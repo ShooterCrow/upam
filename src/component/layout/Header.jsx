@@ -56,19 +56,7 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
                     <div className="flex items-center justify-between">
                         {/* Logo */}
                         <div className="flex items-center">
-                            <div className="flex items-center gap-2">
-                                <div className="flex flex-col items-center">
-                                    <div className="flex gap-0.5">
-                                        <div className="w-2 h-2 bg-red-600 rounded-full"></div>
-                                        <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                                        <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className="text-red-600 font-bold text-xl leading-none">UNITED</div>
-                                    <div className="text-green-600 text-xs leading-none">Pan-Africanism Movement</div>
-                                </div>
-                            </div>
+                            <img src="/logoupam.png" alt="UPAM Logo" />
                         </div>
 
 
@@ -120,14 +108,8 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
             <header className="lg:hidden bg-gray-200 shadow-sm mb-10">
                 <div className="flex items-center justify-between px-4 py-4">
                     <div className="flex items-center gap-2">
-                        {/* <div className="flex gap-0.5">
-                            <div className="w-2 h-2 bg-red-600 rounded-full"></div>
-                            <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                            <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-                        </div> */}
                         <div>
-                            <div className="text-red-600 font-bold text-lg leading-none">UNITED</div>
-                            <div className="text-green-600 text-xs leading-none">Pan-Africanism Movement</div>
+                            <img src="/logoupam.png" alt="UPAM Logo" />
                         </div>
                     </div>
                     <button
