@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, ChevronDown, Home, Info, Users, Grid, Calendar, FileText, UserPlus, Mail, LogOut, Bell, HelpCircle, User, CreditCard, Phone } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 // Mock user data - in real app, this would come from your auth context/store
 const mockUser = {
@@ -13,35 +14,35 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
     const [openDropdown, setOpenDropdown] = useState(null);
 
     const navigationLinks = [
-        { name: 'Home', href: '#', icon: Home },
-        { name: 'About Us', href: '#', icon: Info },
-        { name: 'Leadership', href: '#', icon: Users },
-        { name: 'Platforms & Initiatives', href: '#', icon: Grid },
-        { name: 'Events & Conferences', href: '#', icon: Calendar },
+        { name: 'Home', path: '/', icon: Home },
+        { name: 'About Us', path: '#', icon: Info },
+        { name: 'Leadership', path: '#', icon: Users },
+        { name: 'Platforms & Initiatives', path: '#', icon: Grid },
+        { name: 'Events & Conferences', path: '#', icon: Calendar },
         {
             name: 'Resources & Media',
-            href: '#',
+            path: '/gallery',
             icon: FileText,
             hasDropdown: true
         },
         {
             name: 'Membership',
-            href: '#',
+            path: '#',
             icon: UserPlus,
             hasDropdown: true
         },
-        { name: 'Get Involved', href: '#', icon: UserPlus },
-        { name: 'Contact Us', href: '#', icon: Mail },
+        { name: 'Get Involved', path: '/get-involved', icon: UserPlus },
+        { name: 'Contact Us', path: '#', icon: Mail },
     ];
 
     const dashboardLinks = [
-        { name: 'Dashboard', href: '#', icon: Home, isActive: true },
-        { name: 'Member Verification', href: '#', icon: User },
-        { name: 'Membership Payment', href: '#', icon: CreditCard },
-        { name: 'Emergency Contact', href: '#', icon: Phone },
-        { name: 'Notification', href: '#', icon: Bell },
-        { name: 'Support & Help', href: '#', icon: HelpCircle },
-        { name: 'Account', href: '#', icon: User },
+        { name: 'Dashboard', path: '#', icon: Home, isActive: true },
+        { name: 'Member Verification', path: '#', icon: User },
+        { name: 'Membership Payment', path: '#', icon: CreditCard },
+        { name: 'Emergency Contact', path: '#', icon: Phone },
+        { name: 'Notification', path: '#', icon: Bell },
+        { name: 'Support & Help', path: '#', icon: HelpCircle },
+        { name: 'Account', path: '#', icon: User },
     ];
 
     const toggleDropdown = (name) => {
@@ -56,7 +57,9 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
                     <div className="flex items-center justify-between">
                         {/* Logo */}
                         <div className="flex items-center">
-                            <img src="/logoupam.png" alt="UPAM Logo" />
+                            <Link to="/">
+                                <img src="/logoupam.png" alt="UPAM Logo" />
+                            </Link>
                         </div>
 
 
@@ -85,8 +88,8 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
                     <nav className="flex items-center space-x-8 pt-5 w-full justify-center">
                         {navigationLinks.map((link) => (
                             <div key={link.name} className="relative">
-                                <a
-                                    href={link.href}
+                                <Link
+                                    to={link.path}
                                     className="text-gray-800 hover:text-red-600 transition-colors text-sm font-medium flex items-center gap-1"
                                     onClick={(e) => {
                                         if (link.hasDropdown) {
@@ -97,7 +100,7 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
                                 >
                                     {link.name}
                                     {link.hasDropdown && <ChevronDown size={16} />}
-                                </a>
+                                </Link>
                             </div>
                         ))}
                     </nav>
@@ -109,7 +112,9 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
                 <div className="flex items-center justify-between px-4 py-4">
                     <div className="flex items-center gap-2">
                         <div>
-                            <img src="/logoupam.png" alt="UPAM Logo" />
+                            <Link to="/">
+                                <img src="/logoupam.png" alt="UPAM Logo" />
+                            </Link>
                         </div>
                     </div>
                     <button
@@ -126,14 +131,10 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
                 <div className="lg:hidden fixed inset-0 bg-white z-50 overflow-y-auto">
                     <div className="flex items-center justify-between px-4 py-4 bg-gray-200">
                         <div className="flex items-center gap-2">
-                            {/* <div className="flex gap-0.5">
-                                <div className="w-1.5 h-1.5 bg-red-600 rounded-full"></div>
-                                <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
-                                <div className="w-1.5 h-1.5 bg-green-600 rounded-full"></div>
-                            </div> */}
                             <div>
-                                <div className="text-red-600 font-bold text-lg leading-none">UNITED</div>
-                                <div className="text-green-600 text-xs leading-none">Pan-Africanism Movement</div>
+                                <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <img src="/logoupam.png" alt="UPAM Logo" className="h-8 w-auto" />
+                                </Link>
                             </div>
                         </div>
                         <button onClick={() => setIsMobileMenuOpen(false)} className="p-2">
@@ -169,58 +170,68 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
                                     {dashboardLinks.map((link) => {
                                         const IconComponent = link.icon;
                                         return (
-                                            <a
+                                            <Link
                                                 key={link.name}
-                                                href={link.href}
+                                                to={link.path}
                                                 className={`flex items-center gap-3 px-4 py-3 rounded transition-colors ${link.isActive
                                                     ? 'bg-red-600 text-white'
                                                     : 'text-gray-800 hover:bg-gray-100'
                                                     }`}
+                                                onClick={() => setIsMobileMenuOpen(false)}
                                             >
                                                 <IconComponent size={20} />
                                                 {link.name}
-                                            </a>
+                                            </Link>
                                         );
                                     })}
                                     <button className="flex items-center gap-3 px-4 py-3 text-gray-800 hover:bg-gray-100 w-full rounded transition-colors">
                                         <LogOut size={20} />
                                         Log out
                                     </button>
-                                    <a href="#" className="block text-center text-red-600 font-semibold mt-6">
+                                    <Link to="/" className="block text-center text-red-600 font-semibold mt-6" onClick={() => setIsMobileMenuOpen(false)}>
                                         Go to homepage
-                                    </a>
+                                    </Link>
                                 </>
                             ) : isLoggedIn ? (
                                 // Logged in, on homepage
                                 <>
                                     {navigationLinks.map((link) => (
-                                        <a
+                                        <Link
                                             key={link.name}
-                                            href={link.href}
-                                            className={`flex items-center justify-between px-4 py-3 text-gray-800 hover:bg-gray-100 rounded transition-colors ${link.name === 'Home' ? 'bg-gray-100' : ''
+                                            to={link.path}
+                                            className={`flex items-center justify-between px-4 py-3 text-gray-800 hover:bg-gray-100 rounded transition-colors ${link.path === '/' ? 'bg-gray-100' : ''
                                                 }`}
+                                            onClick={() => setIsMobileMenuOpen(false)}
                                         >
                                             <span>{link.name}</span>
                                             {link.hasDropdown && <ChevronDown size={16} />}
-                                        </a>
+                                        </Link>
                                     ))}
-                                    <a href="#" className="block text-center text-red-600 font-semibold mt-6">
+                                    <Link to="/dashboard" className="block text-center text-red-600 font-semibold mt-6" onClick={() => setIsMobileMenuOpen(false)}>
                                         Go back to Dashboard
-                                    </a>
+                                    </Link>
                                 </>
                             ) : (
                                 // Not logged in
                                 <>
                                     {navigationLinks.map((link) => (
-                                        <a
+                                        <Link
                                             key={link.name}
-                                            href={link.href}
-                                            className={`flex items-center justify-between px-4 py-3 text-gray-800 hover:bg-gray-100 rounded transition-colors ${link.name === 'Home' ? 'bg-gray-100' : ''
+                                            to={link.path}
+                                            className={`flex items-center justify-between px-4 py-3 text-gray-800 hover:bg-gray-100 rounded transition-colors ${link.path === '/' ? 'bg-gray-100' : ''
                                                 }`}
+                                            onClick={(e) => {
+                                                if (link.hasDropdown) {
+                                                    e.preventDefault();
+                                                    toggleDropdown(link.name);
+                                                } else {
+                                                    setIsMobileMenuOpen(false);
+                                                }
+                                            }}
                                         >
                                             <span>{link.name}</span>
                                             {link.hasDropdown && <ChevronDown size={16} />}
-                                        </a>
+                                        </Link>
                                     ))}
                                     <button className="w-full border-2 border-gray-800 px-6 py-3 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors mt-6">
                                         Register / Login
