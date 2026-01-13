@@ -67,395 +67,420 @@ const Index = () => {
     ]);
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-gradient-to-b from-white to-gray-50/30">
             {/* Main Content Container */}
             <div className="flex flex-col items-center gap-16 lg:gap-24 pb-12 lg:py-24 px-4 lg:px-8">
                 <div className="w-full max-w-7xl">
                     {/* Mission & Vision Section */}
-                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16 lg:mb-20">
+                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20 lg:mb-28">
                         {/* Left Column - Mission & Vision */}
-                        <div className="flex flex-col gap-8 lg:gap-10">
-                            <div className="flex flex-col gap-4 lg:gap-10">
-                                <h2 className="text-2xl font-semibold text-black tracking-wide">
+                        <div className="flex flex-col gap-10 lg:gap-12">
+                            <div className="flex flex-col gap-4 lg:gap-6">
+                                <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 tracking-tight">
                                     Our Mission
                                 </h2>
-                                <p className="text-sm text-upam-gray leading-relaxed tracking-wide">
-                                    To strengthen bonds of solidarity between all people of African descent, fostering unity and development in Africa; for enhanced independence, industrialization, economic self- reliance as well as promote peace, security and stability within African communities and states.
+                                <p className="text-sm lg:text-base text-gray-600 leading-relaxed tracking-wide">
+                                    To strengthen bonds of solidarity between all people of African descent, fostering unity and development in Africa; for enhanced independence, industrialization, economic self-reliance as well as promote peace, security and stability within African communities and states.
                                 </p>
                             </div>
 
-                            <div className="flex flex-col gap-2.5">
-                                <h2 className="text-2xl font-semibold text-black tracking-wide">
-                                    Our Vission & Values
+                            <div className="flex flex-col gap-4 lg:gap-6">
+                                <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 tracking-tight">
+                                    Our Vision & Values
                                 </h2>
-                                <p className="text-sm text-upam-gray leading-relaxed tracking-wide">
+                                <p className="text-sm lg:text-base text-gray-600 leading-relaxed tracking-wide">
                                     A United Africa for sustainable development for all Africans Descent. UPAM is a continental evolution and an all-African organization, seeking to enhance the unification of African nations as a whole and reclaiming its hope for the destined future.
                                 </p>
                             </div>
                         </div>
 
                         {/* Right Column - Video */}
-                        <div className="relative w-full aspect-video lg:aspect-[655/367] rounded-sm overflow-hidden bg-gray-200 group cursor-pointer">
+                        <div className="relative w-full aspect-video lg:aspect-[655/367] rounded-xl overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 group cursor-pointer transition-transform duration-300 hover:scale-[1.02]">
                             <img
                                 src="https://api.builder.io/api/v1/image/assets/TEMP/b3564abd0e1fb1dfb19649f1092e28adc8a02548?width=1310"
                                 alt="UPAM Mission Video"
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover opacity-90 group-hover:opacity-95 transition-opacity duration-300"
                             />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                             <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="flex items-center justify-center w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-upam-red transition-transform group-hover:scale-110">
-                                    <Play className="w-5 h-5 lg:w-6 lg:h-6 text-white fill-white ml-1" />
+                                <div className="flex items-center justify-center w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-upam-red shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl">
+                                    <Play className="w-6 h-6 lg:w-8 lg:h-8 text-white fill-white ml-1" />
                                 </div>
                             </div>
                         </div>
                     </section>
 
                     {/* The Movement Section */}
-                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16 lg:mb-20">
-                        <div className="flex flex-col gap-8 lg:gap-11 order-2 lg:order-1">
-                            <div className="flex flex-col gap-2">
-                                <p className="text-base font-normal text-black tracking-wide">THE MOVEMENT</p>
-                                <h2 className="text-2xl font-semibold text-black tracking-wide">
+                    <section className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-16 mb-20 lg:mb-28">
+                        <div className="flex flex-col gap-8 lg:gap-10 order-2 lg:order-1">
+                            <div className="flex flex-col gap-3">
+                                <p className="text-sm font-medium text-upam-red tracking-wider uppercase">THE MOVEMENT</p>
+                                <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 tracking-tight">
                                     The Spirit of Pan-Africanism Lives On
                                 </h2>
                             </div>
-                            <div className="relative">
+                            <div className="relative rounded-xl overflow-hidden">
                                 <img
                                     src="https://api.builder.io/api/v1/image/assets/TEMP/fd61f6f051ea09ccd7a23f36e8663b9e804698ae?width=816"
                                     alt="Pan-African Map"
-                                    className="w-full h-auto"
+                                    className="w-auto h-full"
                                 />
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-4 justify-end order-1 lg:order-2">
-                            <div className="relative w-full aspect-[431/248] rounded-sm overflow-hidden">
+                        <div className="flex flex-col gap-6 justify-end order-1 lg:order-2">
+                            <div className="relative w-full aspect-[431/248] rounded-xl overflow-hidden">
                                 <img
                                     src="https://api.builder.io/api/v1/image/assets/TEMP/3aff55db95a13f272ccc48de58a70673598f80db?width=862"
                                     alt="Pan-African Unity"
                                     className="w-full h-full object-cover"
                                 />
                             </div>
-                            <div className="flex flex-col gap-2">
-                                <p className="text-sm text-upam-gray leading-relaxed tracking-wide">
-                                    This call invites every African, at home and in the diaspora, to embrace a future wherewhere our combined strength becomes the foundation for lasting development.
+                            <div className="flex flex-col gap-4">
+                                <p className="text-sm lg:text-base text-gray-600 leading-relaxed">
+                                    This call invites every African, at home and in the diaspora, to embrace a future where our combined strength becomes the foundation for lasting development.
                                 </p>
-                                <button className="flex items-center gap-1 text-sm text-black hover:text-upam-red transition-colors self-start">
+                                <button className="flex items-center gap-2 text-sm font-medium text-upam-red hover:text-upam-red/80 transition-colors self-start group">
                                     Read more
-                                    <ArrowRight className="w-5 h-5" />
+                                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                                 </button>
                             </div>
                         </div>
                     </section>
 
                     {/* Who We Are Section */}
-                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16 lg:mb-20 items-center">
+                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20 lg:mb-28 items-center">
                         <div className="relative">
-                            <div className="relative w-full aspect-[543/293] rounded-sm overflow-hidden">
+                            <div className="relative w-full aspect-[543/293] rounded-xl overflow-hidden shadow-lg">
                                 <img
                                     src="https://api.builder.io/api/v1/image/assets/TEMP/45370172fe42ffd55b6009588f5603c9aeb8c1b3?width=1086"
                                     alt="UPAM Community"
                                     className="w-full h-full object-cover"
                                 />
-                                <div className="absolute bottom-4 left-4 w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-upam-green/60"></div>
-                                <div className="absolute top-4 right-4 w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-upam-green/60"></div>
+                                <div className="absolute bottom-6 left-6 w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-upam-green/80 backdrop-blur-sm border-4 border-white/30"></div>
+                                <div className="absolute top-6 right-6 w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-upam-green/80 backdrop-blur-sm border-4 border-white/30"></div>
                             </div>
-                            <p className="text-base font-normal text-black tracking-wide mt-3">ABOUT US</p>
                         </div>
 
-                        <div className="flex flex-col gap-3 justify-end">
-                            <h2 className="text-2xl font-semibold text-black tracking-wide">
+                        <div className="flex flex-col gap-6 justify-end">
+                            <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 tracking-tight">
                                 Who We Are
                             </h2>
-                            <p className="text-sm text-upam-gray leading-relaxed tracking-wide">
+                            <p className="text-sm lg:text-base text-gray-600 leading-relaxed">
                                 UPAM is a continental evolution and an all-African organization, seeking to enhance the unification of African nations as a whole and reclaiming its hope for the destined future. To encourage and strengthen bonds of solidarity between all people of African descent, Foster the development and unity of Africa, to enhanced independence.
                             </p>
-                            <button className="flex items-center gap-1 text-sm text-upam-red hover:text-upam-red/80 transition-colors self-start">
+                            <button className="flex items-center gap-2 text-sm font-medium text-upam-red hover:text-upam-red/80 transition-colors self-start group">
                                 Read more
-                                <ArrowRight className="w-5 h-5" />
+                                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                             </button>
                         </div>
                     </section>
 
                     {/* What We Stand For Section */}
-                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16 lg:mb-20">
-                        <div className="flex flex-col gap-6">
-                            <div className="flex flex-col gap-3">
-                                <p className="text-base font-normal text-black tracking-wide">OUR FOCUS AREAS</p>
-                                <h2 className="text-2xl font-semibold text-black tracking-wide">
+                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20 lg:mb-28">
+                        <div className="flex flex-col gap-8">
+                            <p className="text-sm font-medium text-upam-red tracking-wider uppercase mt-4">ABOUT US</p>
+
+                            <div className="flex flex-col gap-4">
+                                <p className="text-sm font-medium text-upam-red tracking-wider uppercase">OUR FOCUS AREAS</p>
+                                <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 tracking-tight">
                                     What We Stand For
                                 </h2>
-                                <p className="text-base text-upam-gray tracking-wide">
-                                    We channel our energy into key areas that drive Africa forwardWe channel our energy into key areas that drive Africa forward
+                                <p className="text-base text-gray-600">
+                                    We channel our energy into key areas that drive Africa forward
                                 </p>
                             </div>
 
-                            <div className="flex flex-col gap-4">
-                                <button className="flex items-center justify-between px-3 py-2 bg-upam-green text-white hover:bg-upam-green/90 transition-colors">
-                                    <span className="text-base font-normal tracking-wide">Africa's Unity & Development</span>
-                                    <div className="flex gap-0.5">
-                                        <span className="text-xs">›</span>
-                                        <span className="text-xs">›</span>
-                                        <span className="text-xs">›</span>
-                                    </div>
-                                </button>
-
-                                <button className="flex items-center justify-between px-3 py-2 bg-upam-light text-black hover:bg-gray-300 transition-colors">
-                                    <span className="text-base font-normal tracking-wide">Africa's Independence</span>
-                                    <div className="flex gap-0.5 text-upam-dark">
-                                        <span className="text-xs">›</span>
-                                        <span className="text-xs">›</span>
-                                        <span className="text-xs">›</span>
-                                    </div>
-                                </button>
-
-                                <button className="flex items-center justify-between px-3 py-2 bg-upam-light text-black hover:bg-gray-300 transition-colors">
-                                    <span className="text-base font-normal tracking-wide">Education & Leadership</span>
-                                    <div className="flex gap-0.5 text-upam-dark">
-                                        <span className="text-xs">›</span>
-                                        <span className="text-xs">›</span>
-                                        <span className="text-xs">›</span>
-                                    </div>
-                                </button>
-
-                                <button className="flex items-center justify-between px-3 py-2 bg-upam-light text-black hover:bg-gray-300 transition-colors">
-                                    <span className="text-base font-normal tracking-wide">Security & Stability within African Communities and States</span>
-                                    <div className="flex gap-0.5 text-upam-dark">
-                                        <span className="text-xs">›</span>
-                                        <span className="text-xs">›</span>
-                                        <span className="text-xs">›</span>
-                                    </div>
-                                </button>
+                            <div className="flex flex-col gap-3">
+                                {[
+                                    "Africa's Unity & Development",
+                                    "Africa's Independence",
+                                    "Education & Leadership",
+                                    "Security & Stability within African Communities and States"
+                                ].map((item, index) => (
+                                    <button
+                                        key={index}
+                                        className={`flex items-center justify-between px-4 py-4 rounded-lg transition-all duration-300 hover:scale-[1.02] ${index === 0
+                                            ? 'bg-gradient-to-r from-upam-green to-upam-green/90 text-white shadow-lg'
+                                            : 'bg-white text-gray-800 shadow-md hover:shadow-lg'
+                                            }`}
+                                    >
+                                        <span className="text-sm lg:text-base font-medium tracking-wide text-left">{item}</span>
+                                        <div className={`flex gap-0.5 ${index === 0 ? 'text-white' : 'text-upam-dark'}`}>
+                                            <span className="text-lg">›</span>
+                                            <span className="text-lg">›</span>
+                                            <span className="text-lg">›</span>
+                                        </div>
+                                    </button>
+                                ))}
                             </div>
                         </div>
 
-                        <div className="relative">
+                        <div className="relative rounded-xl overflow-hidden shadow-xl">
                             <img
                                 src="https://api.builder.io/api/v1/image/assets/TEMP/04328338922ba2be5989a627fc0bcd688bc77625?width=1086"
                                 alt="Focus Areas"
-                                className="w-full h-auto object-cover rounded-sm"
+                                className="w-full h-full object-cover"
                             />
                         </div>
                     </section>
 
                     {/* Gallery Section */}
-                    <section className="flex flex-col items-center gap-8 lg:gap-12 mb-16 lg:mb-20">
-                        <div className="flex flex-col items-center gap-2 max-w-3xl text-center">
-                            <p className="text-base font-normal text-black tracking-wide">GALLERY</p>
-                            <h2 className="text-2xl font-semibold text-black tracking-wide">
+                    {/* Gallery Section - Horizontal Scrolling Carousel */}
+                    <section className="flex flex-col items-center gap-10 lg:gap-12 mb-20 lg:mb-28">
+                        <div className="flex flex-col items-center gap-4 max-w-3xl text-center">
+                            <p className="text-sm font-medium text-upam-red tracking-wider uppercase">GALLERY</p>
+                            <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 tracking-tight">
                                 Moments that inspire change
                             </h2>
-                            <p className="text-base text-upam-gray tracking-wide">
+                            <p className="text-base text-gray-600">
                                 Moments of unity, culture, advocacy, and community impact captured across Africa and the diaspora.
                             </p>
                         </div>
 
-                        <div className="w-full flex flex-col gap-3.5">
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5">
-                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/b25f74c0c208851c995df3fe41a15ea551fbb960?width=336" alt="Gallery 1" className="w-full h-48 lg:h-56 object-cover rounded-sm" />
-                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/0ac49176818ab6dbe13202ff503abf2227cb2069?width=560" alt="Gallery 2" className="w-full h-48 lg:h-56 object-cover rounded-sm" />
-                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/683f693939e917cd3297ff8c6e8af8554e42eae3?width=560" alt="Gallery 3" className="w-full h-48 lg:h-56 object-cover rounded-sm" />
-                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/1baa487a59315c54db38e9d2509b9139cca12f04?width=560" alt="Gallery 4" className="w-full h-48 lg:h-56 object-cover rounded-sm" />
-                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/07536e0af663886d7094bb2f428fbad257f117cd?width=560" alt="Gallery 5" className="w-full h-48 lg:h-56 object-cover rounded-sm" />
-                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/e30f23ba83e18af62762d04d97d7fb23736884ea?width=166" alt="Gallery 6" className="w-full h-48 lg:h-56 object-cover rounded-sm" />
-                            </div>
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5">
-                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/abfd27d9caa30b255c52b305f32ea927babe0a7c?width=560" alt="Gallery 7" className="w-full h-48 lg:h-56 object-cover rounded-sm" />
-                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/ac234c04876489cf67819ff29fd69111a0cb2551?width=560" alt="Gallery 8" className="w-full h-48 lg:h-56 object-cover rounded-sm" />
-                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/b31867e5786bbf758ab14021fa312dfd60fefa4a?width=560" alt="Gallery 9" className="w-full h-48 lg:h-56 object-cover rounded-sm" />
-                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/cc12aecd308e8fae3240012701bfdd6c09ff6b0d?width=560" alt="Gallery 10" className="w-full h-48 lg:h-56 object-cover rounded-sm" />
-                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/60e7aa2081693a1b2f14cd4094ea75358bc99a51?width=528" alt="Gallery 11" className="w-full h-48 lg:h-56 object-cover rounded-sm" />
+                        {/* Horizontal Scrolling Carousel */}
+                        <div className="w-full max-w-7xl mx-auto">
+                            <div className="relative overflow-hidden py-4">
+                                {/* Gradient overlays for fade effect on sides */}
+                                <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+                                <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
+                                {/* Scrolling container with slow animation */}
+                                <div className="flex animate-scroll-slow hover:pause-animation">
+                                    {/* First set of images */}
+                                    {[
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/b25f74c0c208851c995df3fe41a15ea551fbb960?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/0ac49176818ab6dbe13202ff503abf2227cb2069?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/683f693939e917cd3297ff8c6e8af8554e42eae3?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/1baa487a59315c54db38e9d2509b9139cca12f04?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/07536e0af663886d7094bb2f428fbad257f117cd?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/e30f23ba83e18af62762d04d97d7fb23736884ea?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/abfd27d9caa30b255c52b305f32ea927babe0a7c?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/ac234c04876489cf67819ff29fd69111a0cb2551?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/b31867e5786bbf758ab14021fa312dfd60fefa4a?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/cc12aecd308e8fae3240012701bfdd6c09ff6b0d?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/60e7aa2081693a1b2f14cd4094ea75358bc99a51?width=400"
+                                    ].map((src, index) => (
+                                        <div key={`first-${index}`} className="flex-shrink-0 w-64 md:w-80 lg:w-96 mx-2 group">
+                                            <div className="relative overflow-hidden rounded-xl transition-all duration-500">
+                                                <div className="aspect-[4/3] overflow-hidden">
+                                                    <img
+                                                        src={src}
+                                                        alt={`Gallery ${index + 1}`}
+                                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+
+                                    {/* Duplicate set for seamless scrolling */}
+                                    {[
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/b25f74c0c208851c995df3fe41a15ea551fbb960?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/0ac49176818ab6dbe13202ff503abf2227cb2069?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/683f693939e917cd3297ff8c6e8af8554e42eae3?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/1baa487a59315c54db38e9d2509b9139cca12f04?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/07536e0af663886d7094bb2f428fbad257f117cd?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/e30f23ba83e18af62762d04d97d7fb23736884ea?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/abfd27d9caa30b255c52b305f32ea927babe0a7c?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/ac234c04876489cf67819ff29fd69111a0cb2551?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/b31867e5786bbf758ab14021fa312dfd60fefa4a?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/cc12aecd308e8fae3240012701bfdd6c09ff6b0d?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/60e7aa2081693a1b2f14cd4094ea75358bc99a51?width=400"
+                                    ].map((src, index) => (
+                                        <div key={`second-${index}`} className="flex-shrink-0 w-64 md:w-80 lg:w-96 mx-2 group">
+                                            <div className="relative overflow-hidden rounded-xl shadow-lg transition-all duration-500 group-hover:shadow-2xl">
+                                                <div className="aspect-[4/3] overflow-hidden">
+                                                    <img
+                                                        src={src}
+                                                        alt={`Gallery ${index + 1}`}
+                                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                                    />
+                                                </div>
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                    <div className="absolute bottom-4 left-4">
+                                                        <div className="flex items-center gap-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full">
+                                                            <div className="w-2 h-2 rounded-full bg-upam-green animate-pulse"></div>
+                                                            <span className="text-xs font-medium text-white">View</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </section>
 
                     {/* Our Impacts Section */}
-                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16 lg:mb-20">
-                        <div className="flex flex-col gap-8 lg:gap-12">
-                            <h2 className="text-2xl font-semibold text-black tracking-wide">
-                                Our Impacts /Projects
+                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20 lg:mb-28">
+                        <div className="flex flex-col gap-10 lg:gap-12">
+                            <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 tracking-tight">
+                                Our Impacts / Projects
                             </h2>
 
-                            <div className="flex flex-col gap-7">
-                                <div className="flex gap-4 lg:gap-8">
-                                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-upam-green border-2 border-upam-green mt-3"></div>
-                                    <div className="flex flex-col gap-2">
-                                        <h3 className="text-lg lg:text-xl text-black tracking-wide">
-                                            Clean energy with the Sudan National Energy Research Center
-                                        </h3>
-                                        <p className="text-sm text-upam-gray leading-relaxed tracking-wide">
-                                            Powering a brighter future for Sudan! Upam is proud to partner with the Sudan National Energy Research Center on a groundbreaking clean energy project.
-                                        </p>
+                            <div className="flex flex-col gap-8">
+                                {[
+                                    {
+                                        title: "Clean energy with the Sudan National Energy Research Center",
+                                        desc: "Powering a brighter future for Sudan! Upam is proud to partner with the Sudan National Energy Research Center on a groundbreaking clean energy project."
+                                    },
+                                    {
+                                        title: "UPAM Finance to Support Vulnerable Communities",
+                                        desc: "Making a difference, one community at a time. UPAM Finance is stepping up to support vulnerable communities with financial inclusion initiatives"
+                                    },
+                                    {
+                                        title: "Health Program Across Africa",
+                                        desc: "Healthy lives, brighter futures UPAM is rolling out health programs across Africa, touching lives and building stronger communities."
+                                    },
+                                    {
+                                        title: "UPAM Schools/Academy to Prepare Skilled Professionals for Todays Job Market",
+                                        desc: "Empowering the next-gen workforce, UPAM Schools/Academy is equipping students with in-demand skills to thrive in today's job market. Future-ready professionals, rising from Africa"
+                                    }
+                                ].map((item, index) => (
+                                    <div key={index} className="flex gap-4 lg:gap-6 group cursor-pointer">
+                                        <div className="flex-shrink-0 w-3 h-3 rounded-full bg-upam-green border-2 border-upam-green mt-3 group-hover:scale-125 transition-transform"></div>
+                                        <div className="flex flex-col gap-3">
+                                            <h3 className="text-lg lg:text-xl font-semibold text-gray-900 tracking-wide group-hover:text-upam-green transition-colors">
+                                                {item.title}
+                                            </h3>
+                                            <p className="text-sm text-gray-600 leading-relaxed">
+                                                {item.desc}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div className="flex gap-4 lg:gap-8">
-                                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-upam-green border-2 border-upam-green mt-3"></div>
-                                    <div className="flex flex-col gap-2">
-                                        <h3 className="text-lg lg:text-xl text-black tracking-wide">
-                                            UPAM Finance to Support Vulnerable Communities
-                                        </h3>
-                                        <p className="text-sm text-upam-gray leading-relaxed tracking-wide">
-                                            Making a difference, one community at a time. UPAM Finance is stepping up to support vulnerable communities with financial inclusion initiatives
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-4 lg:gap-8">
-                                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-upam-green border-2 border-upam-green mt-3"></div>
-                                    <div className="flex flex-col gap-2">
-                                        <h3 className="text-lg lg:text-xl text-black tracking-wide">
-                                            Health Program Across Africa
-                                        </h3>
-                                        <p className="text-sm text-upam-gray leading-relaxed tracking-wide">
-                                            Healthy lives, brighter futures UPAM is rolling out health programs across Africa, touching lives and building stronger communities.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-4 lg:gap-8">
-                                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-upam-green border-2 border-upam-green mt-3"></div>
-                                    <div className="flex flex-col gap-2">
-                                        <h3 className="text-lg lg:text-xl text-black tracking-wide">
-                                            UPAM Schools/Academy to Prepare Skilled Professionals for Todays Job Market
-                                        </h3>
-                                        <p className="text-sm text-upam-gray leading-relaxed tracking-wide">
-                                            Empowering the next-gen workforce, UPAM Schools/Academy is equipping students with in-demand skills to thrive in today's job market. Future-ready professionals, rising from Africa
-                                        </p>
-                                    </div>
-                                </div>
+                                ))}
                             </div>
                         </div>
 
                         <div className="flex items-center justify-center">
-                            <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/60f56090a043aa0052b7f54ed5a76931e6460ef6?width=1176"
-                                alt="Our Impacts Map"
-                                className="w-full max-w-md h-auto"
-                            />
+                            <div className="relative overflow-hidden w-full max-w-md">
+                                <img
+                                    src="https://api.builder.io/api/v1/image/assets/TEMP/60f56090a043aa0052b7f54ed5a76931e6460ef6?width=1176"
+                                    alt="Our Impacts Map"
+                                    className="w-full h-auto"
+                                />
+                            </div>
                         </div>
                     </section>
 
                     {/* Be Part of The Movement Section */}
-                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16 lg:mb-20">
-                        <div className="relative aspect-[711/350] rounded-sm overflow-hidden">
+                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20 lg:mb-28">
+                        <div className="relative aspect-[711/350] rounded-xl overflow-hidden shadow-xl group">
                             <img
                                 src="https://api.builder.io/api/v1/image/assets/TEMP/743da7307db5c6f3802fcc3250631182d6dcce9b?width=1422"
                                 alt="Join Movement"
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             />
-                            <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-upam-green/70"></div>
-                            <div className="absolute top-0 right-0 w-1/6 h-1/4 bg-upam-red/70"></div>
+                            <div className="absolute inset-0 bg-gradient-to-tr from-upam-green/20 via-transparent to-upam-red/20"></div>
                         </div>
 
-                        <div className="flex flex-col gap-8 lg:gap-9 justify-center">
-                            <p className="text-base font-normal text-black tracking-wide">GET INVOLVED</p>
-                            <div className="flex flex-col gap-3">
-                                <h2 className="text-2xl font-semibold text-black tracking-wide">
+                        <div className="flex flex-col gap-8 lg:gap-10 justify-center">
+                            <p className="text-sm font-medium text-upam-red tracking-wider uppercase">GET INVOLVED</p>
+                            <div className="flex flex-col gap-6">
+                                <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 tracking-tight">
                                     Be Part of The Movement
                                 </h2>
-                                <p className="text-sm text-upam-gray leading-relaxed tracking-wide">
-                                    We the African People Stand United for Economically Self-sustainable, Development, Freedom, Equality, Justice, Free Trade, Open Boarders, Effective Governance, One Nation and the Protection of Our motherland, one people united for Africa, Home of the Brave.
+                                <p className="text-sm lg:text-base text-gray-600 leading-relaxed">
+                                    We the African People Stand United for Economically Self-sustainable, Development, Freedom, Equality, Justice, Free Trade, Open Borders, Effective Governance, One Nation and the Protection of Our motherland, one people united for Africa, Home of the Brave.
                                 </p>
-                                <button className="flex items-center gap-1 text-sm text-black hover:text-upam-red transition-colors self-start">
+                                <button className="flex items-center gap-2 px-6 py-3 bg-upam-red text-white rounded-lg hover:bg-upam-red/90 transition-all duration-300 hover:shadow-lg self-start group">
                                     Join Now
-                                    <ArrowRight className="w-5 h-5" />
+                                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                                 </button>
                             </div>
                         </div>
                     </section>
 
-                    {/* Leadership Section */}
-                    <section className="flex flex-col gap-5 mb-16 lg:mb-20">
-                        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-4">
-                            <div className="flex flex-col gap-3">
-                                <p className="text-base font-normal text-black tracking-wide">Leadership</p>
-                                <h2 className="text-2xl font-semibold text-black tracking-wide">
-                                    Global Executive
-                                </h2>
-                                <p className="text-base text-upam-gray tracking-wide">
-                                    UPAM thrives through committed leaders, dedicated volunteers, and strategic partners.
-                                </p>
-                            </div>
-                            <button className="flex items-center gap-1 text-sm text-upam-red hover:text-upam-red/80 transition-colors">
-                                See All
-                                <ArrowRight className="w-5 h-5" />
-                            </button>
-                        </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8">
+                        {[
+                            {
+                                id: 1,
+                                name: "Benedicto Mbango",
+                                role: "Global President (UPAM)",
+                                image: "https://api.builder.io/api/v1/image/assets/TEMP/e144c36edf141cdbaf91e1c889bf576effca28f8?width=504"
+                            },
+                            {
+                                id: 2,
+                                name: "Priscilia Tsongwain",
+                                role: "Vice President (UPAM)",
+                                image: "https://api.builder.io/api/v1/image/assets/TEMP/3fff38c2724d07db4e7078f0213b213c92f4daf7?width=502"
+                            },
+                            {
+                                id: 3,
+                                name: "Petrina Nghipundilo Shiindi",
+                                role: "Global Executive Administrator II",
+                                image: "https://api.builder.io/api/v1/image/assets/TEMP/38c51c34a61b389791ab1f01683e8012905ab5f1?width=502"
+                            },
+                            {
+                                id: 4,
+                                name: "Akpur Emmanuel Terfa",
+                                role: "Global Secretary General",
+                                image: "https://api.builder.io/api/v1/image/assets/TEMP/3a55b1bee8e50967efc6b30c34bd732da3babd98?width=502"
+                            },
+                            {
+                                id: 5,
+                                name: "Augustine Nyakatoma",
+                                role: "Speaker of National Representative",
+                                image: "https://api.builder.io/api/v1/image/assets/TEMP/af4122391d369736f68533f7726a71f3ca00aca4?width=504"
+                            }
+                        ].map((leader) => (
+                            <div key={leader.id} className="group cursor-pointer">
+                                <div className="relative overflow-hidden rounded-xl transition-all duration-500 group-hover:shadow-xl">
+                                    {/* Fixed height for all images */}
+                                    <div className="h-72 lg:h-80 overflow-hidden">
+                                        <img
+                                            src={leader.image}
+                                            alt={leader.name}
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                    </div>
 
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5">
-                            <div className="flex flex-col gap-5">
-                                <img
-                                    src="https://api.builder.io/api/v1/image/assets/TEMP/e144c36edf141cdbaf91e1c889bf576effca28f8?width=504"
-                                    alt="Benedicto Mbango"
-                                    className="w-full aspect-[252/288] object-cover rounded-sm"
-                                />
-                                <div className="flex flex-col">
-                                    <p className="text-sm text-black tracking-wide">Benedicto Mbango</p>
-                                    <p className="text-base font-medium text-black tracking-wide">Global President (UPAM)</p>
+                                    {/* Position Badge */}
+                                    <div className="absolute top-4 left-4">
+                                        <div className="px-3 py-1.5 bg-upam-red text-white text-xs font-medium rounded-full">
+                                            #{leader.id}
+                                        </div>
+                                    </div>
+
+                                    {/* Information overlay - Partially visible by default, fully visible on hover */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent group-hover:from-black/80 group-hover:via-black/40 transition-all duration-300">
+                                        <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6 flex">
+                                            {/* Name and Role - Always visible but enhanced on hover */}
+                                            <div className="transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300">
+                                                <h4 className="text-white font-semibold text-base lg:text-lg mb-1 opacity-90 group-hover:opacity-100 group-hover:text-xl transition-all duration-300">
+                                                    {leader.name}
+                                                </h4>
+                                                <p className="text-white/80 text-xs lg:text-sm opacity-80 group-hover:opacity-100 group-hover:text-base transition-all duration-300">
+                                                    {leader.role}
+                                                </p>
+                                            </div>
+
+                                            {/* Arrow - Only visible on hover with scale animation */}
+                                            <div className="flex justify-center mt-4">
+                                                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300">
+                                                    <ArrowRight className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div className="flex flex-col gap-5">
-                                <img
-                                    src="https://api.builder.io/api/v1/image/assets/TEMP/3fff38c2724d07db4e7078f0213b213c92f4daf7?width=502"
-                                    alt="Priscilia Tsongwain"
-                                    className="w-full aspect-[252/288] object-cover rounded-sm"
-                                />
-                                <div className="flex flex-col">
-                                    <p className="text-sm text-black tracking-wide">Priscilia Tsongwain</p>
-                                    <p className="text-base font-medium text-black tracking-wide">Vice President (UPAM)</p>
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col gap-5">
-                                <img
-                                    src="https://api.builder.io/api/v1/image/assets/TEMP/38c51c34a61b389791ab1f01683e8012905ab5f1?width=502"
-                                    alt="Petrina Nghipundilo Shiindi"
-                                    className="w-full aspect-[252/288] object-cover rounded-sm"
-                                />
-                                <div className="flex flex-col">
-                                    <p className="text-sm text-black tracking-wide">Petrina Nghipundilo Shiindi</p>
-                                    <p className="text-base font-medium text-black tracking-wide">Global Executive Administrator II</p>
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col gap-5">
-                                <img
-                                    src="https://api.builder.io/api/v1/image/assets/TEMP/3a55b1bee8e50967efc6b30c34bd732da3babd98?width=502"
-                                    alt="Akpur Emmanuel Terfa"
-                                    className="w-full aspect-[252/288] object-cover rounded-sm"
-                                />
-                                <div className="flex flex-col">
-                                    <p className="text-sm text-black tracking-wide">Akpur Emmanuel Terfa</p>
-                                    <p className="text-base font-medium text-black tracking-wide">Global Secretary General</p>
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col gap-5">
-                                <img
-                                    src="https://api.builder.io/api/v1/image/assets/TEMP/af4122391d369736f68533f7726a71f3ca00aca4?width=504"
-                                    alt="Augustine Nyakatoma"
-                                    className="w-full aspect-[252/266] object-cover rounded-sm"
-                                />
-                                <div className="flex flex-col">
-                                    <p className="text-xs text-black tracking-wide">Augustine Nyakatoma</p>
-                                    <p className="text-[15px] font-medium text-black tracking-wide leading-snug">Speaker of National Representative</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                        ))}
+                    </div>
 
                     {/* Activities Section */}
-                    <section className="">
-                        <div className="flex flex-col gap-8">
-                            <div className="flex flex-col gap-4 lg:gap-7">
+                    <section className="mb-20 lg:mb-28">
+                        <div className="flex flex-col gap-10 lg:gap-12">
+                            <div className="flex flex-col gap-6">
                                 <div className="flex flex-col gap-4">
-                                    <p className="text-base font-normal text-black tracking-wide font-dm-sans">Activities</p>
-                                    <div className="flex flex-col gap-2">
-                                        <h2 className="text-2xl font-semibold text-black tracking-wide">
+                                    <p className="text-sm font-medium text-upam-red tracking-wider uppercase font-dm-sans">Activities</p>
+                                    <div className="flex flex-col gap-3">
+                                        <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 tracking-tight">
                                             Activities Lined up for 2026
                                         </h2>
-                                        <p className="text-base text-upam-gray tracking-wide">
+                                        <p className="text-base text-gray-600">
                                             Stay updated with UPAM activities, announcements, and Pan-African happenings.
                                         </p>
                                     </div>
@@ -463,143 +488,105 @@ const Index = () => {
                             </div>
 
                             <div className="flex flex-col lg:flex-row gap-8">
-                                <div className="relative w-full lg:w-2/3 h-[400px] rounded-sm overflow-hidden group cursor-pointer">
+                                <div className="relative w-full lg:w-2/3 h-[400px] rounded-xl overflow-hidden shadow-xl group cursor-pointer">
                                     <img
                                         src="https://api.builder.io/api/v1/image/assets/TEMP/87a486687e349d2a5c9a964e45e9e666dd8b47a7?width=1760"
                                         alt="UPAM Academy Launch"
-                                        className="w-full h-full object-cover"
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-black/0"></div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-10 text-white">
-                                        <div className="flex items-center gap-3 mb-2.5">
+                                        <div className="flex items-center gap-2 mb-3">
                                             <Calendar className="w-4 h-4" />
-                                            <p className="text-xs tracking-wide">20th march 2025,</p>
+                                            <p className="text-sm font-medium">20th March 2025</p>
                                         </div>
-                                        <div className="flex flex-col gap-3.5">
-                                            <h3 className="text-xl font-semibold tracking-wide">UPAM Academy Launch</h3>
-                                            <p className="text-sm text-white/70 leading-relaxed tracking-wide">
+                                        <div className="flex flex-col gap-4">
+                                            <h3 className="text-2xl lg:text-3xl font-semibold tracking-tight">UPAM Academy Launch</h3>
+                                            <p className="text-base text-white/90 leading-relaxed max-w-2xl">
                                                 Get ready to unlock new skills and opportunities! We're excited to announce the launch of Upam Academy, where learning meets innovation. Join us for an exclusive event as we unveil our programs and opportunities for growth.
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-6 w-full lg:w-1/3">
-                                    <div className="relative w-full h-[300px] rounded-sm overflow-hidden">
+                                    <div className="relative w-full h-[300px] rounded-xl overflow-hidden shadow-lg group">
                                         <img
                                             src="https://api.builder.io/api/v1/image/assets/TEMP/77d44987ad0ee22bd9d573bb47d256e184bf2af3?width=860"
                                             alt="UPAM Unity Conference"
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                         />
                                     </div>
-                                    <div className="flex flex-col gap-2.5">
-                                        {/* <div className="flex items-center gap-3">
-                                    <Calendar className="w-4 h-4 text-upam-dark" />
-                                    <p className="text-xs text-upam-gray tracking-wide">20th July 2025,</p>
-                                </div> */}
-                                        <h3 className="text-xl font-semibold text-black tracking-wide">
+                                    <div className="flex flex-col gap-3 p-4 bg-white rounded-xl shadow-sm">
+                                        <h3 className="text-xl lg:text-2xl font-semibold text-gray-900 tracking-tight">
                                             UPAM Unity Conference
                                         </h3>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </section>
 
                     {/* News Section */}
-                    <section className="flex flex-col gap-8 lg:gap-9 mb-16 lg:mb-20">
-                        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-4">
-                            <div className="flex flex-col gap-4 lg:gap-5">
-                                <p className="text-base font-normal text-black tracking-wide font-dm-sans">NEWS</p>
-                                <div className="flex flex-col gap-2">
-                                    <h2 className="text-2xl font-semibold text-black tracking-wide">
+                    <section className="flex flex-col gap-10 lg:gap-12 mb-20 lg:mb-28">
+                        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6">
+                            <div className="flex flex-col gap-5">
+                                <p className="text-sm font-medium text-upam-red tracking-wider uppercase font-dm-sans">NEWS</p>
+                                <div className="flex flex-col gap-3">
+                                    <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 tracking-tight">
                                         Wakanda Network News
                                     </h2>
-                                    <p className="text-base text-upam-gray tracking-wide">
+                                    <p className="text-base text-gray-600">
                                         Trusted Pan-African news curated for an informed and empowered continent.
                                     </p>
                                 </div>
                             </div>
-                            <button className="flex items-center gap-1 text-sm text-upam-red hover:text-upam-red/80 transition-colors">
+                            <button className="flex items-center gap-2 text-sm font-medium text-upam-red hover:text-upam-red/80 transition-colors group">
                                 Read WNN Africa News
-                                <ArrowRight className="w-5 h-5" />
+                                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                             </button>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                            <div className="flex flex-col gap-5">
-                                <img
-                                    src="https://api.builder.io/api/v1/image/assets/TEMP/7cd9c8f05a7270035a671f3aa537d96d7a6dd87a?width=860"
-                                    alt="Nigeria Defence Minister News"
-                                    className="w-full aspect-[430/312] object-cover rounded-sm"
-                                />
-                                <div className="flex flex-col gap-2.5">
-                                    {/* <div className="flex items-center gap-3">
-                                        <Calendar className="w-4 h-4 text-upam-dark" />
-                                        <p className="text-xs text-upam-gray tracking-wide">20th march 2025, Rachel Eleojo Sunday</p>
-                                    </div> */}
-                                    <div className="flex flex-col gap-2.5">
-                                        <h3 className="text-xl font-semibold text-black tracking-wide">
-                                            Nigeria Defence Minister Resigns, Ex-Military Chief Musa Poised to Succeed
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                            {[
+                                {
+                                    title: "Nigeria Defence Minister Resigns, Ex-Military Chief Musa Poised to Succeed",
+                                    desc: "ABUJA: Nigeria's Defence Minister, Alhaji Mohammed Badaru Abubakar, has officially resigned from his position, citing health reasons..."
+                                },
+                                {
+                                    title: "Africa's Top Climate Negotiator Says 'No Reverse Gear' on Commitments",
+                                    desc: "NAIROBI: The world has no choice but to press on with climate commitments despite the United States pulling out of a key international accord..."
+                                },
+                                {
+                                    title: "Ukraine, US Sign Minerals Deal Sought by Trump",
+                                    desc: "KYIV/WASHINGTON: Ukraine and the U.S. on Wednesday signed a deal heavily promoted by U.S. President Donald Trump that will give the United States..."
+                                }
+                            ].map((news, index) => (
+                                <div key={index} className="flex flex-col gap-6 group cursor-pointer">
+                                    <div className="relative rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                                        <img
+                                            src={`https://api.builder.io/api/v1/image/assets/TEMP/news${index + 1}`}
+                                            alt={news.title}
+                                            className="w-full aspect-[430/312] object-cover group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col gap-4">
+                                        <h3 className="text-xl font-semibold text-gray-900 tracking-tight group-hover:text-upam-red transition-colors">
+                                            {news.title}
                                         </h3>
-                                        <p className="text-sm text-upam-gray leading-relaxed tracking-wide">
-                                            ABUJA: Nigeria's Defence Minister, Alhaji Mohammed Badaru Abubakar, has officially resigned from his position, citing health reasons. President Bola Tinubu accepted the resignation with immediate effect, according to a statement released by
+                                        <p className="text-sm text-gray-600 leading-relaxed">
+                                            {news.desc}
                                         </p>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div className="flex flex-col gap-5">
-                                <img
-                                    src="https://api.builder.io/api/v1/image/assets/TEMP/f2d0668554633b8240cf17ee26637d0743300c7a?width=860"
-                                    alt="Climate News"
-                                    className="w-full aspect-[430/312] object-cover rounded-sm"
-                                />
-                                <div className="flex flex-col gap-2.5">
-                                    {/* <div className="flex items-center gap-3">
-                                        <Calendar className="w-4 h-4 text-upam-dark" />
-                                        <p className="text-xs text-upam-gray tracking-wide">20th march 2025, Rachel Eleojo Sunday</p>
-                                    </div> */}
-                                    <div className="flex flex-col gap-2.5">
-                                        <h3 className="text-xl font-semibold text-black tracking-wide">
-                                            Africa's Top Climate Negotiator Says 'No Reverse Gear' on Commitments
-                                        </h3>
-                                        <p className="text-sm text-upam-gray leading-relaxed tracking-wide">
-                                            NAIROBI: The world has no choice but to press on with climate commitments despite the United States pulling out of a key international accord, given the threats posed by global warming and the progress already made, the chair of the Africa group of negotiators said.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col gap-5">
-                                <img
-                                    src="https://api.builder.io/api/v1/image/assets/TEMP/b329cab0f6c4f482cadbf97b0e3901cd347c23cd?width=860"
-                                    alt="Ukraine Minerals News"
-                                    className="w-full aspect-[430/312] object-cover rounded-sm"
-                                />
-                                <div className="flex flex-col gap-2.5">
-                                    {/* <div className="flex items-center gap-3">
-                                        <Calendar className="w-4 h-4 text-upam-dark" />
-                                        <p className="text-xs text-upam-gray tracking-wide">20th march 2025, Rachel Eleojo Sunday</p>
-                                    </div> */}
-                                    <div className="flex flex-col gap-2.5">
-                                        <h3 className="text-xl font-semibold text-black tracking-wide">
-                                            Ukraine, US Sign Minerals Deal Sought by Trump
-                                        </h3>
-                                        <p className="text-sm text-upam-gray leading-relaxed tracking-wide">
-                                            KYIV/WASHINGTON: Ukraine and the U.S. on Wednesday signed a deal heavily promoted by U.S. President Donald Trump that will give the United States preferential access to new Ukrainian minerals deals and fund investment in Ukraine's reconstruction.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </section>
 
                     {/* Video Section */}
-                    <section className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-8 lg:gap-12 mb-16 lg:mb-20">
+                    <section className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-8 lg:gap-12 mb-20 lg:mb-28">
                         {/* Main Video */}
                         <div className="flex flex-col">
-                            <div className="relative w-full aspect-[768/428] rounded-sm overflow-hidden">
+                            <div className="relative w-full aspect-[768/428] rounded-xl overflow-hidden shadow-xl">
                                 <iframe
                                     className="w-full h-full"
                                     src={`https://www.youtube.com/embed/${videos[0].youtubeId}`}
@@ -613,7 +600,7 @@ const Index = () => {
 
                         {/* Side Video */}
                         <div className="flex flex-col">
-                            <div className="relative w-full aspect-[542/356] rounded-sm overflow-hidden">
+                            <div className="relative w-full aspect-[542/356] rounded-xl overflow-hidden shadow-xl">
                                 <iframe
                                     className="w-full h-full"
                                     src={`https://www.youtube.com/embed/${videos[1].youtubeId}`}
@@ -627,100 +614,69 @@ const Index = () => {
                     </section>
 
                     {/* FAQ Section */}
-                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-                        <div className="flex flex-col gap-8">
-                            <div className="flex flex-col gap-5">
-                                <h2 className="text-2xl font-medium text-upam-dark">
+                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+                        <div className="flex flex-col gap-10">
+                            <div className="flex flex-col gap-6">
+                                <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 tracking-tight">
                                     Frequently Asked Questions
                                 </h2>
-                                <p className="text-sm text-upam-paragraph leading-relaxed tracking-wider">
-                                    Welcome to our FAQ section! Here, you'll find answers to common questions about UPAM. If you need further assistance, feel free to send us an email
+                                <p className="text-base text-gray-600 leading-relaxed">
+                                    Welcome to our FAQ section! Here, you'll find answers to common questions about UPAM. If you need further assistance, feel free to send us an email.
                                 </p>
                             </div>
 
-                            <div className="flex flex-col gap-6">
-                                <div className="flex flex-col gap-2.5">
+                            <div className="flex flex-col gap-4">
+                                <div className="flex flex-col gap-3">
                                     <button
                                         onClick={() => setOpenFaq(openFaq === 0 ? -1 : 0)}
-                                        className="flex items-center justify-between gap-2.5 text-left"
+                                        className="flex items-center justify-between gap-4 text-left p-4 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow"
                                     >
-                                        <h3 className="text-xl font-medium text-upam-red leading-tight">
-                                            What is UPAM (United Pan-Africanist Movement
+                                        <h3 className="text-lg font-semibold text-upam-red">
+                                            What is UPAM (United Pan-Africanist Movement)?
                                         </h3>
-                                        <ChevronDown className={`w-4 h-4 flex-shrink-0 text-upam-red transition-transform ${openFaq === 0 ? 'rotate-180' : ''}`} />
+                                        <ChevronDown className={`w-5 h-5 flex-shrink-0 text-upam-red transition-transform ${openFaq === 0 ? 'rotate-180' : ''}`} />
                                     </button>
                                     {openFaq === 0 && (
-                                        <p className="text-base text-upam-gray leading-relaxed tracking-wider">
-                                            UPAM is a Pan-African organization focused on unity, empowerment, leadership development, and sustainable progress across Africa and the diaspora.
-                                        </p>
+                                        <div className="p-4 bg-gray-50 rounded-lg">
+                                            <p className="text-base text-gray-600 leading-relaxed">
+                                                UPAM is a Pan-African organization focused on unity, empowerment, leadership development, and sustainable progress across Africa and the diaspora.
+                                            </p>
+                                        </div>
                                     )}
                                 </div>
 
-                                <div className="flex flex-col gap-8">
+                                {[1, 2, 3, 4, 5].map((index) => (
                                     <button
-                                        onClick={() => setOpenFaq(openFaq === 1 ? -1 : 1)}
-                                        className="flex items-center justify-between gap-2.5 text-left"
+                                        key={index}
+                                        onClick={() => setOpenFaq(openFaq === index ? -1 : index)}
+                                        className="flex items-center justify-between gap-4 text-left p-4 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow"
                                     >
-                                        <h3 className="text-xl font-medium text-upam-dark">
-                                            Who can become a member of UPAM?
+                                        <h3 className="text-lg font-semibold text-gray-900">
+                                            {index === 1 && "Who can become a member of UPAM?"}
+                                            {index === 2 && "How can I join or get involved with UPAM?"}
+                                            {index === 3 && "Where does UPAM operate?"}
+                                            {index === 4 && "What kind of programs and initiatives does UPAM run?"}
+                                            {index === 5 && "How is UPAM funded?"}
                                         </h3>
-                                        <ChevronDown className={`w-4 h-4 flex-shrink-0 text-upam-dark transition-transform ${openFaq === 1 ? 'rotate-180' : ''}`} />
+                                        <ChevronDown className={`w-5 h-5 flex-shrink-0 text-gray-400 transition-transform ${openFaq === index ? 'rotate-180' : ''}`} />
                                     </button>
-
-                                    <button
-                                        onClick={() => setOpenFaq(openFaq === 2 ? -1 : 2)}
-                                        className="flex items-center justify-between gap-2.5 text-left"
-                                    >
-                                        <h3 className="text-xl font-medium text-upam-dark">
-                                            How can I join or get involved with UPAM?
-                                        </h3>
-                                        <ChevronDown className={`w-4 h-4 flex-shrink-0 text-upam-dark transition-transform ${openFaq === 2 ? 'rotate-180' : ''}`} />
-                                    </button>
-
-                                    <button
-                                        onClick={() => setOpenFaq(openFaq === 3 ? -1 : 3)}
-                                        className="flex items-center justify-between gap-2.5 text-left"
-                                    >
-                                        <h3 className="text-xl font-medium text-upam-dark">
-                                            Where does UPAM operate?
-                                        </h3>
-                                        <ChevronDown className={`w-4 h-4 flex-shrink-0 text-upam-dark transition-transform ${openFaq === 3 ? 'rotate-180' : ''}`} />
-                                    </button>
-
-                                    <button
-                                        onClick={() => setOpenFaq(openFaq === 4 ? -1 : 4)}
-                                        className="flex items-center justify-between gap-2.5 text-left"
-                                    >
-                                        <h3 className="text-xl font-medium text-upam-dark">
-                                            What kind of programs and initiatives does UPAM run?
-                                        </h3>
-                                        <ChevronDown className={`w-4 h-4 flex-shrink-0 text-upam-dark transition-transform ${openFaq === 4 ? 'rotate-180' : ''}`} />
-                                    </button>
-
-                                    <button
-                                        onClick={() => setOpenFaq(openFaq === 5 ? -1 : 5)}
-                                        className="flex items-center justify-between gap-2.5 text-left"
-                                    >
-                                        <h3 className="text-xl font-medium text-upam-dark">
-                                            How is UPAM funded?
-                                        </h3>
-                                        <ChevronDown className={`w-4 h-4 flex-shrink-0 text-upam-dark transition-transform ${openFaq === 5 ? 'rotate-180' : ''}`} />
-                                    </button>
-                                </div>
+                                ))}
                             </div>
                         </div>
 
                         <div className="flex items-center justify-center">
-                            <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/8b553fc5ee46c49c7770ecda17fa30afaf62ddfc?width=1263"
-                                alt="FAQ Map"
-                                className="w-full max-w-lg h-auto"
-                            />
+                            <div className="relative overflow-hidden w-full max-w-lg">
+                                <img
+                                    src="https://api.builder.io/api/v1/image/assets/TEMP/8b553fc5ee46c49c7770ecda17fa30afaf62ddfc?width=1263"
+                                    alt="FAQ Map"
+                                    className="w-full h-auto"
+                                />
+                            </div>
                         </div>
                     </section>
                 </div>
-            </div >
-        </div >
+            </div>
+        </div>
     );
 }
 

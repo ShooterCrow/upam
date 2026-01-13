@@ -21,14 +21,37 @@ h4 {
 } */
 
 .vignette {
-  background: linear-gradient(to left,
-      rgba(0, 0, 0, 1) 12%,
-      rgba(0, 0, 0, 0) 40%,
-      rgba(0, 0, 0, 0) 60%,
-      rgba(0, 0, 0, 1) 88%);
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 1) 12%,
+    rgba(0, 0, 0, 0) 40%,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 1) 88%
+  );
 }
 
 .ring-img {
   backface-visibility: hidden;
   user-select: none;
+}
+
+@keyframes scroll-slow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-slow {
+  animation: scroll-slow 40s linear infinite;
+}
+
+.animate-scroll-slow:hover {
+  animation-play-state: paused;
+}
+
+.pause-animation {
+  animation-play-state: paused;
 }

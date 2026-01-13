@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Menu, X, ChevronDown, Home, Info, Users, Grid, Calendar, FileText, UserPlus, Mail, LogOut, Bell, HelpCircle, User, CreditCard, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -12,6 +12,7 @@ const mockUser = {
 const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
+    const headerRef = useRef(null);
 
     const navigationLinks = [
         { name: 'Home', path: '/', icon: Home },
@@ -21,15 +22,24 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
         { name: 'Events & Conferences', path: '#', icon: Calendar },
         {
             name: 'Resources & Media',
-            path: '/gallery',
+            path: '#',
             icon: FileText,
-            hasDropdown: true
+            hasDropdown: true,
+            children: [
+                { name: 'Publications', path: '/publications' },
+                { name: 'Gallery', path: '/gallery' },
+            ]
         },
         {
             name: 'Membership',
             path: '#',
             icon: UserPlus,
-            hasDropdown: true
+            hasDropdown: true,
+            children: [
+                { name: 'Join Us', path: '/get-involved' },
+                { name: 'Member Benefits', path: '#' },
+                { name: 'Login', path: '#' },
+            ]
         },
         { name: 'Get Involved', path: '/get-involved', icon: UserPlus },
         { name: 'Contact Us', path: '#', icon: Mail },
@@ -45,12 +55,22 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
         { name: 'Account', path: '#', icon: User },
     ];
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (headerRef.current && !headerRef.current.contains(event.target)) {
+                setOpenDropdown(null);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
     const toggleDropdown = (name) => {
         setOpenDropdown(openDropdown === name ? null : name);
     };
 
     return (
-        <>
+        <div ref={headerRef}>
             {/* Desktop Header */}
             <header className="hidden lg:block bg-gray-200 shadow-sm mb-20">
                 <div className="max-w-7xl mx-auto px-6 py-4">
@@ -88,19 +108,39 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
                     <nav className="flex items-center space-x-8 pt-5 w-full justify-center">
                         {navigationLinks.map((link) => (
                             <div key={link.name} className="relative">
-                                <Link
-                                    to={link.path}
-                                    className="text-gray-800 hover:text-red-600 transition-colors text-sm font-medium flex items-center gap-1"
-                                    onClick={(e) => {
-                                        if (link.hasDropdown) {
-                                            e.preventDefault();
-                                            toggleDropdown(link.name);
-                                        }
-                                    }}
-                                >
-                                    {link.name}
-                                    {link.hasDropdown && <ChevronDown size={16} />}
-                                </Link>
+                                {link.hasDropdown ? (
+                                    <>
+                                        <button
+                                            onClick={() => toggleDropdown(link.name)}
+                                            className={`text-gray-800 hover:text-red-600 transition-colors text-sm font-medium flex items-center gap-1 ${openDropdown === link.name ? 'text-red-600' : ''}`}
+                                        >
+                                            {link.name}
+                                            <ChevronDown size={16} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
+                                        </button>
+                                        {/* Dropdown Menu */}
+                                        {openDropdown === link.name && (
+                                            <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-100 shadow-lg rounded-md py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                                                {link.children.map((child) => (
+                                                    <Link
+                                                        key={child.name}
+                                                        to={child.path}
+                                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors"
+                                                        onClick={() => setOpenDropdown(null)}
+                                                    >
+                                                        {child.name}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </>
+                                ) : (
+                                    <Link
+                                        to={link.path}
+                                        className="text-gray-800 hover:text-red-600 transition-colors text-sm font-medium flex items-center gap-1"
+                                    >
+                                        {link.name}
+                                    </Link>
+                                )}
                             </div>
                         ))}
                     </nav>
@@ -196,16 +236,38 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
                                 // Logged in, on homepage
                                 <>
                                     {navigationLinks.map((link) => (
-                                        <Link
-                                            key={link.name}
-                                            to={link.path}
-                                            className={`flex items-center justify-between px-4 py-3 text-gray-800 hover:bg-gray-100 rounded transition-colors ${link.path === '/' ? 'bg-gray-100' : ''
-                                                }`}
-                                            onClick={() => setIsMobileMenuOpen(false)}
-                                        >
-                                            <span>{link.name}</span>
-                                            {link.hasDropdown && <ChevronDown size={16} />}
-                                        </Link>
+                                        <div key={link.name}>
+                                            <Link
+                                                to={link.path}
+                                                className={`flex items-center justify-between px-4 py-3 text-gray-800 hover:bg-gray-100 rounded transition-colors ${link.path === '/' ? 'bg-gray-100' : ''
+                                                    }`}
+                                                onClick={() => {
+                                                    if (!link.hasDropdown) setIsMobileMenuOpen(false);
+                                                    else toggleDropdown(link.name);
+                                                }}
+                                            >
+                                                <span>{link.name}</span>
+                                                {link.hasDropdown && <ChevronDown size={16} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />}
+                                            </Link>
+                                            {/* Mobile Dropdown */}
+                                            {link.hasDropdown && openDropdown === link.name && (
+                                                <div className="bg-gray-50 py-1 pl-4">
+                                                    {link.children.map((child) => (
+                                                        <Link
+                                                            key={child.name}
+                                                            to={child.path}
+                                                            className="block px-4 py-3 text-sm text-gray-600 hover:text-red-600 transition-colors"
+                                                            onClick={() => {
+                                                                setIsMobileMenuOpen(false);
+                                                                setOpenDropdown(null);
+                                                            }}
+                                                        >
+                                                            {child.name}
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
                                     ))}
                                     <Link to="/dashboard" className="block text-center text-red-600 font-semibold mt-6" onClick={() => setIsMobileMenuOpen(false)}>
                                         Go back to Dashboard
@@ -215,34 +277,59 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
                                 // Not logged in
                                 <>
                                     {navigationLinks.map((link) => (
-                                        <Link
-                                            key={link.name}
-                                            to={link.path}
-                                            className={`flex items-center justify-between px-4 py-3 text-gray-800 hover:bg-gray-100 rounded transition-colors ${link.path === '/' ? 'bg-gray-100' : ''
-                                                }`}
-                                            onClick={(e) => {
-                                                if (link.hasDropdown) {
-                                                    e.preventDefault();
-                                                    toggleDropdown(link.name);
-                                                } else {
-                                                    setIsMobileMenuOpen(false);
-                                                }
-                                            }}
-                                        >
-                                            <span>{link.name}</span>
-                                            {link.hasDropdown && <ChevronDown size={16} />}
-                                        </Link>
+                                        <div key={link.name}>
+                                            {link.hasDropdown ? (
+                                                <>
+                                                    <button
+                                                        onClick={() => toggleDropdown(link.name)}
+                                                        className="flex items-center justify-between w-full px-4 py-3 text-gray-800 hover:bg-gray-100 rounded transition-colors"
+                                                    >
+                                                        <span>{link.name}</span>
+                                                        <ChevronDown size={16} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
+                                                    </button>
+                                                    {/* Mobile Dropdown */}
+                                                    {openDropdown === link.name && (
+                                                        <div className="bg-gray-50 py-1 pl-4 animate-in slide-in-from-top-1 duration-200">
+                                                            {link.children.map((child) => (
+                                                                <Link
+                                                                    key={child.name}
+                                                                    to={child.path}
+                                                                    className="block px-4 py-3 text-sm text-gray-600 hover:text-red-600 transition-colors"
+                                                                    onClick={() => {
+                                                                        setIsMobileMenuOpen(false);
+                                                                        setOpenDropdown(null);
+                                                                    }}
+                                                                >
+                                                                    {child.name}
+                                                                </Link>
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </>
+                                            ) : (
+                                                <Link
+                                                    to={link.path}
+                                                    className={`block px-4 py-3 text-gray-800 hover:bg-gray-100 rounded transition-colors ${link.path === '/' ? 'bg-gray-100' : ''
+                                                        }`}
+                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                >
+                                                    {link.name}
+                                                </Link>
+                                            )}
+                                        </div>
                                     ))}
-                                    <button className="w-full border-2 border-gray-800 px-6 py-3 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors mt-6">
-                                        Register / Login
-                                    </button>
+                                    <div className="px-4 mt-6">
+                                        <button className="w-full border-2 border-gray-800 px-6 py-3 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors">
+                                            Register / Login
+                                        </button>
+                                    </div>
                                 </>
                             )}
                         </nav>
                     </div>
                 </div>
             )}
-        </>
+        </div>
     );
 };
 
