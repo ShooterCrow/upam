@@ -22,6 +22,7 @@ const App = () => {
           <Route path="publications" element={<Publications />} />
           <Route path="research" element={<Research />} />
           {/* Platform */}
+
           <Route path="platforms" element={<Platform />} />
         </Route>
       </Routes>
