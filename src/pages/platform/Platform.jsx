@@ -1,6 +1,5 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
-import wnnLogo from '../../assets/wnn_logo.png';
 import jumuiyaLogo from '../../assets/jumuiya_logo.png';
 import upamEventsLogo from '../../assets/upam_events_logo.png';
 import academyLogo from '../../assets/academy_logo.png';
@@ -13,7 +12,7 @@ const Platform = () => {
       name: "WNN Africa",
       description: "Global media network and radio services.",
       link: "#",
-      logo: wnnLogo
+      logo: '../../assets/wnn_logo.png'
     },
     {
       name: "Jumuiya Forum",
@@ -54,7 +53,7 @@ const Platform = () => {
   return (
     <div className="bg-white min-h-screen font-['Lato',_sans-serif] text-black">
       <div className="px-4 container mx-auto md:px-8 max-w-[1280px] pb-24">
-        
+
         {/* Hero Section */}
         <section className="pt-16 md:pt-28 mb-16 max-w-4xl">
           <p className="text-[14px] leading-[139%] tracking-[0.02em] uppercase mb-5 font-medium">
@@ -70,8 +69,8 @@ const Platform = () => {
           <h2 className="text-[16px] font-semibold mb-10 uppercase tracking-[0.05em]">Active Platforms</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
             {activePlatforms.map((platform, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={`group p-8 border border-gray-100 flex flex-col justify-between min-h-[220px] transition-all duration-300 hover:shadow-lg ${platform.isActive ? 'bg-[#EEEEEE]' : 'bg-[#F9F9F9]'}`}
               >
                 <div>
@@ -86,8 +85,8 @@ const Platform = () => {
                   </p>
                 </div>
                 <div className="flex justify-end">
-                  <a 
-                    href={platform.link} 
+                  <a
+                    href={platform.link}
                     className="p-2 border border-black rounded-full transition-all duration-300 group-hover:bg-black group-hover:text-white"
                   >
                     <ArrowUpRight size={20} />
@@ -103,8 +102,8 @@ const Platform = () => {
           <h2 className="text-[16px] font-semibold mb-10 uppercase tracking-[0.05em] text-[#666666]">Under Development</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 text-[#666666]">
             {developmentPlatforms.map((platform, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="p-8 border border-gray-50 bg-[#F9F9F9] flex flex-col justify-between min-h-[240px]"
               >
                 <div>
@@ -122,7 +121,7 @@ const Platform = () => {
                   </p>
                 </div>
                 <div className="flex justify-end">
-                   <div className="p-2 border border-gray-200 rounded-full text-gray-300 cursor-not-allowed">
+                  <div className="p-2 border border-gray-200 rounded-full text-gray-300 cursor-not-allowed">
                     <ArrowUpRight size={20} />
                   </div>
                 </div>
