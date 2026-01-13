@@ -19,13 +19,10 @@ const App = () => {
           <Route path="gallery" element={<Gallery />} />
           {/* Get Involved */}
           <Route path="get-involved" element={<GetInvolve />} />
-<<<<<<< HEAD
           <Route path="publications" element={<Publications />} />
           <Route path="research" element={<Research />} />
-=======
           {/* Platform */}
           <Route path="platforms" element={<Platform />} />
->>>>>>> 266fb995d643b0b3ba5c96621826b899a00a7a96
         </Route>
       </Routes>
     </div>
