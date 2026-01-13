@@ -4,6 +4,7 @@ import Layout from './component/layout/Layout'
 import Home from './pages/home/Home'
 import Gallery from './pages/gallery/Gallery'
 import GetInvolve from './pages/getInvolve/getInvolve'
+import Platform from './pages/platform/Platform'
 import Header from './component/layout/Header'
 import Publications from './pages/publications/Publications'
 import Research from './pages/publications/Research'
@@ -18,8 +19,13 @@ const App = () => {
           <Route path="gallery" element={<Gallery />} />
           {/* Get Involved */}
           <Route path="get-involved" element={<GetInvolve />} />
+<<<<<<< HEAD
           <Route path="publications" element={<Publications />} />
           <Route path="research" element={<Research />} />
+=======
+          {/* Platform */}
+          <Route path="platforms" element={<Platform />} />
+>>>>>>> 266fb995d643b0b3ba5c96621826b899a00a7a96
         </Route>
       </Routes>
     </div>
