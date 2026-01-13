@@ -76,7 +76,7 @@ const GetInvolve = () => {
           <img 
             src={becomeMemberImg} 
             alt="Become a Member" 
-            className="w-full h-full object-cover grayscale"
+            className="w-full h-full object-cover"
           />
         </div>
 
@@ -103,7 +103,7 @@ const GetInvolve = () => {
               <img 
                 src={volunteerImg} 
                 alt="Volunteer With Us" 
-                className="w-full h-full object-cover grayscale"
+                className="w-full h-full object-cover"
               />
             </div>
           </section>
@@ -115,7 +115,7 @@ const GetInvolve = () => {
               <img 
                 src={partnerImg} 
                 alt="Partner With UPAM" 
-                className="w-full h-full object-cover grayscale"
+                className="w-full h-full object-cover"
               />
             </div>
             <div className="order-1 md:order-2 md:pl-10">
@@ -157,7 +157,7 @@ const GetInvolve = () => {
               <img 
                 src={benefitsImg} 
                 alt="Benefits of membership" 
-                className="w-full h-full object-cover grayscale"
+                className="w-full h-full object-cover"
               />
             </div>
           </section>
@@ -194,7 +194,7 @@ const GetInvolve = () => {
                <img 
                 src={mapImg} 
                 alt="Operations Map" 
-                className="w-full h-auto object-contain grayscale opacity-80"
+                className="w-full h-auto object-contain opacity-80"
               />
             </div>
           </section>
