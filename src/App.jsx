@@ -5,6 +5,9 @@ import Home from './pages/home/Home'
 import Gallery from './pages/gallery/Gallery'
 import GetInvolve from './pages/getInvolve/getInvolve'
 import Platform from './pages/platform/Platform'
+import ContactUs from './pages/contactUs/ContactUs'
+import Partnership from './pages/partnership/Partnership'
+import Volunteer from './pages/volunteer/Volunteer'
 import Header from './component/layout/Header'
 import Publications from './pages/publications/Publications'
 import Research from './pages/publications/Research'
@@ -24,6 +27,12 @@ const App = () => {
           {/* Platform */}
 
           <Route path="platforms" element={<Platform />} />
+          {/* Contact Us */}
+          <Route path="contact-us" element={<ContactUs />} />
+          {/* Partnership */}
+          <Route path="partnership" element={<Partnership />} />
+          {/* Volunteer */}
+          <Route path="volunteer" element={<Volunteer />} />
         </Route>
       </Routes>
     </div>
