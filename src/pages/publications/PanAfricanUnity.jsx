@@ -1,4 +1,4 @@
-export default function Research() {
+const PanAfricanUnity = () => {
     return (
         <div className="min-h-screen bg-white">
             <article className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24">
@@ -147,3 +147,5 @@ export default function Research() {
         </div>
     );
 }
+
+export default PanAfricanUnity

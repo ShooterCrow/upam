@@ -8,9 +8,10 @@ import Platform from './pages/platform/Platform'
 import ContactUs from './pages/contactUs/ContactUs'
 import Partnership from './pages/partnership/Partnership'
 import Volunteer from './pages/volunteer/Volunteer'
-import Header from './component/layout/Header'
 import Publications from './pages/publications/Publications'
-import Research from './pages/publications/Research'
+import PanAfricanUnity from './pages/publications/PanAfricanUnity'
+import DigitalLiteracy from './pages/publications/DigitalLiteracy'
+
 
 const App = () => {
   return (
@@ -23,9 +24,13 @@ const App = () => {
           {/* Get Involved */}
           <Route path="get-involved" element={<GetInvolve />} />
           <Route path="publications" element={<Publications />} />
-          <Route path="research" element={<Research />} />
-          {/* Platform */}
 
+          <Route path="research" >
+            <Route path='panafrican-unity' element={<PanAfricanUnity />} />
+            <Route path="digital-literacy" element={<DigitalLiteracy />} />
+          </Route>
+
+          {/* Platform */}
           <Route path="platforms" element={<Platform />} />
           {/* Contact Us */}
           <Route path="contact-us" element={<ContactUs />} />
