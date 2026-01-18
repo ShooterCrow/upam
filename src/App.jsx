@@ -9,8 +9,9 @@ import ContactUs from './pages/contactUs/ContactUs'
 import Partnership from './pages/partnership/Partnership'
 import Volunteer from './pages/volunteer/Volunteer'
 import Publications from './pages/publications/Publications'
-import PanAfricanUnity from './pages/publications/PanAfricanUnity'
-import DigitalLiteracy from './pages/publications/DigitalLiteracy'
+import DigitalLiteracy from './pages/publications/articles/DigitalLiteracy'
+import PanAfricanUnity from './pages/publications/articles/PanAfricanUnity'
+import About from './pages/about/About'
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
           <Route index element={<Home />} />
           {/* Gallery */}
           <Route path="gallery" element={<Gallery />} />
+          <Route path="about" element={<About />} />
           {/* Get Involved */}
           <Route path="get-involved" element={<GetInvolve />} />
           <Route path="publications" element={<Publications />} />

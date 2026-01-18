@@ -16,7 +16,7 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
 
     const navigationLinks = [
         { name: 'Home', path: '/', icon: Home },
-        { name: 'About Us', path: '#', icon: Info },
+        { name: 'About Us', path: 'about', icon: Info },
         { name: 'Leadership', path: '#', icon: Users },
         { name: 'Platforms & Initiatives', path: '#', icon: Grid },
         { name: 'Events & Conferences', path: '#', icon: Calendar },
@@ -107,31 +107,38 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
                     {/* Desktop Navigation */}
                     <nav className="flex items-center space-x-8 pt-5 w-full justify-center">
                         {navigationLinks.map((link) => (
-                            <div key={link.name} className="relative">
+                            <div
+                                key={link.name}
+                                className="relative group"
+                                onMouseEnter={() => link.hasDropdown && setOpenDropdown(link.name)}
+                                onMouseLeave={() => link.hasDropdown && setOpenDropdown(null)}
+                            >
                                 {link.hasDropdown ? (
                                     <>
                                         <button
-                                            onClick={() => toggleDropdown(link.name)}
                                             className={`text-gray-800 hover:text-red-600 transition-colors text-sm font-medium flex items-center gap-1 ${openDropdown === link.name ? 'text-red-600' : ''}`}
                                         >
                                             {link.name}
                                             <ChevronDown size={16} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
                                         </button>
                                         {/* Dropdown Menu */}
-                                        {openDropdown === link.name && (
-                                            <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-100 shadow-lg rounded-md py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                                                {link.children.map((child) => (
-                                                    <Link
-                                                        key={child.name}
-                                                        to={child.path}
-                                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors"
-                                                        onClick={() => setOpenDropdown(null)}
-                                                    >
-                                                        {child.name}
-                                                    </Link>
-                                                ))}
-                                            </div>
-                                        )}
+                                        <div
+                                            className={`absolute top-full left-0 mt-2 w-48 bg-white border border-gray-100 shadow-lg rounded-md py-2 z-50 transition-all duration-300 ease-in-out transform origin-top ${openDropdown === link.name
+                                                ? 'opacity-100 translate-y-0 visible'
+                                                : 'opacity-0 -translate-y-2 invisible'
+                                                }`}
+                                        >
+                                            {link.children.map((child) => (
+                                                <Link
+                                                    key={child.name}
+                                                    to={child.path}
+                                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors"
+                                                    onClick={() => setOpenDropdown(null)}
+                                                >
+                                                    {child.name}
+                                                </Link>
+                                            ))}
+                                        </div>
                                     </>
                                 ) : (
                                     <Link

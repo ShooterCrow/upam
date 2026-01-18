@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Exercise Challenge</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f5f5;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 8px;
+        padding: 40px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 2.5em;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 40px;
+        font-size: 1.1em;
+      }
+
+      .instructions {
+        background: #f9f9f9;
+        border-left: 4px solid #333;
+        padding: 20px;
+        margin-bottom: 30px;
+        border-radius: 4px;
+      }
+
+      .instructions h2 {
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .instructions ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .instructions li {
+        padding: 8px 0;
+        padding-left: 25px;
+        position: relative;
+      }
+
+      .instructions li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #333;
+        font-weight: bold;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .section h3 {
+        color: #333;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #333;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .product-card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        border: 2px solid #ddd;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-card h4 {
+        margin-bottom: 10px;
+        font-size: 1.3em;
+        color: #333;
+      }
+
+      .product-card .price {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin: 10px 0;
+        color: #333;
+      }
+
+      .product-card .stock {
+        font-size: 0.9em;
+        color: #666;
+      }
+
+      .number-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+        max-width: 600px;
+      }
+
+      .number-box {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        font-weight: bold;
+        font-size: 1.3em;
+        border: 2px solid #333;
+        background: #f0f0f0;
+      }
+
+      .stats {
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        border: 1px solid #ddd;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-value {
+        font-size: 2em;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .stat-label {
+        color: #666;
+        margin-top: 5px;
+      }
+
+      .code-hint {
+        background: #2d3748;
+        color: #68d391;
+        padding: 15px;
+        border-radius: 8px;
+        font-family: "Courier New", monospace;
+        margin-top: 10px;
+        font-size: 0.9em;
+      }
+
+      .input-section {
+        background: #f9f9f9;
+        padding: 30px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .input-section label {
+        display: block;
+        margin-bottom: 15px;
+        font-weight: bold;
+        font-size: 1.1em;
+        color: #333;
+      }
+
+      .input-section input {
+        padding: 12px 20px;
+        font-size: 1.1em;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        width: 250px;
+        margin-right: 10px;
+      }
+
+      .input-section button {
+        padding: 12px 30px;
+        font-size: 1.1em;
+        background: #333;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      #result {
+        padding: 20px;
+        text-align: center;
+        font-size: 1.3em;
+        font-weight: bold;
+        min-height: 60px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+      }
+
+      #result.success {
+        background: #f0f0f0;
+        color: #333;
+        border: 2px solid #333;
+      }
+
+      #result.error {
+        background: #fff5f5;
+        color: #c53030;
+        border: 2px solid #c53030;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎯 JavaScript Exercise Challenge</h1>
+      <p class="subtitle">Recreate this webpage using the required methods!</p>
+
+      <div class="section">
+        <h3>Section 1: Product Catalog</h3>
+        <div id="products" class="product-grid"></div>
+        <div class="instructions">
+          <h2>📋 Instructions</h2>
+          <ul>
+            <li>
+              Create an array of product objects with properties: name, price,
+              stock
+            </li>
+            <li>
+              Use <strong>.map()</strong> to transform the array into HTML (NO
+              repetitive HTML!)
+            </li>
+            <li>
+              Use <strong>arrow functions (=&gt;)</strong> for the callback
+            </li>
+            <li>Use template literals (``) for the HTML structure</li>
+            <li>Join the array and insert into the DOM</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Section 2: Multiplication Table (5x)</h3>
+        <div id="numbers" class="number-grid"></div>
+        <div class="instructions">
+          <h2>📋 Instructions</h2>
+          <ul>
+            <li>
+              Use a <strong>for loop</strong> starting at 1 and ending at 10
+            </li>
+            <li>
+              Inside the loop, multiply each number by 5 (e.g., 1×5=5, 2×5=10,
+              etc.)
+            </li>
+            <li>Create a div element for each result inside the loop</li>
+            <li>Set the div's className to "number-box"</li>
+            <li>Set the div's textContent to the multiplication result</li>
+            <li>
+              Append each div to the numbers container using appendChild()
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Section 3: Grade Calculator</h3>
+        <div class="input-section">
+          <label for="gradeInput">Enter a score (0-100):</label>
+          <input
+            type="number"
+            id="gradeInput"
+            min="0"
+            max="100"
+            placeholder="Enter score"
+          />
+          <button id="calculateBtn">Calculate Grade</button>
+        </div>
+        <div id="result"></div>
+        <div class="instructions">
+          <h2>📋 Instructions</h2>
+          <ul>
+            <li>
+              Get the input element using
+              <strong>document.getElementById()</strong>
+            </li>
+            <li>
+              Add a click event listener to the button using
+              <strong>addEventListener()</strong>
+            </li>
+            <li>
+              Use an <strong>arrow function</strong> for the event handler
+            </li>
+            <li>
+              Inside the function, get the input value and convert to a number
+            </li>
+            <li>
+              Use a <strong>for loop</strong> to determine the grade based on
+              score ranges:
+            </li>
+            <li style="padding-left: 40px">
+              90-100 = A, 80-89 = B, 70-79 = C, 60-69 = D, below 60 = F
+            </li>
+            <li>Display the result showing both the score and letter grade</li>
+            <li>Handle invalid inputs (empty, negative, or over 100)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Product data
+      const products = [
+        { name: "Laptop Pro", price: 1299, stock: 15 },
+        { name: "Wireless Mouse", price: 29, stock: 50 },
+        { name: "Mechanical Keyboard", price: 89, stock: 30 },
+        { name: "USB-C Hub", price: 45, stock: 25 },
+        { name: 'Monitor 27"', price: 349, stock: 12 },
+        { name: "Webcam HD", price: 79, stock: 40 },
+      ];
+
+      // Section 1: Create product cards using map() with arrow function
+      const productHTML = products
+        .map(
+          (product) => `
+            <div class="product-card">
+                <h4>${product.name}</h4>
+                <div class="price">$${product.price}</div>
+                <div class="stock">Stock: ${product.stock} units</div>
+            </div>
+        `
+        )
+        .join("");
+
+      document.getElementById("products").innerHTML = productHTML;
+
+      // Section 2: Generate multiplication table using for loop
+      const numbersContainer = document.getElementById("numbers");
+
+      for (let i = 1; i <= 10; i++) {
+        const result = i * 5;
+        const div = document.createElement("div");
+        div.className = "number-box";
+        div.textContent = result;
+        numbersContainer.appendChild(div);
+      }
+
+      // Section 3: Grade Calculator with for loop logic
+      const calculateBtn = document.getElementById("calculateBtn");
+      const gradeInput = document.getElementById("gradeInput");
+      const resultDiv = document.getElementById("result");
+
+      calculateBtn.addEventListener("click", () => {
+        const score = parseInt(gradeInput.value);
+
+        // Validate input
+        if (isNaN(score) || score < 0 || score > 100) {
+          resultDiv.className = "error";
+          resultDiv.textContent =
+            "Please enter a valid score between 0 and 100";
+          return;
+        }
+
+        // Use for loop to determine grade
+        let grade = "";
+        const ranges = [
+          { min: 90, max: 100, letter: "A" },
+          { min: 80, max: 89, letter: "B" },
+          { min: 70, max: 79, letter: "C" },
+          { min: 60, max: 69, letter: "D" },
+          { min: 0, max: 59, letter: "F" },
+        ];
+
+        for (let i = 0; i < ranges.length; i++) {
+          if (score >= ranges[i].min && score <= ranges[i].max) {
+            grade = ranges[i].letter;
+            break;
+          }
+        }
+
+        resultDiv.className = "success";
+        resultDiv.textContent = `Score: ${score} | Grade: ${grade}`;
+      });
+    </script>
+  </body>
+</html>
