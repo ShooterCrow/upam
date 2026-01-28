@@ -69,7 +69,7 @@ const About = () => {
                     </div>
 
                     {/* Image Grid */}
-                    <div className="flex flex-col lg:flex-row justify-between items-center gap-6 lg:gap-8 w-full">
+                    <div className="hidden lg:flex flex-col lg:flex-row justify-between items-center gap-6 lg:gap-8 w-full">
                         {/* Left Group */}
                         <div className="flex flex-col sm:flex-row items-center gap-4 lg:gap-0">
                             <img
@@ -95,6 +95,33 @@ const About = () => {
                                 src="https://api.builder.io/api/v1/image/assets/TEMP/65edfbd6618650ee6c39d6d3e581e169f2567595?width=714"
                                 alt="Cultural celebration"
                                 className="w-full sm:w-[280px] lg:w-[357px] h-auto lg:h-[422px] object-cover"
+                            />
+                        </div>
+                    </div>
+
+                    <div className=" lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <img
+                                src="https://api.builder.io/api/v1/image/assets/TEMP/7fe6a4a6f31d3a5de91463aff776e511431d8ec3?width=520"
+                                alt="UPAM team meeting"
+                                className="w-full h-48 md:h-64 lg:h-80 object-cover rounded-lg"
+                            />
+                            <img
+                                src="https://api.builder.io/api/v1/image/assets/TEMP/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf?width=1126"
+                                alt="UPAM conference"
+                                className="w-full h-48 md:h-64 lg:h-80 object-cover rounded-lg sm:col-span-2"
+                            />
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <img
+                                src="https://api.builder.io/api/v1/image/assets/TEMP/0939de8e4e557c4e75f688148d4757b3f0e275bb?width=520"
+                                alt="Community members"
+                                className="w-full h-48 md:h-64 lg:h-80 object-cover rounded-lg"
+                            />
+                            <img
+                                src="https://api.builder.io/api/v1/image/assets/TEMP/65edfbd6618650ee6c39d6d3e581e169f2567595?width=714"
+                                alt="Cultural celebration"
+                                className="w-full h-48 md:h-64 lg:h-80 object-cover rounded-lg"
                             />
                         </div>
                     </div>
@@ -196,7 +223,7 @@ const About = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 w-full lg:w-1/2">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2 w-full lg:w-1/2">
                         <div className='flex flex-col gap-2'>
                             <img
                                 src="https://api.builder.io/api/v1/image/assets/TEMP/299e1480b26e20d4a93c2dae4e9560f6a5f58062?width=312"
@@ -222,7 +249,7 @@ const About = () => {
                         <img
                             src="https://api.builder.io/api/v1/image/assets/TEMP/69e8a713eff97bf06eb064b12e7f33ad52b7b61d?width=634"
                             alt="Community impact showcase"
-                            className="w-full h-48 lg:h-146 object-cover rounded-lg lg:col-span-2 lg:row-span-2"
+                            className="w-full h-48 md:h-146 object-cover rounded-lg lg:col-span-2 lg:row-span-2"
                         />
                     </div>
                 </div>
