@@ -12,6 +12,11 @@ import Publications from './pages/publications/Publications'
 import DigitalLiteracy from './pages/publications/articles/DigitalLiteracy'
 import PanAfricanUnity from './pages/publications/articles/PanAfricanUnity'
 import About from './pages/about/About'
+import MembershipPolicy from './pages/membershipPolicy/MembershipPolicy'
+import MembershipAgreement from './pages/membershipAgreement/MembershipAgreement'
+import Register from './pages/auth/Register'
+import Login from './pages/auth/Login'
+import ForgottenPassword from './pages/auth/ForgottenPassword'
 
 
 const App = () => {
@@ -26,8 +31,15 @@ const App = () => {
           {/* Get Involved */}
           <Route path="get-involved" element={<GetInvolve />} />
           <Route path="publications" element={<Publications />} />
+          <Route path="membership-policy" element={<MembershipPolicy />} />
+          <Route path="membership-agreement" element={<MembershipAgreement />} />
 
-          <Route path="research" >
+          {/* Auth */}
+          <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
+          <Route path="forgot-password" element={<ForgottenPassword />} />
+
+          <Route path="research">
             <Route path='panafrican-unity' element={<PanAfricanUnity />} />
             <Route path="digital-literacy" element={<DigitalLiteracy />} />
           </Route>
