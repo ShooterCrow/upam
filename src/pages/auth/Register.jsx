@@ -1,6 +1,9 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import registerIllustration from "../../assets/Register.png";
+import { useSignupMutation } from "../../pages/authenticationPages/authApiSlice";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../pages/authenticationPages/authSlice";
 
 /** Google "G" logo for Sign up with Google */
 const GoogleIcon = () => (
@@ -32,12 +35,77 @@ const inputBase = "w-full font-['Lato',sans-serif] text-[16px] text-[#222] bg-tr
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const [signup, { isLoading }] = useSignupMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [errMsg, setErrMsg] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleNameChange = (e) => {
+    // Basic splitting of full name input into first and last name
+    const fullName = e.target.value;
+    const nameParts = fullName.split(" ");
+    const firstName = nameParts[0] || "";
+    const lastName = nameParts.slice(1).join(" ") || ""; // Join the rest as last name, or empty if none
+
+    // We can store the full raw input if needed, but for backend formatted:
+    setFormData((prev) => ({
+      ...prev,
+      firstName: firstName,
+      lastName: lastName || firstName, // Fallback if user only enters one name
+    }));
+  };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrMsg("");
+    try {
+      // Backend expects firstName, lastName, email, password
+      // The simple form has one "Name" field, so we split it roughly
+      // Actually, let's just make the "Name" input update both if simpler,
+      // OR update the UI to have two fields.
+      // For now, adhering to UI constraint: First word is First Name, rest is Last Name.
+
+      // Validation
+      if (!formData.firstName || !formData.email || !formData.password) {
+        setErrMsg("Please fill in all fields");
+        return;
+      }
+
+      await signup(formData).unwrap();
+      // On successful signup, usually we redirect to login or dashboard
+      // Assuming backend doesn't auto-login unless it returns token
+      navigate("/login");
+      alert("Registration successful! Please login.");
+    } catch (err) {
+      if (err?.data.message) {
+        setErrMsg(err?.data.message);
+      } else if (err.originalStatus === 409) {
+        setErrMsg("Email or Username Taken");
+      } else {
+        setErrMsg("Registration Failed");
+      }
+    }
+  };
+
+
   return (
     <div className="min-h-screen bg-white">
-      <section className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+      <section className="max-w-7xl mx-auto mx-auto px-4 sm:px-6 lg:px-8 pb-10 lg:pb-16">
         {/* Desktop: two-column — form left, illustration right */}
         <div className="hidden lg:flex justify-center w-full overflow-hidden" data-node-id="4792:29118">
-          <div className="flex flex-row gap-[60px] items-center w-full max-w-[1000px] min-w-0">
+          <div className="flex flex-row gap-[60px] items-center justify-around w-full">
             {/* Left: Form */}
             <div className="flex-1 min-w-0 flex flex-col gap-6 max-w-[400px]">
               <div>
@@ -47,8 +115,9 @@ const Register = () => {
                 <p className="font-['Lato',sans-serif] text-[16px] text-[#666] tracking-[0.32px] mt-2">
                   Register as a new member
                 </p>
+                {errMsg && <p className="text-red-600 mt-2">{errMsg}</p>}
               </div>
-              <form className="flex flex-col gap-5" onSubmit={(e) => e.preventDefault()}>
+              <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
                 <div>
                   <label className="block font-['Lato',sans-serif] text-[14px] text-[#444] tracking-[0.28px] mb-1.5">
                     Name
@@ -57,6 +126,7 @@ const Register = () => {
                     type="text"
                     placeholder="Maxwell Diamein"
                     className={inputBase + " pr-0"}
+                    onChange={handleNameChange} // Simple handler for single input
                   />
                 </div>
                 <div>
@@ -65,8 +135,11 @@ const Register = () => {
                   </label>
                   <input
                     type="email"
+                    name="email"
                     placeholder="Example999@gmail.com"
                     className={inputBase + " pr-0"}
+                    value={formData.email}
+                    onChange={handleChange}
                   />
                 </div>
                 <div>
@@ -76,8 +149,11 @@ const Register = () => {
                   <div className="relative">
                     <input
                       type={showPassword ? "text" : "password"}
+                      name="password"
                       placeholder="••••••••"
                       className={inputBase}
+                      value={formData.password}
+                      onChange={handleChange}
                     />
                     <button
                       type="button"
@@ -91,14 +167,15 @@ const Register = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-[#eb010c] font-['Lato',sans-serif] text-[16px] text-white py-3 px-4 rounded tracking-[0.32px] hover:bg-[#d0010b] transition-colors mt-1"
+                  disabled={isLoading}
+                  className="w-full bg-[#eb010c] font-['Lato',sans-serif] text-[16px] text-white py-3 px-4 rounded tracking-[0.32px] hover:bg-[#d0010b] transition-colors mt-1 disabled:opacity-50"
                 >
-                  Register Now
+                  {isLoading ? "Registering..." : "Register Now"}
                 </button>
               </form>
               <button
                 type="button"
-                onClick={() => {}}
+                onClick={() => { }}
                 className="w-full flex items-center justify-center gap-3 font-['Lato',sans-serif] text-[16px] text-[#444] tracking-[0.32px] border border-[#ccc] rounded px-4 py-3 bg-white hover:bg-gray-50 hover:border-[#999] transition-colors"
               >
                 <GoogleIcon />
@@ -132,8 +209,9 @@ const Register = () => {
               <p className="font-['Lato',sans-serif] text-[14px] text-[#666] tracking-[0.28px] mt-1.5">
                 Register as a new member
               </p>
+              {errMsg && <p className="text-red-600 mt-2">{errMsg}</p>}
             </div>
-            <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
+            <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <div>
                 <label className="block font-['Lato',sans-serif] text-[14px] text-[#444] tracking-[0.28px] mb-1">
                   Name
@@ -142,6 +220,7 @@ const Register = () => {
                   type="text"
                   placeholder="Maxwell Diamein"
                   className={inputBase + " pr-0"}
+                  onChange={handleNameChange}
                 />
               </div>
               <div>
@@ -150,8 +229,11 @@ const Register = () => {
                 </label>
                 <input
                   type="email"
+                  name="email"
                   placeholder="Example999@gmail.com"
                   className={inputBase + " pr-0"}
+                  value={formData.email}
+                  onChange={handleChange}
                 />
               </div>
               <div>
@@ -161,8 +243,11 @@ const Register = () => {
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
+                    name="password"
                     placeholder="••••••••"
                     className={inputBase}
+                    value={formData.password}
+                    onChange={handleChange}
                   />
                   <button
                     type="button"
@@ -176,14 +261,15 @@ const Register = () => {
               </div>
               <button
                 type="submit"
-                className="w-full bg-[#eb010c] font-['Lato',sans-serif] text-[16px] text-white py-3 px-4 rounded tracking-[0.32px] hover:bg-[#d0010b] transition-colors"
+                disabled={isLoading}
+                className="w-full bg-[#eb010c] font-['Lato',sans-serif] text-[16px] text-white py-3 px-4 rounded tracking-[0.32px] hover:bg-[#d0010b] transition-colors disabled:opacity-50"
               >
-                Register Now
+                {isLoading ? "Registering..." : "Register Now"}
               </button>
             </form>
             <button
               type="button"
-              onClick={() => {}}
+              onClick={() => { }}
               className="w-full flex items-center justify-center gap-3 font-['Lato',sans-serif] text-[16px] text-[#444] tracking-[0.32px] border border-[#ccc] rounded px-4 py-3 bg-white hover:bg-gray-50 hover:border-[#999] transition-colors"
             >
               <GoogleIcon />

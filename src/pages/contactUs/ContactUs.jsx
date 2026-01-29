@@ -53,8 +53,8 @@ const ContactUs = () => {
     return (
         <div className="bg-white min-h-screen font-['Lato',_sans-serif] text-black">
             {/* Hero & Form Section */}
-            <div className="container mx-auto px-4 md:px-8 py-16 md:py-24">
-                <div className="grid md:grid-cols-2 gap-12 items-start">
+            <div className="max-w-7xl mx-auto container mx-auto px-4 md:px-8 pb-16 md:pb-24">
+                <div className="grid md:grid-cols-2 gap-12 items-center">
                     {/* Left: Heading and Form */}
                     <div className="max-w-xl">
                         <h1 className="text-[32px] md:text-[48px] font-semibold leading-[1.2] mb-12">
@@ -130,7 +130,7 @@ const ContactUs = () => {
             <div className="bg-[#F9F9F9] py-16 md:py-24">
                 <div className="container mx-auto px-4 md:px-8">
                     <h2 className="text-[28px] md:text-[36px] font-semibold mb-12">We are always happy to assist you</h2>
-                    
+
                     <div className="grid md:grid-cols-3 gap-12">
                         {/* Office Locations */}
                         <div className="space-y-8">
@@ -177,30 +177,30 @@ const ContactUs = () => {
 
                         {/* Social Media links */}
                         <div>
-                           <h3 className="font-bold mb-6">Follow our updates</h3>
-                           <div className="flex gap-4">
-                               <a href="#" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
-                                   <Facebook size={20} />
-                               </a>
-                               <a href="#" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
-                                   <Twitter size={20} />
-                               </a>
-                               <a href="#" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
-                                   <Instagram size={20} />
-                               </a>
-                           </div>
+                            <h3 className="font-bold mb-6">Follow our updates</h3>
+                            <div className="flex gap-4">
+                                <a href="#" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
+                                    <Facebook size={20} />
+                                </a>
+                                <a href="#" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
+                                    <Twitter size={20} />
+                                </a>
+                                <a href="#" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
+                                    <Instagram size={20} />
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* FAQ Section */}
-            <div className="container mx-auto px-4 md:px-8 py-16 md:py-24">
+            <div className="max-w-7xl mx-auto container mx-auto px-4 md:px-8 py-16 md:py-24">
                 <div className="grid md:grid-cols-2 gap-20">
                     <div>
                         <h2 className="text-[32px] md:text-[40px] font-bold mb-6">Frequently Asked Questions</h2>
                         <p className="text-[#666666] leading-relaxed mb-8 max-w-md">
-                            Welcome to our FAQ section! Here, you'll find answers to common questions about joining with us. 
+                            Welcome to our FAQ section! Here, you'll find answers to common questions about joining with us.
                             If you need further assistance, feel free to reach out to our customer support team.
                         </p>
                     </div>
@@ -229,12 +229,12 @@ const ContactUs = () => {
             {/* Newsletter Section */}
             <div className="mt-16">
                 {/* Full-width top image */}
-                <img 
-                    src={benefitsImg} 
-                    alt="Newsletter Benefits" 
-                    className="w-full h-auto object-cover max-h-[400px]" 
+                <img
+                    src={benefitsImg}
+                    alt="Newsletter Benefits"
+                    className="w-full h-auto object-cover max-h-[400px]"
                 />
-                
+
                 {/* Content Block */}
                 <div className="bg-red-600 text-white py-12 md:py-20">
                     <div className="container mx-auto px-4 md:px-8 max-w-6xl">

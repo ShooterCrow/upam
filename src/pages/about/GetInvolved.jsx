@@ -1,6 +1,6 @@
 const GetInvolved = () => {
     return (
-        <section className="w-full max-w-[1440px] mx-auto px-6 lg:px-12 py-12 lg:py-20">
+        <section className="max-w-7xl mx-auto px-6 lg:px-12 py-12 lg:py-20">
             <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-12">
                 {/* Left: Content */}
                 <div className="flex flex-col gap-8 max-w-[525px] order-2 lg:order-1">

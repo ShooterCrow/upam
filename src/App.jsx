@@ -1,4 +1,3 @@
-import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Layout from './component/layout/Layout'
 import Home from './pages/home/Home'
@@ -17,41 +16,44 @@ import MembershipAgreement from './pages/membershipAgreement/MembershipAgreement
 import Register from './pages/auth/Register'
 import Login from './pages/auth/Login'
 import ForgottenPassword from './pages/auth/ForgottenPassword'
+import PersistLogin from './pages/authenticationPages/PersistLogin'
+import RequireAuth from './pages/authenticationPages/RequireAuth'
 
 
 const App = () => {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          {/* Gallery */}
-          <Route path="gallery" element={<Gallery />} />
-          <Route path="about" element={<About />} />
-          {/* Get Involved */}
-          <Route path="get-involved" element={<GetInvolve />} />
-          <Route path="publications" element={<Publications />} />
-          <Route path="membership-policy" element={<MembershipPolicy />} />
-          <Route path="membership-agreement" element={<MembershipAgreement />} />
+        <Route element={<PersistLogin />}>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            {/* Public Routes */}
+            <Route path="gallery" element={<Gallery />} />
+            <Route path="about" element={<About />} />
+            <Route path="get-involved" element={<GetInvolve />} />
+            <Route path="publications" element={<Publications />} />
+            <Route path="membership-policy" element={<MembershipPolicy />} />
+            <Route path="membership-agreement" element={<MembershipAgreement />} />
+            <Route path="contact-us" element={<ContactUs />} />
+            <Route path="partnership" element={<Partnership />} />
+            <Route path="volunteer" element={<Volunteer />} />
 
-          {/* Auth */}
-          <Route path="register" element={<Register />} />
-          <Route path="login" element={<Login />} />
-          <Route path="forgot-password" element={<ForgottenPassword />} />
+            <Route path="research">
+              <Route path='panafrican-unity' element={<PanAfricanUnity />} />
+              <Route path="digital-literacy" element={<DigitalLiteracy />} />
+            </Route>
 
-          <Route path="research">
-            <Route path='panafrican-unity' element={<PanAfricanUnity />} />
-            <Route path="digital-literacy" element={<DigitalLiteracy />} />
+            {/* Auth Routes */}
+            <Route path="register" element={<Register />} />
+            <Route path="login" element={<Login />} />
+            <Route path="forgot-password" element={<ForgottenPassword />} />
+
+            {/* Protected Routes */}
+            <Route element={<RequireAuth />}>
+              <Route path="platforms" element={<Platform />} />
+            </Route>
+
           </Route>
-
-          {/* Platform */}
-          <Route path="platforms" element={<Platform />} />
-          {/* Contact Us */}
-          <Route path="contact-us" element={<ContactUs />} />
-          {/* Partnership */}
-          <Route path="partnership" element={<Partnership />} />
-          {/* Volunteer */}
-          <Route path="volunteer" element={<Volunteer />} />
         </Route>
       </Routes>
     </div>

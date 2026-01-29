@@ -42,7 +42,7 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
             ]
         },
         { name: 'Get Involved', path: '/get-involved', icon: UserPlus },
-        { name: 'Contact Us', path: '#', icon: Mail },
+        { name: 'Contact Us', path: '/contact-us', icon: Mail },
     ];
 
     const dashboardLinks = [
@@ -97,9 +97,9 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
                             </button>
 
                             {/* Register/Login Button */}
-                            <button className="border-2 border-gray-800 px-6 py-2 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors">
+                            <Link to="/register" className="border-2 border-gray-800 px-6 py-2 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors">
                                 Register/Login
-                            </button>
+                            </Link>
                         </div>
 
                     </div>
