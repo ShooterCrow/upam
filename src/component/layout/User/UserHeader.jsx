@@ -1,5 +1,6 @@
 import React from 'react';
 import { Search, Bell, ChevronDown } from 'lucide-react';
+import ProfileBox from '../../ui/ProfileBox';
 
 const UserHeader = () => {
     return (
@@ -24,28 +25,8 @@ const UserHeader = () => {
                     </span>
                 </button>
 
-                {/* Language Selector */}
-                <button className="hidden sm:flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300">
-                    <div className="w-5 h-5 rounded-full bg-green-600 flex items-center justify-center text-[8px] text-white">NG</div>
-                    <span>ENG</span>
-                    <ChevronDown size={14} />
-                </button>
-
                 {/* Profile */}
-                <div className="flex items-center gap-3 pl-4 border-l border-gray-100 dark:border-slate-800">
-                    <div className="w-9 h-9 rounded-full bg-slate-200 overflow-hidden border border-gray-200">
-                        <img
-                            src="https://api.dicebear.com/7.x/avataaars/svg?seed=Micheal"
-                            alt="Profile"
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-                    <div className="hidden sm:block text-left">
-                        <p className="text-xs font-bold text-slate-800 dark:text-white leading-tight">Micheal Adams</p>
-                        <p className="text-[10px] text-green-500 font-medium leading-tight">Online</p>
-                    </div>
-                    <ChevronDown size={14} className="hidden sm:block text-slate-400" />
-                </div>
+                <ProfileBox />
             </div>
         </header>
     );

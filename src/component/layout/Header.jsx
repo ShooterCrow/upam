@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Menu, X, ChevronDown, Home, Info, Users, Grid, Calendar, FileText, UserPlus, Mail, LogOut, Bell, HelpCircle, User, CreditCard, Phone } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
+import ProfileBox from '../ui/ProfileBox';
 
 // Mock user data - in real app, this would come from your auth context/store
 const mockUser = {
@@ -9,11 +11,13 @@ const mockUser = {
     avatar: null // Could be an image URL
 };
 
-const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
+const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
     const headerRef = useRef(null);
     const location = useLocation();
+    const { isLoggedIn, user, roles } = useAuth();
+    const isOnDashboard = location.pathname.startsWith('/user') || location.pathname.startsWith('/admin');
 
     const navigationLinks = [
         { name: 'Home', path: '/', icon: Home },
@@ -97,10 +101,12 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
 
                         {/* Right side actions */}
                         <div className="flex items-center gap-4">
-                            {/* Register/Login Button */}
-                            <Link to="/register" className="border-2 border-gray-800 px-4 py-2 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors">
-                                Register/Login
-                            </Link>
+                            {
+                                isLoggedIn ? <ProfileBox show={true} /> :
+                                    <Link to="/register" className="border-2 border-gray-800 px-4 py-2 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors">
+                                        Register/Login
+                                    </Link>
+                            }
                         </div>
 
                     </div>
@@ -200,15 +206,13 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
                             <div className="mb-6 pb-6 border-b">
                                 <div className="flex items-center gap-3 mb-2">
                                     <div className="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center">
-                                        {mockUser.avatar ? (
-                                            <img src={mockUser.avatar} alt={mockUser.name} className="w-full h-full rounded-full" />
-                                        ) : (
-                                            <User size={24} className="text-white" />
-                                        )}
+
+                                        <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.name}`} alt={user?.name} className="w-full h-full rounded-full" />
+
                                     </div>
                                     <div>
-                                        <div className="font-semibold text-gray-900">{mockUser.name}</div>
-                                        <div className="text-sm text-gray-600">ID No.: {mockUser.id}</div>
+                                        <div className="font-semibold text-gray-900">{user?.firstName} {user?.lastName}</div>
+                                        <div className="text-sm text-gray-600">Email: {user.email}</div>
                                     </div>
                                 </div>
                             </div>
@@ -288,7 +292,7 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
                                             </div>
                                         );
                                     })}
-                                    <Link to="/user" className="block text-center text-red-600 font-semibold mt-6" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <Link to={`/${roles[0]}`} className="block text-center text-red-600 font-semibold mt-6" onClick={() => setIsMobileMenuOpen(false)}>
                                         Go back to Dashboard
                                     </Link>
                                 </>

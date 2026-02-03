@@ -12,8 +12,10 @@ import {
     User,
     LogOut
 } from 'lucide-react';
+import useAuth from '../../../hooks/useAuth';
 
 const UserSidebar = () => {
+    const { user } = useAuth()
     const location = useLocation();
 
     // Links matching the mockup
@@ -45,7 +47,7 @@ const UserSidebar = () => {
 
             {/* User ID Section */}
             <div className="px-6 py-4">
-                <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">ID No.: 20-1175</p>
+                <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">ID: {user?.id}</p>
             </div>
 
             {/* Main Navigation */}
