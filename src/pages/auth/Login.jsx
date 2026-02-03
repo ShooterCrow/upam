@@ -172,7 +172,7 @@ const Login = () => {
         </div>
 
         {/* Mobile: stacked form, no illustration */}
-        <div className="block lg:hidden pt-12">
+        <div className="block lg:hidden py-12">
           <div className="flex flex-col gap-6 w-full max-w-[400px] mx-auto">
             <div>
               <h1 className="font-medium text-[24px] text-black tracking-[0.48px]">
