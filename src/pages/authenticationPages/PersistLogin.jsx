@@ -1,49 +1,77 @@
-import { Outlet, Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
-import { useRefreshMutation } from "./authApiSlice";
-import { useSelector } from "react-redux";
-import { selectCurrentToken } from "./authSlice";
+import { useState, useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import usePersist from '../../hooks/usePersist';
+import { useRefreshMutation } from './authApiSlice';
+import useAuth from '../../hooks/useAuth';
+import LoadingState from '../../component/ui/LoadingState';
 
 const PersistLogin = () => {
-    const [refresh] = useRefreshMutation();
-    const token = useSelector(selectCurrentToken);
-    const effectRan = useRef(false);
-    const [trueSuccess, setTrueSuccess] = useState(false);
-
     const [isLoading, setIsLoading] = useState(true);
+    const [refresh] = useRefreshMutation();
+    const { token } = useAuth();
+    const [persist] = usePersist();
+    const { pathname } = useLocation()
+
+    // Public routes that don't require authentication
+    const publicRoutes = [
+        '/',
+        '/login',
+        '/register',
+        '/about',
+        '/gallery',
+        '/get-involved',
+        '/publications',
+        '/membership-policy',
+        '/membership-agreement',
+        '/contact-us',
+        '/partnership',
+        '/volunteer',
+        '/leadership',
+        '/platforms',
+        '/forgot-password'
+    ];
+    const isPublicRoute = publicRoutes.some(route => pathname === route || pathname.startsWith('/research/'));
 
     useEffect(() => {
-        if (effectRan.current === true || process.env.NODE_ENV !== 'development') { // React 18 Strict Mode
-            const verifyRefreshToken = async () => {
-                console.log('Verifying refresh token');
-                try {
-                    //const response = 
-                    await refresh();
-                    //const { accessToken } = response.data
-                    setTrueSuccess(true);
-                } catch (err) {
-                    console.error(err);
-                } finally {
+        let isMounted = true;
+
+        const verifyRefreshToken = async () => {
+            try {
+                await refresh().unwrap();
+            } catch (err) {
+                import.meta.env.VITE_ENV === "dev_env" && console.error('Token refresh failed:', err);
+                // Optionally handle specific error cases here
+                // For example, redirect to login on certain errors
+            } finally {
+                if (isMounted) {
                     setIsLoading(false);
                 }
             }
+        };
 
-            if (!token) verifyRefreshToken();
-            else setIsLoading(false);
+        // Only attempt to refresh if we don't have a token and persistence is enabled
+        if (!token && persist) {
+            verifyRefreshToken();
+        } else {
+            setIsLoading(false);
         }
-        return () => effectRan.current = true;
-        // eslint-disable-next-line
-    }, [])
 
+        return () => {
+            isMounted = false;
+        };
+    }, [token, persist, refresh]); // Added missing dependencies
 
-    let content;
-    if (isLoading) {
-        content = <p>Loading...</p>; // Or your loading spinner
-    } else { // persisted check
-        content = <Outlet />;
+    // If persistence is disabled, render content immediately
+    if (!persist || isPublicRoute) {
+        return <Outlet />;
     }
 
-    return content;
+    // While refreshing, show loader
+    if (isLoading && !token) {
+        return <LoadingState />;
+    }
+
+    return <Outlet />;
 };
 
 export default PersistLogin;

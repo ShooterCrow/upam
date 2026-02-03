@@ -38,12 +38,12 @@ const GetInvolve = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto bg-white min-h-screen font-['Inter',_sans-serif] text-black">
+    <div className="max-w-7xl mx-auto bg-white min-h-screen text-black">
       {/* Container: Mobile fixed width, Desktop fluid container */}
       <div className="px-4 max-w-[393px] md:max-w-none md:container md:mx-auto md:px-8 pb-20">
 
         {/* Top Section Layout: MD Grid */}
-        <div className="md:grid md:grid-cols-2 md:gap-x-20 md:items-start pt-16 md:pt-24 mb-12">
+        <div className="md:grid md:grid-cols-2 md:gap-x-20 md:items-start mb-12">
           {/* Intro Section - Left on Desktop */}
           <section className="text-center md:text-left">
             <p className="font-['Lato'] font-normal text-[14px] leading-[139%] tracking-[0.02em] uppercase mb-4">
@@ -163,7 +163,7 @@ const GetInvolve = () => {
           </section>
 
           {/* FAQ Section */}
-          <section className="text-left py-10 grid md:grid-cols-2 md:gap-20 md:items-start">
+          <section className="text-left py-10 grid md:grid-cols-2 md:gap-20 items-center">
             <div>
               <h2 className="text-[31px] font-bold mb-4">Frequently Asked Questions</h2>
               <p className="text-[14px] text-gray-500 mb-8">
@@ -190,7 +190,7 @@ const GetInvolve = () => {
               </div>
             </div>
             {/* Map Image for Desktop */}
-            <div className="block relative w-full aspect-square md:aspect-auto h-full overflow-hidden">
+            <div className="block relative w-full aspect-square md:aspect-auto overflow-hidden">
               <img
                 src={mapImg}
                 alt="Operations Map"

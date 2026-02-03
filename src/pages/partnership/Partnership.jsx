@@ -44,7 +44,7 @@ const Partnership = () => {
         const { name, value, type, checked } = e.target;
         if (type === 'checkbox') {
             const listName = name === 'areasOfInterest' ? 'areasOfInterest' : 'resourcesContribute';
-            const updatedList = checked 
+            const updatedList = checked
                 ? [...formData[listName], value]
                 : formData[listName].filter(item => item !== value);
             setFormData(prev => ({ ...prev, [listName]: updatedList }));
@@ -76,13 +76,13 @@ const Partnership = () => {
                     <div className="space-y-6">
                         <div className="grid md:grid-cols-2 gap-6">
                             <InputField label="Organization Name" name="orgName" value={formData.orgName} onChange={handleChange} required />
-                            <SelectField 
-                                label="Organization Type" 
-                                name="orgType" 
-                                value={formData.orgType} 
-                                onChange={handleChange} 
+                            <SelectField
+                                label="Organization Type"
+                                name="orgType"
+                                value={formData.orgType}
+                                onChange={handleChange}
                                 options={["Private Company", "NGO", "Government Agency", "Educational Institution", "Media", "Community Group", "Foundation", "Other"]}
-                                required 
+                                required
                             />
                             <InputField label="Year Established" name="yearEstablished" value={formData.yearEstablished} onChange={handleChange} type="number" />
                             <InputField label="Country of Registration" name="countryRegistration" value={formData.countryRegistration} onChange={handleChange} required />
@@ -95,35 +95,35 @@ const Partnership = () => {
 
                     {/* Partnership Details */}
                     <div className="space-y-8">
-                        <SelectField 
-                            label="Type of Partnership Interested In" 
-                            name="partnershipType" 
-                            value={formData.partnershipType} 
-                            onChange={handleChange} 
+                        <SelectField
+                            label="Type of Partnership Interested In"
+                            name="partnershipType"
+                            value={formData.partnershipType}
+                            onChange={handleChange}
                             options={["Strategic Partner", "Program Partner", "Media Partner", "Research Partner", "Event Partner", "Community Group", "Funding Partner", "Technology & Innovation Partner", "Other"]}
-                            required 
+                            required
                         />
-                        
+
                         <div>
                             <label className="block text-base font-bold mb-4">Area(s) of Interest</label>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {interestAreas.map(area => (
-                                    <CheckboxItem 
-                                        key={area} 
-                                        name="areasOfInterest" 
-                                        label={area} 
-                                        checked={formData.areasOfInterest.includes(area)} 
-                                        onChange={handleChange} 
+                                    <CheckboxItem
+                                        key={area}
+                                        name="areasOfInterest"
+                                        label={area}
+                                        checked={formData.areasOfInterest.includes(area)}
+                                        onChange={handleChange}
                                     />
                                 ))}
                             </div>
                         </div>
 
-                        <TextareaField 
-                            label="Short Description of Proposed Collaboration" 
-                            name="collaborationDescription" 
-                            value={formData.collaborationDescription} 
-                            onChange={handleChange} 
+                        <TextareaField
+                            label="Short Description of Proposed Collaboration"
+                            name="collaborationDescription"
+                            value={formData.collaborationDescription}
+                            onChange={handleChange}
                             placeholder="Briefly describe how you envision working with UPAM..."
                             required
                         />
@@ -135,46 +135,46 @@ const Partnership = () => {
                             <label className="block text-base font-bold mb-4">What resources can your organization contribute?</label>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {resourcesOptions.map(res => (
-                                    <CheckboxItem 
-                                        key={res} 
-                                        name="resourcesContribute" 
-                                        label={res} 
-                                        checked={formData.resourcesContribute.includes(res)} 
-                                        onChange={handleChange} 
+                                    <CheckboxItem
+                                        key={res}
+                                        name="resourcesContribute"
+                                        label={res}
+                                        checked={formData.resourcesContribute.includes(res)}
+                                        onChange={handleChange}
                                     />
                                 ))}
                             </div>
                         </div>
 
-                        <SelectField 
-                            label="Estimated Level of Commitment" 
-                            name="commitmentLevel" 
-                            value={formData.commitmentLevel} 
-                            onChange={handleChange} 
+                        <SelectField
+                            label="Estimated Level of Commitment"
+                            name="commitmentLevel"
+                            value={formData.commitmentLevel}
+                            onChange={handleChange}
                             options={["One-time", "Short-term", "Long-term"]}
-                            required 
+                            required
                         />
 
-                        <SelectField 
-                            label="Is your organization legally registered? (Yes/No)" 
-                            name="legalStatus" 
-                            value={formData.legalStatus} 
-                            onChange={handleChange} 
+                        <SelectField
+                            label="Is your organization legally registered? (Yes/No)"
+                            name="legalStatus"
+                            value={formData.legalStatus}
+                            onChange={handleChange}
                             options={["Yes", "No"]}
-                            required 
+                            required
                         />
 
-                        <TextareaField 
-                            label="Any conflict of interest we should be aware of? (Describe if application)" 
-                            name="conflictOfInterest" 
-                            value={formData.conflictOfInterest} 
-                            onChange={handleChange} 
+                        <TextareaField
+                            label="Any conflict of interest we should be aware of? (Describe if application)"
+                            name="conflictOfInterest"
+                            value={formData.conflictOfInterest}
+                            onChange={handleChange}
                             placeholder="Please explain if any..."
                         />
                     </div>
 
-                    <button 
-                        type="submit" 
+                    <button
+                        type="submit"
                         className="w-full bg-[#EB010C] text-white py-4 font-bold uppercase tracking-widest hover:bg-red-700 transition-colors rounded shadow-md mt-8"
                     >
                         Submit Information
@@ -189,9 +189,9 @@ const Partnership = () => {
 const InputField = ({ label, ...props }) => (
     <div className="space-y-2">
         <label className="block text-sm font-bold text-gray-800">{label}</label>
-        <input 
+        <input
             className="w-full px-4 py-3 bg-white border border-gray-300 focus:outline-none focus:border-[#EB010C] transition-colors rounded"
-            {...props} 
+            {...props}
         />
     </div>
 );
@@ -200,7 +200,7 @@ const SelectField = ({ label, options, ...props }) => (
     <div className="space-y-2">
         <label className="block text-sm font-bold text-gray-800">{label}</label>
         <div className="relative">
-            <select 
+            <select
                 className="w-full px-4 py-3 bg-white border border-gray-300 focus:outline-none focus:border-[#EB010C] appearance-none transition-colors rounded"
                 {...props}
             >
@@ -215,18 +215,18 @@ const SelectField = ({ label, options, ...props }) => (
 const TextareaField = ({ label, ...props }) => (
     <div className="space-y-2">
         <label className="block text-sm font-bold text-gray-800">{label}</label>
-        <textarea 
+        <textarea
             rows="5"
             className="w-full px-4 py-3 bg-white border border-gray-300 focus:outline-none focus:border-[#EB010C] transition-colors rounded resize-none"
-            {...props} 
+            {...props}
         />
     </div>
 );
 
 const CheckboxItem = ({ label, name, checked, onChange }) => (
     <label className="flex items-center gap-3 p-4 bg-white border border-gray-200 rounded cursor-pointer hover:border-[#EB010C]/50 transition-colors group">
-        <input 
-            type="checkbox" 
+        <input
+            type="checkbox"
             name={name}
             value={label}
             checked={checked}

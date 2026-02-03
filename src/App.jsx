@@ -1,5 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import Layout from './component/layout/Layout'
+import AdminLayoutContext from './component/layout/AdminLayoutContext'
+import UserLayoutContext from './component/layout/UserLayoutContext'
 import Home from './pages/home/Home'
 import Gallery from './pages/gallery/Gallery'
 import GetInvolve from './pages/getInvolve/getInvolve'
@@ -13,6 +15,7 @@ import PanAfricanUnity from './pages/publications/articles/PanAfricanUnity'
 import About from './pages/about/About'
 import MembershipPolicy from './pages/membershipPolicy/MembershipPolicy'
 import MembershipAgreement from './pages/membershipAgreement/MembershipAgreement'
+import Leadership from './pages/leadership/Leadership'
 import Register from './pages/auth/Register'
 import Login from './pages/auth/Login'
 import ForgottenPassword from './pages/auth/ForgottenPassword'
@@ -37,6 +40,7 @@ const App = () => {
             <Route path="contact-us" element={<ContactUs />} />
             <Route path="partnership" element={<Partnership />} />
             <Route path="volunteer" element={<Volunteer />} />
+            <Route path="leadership" element={<Leadership />} />
 
             <Route path="research">
               <Route path='panafrican-unity' element={<PanAfricanUnity />} />
@@ -47,13 +51,29 @@ const App = () => {
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
             <Route path="forgot-password" element={<ForgottenPassword />} />
+            <Route path="platforms" element={<Platform />} />
 
             {/* Protected Routes */}
             <Route element={<RequireAuth />}>
-              <Route path="platforms" element={<Platform />} />
             </Route>
 
+
           </Route>
+
+          {/* Admin Routes */}
+          <Route element={<RequireAuth allowedRoles={['admin', "manager"]} />}>
+            <Route path="/admin" element={<AdminLayoutContext />}>
+              <Route index element={<div className="p-4">Admin Dashboard Area</div>} />
+            </Route>
+          </Route>
+
+          {/* User Routes */}
+          <Route element={<RequireAuth allowedRoles={['user', "admin", "manager"]} />}>
+            <Route path="/user" element={<UserLayoutContext />}>
+              <Route index element={<div className="p-4">User Dashboard Area</div>} />
+            </Route>
+          </Route>
+
         </Route>
       </Routes>
     </div>

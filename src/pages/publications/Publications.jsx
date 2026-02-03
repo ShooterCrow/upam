@@ -64,12 +64,12 @@ export default function Publications() {
         <div className="min-h-screen bg-gray-50">
             {/* Hero Section */}
             <div className="bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-16">
                     <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                         {/* Left Content */}
                         <div>
                             <p className="text-sm text-gray-600 mb-3">Publications & Policy Insights</p>
-                            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                            <h1 className="text-2xl sm:text-xl lg:text-3xl font-bold text-gray-900 mb-6 leading-tight">
                                 Knowledge that strengthens African unity, informs policy, and drives sustainable development.
                             </h1>
                             <p className="text-gray-600 mb-8 leading-relaxed">
@@ -81,8 +81,8 @@ export default function Publications() {
                                 <button
                                     onClick={() => setActiveTab('reports')}
                                     className={`px-6 py-3 font-medium transition-colors ${activeTab === 'reports'
-                                            ? 'bg-red-600 text-white hover:bg-red-700'
-                                            : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-50'
+                                        ? 'bg-red-600 text-white hover:bg-red-700'
+                                        : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-50'
                                         }`}
                                 >
                                     Reports/Policy Papers
@@ -90,8 +90,8 @@ export default function Publications() {
                                 <button
                                     onClick={() => setActiveTab('articles')}
                                     className={`px-6 py-3 font-medium transition-colors ${activeTab === 'articles'
-                                            ? 'bg-red-600 text-white hover:bg-red-700'
-                                            : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-50'
+                                        ? 'bg-red-600 text-white hover:bg-red-700'
+                                        : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-50'
                                         }`}
                                 >
                                     Articles/Research

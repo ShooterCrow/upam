@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Menu, X, ChevronDown, Home, Info, Users, Grid, Calendar, FileText, UserPlus, Mail, LogOut, Bell, HelpCircle, User, CreditCard, Phone } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 // Mock user data - in real app, this would come from your auth context/store
 const mockUser = {
@@ -13,16 +13,17 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
     const headerRef = useRef(null);
+    const location = useLocation();
 
     const navigationLinks = [
         { name: 'Home', path: '/', icon: Home },
-        { name: 'About Us', path: 'about', icon: Info },
-        { name: 'Leadership', path: '#', icon: Users },
-        { name: 'Platforms & Initiatives', path: '#', icon: Grid },
-        { name: 'Events & Conferences', path: '#', icon: Calendar },
+        { name: 'About Us', path: '/about', icon: Info },
+        { name: 'Leadership', path: '/leadership', icon: Users },
+        { name: 'Platforms & Initiatives', path: '/platforms', icon: Grid },
+        // { name: 'Events & Conferences', path: '/events', icon: Calendar }, // Route does not exist yet
         {
             name: 'Resources & Media',
-            path: '#',
+            path: '/resources', // Parent path
             icon: FileText,
             hasDropdown: true,
             children: [
@@ -32,13 +33,13 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
         },
         {
             name: 'Membership',
-            path: '#',
+            path: '/membership',
             icon: UserPlus,
             hasDropdown: true,
             children: [
-                { name: 'Join Us', path: '/get-involved' },
-                { name: 'Member Benefits', path: '#' },
-                { name: 'Login', path: '#' },
+                { name: 'Membership Policy', path: '/membership-policy' },
+                { name: 'Registration', path: '/register' },
+                // { name: 'Search Members', path: '#' },
             ]
         },
         { name: 'Get Involved', path: '/get-involved', icon: UserPlus },
@@ -46,14 +47,25 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
     ];
 
     const dashboardLinks = [
-        { name: 'Dashboard', path: '#', icon: Home, isActive: true },
-        { name: 'Member Verification', path: '#', icon: User },
-        { name: 'Membership Payment', path: '#', icon: CreditCard },
-        { name: 'Emergency Contact', path: '#', icon: Phone },
-        { name: 'Notification', path: '#', icon: Bell },
-        { name: 'Support & Help', path: '#', icon: HelpCircle },
-        { name: 'Account', path: '#', icon: User },
+        { name: 'Dashboard', path: '/user', icon: Home },
+        { name: 'Member Verification', path: '/user/verification', icon: User },
+        { name: 'Membership Payment', path: '/user/payment', icon: CreditCard },
+        { name: 'Emergency Contact', path: '/user/emergency', icon: Phone },
+        { name: 'Notification', path: '/user/notifications', icon: Bell },
+        { name: 'Support & Help', path: '/user/support', icon: HelpCircle },
+        { name: 'Account', path: '/user/account', icon: User },
     ];
+
+    // Helper to check if a link is active
+    const isActiveLink = (path) => {
+        if (path === '/') return location.pathname === '/';
+        return location.pathname.startsWith(path);
+    };
+
+    // Helper to check if any child of a dropdown is active
+    const isDropdownActive = (children) => {
+        return children?.some(child => isActiveLink(child.path));
+    };
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -72,7 +84,7 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
     return (
         <div ref={headerRef}>
             {/* Desktop Header */}
-            <header className="hidden lg:block bg-gray-200 shadow-sm mb-20">
+            <header className="hidden lg:block bg-gray-200 shadow-sm mb-0">
                 <div className="max-w-7xl mx-auto px-6 py-4">
                     <div className="flex items-center justify-between">
                         {/* Logo */}
@@ -85,19 +97,8 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
 
                         {/* Right side actions */}
                         <div className="flex items-center gap-4">
-                            {/* Language Selector */}
-                            <button className="flex items-center gap-2 text-sm font-medium text-gray-800">
-                                <span className="flex items-center gap-1">
-                                    <span className="text-green-600">●</span>
-                                    <span className="text-yellow-500">●</span>
-                                    <span className="text-red-600">●</span>
-                                </span>
-                                ENG
-                                <ChevronDown size={16} />
-                            </button>
-
                             {/* Register/Login Button */}
-                            <Link to="/register" className="border-2 border-gray-800 px-6 py-2 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors">
+                            <Link to="/register" className="border-2 border-gray-800 px-4 py-2 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors">
                                 Register/Login
                             </Link>
                         </div>
@@ -106,56 +107,60 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
 
                     {/* Desktop Navigation */}
                     <nav className="flex items-center space-x-8 pt-5 w-full justify-center">
-                        {navigationLinks.map((link) => (
-                            <div
-                                key={link.name}
-                                className="relative group"
-                                onMouseEnter={() => link.hasDropdown && setOpenDropdown(link.name)}
-                                onMouseLeave={() => link.hasDropdown && setOpenDropdown(null)}
-                            >
-                                {link.hasDropdown ? (
-                                    <>
-                                        <button
-                                            className={`text-gray-800 hover:text-red-600 transition-colors text-sm font-medium flex items-center gap-1 ${openDropdown === link.name ? 'text-red-600' : ''}`}
+                        {navigationLinks.map((link) => {
+                            const active = link.hasDropdown ? isDropdownActive(link.children) : isActiveLink(link.path);
+
+                            return (
+                                <div
+                                    key={link.name}
+                                    className="relative group"
+                                    onMouseEnter={() => link.hasDropdown && setOpenDropdown(link.name)}
+                                    onMouseLeave={() => link.hasDropdown && setOpenDropdown(null)}
+                                >
+                                    {link.hasDropdown ? (
+                                        <>
+                                            <button
+                                                className={`transition-colors text-sm font-medium flex items-center gap-1 ${active || openDropdown === link.name ? 'text-red-600' : 'text-gray-800 hover:text-red-600'}`}
+                                            >
+                                                {link.name}
+                                                <ChevronDown size={16} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
+                                            </button>
+                                            {/* Dropdown Menu */}
+                                            <div
+                                                className={`absolute top-full left-0 mt-2 w-48 bg-white border border-gray-100 shadow-lg rounded-md py-2 z-50 transition-all duration-300 ease-in-out transform origin-top ${openDropdown === link.name
+                                                    ? 'opacity-100 translate-y-0 visible'
+                                                    : 'opacity-0 -translate-y-2 invisible'
+                                                    }`}
+                                            >
+                                                {link.children.map((child) => (
+                                                    <Link
+                                                        key={child.name}
+                                                        to={child.path}
+                                                        className={`block px-4 py-2 text-sm transition-colors ${isActiveLink(child.path) ? 'text-red-600 bg-gray-50' : 'text-gray-700 hover:bg-gray-50 hover:text-red-600'}`}
+                                                        onClick={() => setOpenDropdown(null)}
+                                                    >
+                                                        {child.name}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <Link
+                                            to={link.path}
+                                            className={`transition-colors text-sm font-medium flex items-center gap-1 ${active ? 'text-red-600' : 'text-gray-800 hover:text-red-600'}`}
                                         >
                                             {link.name}
-                                            <ChevronDown size={16} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
-                                        </button>
-                                        {/* Dropdown Menu */}
-                                        <div
-                                            className={`absolute top-full left-0 mt-2 w-48 bg-white border border-gray-100 shadow-lg rounded-md py-2 z-50 transition-all duration-300 ease-in-out transform origin-top ${openDropdown === link.name
-                                                ? 'opacity-100 translate-y-0 visible'
-                                                : 'opacity-0 -translate-y-2 invisible'
-                                                }`}
-                                        >
-                                            {link.children.map((child) => (
-                                                <Link
-                                                    key={child.name}
-                                                    to={child.path}
-                                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors"
-                                                    onClick={() => setOpenDropdown(null)}
-                                                >
-                                                    {child.name}
-                                                </Link>
-                                            ))}
-                                        </div>
-                                    </>
-                                ) : (
-                                    <Link
-                                        to={link.path}
-                                        className="text-gray-800 hover:text-red-600 transition-colors text-sm font-medium flex items-center gap-1"
-                                    >
-                                        {link.name}
-                                    </Link>
-                                )}
-                            </div>
-                        ))}
+                                        </Link>
+                                    )}
+                                </div>
+                            );
+                        })}
                     </nav>
                 </div>
             </header>
 
             {/* Mobile Header */}
-            <header className="lg:hidden bg-gray-200 shadow-sm mb-10">
+            <header className="lg:hidden bg-gray-200 shadow-sm">
                 <div className="flex items-center justify-between px-4 py-4">
                     <div className="flex items-center gap-2">
                         <div>
@@ -216,11 +221,12 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
                                 <>
                                     {dashboardLinks.map((link) => {
                                         const IconComponent = link.icon;
+                                        const active = isActiveLink(link.path);
                                         return (
                                             <Link
                                                 key={link.name}
                                                 to={link.path}
-                                                className={`flex items-center gap-3 px-4 py-3 rounded transition-colors ${link.isActive
+                                                className={`flex items-center gap-3 px-4 py-3 rounded transition-colors ${active
                                                     ? 'bg-red-600 text-white'
                                                     : 'text-gray-800 hover:bg-gray-100'
                                                     }`}
@@ -242,93 +248,101 @@ const Header = ({ isLoggedIn = false, isOnDashboard = false }) => {
                             ) : isLoggedIn ? (
                                 // Logged in, on homepage
                                 <>
-                                    {navigationLinks.map((link) => (
-                                        <div key={link.name}>
-                                            <Link
-                                                to={link.path}
-                                                className={`flex items-center justify-between px-4 py-3 text-gray-800 hover:bg-gray-100 rounded transition-colors ${link.path === '/' ? 'bg-gray-100' : ''
-                                                    }`}
-                                                onClick={() => {
-                                                    if (!link.hasDropdown) setIsMobileMenuOpen(false);
-                                                    else toggleDropdown(link.name);
-                                                }}
-                                            >
-                                                <span>{link.name}</span>
-                                                {link.hasDropdown && <ChevronDown size={16} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />}
-                                            </Link>
-                                            {/* Mobile Dropdown */}
-                                            {link.hasDropdown && openDropdown === link.name && (
-                                                <div className="bg-gray-50 py-1 pl-4">
-                                                    {link.children.map((child) => (
-                                                        <Link
-                                                            key={child.name}
-                                                            to={child.path}
-                                                            className="block px-4 py-3 text-sm text-gray-600 hover:text-red-600 transition-colors"
-                                                            onClick={() => {
-                                                                setIsMobileMenuOpen(false);
-                                                                setOpenDropdown(null);
-                                                            }}
-                                                        >
-                                                            {child.name}
-                                                        </Link>
-                                                    ))}
-                                                </div>
-                                            )}
-                                        </div>
-                                    ))}
-                                    <Link to="/dashboard" className="block text-center text-red-600 font-semibold mt-6" onClick={() => setIsMobileMenuOpen(false)}>
+                                    {navigationLinks.map((link) => {
+                                        const active = link.hasDropdown ? isDropdownActive(link.children) : isActiveLink(link.path);
+                                        return (
+                                            <div key={link.name}>
+                                                <Link
+                                                    to={link.hasDropdown ? '#' : link.path}
+                                                    className={`flex items-center justify-between px-4 py-3 rounded transition-colors ${active ? 'bg-red-50 text-red-600 font-semibold' : 'text-gray-800 hover:bg-gray-100'}`}
+                                                    onClick={(e) => {
+                                                        if (link.hasDropdown) {
+                                                            e.preventDefault();
+                                                            toggleDropdown(link.name);
+                                                        } else {
+                                                            setIsMobileMenuOpen(false);
+                                                        }
+                                                    }}
+                                                >
+                                                    <span>{link.name}</span>
+                                                    {link.hasDropdown && <ChevronDown size={16} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />}
+                                                </Link>
+                                                {/* Mobile Dropdown */}
+                                                {link.hasDropdown && openDropdown === link.name && (
+                                                    <div className="bg-gray-50 py-1 pl-4">
+                                                        {link.children.map((child) => (
+                                                            <Link
+                                                                key={child.name}
+                                                                to={child.path}
+                                                                className={`block px-4 py-3 text-sm transition-colors ${isActiveLink(child.path) ? 'text-red-600 font-medium' : 'text-gray-600 hover:text-red-600'}`}
+                                                                onClick={() => {
+                                                                    setIsMobileMenuOpen(false);
+                                                                    setOpenDropdown(null);
+                                                                }}
+                                                            >
+                                                                {child.name}
+                                                            </Link>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                    <Link to="/user" className="block text-center text-red-600 font-semibold mt-6" onClick={() => setIsMobileMenuOpen(false)}>
                                         Go back to Dashboard
                                     </Link>
                                 </>
                             ) : (
                                 // Not logged in
                                 <>
-                                    {navigationLinks.map((link) => (
-                                        <div key={link.name}>
-                                            {link.hasDropdown ? (
-                                                <>
-                                                    <button
-                                                        onClick={() => toggleDropdown(link.name)}
-                                                        className="flex items-center justify-between w-full px-4 py-3 text-gray-800 hover:bg-gray-100 rounded transition-colors"
+                                    {navigationLinks.map((link) => {
+                                        const active = link.hasDropdown ? isDropdownActive(link.children) : isActiveLink(link.path);
+                                        return (
+                                            <div key={link.name}>
+                                                {link.hasDropdown ? (
+                                                    <>
+                                                        <button
+                                                            onClick={() => toggleDropdown(link.name)}
+                                                            className={`flex items-center justify-between w-full px-4 py-3 rounded transition-colors ${active || openDropdown === link.name ? 'bg-red-50 text-red-600 font-semibold' : 'text-gray-800 hover:bg-gray-100'}`}
+                                                        >
+                                                            <span>{link.name}</span>
+                                                            <ChevronDown size={16} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
+                                                        </button>
+                                                        {/* Mobile Dropdown */}
+                                                        {openDropdown === link.name && (
+                                                            <div className="bg-gray-50 py-1 pl-4 animate-in slide-in-from-top-1 duration-200">
+                                                                {link.children.map((child) => (
+                                                                    <Link
+                                                                        key={child.name}
+                                                                        to={child.path}
+                                                                        className={`block px-4 py-3 text-sm transition-colors ${isActiveLink(child.path) ? 'text-red-600 font-medium' : 'text-gray-600 hover:text-red-600'}`}
+                                                                        onClick={() => {
+                                                                            setIsMobileMenuOpen(false);
+                                                                            setOpenDropdown(null);
+                                                                        }}
+                                                                    >
+                                                                        {child.name}
+                                                                    </Link>
+                                                                ))}
+                                                            </div>
+                                                        )}
+                                                    </>
+                                                ) : (
+                                                    <Link
+                                                        to={link.path}
+                                                        className={`block px-4 py-3 rounded transition-colors ${active ? 'bg-red-50 text-red-600 font-semibold' : 'text-gray-800 hover:bg-gray-100'}`}
+                                                        onClick={() => setIsMobileMenuOpen(false)}
                                                     >
-                                                        <span>{link.name}</span>
-                                                        <ChevronDown size={16} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
-                                                    </button>
-                                                    {/* Mobile Dropdown */}
-                                                    {openDropdown === link.name && (
-                                                        <div className="bg-gray-50 py-1 pl-4 animate-in slide-in-from-top-1 duration-200">
-                                                            {link.children.map((child) => (
-                                                                <Link
-                                                                    key={child.name}
-                                                                    to={child.path}
-                                                                    className="block px-4 py-3 text-sm text-gray-600 hover:text-red-600 transition-colors"
-                                                                    onClick={() => {
-                                                                        setIsMobileMenuOpen(false);
-                                                                        setOpenDropdown(null);
-                                                                    }}
-                                                                >
-                                                                    {child.name}
-                                                                </Link>
-                                                            ))}
-                                                        </div>
-                                                    )}
-                                                </>
-                                            ) : (
-                                                <Link
-                                                    to={link.path}
-                                                    className={`block px-4 py-3 text-gray-800 hover:bg-gray-100 rounded transition-colors ${link.path === '/' ? 'bg-gray-100' : ''
-                                                        }`}
-                                                    onClick={() => setIsMobileMenuOpen(false)}
-                                                >
-                                                    {link.name}
-                                                </Link>
-                                            )}
-                                        </div>
-                                    ))}
+                                                        {link.name}
+                                                    </Link>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
                                     <div className="px-4 mt-6">
-                                        <button className="w-full border-2 border-gray-800 px-6 py-3 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors">
+                                        <Link to="/register" className="block w-full text-center border-2 border-gray-800 px-6 py-3 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
                                             Register / Login
-                                        </button>
+                                        </Link>
                                     </div>
                                 </>
                             )}

@@ -46,7 +46,7 @@ const About = () => {
     return (
         <main className="w-full">
             {/* Hero Section */}
-            <section className="w-full max-w-[1440px] mx-auto px-6 lg:px-12 py-12 lg:py-20">
+            <section className="w-full max-w-7xl mx-auto px-6 lg:px-12">
                 <div className="flex flex-col items-center gap-12 lg:gap-20">
                     {/* Header Text */}
                     <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 lg:gap-12 w-full">
@@ -129,7 +129,7 @@ const About = () => {
             </section>
 
             {/* First Executive */}
-            <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
                 <div className="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-16">
                     <div className="flex-1 max-w-3xl">
                         <p className="text-base text-neutral/80 leading-relaxed">
@@ -156,7 +156,7 @@ const About = () => {
             </section>
 
             {/* Mission & Vision */}
-            <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
                 <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12">
                     <div className="flex flex-col gap-10 max-w-xl">
                         <div className="space-y-4">
@@ -188,7 +188,7 @@ const About = () => {
             </section>
 
             {/* Objectives */}
-            <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
                 <div className="flex flex-col lg:flex-row justify-between items-center gap-12">
                     <img
                         src="https://api.builder.io/api/v1/image/assets/TEMP/494bd64452c17d8f73dc5f162ce9131d86969c3b?width=970"
@@ -205,7 +205,7 @@ const About = () => {
             </section>
 
             {/* Impacts */}
-            <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
                 <div className="flex flex-col lg:flex-row justify-between items-start gap-12">
                     <div className="flex-1 max-w-2xl">
                         <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-10">Our Impact / Projects</h2>
@@ -256,7 +256,7 @@ const About = () => {
             </section>
 
             {/* Gallery */}
-            <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
                 <div className="space-y-12">
                     <div className="text-center max-w-3xl mx-auto">
                         <p className="text-base font-medium text-foreground mb-2">GALLERY</p>
@@ -287,7 +287,7 @@ const About = () => {
 
             {/* Organizational Structure */}
             <section className="w-full bg-gray-50 py-12 md:py-16">
-                <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col lg:flex-row justify-between items-start gap-12">
                         <div className="space-y-6 max-w-2xl">
                             <div>
@@ -329,7 +329,7 @@ const About = () => {
             </section>
 
             {/* Global Presence */}
-            <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
                 <div className="flex flex-col lg:flex-row justify-between items-center gap-12">
                     <div className="space-y-6 max-w-2xl">
                         <div>
@@ -351,7 +351,7 @@ const About = () => {
             </section>
 
             {/* Get Involved */}
-            <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-16">
+            <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-16">
                 <div className="flex flex-col lg:flex-row justify-between items-center gap-12">
                     <div className="space-y-8 max-w-2xl">
                         <p className="text-base font-medium text-foreground">GET INVOLVED</p>

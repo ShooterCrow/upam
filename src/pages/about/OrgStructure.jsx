@@ -24,7 +24,7 @@ const OrgStructure = () => {
 
     return (
         <section className="w-full bg-gray-50 py-12 lg:py-20">
-            <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
+            <div className="w-full max-w-7xl mx-auto px-6 lg:px-12">
                 <div className="flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-[245px]">
                     {/* Left: Intro */}
                     <div className="flex flex-col gap-4 max-w-[544px]">

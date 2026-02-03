@@ -22,7 +22,7 @@ const Newsletter = () => {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 py-10 lg:gap-12 xl:gap-[347px] px-4 sm:px-8 lg:px-14 max-w-[1440px] mx-auto md:pt-[385px] md:pb-12">
+            <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 py-10 lg:gap-12 xl:gap-[347px] px-4 sm:px-8 lg:px-14 max-w-7xl mx-auto md:pt-[385px] md:pb-12">
                 {/* Left Content */}
                 <div className="flex flex-col items-start gap-3 lg:gap-[13px] w-full lg:w-auto lg:max-w-[557px]">
                     <h2 className="text-white font-lato text-2xl sm:text-3xl lg:text-[32.747px] font-medium leading-normal">

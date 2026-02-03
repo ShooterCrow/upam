@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, ArrowUpRight, ChevronDown, ChevronUp, Facebook, Twitter, Instagram } from 'lucide-react';
 import worldMap from '../../assets/world_map.png';
 import benefitsImg from '../../assets/benefits.png';
+import { useCreateContactMutation } from './contactsApiSlice';
+import LoadingState from '../../component/ui/LoadingState';
+import ErrorState from '../../component/ui/ErrorState';
+import SuccessState from '../../component/ui/SuccessState';
 
 const ContactUs = () => {
+    const [createContact, { isLoading, isSuccess, isError, error, reset }] = useCreateContactMutation();
     const [openFaq, setOpenFaq] = useState(null);
     const [formData, setFormData] = useState({
         name: '',
@@ -39,10 +44,14 @@ const ContactUs = () => {
         }
     ];
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Form submitted:', formData);
-        // Add form submission logic here
+        try {
+            await createContact(formData).unwrap();
+            // Form clearing is handled in the SuccessState onAction, or you can do it here if you prefer not to wait for user action
+        } catch (err) {
+            console.error('Failed to save contact message: ', err);
+        }
     };
 
     const handleChange = (e) => {
@@ -54,69 +63,94 @@ const ContactUs = () => {
         <div className="bg-white min-h-screen font-['Lato',_sans-serif] text-black">
             {/* Hero & Form Section */}
             <div className="max-w-7xl mx-auto container mx-auto px-4 md:px-8 pb-16 md:pb-24">
-                <div className="grid md:grid-cols-2 gap-12 items-center">
-                    {/* Left: Heading and Form */}
-                    <div className="max-w-xl">
-                        <h1 className="text-[32px] md:text-[48px] font-semibold leading-[1.2] mb-12">
-                            Get in touch with us. We're here to assist you.
-                        </h1>
 
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            <div>
-                                <label className="block text-sm font-medium mb-2">Your Name</label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    placeholder="Enter your name"
-                                    className="w-full px-4 py-3 bg-[#F9F9F9] border border-gray-100 focus:outline-none focus:border-red-600 transition-colors"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-2">Email Address</label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    placeholder="Enter your email"
-                                    className="w-full px-4 py-3 bg-[#F9F9F9] border border-gray-100 focus:outline-none focus:border-red-600 transition-colors"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-2">Phone Number (optional)</label>
-                                <input
-                                    type="tel"
-                                    name="phone"
-                                    value={formData.phone}
-                                    onChange={handleChange}
-                                    placeholder="Enter your phone number"
-                                    className="w-full px-4 py-3 bg-[#F9F9F9] border border-gray-100 focus:outline-none focus:border-red-600 transition-colors"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-2">Message</label>
-                                <textarea
-                                    name="message"
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    placeholder="Write your message here"
-                                    rows="5"
-                                    className="w-full px-4 py-3 bg-[#F9F9F9] border border-gray-100 focus:outline-none focus:border-red-600 transition-colors resize-none"
-                                    required
-                                ></textarea>
-                            </div>
-                            <button
-                                type="submit"
-                                className="bg-red-600 text-white px-10 py-4 uppercase font-bold tracking-wider hover:bg-red-700 transition-colors"
-                            >
-                                Send Message
-                            </button>
-                        </form>
-                    </div>
+                <h1 className="text-[32px] md:text-[48px] font-semibold leading-[1.2] mb-12">
+                    Get in touch with us. We're here to assist you.
+                </h1><div className="grid md:grid-cols-2 gap-12 items-center">
+                    {/* Left: Heading and Form */}
+                    {isSuccess ? (
+                        <SuccessState
+                            title="Message Sent Successfully!"
+                            message="Thank you for reaching out. We have received your message and will get back to you shortly."
+                            actionLabel="Send Another Message"
+                            onAction={() => {
+                                reset();
+                                setFormData({ name: '', email: '', phone: '', message: '' });
+                            }}
+                        />
+                    ) : (
+                        <>
+
+                            {isError && (
+                                <div className="mb-6">
+                                    <ErrorState
+                                        message={error?.data?.message || "Failed to send message. Please try again."}
+                                    />
+                                </div>
+                            )}
+
+                            <form onSubmit={handleSubmit} className="space-y-6">
+                                <div>
+                                    <label className="block text-sm font-medium mb-2">Your Name</label>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        placeholder="Enter your name"
+                                        className="w-full px-4 py-3 bg-[#F9F9F9] border border-gray-100 focus:outline-none focus:border-red-600 transition-colors"
+                                        required
+                                        disabled={isLoading}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-2">Email Address</label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        placeholder="Enter your email"
+                                        className="w-full px-4 py-3 bg-[#F9F9F9] border border-gray-100 focus:outline-none focus:border-red-600 transition-colors"
+                                        required
+                                        disabled={isLoading}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-2">Phone Number (optional)</label>
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        placeholder="Enter your phone number"
+                                        className="w-full px-4 py-3 bg-[#F9F9F9] border border-gray-100 focus:outline-none focus:border-red-600 transition-colors"
+                                        disabled={isLoading}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-2">Message</label>
+                                    <textarea
+                                        name="message"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        placeholder="Write your message here"
+                                        rows="5"
+                                        className="w-full px-4 py-3 bg-[#F9F9F9] border border-gray-100 focus:outline-none focus:border-red-600 transition-colors resize-none"
+                                        required
+                                        disabled={isLoading}
+                                    ></textarea>
+                                </div>
+                                <button
+                                    type="submit"
+                                    disabled={isLoading}
+                                    className="bg-red-600 text-white px-10 py-4 uppercase font-bold tracking-wider hover:bg-red-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center gap-2"
+                                >
+                                    {isLoading ? 'Sending...' : 'Send Message'}
+                                </button>
+                            </form>
+                        </>
+                    )}
 
                     {/* Right: Map Image */}
                     <div className="relative">
@@ -128,7 +162,7 @@ const ContactUs = () => {
 
             {/* Contact Details Section */}
             <div className="bg-[#F9F9F9] py-16 md:py-24">
-                <div className="container mx-auto px-4 md:px-8">
+                <div className="max-w-7xl mx-auto px-4 md:px-8">
                     <h2 className="text-[28px] md:text-[36px] font-semibold mb-12">We are always happy to assist you</h2>
 
                     <div className="grid md:grid-cols-3 gap-12">
@@ -227,7 +261,7 @@ const ContactUs = () => {
             </div>
 
             {/* Newsletter Section */}
-            <div className="mt-16">
+            <div>
                 {/* Full-width top image */}
                 <img
                     src={benefitsImg}

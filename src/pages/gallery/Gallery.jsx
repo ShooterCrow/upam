@@ -16,7 +16,7 @@ const Gallery = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-stone-50 py-8 md:py-12">
+    <div className="min-h-screen pb-8 md:pb-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Gallery Header */}
         <div className="flex flex-col items-center mb-8 md:mb-12 lg:mb-16">

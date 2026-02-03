@@ -31,7 +31,7 @@ const EyeOffIcon = () => (
 );
 
 const inputBase =
-  "w-full font-['Lato',sans-serif] text-[16px] text-[#222] bg-transparent border-0 border-b border-[#ccc] rounded-none py-2.5 pr-10 tracking-[0.32px] outline-none focus:border-[#eb010c] focus:ring-0";
+  "w-full text-[16px] text-[#222] bg-transparent border-0 border-b border-[#ccc] rounded-none py-2.5 pr-10 tracking-[0.32px] outline-none focus:border-[#eb010c] focus:ring-0";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -39,17 +39,24 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [errMsg, setErrMsg] = useState("");
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoading, isSuccess }] = useLoginMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(isSuccess)
+    if (isSuccess) navigate("/admin");
+  }, [isSuccess, navigate])
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const userData = await login({ email, password }).unwrap();
-      dispatch(setCredentials({ ...userData }));
+      // dispatch(setCredentials({ ...userData }));
       // For now redirect to home or user profile
-      navigate("/");
+      // navigate("/admin");
+      console.log(isSuccess)
     } catch (err) {
       console.log(err);
       if (err?.data.message) {
@@ -65,27 +72,27 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <section className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+    <div>
+      <section className="">
         {/* Desktop: two-column — form left, illustration right */}
         <div
           className="hidden lg:flex justify-center w-full overflow-hidden"
         >
           <div className="flex flex-row gap-[60px] items-center justify-around w-full">
             {/* Left: Form */}
-            <div className="flex-1 min-w-0 flex flex-col gap-6 max-w-[400px]">
+            <div className="p-20 flex-1 min-w-0 flex flex-col gap-6 max-w-[500px]">
               <div>
-                <h1 className="font-['Lato',sans-serif] font-medium text-[28px] text-black tracking-[0.56px]">
+                <h1 className="text-[28px] text-black tracking-[0.56px]">
                   Log in
                 </h1>
-                <p className="font-['Lato',sans-serif] text-[16px] text-[#666] tracking-[0.32px] mt-2">
+                <p className="text-[16px] text-[#666] tracking-[0.32px] mt-2">
                   Log in to your account
                 </p>
-                {errMsg && <p className="text-red-500 mt-2">{errMsg}</p>}
+                {errMsg && <p className="text-red-600 mt-2">{errMsg}</p>}
               </div>
               <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
                 <div>
-                  <label className="block font-['Lato',sans-serif] text-[14px] text-[#444] tracking-[0.28px] mb-1.5">
+                  <label className="block text-[14px] text-[#444] tracking-[0.28px] mb-1.5">
                     Email
                   </label>
                   <input
@@ -122,7 +129,7 @@ const Login = () => {
                   <div className="text-right mt-1">
                     <Link
                       to="/forgot-password"
-                      className="font-['Lato',sans-serif] text-[14px] text-[#666] hover:text-[#eb010c] transition-colors"
+                      className="text-[14px] text-[#666] hover:text-[#eb010c] transition-colors"
                     >
                       Forgot password?
                     </Link>
@@ -131,19 +138,19 @@ const Login = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-[#eb010c] font-['Lato',sans-serif] text-[16px] text-white py-3 px-4 rounded tracking-[0.32px] hover:bg-[#d0010b] transition-colors mt-1 disabled:opacity-50"
+                  className="w-full bg-[#eb010c] text-[16px] text-white py-3 px-4 rounded tracking-[0.32px] hover:bg-[#d0010b] transition-colors mt-1 disabled:opacity-50"
                 >
                   {isLoading ? "Logging in..." : "Log In"}
                 </button>
               </form>
               <button
                 type="button"
-                className="w-full flex items-center justify-center gap-3 font-['Lato',sans-serif] text-[16px] text-[#444] tracking-[0.32px] border border-[#ccc] rounded px-4 py-3 bg-white hover:bg-gray-50 hover:border-[#999] transition-colors"
+                className="w-full flex items-center justify-center gap-3 text-[16px] text-[#444] tracking-[0.32px] border border-[#ccc] rounded px-4 py-3 bg-white hover:bg-gray-50 hover:border-[#999] transition-colors"
               >
                 <GoogleIcon />
                 Sign in with Google
               </button>
-              <p className="font-['Lato',sans-serif] text-[14px] text-[#444] tracking-[0.28px] text-center pt-1">
+              <p className="text-[14px] text-[#444] tracking-[0.28px] text-center pt-1">
                 Don&apos;t have an account?{" "}
                 <Link
                   to="/register"
@@ -154,31 +161,31 @@ const Login = () => {
               </p>
             </div>
             {/* Right: Illustration */}
-            <div className="shrink-0 w-[420px] h-[380px] flex items-center justify-center rounded-xl overflow-hidden">
+            <div className="shrink-0 flex-1 h-full p-10 flex items-center justify-center overflow-hidden bg-gray-100">
               <img
                 src={loginIllustration}
                 alt="Login Illustration"
-                className="w-full h-full object-contain object-center"
+                className="w-[80%] md:w-[60%] h-full object-contain object-center"
               />
             </div>
           </div>
         </div>
 
         {/* Mobile: stacked form, no illustration */}
-        <div className="block lg:hidden">
+        <div className="block lg:hidden pt-12">
           <div className="flex flex-col gap-6 w-full max-w-[400px] mx-auto">
             <div>
-              <h1 className="font-['Lato',sans-serif] font-medium text-[24px] text-black tracking-[0.48px]">
+              <h1 className="font-medium text-[24px] text-black tracking-[0.48px]">
                 Log in
               </h1>
-              <p className="font-['Lato',sans-serif] text-[14px] text-[#666] tracking-[0.28px] mt-1.5">
+              <p className="text-[14px] text-[#666] tracking-[0.28px] mt-1.5">
                 Log in to your account
               </p>
-              {errMsg && <p className="text-red-500 mt-2">{errMsg}</p>}
+              {errMsg && <p className="text-red-600 mt-2">{errMsg}</p>}
             </div>
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <div>
-                <label className="block font-['Lato',sans-serif] text-[14px] text-[#444] tracking-[0.28px] mb-1">
+                <label className="block text-[14px] text-[#444] tracking-[0.28px] mb-1">
                   Email
                 </label>
                 <input
@@ -215,7 +222,7 @@ const Login = () => {
                 <div className="text-right mt-1">
                   <Link
                     to="/forgot-password"
-                    className="font-['Lato',sans-serif] text-[14px] text-[#666] hover:text-[#eb010c] transition-colors"
+                    className="text-[14px] text-[#666] hover:text-[#eb010c] transition-colors"
                   >
                     Forgot password?
                   </Link>
@@ -224,19 +231,19 @@ const Login = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-[#eb010c] font-['Lato',sans-serif] text-[16px] text-white py-3 px-4 rounded tracking-[0.32px] hover:bg-[#d0010b] transition-colors disabled:opacity-50"
+                className="w-full bg-[#eb010c] text-[16px] text-white py-3 px-4 rounded tracking-[0.32px] hover:bg-[#d0010b] transition-colors disabled:opacity-50"
               >
                 {isLoading ? "Logging in..." : "Log In"}
               </button>
             </form>
             <button
               type="button"
-              className="w-full flex items-center justify-center gap-3 font-['Lato',sans-serif] text-[16px] text-[#444] tracking-[0.32px] border border-[#ccc] rounded px-4 py-3 bg-white hover:bg-gray-50 hover:border-[#999] transition-colors"
+              className="w-full flex items-center justify-center gap-3 text-[16px] text-[#444] tracking-[0.32px] border border-[#ccc] rounded px-4 py-3 bg-white hover:bg-gray-50 hover:border-[#999] transition-colors"
             >
               <GoogleIcon />
               Sign in with Google
             </button>
-            <p className="font-['Lato',sans-serif] text-[14px] text-[#444] tracking-[0.28px] text-center">
+            <p className="text-[14px] text-[#444] tracking-[0.28px] text-center">
               Don&apos;t have an account?{" "}
               <Link
                 to="/register"

@@ -1,16 +1,22 @@
-import { useLocation, Navigate, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectCurrentToken } from "./authSlice";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
-const RequireAuth = () => {
-    const token = useSelector(selectCurrentToken);
+const RequireAuth = ({ allowedRoles }) => {
+    const { roles, isLoggedIn } = useAuth();
     const location = useLocation();
 
-    return token ? (
-        <Outlet />
-    ) : (
-        <Navigate to="/login" state={{ from: location }} replace />
-    );
+    // If not logged in, redirect to login page
+    if (!isLoggedIn) {
+        return <Navigate to="/login" state={{ from: location }} replace />;
+    }
+
+    // If logged in but doesn't have required role, redirect to home
+    if (!roles.some(role => allowedRoles.includes(role))) {
+        return <Navigate to="/" state={{ from: location }} replace />;
+    }
+
+    // User is authenticated and authorized
+    return <Outlet />;
 };
 
 export default RequireAuth;

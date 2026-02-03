@@ -12,6 +12,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
+          console.log("Login response data:", data);
           dispatch(setCredentials(data));
         } catch (err) {
           import.meta.env.VITE_ENV === "dev_env" &&

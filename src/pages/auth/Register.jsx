@@ -30,7 +30,7 @@ const EyeOffIcon = () => (
   </svg>
 );
 
-const inputBase = "w-full font-['Lato',sans-serif] text-[16px] text-[#222] bg-transparent border-0 border-b border-[#ccc] rounded-none py-2.5 pr-10 tracking-[0.32px] outline-none focus:border-[#eb010c] focus:ring-0";
+const inputBase = "w-full text-[16px] text-[#222] bg-transparent border-0 border-b border-[#ccc] rounded-none py-2.5 pr-10 tracking-[0.32px] outline-none focus:border-[#eb010c] focus:ring-0";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -102,24 +102,25 @@ const Register = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="max-w-7xl mx-auto mx-auto px-4 sm:px-6 lg:px-8 pb-10 lg:pb-16">
+      <section className="">
+        {/* max-w-7xl mx-auto mx-auto px-4 sm:px-6 lg:px-8 pb-10 lg:pb-16 */}
         {/* Desktop: two-column — form left, illustration right */}
         <div className="hidden lg:flex justify-center w-full overflow-hidden" data-node-id="4792:29118">
           <div className="flex flex-row gap-[60px] items-center justify-around w-full">
             {/* Left: Form */}
-            <div className="flex-1 min-w-0 flex flex-col gap-6 max-w-[400px]">
+            <div className="p-20 flex-1 min-w-0 flex flex-col gap-6 max-w-[500px]">
               <div>
-                <h1 className="font-['Lato',sans-serif] font-medium text-[28px] text-black tracking-[0.56px]">
+                <h1 className="text-[28px] text-black tracking-[0.56px]">
                   Register
                 </h1>
-                <p className="font-['Lato',sans-serif] text-[16px] text-[#666] tracking-[0.32px] mt-2">
+                <p className="text-[16px] text-[#666] tracking-[0.32px] mt-2">
                   Register as a new member
                 </p>
                 {errMsg && <p className="text-red-600 mt-2">{errMsg}</p>}
               </div>
               <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
                 <div>
-                  <label className="block font-['Lato',sans-serif] text-[14px] text-[#444] tracking-[0.28px] mb-1.5">
+                  <label className="block text-[14px] text-[#444] tracking-[0.28px] mb-1.5">
                     Name
                   </label>
                   <input
@@ -130,7 +131,7 @@ const Register = () => {
                   />
                 </div>
                 <div>
-                  <label className="block font-['Lato',sans-serif] text-[14px] text-[#444] tracking-[0.28px] mb-1.5">
+                  <label className="block text-[14px] text-[#444] tracking-[0.28px] mb-1.5">
                     Email
                   </label>
                   <input
@@ -143,7 +144,7 @@ const Register = () => {
                   />
                 </div>
                 <div>
-                  <label className="block font-['Lato',sans-serif] text-[14px] text-[#444] tracking-[0.28px] mb-1.5">
+                  <label className="block text-[14px] text-[#444] tracking-[0.28px] mb-1.5">
                     Password
                   </label>
                   <div className="relative">
@@ -168,7 +169,7 @@ const Register = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-[#eb010c] font-['Lato',sans-serif] text-[16px] text-white py-3 px-4 rounded tracking-[0.32px] hover:bg-[#d0010b] transition-colors mt-1 disabled:opacity-50"
+                  className="w-full bg-[#eb010c] text-[16px] text-white py-3 px-4 rounded tracking-[0.32px] hover:bg-[#d0010b] transition-colors mt-1 disabled:opacity-50"
                 >
                   {isLoading ? "Registering..." : "Register Now"}
                 </button>
@@ -176,12 +177,12 @@ const Register = () => {
               <button
                 type="button"
                 onClick={() => { }}
-                className="w-full flex items-center justify-center gap-3 font-['Lato',sans-serif] text-[16px] text-[#444] tracking-[0.32px] border border-[#ccc] rounded px-4 py-3 bg-white hover:bg-gray-50 hover:border-[#999] transition-colors"
+                className="w-full flex items-center justify-center gap-3 text-[16px] text-[#444] tracking-[0.32px] border border-[#ccc] rounded px-4 py-3 bg-white hover:bg-gray-50 hover:border-[#999] transition-colors"
               >
                 <GoogleIcon />
                 Sign up with Google
               </button>
-              <p className="font-['Lato',sans-serif] text-[14px] text-[#444] tracking-[0.28px] text-center pt-1">
+              <p className="text-[14px] text-[#444] tracking-[0.28px] text-center pt-1">
                 Already have an account?{" "}
                 <Link to="/login" className="text-[#eb010c] underline decoration-solid underline-offset-2">
                   Sign in
@@ -189,31 +190,31 @@ const Register = () => {
               </p>
             </div>
             {/* Right: Illustration */}
-            <div className="shrink-0 w-[420px] h-[380px] flex items-center justify-center rounded-xl overflow-hidden">
+            <div className="shrink-0 flex-1 h-full p-10 flex items-center justify-center overflow-hidden bg-gray-100">
               <img
                 src={registerIllustration}
                 alt=""
-                className="w-full h-full object-contain object-center"
+                className="w-[80%] md:w-[60%] h-full object-contain object-center"
               />
             </div>
           </div>
         </div>
 
         {/* Mobile: stacked form, no illustration */}
-        <div className="block lg:hidden" data-node-id="4792:29331">
+        <div className="block lg:hidden pt-12" data-node-id="4792:29331">
           <div className="flex flex-col gap-6 w-full max-w-[400px] mx-auto">
             <div>
-              <h1 className="font-['Lato',sans-serif] font-medium text-[24px] text-black tracking-[0.48px]">
+              <h1 className="font-medium text-[24px] text-black tracking-[0.48px]">
                 Register
               </h1>
-              <p className="font-['Lato',sans-serif] text-[14px] text-[#666] tracking-[0.28px] mt-1.5">
+              <p className="text-[14px] text-[#666] tracking-[0.28px] mt-1.5">
                 Register as a new member
               </p>
               {errMsg && <p className="text-red-600 mt-2">{errMsg}</p>}
             </div>
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <div>
-                <label className="block font-['Lato',sans-serif] text-[14px] text-[#444] tracking-[0.28px] mb-1">
+                <label className="block text-[14px] text-[#444] tracking-[0.28px] mb-1">
                   Name
                 </label>
                 <input
@@ -224,7 +225,7 @@ const Register = () => {
                 />
               </div>
               <div>
-                <label className="block font-['Lato',sans-serif] text-[14px] text-[#444] tracking-[0.28px] mb-1">
+                <label className="block text-[14px] text-[#444] tracking-[0.28px] mb-1">
                   Email
                 </label>
                 <input
@@ -237,7 +238,7 @@ const Register = () => {
                 />
               </div>
               <div>
-                <label className="block font-['Lato',sans-serif] text-[14px] text-[#444] tracking-[0.28px] mb-1">
+                <label className="block text-[14px] text-[#444] tracking-[0.28px] mb-1">
                   Password
                 </label>
                 <div className="relative">
@@ -262,7 +263,7 @@ const Register = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-[#eb010c] font-['Lato',sans-serif] text-[16px] text-white py-3 px-4 rounded tracking-[0.32px] hover:bg-[#d0010b] transition-colors disabled:opacity-50"
+                className="w-full bg-[#eb010c] text-[16px] text-white py-3 px-4 rounded tracking-[0.32px] hover:bg-[#d0010b] transition-colors disabled:opacity-50"
               >
                 {isLoading ? "Registering..." : "Register Now"}
               </button>
@@ -270,12 +271,12 @@ const Register = () => {
             <button
               type="button"
               onClick={() => { }}
-              className="w-full flex items-center justify-center gap-3 font-['Lato',sans-serif] text-[16px] text-[#444] tracking-[0.32px] border border-[#ccc] rounded px-4 py-3 bg-white hover:bg-gray-50 hover:border-[#999] transition-colors"
+              className="w-full flex items-center justify-center gap-3 text-[16px] text-[#444] tracking-[0.32px] border border-[#ccc] rounded px-4 py-3 bg-white hover:bg-gray-50 hover:border-[#999] transition-colors"
             >
               <GoogleIcon />
               Sign up with Google
             </button>
-            <p className="font-['Lato',sans-serif] text-[14px] text-[#444] tracking-[0.28px] text-center">
+            <p className="text-[14px] text-[#444] tracking-[0.28px] text-center">
               Already have an account?{" "}
               <Link to="/login" className="text-[#eb010c] underline decoration-solid underline-offset-2">
                 Sign in
