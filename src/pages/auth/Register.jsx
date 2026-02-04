@@ -101,7 +101,7 @@ const Register = () => {
 
 
   return (
-    <div className="min-h-screen bg-white">
+    <div>
       <section className="">
         {/* max-w-7xl mx-auto mx-auto px-4 sm:px-6 lg:px-8 pb-10 lg:pb-16 */}
         {/* Desktop: two-column — form left, illustration right */}
@@ -201,7 +201,7 @@ const Register = () => {
         </div>
 
         {/* Mobile: stacked form, no illustration */}
-        <div className="block lg:hidden pt-12" data-node-id="4792:29331">
+        <div className="block lg:hidden py-12 px-6 lg:px-12" data-node-id="4792:29331">
           <div className="flex flex-col gap-6 w-full max-w-[400px] mx-auto">
             <div>
               <h1 className="font-medium text-[24px] text-black tracking-[0.48px]">

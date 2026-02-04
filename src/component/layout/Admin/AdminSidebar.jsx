@@ -9,7 +9,11 @@ import {
     Shield,
     Bell,
     LogOut,
-    User
+    User,
+    CheckCircle,
+    CreditCard,
+    AlertCircle,
+    Headphones
 } from 'lucide-react';
 
 const AdminSidebar = () => {
@@ -18,12 +22,13 @@ const AdminSidebar = () => {
     // Admin specific links
     const links = [
         { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
-        { name: 'Manage Users', path: '/admin/users', icon: Users },
-        { name: 'Content', path: '/admin/content', icon: FileText },
-        { name: 'Analytics', path: '/admin/analytics', icon: BarChart },
-        { name: 'Security', path: '/admin/security', icon: Shield },
-        { name: 'Notifications', path: '/admin/notifications', icon: Bell },
-        { name: 'Settings', path: '/admin/settings', icon: Settings },
+        { name: 'Member Verification', path: '/admin/verification', icon: CheckCircle },
+        { name: 'Membership Payment', path: '/admin/payment', icon: CreditCard },
+        { name: 'Emergency Contact', path: '/admin/emergency', icon: AlertCircle },
+        { name: 'Notification', path: '/admin/notifications', icon: Bell },
+        { name: 'Support & Help', path: '/admin/support', icon: Headphones },
+        { name: 'All Members', path: '/admin/members', icon: Users },
+        { name: 'Members Application', path: '/admin/applications', icon: FileText }, // Using FileText for application
     ];
 
     const bottomLinks = [

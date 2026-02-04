@@ -10,7 +10,10 @@ import {
     Users,
     FileText,
     User,
-    LogOut
+    LogOut,
+    BarChart,
+    Shield,
+    Settings
 } from 'lucide-react';
 import useAuth from '../../../hooks/useAuth';
 
@@ -21,13 +24,12 @@ const UserSidebar = () => {
     // Links matching the mockup
     const links = [
         { name: 'Dashboard', path: '/user', icon: LayoutDashboard },
-        { name: 'Member Verification', path: '/user/verification', icon: CheckCircle },
-        { name: 'Membership Payment', path: '/user/payment', icon: CreditCard },
-        { name: 'Emergency Contact', path: '/user/emergency', icon: AlertCircle },
-        { name: 'Notification', path: '/user/notifications', icon: Bell },
-        { name: 'Support & Help', path: '/user/support', icon: Headphones },
-        { name: 'All Members', path: '/user/members', icon: Users },
-        { name: 'Members Application', path: '/user/applications', icon: FileText }, // Using FileText for application
+        { name: 'Manage Users', path: '/user/users', icon: Users },
+        { name: 'Content', path: '/user/content', icon: FileText },
+        { name: 'Analytics', path: '/user/analytics', icon: BarChart },
+        { name: 'Security', path: '/user/security', icon: Shield },
+        { name: 'Notifications', path: '/user/notifications', icon: Bell },
+        { name: 'Settings', path: '/user/settings', icon: Settings },
     ];
 
     const bottomLinks = [

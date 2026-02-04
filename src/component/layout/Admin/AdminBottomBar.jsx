@@ -10,27 +10,31 @@ import {
     Shield,
     Bell,
     LogOut,
-    User
+    User,
+    CheckCircle,
+    CreditCard,
+    AlertCircle,
+    Headphones
 } from 'lucide-react';
 
 const AdminBottomBar = () => {
     const location = useLocation();
     const [showMore, setShowMore] = useState(false);
 
-    // Priority links for bottom bar
+
     const mainLinks = [
         { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
-        { name: 'Users', path: '/admin/users', icon: Users },
-        { name: 'Content', path: '/admin/content', icon: FileText },
+        { name: 'Verification', path: '/admin/verification', icon: CheckCircle },
+        { name: 'Payment', path: '/admin/payment', icon: CreditCard },
     ];
 
-    // Secondary links for "More" menu
     const moreLinks = [
-        { name: 'Analytics', path: '/admin/analytics', icon: BarChart },
-        { name: 'Security', path: '/admin/security', icon: Shield },
+        { name: 'Emergency', path: '/admin/emergency', icon: AlertCircle },
         { name: 'Notifications', path: '/admin/notifications', icon: Bell },
-        { name: 'Settings', path: '/admin/settings', icon: Settings },
-        { name: 'My Profile', path: '/admin/profile', icon: User },
+        { name: 'Support', path: '/admin/support', icon: Headphones },
+        { name: 'All Members', path: '/admin/members', icon: Users },
+        { name: 'Applications', path: '/admin/applications', icon: FileText },
+        { name: 'Account', path: '/admin/account', icon: User },
         { name: 'Log out', path: '/logout', icon: LogOut, isDanger: true },
     ];
 
