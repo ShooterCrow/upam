@@ -55,14 +55,39 @@ const UnitedAfricaHero = () => {
 
 const Index = () => {
     const [openFaq, setOpenFaq] = useState(0);
+    const [activeFocus, setActiveFocus] = useState(0);
+
+    const focusAreas = [
+        {
+            title: "Africa's Unity & Development",
+            description: "Fostering collaboration and shared growth across the continent to build a stronger, more integrated Africa.",
+            image: "/africa_unity.png"
+        },
+        {
+            title: "Africa's Independence",
+            description: "Promoting economic self-reliance and political sovereignty for all African nations.",
+            image: "/africa_independence.png"
+        },
+        {
+            title: "Education & Leadership",
+            description: "Investing in the next generation of African leaders through quality education and mentorship.",
+            image: "/education_leadership.png"
+        },
+        {
+            title: "Security & Stability",
+            description: "Ensuring peace and safety within African communities and states for sustainable development.",
+            image: "/security_stability.png"
+        }
+    ];
+
     const [videos] = useState([
         {
             id: '1',
-            youtubeId: 'ccb7c08978b826c4b4cc998579da1c57cb3c07dd'
+            youtubeId: 'b_4uHrcBeGI?si=jriCTckL9IN12NgC'
         },
         {
             id: '2',
-            youtubeId: 'df95fb80d8ecebfffaa0c7e123e54f17eee599d0'
+            youtubeId: '0ReBuPaAC5s?si=_A3k7xMSnOYi67Tq'
         }
     ]);
 
@@ -103,7 +128,7 @@ const Index = () => {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                             <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="flex items-center justify-center w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-upam-red shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl">
+                                <div className="flex items-center justify-center w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-[#EB010C] shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:">
                                     <Play className="w-6 h-6 lg:w-8 lg:h-8 text-white fill-white ml-1" />
                                 </div>
                             </div>
@@ -177,51 +202,130 @@ const Index = () => {
                     </section>
 
                     {/* What We Stand For Section */}
-                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20 lg:mb-28">
-                        <div className="flex flex-col gap-8">
-                            <p className="text-sm font-medium text-upam-red tracking-wider uppercase mt-4">ABOUT US</p>
-
-                            <div className="flex flex-col gap-4">
-                                <p className="text-sm font-medium text-upam-red tracking-wider uppercase">OUR FOCUS AREAS</p>
-                                <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 tracking-tight">
+                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 mb-24 lg:mb-32">
+                        <div className="flex flex-col gap-2">
+                            <div>
+                                <span className="inline-block text-sm font-semibold text-upam-red uppercase tracking-wider mb-3">
+                                    ABOUT US
+                                </span>
+                                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight mb-6">
                                     What We Stand For
                                 </h2>
-                                <p className="text-base text-gray-600">
-                                    We channel our energy into key areas that drive Africa forward
-                                </p>
                             </div>
 
-                            <div className="flex flex-col gap-3">
-                                {[
-                                    "Africa's Unity & Development",
-                                    "Africa's Independence",
-                                    "Education & Leadership",
-                                    "Security & Stability within African Communities and States"
-                                ].map((item, index) => (
-                                    <button
-                                        key={index}
-                                        className={`flex items-center justify-between px-4 py-4 rounded-lg transition-all duration-300 hover:scale-[1.02] ${index === 0
-                                            ? 'bg-gradient-to-r from-upam-green to-upam-green/90 text-white shadow-lg'
-                                            : 'bg-white text-gray-800 shadow-md hover:shadow-lg'
-                                            }`}
-                                    >
-                                        <span className="text-sm lg:text-base font-medium tracking-wide text-left">{item}</span>
-                                        <div className={`flex gap-0.5 ${index === 0 ? 'text-white' : 'text-upam-dark'}`}>
-                                            <span className="text-lg">›</span>
-                                            <span className="text-lg">›</span>
-                                            <span className="text-lg">›</span>
-                                        </div>
-                                    </button>
-                                ))}
+                            <div className="bg-white rounded-2xl p-2 shadow-md">
+                                <div className="flex flex-col gap-4">
+                                    <div className="flex items-center gap-3 px-4 pt-4">
+                                        <div className="w-2 h-8 bg-[#EB010C] rounded-full"></div>
+                                        <span className="text-sm font-semibold text-upam-red uppercase tracking-wider">
+                                            OUR FOCUS AREAS
+                                        </span>
+                                    </div>
+
+                                    <p className="px-4 text-lg text-gray-700 leading-relaxed">
+                                        {focusAreas[activeFocus].description}
+                                    </p>
+                                </div>
+
+                                <div className="mt-8 space-y-2.5">
+                                    {focusAreas.map((area, index) => (
+                                        <button
+                                            key={index}
+                                            onClick={() => setActiveFocus(index)}
+                                            className={`flex items-center justify-between w-full px-5 py-4 rounded-xl transition-all duration-300 ease-out ${activeFocus === index
+                                                ? 'text-gray-900'
+                                                : 'text-gray-700 hover:text-upam-red'
+                                                }`}
+                                        >
+                                            <div className="flex items-center gap-4">
+                                                <div className={`flex items-center justify-center w-8 h-8 rounded-lg transition-colors ${activeFocus === index
+                                                    ? 'bg-[#EB010C] text-white'
+                                                    : 'bg-gray-100 text-gray-500 hover:bg-[#EB010C]/10 hover:text-upam-red'
+                                                    }`}>
+                                                    <span className="text-sm font-semibold">
+                                                        {index + 1}
+                                                    </span>
+                                                </div>
+                                                <span className={`text-base text-left transition-colors ${activeFocus === index
+                                                    ? 'font-bold'
+                                                    : 'font-semibold'
+                                                    }`}>
+                                                    {area.title}
+                                                </span>
+                                            </div>
+
+                                            <div className="flex items-center gap-2">
+                                                <div className={`w-6 h-[2px] rounded-full transition-all duration-300 ${activeFocus === index
+                                                    ? 'bg-[#EB010C]'
+                                                    : 'bg-gray-300 hover:bg-[#EB010C]/40'
+                                                    }`}></div>
+                                                <div className={`w-6 h-[2px] rounded-full transition-all duration-300 ${activeFocus === index
+                                                    ? 'bg-[#EB010C]'
+                                                    : 'bg-gray-400 hover:bg-[#EB010C]/60'
+                                                    }`}></div>
+                                                <div className={`w-6 h-[2px] rounded-full transition-all duration-300 ${activeFocus === index
+                                                    ? 'bg-[#EB010C]'
+                                                    : 'bg-gray-500 hover:bg-[#EB010C]'
+                                                    }`}></div>
+                                            </div>
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
                         </div>
 
-                        <div className="relative rounded-xl overflow-hidden shadow-xl">
-                            <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/04328338922ba2be5989a627fc0bcd688bc77625?width=1086"
-                                alt="Focus Areas"
-                                className="w-full h-full object-cover"
-                            />
+                        <div className="relative rounded-2xl overflow-hidden group">
+                            {focusAreas.map((area, index) => (
+                                <div
+                                    key={index}
+                                    className={`absolute inset-0 transition-all duration-700 ease-in-out ${activeFocus === index
+                                        ? 'opacity-100 scale-100'
+                                        : 'opacity-0 scale-105 pointer-events-none'
+                                        }`}
+                                >
+                                    <img
+                                        src={area.image}
+                                        alt={area.title}
+                                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                                    />
+
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+
+                                    <div className={`absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent transition-all duration-500 ${activeFocus === index
+                                        ? 'opacity-100 translate-y-0'
+                                        : 'opacity-0 translate-y-8'
+                                        }`}>
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-12 h-1 bg-[#EB010C] rounded-full"></div>
+                                            <span className="text-sm font-medium text-white/80 uppercase tracking-wider">
+                                                Focus Area {index + 1}
+                                            </span>
+                                        </div>
+
+                                        <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
+                                            {area.title}
+                                        </h3>
+
+                                        <p className="text-white/90 leading-relaxed max-w-2xl">
+                                            {area.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+
+                            <div className="absolute bottom-8 right-8 flex gap-2 z-10">
+                                {focusAreas.map((_, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => setActiveFocus(index)}
+                                        className={`w-3 h-3 rounded-full transition-all duration-300 ${activeFocus === index
+                                            ? 'bg-white scale-125'
+                                            : 'bg-white/50 hover:bg-white/80'
+                                            }`}
+                                        aria-label={`View focus area ${index + 1}`}
+                                    />
+                                ))}
+                            </div>
                         </div>
                     </section>
 
@@ -314,7 +418,7 @@ const Index = () => {
                     </section>
 
                     {/* Our Impacts Section */}
-                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20 lg:mb-28">
+                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20 lg:mb-28 items-end">
                         <div className="flex flex-col gap-10 lg:gap-12">
                             <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 tracking-tight">
                                 Our Impacts / Projects
@@ -355,7 +459,7 @@ const Index = () => {
                         </div>
 
                         <div className="flex items-center justify-center">
-                            <div className="relative overflow-hidden w-full max-w-md">
+                            <div className="relative overflow-hidden w-full">
                                 <img
                                     src="https://api.builder.io/api/v1/image/assets/TEMP/60f56090a043aa0052b7f54ed5a76931e6460ef6?width=1176"
                                     alt="Our Impacts Map"
@@ -367,7 +471,7 @@ const Index = () => {
 
                     {/* Be Part of The Movement Section */}
                     <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20 lg:mb-28">
-                        <div className="relative aspect-[711/350] rounded-xl overflow-hidden shadow-xl group">
+                        <div className="relative aspect-[711/350] rounded-xl overflow-hidden  group">
                             <img
                                 src="https://api.builder.io/api/v1/image/assets/TEMP/743da7307db5c6f3802fcc3250631182d6dcce9b?width=1422"
                                 alt="Join Movement"
@@ -385,7 +489,7 @@ const Index = () => {
                                 <p className="text-sm lg:text-base text-gray-600 leading-relaxed">
                                     We the African People Stand United for Economically Self-sustainable, Development, Freedom, Equality, Justice, Free Trade, Open Borders, Effective Governance, One Nation and the Protection of Our motherland, one people united for Africa, Home of the Brave.
                                 </p>
-                                <button className="flex items-center gap-2 px-6 py-3 bg-upam-red text-white rounded-lg hover:bg-upam-red/90 transition-all duration-300 hover:shadow-lg self-start group">
+                                <button className="flex items-center gap-2 px-6 py-3 bg-[#EB010C] text-white rounded-lg hover:bg-[#EB010C]/90 transition-all duration-300 hover:shadow-lg self-start group">
                                     Join Now
                                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                                 </button>
@@ -427,7 +531,7 @@ const Index = () => {
                             }
                         ].map((leader) => (
                             <div key={leader.id} className="group cursor-pointer">
-                                <div className="relative overflow-hidden rounded-xl transition-all duration-500 group-hover:shadow-xl">
+                                <div className="relative overflow-hidden rounded-xl transition-all duration-500 group-hover:">
                                     {/* Fixed height for all images */}
                                     <div className="h-72 lg:h-80 overflow-hidden">
                                         <img
@@ -439,7 +543,7 @@ const Index = () => {
 
                                     {/* Position Badge */}
                                     <div className="absolute top-4 left-4">
-                                        <div className="px-3 py-1.5 bg-upam-red text-white text-xs font-medium rounded-full">
+                                        <div className="px-3 py-1.5 bg-[#EB010C] text-white text-xs font-medium rounded-full">
                                             #{leader.id}
                                         </div>
                                     </div>
@@ -471,58 +575,174 @@ const Index = () => {
                     </div>
 
                     {/* Activities Section */}
-                    <section className="mb-20 lg:mb-28">
-                        <div className="flex flex-col gap-10 lg:gap-12">
-                            <div className="flex flex-col gap-6">
-                                <div className="flex flex-col gap-4">
-                                    <p className="text-sm font-medium text-upam-red tracking-wider uppercase font-dm-sans">Activities</p>
-                                    <div className="flex flex-col gap-3">
-                                        <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 tracking-tight">
-                                            Activities Lined up for 2026
-                                        </h2>
-                                        <p className="text-base text-gray-600">
-                                            Stay updated with UPAM activities, announcements, and Pan-African happenings.
+                    <section className="my-24 lg:my-32">
+                        <div className="flex flex-col gap-12 lg:gap-16">
+                            {/* Header Section */}
+                            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+                                <div className="flex flex-col gap-4 max-w-2xl">
+                                    <div className="flex items-center gap-3">
+                                        <p className="text-sm font-semibold text-upam-red uppercase tracking-wider">
+                                            Activities & Events
                                         </p>
+                                    </div>
+                                    <div className="flex flex-col gap-3">
+                                        <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight">
+                                            Activities Lined Up for 2026
+                                        </h2>
+                                        <p className="text-lg text-gray-600 leading-relaxed">
+                                            Stay updated with UPAM activities, announcements, and Pan-African happenings throughout the year.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <button className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#EB010C] text-white font-semibold rounded-lg hover:bg-[#EB010C]/90 transition-colors duration-300 hover: w-fit">
+                                    <Calendar className="w-4 h-4" />
+                                    View All Events
+                                </button>
+                            </div>
+
+                            {/* Main Content Grid - Fixed Height Layout */}
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                {/* Featured Event - Left Column (Full height) */}
+                                <div className="lg:col-span-2">
+                                    <div className="relative h-[530px] rounded-2xl overflow-hidden group cursor-pointer">
+                                        <img
+                                            src="https://api.builder.io/api/v1/image/assets/TEMP/87a486687e349d2a5c9a964e45e9e666dd8b47a7?width=1760"
+                                            alt="UPAM Academy Launch"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+
+                                        <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12 text-white">
+                                            <div className="flex flex-wrap items-center gap-4 mb-4">
+                                                <div className="flex items-center gap-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full">
+                                                    <Calendar className="w-4 h-4" />
+                                                    <span className="text-sm font-medium">20th March 2025</span>
+                                                </div>
+                                                <div className="flex items-center gap-2 px-3 py-1.5 bg-[#EB010C] rounded-full">
+                                                    <span className="text-sm font-semibold">Featured Event</span>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex flex-col gap-4">
+                                                <h3 className="text-2xl lg:text-3xl font-bold tracking-tight">
+                                                    UPAM Academy Launch
+                                                </h3>
+                                                <p className="text-white/90 leading-relaxed text-lg max-w-3xl">
+                                                    Get ready to unlock new skills and opportunities! We're excited to announce the launch of Upam Academy, where learning meets innovation. Join us for an exclusive event as we unveil our programs and opportunities for growth.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Side Events - Right Column (Two images split height) */}
+                                <div className="flex flex-col md:flex-row lg:flex-col gap-6 h-[500px]">
+                                    {/* Event 1 - Takes half height */}
+                                    <div className="group cursor-pointer h-1/2 md:flex-1">
+                                        <div className="relative h-full rounded-xl overflow-hidden shadow-lg">
+                                            <img
+                                                src="https://api.builder.io/api/v1/image/assets/TEMP/77d44987ad0ee22bd9d573bb47d256e184bf2af3?width=860"
+                                                alt="UPAM Unity Conference"
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+
+                                            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                                <div className="flex items-center justify-between mb-3">
+                                                    <div className="flex items-center gap-2">
+                                                        <Calendar className="w-4 h-4" />
+                                                        <span className="text-sm font-medium">15th April 2025</span>
+                                                    </div>
+                                                    <div className="px-3 py-1 bg-[#EB010C]/20 backdrop-blur-sm rounded-full">
+                                                        <span className="text-xs font-semibold text-white">Conference</span>
+                                                    </div>
+                                                </div>
+
+                                                <h3 className="text-xl font-bold mb-2 group-hover:text-upam-red transition-colors duration-300">
+                                                    UPAM Unity Conference
+                                                </h3>
+
+                                                <button className="inline-flex items-center gap-2 text-white font-semibold text-sm mt-3 group-hover:gap-3 transition-all duration-300">
+                                                    View Details
+                                                    <ArrowRight className="w-4 h-4" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Event 2 - Takes half height */}
+                                    <div className="group cursor-pointer h-1/2 md:flex-1">
+                                        <div className="relative h-full rounded-xl overflow-hidden shadow-lg">
+                                            <img
+                                                src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                                alt="Youth Empowerment Summit"
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+
+                                            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                                <div className="flex items-center justify-between mb-3">
+                                                    <div className="flex items-center gap-2">
+                                                        <Calendar className="w-4 h-4" />
+                                                        <span className="text-sm font-medium">10th June 2025</span>
+                                                    </div>
+                                                    <div className="px-3 py-1 bg-blue-500/20 backdrop-blur-sm rounded-full">
+                                                        <span className="text-xs font-semibold text-white">Summit</span>
+                                                    </div>
+                                                </div>
+
+                                                <h3 className="text-xl font-bold mb-2 group-hover:text-upam-red transition-colors duration-300">
+                                                    Youth Empowerment Summit
+                                                </h3>
+
+                                                <button className="inline-flex items-center gap-2 text-white font-semibold text-sm mt-3 group-hover:gap-3 transition-all duration-300">
+                                                    View Details
+                                                    <ArrowRight className="w-4 h-4" />
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="flex flex-col lg:flex-row gap-8">
-                                <div className="relative w-full lg:w-2/3 h-[400px] rounded-xl overflow-hidden shadow-xl group cursor-pointer">
-                                    <img
-                                        src="https://api.builder.io/api/v1/image/assets/TEMP/87a486687e349d2a5c9a964e45e9e666dd8b47a7?width=1760"
-                                        alt="UPAM Academy Launch"
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
-                                    <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-10 text-white">
-                                        <div className="flex items-center gap-2 mb-3">
-                                            <Calendar className="w-4 h-4" />
-                                            <p className="text-sm font-medium">20th March 2025</p>
-                                        </div>
-                                        <div className="flex flex-col gap-4">
-                                            <h3 className="text-2xl lg:text-3xl font-semibold tracking-tight">UPAM Academy Launch</h3>
-                                            <p className="text-base text-white/90 leading-relaxed max-w-2xl">
-                                                Get ready to unlock new skills and opportunities! We're excited to announce the launch of Upam Academy, where learning meets innovation. Join us for an exclusive event as we unveil our programs and opportunities for growth.
+                            {/* Upcoming Events Row */}
+                            {/* <div className="mt-8">
+                                <div className="flex items-center justify-between mb-6">
+                                    <h3 className="text-xl font-bold text-gray-900">More Upcoming Events</h3>
+                                    <button className="text-upam-red font-semibold text-sm hover:underline">
+                                        See all upcoming events →
+                                    </button>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    {[1, 2, 3].map((item) => (
+                                        <div key={item} className="bg-white rounded-xl p-5 shadow-lg hover: transition-shadow duration-300 group cursor-pointer">
+                                            <div className="flex items-center gap-3 mb-4">
+                                                <div className="w-12 h-12 flex items-center justify-center bg-[#EB010C]/10 rounded-lg">
+                                                    <Calendar className="w-6 h-6 text-upam-red" />
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm font-medium text-gray-600">July {item * 10} 2025</p>
+                                                    <p className="text-xs text-gray-500">2:00 PM - 5:00 PM</p>
+                                                </div>
+                                            </div>
+
+                                            <h4 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-upam-red transition-colors duration-300">
+                                                Pan-African Workshop #{item}
+                                            </h4>
+                                            <p className="text-gray-600 text-sm">
+                                                Interactive workshop focusing on key development areas for African communities.
                                             </p>
+
+                                            <div className="flex items-center gap-2 mt-4">
+                                                <span className="text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-full">Workshop</span>
+                                                <span className="text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-full">Free</span>
+                                            </div>
                                         </div>
-                                    </div>
+                                    ))}
                                 </div>
-                                <div className="flex flex-col gap-6 w-full lg:w-1/3">
-                                    <div className="relative w-full h-[300px] rounded-xl overflow-hidden shadow-lg group">
-                                        <img
-                                            src="https://api.builder.io/api/v1/image/assets/TEMP/77d44987ad0ee22bd9d573bb47d256e184bf2af3?width=860"
-                                            alt="UPAM Unity Conference"
-                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col gap-3 p-4 bg-white rounded-xl shadow-sm">
-                                        <h3 className="text-xl lg:text-2xl font-semibold text-gray-900 tracking-tight">
-                                            UPAM Unity Conference
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
+                            </div> */}
                         </div>
                     </section>
 
@@ -562,7 +782,7 @@ const Index = () => {
                                 }
                             ].map((news, index) => (
                                 <div key={index} className="flex flex-col gap-6 group cursor-pointer">
-                                    <div className="relative rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                                    <div className="relative rounded-xl overflow-hidden shadow-md hover: transition-shadow duration-300">
                                         <img
                                             src={`https://api.builder.io/api/v1/image/assets/TEMP/news${index + 1}`}
                                             alt={news.title}
@@ -583,10 +803,10 @@ const Index = () => {
                     </section>
 
                     {/* Video Section */}
-                    <section className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-8 lg:gap-12 mb-20 lg:mb-28">
+                    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_2fr] gap-8 lg:gap-12 mb-20 lg:mb-28">
                         {/* Main Video */}
                         <div className="flex flex-col">
-                            <div className="relative w-full aspect-[768/428] rounded-xl overflow-hidden shadow-xl">
+                            <div className="relative w-full aspect-[542/356] rounded-xl overflow-hidden ">
                                 <iframe
                                     className="w-full h-full"
                                     src={`https://www.youtube.com/embed/${videos[0].youtubeId}`}
@@ -600,7 +820,7 @@ const Index = () => {
 
                         {/* Side Video */}
                         <div className="flex flex-col">
-                            <div className="relative w-full aspect-[542/356] rounded-xl overflow-hidden shadow-xl">
+                            <div className="relative w-full aspect-[542/356] rounded-xl overflow-hidden ">
                                 <iframe
                                     className="w-full h-full"
                                     src={`https://www.youtube.com/embed/${videos[1].youtubeId}`}
