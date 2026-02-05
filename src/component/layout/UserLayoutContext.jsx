@@ -6,7 +6,7 @@ import UserBottomBar from './User/UserBottomBar';
 
 const UserLayoutContext = () => {
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
+        <div className="min-h-screen bg-gray-50">
             {/* Sidebar - Desktop Only */}
             <UserSidebar />
 

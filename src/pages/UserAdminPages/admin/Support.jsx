@@ -30,30 +30,30 @@ const UserSupportForm = () => {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-                <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-gray-100 dark:border-slate-800 shadow-sm relative overflow-hidden">
+                <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm relative overflow-hidden">
                     <div className="relative z-10">
-                        <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-2">Send us a message</h2>
-                        <p className="text-slate-500 dark:text-slate-400 mb-8">We usually respond within 24 hours.</p>
+                        <h2 className="text-2xl font-bold text-slate-800 mb-2">Send us a message</h2>
+                        <p className="text-slate-500 mb-8">We usually respond within 24 hours.</p>
 
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Your Name</label>
+                                    <label className="text-sm font-semibold text-slate-700">Your Name</label>
                                     <input
                                         type="text"
                                         required
-                                        className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border-none focus:ring-2 focus:ring-blue-500 transition-all dark:text-white"
+                                        className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-blue-500 transition-all"
                                         placeholder="Enter your name"
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Email Address</label>
+                                    <label className="text-sm font-semibold text-slate-700">Email Address</label>
                                     <input
                                         type="email"
                                         required
-                                        className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border-none focus:ring-2 focus:ring-blue-500 transition-all dark:text-white"
+                                        className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-blue-500 transition-all"
                                         placeholder="your@email.com"
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -61,9 +61,9 @@ const UserSupportForm = () => {
                                 </div>
                             </div>
                             <div className="space-y-2">
-                                <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Category</label>
+                                <label className="text-sm font-semibold text-slate-700">Category</label>
                                 <select
-                                    className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border-none focus:ring-2 focus:ring-blue-500 transition-all dark:text-white"
+                                    className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-blue-500 transition-all"
                                     value={formData.category}
                                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                                 >
@@ -74,11 +74,11 @@ const UserSupportForm = () => {
                                 </select>
                             </div>
                             <div className="space-y-2">
-                                <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Message</label>
+                                <label className="text-sm font-semibold text-slate-700">Message</label>
                                 <textarea
                                     required
                                     rows="5"
-                                    className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border-none focus:ring-2 focus:ring-blue-500 transition-all dark:text-white resize-none"
+                                    className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-blue-500 transition-all resize-none"
                                     placeholder="Tell us what's on your mind..."
                                     value={formData.message}
                                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -87,7 +87,7 @@ const UserSupportForm = () => {
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-lg shadow-blue-200 dark:shadow-none"
+                                className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-lg shadow-blue-200"
                             >
                                 {isLoading ? 'Sending...' : 'Send Message'}
                                 <Send size={20} />
@@ -108,17 +108,17 @@ const UserSupportForm = () => {
 
             <div className="space-y-6">
                 {[
-                    { icon: Phone, title: 'Call Center', detail: '+255 123 456 789', color: 'text-blue-500', bg: 'bg-blue-50 dark:bg-blue-900/20' },
-                    { icon: Mail, title: 'Email Support', detail: 'support@upam.org', color: 'text-red-500', bg: 'bg-red-50 dark:bg-red-900/20' },
-                    { icon: HelpCircle, title: 'Live Chat', detail: 'Available 9am - 5pm', color: 'text-indigo-500', bg: 'bg-indigo-50 dark:bg-indigo-900/20' }
+                    { icon: Phone, title: 'Call Center', detail: '+255 123 456 789', color: 'text-blue-500', bg: 'bg-blue-50' },
+                    { icon: Mail, title: 'Email Support', detail: 'support@upam.org', color: 'text-red-500', bg: 'bg-red-50' },
+                    { icon: HelpCircle, title: 'Live Chat', detail: 'Available 9am - 5pm', color: 'text-indigo-500', bg: 'bg-indigo-50' }
                 ].map((item, i) => (
-                    <div key={i} className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm flex items-center gap-4 group hover:scale-[1.02] transition-all cursor-pointer">
+                    <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-4 group hover:scale-[1.02] transition-all cursor-pointer">
                         <div className={`${item.bg} p-4 rounded-xl group-hover:rotate-12 transition-transform`}>
                             <item.icon className={item.color} size={24} />
                         </div>
                         <div>
-                            <h4 className="font-bold text-slate-800 dark:text-white">{item.title}</h4>
-                            <p className="text-sm text-slate-500 dark:text-slate-400">{item.detail}</p>
+                            <h4 className="font-bold text-slate-800">{item.title}</h4>
+                            <p className="text-sm text-slate-500">{item.detail}</p>
                         </div>
                         <ChevronRight className="ml-auto text-slate-300" size={20} />
                     </div>
@@ -155,9 +155,9 @@ const AdminSupportInbox = () => {
             {/* List */}
             <div className="lg:col-span-5 flex flex-col gap-4 overflow-hidden">
                 <div className="flex justify-between items-center mb-2">
-                    <h2 className="text-xl font-bold dark:text-white">Messages ({contacts?.data?.length || 0})</h2>
+                    <h2 className="text-xl font-bold">Messages ({contacts?.data?.length || 0})</h2>
                     <div className="flex gap-2">
-                        <button className="p-2 bg-white dark:bg-slate-900 rounded-lg border border-gray-100 dark:border-slate-800" onClick={refetch}>
+                        <button className="p-2 bg-white rounded-lg border border-gray-100" onClick={refetch}>
                             <Clock size={16} className="text-slate-500" />
                         </button>
                     </div>
@@ -168,8 +168,8 @@ const AdminSupportInbox = () => {
                             key={msg._id}
                             onClick={() => setSelectedMsg(msg)}
                             className={`p-6 rounded-2xl border cursor-pointer transition-all ${selectedMsg?._id === msg._id
-                                ? 'bg-blue-600 border-blue-600 shadow-lg shadow-blue-200 dark:shadow-none'
-                                : 'bg-white dark:bg-slate-900 border-gray-100 dark:border-slate-800 hover:border-blue-300'
+                                ? 'bg-blue-600 border-blue-600 shadow-lg shadow-blue-200'
+                                : 'bg-white border-gray-100 hover:border-blue-300'
                                 }`}
                         >
                             <div className="flex justify-between items-start mb-2">
@@ -183,10 +183,10 @@ const AdminSupportInbox = () => {
                                     {new Date(msg.createdAt).toLocaleDateString()}
                                 </span>
                             </div>
-                            <h4 className={`font-bold mb-1 truncate ${selectedMsg?._id === msg._id ? 'text-white' : 'text-slate-800 dark:text-white'}`}>
+                            <h4 className={`font-bold mb-1 truncate ${selectedMsg?._id === msg._id ? 'text-white' : 'text-slate-800'}`}>
                                 {msg.name}
                             </h4>
-                            <p className={`text-xs truncate ${selectedMsg?._id === msg._id ? 'text-blue-100' : 'text-slate-500 dark:text-slate-400'}`}>
+                            <p className={`text-xs truncate ${selectedMsg?._id === msg._id ? 'text-blue-100' : 'text-slate-500'}`}>
                                 {msg.message}
                             </p>
                         </div>
@@ -203,31 +203,31 @@ const AdminSupportInbox = () => {
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -20 }}
-                            className="bg-white dark:bg-slate-900 h-full rounded-3xl border border-gray-100 dark:border-slate-800 shadow-sm flex flex-col overflow-hidden"
+                            className="bg-white h-full rounded-3xl border border-gray-100 shadow-sm flex flex-col overflow-hidden"
                         >
-                            <div className="p-8 border-b border-gray-50 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50">
+                            <div className="p-8 border-b border-gray-50 bg-slate-50/50">
                                 <div className="flex justify-between items-start">
                                     <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-xl">
+                                        <div className="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xl">
                                             {selectedMsg.name[0]}
                                         </div>
                                         <div>
-                                            <h3 className="font-bold text-slate-800 dark:text-white text-lg">{selectedMsg.name}</h3>
-                                            <p className="text-sm text-slate-500 dark:text-slate-400">{selectedMsg.email}</p>
+                                            <h3 className="font-bold text-slate-800 text-lg">{selectedMsg.name}</h3>
+                                            <p className="text-sm text-slate-500">{selectedMsg.email}</p>
                                         </div>
                                     </div>
                                     <div className="text-right">
                                         <p className="text-xs text-slate-400 mb-1">Received at</p>
-                                        <p className="text-sm font-medium dark:text-white">{new Date(selectedMsg.createdAt).toLocaleString()}</p>
+                                        <p className="text-sm font-medium">{new Date(selectedMsg.createdAt).toLocaleString()}</p>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="flex-1 p-8 overflow-y-auto space-y-8">
                                 <div className="space-y-4">
-                                    <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-[10px] font-bold text-slate-500 tracking-wider uppercase">User Request</span>
-                                    <div className="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-100 dark:border-slate-800">
-                                        <p className="text-slate-700 dark:text-slate-200 leading-relaxed font-medium">
+                                    <span className="px-3 py-1 bg-slate-100 rounded-full text-[10px] font-bold text-slate-500 tracking-wider uppercase">User Request</span>
+                                    <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                                        <p className="text-slate-700 leading-relaxed font-medium">
                                             {selectedMsg.message}
                                         </p>
                                     </div>
@@ -236,20 +236,20 @@ const AdminSupportInbox = () => {
                                 {selectedMsg.response ? (
                                     <div className="space-y-4">
                                         <div className="flex items-center gap-2">
-                                            <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 rounded-full text-[10px] font-bold text-green-600 dark:text-green-400 tracking-wider uppercase">Admin Response</span>
+                                            <span className="px-3 py-1 bg-green-100 rounded-full text-[10px] font-bold text-green-600 tracking-wider uppercase">Admin Response</span>
                                             <span className="text-[10px] text-slate-400">Responded on {new Date(selectedMsg.respondedAt).toLocaleString()}</span>
                                         </div>
-                                        <div className="bg-blue-50/50 dark:bg-blue-900/10 p-6 rounded-2xl border border-blue-100/50 dark:border-blue-900/30 border-l-4 border-l-blue-500">
-                                            <p className="text-slate-700 dark:text-slate-200 italic">
+                                        <div className="bg-blue-50/50 p-6 rounded-2xl border border-blue-100/50 border-l-4 border-l-blue-500">
+                                            <p className="text-slate-700 italic">
                                                 "{selectedMsg.response}"
                                             </p>
                                         </div>
                                     </div>
                                 ) : (
                                     <div className="space-y-4">
-                                        <span className="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 rounded-full text-[10px] font-bold text-orange-600 tracking-wider uppercase">Reply to user</span>
+                                        <span className="px-3 py-1 bg-orange-100 rounded-full text-[10px] font-bold text-orange-600 tracking-wider uppercase">Reply to user</span>
                                         <textarea
-                                            className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all dark:text-white resize-none"
+                                            className="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-blue-500 focus:bg-white transition-all resize-none"
                                             placeholder="Type your response here..."
                                             rows="4"
                                             value={replyText}
@@ -258,7 +258,7 @@ const AdminSupportInbox = () => {
                                         <button
                                             onClick={handleReply}
                                             disabled={isReplying || !replyText.trim()}
-                                            className="w-full py-4 bg-slate-800 dark:bg-blue-600 hover:bg-slate-900 dark:hover:bg-blue-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                                            className="w-full py-4 bg-slate-800 hover:bg-slate-900 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all disabled:opacity-50"
                                         >
                                             {isReplying ? 'Sending...' : 'Send Response'}
                                             <Reply size={20} />
@@ -268,12 +268,12 @@ const AdminSupportInbox = () => {
                             </div>
                         </motion.div>
                     ) : (
-                        <div className="bg-white dark:bg-slate-900 h-full rounded-3xl border border-dashed border-gray-200 dark:border-slate-700 flex flex-col items-center justify-center p-12 text-center">
-                            <div className="w-20 h-20 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center mb-6">
+                        <div className="bg-white h-full rounded-3xl border border-dashed border-gray-200 flex flex-col items-center justify-center p-12 text-center">
+                            <div className="w-20 h-20 rounded-full bg-slate-50 flex items-center justify-center mb-6">
                                 <MessageSquare size={40} className="text-slate-300" />
                             </div>
-                            <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-2">No message selected</h3>
-                            <p className="text-slate-500 dark:text-slate-400 max-w-sm">
+                            <h3 className="text-xl font-bold text-slate-800 mb-2">No message selected</h3>
+                            <p className="text-slate-500 max-w-sm">
                                 Select a support ticket from the list on the left to view details and send a response.
                             </p>
                         </div>
@@ -292,13 +292,13 @@ const Support = () => {
         <div className="space-y-8 lg:p-4">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div className="space-y-1">
-                    <h1 className="text-3xl font-bold text-slate-800 dark:text-white">Support & Help</h1>
-                    <p className="text-slate-500 dark:text-slate-400 font-medium">
+                    <h1 className="text-3xl font-bold text-slate-800">Support & Help</h1>
+                    <p className="text-slate-500 font-medium">
                         {isAdmin ? 'Manage user inquiries and provide assistance.' : 'How can we help you today?'}
                     </p>
                 </div>
                 {!isAdmin && (
-                    <div className="flex items-center gap-2 text-sm font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-4 py-2 rounded-full">
+                    <div className="flex items-center gap-2 text-sm font-bold text-green-500 bg-green-50 px-4 py-2 rounded-full">
                         <Clock size={16} />
                         Average response: 24h
                     </div>

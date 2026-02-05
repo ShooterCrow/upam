@@ -8,15 +8,15 @@ const DashboardCalendar = () => {
     const [date, setDate] = useState(new Date(2026, 2, 1)); // March 2026 as in mockup
 
     return (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-50 dark:border-slate-800 overflow-hidden flex flex-col xl:flex-row justify-center items-center">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-50 overflow-hidden flex flex-col xl:flex-row justify-center items-center">
             <div className="p-6 flex-2">
                 <div className="flex justify-between items-center mb-6">
-                    <h3 className="font-bold text-slate-800 dark:text-white">March 2026</h3>
+                    <h3 className="font-bold text-slate-800">March 2026</h3>
                     <div className="flex gap-2">
-                        <button className="p-1 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+                        <button className="p-1 hover:bg-gray-100 rounded-full transition-colors">
                             <ChevronLeft size={20} className="text-slate-400" />
                         </button>
-                        <button className="p-1 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+                        <button className="p-1 hover:bg-gray-100 rounded-full transition-colors">
                             <ChevronRight size={20} className="text-slate-400" />
                         </button>
                     </div>
@@ -36,15 +36,15 @@ const DashboardCalendar = () => {
                 </div>
             </div>
 
-            <div className="h-fit bottom-0 mb-auto bg-slate-50 dark:bg-slate-800/50 p-6 m-4 my-auto rounded-xl flex-1">
+            <div className="h-fit bottom-0 mb-auto bg-slate-50 p-6 m-4 my-auto rounded-xl flex-1">
                 <div className="flex justify-between items-center mb-3">
-                    <span className="text-sm font-bold text-slate-800 dark:text-white">Event</span>
+                    <span className="text-sm font-bold text-slate-800">Event</span>
                 </div>
                 <div className="space-y-3">
-                    <h4 className="text-xs font-bold text-slate-700 dark:text-slate-200 leading-tight">
+                    <h4 className="text-xs font-bold text-slate-700 leading-tight">
                         International Women's Day Empowerment Program
                     </h4>
-                    <div className="flex items-center gap-2 text-[10px] text-slate-500 dark:text-slate-400">
+                    <div className="flex items-center gap-2 text-[10px] text-slate-500">
                         <CalendarIcon size={12} />
                         March 1st - 8th 2026
                     </div>

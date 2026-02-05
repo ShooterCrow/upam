@@ -3,11 +3,11 @@ import { CreditCard, Wallet, Share2, Users } from 'lucide-react';
 
 const StatCard = ({ title, value, type, trend, icon: Icon, iconBg, iconColor, onClickLink, linkText }) => {
     return (
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-gray-50 dark:border-slate-800 flex flex-col justify-between">
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-50 flex flex-col justify-between">
             <div className="flex justify-between items-start mb-4">
                 <div className="space-y-1">
-                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{title}</p>
-                    <h3 className="text-3xl font-bold text-slate-800 dark:text-white">{value}</h3>
+                    <p className="text-sm font-medium text-slate-500">{title}</p>
+                    <h3 className="text-3xl font-bold text-slate-800">{value}</h3>
                 </div>
                 <div className={`${iconBg} p-3 rounded-xl`}>
                     <Icon className={iconColor} size={24} />
@@ -32,7 +32,7 @@ export const DashboardStats = () => {
             title: "Total Spent",
             value: "$68.00",
             icon: CreditCard,
-            iconBg: "bg-amber-50 dark:bg-amber-900/20",
+            iconBg: "bg-amber-50",
             iconColor: "text-amber-500",
             linkText: "Transaction history"
         },
@@ -40,7 +40,7 @@ export const DashboardStats = () => {
             title: "Outstanding Balance",
             value: "$-32.00",
             icon: Wallet,
-            iconBg: "bg-green-50 dark:bg-green-900/20",
+            iconBg: "bg-green-50",
             iconColor: "text-green-500",
             linkText: "Make payment",
             trend: 'up'
@@ -49,7 +49,7 @@ export const DashboardStats = () => {
             title: "Total Shares",
             value: "$43.00",
             icon: Share2,
-            iconBg: "bg-orange-50 dark:bg-orange-900/20",
+            iconBg: "bg-orange-50",
             iconColor: "text-orange-500",
             linkText: "Buy more shares",
             trend: 'up'
@@ -58,7 +58,7 @@ export const DashboardStats = () => {
             title: "Total Members",
             value: "350,000",
             icon: Users,
-            iconBg: "bg-indigo-50 dark:bg-indigo-900/20",
+            iconBg: "bg-indigo-50",
             iconColor: "text-indigo-500"
         }
     ];

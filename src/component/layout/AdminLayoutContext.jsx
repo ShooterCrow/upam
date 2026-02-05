@@ -6,7 +6,7 @@ import AdminBottomBar from './Admin/AdminBottomBar';
 
 const AdminLayoutContext = () => {
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
+        <div className="min-h-screen bg-gray-50">
             {/* Sidebar - Desktop Only */}
             <AdminSidebar />
 

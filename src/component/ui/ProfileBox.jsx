@@ -49,7 +49,7 @@ const ProfileBox = ({ show = false }) => {
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center gap-3 pl-4 border-l border-gray-100 dark:border-slate-800 hover:opacity-80 transition-opacity"
+                className="flex items-center gap-3 pl-4 border-l border-gray-100 hover:opacity-80 transition-opacity"
             >
                 <div className="w-9 h-9 rounded-full bg-slate-200 overflow-hidden border border-gray-200">
                     <img
@@ -59,7 +59,7 @@ const ProfileBox = ({ show = false }) => {
                     />
                 </div>
                 <div className="hidden sm:block text-left">
-                    <p className="text-xs font-bold text-slate-800 dark:text-white leading-tight">
+                    <p className="text-xs font-bold text-slate-800 leading-tight">
                         {user?.firstName} {user?.lastName}
                     </p>
                     <p className="text-[10px] text-green-500 font-medium leading-tight">{user?.email}</p>
@@ -73,7 +73,7 @@ const ProfileBox = ({ show = false }) => {
 
             {/* Dropdown Menu */}
             {(isDropdownOpen && show) && (
-                <div className="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-lg shadow-lg overflow-hidden z-50">
+                <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-100 rounded-lg shadow-lg overflow-hidden z-50">
                     <div className="py-2 overflow-y-auto">
                         {links.map((link, index) => {
                             const Icon = link.icon
@@ -83,14 +83,14 @@ const ProfileBox = ({ show = false }) => {
                             return (
                                 <React.Fragment key={link.path}>
                                     {isDivider && index > 0 && (
-                                        <div className="my-1 border-t border-gray-100 dark:border-slate-800" />
+                                        <div className="my-1 border-t border-gray-100" />
                                     )}
                                     <Link
                                         to={link.path}
                                         onClick={() => setIsDropdownOpen(false)}
                                         className={`flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-colors ${isLogout
-                                            ? 'text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20'
-                                            : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-red-600'
+                                            ? 'text-red-600 hover:bg-red-50'
+                                            : 'text-slate-700 hover:bg-slate-50 hover:text-red-600'
                                             }`}
                                     >
                                         <Icon size={16} />

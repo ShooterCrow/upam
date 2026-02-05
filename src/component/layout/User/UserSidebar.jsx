@@ -27,9 +27,9 @@ const UserSidebar = () => {
     const bottomLinks = USER_BOTTOM_LINKS;
 
     return (
-        <aside className="fixed top-0 left-0 h-full w-64 bg-white dark:bg-slate-900 border-r border-gray-100 dark:border-slate-800 z-40 hidden lg:flex flex-col font-sans">
+        <aside className="fixed top-0 left-0 h-full w-64 bg-white border-r border-gray-100 z-40 hidden lg:flex flex-col font-sans">
             {/* Logo Section */}
-            <div className="h-24 flex flex-col justify-center px-6 border-b border-gray-50 dark:border-slate-800">
+            <div className="h-24 flex flex-col justify-center px-6 border-b border-gray-50">
                 <Link to="/" className="flex items-center">
                     {/* Placeholder Logo */}
                     <img src="/logoupam.png" alt="Logo" />
@@ -38,7 +38,7 @@ const UserSidebar = () => {
 
             {/* User ID Section */}
             <div className="px-6 py-4">
-                <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">ID: {user?.id}</p>
+                <p className="text-sm font-semibold text-slate-700">ID: {user?.id}</p>
             </div>
 
             {/* Main Navigation */}
@@ -52,7 +52,7 @@ const UserSidebar = () => {
                             to={link.path}
                             className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${isActive
                                 ? 'bg-red-600 text-white shadow-sm'
-                                : 'text-slate-500 hover:bg-slate-50 hover:text-red-500 dark:text-slate-400 dark:hover:bg-slate-800/50'
+                                : 'text-slate-500 hover:bg-slate-50 hover:text-red-500'
                                 }`}
                         >
                             <Icon size={18} />
@@ -63,14 +63,14 @@ const UserSidebar = () => {
             </nav>
 
             {/* Bottom Navigation (Account/Logout) */}
-            <div className="p-4 border-t border-gray-50 dark:border-slate-800 space-y-1">
+            <div className="p-4 border-t border-gray-50 space-y-1">
                 {bottomLinks.map((link) => {
                     const Icon = link.icon;
                     return (
                         <Link
                             key={link.path}
                             to={link.path}
-                            className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-red-500 dark:text-slate-400 dark:hover:bg-slate-800/50 transition-colors"
+                            className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-red-500 transition-colors"
                         >
                             <Icon size={18} />
                             {link.name}

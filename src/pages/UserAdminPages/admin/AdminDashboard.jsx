@@ -26,7 +26,7 @@ const AdminDashboard = () => {
         <div className="space-y-8 animate-in fade-in duration-500">
             {/* Header section */}
             <div className="flex justify-between items-end">
-                <h1 className="text-3xl font-bold text-slate-800 dark:text-white">Dashboard</h1>
+                <h1 className="text-3xl font-bold text-slate-800">Dashboard</h1>
             </div>
 
             {/* Stats Cards */}
@@ -36,12 +36,12 @@ const AdminDashboard = () => {
                 {/* Left side: Banner and Announcement */}
                 <div className="lg:col-span-2 space-y-8">
                     {/* Welcome Banner */}
-                    <div className="relative overflow-hidden bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-slate-800 rounded-3xl p-8 lg:p-12 min-h-[300px] flex flex-col justify-center border border-blue-100/50 dark:border-slate-700">
+                    <div className="relative overflow-hidden bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8 lg:p-12 min-h-[300px] flex flex-col justify-center border border-blue-100/50">
                         <div className="relative z-10 space-y-4 max-w-md">
-                            <h2 className="text-4xl lg:text-5xl font-bold text-slate-800 dark:text-white leading-tight">
+                            <h2 className="text-4xl lg:text-5xl font-bold text-slate-800 leading-tight">
                                 Welcome {user?.firstName} {user?.lastName}
                             </h2>
-                            <p className="text-slate-500 dark:text-slate-400 text-lg">
+                            <p className="text-slate-500 text-lg">
                                 Here's the Summary of your Activity History for the Week Here
                             </p>
                             <button className="flex items-center gap-2 text-blue-600 font-bold hover:gap-3 transition-all mt-4 group">
@@ -61,13 +61,13 @@ const AdminDashboard = () => {
                             {countries.map((c) => (
                                 <div
                                     key={c.name}
-                                    className="absolute flex items-center gap-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm px-2 py-1 rounded-md shadow-sm border border-white/50 dark:border-slate-700 animate-pulse"
+                                    className="absolute flex items-center gap-2 bg-white/80 backdrop-blur-sm px-2 py-1 rounded-md shadow-sm border border-white/50 animate-pulse"
                                     style={{ top: c.top, left: c.left }}
                                 >
                                     <div className="w-6 h-6 rounded-full overflow-hidden border border-gray-100">
                                         <img src={`https://flagcdn.com/w40/${c.name.toLowerCase() === 'nigeria' ? 'ng' : c.name.toLowerCase() === 'kenya' ? 'ke' : c.name.toLowerCase() === 'namibia' ? 'na' : c.name.toLowerCase() === 'cameroon' ? 'cm' : c.name.toLowerCase() === 'tanzania' ? 'tz' : 'mw'}.png`} alt={c.name} className="w-full h-full object-cover" />
                                     </div>
-                                    <span className="text-[10px] font-bold text-slate-700 dark:text-slate-200">{c.name}</span>
+                                    <span className="text-[10px] font-bold text-slate-700">{c.name}</span>
                                 </div>
                             ))}
                         </div>
@@ -76,10 +76,10 @@ const AdminDashboard = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className='space-y-8'>
                             {/* Create Announcement */}
-                            <div className="bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-sm border border-gray-50 dark:border-slate-800 flex justify-between">
+                            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-50 flex justify-between">
                                 <div className="space-y-2">
-                                    <h3 className="text-xl font-bold text-slate-800 dark:text-white">Create Announcement</h3>
-                                    <p className="text-sm text-slate-500 dark:text-slate-400">Create wide site announcement to everyone</p>
+                                    <h3 className="text-xl font-bold text-slate-800">Create Announcement</h3>
+                                    <p className="text-sm text-slate-500">Create wide site announcement to everyone</p>
                                 </div>
                                 <button className="flex items-center gap-2 text-blue-500 font-bold hover:gap-3 transition-all mt-6 text-sm">
                                     Make payment
@@ -88,27 +88,27 @@ const AdminDashboard = () => {
                             </div>
 
                             {/* Recently verified members */}
-                            <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-sm border border-gray-50 dark:border-slate-800 p-8">
+                            <div className="bg-white rounded-3xl shadow-sm border border-gray-50 p-8">
                                 <div className="flex justify-between items-center mb-6">
-                                    <h3 className="text-xl font-bold text-slate-800 dark:text-white">Recently verified members</h3>
+                                    <h3 className="text-xl font-bold text-slate-800">Recently verified members</h3>
                                 </div>
                                 <div className="overflow-x-auto">
                                     <table className="w-full text-left">
                                         <thead>
-                                            <tr className="border-b border-slate-50 dark:border-slate-800">
+                                            <tr className="border-b border-slate-50">
                                                 <th className="pb-4 text-sm font-semibold text-slate-500">Name</th>
                                                 <th className="pb-4 text-sm font-semibold text-slate-500">Email</th>
                                                 <th className="pb-4 text-sm font-semibold text-slate-500">Country</th>
                                                 <th className="pb-4 text-sm font-semibold text-slate-500">ID.NO</th>
                                             </tr>
                                         </thead>
-                                        <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
+                                        <tbody className="divide-y divide-slate-50">
                                             {verifiedMembers.map((member, idx) => (
-                                                <tr key={idx} className="group hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
-                                                    <td className="py-4 text-sm font-medium text-slate-700 dark:text-slate-200">{member.name}</td>
-                                                    <td className="py-4 text-sm text-slate-500 dark:text-slate-400">{member.email}</td>
-                                                    <td className="py-4 text-sm text-slate-500 dark:text-slate-400">{member.country}</td>
-                                                    <td className="py-4 text-sm font-bold text-slate-800 dark:text-slate-200">{member.id}</td>
+                                                <tr key={idx} className="group hover:bg-slate-50/50 transition-colors">
+                                                    <td className="py-4 text-sm font-medium text-slate-700">{member.name}</td>
+                                                    <td className="py-4 text-sm text-slate-500">{member.email}</td>
+                                                    <td className="py-4 text-sm text-slate-500">{member.country}</td>
+                                                    <td className="py-4 text-sm font-bold text-slate-800">{member.id}</td>
                                                 </tr>
                                             ))}
                                         </tbody>
