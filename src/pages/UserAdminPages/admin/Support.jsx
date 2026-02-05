@@ -436,7 +436,7 @@ const Support = () => {
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div className="space-y-1">
-                    <h1 className="text-3xl font-bold text-slate-800">Support & Help</h1>
+                    <h1 className="text-2xl md:text-3xl font-semibold text-gray-900 tracking-tight">Support & Help</h1>
                     <p className="text-slate-500 font-medium">
                         {isAdmin
                             ? 'Manage user inquiries and provide assistance.'

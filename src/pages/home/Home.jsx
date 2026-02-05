@@ -539,8 +539,8 @@ const Index = () => {
                         <div className="w-full max-w-7xl mx-auto">
                             <div className="relative overflow-hidden py-4">
                                 {/* Gradient overlays for fade effect on sides */}
-                                <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-                                <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+                                <div className="absolute hidden lg:block left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+                                <div className="absolute hidden lg:block right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
 
                                 {/* Scrolling container with slow animation */}
                                 <div className="flex animate-scroll-slow hover:pause-animation">

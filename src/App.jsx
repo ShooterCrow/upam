@@ -30,6 +30,7 @@ import Support from './pages/UserAdminPages/admin/Support'
 import AllMemebers from './pages/UserAdminPages/admin/AllMemebers'
 import MemberApplication from './pages/UserAdminPages/admin/MemberApplication'
 import MyProfileAdmin from './pages/UserAdminPages/admin/MyProfileAdmin'
+import UPAMCalender from './pages/UserAdminPages/admin/UPAMCalender'
 
 
 const App = () => {
@@ -81,6 +82,7 @@ const App = () => {
               <Route path='all-members' element={<AllMemebers />} />
               <Route path='members-application' element={<MemberApplication />} />
               <Route path='my-profile' element={<MyProfileAdmin />} />
+              <Route path='calendar' element={<UPAMCalender />} />
             </Route>
           </Route>
 

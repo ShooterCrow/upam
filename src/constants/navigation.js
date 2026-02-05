@@ -16,10 +16,12 @@ import {
   Phone,
   HelpCircle,
   LogOutIcon,
+  Calendar,
 } from "lucide-react";
 
 export const ADMIN_LINKS = [
   { name: "Dashboard", path: "/admin", icon: LayoutDashboard },
+  { name: "UPAM Calender", path: "/admin/calendar", icon: Calendar },
   {
     name: "Member Verification",
     path: "/admin/member-verification",

@@ -37,8 +37,8 @@ const UserSidebar = () => {
             </div>
 
             {/* User ID Section */}
-            <div className="px-6 py-4">
-                <p className="text-sm font-semibold text-slate-700">ID: {user?.id}</p>
+            <div className="px-6">
+                <p className="text-xs font-semibold text-slate-700">ID: {user?.id}</p>
             </div>
 
             {/* Main Navigation */}

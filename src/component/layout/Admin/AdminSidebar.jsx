@@ -35,8 +35,8 @@ const AdminSidebar = () => {
             </div>
 
             {/* Admin ID Section */}
-            <div className="px-6 py-4">
-                <p className="text-sm font-semibold text-slate-700">Admin ID: AD-9901</p>
+            <div className="px-6">
+                <p className="text-xs font-semibold text-slate-700">Admin ID: AD-9901</p>
             </div>
 
             {/* Main Navigation */}
