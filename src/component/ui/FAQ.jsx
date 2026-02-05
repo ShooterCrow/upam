@@ -60,7 +60,7 @@ const FAQ = () => {
                 </div>
             </div>
             {/* Map Image for Desktop */}
-            <div className="block relative w-full aspect-square md:aspect-auto overflow-hidden">
+            <div className="hidden lg:block relative w-full aspect-square md:aspect-auto overflow-hidden">
                 <img
                     src={mapImg}
                     alt="Operations Map"
