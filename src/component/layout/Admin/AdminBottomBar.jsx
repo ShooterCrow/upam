@@ -71,13 +71,13 @@ const AdminBottomBar = () => {
                             key={link.path}
                             to={link.path}
                             onClick={() => setShowMore(false)}
-                            className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${isActive
+                            className={`flex flex-col items-center text-center justify-center w-full h-full space-y-1 transition-colors ${isActive
                                 ? 'text-red-600'
                                 : 'text-slate-400'
                                 }`}
                         >
                             <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
-                            <span className="text-[10px] font-medium">{link.name}</span>
+                            <span className="text-[10px] font-medium text-center">{link.name}</span>
                         </Link>
                     );
                 })}
