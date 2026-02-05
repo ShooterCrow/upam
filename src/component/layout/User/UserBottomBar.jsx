@@ -16,27 +16,20 @@ import {
     Shield,
     Settings
 } from 'lucide-react';
+import { USER_LINKS } from '../../../constants/navigation';
 
 const UserBottomBar = () => {
     const location = useLocation();
     const [showMore, setShowMore] = useState(false);
 
     // Priority links for bottom bar
-    const mainLinks = [
-        { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
-        { name: 'Users', path: '/admin/users', icon: Users },
-        { name: 'Content', path: '/admin/content', icon: FileText },
-    ];
+    const mainLinks = USER_LINKS.slice(0, 3);
 
     // Secondary links for "More" menu
-    const moreLinks = [
-        { name: 'Analytics', path: '/admin/analytics', icon: BarChart },
-        { name: 'Security', path: '/admin/security', icon: Shield },
-        { name: 'Notifications', path: '/admin/notifications', icon: Bell },
-        { name: 'Settings', path: '/admin/settings', icon: Settings },
-        { name: 'My Profile', path: '/admin/profile', icon: User },
+    const moreLinks = USER_LINKS.slice(3).concat([
+        { name: 'My Profile', path: '/user/my-profile', icon: User },
         { name: 'Log out', path: '/logout', icon: LogOut, isDanger: true },
-    ];
+    ]);
 
     return (
         <>

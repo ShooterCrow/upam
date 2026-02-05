@@ -15,26 +15,14 @@ import {
     AlertCircle,
     Headphones
 } from 'lucide-react';
+import { ADMIN_LINKS, ADMIN_BOTTOM_LINKS } from '../../../constants/navigation';
 
 const AdminSidebar = () => {
     const location = useLocation();
 
     // Admin specific links
-    const links = [
-        { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
-        { name: 'Member Verification', path: '/admin/verification', icon: CheckCircle },
-        { name: 'Membership Payment', path: '/admin/payment', icon: CreditCard },
-        { name: 'Emergency Contact', path: '/admin/emergency', icon: AlertCircle },
-        { name: 'Notification', path: '/admin/notifications', icon: Bell },
-        { name: 'Support & Help', path: '/admin/support', icon: Headphones },
-        { name: 'All Members', path: '/admin/members', icon: Users },
-        { name: 'Members Application', path: '/admin/applications', icon: FileText }, // Using FileText for application
-    ];
-
-    const bottomLinks = [
-        { name: 'My Profile', path: '/admin/profile', icon: User },
-        { name: 'Log out', path: '/logout', icon: LogOut },
-    ];
+    const links = ADMIN_LINKS;
+    const bottomLinks = ADMIN_BOTTOM_LINKS;
 
     return (
         <aside className="fixed top-0 left-0 h-full w-64 bg-white dark:bg-slate-900 border-r border-gray-100 dark:border-slate-800 z-40 hidden lg:flex flex-col font-sans">
@@ -76,11 +64,16 @@ const AdminSidebar = () => {
             <div className="p-4 border-t border-gray-50 dark:border-slate-800 space-y-1">
                 {bottomLinks.map((link) => {
                     const Icon = link.icon;
+                    const isActive = location.pathname === link.path || (link.path !== '/admin' && location.pathname.startsWith(link.path));
+
                     return (
                         <Link
                             key={link.path}
                             to={link.path}
-                            className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-red-500 dark:text-slate-400 dark:hover:bg-slate-800/50 transition-colors"
+                            className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-red-500 dark:text-slate-400 dark:hover:bg-slate-800/50 transition-colors  ${isActive
+                                ? 'bg-red-600 text-white shadow-sm'
+                                : 'text-slate-500 hover:bg-slate-50 hover:text-red-500 dark:text-slate-400 dark:hover:bg-slate-800/50'
+                                }`}
                         >
                             <Icon size={18} />
                             {link.name}

@@ -21,6 +21,15 @@ import Login from './pages/auth/Login'
 import ForgottenPassword from './pages/auth/ForgottenPassword'
 import PersistLogin from './pages/authenticationPages/PersistLogin'
 import RequireAuth from './pages/authenticationPages/RequireAuth'
+import AdminDashboard from './pages/UserAdminPages/admin/AdminDashboard'
+import MemberVerification from './pages/UserAdminPages/admin/MemberVerification'
+import MembershipPayment from './pages/UserAdminPages/admin/MembershipPayment'
+import EmergencyContact from './pages/UserAdminPages/admin/EmergencyContact'
+import Notification from './pages/UserAdminPages/admin/Notification'
+import Support from './pages/UserAdminPages/admin/Support'
+import AllMemebers from './pages/UserAdminPages/admin/AllMemebers'
+import MemberApplication from './pages/UserAdminPages/admin/MemberApplication'
+import MyProfileAdmin from './pages/UserAdminPages/admin/MyProfileAdmin'
 
 
 const App = () => {
@@ -63,7 +72,15 @@ const App = () => {
           {/* Admin Routes */}
           <Route element={<RequireAuth allowedRoles={['admin', "manager"]} />}>
             <Route path="/admin" element={<AdminLayoutContext />}>
-              <Route index element={<div className="p-4">Admin Dashboard Area</div>} />
+              <Route index element={<AdminDashboard />} />
+              <Route path='member-verification' element={<MemberVerification />} />
+              <Route path='membership-payment' element={<MembershipPayment />} />
+              <Route path='emergency-contact' element={<EmergencyContact />} />
+              <Route path='notification' element={<Notification />} />
+              <Route path='support' element={<Support />} />
+              <Route path='all-members' element={<AllMemebers />} />
+              <Route path='members-application' element={<MemberApplication />} />
+              <Route path='my-profile' element={<MyProfileAdmin />} />
             </Route>
           </Route>
 

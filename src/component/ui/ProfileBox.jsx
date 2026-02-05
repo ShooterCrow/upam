@@ -17,6 +17,7 @@ import {
     AlertCircle,
     Headphones
 } from 'lucide-react'
+import { ADMIN_LINKS, ADMIN_BOTTOM_LINKS, USER_LINKS, USER_BOTTOM_LINKS } from '../../constants/navigation'
 
 const ProfileBox = ({ show = false }) => {
     const { user, roles } = useAuth()
@@ -24,31 +25,10 @@ const ProfileBox = ({ show = false }) => {
     const dropdownRef = useRef(null)
 
     // Admin links
-    const adminLinks = [
-        { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
-        { name: 'Manage Users', path: '/admin/users', icon: Users },
-        { name: 'Content', path: '/admin/content', icon: FileText },
-        { name: 'Analytics', path: '/admin/analytics', icon: BarChart },
-        { name: 'Security', path: '/admin/security', icon: Shield },
-        { name: 'Notifications', path: '/admin/notifications', icon: Bell },
-        { name: 'Settings', path: '/admin/settings', icon: Settings },
-        { name: 'My Profile', path: '/admin/profile', icon: User },
-        { name: 'Log out', path: '/logout', icon: LogOut },
-    ]
+    const adminLinks = ADMIN_LINKS.concat(ADMIN_BOTTOM_LINKS);
 
     // User links
-    const userLinks = [
-        { name: 'Dashboard', path: '/user', icon: LayoutDashboard },
-        { name: 'Member Verification', path: '/user/verification', icon: CheckCircle },
-        { name: 'Membership Payment', path: '/user/payment', icon: CreditCard },
-        { name: 'Emergency Contact', path: '/user/emergency', icon: AlertCircle },
-        { name: 'Notification', path: '/user/notifications', icon: Bell },
-        { name: 'Support & Help', path: '/user/support', icon: Headphones },
-        { name: 'All Members', path: '/user/members', icon: Users },
-        { name: 'Members Application', path: '/user/applications', icon: FileText },
-        { name: 'Account', path: '/user/account', icon: User },
-        { name: 'Log out', path: '/logout', icon: LogOut },
-    ]
+    const userLinks = USER_LINKS.concat(USER_BOTTOM_LINKS);
 
     // Get links based on user role
     const links = roles.includes('admin') ? adminLinks : userLinks

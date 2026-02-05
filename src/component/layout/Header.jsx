@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Menu, X, ChevronDown, Home, Info, Users, Grid, Calendar, FileText, UserPlus, Mail, LogOut, Bell, HelpCircle, User, CreditCard, Phone } from 'lucide-react';
+import { Menu, X, ChevronDown, LogOut } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import ProfileBox from '../ui/ProfileBox';
+import { PUBLIC_LINKS, USER_LINKS, USER_BOTTOM_LINKS } from '../../constants/navigation';
 
 // Mock user data - in real app, this would come from your auth context/store
 const mockUser = {
@@ -19,46 +20,9 @@ const Header = () => {
     const { isLoggedIn, user, roles } = useAuth();
     const isOnDashboard = location.pathname.startsWith('/user') || location.pathname.startsWith('/admin');
 
-    const navigationLinks = [
-        { name: 'Home', path: '/', icon: Home },
-        { name: 'About Us', path: '/about', icon: Info },
-        { name: 'Leadership', path: '/leadership', icon: Users },
-        { name: 'Platforms & Initiatives', path: '/platforms', icon: Grid },
-        // { name: 'Events & Conferences', path: '/events', icon: Calendar }, // Route does not exist yet
-        {
-            name: 'Resources & Media',
-            path: '/resources', // Parent path
-            icon: FileText,
-            hasDropdown: true,
-            children: [
-                { name: 'Publications', path: '/publications' },
-                { name: 'Gallery', path: '/gallery' },
-            ]
-        },
-        {
-            name: 'Membership',
-            path: '/membership',
-            icon: UserPlus,
-            hasDropdown: true,
-            children: [
-                { name: 'Membership Policy', path: '/membership-policy' },
-                { name: 'Registration', path: '/register' },
-                // { name: 'Search Members', path: '#' },
-            ]
-        },
-        { name: 'Get Involved', path: '/get-involved', icon: UserPlus },
-        { name: 'Contact Us', path: '/contact-us', icon: Mail },
-    ];
+    const navigationLinks = PUBLIC_LINKS;
 
-    const dashboardLinks = [
-        { name: 'Dashboard', path: '/user', icon: Home },
-        { name: 'Member Verification', path: '/user/verification', icon: User },
-        { name: 'Membership Payment', path: '/user/payment', icon: CreditCard },
-        { name: 'Emergency Contact', path: '/user/emergency', icon: Phone },
-        { name: 'Notification', path: '/user/notifications', icon: Bell },
-        { name: 'Support & Help', path: '/user/support', icon: HelpCircle },
-        { name: 'Account', path: '/user/account', icon: User },
-    ];
+    const dashboardLinks = USER_LINKS.concat(USER_BOTTOM_LINKS.filter(l => l.name !== 'Log out'));
 
     // Helper to check if a link is active
     const isActiveLink = (path) => {

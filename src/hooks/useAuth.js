@@ -26,7 +26,6 @@ const useAuth = () => {
     else if (isManager) status = "Manager";
 
     return {
-      token,
       roles,
       isLoggedIn,
       isActive,
@@ -40,7 +39,6 @@ const useAuth = () => {
   }
 
   return {
-    token: null,
     roles: [],
     isLoggedIn: false,
     isActive: false,

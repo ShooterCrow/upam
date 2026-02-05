@@ -16,27 +16,18 @@ import {
     AlertCircle,
     Headphones
 } from 'lucide-react';
+import { ADMIN_LINKS } from '../../../constants/navigation';
 
 const AdminBottomBar = () => {
     const location = useLocation();
     const [showMore, setShowMore] = useState(false);
 
 
-    const mainLinks = [
-        { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
-        { name: 'Verification', path: '/admin/verification', icon: CheckCircle },
-        { name: 'Payment', path: '/admin/payment', icon: CreditCard },
-    ];
-
-    const moreLinks = [
-        { name: 'Emergency', path: '/admin/emergency', icon: AlertCircle },
-        { name: 'Notifications', path: '/admin/notifications', icon: Bell },
-        { name: 'Support', path: '/admin/support', icon: Headphones },
-        { name: 'All Members', path: '/admin/members', icon: Users },
-        { name: 'Applications', path: '/admin/applications', icon: FileText },
-        { name: 'Account', path: '/admin/account', icon: User },
+    const mainLinks = ADMIN_LINKS.slice(0, 3);
+    const moreLinks = ADMIN_LINKS.slice(3).concat([
+        { name: 'Account', path: '/admin/my-profile', icon: User },
         { name: 'Log out', path: '/logout', icon: LogOut, isDanger: true },
-    ];
+    ]);
 
     return (
         <>

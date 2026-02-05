@@ -15,6 +15,7 @@ import {
     Shield,
     Settings
 } from 'lucide-react';
+import { USER_LINKS, USER_BOTTOM_LINKS } from '../../../constants/navigation';
 import useAuth from '../../../hooks/useAuth';
 
 const UserSidebar = () => {
@@ -22,20 +23,8 @@ const UserSidebar = () => {
     const location = useLocation();
 
     // Links matching the mockup
-    const links = [
-        { name: 'Dashboard', path: '/user', icon: LayoutDashboard },
-        { name: 'Manage Users', path: '/user/users', icon: Users },
-        { name: 'Content', path: '/user/content', icon: FileText },
-        { name: 'Analytics', path: '/user/analytics', icon: BarChart },
-        { name: 'Security', path: '/user/security', icon: Shield },
-        { name: 'Notifications', path: '/user/notifications', icon: Bell },
-        { name: 'Settings', path: '/user/settings', icon: Settings },
-    ];
-
-    const bottomLinks = [
-        { name: 'Account', path: '/user/account', icon: User },
-        { name: 'Log out', path: '/logout', icon: LogOut },
-    ];
+    const links = USER_LINKS;
+    const bottomLinks = USER_BOTTOM_LINKS;
 
     return (
         <aside className="fixed top-0 left-0 h-full w-64 bg-white dark:bg-slate-900 border-r border-gray-100 dark:border-slate-800 z-40 hidden lg:flex flex-col font-sans">

@@ -1,11 +1,8 @@
 import React from 'react';
 import { Search, Bell, ChevronDown } from 'lucide-react';
-import useAuth from '../../../hooks/useAuth';
 import ProfileBox from '../../ui/ProfileBox';
 
 const AdminHeader = () => {
-    const { user } = useAuth()
-    console.log(useAuth());
     return (
         <header className="bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800 h-16 fixed top-0 right-0 left-0 lg:left-64 z-30 flex items-center justify-between px-6 transition-all duration-300 font-sans">
             {/* Search Bar */}
