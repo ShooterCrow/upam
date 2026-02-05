@@ -28,54 +28,59 @@ const UPAMCalender = () => {
 
     const events = eventsData?.data || [];
 
-    // Form State for Event
-    const [eventForm, setEventForm] = useState({
+    // Unified Form State as per mockup
+    const [formData, setFormData] = useState({
         title: '',
         description: '',
         date: '',
         category: 'Event',
-        image: ''
+        imageFile: null,
+        imagePreview: null
     });
 
-    // Form State for Announcement
-    const [announcementForm, setAnnouncementForm] = useState({
-        title: '',
-        content: '',
-        category: 'Announcement'
-    });
-
-    const [createEvent, { isLoading: isCreatingEvent, isSuccess: isEventSuccess }] = useCreateEventMutation();
+    const [createEvent, { isLoading: isCreating, isSuccess: isSuccessState }] = useCreateEventMutation();
 
     const handleAddClick = () => {
         const dateStr = selectedDate.toISOString().split('T')[0];
-        setEventForm({ title: '', description: '', date: dateStr, category: 'Event', image: '' });
-        setAnnouncementForm({ title: '', content: '', category: 'Announcement' });
+        setFormData({
+            title: '',
+            description: '',
+            date: dateStr,
+            category: 'Event',
+            imageFile: null,
+            imagePreview: null
+        });
         setViewMode('add');
     };
 
-    const handleEventSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await createEvent(eventForm).unwrap();
-            refetch();
-            // Optional: reset or show success
-        } catch (err) {
-            console.error('Failed to create event:', err);
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setFormData(prev => ({
+                ...prev,
+                imageFile: file,
+                imagePreview: URL.createObjectURL(file)
+            }));
         }
     };
 
-    const handleAnnouncementSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await createEvent({
-                title: announcementForm.title,
-                description: announcementForm.content,
-                date: selectedDate.toISOString().split('T')[0],
-                category: 'Announcement'
-            }).unwrap();
+            const submitData = new FormData();
+            submitData.append('title', formData.title);
+            submitData.append('description', formData.description);
+            submitData.append('date', formData.date);
+            submitData.append('category', formData.category);
+            if (formData.imageFile) {
+                submitData.append('image', formData.imageFile);
+            }
+
+            await createEvent(submitData).unwrap();
             refetch();
+            setViewMode('calendar');
         } catch (err) {
-            console.error('Failed to create announcement:', err);
+            console.error('Failed to create event/announcement:', err);
         }
     };
 
@@ -354,110 +359,120 @@ const UPAMCalender = () => {
                                     </button>
                                 </div>
 
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-                                    {/* Create Event Form */}
-                                    <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm space-y-6">
-                                        <h4 className="font-bold text-slate-800 flex items-center gap-2">
-                                            <CalendarIcon size={20} className="text-blue-500" />
-                                            Create New Event
-                                        </h4>
+                                <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                                    <div className="space-y-6 bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+                                        <div className="space-y-2">
+                                            <label className="text-sm font-bold text-slate-700">Event Title</label>
+                                            <input
+                                                type="text"
+                                                required
+                                                className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-blue-500 transition-all font-medium"
+                                                placeholder="Enter event title"
+                                                value={formData.title}
+                                                onChange={e => setFormData({ ...formData, title: e.target.value })}
+                                            />
+                                        </div>
 
-                                        <form onSubmit={handleEventSubmit} className="space-y-5">
+                                        <div className="space-y-2">
+                                            <label className="text-sm font-bold text-slate-700">Event Description</label>
+                                            <textarea
+                                                rows="4"
+                                                required
+                                                className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-blue-500 transition-all resize-none"
+                                                placeholder="Detailed description..."
+                                                value={formData.description}
+                                                onChange={e => setFormData({ ...formData, description: e.target.value })}
+                                            ></textarea>
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-4">
                                             <div className="space-y-2">
-                                                <label className="text-xs font-bold text-slate-500 uppercase">Event Title</label>
+                                                <label className="text-sm font-bold text-slate-700">Event Date</label>
                                                 <input
-                                                    required
-                                                    type="text"
-                                                    placeholder="e.g. 1st Global Meeting 2026"
-                                                    className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl focus:ring-2 focus:ring-blue-500 transition-all"
-                                                    value={eventForm.title}
-                                                    onChange={e => setEventForm({ ...eventForm, title: e.target.value })}
-                                                />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <label className="text-xs font-bold text-slate-500 uppercase">Description</label>
-                                                <textarea
-                                                    required
-                                                    rows="3"
-                                                    placeholder="Describe the objective of this event..."
-                                                    className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl focus:ring-2 focus:ring-blue-500 transition-all resize-none"
-                                                    value={eventForm.description}
-                                                    onChange={e => setEventForm({ ...eventForm, description: e.target.value })}
-                                                />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <label className="text-xs font-bold text-slate-500 uppercase">Event Date</label>
-                                                <input
-                                                    required
                                                     type="date"
-                                                    className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl focus:ring-2 focus:ring-blue-500 transition-all"
-                                                    value={eventForm.date}
-                                                    onChange={e => setEventForm({ ...eventForm, date: e.target.value })}
+                                                    required
+                                                    className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-blue-500 transition-all"
+                                                    value={formData.date}
+                                                    onChange={e => setFormData({ ...formData, date: e.target.value })}
                                                 />
                                             </div>
-
-                                            <div className="pt-2">
-                                                <button
-                                                    type="submit"
-                                                    disabled={isCreatingEvent}
-                                                    className="w-full py-4 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold shadow-lg shadow-red-100 transition-all disabled:opacity-50"
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-bold text-slate-700">Category</label>
+                                                <select
+                                                    className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-blue-500 transition-all font-medium cursor-pointer"
+                                                    value={formData.category}
+                                                    onChange={e => setFormData({ ...formData, category: e.target.value })}
                                                 >
-                                                    {isCreatingEvent ? 'Adding...' : 'Add Event'}
-                                                </button>
+                                                    <option>Event</option>
+                                                    <option>Announcement</option>
+                                                </select>
                                             </div>
-                                        </form>
+                                        </div>
+
+                                        <div className="flex gap-4 pt-4">
+                                            <button
+                                                type="button"
+                                                onClick={() => setViewMode('calendar')}
+                                                className="flex-1 py-4 border border-slate-200 rounded-xl font-bold text-slate-500 hover:bg-slate-50 transition-all"
+                                            >
+                                                Cancel
+                                            </button>
+                                            <button
+                                                type="submit"
+                                                disabled={isCreating}
+                                                className="flex-1 py-4 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold shadow-lg shadow-red-100 transition-all disabled:opacity-50"
+                                            >
+                                                {isCreating ? 'Creating...' : 'Add Event'}
+                                            </button>
+                                        </div>
                                     </div>
 
-                                    {/* Create Announcement & Image Upload */}
                                     <div className="space-y-6">
-                                        {/* Announcement Card */}
-                                        <div className="bg-white p-8 rounded-3xl border border-gray-50 shadow-sm space-y-6">
-                                            <h4 className="font-bold text-slate-800 flex items-center gap-2">
-                                                <MessageSquare size={20} className="text-red-500" />
-                                                Create Announcement
-                                            </h4>
-                                            <form onSubmit={handleAnnouncementSubmit} className="space-y-5">
-                                                <div className="space-y-2">
-                                                    <label className="text-xs font-bold text-slate-500 uppercase">Title</label>
-                                                    <input
-                                                        required
-                                                        type="text"
-                                                        placeholder="Enter announcement title..."
-                                                        className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl focus:ring-2 focus:ring-red-500 transition-all"
-                                                        value={announcementForm.title}
-                                                        onChange={e => setAnnouncementForm({ ...announcementForm, title: e.target.value })}
-                                                    />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-xs font-bold text-slate-500 uppercase">Content</label>
-                                                    <textarea
-                                                        required
-                                                        rows="3"
-                                                        placeholder="Enter announcement content..."
-                                                        className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl focus:ring-2 focus:ring-red-500 transition-all resize-none"
-                                                        value={announcementForm.content}
-                                                        onChange={e => setAnnouncementForm({ ...announcementForm, content: e.target.value })}
-                                                    />
-                                                </div>
-                                                <button
-                                                    type="submit"
-                                                    className="w-full py-4 bg-slate-800 hover:bg-slate-900 text-white rounded-xl font-bold transition-all"
-                                                >
-                                                    Create Announcement
-                                                </button>
-                                            </form>
+                                        <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm space-y-6">
+                                            <h4 className="text-sm font-bold text-slate-700">Upload Image</h4>
+                                            <input
+                                                type="file"
+                                                id="eventImage"
+                                                className="hidden"
+                                                accept="image/*"
+                                                onChange={handleFileChange}
+                                            />
+                                            <label
+                                                htmlFor="eventImage"
+                                                className="w-full aspect-video border-2 border-dashed border-slate-200 rounded-3xl flex flex-col items-center justify-center p-8 text-center group hover:border-blue-500 transition-all cursor-pointer relative overflow-hidden bg-slate-50"
+                                            >
+                                                {formData.imagePreview ? (
+                                                    <img src={formData.imagePreview} className="absolute inset-0 w-full h-full object-cover" alt="Preview" />
+                                                ) : (
+                                                    <div className="flex flex-col items-center gap-3">
+                                                        <div className="p-4 bg-white rounded-full shadow-sm text-slate-400 group-hover:text-blue-500 transition-colors">
+                                                            <ImageIcon size={32} />
+                                                        </div>
+                                                        <div>
+                                                            <p className="font-bold text-slate-700">Upload Banner Image</p>
+                                                            <p className="text-xs text-slate-400 mt-1">Drag and drop or click to choose files</p>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </label>
                                         </div>
 
-                                        {/* Upload Hero Card */}
-                                        <div className="group bg-slate-50 border-2 border-dashed border-slate-200 rounded-3xl p-8 flex flex-col items-center justify-center text-center hover:border-blue-400 transition-colors cursor-pointer min-h-[200px]">
-                                            <div className="bg-white p-4 rounded-2xl shadow-sm text-slate-300 group-hover:text-blue-500 group-hover:scale-110 transition-all mb-4">
-                                                <ImageIcon size={32} />
+                                        {/* Announcement Preview Logic */}
+                                        <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+                                            <h4 className="text-sm font-bold text-slate-700 mb-4">Preview</h4>
+                                            <div className={`p-6 rounded-2xl border ${formData.category === 'Announcement' ? 'bg-red-50/50 border-red-100' : 'bg-blue-50/50 border-blue-100'}`}>
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <div className={`w-2 h-2 rounded-full ${formData.category === 'Announcement' ? 'bg-red-600' : 'bg-blue-600'}`} />
+                                                    <span className={`text-[10px] uppercase font-bold tracking-wider ${formData.category === 'Announcement' ? 'text-red-600' : 'text-blue-600'}`}>
+                                                        {formData.category}
+                                                    </span>
+                                                </div>
+                                                <h5 className="font-bold text-slate-800 text-sm truncate">{formData.title || 'Draft Title'}</h5>
+                                                <p className="text-xs text-slate-500 mt-1 line-clamp-2">{formData.description || 'Description will appear here...'}</p>
                                             </div>
-                                            <h5 className="font-bold text-slate-700">Upload Banner Image</h5>
-                                            <p className="text-[10px] text-slate-400 mt-1 uppercase tracking-wider">Drag and drop or click to browse</p>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </motion.div>
                         )}
                     </AnimatePresence>
