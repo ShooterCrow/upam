@@ -316,7 +316,7 @@ const Index = () => {
                                         </div>
                                     </div>
                                 ))}
-                                <div className="absolute bottom-6 right-6 flex gap-2 z-10">
+                                <div className="absolute top-6 right-6 flex gap-2 z-10">
                                     {focusAreas.map((_, index) => (
                                         <button
                                             key={index}
