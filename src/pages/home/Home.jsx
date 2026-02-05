@@ -149,7 +149,7 @@ const Index = () => {
                         {/* Mobile Layout (hidden on desktop) */}
                         <div className="flex flex-col gap-8 lg:hidden">
                             <div className="flex flex-col gap-3">
-                                <p className="text-sm font-medium text-upam-red tracking-wider uppercase">THE MOVEMENT</p>
+                                <p className="text-xs font-medium text-upam-red tracking-wider uppercase">THE MOVEMENT</p>
                                 <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 tracking-tight">
                                     The Spirit of Pan-Africanism Lives On
                                 </h2>
@@ -178,7 +178,7 @@ const Index = () => {
                         <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-16">
                             <div className="flex flex-col gap-8 lg:gap-10">
                                 <div className="flex flex-col gap-3">
-                                    <p className="text-sm font-medium text-upam-red tracking-wider uppercase">THE MOVEMENT</p>
+                                    <p className="text-xs font-medium text-upam-red tracking-wider uppercase">THE MOVEMENT</p>
                                     <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 tracking-tight">
                                         The Spirit of Pan-Africanism Lives On
                                     </h2>
