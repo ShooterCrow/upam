@@ -1,10 +1,15 @@
 import React from 'react';
 import { Search, Bell, ChevronDown } from 'lucide-react';
 import ProfileBox from '../../ui/ProfileBox';
+import { Link } from 'react-router-dom';
 
 const UserHeader = () => {
     return (
         <header className="bg-white border-b border-gray-100 h-16 fixed top-0 right-0 left-0 lg:left-64 z-30 flex items-center justify-between px-6 transition-all duration-300 font-sans">
+            <Link to="/" className="flex items-center gap-2 lg:hidden">
+                {/* Placeholder Logo */}
+                <img src="/logoupam.png" alt="Logo" />
+            </Link>
             {/* Search Bar */}
             <div className="hidden md:flex items-center w-96 relative">
                 <Search className="absolute left-3 text-slate-400" size={18} />
