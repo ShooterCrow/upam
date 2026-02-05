@@ -6,13 +6,19 @@ import Header from '../../component/layout/Header';
 import { useState } from "react";
 import Newsletter from '../../component/ui/NewsLetter';
 import FAQ from '../../component/ui/FAQ';
+import { Link } from 'react-router-dom';
 
-const ReadMore = ({ text }) => {
+const ReadMore = ({ text, newTab, link }) => {
     return (
-        <button className="flex items-center gap-2 text-sm font-medium text-upam-red hover:text-upam-red/80 transition-colors group">
-            {text}
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-        </button>
+        <>
+            {newTab ? <a href={link} target="_blank" rel="noopener noreferrer" className="cursor-pointer flex items-center gap-2 text-sm font-medium text-upam-red hover:text-upam-red/80 transition-colors group">
+                {text}
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </a> : <Link to={link} className="cursor-pointer flex items-center gap-2 text-sm font-medium text-upam-red hover:text-upam-red/80 transition-colors group">
+                {text}
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Link>}
+        </>
     )
 }
 // Main Hero Component
@@ -235,10 +241,7 @@ const Index = () => {
                                 <p className="text-sm text-gray-600 leading-relaxed">
                                     UPAM is a continental evolution and an all-African organization, seeking to enhance the unification of African nations as a whole and reclaiming its hope for the destined future. To encourage and strengthen bonds of solidarity between all people of African descent, Foster the development and unity of Africa, to enhanced independence.
                                 </p>
-                                <button className="flex items-center gap-2 text-sm font-medium text-upam-red hover:text-upam-red/80 transition-colors self-start group">
-                                    Read more
-                                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                                </button>
+                                <ReadMore link={"/about"} text={"Read More"} />
                             </div>
                         </div>
 
@@ -263,10 +266,7 @@ const Index = () => {
                                 <p className="text-sm lg:text-base text-gray-600 leading-relaxed">
                                     UPAM is a continental evolution and an all-African organization, seeking to enhance the unification of African nations as a whole and reclaiming its hope for the destined future. To encourage and strengthen bonds of solidarity between all people of African descent, Foster the development and unity of Africa, to enhanced independence.
                                 </p>
-                                <button className="flex items-center gap-2 text-sm font-medium text-upam-red hover:text-upam-red/80 transition-colors self-start group">
-                                    Read more
-                                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                                </button>
+                                <ReadMore link={"/about"} text={"Read More"} />
                             </div>
                         </div>
                     </section>
@@ -984,7 +984,7 @@ const Index = () => {
                                     </p>
                                 </div>
                             </div>
-                            <ReadMore text={"Read WNN Africa News"} />
+                            <ReadMore link={"http://wnn.africa/"} newTab={true} text={"Read WNN Africa News"} />
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -992,25 +992,28 @@ const Index = () => {
                                 {
                                     title: "Nigeria Defence Minister Resigns, Ex-Military Chief Musa Poised to Succeed",
                                     desc: "ABUJA: Nigeria's Defence Minister, Alhaji Mohammed Badaru Abubakar, has officially resigned from his position, citing health reasons...",
-                                    image: "/wnn_Logo.png"
+                                    image: "https://wnn.africa/wp-content/uploads/2025/12/Mohammed-Badaru-Abubakar-Nigeria-Defence-Minister.jpeg",
+                                    link: "https://wnn.africa/2025/12/01/nigeria-defence-minister-badaru-abubakar-resigns-musa-successor-2025/"
                                 },
                                 {
                                     title: "Africa's Top Climate Negotiator Says 'No Reverse Gear' on Commitments",
                                     desc: "NAIROBI: The world has no choice but to press on with climate commitments despite the United States pulling out of a key international accord...",
-                                    image: "/wnn_Logo.png"
+                                    image: "https://wnn.africa/wp-content/uploads/2025/04/Africa-Climate.jpeg",
+                                    link: "https://wnn.africa/2025/04/05/africas-top-climate-negotiator-says-no-reverse-gear-on-commitments/"
                                 },
                                 {
                                     title: "Ukraine, US Sign Minerals Deal Sought by Trump",
                                     desc: "KYIV/WASHINGTON: Ukraine and the U.S. on Wednesday signed a deal heavily promoted by U.S. President Donald Trump that will give the United States...",
-                                    image: "/wnn_Logo.png"
+                                    image: "https://wnn.africa/wp-content/uploads/2025/05/Ukraine-US-.jpeg",
+                                    link: "https://wnn.africa/2025/05/01/ukraine-us-sign-minerals-deal-sought-by-trump/"
                                 }
                             ].map((news, index) => (
-                                <div key={index} className="flex flex-col gap-6 group cursor-pointer">
-                                    <div className="relative h-[250px] lg:h-[300px] rounded-xl overflow-hidden shadow-sm hover: transition-shadow duration-300">
+                                <a href={news.link} target='_blank' key={index} className="flex flex-col gap-6 group cursor-pointer">
+                                    <div className="relative h-[250px] lg:h-[300px] rounded-xl overflow-hidden hover: transition-shadow duration-300">
                                         <img
                                             src={news.image}
                                             alt={news.title}
-                                            className="w-full h-full object-contain group-hover:scale-95 transition-transform duration-300"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                         />
                                     </div>
                                     <div className="flex flex-col gap-4">
@@ -1021,7 +1024,7 @@ const Index = () => {
                                             {news.desc}
                                         </p>
                                     </div>
-                                </div>
+                                </a>
                             ))}
                         </div>
                     </section>
