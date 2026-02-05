@@ -16,13 +16,33 @@ const Curved3DCarousel = () => {
         gsap.set(ringRef.current, { rotationY: 180 });
 
         // Set up each image in the ring
+        // First, define your image array
+        const myImages = [
+            'https://api.builder.io/api/v1/image/assets/TEMP/65edfbd6618650ee6c39d6d3e581e169f2567595?width=700',
+            'https://api.builder.io/api/v1/image/assets/TEMP/0939de8e4e557c4e75f688148d4757b3f0e275bb?width=700',
+            'https://api.builder.io/api/v1/image/assets/TEMP/b3564abd0e1fb1dfb19649f1092e28adc8a02548?width=700',
+            'https://api.builder.io/api/v1/image/assets/TEMP/7fe6a4a6f31d3a5de91463aff776e511431d8ec3?width=700',
+            '/constructionworker.png',
+            'https://api.builder.io/api/v1/image/assets/TEMP/65edfbd6618650ee6c39d6d3e581e169f2567595?width=700',
+            'https://api.builder.io/api/v1/image/assets/TEMP/0939de8e4e557c4e75f688148d4757b3f0e275bb?width=700',
+            'https://api.builder.io/api/v1/image/assets/TEMP/b3564abd0e1fb1dfb19649f1092e28adc8a02548?width=700',
+            'https://api.builder.io/api/v1/image/assets/TEMP/7fe6a4a6f31d3a5de91463aff776e511431d8ec3?width=700',
+            '/constructionworker.png',
+            // ... add more images as needed
+        ];
+
         const images = gsap.utils.toArray('.ring-img');
+        console.log(images);
+
         images.forEach((img, i) => {
+            // Use your custom image if available, otherwise fall back to placeholder
+            const imageUrl = myImages[i] || `https://picsum.photos/id/${i + 32}/700/300/`;
+
             gsap.set(img, {
                 rotateY: i * -36,
                 transformOrigin: '50% 50% 500px',
                 z: -500,
-                backgroundImage: `url(https://picsum.photos/id/${i + 32}/700/300/)`,
+                backgroundImage: `url(${imageUrl})`,
                 backgroundPosition: getBgPosition(i),
                 backfaceVisibility: 'hidden'
             });
