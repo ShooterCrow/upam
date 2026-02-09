@@ -22,7 +22,7 @@ const Layout = () => {
             // isLoggedIn={isLoggedIn}
             // isOnDashboard={isOnDashboard}
             />
-            <main className={`${noPaddingComponents.includes(pathname) ? '' : 'pt-12 lg:pt-20'}`}>
+            <main className={`${noPaddingComponents.includes(pathname) ? '' : 'pt-[160px] lg:pt-[180px]'}`}>
                 <Outlet />
             </main>
             <Footer />

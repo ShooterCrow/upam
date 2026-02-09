@@ -69,59 +69,32 @@ const About = () => {
                     </div>
 
                     {/* Image Grid */}
-                    <div className="hidden lg:flex flex-col lg:flex-row justify-between items-center gap-6 lg:gap-8 w-full">
+                    <div className="flex flex-row justify-between items-center gap-2 sm:gap-4 lg:gap-8 w-full">
                         {/* Left Group */}
-                        <div className="flex flex-col sm:flex-row items-center gap-4 lg:gap-0">
+                        <div className="flex flex-row items-center gap-0 flex-[1.33]">
                             <img
                                 src="https://api.builder.io/api/v1/image/assets/TEMP/7fe6a4a6f31d3a5de91463aff776e511431d8ec3?width=520"
                                 alt="UPAM team meeting"
-                                className="w-full sm:w-[200px] lg:w-[260px] h-auto lg:h-[340px] object-cover"
+                                className="w-[31.6%] h-auto object-cover"
                             />
                             <img
                                 src="https://api.builder.io/api/v1/image/assets/TEMP/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf?width=1126"
                                 alt="UPAM conference"
-                                className="w-full sm:w-[400px] lg:w-[563px] h-auto lg:h-[471px] object-cover"
+                                className="w-[68.4%] h-auto object-cover"
                             />
                         </div>
 
                         {/* Right Group */}
-                        <div className="flex flex-col sm:flex-row items-center gap-4 lg:gap-0">
+                        <div className="flex flex-row items-center gap-0 flex-1">
                             <img
                                 src="https://api.builder.io/api/v1/image/assets/TEMP/0939de8e4e557c4e75f688148d4757b3f0e275bb?width=520"
                                 alt="Community members"
-                                className="w-full sm:w-[200px] lg:w-[260px] h-auto lg:h-[340px] object-cover"
+                                className="w-[42.1%] h-auto object-cover"
                             />
                             <img
                                 src="https://api.builder.io/api/v1/image/assets/TEMP/65edfbd6618650ee6c39d6d3e581e169f2567595?width=714"
                                 alt="Cultural celebration"
-                                className="w-full sm:w-[280px] lg:w-[357px] h-auto lg:h-[422px] object-cover"
-                            />
-                        </div>
-                    </div>
-
-                    <div className=" lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/7fe6a4a6f31d3a5de91463aff776e511431d8ec3?width=520"
-                                alt="UPAM team meeting"
-                                className="w-full h-48 md:h-64 lg:h-80 object-cover rounded-lg"
-                            />
-                            <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf?width=1126"
-                                alt="UPAM conference"
-                                className="w-full h-48 md:h-64 lg:h-80 object-cover rounded-lg sm:col-span-2"
-                            />
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/0939de8e4e557c4e75f688148d4757b3f0e275bb?width=520"
-                                alt="Community members"
-                                className="w-full h-48 md:h-64 lg:h-80 object-cover rounded-lg"
-                            />
-                            <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/65edfbd6618650ee6c39d6d3e581e169f2567595?width=714"
-                                alt="Cultural celebration"
-                                className="w-full h-48 md:h-64 lg:h-80 object-cover rounded-lg"
+                                className="w-[57.9%] h-auto object-cover"
                             />
                         </div>
                     </div>

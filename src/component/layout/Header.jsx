@@ -50,7 +50,7 @@ const Header = () => {
     };
 
     return (
-        <div ref={headerRef}>
+        <div ref={headerRef} className="fixed top-0 left-0 w-full z-[100]">
             {/* Desktop Header */}
             <header className="hidden lg:block bg-gray-200 shadow-sm mb-0">
                 <div className="max-w-7xl mx-auto px-6 py-4">
