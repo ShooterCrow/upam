@@ -39,7 +39,7 @@ const AdminDashboard = () => {
                     {/* Welcome Banner */}
                     <div className="relative overflow-hidden bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8 lg:p-12 min-h-[300px] flex flex-col justify-center border border-blue-100/50">
                         {/* <div className='absolute w-[100px] h-[100px] bg-red-300 opacity-50 rounded-full'></div> */}
-                        <div className="absolute left-40 w-[150px] h-[150px] rounded-full 
+                        <div className="absolute left-5 lg:left-40 w-[150px] h-[150px] rounded-full 
                         bg-gradient-to-r from-red-200 via-red-300 to-red-400
                         shadow-[0_0_60px_20px_rgba(200,0,0,0.3)]
                         animate-pulse blur-[20px]"></div>

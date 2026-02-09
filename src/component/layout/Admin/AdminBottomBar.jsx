@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLogoutMutation } from '../../../pages/authenticationPages/authApiSlice';
 import {
     LayoutDashboard,
     Users,
@@ -20,7 +21,18 @@ import { ADMIN_LINKS } from '../../../constants/navigation';
 
 const AdminBottomBar = () => {
     const location = useLocation();
+    const navigate = useNavigate();
+    const [logout] = useLogoutMutation();
     const [showMore, setShowMore] = useState(false);
+
+    const handleLogout = async () => {
+        try {
+            await logout().unwrap();
+            navigate('/login');
+        } catch (err) {
+            console.error('Failed to logout:', err);
+        }
+    };
 
 
     const mainLinks = ADMIN_LINKS.slice(0, 3);
@@ -43,7 +55,16 @@ const AdminBottomBar = () => {
                 <div className="p-2 grid grid-cols-2 gap-2 max-h-[60vh] overflow-y-auto">
                     {moreLinks.map((link) => {
                         const Icon = link.icon;
-                        return (
+                        return link.path === '/logout' ? (
+                            <button
+                                key={link.path}
+                                onClick={handleLogout}
+                                className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors text-red-600 hover:bg-red-50 w-full"
+                            >
+                                <Icon size={18} />
+                                {link.name}
+                            </button>
+                        ) : (
                             <Link
                                 key={link.path}
                                 to={link.path}

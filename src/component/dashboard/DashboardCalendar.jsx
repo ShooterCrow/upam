@@ -1,28 +1,12 @@
 import React, { useState } from 'react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, ArrowRight } from 'lucide-react';
-import './DashboardCalendar.css';
+import { Calendar as CalendarIcon, ArrowRight } from 'lucide-react';
+import CommunityCalendar from '../calendar/CommunityCalendar';
 import { useGetEventsQuery } from '../../pages/UserAdminPages/admin/calendarApiSlice';
 
 const DashboardCalendar = () => {
     const [date, setDate] = useState(new Date());
-    const [activeMonth, setActiveMonth] = useState(new Date());
-
     const { data, isLoading } = useGetEventsQuery();
-    const events = data?.data
-
-    const handlePrevMonth = () => {
-        const prevMonth = new Date(activeMonth.getFullYear(), activeMonth.getMonth() - 1, 1);
-        setActiveMonth(prevMonth);
-    };
-
-    const handleNextMonth = () => {
-        const nextMonth = new Date(activeMonth.getFullYear(), activeMonth.getMonth() + 1, 1);
-        setActiveMonth(nextMonth);
-    };
-
-    const monthYear = activeMonth.toLocaleString('default', { month: 'long', year: 'numeric' });
+    const events = data?.data;
 
     // Find event for selected date
     const selectedDateString = date.toDateString();
@@ -34,51 +18,14 @@ const DashboardCalendar = () => {
 
     const displayEvent = events ? eventOnSelectedDate || upcomingEvent || events[0] : null;
 
-    // Function to check if a date has an event
-    const hasEvent = ({ date, view }) => {
-        if (view === 'month' && events) {
-            return events.some(event => new Date(event.date).toDateString() === date.toDateString());
-        }
-    };
-
     return (
         <div className="bg-white rounded-2xl border border-gray-50 overflow-hidden flex flex-col xl:flex-row justify-center items-center">
-            <div className="p-6 flex-2">
-                <div className="flex justify-between items-center mb-6">
-                    <h3 className="font-bold text-slate-800">{monthYear}</h3>
-                    <div className="flex gap-2">
-                        <button
-                            onClick={handlePrevMonth}
-                            className="p-1 hover:bg-gray-100 rounded-full transition-colors"
-                        >
-                            <ChevronLeft size={20} className="text-slate-400" />
-                        </button>
-                        <button
-                            onClick={handleNextMonth}
-                            className="p-1 hover:bg-gray-100 rounded-full transition-colors"
-                        >
-                            <ChevronRight size={20} className="text-slate-400" />
-                        </button>
-                    </div>
-                </div>
-
-                <div className="calendar-container">
-                    <Calendar
-                        onChange={setDate}
-                        value={date}
-                        activeStartDate={activeMonth}
-                        onActiveStartDateChange={({ activeStartDate }) => setActiveMonth(activeStartDate)}
-                        nextLabel={null}
-                        prevLabel={null}
-                        next2Label={null}
-                        prev2Label={null}
-                        formatShortWeekday={(locale, date) => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][date.getDay()]}
-                        showNavigation={false}
-                        tileClassName={({ date, view }) =>
-                            hasEvent({ date, view }) ? 'has-event' : null
-                        }
-                    />
-                </div>
+            <div className="p-6 flex-2 w-full">
+                <CommunityCalendar
+                    selectedDate={date}
+                    onDateChange={setDate}
+                    events={events}
+                />
             </div>
 
             <div className="h-fit bottom-0 mb-auto bg-slate-50 p-6 m-4 my-auto rounded-xl flex-1 w-full max-w-[300px]">

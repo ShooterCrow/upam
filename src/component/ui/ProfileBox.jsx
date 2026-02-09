@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
+import { useLogoutMutation } from '../../pages/authenticationPages/authApiSlice'
 import {
     ChevronDown,
     LayoutDashboard,
@@ -21,8 +22,19 @@ import { ADMIN_LINKS, ADMIN_BOTTOM_LINKS, USER_LINKS, USER_BOTTOM_LINKS } from '
 
 const ProfileBox = ({ show = false }) => {
     const { user, roles } = useAuth()
+    const navigate = useNavigate()
+    const [logout] = useLogoutMutation()
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const dropdownRef = useRef(null)
+
+    const handleLogout = async () => {
+        try {
+            await logout().unwrap()
+            navigate('/login')
+        } catch (err) {
+            console.error('Failed to logout:', err)
+        }
+    }
 
     // Admin links
     const adminLinks = ADMIN_LINKS.concat(ADMIN_BOTTOM_LINKS);
@@ -53,7 +65,7 @@ const ProfileBox = ({ show = false }) => {
             >
                 <div className="w-9 h-9 rounded-full bg-slate-200 overflow-hidden border border-gray-200">
                     <img
-                        src="https://api.dicebear.com/7.x/avataaars/svg?seed=Admin"
+                        src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.firstName}`}
                         alt="Profile"
                         className="w-full h-full object-cover"
                     />
@@ -78,24 +90,34 @@ const ProfileBox = ({ show = false }) => {
                         {links.map((link, index) => {
                             const Icon = link.icon
                             const isLogout = link.path === '/logout'
-                            const isDivider = isLogout || (user?.role === 'admin' && link.name === 'My Profile') || (user?.role !== 'admin' && link.name === 'Account')
+                            const isDivider = isLogout || (user?.role === 'admin' && link.name === 'Account') || (user?.role !== 'admin' && link.name === 'Account')
 
                             return (
                                 <React.Fragment key={link.path}>
                                     {isDivider && index > 0 && (
                                         <div className="my-1 border-t border-gray-100" />
                                     )}
-                                    <Link
-                                        to={link.path}
-                                        onClick={() => setIsDropdownOpen(false)}
-                                        className={`flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-colors ${isLogout
-                                            ? 'text-red-600 hover:bg-red-50'
-                                            : 'text-slate-700 hover:bg-slate-50 hover:text-red-600'
-                                            }`}
-                                    >
-                                        <Icon size={16} />
-                                        {link.name}
-                                    </Link>
+                                    {isLogout ? (
+                                        <button
+                                            onClick={handleLogout}
+                                            className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-colors text-red-600 hover:bg-red-50 w-full text-left"
+                                        >
+                                            <Icon size={16} />
+                                            {link.name}
+                                        </button>
+                                    ) : (
+                                        <Link
+                                            to={link.path}
+                                            onClick={() => setIsDropdownOpen(false)}
+                                            className={`flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-colors ${isLogout
+                                                ? 'text-red-600 hover:bg-red-50'
+                                                : 'text-slate-700 hover:bg-slate-50 hover:text-red-600'
+                                                }`}
+                                        >
+                                            <Icon size={16} />
+                                            {link.name}
+                                        </Link>
+                                    )}
                                 </React.Fragment>
                             )
                         })}

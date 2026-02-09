@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Menu, X, ChevronDown, LogOut } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLogoutMutation } from '../../pages/authenticationPages/authApiSlice';
 import useAuth from '../../hooks/useAuth';
 import ProfileBox from '../ui/ProfileBox';
 import { PUBLIC_LINKS, USER_LINKS, USER_BOTTOM_LINKS } from '../../constants/navigation';
@@ -17,6 +18,8 @@ const Header = () => {
     const [openDropdown, setOpenDropdown] = useState(null);
     const headerRef = useRef(null);
     const location = useLocation();
+    const navigate = useNavigate();
+    const [logout] = useLogoutMutation();
     const { isLoggedIn, user, roles } = useAuth();
     const isOnDashboard = location.pathname.startsWith('/user') || location.pathname.startsWith('/admin');
 
@@ -47,6 +50,16 @@ const Header = () => {
 
     const toggleDropdown = (name) => {
         setOpenDropdown(openDropdown === name ? null : name);
+    };
+
+    const handleLogout = async () => {
+        try {
+            await logout().unwrap();
+            setIsMobileMenuOpen(false);
+            navigate('/login');
+        } catch (err) {
+            console.error('Failed to logout:', err);
+        }
     };
 
     return (
@@ -171,7 +184,7 @@ const Header = () => {
                                 <div className="flex items-center gap-3 mb-2">
                                     <div className="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center">
 
-                                        <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.name}`} alt={user?.name} className="w-full h-full rounded-full" />
+                                        <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.firstName}`} alt={user?.name} className="w-full h-full rounded-full" />
 
                                     </div>
                                     <div>
@@ -205,7 +218,10 @@ const Header = () => {
                                             </Link>
                                         );
                                     })}
-                                    <button className="flex items-center gap-3 px-4 py-3 text-gray-800 hover:bg-gray-100 w-full rounded transition-colors">
+                                    <button
+                                        onClick={handleLogout}
+                                        className="flex items-center gap-3 px-4 py-3 text-gray-800 hover:bg-gray-100 w-full rounded transition-colors"
+                                    >
                                         <LogOut size={20} />
                                         Log out
                                     </button>

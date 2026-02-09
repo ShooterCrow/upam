@@ -13,14 +13,38 @@ import {
     LogOut,
     BarChart,
     Shield,
-    Settings
+    Settings,
+    Copy,
+    Check
 } from 'lucide-react';
 import { USER_LINKS, USER_BOTTOM_LINKS } from '../../../constants/navigation';
 import useAuth from '../../../hooks/useAuth';
+import { useLogoutMutation } from '../../../pages/authenticationPages/authApiSlice';
+import { useNavigate } from 'react-router-dom';
 
 const UserSidebar = () => {
     const { user } = useAuth()
     const location = useLocation();
+    const navigate = useNavigate();
+    const [logout] = useLogoutMutation();
+    const [copied, setCopied] = React.useState(false);
+
+    const handleLogout = async () => {
+        try {
+            await logout().unwrap();
+            navigate('/login');
+        } catch (err) {
+            console.error('Failed to logout:', err);
+        }
+    };
+
+    const handleCopy = () => {
+        if (user?.id) {
+            navigator.clipboard.writeText(user.id);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        }
+    };
 
     // Links matching the mockup
     const links = USER_LINKS;
@@ -37,8 +61,21 @@ const UserSidebar = () => {
             </div>
 
             {/* User ID Section */}
-            <div className="px-6">
-                <p className="text-xs font-semibold text-slate-700">ID: {user?.id}</p>
+            <div className="px-6 mb-2">
+                <button
+                    onClick={handleCopy}
+                    className="flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-red-600 transition-colors group"
+                    title="Copy ID"
+                >
+                    <span className="bg-slate-50 px-2 py-1 rounded border border-gray-100 group-hover:border-red-100">
+                        ID: {user?.id}
+                    </span>
+                    {copied ? (
+                        <Check size={14} className="text-green-500" />
+                    ) : (
+                        <Copy size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                    )}
+                </button>
             </div>
 
             {/* Main Navigation */}
@@ -52,7 +89,7 @@ const UserSidebar = () => {
                             to={link.path}
                             className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${isActive
                                 ? 'bg-red-600 text-white shadow-sm'
-                                : 'text-slate-500 hover:bg-slate-50 hover:text-red-500'
+                                : 'text-gray-900 hover:bg-slate-50 hover:text-red-500'
                                 }`}
                         >
                             <Icon size={18} />
@@ -66,7 +103,16 @@ const UserSidebar = () => {
             <div className="p-4 border-t border-gray-50 space-y-1">
                 {bottomLinks.map((link) => {
                     const Icon = link.icon;
-                    return (
+                    return link.path === '/logout' ? (
+                        <button
+                            key={link.path}
+                            onClick={handleLogout}
+                            className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-red-500 transition-colors w-full"
+                        >
+                            <Icon size={18} />
+                            {link.name}
+                        </button>
+                    ) : (
                         <Link
                             key={link.path}
                             to={link.path}

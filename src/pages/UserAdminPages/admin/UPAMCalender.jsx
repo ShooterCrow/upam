@@ -17,6 +17,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGetEventsQuery, useCreateEventMutation } from './calendarApiSlice';
 import useAuth from '../../../hooks/useAuth';
+import CommunityCalendar from '../../../component/calendar/CommunityCalendar';
 
 const UPAMCalender = () => {
     const [selectedDate, setSelectedDate] = useState(new Date(2026, 1, 12)); // Feb 12, 2026
@@ -112,35 +113,14 @@ const UPAMCalender = () => {
                 <aside className="lg:w-80 flex flex-col gap-6">
                     {/* Mini Calendar Card */}
                     <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="font-bold text-slate-800">
-                                {selectedDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
-                            </h2>
-                            <div className="flex gap-1">
-                                <button className="p-1 hover:bg-slate-50 rounded-lg text-slate-400">
-                                    <ChevronLeft size={18} />
-                                </button>
-                                <button className="p-1 hover:bg-slate-50 rounded-lg text-slate-400">
-                                    <ChevronRight size={18} />
-                                </button>
-                            </div>
-                        </div>
-
-                        <div className="mini-calendar">
-                            <Calendar
-                                onChange={(date) => {
-                                    setSelectedDate(date);
-                                    setViewMode('calendar');
-                                }}
-                                value={selectedDate}
-                                nextLabel={null}
-                                prevLabel={null}
-                                next2Label={null}
-                                prev2Label={null}
-                                showNavigation={false}
-                                formatShortWeekday={(locale, date) => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][date.getDay()]}
-                            />
-                        </div>
+                        <CommunityCalendar
+                            selectedDate={selectedDate}
+                            onDateChange={(date) => {
+                                setSelectedDate(date);
+                                setViewMode('calendar');
+                            }}
+                            events={events}
+                        />
                     </div>
 
                     {/* Add Event Button & List */}
@@ -478,40 +458,6 @@ const UPAMCalender = () => {
                     </AnimatePresence>
                 </main>
 
-                <style>{`
-                .mini-calendar .react-calendar {
-                    border: none;
-                    width: 100%;
-                    font-family: inherit;
-                }
-                .mini-calendar .react-calendar__month-view__weekdays {
-                    font-weight: 800;
-                    font-size: 0.65rem;
-                    color: #94a3b8;
-                    text-transform: uppercase;
-                }
-                .mini-calendar .react-calendar__month-view__weekdays__weekday abbr {
-                    text-decoration: none;
-                }
-                .mini-calendar .react-calendar__tile {
-                    padding: 0.75rem 0.5rem;
-                    font-weight: 600;
-                    font-size: 0.875rem;
-                    border-radius: 0.75rem;
-                    transition: all 0.2s;
-                }
-                .mini-calendar .react-calendar__tile--active {
-                    background: #155DFC !important;
-                    color: white !important;
-                }
-                .mini-calendar .react-calendar__tile--now {
-                    background: #eff6ff;
-                    color: #2563eb;
-                }
-                .mini-calendar .react-calendar__tile:hover {
-                    background: #f8fafc;
-                }
-            `}</style>
             </div>
         </div>
     );

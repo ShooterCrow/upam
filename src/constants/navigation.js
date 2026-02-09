@@ -48,7 +48,7 @@ export const ADMIN_LINKS = [
 ];
 
 export const ADMIN_BOTTOM_LINKS = [
-  { name: "My Profile", path: "/admin/my-profile", icon: User },
+  { name: "Account", path: "/admin/my-profile", icon: User },
   { name: "Log out", path: "/logout", icon: LogOutIcon }, // Note: Handled specially in components
 ];
 

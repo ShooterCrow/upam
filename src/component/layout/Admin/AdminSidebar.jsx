@@ -13,14 +13,38 @@ import {
     CheckCircle,
     CreditCard,
     AlertCircle,
-    Headphones
+    Headphones,
+    Copy,
+    Check
 } from 'lucide-react';
 import { ADMIN_LINKS, ADMIN_BOTTOM_LINKS } from '../../../constants/navigation';
 import useAuth from '../../../hooks/useAuth';
+import { useLogoutMutation } from '../../../pages/authenticationPages/authApiSlice';
+import { useNavigate } from 'react-router-dom';
 
 const AdminSidebar = () => {
     const { user } = useAuth()
     const location = useLocation();
+    const navigate = useNavigate();
+    const [logout] = useLogoutMutation();
+    const [copied, setCopied] = React.useState(false);
+
+    const handleLogout = async () => {
+        try {
+            await logout().unwrap();
+            navigate('/login');
+        } catch (err) {
+            console.error('Failed to logout:', err);
+        }
+    };
+
+    const handleCopy = () => {
+        if (user?.id) {
+            navigator.clipboard.writeText(user.id);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        }
+    };
 
     // Admin specific links
     const links = ADMIN_LINKS;
@@ -37,8 +61,21 @@ const AdminSidebar = () => {
             </div>
 
             {/* Admin ID Section */}
-            <div className="px-6">
-                <p className="text-xs font-semibold text-slate-700">ID: {user?.id}</p>
+            <div className="px-6 mb-2">
+                <button
+                    onClick={handleCopy}
+                    className="flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-red-600 transition-colors group"
+                    title="Copy ID"
+                >
+                    <span className="group-hover:border-red-100">
+                        Id: {user?.id}
+                    </span>
+                    {copied ? (
+                        <Check size={14} className="text-green-500" />
+                    ) : (
+                        <Copy size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                    )}
+                </button>
             </div>
 
             {/* Main Navigation */}
@@ -68,7 +105,16 @@ const AdminSidebar = () => {
                     const Icon = link.icon;
                     const isActive = location.pathname === link.path || (link.path !== '/admin' && location.pathname.startsWith(link.path));
 
-                    return (
+                    return link.path === '/logout' ? (
+                        <button
+                            key={link.path}
+                            onClick={handleLogout}
+                            className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-red-500 transition-colors w-full"
+                        >
+                            <Icon size={18} />
+                            {link.name}
+                        </button>
+                    ) : (
                         <Link
                             key={link.path}
                             to={link.path}
