@@ -16,8 +16,10 @@ import {
     Headphones
 } from 'lucide-react';
 import { ADMIN_LINKS, ADMIN_BOTTOM_LINKS } from '../../../constants/navigation';
+import useAuth from '../../../hooks/useAuth';
 
 const AdminSidebar = () => {
+    const { user } = useAuth()
     const location = useLocation();
 
     // Admin specific links
@@ -36,7 +38,7 @@ const AdminSidebar = () => {
 
             {/* Admin ID Section */}
             <div className="px-6">
-                <p className="text-xs font-semibold text-slate-700">Admin ID: AD-9901</p>
+                <p className="text-xs font-semibold text-slate-700">ID: {user?.id}</p>
             </div>
 
             {/* Main Navigation */}
@@ -50,7 +52,7 @@ const AdminSidebar = () => {
                             to={link.path}
                             className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${isActive
                                 ? 'bg-red-600 text-white shadow-sm'
-                                : 'text-slate-500 hover:bg-slate-50 hover:text-red-500'
+                                : 'text-gray-900 hover:bg-slate-50 hover:text-red-500'
                                 }`}
                         >
                             <Icon size={18} />

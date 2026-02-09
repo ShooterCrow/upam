@@ -47,13 +47,18 @@
   background-color: #1e293b;
 }
 
-/* Custom indicator for special days */
-.calendar-container .react-calendar__month-view__days__day:nth-child(8) {
+/* Custom indicator for special days with events */
+.calendar-container .has-event {
   background: #dbeafe !important;
   color: #3b82f6 !important;
+  font-weight: bold;
 }
 
-.dark .calendar-container .react-calendar__month-view__days__day:nth-child(8) {
+.dark .calendar-container .has-event {
   background: #1e3a8a !important;
   color: #93c5fd !important;
+}
+
+.calendar-container .has-event:hover {
+  background: #bfdbfe !important;
 }

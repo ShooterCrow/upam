@@ -73,7 +73,7 @@ const Login = () => {
 
   return (
     <div>
-      <section className="">
+      <section className="pt-[100px] lg:pt-[110px]">
         {/* Desktop: two-column — form left, illustration right */}
         <div
           className="hidden lg:flex justify-center w-full overflow-hidden"

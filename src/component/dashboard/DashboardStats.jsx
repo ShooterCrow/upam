@@ -3,7 +3,7 @@ import { CreditCard, Wallet, Share2, Users } from 'lucide-react';
 
 const StatCard = ({ title, value, type, trend, icon: Icon, iconBg, iconColor, onClickLink, linkText }) => {
     return (
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-50 flex flex-col justify-between">
+        <div className="bg-white p-6 rounded-2xl border border-gray-50 flex flex-col justify-between">
             <div className="flex justify-between items-start mb-4">
                 <div className="space-y-1">
                     <p className="text-sm font-medium text-slate-500">{title}</p>

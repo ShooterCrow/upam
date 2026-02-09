@@ -3,6 +3,7 @@ import { DashboardStats } from '../../../component/dashboard/DashboardStats';
 import DashboardCalendar from '../../../component/dashboard/DashboardCalendar';
 import { ArrowRight, Plus, MapPin } from 'lucide-react';
 import useAuth from '../../../hooks/useAuth';
+import { Link } from 'react-router-dom';
 
 const AdminDashboard = () => {
     const { user } = useAuth();
@@ -23,7 +24,7 @@ const AdminDashboard = () => {
     ];
 
     return (
-        <div className="space-y-8 animate-in fade-in duration-500">
+        <div className="space-y-5 animate-in fade-in duration-500">
             {/* Header section */}
             <div className="flex justify-between items-end">
                 <h1 className="text-3xl font-bold text-slate-800">Dashboard</h1>
@@ -34,9 +35,19 @@ const AdminDashboard = () => {
 
             <div className="grid grid-cols-1 gap-8">
                 {/* Left side: Banner and Announcement */}
-                <div className="lg:col-span-2 space-y-8">
+                <div className="lg:col-span-2 space-y-5">
                     {/* Welcome Banner */}
                     <div className="relative overflow-hidden bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8 lg:p-12 min-h-[300px] flex flex-col justify-center border border-blue-100/50">
+                        {/* <div className='absolute w-[100px] h-[100px] bg-red-300 opacity-50 rounded-full'></div> */}
+                        <div className="absolute left-40 w-[150px] h-[150px] rounded-full 
+                        bg-gradient-to-r from-red-200 via-red-300 to-red-400
+                        shadow-[0_0_60px_20px_rgba(200,0,0,0.3)]
+                        animate-pulse blur-[20px]"></div>
+                        <div className="absolute right-20 w-[100px] h-[100px] rounded-full 
+                        bg-gradient-to-r from-blue-200 via-blue-300 to-blue-400
+                        shadow-[0_0_60px_20px_rgba(0,0,200,0.3)]
+                        blur-[20px]"></div>
+
                         <div className="relative z-10 space-y-4 max-w-md">
                             <h2 className="text-4xl lg:text-5xl font-bold text-slate-800 leading-tight">
                                 Welcome {user?.firstName} {user?.lastName}
@@ -44,10 +55,10 @@ const AdminDashboard = () => {
                             <p className="text-slate-500 text-lg">
                                 Here's the Summary of your Activity History for the Week Here
                             </p>
-                            <button className="flex items-center gap-2 text-blue-600 font-bold hover:gap-3 transition-all mt-4 group">
+                            <Link to='/admin/calendar' className="flex items-center gap-2 text-blue-600 font-bold hover:gap-3 transition-all mt-4 group">
                                 View Activities Here
                                 <ArrowRight size={20} />
-                            </button>
+                            </Link>
                         </div>
 
                         {/* Map Decoration */}
@@ -61,7 +72,7 @@ const AdminDashboard = () => {
                             {countries.map((c) => (
                                 <div
                                     key={c.name}
-                                    className="absolute flex items-center gap-2 bg-white/80 backdrop-blur-sm px-2 py-1 rounded-md shadow-sm border border-white/50 animate-pulse"
+                                    className="absolute flex items-center gap-2 bg-white/80 backdrop-blur-sm px-2 py-1 rounded-md border border-white/50 animate-pulse"
                                     style={{ top: c.top, left: c.left }}
                                 >
                                     <div className="w-6 h-6 rounded-full overflow-hidden border border-gray-100">
@@ -74,9 +85,9 @@ const AdminDashboard = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className='space-y-8'>
+                        <div className='space-y-5'>
                             {/* Create Announcement */}
-                            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-50 flex justify-between">
+                            <div className="bg-white p-8 rounded-3xl border border-gray-50 flex justify-between">
                                 <div className="space-y-2">
                                     <h3 className="text-xl font-bold text-slate-800">Create Announcement</h3>
                                     <p className="text-sm text-slate-500">Create wide site announcement to everyone</p>
@@ -88,7 +99,7 @@ const AdminDashboard = () => {
                             </div>
 
                             {/* Recently verified members */}
-                            <div className="bg-white rounded-3xl shadow-sm border border-gray-50 p-8">
+                            <div className="bg-white rounded-3xl border border-gray-50 p-8">
                                 <div className="flex justify-between items-center mb-6">
                                     <h3 className="text-xl font-bold text-slate-800">Recently verified members</h3>
                                 </div>

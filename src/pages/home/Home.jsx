@@ -55,12 +55,16 @@ const UnitedAfricaHero = () => {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <Button variant="primary">
-                        Learn About UPAM
-                    </Button>
-                    <Button variant="secondary">
-                        Join the Movement
-                    </Button>
+                    <Link to="/about">
+                        <Button variant="primary" className='cursor-pointer'>
+                            Learn About UPAM
+                        </Button>
+                    </Link>
+                    <Link to="/register">
+                        <Button variant="secondary" className='cursor-pointer'>
+                            Join the Movement
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </div>

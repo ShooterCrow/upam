@@ -52,7 +52,7 @@ const UserBottomBar = () => {
                                 onClick={() => setShowMore(false)}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${link.isDanger
                                     ? 'text-red-600 hover:bg-red-50'
-                                    : 'text-slate-600 hover:bg-slate-50'
+                                    : 'text-gray-900 hover:bg-slate-50'
                                     }`}
                             >
                                 <Icon size={18} />

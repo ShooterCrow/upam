@@ -102,7 +102,7 @@ const Register = () => {
 
   return (
     <div>
-      <section className="">
+      <section className="pt-[100px] lg:pt-[110px]">
         {/* max-w-7xl mx-auto mx-auto px-4 sm:px-6 lg:px-8 pb-10 lg:pb-16 */}
         {/* Desktop: two-column — form left, illustration right */}
         <div className="hidden lg:flex justify-center w-full overflow-hidden" data-node-id="4792:29118">
