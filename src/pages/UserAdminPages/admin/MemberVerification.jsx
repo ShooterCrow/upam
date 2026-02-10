@@ -207,13 +207,13 @@ const MemberVerification = () => {
             </div>
 
             {isPending && (
-                <div className="p-6 bg-blue-50 border border-blue-100 rounded-3xl flex items-start gap-4 animate-in slide-in-from-top duration-500">
-                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-blue-500 shadow-sm border border-blue-50 shrink-0">
+                <div className="p-6 bg-yellow-50 border border-yellow-100 rounded-3xl flex items-start gap-4 animate-in slide-in-from-top duration-500">
+                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-yellow-500 shadow-sm border border-yellow-50 shrink-0">
                         <Info size={24} />
                     </div>
                     <div>
-                        <h4 className="font-bold text-blue-900 text-lg">Application Under Review</h4>
-                        <p className="text-blue-700 mt-1">Your verification application has been submitted and is currently being reviewed by our team. You cannot make changes while the application is pending.</p>
+                        <h4 className="font-bold text-yellow-900 text-lg">Application Under Review</h4>
+                        <p className="text-yellow-700 mt-1">Your verification application has been submitted and is currently being reviewed by our team. You cannot make changes while the application is pending.</p>
                     </div>
                 </div>
             )}
@@ -464,7 +464,7 @@ const MemberVerification = () => {
                                 checked={formData.termsAgreed}
                                 onChange={handleChange}
                             />
-                            <p className="text-sm text-blue-600 font-bold">
+                            <p className="text-sm text-blue-600 font-semibold">
                                 I agree to all the terms and condition and to abide by all the rules and regulations
                             </p>
                         </div>
