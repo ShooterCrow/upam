@@ -1,18 +1,18 @@
 import React from 'react';
 import { DashboardStats } from '../../../component/dashboard/DashboardStats';
 import DashboardCalendar from '../../../component/dashboard/DashboardCalendar';
-import { ArrowRight, Plus, MapPin } from 'lucide-react';
+import { ArrowRight, Plus, MapPin, Loader2, User } from 'lucide-react';
 import useAuth from '../../../hooks/useAuth';
 import { Link } from 'react-router-dom';
+import { useGetVerificationsQuery } from '../../platform/verificationApiSlice';
 
 const AdminDashboard = () => {
     const { user } = useAuth();
+    const { data: verificationsResponse, isLoading: isVerificationsLoading } = useGetVerificationsQuery();
 
-    const verifiedMembers = [
-        { name: "Joseph Darwin", email: "Joseph@gmail.com", country: "Malawi", id: "20-1175" },
-        { name: "Joseph Darwin", email: "Joseph@gmail.com", country: "Malawi", id: "20-1175" },
-        { name: "Joseph Darwin", email: "Joseph@gmail.com", country: "Malawi", id: "20-1175" },
-    ];
+    const verifiedMembers = verificationsResponse?.data
+        ?.filter(v => v.status === 'Approved')
+        ?.slice(0, 3) || [];
 
     const countries = [
         { name: 'Kenya', top: '20%', left: '60%' },
@@ -114,14 +114,38 @@ const AdminDashboard = () => {
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-slate-50">
-                                            {verifiedMembers.map((member, idx) => (
-                                                <tr key={idx} className="group hover:bg-slate-50/50 transition-colors">
-                                                    <td className="py-4 text-sm font-medium text-slate-700">{member.name}</td>
-                                                    <td className="py-4 text-sm text-slate-500">{member.email}</td>
-                                                    <td className="py-4 text-sm text-slate-500">{member.country}</td>
-                                                    <td className="py-4 text-sm font-bold text-slate-800">{member.id}</td>
+                                            {isVerificationsLoading ? (
+                                                <tr>
+                                                    <td colSpan="4" className="py-12 text-center">
+                                                        <div className="flex flex-col items-center gap-2">
+                                                            <Loader2 size={24} className="animate-spin text-slate-400" />
+                                                            <p className="text-xs font-medium text-slate-400">Loading members...</p>
+                                                        </div>
+                                                    </td>
                                                 </tr>
-                                            ))}
+                                            ) : verifiedMembers.length > 0 ? (
+                                                verifiedMembers.map((v, idx) => (
+                                                    <tr key={idx} className="group hover:bg-slate-50/50 transition-colors">
+                                                        <td className="py-4 text-sm font-medium text-slate-700">
+                                                            {v.user?.firstName} {v.user?.lastName}
+                                                        </td>
+                                                        <td className="py-4 text-sm text-slate-500">{v.user?.email}</td>
+                                                        <td className="py-4 text-sm text-slate-500">{v.user?.country || 'N/A'}</td>
+                                                        <td className="py-4 text-sm font-bold text-slate-800">{v._id.slice(-7)}</td>
+                                                    </tr>
+                                                ))
+                                            ) : (
+                                                <tr>
+                                                    <td colSpan="4" className="py-12 text-center">
+                                                        <div className="flex flex-col items-center gap-2">
+                                                            <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-300">
+                                                                <User size={20} />
+                                                            </div>
+                                                            <p className="text-xs font-medium text-slate-400">No verified members yet</p>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            )}
                                         </tbody>
                                     </table>
                                 </div>
