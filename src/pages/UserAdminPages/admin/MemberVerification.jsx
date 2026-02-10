@@ -213,7 +213,7 @@ const MemberVerification = () => {
                     </div>
                     <div>
                         <h4 className="font-bold text-yellow-900 text-lg">Application Under Review</h4>
-                        <p className="text-yellow-700 mt-1">Your verification application has been submitted and is currently being reviewed by our team. You cannot make changes while the application is pending.</p>
+                        {/* <p className="text-yellow-700 mt-1">Your verification application has been submitted and is currently being reviewed by our team. You cannot make changes while the application is pending.</p> */}
                     </div>
                 </div>
             )}
