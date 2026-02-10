@@ -207,9 +207,9 @@ const MemberVerification = () => {
             </div>
 
             {isPending && (
-                <div className="p-6 bg-yellow-50 border border-yellow-100 rounded-3xl flex items-start gap-4 animate-in slide-in-from-top duration-500">
-                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-yellow-500 shadow-sm border border-yellow-50 shrink-0">
-                        <Info size={14} />
+                <div className="p-4 bg-yellow-50 border border-yellow-100 rounded-3xl flex items-center gap-4 animate-in slide-in-from-top duration-500">
+                    <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-yellow-500 shadow-sm border border-yellow-50 shrink-0">
+                        <Info size={24} />
                     </div>
                     <div>
                         <h4 className="font-bold text-yellow-900 text-lg">Application Under Review</h4>
