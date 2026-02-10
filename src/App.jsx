@@ -27,10 +27,11 @@ import MembershipPayment from './pages/UserAdminPages/admin/MembershipPayment'
 import EmergencyContact from './pages/UserAdminPages/admin/EmergencyContact'
 import Notification from './pages/UserAdminPages/admin/Notification'
 import Support from './pages/UserAdminPages/admin/Support'
-import AllMemebers from './pages/UserAdminPages/admin/AllMemebers'
 import MemberApplication from './pages/UserAdminPages/admin/MemberApplication'
 import MyProfileAdmin from './pages/UserAdminPages/admin/MyProfileAdmin'
 import UPAMCalender from './pages/UserAdminPages/admin/UPAMCalender'
+import AllMembers from './pages/UserAdminPages/admin/AllMembers'
+import MemberDetail from './pages/UserAdminPages/admin/detailPages/MemberDetail'
 
 
 const App = () => {
@@ -79,8 +80,11 @@ const App = () => {
               <Route path='emergency-contact' element={<EmergencyContact />} />
               <Route path='notification' element={<Notification />} />
               <Route path='support' element={<Support />} />
-              <Route path='all-members' element={<AllMemebers />} />
-              <Route path='members-application' element={<MemberApplication />} />
+              <Route path='all-members' element={<AllMembers />} />
+              <Route path='members-application'>
+                <Route index element={<MemberApplication />} />
+                <Route path=":id" element={<MemberDetail />} />
+              </Route>
               <Route path='my-profile' element={<MyProfileAdmin />} />
               <Route path='calendar' element={<UPAMCalender />} />
             </Route>
