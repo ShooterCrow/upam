@@ -32,6 +32,7 @@ import MyProfileAdmin from './pages/UserAdminPages/admin/MyProfileAdmin'
 import UPAMCalender from './pages/UserAdminPages/admin/UPAMCalender'
 import AllMembers from './pages/UserAdminPages/admin/AllMembers'
 import MemberDetail from './pages/UserAdminPages/admin/detailPages/MemberDetail'
+import NotFound from './pages/NotFound'
 
 
 const App = () => {
@@ -96,6 +97,9 @@ const App = () => {
               <Route index element={<div className="p-4">User Dashboard Area</div>} />
             </Route>
           </Route>
+
+          {/* Catch-all route */}
+          <Route path="*" element={<NotFound />} />
 
         </Route>
       </Routes>
