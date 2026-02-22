@@ -16,6 +16,12 @@ import About from './pages/about/About'
 import MembershipPolicy from './pages/membershipPolicy/MembershipPolicy'
 import MembershipAgreement from './pages/membershipAgreement/MembershipAgreement'
 import Leadership from './pages/leadership/Leadership'
+import Events from './pages/events/Events'
+import EventDetail from './pages/events/EventDetail'
+import CreateEvent from './pages/events/CreateEvent'
+import EventsHelpSupport from './pages/events/EventsHelpSupport'
+import EventsTickets from './pages/events/EventsTickets'
+import TicketsForm from './pages/events/TicketsForm'
 import Register from './pages/auth/Register'
 import Login from './pages/auth/Login'
 import ForgottenPassword from './pages/auth/ForgottenPassword'
@@ -53,6 +59,16 @@ const App = () => {
             <Route path="partnership" element={<Partnership />} />
             <Route path="volunteer" element={<Volunteer />} />
             <Route path="leadership" element={<Leadership />} />
+            <Route path="events">
+              <Route index element={<Events />} />
+              <Route path="create" element={<CreateEvent />} />
+              <Route path="help" element={<EventsHelpSupport />} />
+              <Route path="tickets">
+                <Route index element={<EventsTickets />} />
+                <Route path="form" element={<TicketsForm />} />
+              </Route>
+              <Route path=":slug" element={<EventDetail />} />
+            </Route>
 
             <Route path="research">
               <Route path='panafrican-unity' element={<PanAfricanUnity />} />

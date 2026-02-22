@@ -84,6 +84,7 @@ export const PUBLIC_LINKS = [
   { name: "About Us", path: "/about", icon: Info },
   { name: "Leadership", path: "/leadership", icon: Users },
   { name: "Platforms & Initiatives", path: "/platforms", icon: Grid },
+  { name: "Events & Conferences", path: "/events", icon: Calendar },
   {
     name: "Resources & Media",
     path: "/resources",
