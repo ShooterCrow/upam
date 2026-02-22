@@ -30,7 +30,7 @@ const Events = () => {
       {/* ========== HERO ========== */}
       <section className="relative py-12 md:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10">
+          {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10">
             {heroThumbnails.map((src, i) => (
               <div
                 key={i}
@@ -43,7 +43,7 @@ const Events = () => {
                 />
               </div>
             ))}
-          </div>
+          </div> */}
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
               Discover Events that Unite, Inspire and Empower

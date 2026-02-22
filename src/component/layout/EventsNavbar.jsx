@@ -6,8 +6,8 @@ const EVENTS_NAV_LINKS = [
   { name: 'Home', path: '/' },
   { name: 'Events', path: '/events' },
   { name: 'Create Events', path: '/events/create' },
-  { name: 'Tickets', path: '/events#all-events' },
-  { name: 'Help & Support', path: '/contact-us' },
+  { name: 'Tickets', path: '/events/tickets' },
+  { name: 'Help & Support', path: '/events/help' },
 ];
 
 const EventsNavbar = () => {

@@ -19,6 +19,9 @@ import Leadership from './pages/leadership/Leadership'
 import Events from './pages/events/Events'
 import EventDetail from './pages/events/EventDetail'
 import CreateEvent from './pages/events/CreateEvent'
+import EventsHelpSupport from './pages/events/EventsHelpSupport'
+import EventsTickets from './pages/events/EventsTickets'
+import TicketsForm from './pages/events/TicketsForm'
 import Register from './pages/auth/Register'
 import Login from './pages/auth/Login'
 import ForgottenPassword from './pages/auth/ForgottenPassword'
@@ -59,6 +62,11 @@ const App = () => {
             <Route path="events">
               <Route index element={<Events />} />
               <Route path="create" element={<CreateEvent />} />
+              <Route path="help" element={<EventsHelpSupport />} />
+              <Route path="tickets">
+                <Route index element={<EventsTickets />} />
+                <Route path="form" element={<TicketsForm />} />
+              </Route>
               <Route path=":slug" element={<EventDetail />} />
             </Route>
 
