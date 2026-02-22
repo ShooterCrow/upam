@@ -12,13 +12,13 @@ const Footer = () => {
                         <div className="flex flex-col items-start gap-4">
                             <h3 className="text-white font-lato text-sm font-normal">About us</h3>
                             <div className="flex flex-col items-start gap-4">
-                                <Link to="/contact" className="text-white font-lato text-sm font-normal hover:underline">
+                                <Link to="/contact-us" className="text-white font-lato text-sm font-normal hover:underline">
                                     Contact us
                                 </Link>
-                                <Link to="/executive" className="text-white font-lato text-sm font-normal hover:underline">
+                                <Link to="/leadership" className="text-white font-lato text-sm font-normal hover:underline">
                                     Executive
                                 </Link>
-                                <Link to="/representative" className="text-white font-lato text-sm font-normal hover:underline">
+                                <Link to="/leadership" className="text-white font-lato text-sm font-normal hover:underline">
                                     Representative
                                 </Link>
                                 <Link to="/platforms" className="text-white font-lato text-sm font-normal hover:underline">
@@ -31,16 +31,16 @@ const Footer = () => {
                         <div className="flex flex-col items-start gap-4">
                             <h3 className="text-white font-lato text-sm font-normal">Join the Movement</h3>
                             <div className="flex flex-col items-start gap-4">
-                                <Link to="/account" className="text-white font-lato text-sm font-normal hover:underline">
+                                <Link to="/login" className="text-white font-lato text-sm font-normal hover:underline">
                                     Account
                                 </Link>
-                                <Link to="/newsletters" className="text-white font-lato text-sm font-normal hover:underline">
+                                <Link to="/contact-us" className="text-white font-lato text-sm font-normal hover:underline">
                                     Newsletters
                                 </Link>
-                                <Link to="/projects" className="text-white font-lato text-sm font-normal hover:underline">
+                                <Link to="/get-involved" className="text-white font-lato text-sm font-normal hover:underline">
                                     Projects
                                 </Link>
-                                <Link to="/chapters" className="text-white font-lato text-sm font-normal hover:underline">
+                                <Link to="/about" className="text-white font-lato text-sm font-normal hover:underline">
                                     Chapters
                                 </Link>
                             </div>
@@ -89,13 +89,13 @@ const Footer = () => {
                             </h3>
                             <div className="flex items-start gap-3 w-full">
                                 <Link
-                                    to="/learn-more"
+                                    to="/about"
                                     className="flex-1 flex justify-center items-center px-6 py-3 bg-[#EB010C] text-white font-poppins text-base font-medium hover:bg-[#d00109] transition-colors"
                                 >
                                     Learn more
                                 </Link>
                                 <Link
-                                    to="/join"
+                                    to="/register"
                                     className="flex-1 flex justify-center items-center px-6 py-3 border border-white text-white font-poppins text-base font-medium hover:bg-white hover:text-black transition-colors"
                                 >
                                     Join now

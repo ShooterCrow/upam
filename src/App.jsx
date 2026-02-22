@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import Layout from './component/layout/Layout'
 import AdminLayoutContext from './component/layout/AdminLayoutContext'
 import UserLayoutContext from './component/layout/UserLayoutContext'
@@ -39,6 +39,10 @@ import UPAMCalender from './pages/UserAdminPages/admin/UPAMCalender'
 import AllMembers from './pages/UserAdminPages/admin/AllMembers'
 import MemberDetail from './pages/UserAdminPages/admin/detailPages/MemberDetail'
 import NotFound from './pages/NotFound'
+import TermsOfService from './pages/legal/TermsOfService'
+import PrivacyPolicy from './pages/legal/PrivacyPolicy'
+import Cookies from './pages/legal/Cookies'
+import SearchMembers from './pages/search/SearchMembers'
 
 
 const App = () => {
@@ -80,6 +84,16 @@ const App = () => {
             <Route path="login" element={<Login />} />
             <Route path="forgot-password" element={<ForgottenPassword />} />
             <Route path="platforms" element={<Platform />} />
+
+            {/* Redirects for nav parent paths */}
+            <Route path="resources" element={<Navigate to="/publications" replace />} />
+            <Route path="membership" element={<Navigate to="/membership-policy" replace />} />
+
+            {/* Legal & Search */}
+            <Route path="terms" element={<TermsOfService />} />
+            <Route path="privacy" element={<PrivacyPolicy />} />
+            <Route path="cookies" element={<Cookies />} />
+            <Route path="search" element={<SearchMembers />} />
 
             {/* Protected Routes */}
             <Route element={<RequireAuth />}>
