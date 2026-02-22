@@ -137,7 +137,7 @@ const MyProfileAdmin = () => {
                                 alt="Profile"
                                 className="w-full h-full object-cover"
                             />
-                            <button type="button" className="absolute bottom-0 right-0 p-1.5 bg-white border border-gray-100 rounded-full hover:bg-slate-50 transition-colors">
+                            <button type="button" className="absolute bottom-0 right-0 p-1.5 bg-white border border-gray-100 rounded-full hover:bg-slate-50 transition-colors z-10">
                                 <Upload size={12} className="text-slate-600" />
                             </button>
                         </div>
