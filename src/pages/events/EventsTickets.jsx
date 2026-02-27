@@ -6,7 +6,7 @@ const EventsTickets = () => {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1540575467063-178bf50e2f0a?w=1600&q=80"

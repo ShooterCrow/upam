@@ -28,45 +28,52 @@ const Events = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* ========== HERO ========== */}
-      <section className="relative py-12 md:py-16 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10">
-            {heroThumbnails.map((src, i) => (
-              <div
-                key={i}
-                className="aspect-square rounded-lg overflow-hidden shadow-md"
-              >
-                <img
-                  src={src}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div> */}
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-              Discover Events that Unite, Inspire and Empower
-            </h1>
-            <p className="text-base md:text-lg text-gray-600 mb-8 leading-relaxed">
-              UPAM Events is a Pan-African platform where organizers promote events, audiences discover experiences, and communities come together from conferences and workshops to culture, music, and innovation.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="#all-events"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#EB010C] text-white font-medium rounded hover:bg-[#EB010C]/90 transition-colors"
-              >
-                Explore Events
-                <span className="font-mono">&gt;&gt;</span>
-              </Link>
-              <Link
-                to="/events/create"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-gray-900 font-medium border-2 border-gray-900 rounded hover:bg-gray-50 transition-colors"
-              >
-                Create Event
-                <span className="font-mono">&gt;&gt;</span>
-              </Link>
+      <section className="relative min-h-[70vh] flex flex-col items-center justify-center overflow-hidden bg-gray-900">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1540575467063-178bf50e2f0a?w=1600&q=80"
+            alt="UPAM Events"
+            className="w-full h-full object-cover opacity-40"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+        </div>
+
+        {/* Thumbnail grid overlay */}
+        <div className="absolute inset-0 grid grid-cols-2 md:grid-cols-4 gap-1 opacity-20 pointer-events-none">
+          {heroThumbnails.map((src, i) => (
+            <div key={i} className="overflow-hidden">
+              <img src={src} alt="" className="w-full h-full object-cover" />
             </div>
+          ))}
+        </div>
+
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <span className="inline-block text-xs font-semibold tracking-widest uppercase text-[#EB010C] mb-4">
+            UPAM Events Platform
+          </span>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Discover Events that <br className="hidden md:block" />
+            Unite, Inspire &amp; Empower
+          </h1>
+          <p className="text-base md:text-lg text-white/80 mb-10 leading-relaxed max-w-2xl mx-auto">
+            UPAM Events is a Pan-African platform where organizers promote events, audiences discover experiences, and communities come together — from conferences and workshops to culture, music, and innovation.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="#all-events"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#EB010C] text-white font-semibold rounded hover:bg-[#EB010C]/90 transition-colors"
+            >
+              Explore Events
+              <span className="font-mono">&gt;&gt;</span>
+            </Link>
+            <Link
+              to="/events/create"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white/10 backdrop-blur-sm text-white font-semibold border border-white/40 rounded hover:bg-white/20 transition-colors"
+            >
+              Create Event
+              <span className="font-mono">&gt;&gt;</span>
+            </Link>
           </div>
         </div>
       </section>

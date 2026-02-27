@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import jumuiyaLogo from '../../assets/jumuiya_logo.png';
 import upamEventsLogo from '../../assets/upam_events_logo.png';
 import academyLogo from '../../assets/academy_logo.png';
@@ -10,27 +11,31 @@ const Platform = () => {
     const activePlatforms = [
         {
             name: "WNN Africa",
-            description: "Global media network and radio services.",
-            link: "#",
+            description: "Global media network and radio services covering Pan-African news, politics, culture, and more.",
+            link: "https://wnn.africa/",
+            external: true,
             logo: '../../assets/wnn_logo.png'
         },
         {
             name: "Jumuiya Forum",
-            description: "Vibrant social networking and knowledge hub.",
-            link: "#",
+            description: "Vibrant social networking and knowledge hub for the Pan-African community.",
+            link: "https://jumuiya.upam.org/",
+            external: true,
             isActive: true,
             logo: jumuiyaLogo
         },
         {
             name: "UPAM Events",
-            description: "Discover and participate in upcoming events.",
-            link: "#",
+            description: "Discover, promote, and participate in upcoming Pan-African events and conferences.",
+            link: "/events",
+            external: false,
             logo: upamEventsLogo
         },
         {
-            name: "UPAM Academy Website",
-            description: "Educational resources and leadership training.",
-            link: "#",
+            name: "UPAM Academy",
+            description: "Educational resources, leadership training, and skill development for Africans.",
+            link: "https://academy.upam.org/",
+            external: true,
             logo: academyLogo
         }
     ];
@@ -85,12 +90,23 @@ const Platform = () => {
                                     </p>
                                 </div>
                                 <div className="flex justify-end">
-                                    <a
-                                        href={platform.link}
-                                        className="p-2 border border-black rounded-full transition-all duration-300 group-hover:bg-black group-hover:text-white"
-                                    >
-                                        <ArrowUpRight size={20} />
-                                    </a>
+                                    {platform.external ? (
+                                        <a
+                                            href={platform.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="p-2 border border-black rounded-full transition-all duration-300 group-hover:bg-black group-hover:text-white"
+                                        >
+                                            <ArrowUpRight size={20} />
+                                        </a>
+                                    ) : (
+                                        <Link
+                                            to={platform.link}
+                                            className="p-2 border border-black rounded-full transition-all duration-300 group-hover:bg-black group-hover:text-white"
+                                        >
+                                            <ArrowUpRight size={20} />
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
                         ))}

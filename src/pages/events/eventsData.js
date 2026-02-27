@@ -41,9 +41,35 @@ export const events = [
     date: 'September 20th 2025',
     dateShort: 'Sept 20th 2025',
     location: 'Nigeria / Cameroon',
-    description: "The highlight of the program took place on Saturday with a Health Symposium titled 'Rising Above Influence: The Power of Purpose.' The symposium was an enlightening and impactful session led by Mrs. Venetta, who spoke passionately about the power of the mind and the importance of creating mental maps that guide individuals through life's challenges.",
-    image: 'https://images.unsplash.com/photo-1540575467063-178bf50e2f0a?w=800&q=80',
-    fullDescription: "The highlight of the program took place on Saturday with a Health Symposium titled 'Rising Above Influence: The Power of Purpose.' The symposium was an enlightening and impactful session led by Mrs. Venetta, who spoke passionately about the power of the mind and the importance of creating mental maps that guide individuals through life's challenges.",
+    description: "A Pan-African health awareness initiative challenging youth to channel their energy into ambition, purpose, and positive impact — not substance abuse.",
+    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80',
+    fullDescription: "The 'Get High on Ambitions Not Drugs' program is a Pan-African youth health and empowerment initiative launched by UPAM across Nigeria and Cameroon. The program is designed to challenge the narrative around substance abuse by offering young people a compelling alternative: ambition, purpose, and community.",
+    overview: "This initiative brings together youth leaders, health professionals, community advocates, and educators to tackle one of Africa's most pressing social challenges — the rise of drug abuse and substance dependency among young people. Through interactive symposiums, mentorship sessions, and community engagements, the program empowers youth to discover their potential and pursue their goals with clarity and drive.",
+    highlights: [
+      {
+        title: "Health Symposium: Rising Above Influence — The Power of Purpose",
+        body: "The highlight of the program took place on Saturday with a Health Symposium titled 'Rising Above Influence: The Power of Purpose.' The symposium was an enlightening and impactful session led by Mrs. Venetta, who spoke passionately about the power of the mind and the importance of creating mental maps that guide individuals through life's challenges. Participants were encouraged to identify their core values and use them as a compass in moments of peer pressure and temptation."
+      },
+      {
+        title: "Youth Mentorship & Career Conversations",
+        body: "Young attendees engaged in one-on-one and group mentorship sessions with successful Pan-African professionals who shared their personal journeys. The conversations centered on goal-setting, resilience, and the real rewards of pursuing ambition over escapism."
+      },
+      {
+        title: "Community Outreach & Awareness Campaigns",
+        body: "UPAM teams carried out door-to-door awareness campaigns in local communities, distributing materials on the dangers of drug abuse and connecting families with counseling resources. Schools and youth centers in both Nigeria and Cameroon received visits from program coordinators."
+      },
+      {
+        title: "Cultural & Creative Expression",
+        body: "Participants showcased their talents through spoken word, music, art, and drama — all centered on the theme of ambition and purpose. This creative segment reinforced the message that there are healthy, fulfilling ways to experience elevation and joy."
+      }
+    ],
+    objectives: [
+      "Reduce substance abuse among youth aged 15–35 in target communities",
+      "Equip young people with mental tools to resist peer pressure",
+      "Connect youth to mentors, career guidance, and community support networks",
+      "Promote Pan-African values of self-determination, discipline, and collective progress",
+      "Build a movement of youth ambassadors committed to healthy living"
+    ],
     status: 'upcoming',
   },
   {

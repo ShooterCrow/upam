@@ -12,6 +12,10 @@ import Volunteer from './pages/volunteer/Volunteer'
 import Publications from './pages/publications/Publications'
 import DigitalLiteracy from './pages/publications/articles/DigitalLiteracy'
 import PanAfricanUnity from './pages/publications/articles/PanAfricanUnity'
+import AfricanEconomicEcosystem from './pages/publications/articles/AfricanEconomicEcosystem'
+import ColonialBoundaries from './pages/publications/articles/ColonialBoundaries'
+import AfricanSelfReliance from './pages/publications/articles/AfricanSelfReliance'
+import HealingHistoricalDivides from './pages/publications/articles/HealingHistoricalDivides'
 import About from './pages/about/About'
 import MembershipPolicy from './pages/membershipPolicy/MembershipPolicy'
 import MembershipAgreement from './pages/membershipAgreement/MembershipAgreement'
@@ -77,6 +81,10 @@ const App = () => {
             <Route path="research">
               <Route path='panafrican-unity' element={<PanAfricanUnity />} />
               <Route path="digital-literacy" element={<DigitalLiteracy />} />
+              <Route path="african-economic-ecosystem" element={<AfricanEconomicEcosystem />} />
+              <Route path="colonial-boundaries" element={<ColonialBoundaries />} />
+              <Route path="african-self-reliance" element={<AfricanSelfReliance />} />
+              <Route path="healing-historical-divides" element={<HealingHistoricalDivides />} />
             </Route>
 
             {/* Auth Routes */}

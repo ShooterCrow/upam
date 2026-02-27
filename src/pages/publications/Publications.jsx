@@ -45,25 +45,25 @@ export default function Publications() {
             image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80",
             title: "Building an African Economic Ecosystem Owned by Africans",
             description: "Africa's economic structure have long been shaped by external ownership and extractive models that limit local value creation. Building an African-owned economic ecosystem requires reimagining production, trade, finance, and entrepreneurship in ways that prioritize African control and benefit.",
-            path: "/publications"
+            path: "/research/african-economic-ecosystem"
         },
         {
             image: "https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=800&q=80",
             title: "One People, Many Borders: How Colonial Boundaries Continue to Shape African Disunity",
             description: "The artificial borders imposed during colonial rule fragmented African societies, cultures, and economies, creating divisions that persist today. These boundaries disrupted pre-existing systems of cooperation and continue to influence political instability, ethnic tension, and weak regional integration.",
-            path: "/publications"
+            path: "/research/colonial-boundaries"
         },
         {
             image: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=800&q=80",
             title: "African Self-Reliance: Moving Beyond Aid to Sustainable Development",
             description: "Foreign aid has played a role in addressing humanitarian crises in Africa, but long-term reliance on aid has often undermined local capacity, accountability, and innovation. African self-reliance emphasizes development strategies driven by local knowledge, resources, and institutions.",
-            path: "/publications"
+            path: "/research/african-self-reliance"
         },
         {
             image: "https://images.unsplash.com/photo-1511376777868-611b54f68947?w=800&q=80",
             title: "Healing Historical Divides: Slavery, Colonialism, and the Path to Collective Renewal",
             description: "The legacies of slavery and colonialism have left deep psychological, social, and economic scars across Africa and the African diaspora. These histories foster mistrust, fragmentation, and internalized narratives that weaken collective progress.",
-            path: "/publications"
+            path: "/research/healing-historical-divides"
         }
     ];
 
