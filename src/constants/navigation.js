@@ -59,6 +59,7 @@ export const USER_LINKS = [
     path: "/user/member-verification",
     icon: CheckCircle,
   },
+  { name: "UPAM Calendar", path: "/user/calendar", icon: Calendar },
   {
     name: "Membership Payment",
     path: "/user/membership-payment",
@@ -71,12 +72,6 @@ export const USER_LINKS = [
   },
   { name: "Notification", path: "/user/notification", icon: Bell },
   { name: "Support & Help", path: "/user/support", icon: Headphones },
-  { name: "All Members", path: "/user/all-members", icon: Users },
-  {
-    name: "Members Application",
-    path: "/user/members-application",
-    icon: FileText,
-  },
 ];
 
 export const USER_BOTTOM_LINKS = [
