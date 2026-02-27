@@ -94,7 +94,7 @@ const CreateEvent = () => {
             UPAM Events
           </span>
           <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
-            Create Your Event
+            Create Your Event, Reach Your Audience, Make it Happen
           </h1>
           <p className="text-white/80 text-base md:text-lg max-w-xl mx-auto">
             Share your event with the Pan-African community. Fill in the details below to publish and promote your event.

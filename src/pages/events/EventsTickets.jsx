@@ -21,7 +21,7 @@ const EventsTickets = () => {
             Tickets & Registration
           </h1>
           <p className="text-white/95 text-base md:text-lg mb-8">
-            Fill in the Following Information Below to Create your Event
+            Find and register for UPAM events. Select your event and get your tickets securely.
           </p>
           <Link
             to="/events/tickets/form"
