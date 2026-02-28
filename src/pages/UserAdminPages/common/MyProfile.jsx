@@ -19,7 +19,7 @@ import LoadingState from '../../../component/ui/LoadingState';
 import ErrorState from '../../../component/ui/ErrorState';
 import SuccessState from '../../../component/ui/SuccessState';
 
-const MyProfileAdmin = () => {
+const MyProfile = () => {
     const { user: authUser } = useAuth();
     const { data: profileData, isLoading: isProfileLoading, isError: isProfileError, error: profileFetchError, refetch } = useGetMeQuery();
     const [updateMe, { isLoading: isUpdating }] = useUpdateMeMutation();
@@ -223,7 +223,6 @@ const MyProfileAdmin = () => {
                         <h3 className="text-lg font-bold text-slate-800 mb-6 border-b border-gray-50 pb-4 flex-shrink-0">Login History</h3>
 
                         <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar space-y-4">
-                            {console.log(user?.lastLogins)}
                             {user?.lastLogins && user.lastLogins.length > 0 ? (
                                 user.lastLogins.map((login, index) => (
                                     <div key={index} className="flex items-center gap-4 p-4 rounded-xl border border-gray-50 bg-slate-50/50 hover:bg-slate-50 transition-colors">
@@ -328,4 +327,4 @@ const MyProfileAdmin = () => {
     );
 };
 
-export default MyProfileAdmin;
+export default MyProfile;

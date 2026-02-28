@@ -15,7 +15,7 @@ import {
     ArrowRight
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useGetEventsQuery, useCreateEventMutation } from './calendarApiSlice';
+import { useGetEventsQuery, useCreateEventMutation } from '../admin/calendarApiSlice';
 import useAuth from '../../../hooks/useAuth';
 import CommunityCalendar from '../../../component/calendar/CommunityCalendar';
 
@@ -136,7 +136,7 @@ const UPAMCalender = () => {
                         )}
 
                         <div className="relative group">
-                            <button className="w-full py-3 bg-white border border-gray-100 text-slate-600 rounded-xl font-medium flex items-center justify-center gap-2 hover:bg-slate-50 transition-all">
+                            <button className="w-full py-3 bg-white border border-gray-100 text-slate-600 rounded-xl font-medium flex items-center justify-center gap-2 hover:bg-slate-50 transition-all cursor-default">
                                 Events <ChevronDown size={16} />
                             </button>
                         </div>

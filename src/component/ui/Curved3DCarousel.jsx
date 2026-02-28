@@ -32,7 +32,6 @@ const Curved3DCarousel = () => {
         ];
 
         const images = gsap.utils.toArray('.ring-img');
-        console.log(images);
 
         images.forEach((img, i) => {
             // Use your custom image if available, otherwise fall back to placeholder

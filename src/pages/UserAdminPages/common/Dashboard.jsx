@@ -1,0 +1,235 @@
+import React from 'react';
+import { DashboardStats } from '../../../component/dashboard/DashboardStats';
+import DashboardCalendar from '../../../component/dashboard/DashboardCalendar';
+import { ArrowRight, Plus, MapPin, Loader2, User, Bell } from 'lucide-react';
+import useAuth from '../../../hooks/useAuth';
+import { Link } from 'react-router-dom';
+import { useGetMyNotificationsQuery } from '../../../app/api/notificationsApiSlice';
+import { useGetVerificationsQuery } from '../../platform/verificationApiSlice';
+
+const Dashboard = () => {
+    const { user } = useAuth();
+    const isAdmin = user?.roles?.includes('admin');
+
+    const { data: notificationsResponse, isLoading: isNotificationsLoading } = useGetMyNotificationsQuery(undefined, { skip: isAdmin });
+    const { data: verificationsResponse, isLoading: isVerificationsLoading } = useGetVerificationsQuery(undefined, { skip: !isAdmin });
+
+    const recentNotifications = notificationsResponse?.data
+        ?.slice(0, 5) || [];
+
+    const verifiedMembers = verificationsResponse?.data
+        ?.filter(v => v.status === 'Approved')
+        ?.slice(0, 3) || [];
+
+    const countries = [
+        { name: 'Kenya', top: '20%', left: '60%' },
+        { name: 'Namibia', top: '40%', left: '55%' },
+        { name: 'Cameroon', top: '35%', left: '80%' },
+        { name: 'Tanzania', top: '55%', left: '70%' },
+        { name: 'Nigeria', top: '65%', left: '62%' },
+        { name: 'Malawi', top: '85%', left: '82%' },
+    ];
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+        }).replace(',', '');
+    };
+
+    return (
+        <div className="space-y-5 animate-in fade-in duration-500">
+            {/* Header section */}
+            <div className="flex justify-between items-end">
+                <h1 className="text-3xl font-bold text-slate-800">Dashboard</h1>
+            </div>
+
+            {/* Stats Cards */}
+            <DashboardStats />
+
+            <div className="grid grid-cols-1 gap-8">
+                {/* Left side: Banner and Announcement */}
+                <div className="lg:col-span-2 space-y-5">
+                    {/* Welcome Banner */}
+                    <div className="relative overflow-hidden bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8 lg:p-12 min-h-[300px] flex flex-col justify-center border border-blue-100/50">
+                        <div className="absolute left-5 lg:left-40 w-[150px] h-[150px] rounded-full 
+                        bg-gradient-to-r from-red-200 via-red-300 to-red-400
+                        shadow-[0_0_60px_20px_rgba(200,0,0,0.3)]
+                        animate-pulse blur-[20px]"></div>
+                        <div className="absolute right-20 w-[100px] h-[100px] rounded-full 
+                        bg-gradient-to-r from-blue-200 via-blue-300 to-blue-400
+                        shadow-[0_0_60px_20px_rgba(0,0,200,0.3)]
+                        blur-[20px]"></div>
+
+                        <div className="relative z-10 space-y-4 max-w-md">
+                            <h2 className="text-4xl lg:text-5xl font-bold text-slate-800 leading-tight">
+                                Welcome {user?.firstName} {user?.lastName}
+                            </h2>
+                            <p className="text-slate-500 text-lg">
+                                Here's the Summary of your Activity History for the Week Here
+                            </p>
+                            <Link to={isAdmin ? '/admin/calendar' : '/user/calendar'} className="flex items-center gap-2 text-blue-600 font-bold hover:gap-3 transition-all mt-4 group">
+                                View Activities Here
+                                <ArrowRight size={20} />
+                            </Link>
+                        </div>
+
+                        {/* Map Decoration */}
+                        <div className="absolute top-0 right-0 w-full h-full opacity-30 pointer-events-none">
+                            <img
+                                src="/world_map.png"
+                                alt="World Map"
+                                className="w-full h-full object-contain object-right"
+                            />
+                            {/* Country Markers */}
+                            {countries.map((c) => (
+                                <div
+                                    key={c.name}
+                                    className="absolute flex items-center gap-2 bg-white/80 backdrop-blur-sm px-2 py-1 rounded-md border border-white/50 animate-pulse"
+                                    style={{ top: c.top, left: c.left }}
+                                >
+                                    <div className="w-6 h-6 rounded-full overflow-hidden border border-gray-100">
+                                        <img src={`https://flagcdn.com/w40/${c.name.toLowerCase() === 'nigeria' ? 'ng' : c.name.toLowerCase() === 'kenya' ? 'ke' : c.name.toLowerCase() === 'namibia' ? 'na' : c.name.toLowerCase() === 'cameroon' ? 'cm' : c.name.toLowerCase() === 'tanzania' ? 'tz' : 'mw'}.png`} alt={c.name} className="w-full h-full object-cover" />
+                                    </div>
+                                    <span className="text-[10px] font-bold text-slate-700">{c.name}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className='space-y-5'>
+                            {/* Create Announcement / Quick Actions */}
+                            {isAdmin && <div className="bg-white p-8 rounded-3xl border border-gray-50 flex justify-between">
+                                <div className="space-y-2">
+                                    <h3 className="text-xl font-bold text-slate-800">
+                                        {isAdmin ? 'Create Announcement' : 'Quick Actions'}
+                                    </h3>
+                                    <p className="text-sm text-slate-500">
+                                        {isAdmin ? 'Create wide site announcement to everyone' : 'Access your member tools quickly'}
+                                    </p>
+                                </div>
+                                <button className="flex items-center gap-2 text-blue-500 font-bold hover:gap-3 transition-all mt-6 text-sm">
+                                    {isAdmin ? 'Make payment' : 'Go to Profile'}
+                                    <ArrowRight size={16} />
+                                </button>
+                            </div>}
+
+                            {/* Role-based Bottom Table */}
+                            <div className="bg-white rounded-3xl border border-gray-50 p-8">
+                                <div className="flex justify-between items-center mb-6">
+                                    <h3 className="text-xl font-bold text-slate-800">
+                                        {isAdmin ? 'Recently verified members' : 'Recent Notifications'}
+                                    </h3>
+                                    <Link to={isAdmin ? '/admin/notification' : '/user/notification'} className="text-blue-500 text-sm font-bold hover:underline">View all</Link>
+                                </div>
+                                <div className="overflow-x-auto">
+                                    <table className="w-full text-left">
+                                        <thead>
+                                            <tr className="border-b border-slate-50">
+                                                {isAdmin ? (
+                                                    <>
+                                                        <th className="pb-4 text-sm font-semibold text-slate-500">Name</th>
+                                                        <th className="pb-4 text-sm font-semibold text-slate-500">Email</th>
+                                                        <th className="pb-4 text-sm font-semibold text-slate-500">Country</th>
+                                                        <th className="pb-4 text-sm font-semibold text-slate-500">ID.NO</th>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <th className="pb-4 text-sm font-semibold text-slate-500">Message</th>
+                                                        <th className="pb-4 text-sm font-semibold text-slate-500 text-right">Date</th>
+                                                    </>
+                                                )}
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-slate-50">
+                                            {isAdmin ? (
+                                                isVerificationsLoading ? (
+                                                    <tr>
+                                                        <td colSpan="4" className="py-12 text-center">
+                                                            <div className="flex flex-col items-center gap-2">
+                                                                <Loader2 size={24} className="animate-spin text-slate-400" />
+                                                                <p className="text-xs font-medium text-slate-400">Loading members...</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                ) : verifiedMembers.length > 0 ? (
+                                                    verifiedMembers.map((v, idx) => (
+                                                        <tr key={idx} className="group hover:bg-slate-50/50 transition-colors">
+                                                            <td className="py-4 text-sm font-medium text-slate-700">
+                                                                {v.user?.firstName} {v.user?.lastName}
+                                                            </td>
+                                                            <td className="py-4 text-sm text-slate-500">{v.user?.email}</td>
+                                                            <td className="py-4 text-sm text-slate-500">{v.user?.country || 'N/A'}</td>
+                                                            <td className="py-4 text-sm font-bold text-slate-800">{v._id.slice(-7)}</td>
+                                                        </tr>
+                                                    ))
+                                                ) : (
+                                                    <tr>
+                                                        <td colSpan="4" className="py-12 text-center">
+                                                            <div className="flex flex-col items-center gap-2">
+                                                                <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-300">
+                                                                    <User size={20} />
+                                                                </div>
+                                                                <p className="text-xs font-medium text-slate-400">No verified members yet</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            ) : (
+                                                isNotificationsLoading ? (
+                                                    <tr>
+                                                        <td colSpan="2" className="py-12 text-center">
+                                                            <div className="flex flex-col items-center gap-2">
+                                                                <Loader2 size={24} className="animate-spin text-slate-400" />
+                                                                <p className="text-xs font-medium text-slate-400">Loading notifications...</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                ) : recentNotifications.length > 0 ? (
+                                                    recentNotifications.map((n, idx) => (
+                                                        <tr key={idx} className="group hover:bg-slate-50/50 transition-colors">
+                                                            <td className="py-4 text-sm font-medium text-slate-700 max-w-[200px] truncate">
+                                                                {n.message}
+                                                            </td>
+                                                            <td className="py-4 text-sm text-slate-500 text-right whitespace-nowrap">
+                                                                {formatDate(n.createdAt)}
+                                                            </td>
+                                                        </tr>
+                                                    ))
+                                                ) : (
+                                                    <tr>
+                                                        <td colSpan="2" className="py-12 text-center">
+                                                            <div className="flex flex-col items-center gap-2">
+                                                                <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-300">
+                                                                    <Bell size={20} />
+                                                                </div>
+                                                                <p className="text-xs font-medium text-slate-400">No notifications yet</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Right side: Calendar */}
+                        <div className="lg:col-span-1 h-full">
+                            <DashboardCalendar />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Dashboard;

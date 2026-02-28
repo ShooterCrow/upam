@@ -21,6 +21,7 @@ const useAuth = () => {
     isActive = user.emailVerified;
     isAdmin = roles.includes("admin");
     isManager = roles.includes("manager");
+    console.log(roles);
 
     if (isAdmin) status = "Admin";
     else if (isManager) status = "Manager";

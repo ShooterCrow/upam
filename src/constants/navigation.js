@@ -37,7 +37,7 @@ export const ADMIN_LINKS = [
     path: "/admin/emergency-contact",
     icon: AlertCircle,
   },
-  { name: "Notification", path: "/admin/notification", icon: Bell },
+  { name: "Notifications", path: "/admin/notification", icon: Bell },
   { name: "Support & Help", path: "/admin/support", icon: Headphones },
   { name: "All Members", path: "/admin/all-members", icon: Users },
   {
@@ -70,7 +70,7 @@ export const USER_LINKS = [
     path: "/user/emergency-contact",
     icon: AlertCircle,
   },
-  { name: "Notification", path: "/user/notification", icon: Bell },
+  { name: "Notifications", path: "/user/notification", icon: Bell },
   { name: "Support & Help", path: "/user/support", icon: Headphones },
 ];
 

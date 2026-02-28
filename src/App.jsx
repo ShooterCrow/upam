@@ -27,18 +27,18 @@ import Login from './pages/auth/Login'
 import ForgottenPassword from './pages/auth/ForgottenPassword'
 import PersistLogin from './pages/authenticationPages/PersistLogin'
 import RequireAuth from './pages/authenticationPages/RequireAuth'
-import AdminDashboard from './pages/UserAdminPages/admin/AdminDashboard'
-import MemberVerification from './pages/UserAdminPages/admin/MemberVerification'
-import MembershipPayment from './pages/UserAdminPages/admin/MembershipPayment'
-import EmergencyContact from './pages/UserAdminPages/admin/EmergencyContact'
-import Notification from './pages/UserAdminPages/admin/Notification'
-import Support from './pages/UserAdminPages/admin/Support'
+import Dashboard from './pages/UserAdminPages/common/Dashboard'
+import MemberVerification from './pages/UserAdminPages/common/MemberVerification'
+import EmergencyContact from './pages/UserAdminPages/common/EmergencyContact'
+import Notification from './pages/UserAdminPages/common/Notification'
+import Support from './pages/UserAdminPages/common/Support'
 import MemberApplication from './pages/UserAdminPages/admin/MemberApplication'
-import MyProfileAdmin from './pages/UserAdminPages/admin/MyProfileAdmin'
-import UPAMCalender from './pages/UserAdminPages/admin/UPAMCalender'
+import MyProfile from './pages/UserAdminPages/common/MyProfile'
+import UPAMCalender from './pages/UserAdminPages/common/UPAMCalender'
 import AllMembers from './pages/UserAdminPages/admin/AllMembers'
 import MemberDetail from './pages/UserAdminPages/admin/detailPages/MemberDetail'
 import NotFound from './pages/NotFound'
+import MembershipPayment from './pages/UserAdminPages/common/MembershipPayment'
 
 
 const App = () => {
@@ -52,7 +52,6 @@ const App = () => {
             <Route path="gallery" element={<Gallery />} />
             <Route path="about" element={<About />} />
             <Route path="get-involved" element={<GetInvolve />} />
-            <Route path="publications" element={<Publications />} />
             <Route path="membership-policy" element={<MembershipPolicy />} />
             <Route path="membership-agreement" element={<MembershipAgreement />} />
             <Route path="contact-us" element={<ContactUs />} />
@@ -70,7 +69,8 @@ const App = () => {
               <Route path=":slug" element={<EventDetail />} />
             </Route>
 
-            <Route path="research">
+            <Route path="publications">
+              <Route index element={<Publications />} />
               <Route path='panafrican-unity' element={<PanAfricanUnity />} />
               <Route path="digital-literacy" element={<DigitalLiteracy />} />
             </Route>
@@ -91,7 +91,7 @@ const App = () => {
           {/* Admin Routes */}
           <Route element={<RequireAuth allowedRoles={['admin', "manager"]} />}>
             <Route path="/admin" element={<AdminLayoutContext />}>
-              <Route index element={<AdminDashboard />} />
+              <Route index element={<Dashboard />} />
               <Route path='member-verification' element={<MemberVerification />} />
               <Route path='membership-payment' element={<MembershipPayment />} />
               <Route path='emergency-contact' element={<EmergencyContact />} />
@@ -102,7 +102,7 @@ const App = () => {
                 <Route index element={<MemberApplication />} />
                 <Route path=":id" element={<MemberDetail />} />
               </Route>
-              <Route path='my-profile' element={<MyProfileAdmin />} />
+              <Route path='my-profile' element={<MyProfile />} />
               <Route path='calendar' element={<UPAMCalender />} />
             </Route>
           </Route>
@@ -110,7 +110,14 @@ const App = () => {
           {/* User Routes */}
           <Route element={<RequireAuth allowedRoles={['user', "admin", "manager"]} />}>
             <Route path="/user" element={<UserLayoutContext />}>
-              <Route index element={<div className="p-4">User Dashboard Area</div>} />
+              <Route index element={<Dashboard />} />
+              <Route path='member-verification' element={<MemberVerification />} />
+              <Route path='calendar' element={<UPAMCalender />} />
+              <Route path='membership-payment' element={<MembershipPayment />} />
+              <Route path='emergency-contact' element={<EmergencyContact />} />
+              <Route path='notification' element={<Notification />} />
+              <Route path='support' element={<Support />} />
+              <Route path='my-profile' element={<MyProfile />} />
             </Route>
           </Route>
 

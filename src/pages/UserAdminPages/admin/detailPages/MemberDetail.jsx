@@ -121,13 +121,13 @@ const MemberDetail = () => {
                     <p className="text-slate-500 font-medium">Here is the application details from {userData?.firstName} {userData?.lastName}</p>
                 </div>
 
-                {application.status === 'Pending' && (
+                {(application.status === 'Pending' || application.status === 'Approved') && (
                     <div className="flex items-center gap-3">
                         <button
-                            onClick={() => { setShowActionPanel(true); setFeedback(''); }}
+                            onClick={() => { setShowActionPanel(true); setFeedback(application.adminFeedback || ''); }}
                             className="px-8 py-3.5 bg-slate-900 text-white rounded-2xl font-bold hover:shadow-lg hover:shadow-slate-200 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
                         >
-                            Review Application
+                            {application.status === 'Approved' ? 'Manage Verification' : 'Review Application'}
                         </button>
                     </div>
                 )}
@@ -294,7 +294,9 @@ const MemberDetail = () => {
                 <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
                     <div className="bg-white w-full max-w-lg rounded-[2.5rem] p-10 animate-in zoom-in-95 duration-300">
                         <div className="flex items-center justify-between mb-8">
-                            <h2 className="text-2xl font-black text-slate-900 tracking-tight">Review Application</h2>
+                            <h2 className="text-2xl font-black text-slate-900 tracking-tight">
+                                {application.status === 'Approved' ? 'Manage Verification' : 'Review Application'}
+                            </h2>
                             <button onClick={() => setShowActionPanel(false)} className="p-2 hover:bg-slate-100 rounded-xl transition-colors text-slate-400">
                                 <XCircle size={24} />
                             </button>
@@ -317,17 +319,29 @@ const MemberDetail = () => {
                                     onClick={() => handleStatusUpdate('Rejected')}
                                     className="flex items-center justify-center gap-2 py-4.5 bg-white border-2 border-slate-100 text-slate-600 rounded-2xl font-bold hover:bg-red-50 hover:border-red-100 hover:text-red-600 transition-all disabled:opacity-50"
                                 >
-                                    {isUpdating ? <Loader2 className="animate-spin" size={18} /> : <XCircle size={18} />}
-                                    Reject
+                                    {isUpdating ? <Loader2 className="animate-spin" size={18} /> : (application.status === 'Approved' ? <AlertCircle size={18} /> : <XCircle size={18} />)}
+                                    {application.status === 'Approved' ? 'Cancel Verification' : 'Reject'}
                                 </button>
-                                <button
-                                    disabled={isUpdating}
-                                    onClick={() => handleStatusUpdate('Approved')}
-                                    className="flex items-center justify-center gap-2 py-4.5 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition-all shadow-lg shadow-red-100/50 disabled:opacity-50"
-                                >
-                                    {isUpdating ? <Loader2 className="animate-spin" size={18} /> : <CheckCircle2 size={18} />}
-                                    Approve
-                                </button>
+                                {application.status !== 'Approved' && (
+                                    <button
+                                        disabled={isUpdating}
+                                        onClick={() => handleStatusUpdate('Approved')}
+                                        className="flex items-center justify-center gap-2 py-4.5 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition-all shadow-lg shadow-red-100/50 disabled:opacity-50"
+                                    >
+                                        {isUpdating ? <Loader2 className="animate-spin" size={18} /> : <CheckCircle2 size={18} />}
+                                        Approve
+                                    </button>
+                                )}
+                                {application.status === 'Approved' && (
+                                    <button
+                                        disabled={isUpdating}
+                                        onClick={() => handleStatusUpdate('Approved')}
+                                        className="flex items-center justify-center gap-2 py-4.5 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all disabled:opacity-50"
+                                    >
+                                        {isUpdating ? <Loader2 className="animate-spin" size={18} /> : <CheckCircle2 size={18} />}
+                                        Save Changes
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </div>

@@ -28,7 +28,7 @@ const DashboardCalendar = () => {
                 />
             </div>
 
-            <div className="h-fit bottom-0 mb-auto bg-slate-50 p-6 m-4 my-auto rounded-xl flex-1 w-full max-w-[300px]">
+            <div className="h-fit bottom-0 mb-auto bg-slate-50 p-6 m-4 my-auto rounded-xl flex-1 w-full max-w-[200px]">
                 {displayEvent ? (
                     <div className="space-y-3">
                         <div className="flex justify-between items-center mb-3">

@@ -186,9 +186,9 @@ const MemberVerification = () => {
     }
 
     const verificationStatus = myVerification?.data?.status;
-    console.log(myVerification)
     const isPending = verificationStatus === 'Pending';
     const isRejected = verificationStatus === 'Rejected';
+    const isApproved = verificationStatus === 'Approved';
     const adminFeedback = myVerification?.data?.adminFeedback;
 
     const departments = [
@@ -199,6 +199,33 @@ const MemberVerification = () => {
         "Emergency Response Team", "Energy"
     ];
 
+    // If approved, show an exclusive verified view and do not render the form.
+    if (isApproved) {
+        return (
+            <div className="py-12 mx-auto max-w-3xl animate-in fade-in duration-500">
+                <div className="bg-white p-10 border border-emerald-100 flex flex-col items-center text-center">
+                    <div className="w-24 h-24 bg-emerald-50 rounded-full flex items-center justify-center mb-6">
+                        <CheckCircle className="w-12 h-12 text-emerald-500" />
+                    </div>
+                    <h1 className="text-3xl font-black text-slate-800 mb-4">Membership Verified</h1>
+                    <p className="text-slate-600 text-lg mb-8 max-w-lg">
+                        Congratulations! Your membership verification has been approved. You now have full access to all verified member benefits and features.
+                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-md">
+                        <div className="bg-slate-50 p-4 border border-slate-100 flex flex-col items-center">
+                            <span className="text-xs uppercase tracking-widest font-bold text-slate-400 mb-1">Membership ID</span>
+                            <span className="text-slate-800 font-bold">{myVerification?.data?.idNumber || 'UPAM-VER-100'}</span>
+                        </div>
+                        <div className="bg-slate-50 p-4 border border-slate-100 flex flex-col items-center">
+                            <span className="text-xs uppercase tracking-widest font-bold text-slate-400 mb-1">Tier</span>
+                            <span className="text-slate-800 font-bold text-center">{myVerification?.data?.tierClassification || 'General'}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <form onSubmit={handleSubmit} className="py-4 md:py-8 mx-auto space-y-8 animate-in fade-in duration-500 pb-20">
             <div className="flex flex-col gap-2">
@@ -208,28 +235,38 @@ const MemberVerification = () => {
 
             {isPending && (
                 <div className="p-4 bg-yellow-50 border border-yellow-100 rounded-3xl flex items-center gap-4 animate-in slide-in-from-top duration-500">
-                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-yellow-500 shadow-sm border border-yellow-50 shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-yellow-500 border border-yellow-50 shrink-0">
                         <Info size={24} />
                     </div>
                     <div>
                         <h4 className="font-bold text-yellow-900 text-lg">Application Under Review</h4>
-                        {/* <p className="text-yellow-700 mt-1">Your verification application has been submitted and is currently being reviewed by our team. You cannot make changes while the application is pending.</p> */}
+                        <p className="text-yellow-700 mt-1">Your verification application has been submitted and is currently being reviewed by our team.</p>
                     </div>
                 </div>
             )}
 
             {isRejected && (
-                <div className="p-6 bg-red-50 border border-red-100 rounded-3xl flex items-start gap-4 animate-in slide-in-from-top duration-500">
-                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-red-500 shadow-sm border border-red-50 shrink-0">
-                        <AlertCircle size={24} />
+                <div className="p-6 bg-red-50 border-2 border-red-200/60 flex flex-col md:flex-row items-start gap-6 animate-in slide-in-from-top duration-500 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-red-100 rounded-bl-full -mr-16 -mt-16 opacity-50 pointer-events-none" />
+
+                    <div className="w-16 h-16 rounded-full bg-white flex flex-shrink-0 items-center justify-center text-red-500 border border-red-100 relative z-10">
+                        <AlertCircle size={32} strokeWidth={2.5} />
                     </div>
-                    <div>
-                        <h4 className="font-bold text-red-900 text-lg">Application Rejected</h4>
-                        <p className="text-red-700 mt-1">Unfortunately, your application was not approved. You can correct the information below and re-submit for verification.</p>
+
+                    <div className="flex-1 relative z-10">
+                        <h4 className="font-black text-red-950 text-xl tracking-tight mb-2">Verification Application Rejected</h4>
+                        <p className="text-red-800/90 text-sm md:text-base leading-relaxed max-w-2xl font-medium">
+                            We carefully reviewed your application, but unfortunately, we could not approve it based on the information provided. Please review our feedback below, adjust your details in the pre-filled form, and submit your application again.
+                        </p>
+
                         {adminFeedback && (
-                            <div className="mt-4 p-4 bg-white/50 rounded-2xl border border-red-100/50">
-                                <p className="text-xs font-bold text-red-800 uppercase tracking-wider mb-1">Admin Feedback</p>
-                                <p className="text-red-900">{adminFeedback}</p>
+                            <div className="mt-5 p-5 bg-white/70 backdrop-blur-sm border border-red-100">
+                                <p className="text-xs font-black text-red-900/60 uppercase tracking-widest mb-2 flex items-center gap-2">
+                                    <Shield size={14} /> Administrator Feedback
+                                </p>
+                                <p className="text-red-950 font-medium leading-relaxed">
+                                    "{adminFeedback}"
+                                </p>
                             </div>
                         )}
                     </div>
@@ -364,7 +401,7 @@ const MemberVerification = () => {
 
                             <div
                                 onClick={() => document.getElementById('id-upload').click()}
-                                className={`border-2 border-dashed rounded-2xl p-8 flex flex-col items-center justify-center gap-4 transition-all cursor-pointer group ${idFile ? 'border-green-200 bg-green-50/30' : 'border-gray-200 bg-slate-50/50 hover:bg-slate-50'}`}
+                                className={`border-2 border-dashed p-8 flex flex-col items-center justify-center gap-4 transition-all cursor-pointer group ${idFile ? 'border-green-200 bg-green-50/30' : 'border-gray-200 bg-slate-50/50 hover:bg-slate-50'}`}
                             >
                                 <input
                                     id="id-upload"
@@ -411,7 +448,7 @@ const MemberVerification = () => {
             {/* Agreements */}
             <Section className="py-6" title="Agreements & Acknowledgements">
                 <div className="space-y-8">
-                    <div className="p-6 bg-slate-50/50 rounded-2xl border border-slate-100 flex gap-4">
+                    <div className="p-6 bg-slate-50/50 border border-slate-100 flex gap-4">
                         <CheckboxField
                             name="serviceHoursAgreed"
                             checked={formData.serviceHoursAgreed}
@@ -473,7 +510,7 @@ const MemberVerification = () => {
             </Section>
 
             {submitError && (
-                <div className="p-4 bg-red-50 border border-red-100 rounded-2xl flex items-center gap-3 text-red-600 text-sm font-medium animate-in slide-in-from-top-2">
+                <div className="p-4 bg-red-50 border border-red-100 flex items-center gap-3 text-red-600 text-sm font-medium animate-in slide-in-from-top-2">
                     <AlertCircle size={20} />
                     {submitError}
                 </div>
@@ -482,7 +519,7 @@ const MemberVerification = () => {
             <button
                 type="submit"
                 disabled={isSubmitting || !formData.termsAgreed || isPending}
-                className="w-full py-5 bg-red-600 hover:bg-red-700 text-white rounded-2xl font-bold shadow-xs shadow-red-100 transition-all transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                className="w-full py-5 bg-red-600 hover:bg-red-700 text-white font-bold shadow-xs shadow-red-100 transition-all transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
             >
                 {isSubmitting && <Loader2 className="animate-spin" size={24} />}
                 {isSubmitting ? 'Submitting Application...' : isPending ? 'Application Pending Review' : 'Submit for Verification'}

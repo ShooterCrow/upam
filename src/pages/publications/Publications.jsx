@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Download, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Publications() {
     const [activeTab, setActiveTab] = useState('reports');
@@ -30,31 +31,37 @@ export default function Publications() {
     const articles = [
         {
             image: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&q=80",
+            slug: "panafrican-unity",
             title: "Pan-African Unity in the 21st Century: From Ideology to Institutional Action",
             description: "Pan-Africanism has historically served as both an ideological framework and a political movement aimed at the liberation, unity, and advancement of African peoples globally."
         },
         {
             image: "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=800&q=80",
+            slug: "digital-literacy",
             title: "Digital Literacy and Innovation as Tools for African Self-Sufficiency",
             description: "In the 21st century, digital literacy and technological innovation have become decisive factors in national development and global competitiveness. For Africa, expanding access to digital skills is not merely a technological goal but a strategic pathway toward self-sufficiency."
         },
         {
             image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80",
+            slug: "",
             title: "Building an African Economic Ecosystem Owned by Africans",
             description: "Africa's economic structure have long been shaped by external ownership and extractive models that limit local value creation. Building an African-owned economic ecosystem requires reimagining production, trade, finance, and entrepreneurship in ways that prioritize African control and benefit."
         },
         {
             image: "https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=800&q=80",
+            slug: "",
             title: "One People, Many Borders: How Colonial Boundaries Continue to Shape African Disunity",
             description: "The artificial borders imposed during colonial rule fragmented African societies, cultures, and economies, creating divisions that persist today. These boundaries disrupted pre-existing systems of cooperation and continue to influence political instability, ethnic tension, and weak regional integration."
         },
         {
             image: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=800&q=80",
+            slug: "",
             title: "African Self-Reliance: Moving Beyond Aid to Sustainable Development",
             description: "Foreign aid has played a role in addressing humanitarian crises in Africa, but long-term reliance on aid has often undermined local capacity, accountability, and innovation. African self-reliance emphasizes development strategies driven by local knowledge, resources, and institutions."
         },
         {
             image: "https://images.unsplash.com/photo-1511376777868-611b54f68947?w=800&q=80",
+            slug: "",
             title: "Healing Historical Divides: Slavery, Colonialism, and the Path to Collective Renewal",
             description: "The legacies of slavery and colonialism have left deep psychological, social, and economic scars across Africa and the African diaspora. These histories foster mistrust, fragmentation, and internalized narratives that weaken collective progress."
         }
@@ -220,19 +227,20 @@ export default function Publications() {
                                     <div className="text-sm text-red-600 font-medium mb-3">
                                         Articles/Research
                                     </div>
-
-                                    <h3 className="text-lg font-bold text-gray-900 mb-3 leading-tight">
-                                        {article.title}
-                                    </h3>
+                                    <Link to={`/publications/${article.slug}`}>
+                                        <h3 className="text-lg font-bold text-gray-900 mb-3 leading-tight">
+                                            {article.title}
+                                        </h3>
+                                    </Link>
 
                                     <p className="text-sm text-gray-600 mb-4 flex-grow leading-relaxed">
                                         {article.description}
                                     </p>
 
-                                    <button className="inline-flex items-center text-red-600 hover:text-red-700 font-medium text-sm transition-colors group">
+                                    <Link to={`/publications/${article.slug}`} className="inline-flex items-center text-red-600 hover:text-red-700 font-medium text-sm transition-colors group">
                                         Read more
                                         <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         ))}
