@@ -37,14 +37,36 @@ export const events = [
   {
     id: 1,
     slug: 'get-high-on-ambitions-not-drugs',
-    title: 'Get High on Ambitions Not Drugs (Health Awareness)',
-    date: 'September 20th 2025',
-    dateShort: 'Sept 20th 2025',
-    location: 'Nigeria / Cameroon',
-    description: "The highlight of the program took place on Saturday with a Health Symposium titled 'Rising Above Influence: The Power of Purpose.' The symposium was an enlightening and impactful session led by Mrs. Venetta, who spoke passionately about the power of the mind and the importance of creating mental maps that guide individuals through life's challenges.",
-    image: 'https://images.unsplash.com/photo-1540575467063-178bf50e2f0a?w=800&q=80',
-    fullDescription: "The highlight of the program took place on Saturday with a Health Symposium titled 'Rising Above Influence: The Power of Purpose.' The symposium was an enlightening and impactful session led by Mrs. Venetta, who spoke passionately about the power of the mind and the importance of creating mental maps that guide individuals through life's challenges.",
-    status: 'upcoming',
+    title: 'Get High on Ambitions not Drugs (Mental Health & Drug Abuse Awareness Campaign)',
+    date: 'October 12th 2025',
+    dateShort: 'Oct 12th 2025',
+    location: 'Nigeria',
+    description: "The Global Health Program has been an immense success, blending education, inspiration, and community service. From Mrs. Venetta's dynamic arrival to the impactful symposium and heartfelt outreach, the event demonstrated the power of purpose-driven leadership and collective action in promoting global health and well-being.",
+    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80',
+    fullDescription: "The Global Health Program has been an immense success, blending education, inspiration, and community service. From Mrs. Venetta's dynamic arrival to the impactful symposium and heartfelt outreach, the event demonstrated the power of purpose-driven leadership and collective action in promoting global health and well-being.",
+    overview: "The Global Health Program has been an immense success, blending education, inspiration, and community service. From Mrs. Venetta's dynamic arrival to the impactful symposium and heartfelt outreach, the event demonstrated the power of purpose-driven leadership and collective action in promoting global health and well-being.",
+    highlights: [
+      {
+        title: 'DAY 1 : HEALTH SYMPOSIUM – "Rising Above Influence: The Power of Purpose"',
+        body: 'The highlight of the program took place on Saturday with a Health Symposium titled "Rising Above Influence: The Power of Purpose." The symposium was an enlightening and impactful session led by Mrs. Venetta, who spoke passionately about the power of the mind and the importance of creating mental maps that guide individuals through life\'s challenges. Participants were encouraged to identify their core values and use them as a compass in moments of peer pressure and temptation. The symposium featured participants and representatives from: Skillful Mind Initiative, YALI (Young African Leaders Initiative), and Upam Academy students. The engagement was interactive, featuring question-and-answer sessions, group reflections, and networking opportunities. Many attendees described the experience as "transformational" and "power-packed." Following the symposium, the day concluded with a visitation to an African Art Gallery.'
+      },
+      {
+        title: 'DAY 2: CORRECTIONAL CENTER VISIT',
+        body: "The second day, Sunday, was devoted to community outreach. The team visited a Correctional Center, where participants interacted with inmates in a compassionate and motivational session. Discussions centered on the dangers of drug abuse, the importance of self-development, and the need to channel energy into ambitions and positive goals rather than harmful substances. Lectures and personal testimonies shared during the visit inspired hope and reinforced the message that transformation is possible for everyone, regardless of past mistakes. Mrs. Venetta's empathetic communication and encouragement left a lasting impression on both the inmates and volunteers."
+      },
+      {
+        title: 'DAY 3: SCHOOL OUTREACH',
+        body: "On the final day, Mrs Venetta alongside the team visited two schools — African Child Academy and Freedom International School to enlighten students on the importance of focusing on their future and avoiding drug abuse. During the interactive sessions, Mrs Venetta encouraged students to set meaningful goals, stay disciplined, and make positive choices that support their personal and academic growth. The discussions highlighted the dangers of drug use and the value of education in building a successful future. Both schools welcomed the team warmly, and the students showed great enthusiasm and engagement throughout the program. As a gesture of support, books, pens, and jotters were distributed to students and teachers as souvenirs."
+      }
+    ],
+    objectives: [
+      "Reduce substance abuse among youth aged 15–35 in target communities",
+      "Equip young people with mental tools to resist peer pressure",
+      "Connect youth to mentors, career guidance, and community support networks",
+      "Promote Pan-African values of self-determination, discipline, and collective progress",
+      "Build a movement of youth ambassadors committed to healthy living"
+    ],
+    status: 'completed',
   },
   {
     id: 2,

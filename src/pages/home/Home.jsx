@@ -688,10 +688,10 @@ const Index = () => {
                                 <p className="text-sm text-gray-600 leading-relaxed">
                                     We the African People Stand United for Economically Self-sustainable, Development, Freedom, Equality, Justice, Free Trade, Open Borders, Effective Governance, One Nation and the Protection of Our motherland, one people united for Africa, Home of the Brave.
                                 </p>
-                                <button className="flex items-center gap-2 px-6 py-3 bg-[#EB010C] text-white rounded-lg hover:bg-[#EB010C]/90 transition-all duration-300 hover:shadow-lg w-fit group">
+                                <Link to="/get-involved" className="flex items-center gap-2 px-6 py-3 bg-[#EB010C] text-white rounded-lg hover:bg-[#EB010C]/90 transition-all duration-300 hover:shadow-lg w-fit group">
                                     Join Now
                                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                                </button>
+                                </Link>
                             </div>
                         </div>
 
@@ -715,15 +715,29 @@ const Index = () => {
                                     <p className="text-sm lg:text-base text-gray-600 leading-relaxed">
                                         We the African People Stand United for Economically Self-sustainable, Development, Freedom, Equality, Justice, Free Trade, Open Borders, Effective Governance, One Nation and the Protection of Our motherland, one people united for Africa, Home of the Brave.
                                     </p>
-                                    <button className="flex items-center gap-2 px-6 py-3 bg-[#EB010C] text-white rounded-lg hover:bg-[#EB010C]/90 transition-all duration-300 hover:shadow-lg self-start group">
+                                    <Link to="/get-involved" className="flex items-center gap-2 px-6 py-3 bg-[#EB010C] text-white rounded-lg hover:bg-[#EB010C]/90 transition-all duration-300 hover:shadow-lg self-start group">
                                         Join Now
                                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
                     </section>
 
+                    {/* Leadership Section */}
+                    <section className="mb-10 lg:mb-24">
+                        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-4 mb-8">
+                            <div>
+                                <p className="text-xs font-medium text-upam-red tracking-wider uppercase mb-2">OUR TEAM</p>
+                                <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 tracking-tight">
+                                    Meet Our Leadership
+                                </h2>
+                            </div>
+                            <Link to="/leadership" className="cursor-pointer flex items-center gap-2 text-sm font-medium text-upam-red hover:text-upam-red/80 transition-colors group">
+                                View All Leaders
+                                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                            </Link>
+                        </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8">
                         {[
                             {
@@ -793,6 +807,7 @@ const Index = () => {
                             </div>
                         ))}
                     </div>
+                    </section>
 
                     {/* Activities Section */}
                     <section className="my-10 lg:my-24">
@@ -814,14 +829,14 @@ const Index = () => {
                                         </p>
                                     </div>
                                 </div>
-                                <ReadMore text={"View All Events"} />
+                                <ReadMore text={"View All Events"} link={"/events"} />
                             </div>
 
                             {/* Main Content Grid - Fixed Height Layout */}
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                                 {/* Featured Event - Left Column (Full height) */}
                                 <div className="lg:col-span-2">
-                                    <div className="relative h-[530px] rounded-2xl overflow-hidden group cursor-pointer">
+                                    <Link to="/events/upam-academy-launch" className="relative h-[530px] rounded-2xl overflow-hidden group cursor-pointer block">
                                         <img
                                             src="https://api.builder.io/api/v1/image/assets/TEMP/87a486687e349d2a5c9a964e45e9e666dd8b47a7?width=1760"
                                             alt="UPAM Academy Launch"
@@ -849,7 +864,7 @@ const Index = () => {
                                                 </p>
                                             </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 </div>
 
                                 {/* Side Events - Right Column (Two images split height) */}
@@ -879,10 +894,10 @@ const Index = () => {
                                                     UPAM Unity Conference
                                                 </h3>
 
-                                                <button className="inline-flex items-center gap-2 text-white font-semibold text-sm mt-3 group-hover:gap-3 transition-all duration-300">
+                                                <Link to="/events/upam-unity-conference" className="inline-flex items-center gap-2 text-white font-semibold text-sm mt-3 group-hover:gap-3 transition-all duration-300">
                                                     View Details
                                                     <ArrowRight className="w-4 h-4" />
-                                                </button>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
@@ -912,10 +927,10 @@ const Index = () => {
                                                     Youth Empowerment Summit
                                                 </h3>
 
-                                                <button className="inline-flex items-center gap-2 text-white font-semibold text-sm mt-3 group-hover:gap-3 transition-all duration-300">
+                                                <Link to="/events/pan-african-youth-summit-2025" className="inline-flex items-center gap-2 text-white font-semibold text-sm mt-3 group-hover:gap-3 transition-all duration-300">
                                                     View Details
                                                     <ArrowRight className="w-4 h-4" />
-                                                </button>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>

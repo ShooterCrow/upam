@@ -102,6 +102,7 @@ export const PUBLIC_LINKS = [
     hasDropdown: true,
     children: [
       { name: "Membership Policy", path: "/membership-policy" },
+      { name: "Membership Agreement", path: "/membership-agreement" },
       { name: "Search Members", path: "/search" },
     ],
   },

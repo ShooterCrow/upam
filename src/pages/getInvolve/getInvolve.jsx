@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import becomeMemberImg from '../../assets/become_member.png';
 import volunteerImg from '../../assets/volunteer.png';
@@ -35,9 +36,9 @@ const GetInvolve = () => {
               and driving change across Africa and the diaspora.
             </p>
             <div className="flex justify-end pr-2 md:justify-start">
-              <a href="#" className="flex items-center gap-1 font-['Lato'] font-normal text-[16px] leading-[169%] tracking-[0.04em] group transition-colors">
+              <Link to="/register" className="flex items-center gap-1 font-['Lato'] font-normal text-[16px] leading-[169%] tracking-[0.04em] group transition-colors">
                 Join Now <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </a>
+              </Link>
             </div>
           </section>
         </div>
@@ -65,9 +66,9 @@ const GetInvolve = () => {
                 contributing to real impact.
               </p>
               <div className="flex justify-end pr-2 md:justify-start">
-                <a href="#" className="flex items-center gap-1 font-['Lato'] font-normal text-[16px] leading-[169%] tracking-[0.04em] group transition-colors">
+                <Link to="/volunteer" className="flex items-center gap-1 font-['Lato'] font-normal text-[16px] leading-[169%] tracking-[0.04em] group transition-colors">
                   Volunteer Now <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
+                </Link>
               </div>
             </div>
             <div className="relative w-full mt-4 md:mt-0 overflow-hidden rounded-sm order-2 md:order-2">
@@ -97,9 +98,9 @@ const GetInvolve = () => {
                 socio-economic transformation across the continent.
               </p>
               <div className="flex justify-end pr-2 md:justify-start">
-                <a href="#" className="flex items-center gap-1 font-['Lato'] font-normal text-[16px] leading-[169%] tracking-[0.04em] group transition-colors">
+                <Link to="/partnership" className="flex items-center gap-1 font-['Lato'] font-normal text-[16px] leading-[169%] tracking-[0.04em] group transition-colors">
                   Partner with us <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
+                </Link>
               </div>
             </div>
           </section>

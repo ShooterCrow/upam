@@ -78,7 +78,32 @@ const CreateEvent = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 font-['Lato',sans-serif] text-black pb-16">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+      {/* ── Hero Banner ── */}
+      <section className="relative min-h-[45vh] flex items-center justify-center overflow-hidden bg-gray-900">
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1600&q=80"
+            alt="Create Event"
+            className="w-full h-full object-cover opacity-40"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
+        </div>
+        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto py-16">
+          <span className="inline-block text-xs font-semibold tracking-widest uppercase text-[#EB010C] mb-4">
+            UPAM Events
+          </span>
+          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
+            Create Your Event, Reach Your Audience, Make it Happen
+          </h1>
+          <p className="text-white/80 text-base md:text-lg max-w-xl mx-auto">
+            Share your event with the Pan-African community. Fill in the details below to publish and promote your event.
+          </p>
+        </div>
+      </section>
+
+      {/* ── Form Container ── */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <Link
           to="/events"
           className="inline-flex items-center gap-2 text-sm font-medium text-[#EB010C] hover:text-[#EB010C]/80 mb-6"

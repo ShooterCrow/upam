@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 const globalExecutive = [
     {
@@ -246,12 +247,12 @@ const Leadership = () => {
                         <p className="text-[#666] text-base leading-[139%] tracking-[0.32px] mb-6">
                             We're always looking for passionate individuals to help drive our mission forward.
                         </p>
-                        <a
-                            href="/contact"
+                        <Link
+                            to="/contact-us"
                             className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors duration-200"
                         >
                             Get in Touch
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

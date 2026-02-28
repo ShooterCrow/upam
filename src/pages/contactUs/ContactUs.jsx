@@ -213,13 +213,13 @@ const ContactUs = () => {
                         <div>
                             <h3 className="font-bold mb-6">Follow our updates</h3>
                             <div className="flex gap-4">
-                                <a href="#" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
+                                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
                                     <Facebook size={20} />
                                 </a>
-                                <a href="#" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
+                                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
                                     <Twitter size={20} />
                                 </a>
-                                <a href="#" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
+                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
                                     <Instagram size={20} />
                                 </a>
                             </div>

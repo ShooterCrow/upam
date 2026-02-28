@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import Layout from './component/layout/Layout'
 import AdminLayoutContext from './component/layout/AdminLayoutContext'
 import UserLayoutContext from './component/layout/UserLayoutContext'
@@ -12,6 +12,10 @@ import Volunteer from './pages/volunteer/Volunteer'
 import Publications from './pages/publications/Publications'
 import DigitalLiteracy from './pages/publications/articles/DigitalLiteracy'
 import PanAfricanUnity from './pages/publications/articles/PanAfricanUnity'
+import AfricanEconomicEcosystem from './pages/publications/articles/AfricanEconomicEcosystem'
+import ColonialBoundaries from './pages/publications/articles/ColonialBoundaries'
+import AfricanSelfReliance from './pages/publications/articles/AfricanSelfReliance'
+import HealingHistoricalDivides from './pages/publications/articles/HealingHistoricalDivides'
 import About from './pages/about/About'
 import MembershipPolicy from './pages/membershipPolicy/MembershipPolicy'
 import MembershipAgreement from './pages/membershipAgreement/MembershipAgreement'
@@ -39,6 +43,10 @@ import AllMembers from './pages/UserAdminPages/admin/AllMembers'
 import MemberDetail from './pages/UserAdminPages/admin/detailPages/MemberDetail'
 import NotFound from './pages/NotFound'
 import MembershipPayment from './pages/UserAdminPages/common/MembershipPayment'
+import TermsOfService from './pages/legal/TermsOfService'
+import PrivacyPolicy from './pages/legal/PrivacyPolicy'
+import Cookies from './pages/legal/Cookies'
+import SearchMembers from './pages/search/SearchMembers'
 
 
 const App = () => {
@@ -73,6 +81,10 @@ const App = () => {
               <Route index element={<Publications />} />
               <Route path='panafrican-unity' element={<PanAfricanUnity />} />
               <Route path="digital-literacy" element={<DigitalLiteracy />} />
+              <Route path="african-economic-ecosystem" element={<AfricanEconomicEcosystem />} />
+              <Route path="colonial-boundaries" element={<ColonialBoundaries />} />
+              <Route path="african-self-reliance" element={<AfricanSelfReliance />} />
+              <Route path="healing-historical-divides" element={<HealingHistoricalDivides />} />
             </Route>
 
             {/* Auth Routes */}
@@ -80,6 +92,16 @@ const App = () => {
             <Route path="login" element={<Login />} />
             <Route path="forgot-password" element={<ForgottenPassword />} />
             <Route path="platforms" element={<Platform />} />
+
+            {/* Redirects for nav parent paths */}
+            <Route path="resources" element={<Navigate to="/publications" replace />} />
+            <Route path="membership" element={<Navigate to="/membership-policy" replace />} />
+
+            {/* Legal & Search */}
+            <Route path="terms" element={<TermsOfService />} />
+            <Route path="privacy" element={<PrivacyPolicy />} />
+            <Route path="cookies" element={<Cookies />} />
+            <Route path="search" element={<SearchMembers />} />
 
             {/* Protected Routes */}
             <Route element={<RequireAuth />}>
