@@ -29,6 +29,8 @@ import TicketsForm from './pages/events/TicketsForm'
 import Register from './pages/auth/Register'
 import Login from './pages/auth/Login'
 import ForgottenPassword from './pages/auth/ForgottenPassword'
+import VerifyEmail from './pages/auth/VerifyEmail'
+import ResetPassword from './pages/auth/ResetPassword'
 import PersistLogin from './pages/authenticationPages/PersistLogin'
 import RequireAuth from './pages/authenticationPages/RequireAuth'
 import Dashboard from './pages/UserAdminPages/common/Dashboard'
@@ -41,6 +43,7 @@ import MyProfile from './pages/UserAdminPages/common/MyProfile'
 import UPAMCalender from './pages/UserAdminPages/common/UPAMCalender'
 import AllMembers from './pages/UserAdminPages/admin/AllMembers'
 import MemberDetail from './pages/UserAdminPages/admin/detailPages/MemberDetail'
+import Chapters from './pages/UserAdminPages/admin/chapters/Chapters'
 import NotFound from './pages/NotFound'
 import MembershipPayment from './pages/UserAdminPages/common/MembershipPayment'
 import TermsOfService from './pages/legal/TermsOfService'
@@ -91,6 +94,8 @@ const App = () => {
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
             <Route path="forgot-password" element={<ForgottenPassword />} />
+            <Route path="verify-email" element={<VerifyEmail />} />
+            <Route path="reset-password" element={<ResetPassword />} />
             <Route path="platforms" element={<Platform />} />
 
             {/* Redirects for nav parent paths */}
@@ -124,6 +129,7 @@ const App = () => {
                 <Route index element={<MemberApplication />} />
                 <Route path=":id" element={<MemberDetail />} />
               </Route>
+              <Route path='chapters' element={<Chapters />} />
               <Route path='my-profile' element={<MyProfile />} />
               <Route path='calendar' element={<UPAMCalender />} />
             </Route>

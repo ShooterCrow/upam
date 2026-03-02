@@ -17,6 +17,7 @@ import {
   HelpCircle,
   LogOutIcon,
   Calendar,
+  Globe,
 } from "lucide-react";
 
 export const ADMIN_LINKS = [
@@ -45,6 +46,7 @@ export const ADMIN_LINKS = [
     path: "/admin/members-application",
     icon: FileText,
   },
+  { name: "Chapters", path: "/admin/chapters", icon: Globe },
 ];
 
 export const ADMIN_BOTTOM_LINKS = [
