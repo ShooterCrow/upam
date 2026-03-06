@@ -5,7 +5,7 @@ import EventsNavbar from './EventsNavbar'
 
 const Layout = () => {
     const { pathname } = useLocation()
-    const noPaddingComponents = ["/register", "/login"]
+    const noPaddingComponents = ["/register", "/login", "/verify-email", "/reset-password"]
     const isEventsPage = pathname.startsWith('/events')
 
     return (

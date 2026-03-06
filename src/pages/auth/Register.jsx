@@ -87,7 +87,7 @@ const Register = () => {
       // On successful signup, usually we redirect to login or dashboard
       // Assuming backend doesn't auto-login unless it returns token
       navigate("/login");
-      alert("Registration successful! Please login.");
+      alert("Registration successful! Please check your email to verify your account before logging in.");
     } catch (err) {
       if (err?.data.message) {
         setErrMsg(err?.data.message);

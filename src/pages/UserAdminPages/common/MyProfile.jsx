@@ -23,6 +23,7 @@ const MyProfile = () => {
     const { user: authUser } = useAuth();
     const { data: profileData, isLoading: isProfileLoading, isError: isProfileError, error: profileFetchError, refetch } = useGetMeQuery();
     const [updateMe, { isLoading: isUpdating }] = useUpdateMeMutation();
+    console.log(profileData)
 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);

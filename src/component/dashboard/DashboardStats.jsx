@@ -30,7 +30,7 @@ export const DashboardStats = () => {
     const stats = [
         {
             title: "Total Spent",
-            value: "$68.00",
+            value: "$0.00",
             icon: CreditCard,
             iconBg: "bg-amber-50",
             iconColor: "text-amber-500",
@@ -38,7 +38,7 @@ export const DashboardStats = () => {
         },
         {
             title: "Outstanding Balance",
-            value: "$-32.00",
+            value: "$0.00",
             icon: Wallet,
             iconBg: "bg-green-50",
             iconColor: "text-green-500",
@@ -47,7 +47,7 @@ export const DashboardStats = () => {
         },
         {
             title: "Total Shares",
-            value: "$43.00",
+            value: "$0.00",
             icon: Share2,
             iconBg: "bg-orange-50",
             iconColor: "text-orange-500",
