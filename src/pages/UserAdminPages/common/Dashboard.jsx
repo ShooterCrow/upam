@@ -5,21 +5,22 @@ import { ArrowRight, Plus, MapPin, Loader2, User, Bell } from 'lucide-react';
 import useAuth from '../../../hooks/useAuth';
 import { Link } from 'react-router-dom';
 import { useGetMyNotificationsQuery } from '../../../app/api/notificationsApiSlice';
-import { useGetVerificationsQuery } from '../../platform/verificationApiSlice';
+import { useGetDashboardDataQuery } from '../../platform/dashboardApiSlice';
 
 const Dashboard = () => {
     const { user } = useAuth();
     const isAdmin = user?.roles?.includes('admin');
 
+    const { data: dashboardResponse, isLoading: isDashboardLoading } = useGetDashboardDataQuery();
     const { data: notificationsResponse, isLoading: isNotificationsLoading } = useGetMyNotificationsQuery(undefined, { skip: isAdmin });
-    const { data: verificationsResponse, isLoading: isVerificationsLoading } = useGetVerificationsQuery(undefined, { skip: !isAdmin });
+
+    const dashboardData = dashboardResponse?.data || {};
+    const stats = dashboardData.stats || {};
 
     const recentNotifications = notificationsResponse?.data
         ?.slice(0, 5) || [];
 
-    const verifiedMembers = verificationsResponse?.data
-        ?.filter(v => v.status === 'Approved')
-        ?.slice(0, 3) || [];
+    const verifiedMembers = dashboardData.recentVerifications || [];
 
     const countries = [
         { name: 'Kenya', top: '20%', left: '60%' },
@@ -50,7 +51,7 @@ const Dashboard = () => {
             </div>
 
             {/* Stats Cards */}
-            <DashboardStats />
+            <DashboardStats data={stats} isLoading={isDashboardLoading} />
 
             <div className="grid grid-cols-1 gap-8">
                 {/* Left side: Banner and Announcement */}
@@ -149,7 +150,7 @@ const Dashboard = () => {
                                         </thead>
                                         <tbody className="divide-y divide-slate-50">
                                             {isAdmin ? (
-                                                isVerificationsLoading ? (
+                                                isDashboardLoading ? (
                                                     <tr>
                                                         <td colSpan="4" className="py-12 text-center">
                                                             <div className="flex flex-col items-center gap-2">

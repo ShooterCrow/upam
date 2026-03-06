@@ -26,11 +26,22 @@ const StatCard = ({ title, value, type, trend, icon: Icon, iconBg, iconColor, on
     );
 };
 
-export const DashboardStats = () => {
+export const DashboardStats = ({ data, isLoading }) => {
+    const formatCurrency = (amount) => {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        }).format(amount || 0);
+    };
+
+    const formatNumber = (num) => {
+        return new Intl.NumberFormat('en-US').format(num || 0);
+    };
+
     const stats = [
         {
             title: "Total Spent",
-            value: "$0.00",
+            value: isLoading ? "..." : formatCurrency(data?.totalSpent),
             icon: CreditCard,
             iconBg: "bg-amber-50",
             iconColor: "text-amber-500",
@@ -38,7 +49,7 @@ export const DashboardStats = () => {
         },
         {
             title: "Outstanding Balance",
-            value: "$0.00",
+            value: isLoading ? "..." : formatCurrency(data?.outstandingBalance),
             icon: Wallet,
             iconBg: "bg-green-50",
             iconColor: "text-green-500",
@@ -47,7 +58,7 @@ export const DashboardStats = () => {
         },
         {
             title: "Total Shares",
-            value: "$0.00",
+            value: isLoading ? "..." : formatCurrency(data?.totalShares),
             icon: Share2,
             iconBg: "bg-orange-50",
             iconColor: "text-orange-500",
@@ -56,7 +67,7 @@ export const DashboardStats = () => {
         },
         {
             title: "Total Members",
-            value: "350,000",
+            value: isLoading ? "..." : formatNumber(data?.totalMembers),
             icon: Users,
             iconBg: "bg-indigo-50",
             iconColor: "text-indigo-500"
