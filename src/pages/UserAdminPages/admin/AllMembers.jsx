@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useGetUsersQuery } from '../../platform/usersApiSlice';
-import { MoreVertical, Filter, ChevronLeft, ChevronRight, SlidersHorizontal, Search } from 'lucide-react';
+import { useGetUsersQuery, useUpdateUserMutation } from '../../platform/usersApiSlice';
+import { MoreVertical, Filter, ChevronLeft, ChevronRight, SlidersHorizontal, Search, ShieldCheck, User as UserIcon, Loader2 } from 'lucide-react';
 import LoadingState from '../../../component/ui/LoadingState';
 import ErrorState from '../../../component/ui/ErrorState';
 import MemberInfoModal from './modals/MemberInfoModal';
@@ -14,6 +14,10 @@ const AllMembers = () => {
     const [showFilterMenu, setShowFilterMenu] = useState(false);
     const [selectedMember, setSelectedMember] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [updatingRoleId, setUpdatingRoleId] = useState(null);
+
+    // Mutations
+    const [updateUser] = useUpdateUserMutation();
 
     // Debounce search term
     useEffect(() => {
@@ -34,11 +38,29 @@ const AllMembers = () => {
 
     const users = response?.data || [];
     const totalPages = response?.totalPages || 1;
+    const numberOfUsers = response?.totalUsersInDB || 0;
 
     const handleFilterChange = (status) => {
         setVerifiedFilter(status);
         setPage(1);
         setShowFilterMenu(false);
+    };
+
+    const handleRoleChange = async (member, newRole) => {
+        if (!window.confirm(`Are you sure you want to change ${member.firstName}'s role to ${newRole}?`)) return;
+
+        setUpdatingRoleId(member._id);
+        try {
+            await updateUser({
+                id: member._id,
+                roles: [newRole.toLowerCase()]
+            }).unwrap();
+            // Success! The table will auto-update because of tag invalidation
+        } catch (err) {
+            alert(err?.data?.message || "Failed to update role. Please check the safety net.");
+        } finally {
+            setUpdatingRoleId(null);
+        }
     };
 
     if (isLoading && !users.length) {
@@ -64,7 +86,7 @@ const AllMembers = () => {
         <div className="animate-in fade-in duration-500 pb-10">
             {/* Header & Search/Filter */}
             <div className="bg-white px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
-                <h2 className="text-lg font-bold text-slate-800 w-full md:w-auto">All Members</h2>
+                <h2 className="text-lg font-bold text-slate-800 w-full md:w-auto">All Members ({numberOfUsers})</h2>
 
                 <div className="flex items-center gap-3 w-full md:w-auto">
                     {/* Search Input */}
@@ -134,6 +156,7 @@ const AllMembers = () => {
                                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Name</th>
                                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Email</th>
                                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Country</th>
+                                <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Role</th>
                                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Status</th>
                                 <th className="px-6 py-5 text-sm font-semibold text-slate-500"></th>
                             </tr>
@@ -156,6 +179,32 @@ const AllMembers = () => {
                                     </td>
                                     <td className="px-6 py-5 text-sm text-slate-500">{member.email}</td>
                                     <td className="px-6 py-5 text-sm text-slate-500">{member.country || '---'}</td>
+                                    <td className="px-6 py-5 text-sm" onClick={(e) => e.stopPropagation()}>
+                                        <div className="relative group/role">
+                                            <select
+                                                disabled={updatingRoleId === member._id}
+                                                value={member.roles[0]}
+                                                onChange={(e) => handleRoleChange(member, e.target.value)}
+                                                className={`pl-8 pr-4 py-1.5 rounded-lg text-xs font-bold border transition-all appearance-none cursor-pointer outline-none
+                                                    ${member.roles.includes('admin')
+                                                        ? 'bg-red-50 text-red-600 border-red-100 hover:bg-red-100'
+                                                        : 'bg-slate-50 text-slate-600 border-slate-100 hover:bg-slate-100'
+                                                    } ${updatingRoleId === member._id ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                            >
+                                                <option value="user">USER</option>
+                                                <option value="admin">ADMIN</option>
+                                            </select>
+                                            <div className="absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
+                                                {updatingRoleId === member._id ? (
+                                                    <Loader2 size={14} className="animate-spin text-slate-400" />
+                                                ) : member.roles.includes('admin') ? (
+                                                    <ShieldCheck size={14} className="text-red-600" />
+                                                ) : (
+                                                    <UserIcon size={14} className="text-slate-500" />
+                                                )}
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td className="px-6 py-5 text-sm">
                                         {member.isVerifiedMember ? (
                                             <span className="px-2.5 py-1 bg-green-50 text-green-600 rounded-full text-xs font-bold border border-green-100 uppercase">Verified</span>

@@ -205,13 +205,19 @@ const MyProfile = () => {
                             </div>
                             <div className="space-y-2">
                                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Chapter</label>
-                                <input
-                                    type="text"
+                                <select
                                     name="chapter"
                                     value={formData.chapter}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800"
-                                />
+                                    className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 appearance-none"
+                                >
+                                    <option value="">Select a Chapter</option>
+                                    {profileData?.chapters?.map((ch) => (
+                                        <option key={ch._id} value={ch._id}>
+                                            {ch.chapter_name}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                         </div>
                     </div>
