@@ -39,8 +39,8 @@ const AdminSidebar = () => {
     };
 
     const handleCopy = () => {
-        if (user?.id) {
-            navigator.clipboard.writeText(user.id);
+        if (user?.importedMember_id) {
+            navigator.clipboard.writeText(user.importedMember_id);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         }
@@ -68,7 +68,7 @@ const AdminSidebar = () => {
                     title="Copy ID"
                 >
                     <span className="group-hover:border-red-100">
-                        Id: {user?.id}
+                        Id: {user?.importedMember_id}
                     </span>
                     {copied ? (
                         <Check size={14} className="text-green-500" />

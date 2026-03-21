@@ -23,12 +23,12 @@ const AdminHeader = () => {
             {/* Right Side Actions */}
             <div className="flex items-center gap-6 ml-auto">
                 {/* Notification */}
-                <button className="relative p-1 text-slate-600 hover:text-red-600 transition-colors">
+                {/* <button className="relative p-1 text-slate-600 hover:text-red-600 transition-colors">
                     <Bell size={20} />
                     <span className="absolute top-0 right-0 w-4 h-4 bg-red-600 text-[10px] font-bold text-white flex items-center justify-center rounded-full border-2 border-white">
                         8
                     </span>
-                </button>
+                </button> */}
 
                 {/* Profile */}
                 <ProfileBox />

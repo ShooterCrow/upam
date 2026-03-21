@@ -18,10 +18,10 @@ const useAuth = () => {
   if (token && user) {
     roles = user.roles || [];
     isLoggedIn = true;
-    isActive = user.emailVerified;
+    const { emailVerified, importedMember_id } = user;
+    isActive = emailVerified;
     isAdmin = roles.includes("admin");
     isManager = roles.includes("manager");
-    console.log(roles);
 
     if (isAdmin) status = "Admin";
     else if (isManager) status = "Manager";
@@ -34,6 +34,7 @@ const useAuth = () => {
       isManager,
       status,
       user,
+      importedMember_id,
       isLoading: false,
       isUninitialized: false,
     };
