@@ -23,13 +23,13 @@ const EventsTickets = () => {
 
         <div className="relative z-10 text-center px-4 max-w-3xl mx-auto py-20">
           <span className="inline-block text-xs font-semibold tracking-widest uppercase text-white/80 mb-4">
-            UPAM Events
+            UPAM
           </span>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
             Tickets &amp; Registration
           </h1>
           <p className="text-white/90 text-base md:text-lg mb-8 max-w-xl mx-auto">
-            Find and register for UPAM events. Select your event and get your tickets securely.
+            Find and register for UPAM. Select your event and get your tickets securely.
           </p>
           <Link
             to="/events/tickets/form"

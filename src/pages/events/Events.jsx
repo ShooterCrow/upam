@@ -18,11 +18,11 @@ const eventFaqs = [
   },
   {
     q: 'Can anyone list an event?',
-    a: 'Yes — individuals, organizations, and communities can list events on the UPAM Events platform. All events are subject to a brief review to ensure they align with our community guidelines.',
+    a: 'Yes — individuals, organizations, and communities can list events on the UPAM platform. All events are subject to a brief review to ensure they align with our community guidelines.',
   },
   {
     q: 'Are virtual events supported?',
-    a: 'Absolutely. UPAM Events supports physical, virtual, and hybrid event formats. You can specify an online platform (Zoom, Google Meet, Microsoft Teams) when creating your event.',
+    a: 'Absolutely. UPAM supports physical, virtual, and hybrid event formats. You can specify an online platform (Zoom, Google Meet, Microsoft Teams) when creating your event.',
   },
   {
     q: 'How do attendees receive tickets?',
@@ -73,13 +73,13 @@ const Events = () => {
             {/* Center text */}
             <div className="text-center px-0 lg:px-6">
               <span className="inline-block text-xs font-semibold tracking-widest uppercase text-[#EB010C] mb-4">
-                UPAM Events Platform
+                UPAM Platform
               </span>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-5 leading-tight">
                 Discover Events that Unite, Inspire and Empower
               </h1>
               <p className="text-gray-500 text-base mb-8 leading-relaxed max-w-lg mx-auto">
-                UPAM Events is a Pan-African platform where organizers promote events, audiences
+                UPAM is a Pan-African platform where organizers promote events, audiences
                 discover experiences, and communities come together — from conferences and
                 workshops to culture, music, and innovation.
               </p>
@@ -122,26 +122,26 @@ const Events = () => {
         </div>
       </section>
 
-      {/* ========== ABOUT UPAM EVENTS ========== */}
+      {/* ========== ABOUT UPAM ========== */}
       <section className="py-12 md:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                About UPAM Events
+                About UPAM
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                UPAM Events is a digital event platform created to support Pan-African connection,
+                UPAM is a digital event platform created to support Pan-African connection,
                 knowledge sharing, and cultural exchange. It allows individuals, organizations, and
                 communities to promote events, reach wider audiences, and sell tickets seamlessly.
                 Whether it's a leadership summit, cultural festival, training, concert, or virtual
-                event — UPAM Events provides the space to make it visible and accessible.
+                event — UPAM provides the space to make it visible and accessible.
               </p>
             </div>
             <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-200">
               <img
                 src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80"
-                alt="UPAM Events"
+                alt="UPAM"
                 className="w-full h-full object-cover"
               />
               <button
@@ -193,7 +193,7 @@ const Events = () => {
                 All Events
               </h2>
               <p className="text-gray-500 max-w-2xl text-sm leading-relaxed">
-                UPAM Events is a Pan-African event platform where conferences, cultural festivals,
+                UPAM is a Pan-African event platform where conferences, cultural festivals,
                 workshops, and community gatherings are discovered, promoted, and experienced
                 across Africa and the diaspora.
               </p>
@@ -304,11 +304,11 @@ const Events = () => {
         </div>
       </section>
 
-      {/* ========== HOW UPAM EVENTS WORKS ========== */}
+      {/* ========== HOW UPAM WORKS ========== */}
       <section className="py-12 md:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-10">
-            How UPAM Events Works
+            How UPAM Works
           </h2>
 
           {/* 4 steps in a horizontal row */}
@@ -332,7 +332,7 @@ const Events = () => {
           <div className="relative aspect-video md:aspect-[21/9] rounded-lg overflow-hidden bg-gray-200">
             <img
               src="https://images.unsplash.com/photo-1540575467063-178bf50e2f0a?w=1200&q=80"
-              alt="UPAM Events"
+              alt="UPAM"
               className="w-full h-full object-cover"
             />
             <button
@@ -360,7 +360,7 @@ const Events = () => {
               </h2>
               <p className="text-sm text-gray-500 mb-8 leading-relaxed">
                 Welcome to our FAQ section! Here, you'll find answers to common questions about
-                UPAM Events. If you need further assistance, feel free to reach out to us.
+                UPAM. If you need further assistance, feel free to reach out to us.
               </p>
               <div className="border-t border-gray-100">
                 {eventFaqs.map((faq, idx) => (
@@ -387,7 +387,7 @@ const Events = () => {
             <div className="hidden lg:block">
               <img
                 src="/world_map.png"
-                alt="UPAM Events worldwide"
+                alt="UPAM worldwide"
                 className="w-full h-auto object-contain opacity-80"
               />
             </div>
@@ -412,7 +412,7 @@ const Events = () => {
             </h2>
             <p className="text-white/90 mb-6 leading-relaxed text-sm md:text-base">
               Whether you're organizing a conference, workshop, festival, or community gathering.
-              UPAM Events gives you the tools to reach your audience and sell tickets with ease.
+              UPAM gives you the tools to reach your audience and sell tickets with ease.
             </p>
             <Link
               to="/events/create"

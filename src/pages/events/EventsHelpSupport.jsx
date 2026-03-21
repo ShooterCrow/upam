@@ -9,7 +9,7 @@ const EVENTS_FAQS = [
   },
   {
     q: 'Can anyone list an event?',
-    a: 'Yes. UPAM Events is open to individuals, organizations, and communities who want to promote Pan-African events. Your event will be reviewed to ensure it aligns with our community guidelines before publication.',
+    a: 'Yes. UPAM is open to individuals, organizations, and communities who want to promote Pan-African events. Your event will be reviewed to ensure it aligns with our community guidelines before publication.',
   },
   {
     q: 'Are virtual events supported?',
@@ -75,7 +75,7 @@ const EventsHelpSupport = () => {
               Frequently Asked Questions
             </h2>
             <p className="text-sm text-gray-500 mb-6">
-              Welcome to our FAQ section! Here, you'll find answers to common questions about UPAM Events. If you need further assistance, feel free to send us an email.
+              Welcome to our FAQ section! Here, you'll find answers to common questions about UPAM. If you need further assistance, feel free to send us an email.
             </p>
             <div className="space-y-0 border border-gray-200 rounded-lg overflow-hidden bg-white">
               {EVENTS_FAQS.map((faq, idx) => (
@@ -86,9 +86,8 @@ const EventsHelpSupport = () => {
                     className="w-full flex justify-between items-center gap-4 text-left px-4 py-4 hover:bg-gray-50 transition-colors"
                   >
                     <span
-                      className={`text-sm font-semibold ${
-                        openFaq === idx ? 'text-[#EB010C]' : 'text-gray-900'
-                      }`}
+                      className={`text-sm font-semibold ${openFaq === idx ? 'text-[#EB010C]' : 'text-gray-900'
+                        }`}
                     >
                       {faq.q}
                     </span>

@@ -29,7 +29,7 @@ const Newsletter = () => {
                         Subcribe to our Newsletter
                     </h2>
                     <p className="text-[#ECECEC] font-lato text-sm font-normal leading-[150%]">
-                        Subscribe for Updates: Stay informed about the latest happening in UPAM events, activities and announcements by subscribing to our newsletter.
+                        Subscribe for Updates: Stay informed about the latest happening in UPAM, activities and announcements by subscribing to our newsletter.
                     </p>
                 </div>
 

@@ -91,7 +91,7 @@ const CreateEvent = () => {
         </div>
         <div className="relative z-10 text-center px-4 max-w-3xl mx-auto py-16">
           <span className="inline-block text-xs font-semibold tracking-widest uppercase text-[#EB010C] mb-4">
-            UPAM Events
+            UPAM
           </span>
           <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
             Create Your Event, Reach Your Audience, Make it Happen

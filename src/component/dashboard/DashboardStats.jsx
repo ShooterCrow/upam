@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreditCard, Wallet, Share2, Users } from 'lucide-react';
+import { CreditCard, Wallet, Share2, Users, ChartCandlestick } from 'lucide-react';
 
 const StatCard = ({ title, value, subValue, type, trend, icon: Icon, iconBg, iconColor, onClickLink, linkText }) => {
     return (
@@ -54,7 +54,7 @@ export const DashboardStats = ({ data, isLoading }) => {
             linkText: "Transaction history"
         },
         {
-            title: "Outstanding Balance",
+            title: "Membership Outstanding Balance",
             value: isLoading ? "..." : formatCurrency(data?.outstandingBalance),
             icon: Wallet,
             iconBg: "bg-green-50",
@@ -65,7 +65,7 @@ export const DashboardStats = ({ data, isLoading }) => {
         {
             title: "Total Shares",
             value: isLoading ? "..." : formatCurrency(data?.totalShares),
-            icon: Share2,
+            icon: ChartCandlestick,
             iconBg: "bg-orange-50",
             iconColor: "text-orange-500",
             linkText: "Buy more shares",
