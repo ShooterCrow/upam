@@ -20,6 +20,8 @@ import About from './pages/about/About'
 import MembershipPolicy from './pages/membershipPolicy/MembershipPolicy'
 import MembershipAgreement from './pages/membershipAgreement/MembershipAgreement'
 import Leadership from './pages/leadership/Leadership'
+import Donation from './pages/donation/Donation'
+import DonationFunds from './pages/donation/DonationFunds'
 import Events from './pages/events/Events'
 import EventDetail from './pages/events/EventDetail'
 import CreateEvent from './pages/events/CreateEvent'
@@ -47,7 +49,7 @@ import Chapters from './pages/UserAdminPages/admin/chapters/Chapters'
 import NotFound from './pages/NotFound'
 import MembershipPayment from './pages/UserAdminPages/common/MembershipPayment'
 import TermsOfService from './pages/legal/TermsOfService'
-import PrivacyPolicy from './pages/legal/PrivacyPolicy'
+import PrivacyDataPolicy from './pages/legal/PrivacyDataPolicy'
 import Cookies from './pages/legal/Cookies'
 import SearchMembers from './pages/search/SearchMembers'
 
@@ -68,6 +70,8 @@ const App = () => {
             <Route path="contact-us" element={<ContactUs />} />
             <Route path="partnership" element={<Partnership />} />
             <Route path="volunteer" element={<Volunteer />} />
+            <Route path="donation" element={<Donation />} />
+            <Route path="donation/funds" element={<DonationFunds />} />
             <Route path="leadership" element={<Leadership />} />
             <Route path="events">
               <Route index element={<Events />} />
@@ -104,7 +108,7 @@ const App = () => {
 
             {/* Legal & Search */}
             <Route path="terms" element={<TermsOfService />} />
-            <Route path="privacy" element={<PrivacyPolicy />} />
+            <Route path="privacy" element={<PrivacyDataPolicy />} />
             <Route path="cookies" element={<Cookies />} />
             <Route path="search" element={<SearchMembers />} />
 
