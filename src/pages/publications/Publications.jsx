@@ -92,7 +92,7 @@ export default function Publications() {
                                         : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-50'
                                         }`}
                                 >
-                                    Reports/Policy Papers
+                                    Reports
                                 </button>
                                 <button
                                     onClick={() => setActiveTab('articles')}
