@@ -17,8 +17,6 @@ const Dashboard = () => {
     const dashboardData = dashboardResponse?.data || {};
     const stats = dashboardData.stats || {};
 
-    console.log(dashboardResponse)
-
     const recentNotifications = notificationsResponse?.data
         ?.slice(0, 5) || [];
 
