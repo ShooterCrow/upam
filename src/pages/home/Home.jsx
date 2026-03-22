@@ -124,16 +124,16 @@ const Index = () => {
                                     Our Mission
                                 </h2>
                                 <p className="text-sm lg:text-base text-gray-600 leading-relaxed tracking-wide">
-                                    To strengthen bonds of solidarity between all people of African descent, fostering unity and development in Africa; for enhanced independence, industrialization, economic self-reliance as well as promote peace, security and stability within African communities and states.
+                                    To strengthen bonds of solidarity between all people of African descent, fostering unity and development in Africa; enhanced independence, industrialization, economic self-reliance as well as promote peace, security and stability within African communities and states.
                                 </p>
                             </div>
 
                             <div className="flex flex-col gap-4 lg:gap-6">
                                 <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 tracking-tight">
-                                    Our Vision & Values
+                                    Our Vision
                                 </h2>
                                 <p className="text-sm lg:text-base text-gray-600 leading-relaxed tracking-wide">
-                                    A United Africa for sustainable development for all Africans Descent. UPAM is a continental evolution and an all-African organization, seeking to enhance the unification of African nations as a whole and reclaiming its hope for the destined future.
+                                    A United Africa for sustainable development for all Africans Descent
                                 </p>
                             </div>
                         </div>
@@ -738,75 +738,75 @@ const Index = () => {
                                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                             </Link>
                         </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8">
-                        {[
-                            {
-                                id: 1,
-                                name: "Benedicto Mbango",
-                                role: "Global President (UPAM)",
-                                image: "https://api.builder.io/api/v1/image/assets/TEMP/e144c36edf141cdbaf91e1c889bf576effca28f8?width=504"
-                            },
-                            {
-                                id: 2,
-                                name: "Priscilia Tsongwain",
-                                role: "Vice President (UPAM)",
-                                image: "https://api.builder.io/api/v1/image/assets/TEMP/3fff38c2724d07db4e7078f0213b213c92f4daf7?width=502"
-                            },
-                            {
-                                id: 3,
-                                name: "Petrina Nghipundilo Shiindi",
-                                role: "Global Executive Administrator II",
-                                image: "https://api.builder.io/api/v1/image/assets/TEMP/38c51c34a61b389791ab1f01683e8012905ab5f1?width=502"
-                            },
-                            {
-                                id: 4,
-                                name: "Akpur Emmanuel Terfa",
-                                role: "Global Secretary General",
-                                image: "https://api.builder.io/api/v1/image/assets/TEMP/3a55b1bee8e50967efc6b30c34bd732da3babd98?width=502"
-                            },
-                            {
-                                id: 5,
-                                name: "Augustine Nyakatoma",
-                                role: "Speaker of National Representative",
-                                image: "https://api.builder.io/api/v1/image/assets/TEMP/af4122391d369736f68533f7726a71f3ca00aca4?width=504"
-                            }
-                        ].map((leader) => (
-                            <div key={leader.id} className="group cursor-pointer">
-                                <div className="relative overflow-hidden rounded-xl transition-all duration-500 group-hover:">
-                                    {/* Fixed height for all images */}
-                                    <div className="h-72 lg:h-80 overflow-hidden">
-                                        <img
-                                            src={leader.image}
-                                            alt={leader.name}
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                        />
-                                    </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8">
+                            {[
+                                {
+                                    id: 1,
+                                    name: "Benedicto Mbango",
+                                    role: "Global President (UPAM)",
+                                    image: "https://api.builder.io/api/v1/image/assets/TEMP/e144c36edf141cdbaf91e1c889bf576effca28f8?width=504"
+                                },
+                                {
+                                    id: 2,
+                                    name: "Priscilia Tsongwain",
+                                    role: "Vice President (UPAM)",
+                                    image: "https://api.builder.io/api/v1/image/assets/TEMP/3fff38c2724d07db4e7078f0213b213c92f4daf7?width=502"
+                                },
+                                {
+                                    id: 3,
+                                    name: "Petrina Nghipundilo Shiindi",
+                                    role: "Global Executive Administrator II",
+                                    image: "https://api.builder.io/api/v1/image/assets/TEMP/38c51c34a61b389791ab1f01683e8012905ab5f1?width=502"
+                                },
+                                {
+                                    id: 4,
+                                    name: "Akpur Emmanuel Terfa",
+                                    role: "Global Secretary General",
+                                    image: "https://api.builder.io/api/v1/image/assets/TEMP/3a55b1bee8e50967efc6b30c34bd732da3babd98?width=502"
+                                },
+                                {
+                                    id: 5,
+                                    name: "Augustine Nyakatoma",
+                                    role: "Speaker of National Representative",
+                                    image: "https://api.builder.io/api/v1/image/assets/TEMP/af4122391d369736f68533f7726a71f3ca00aca4?width=504"
+                                }
+                            ].map((leader) => (
+                                <div key={leader.id} className="group cursor-pointer">
+                                    <div className="relative overflow-hidden rounded-xl transition-all duration-500 group-hover:">
+                                        {/* Fixed height for all images */}
+                                        <div className="h-72 lg:h-80 overflow-hidden">
+                                            <img
+                                                src={leader.image}
+                                                alt={leader.name}
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            />
+                                        </div>
 
-                                    {/* Information overlay - Partially visible by default, fully visible on hover */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent group-hover:from-black/80 group-hover:via-black/40 transition-all duration-300">
-                                        <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6 flex">
-                                            {/* Name and Role - Always visible but enhanced on hover */}
-                                            <div className="transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300">
-                                                <h4 className="text-white font-semibold text-base lg:text-lg mb-1 opacity-90 group-hover:opacity-100 group-hover:text-xl transition-all duration-300">
-                                                    {leader.name}
-                                                </h4>
-                                                <p className="text-white/80 text-xs lg:text-sm opacity-80 group-hover:opacity-100 group-hover:text-base transition-all duration-300">
-                                                    {leader.role}
-                                                </p>
-                                            </div>
+                                        {/* Information overlay - Partially visible by default, fully visible on hover */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent group-hover:from-black/80 group-hover:via-black/40 transition-all duration-300">
+                                            <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6 flex">
+                                                {/* Name and Role - Always visible but enhanced on hover */}
+                                                <div className="transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300">
+                                                    <h4 className="text-white font-semibold text-base lg:text-lg mb-1 opacity-90 group-hover:opacity-100 group-hover:text-xl transition-all duration-300">
+                                                        {leader.name}
+                                                    </h4>
+                                                    <p className="text-white/80 text-xs lg:text-sm opacity-80 group-hover:opacity-100 group-hover:text-base transition-all duration-300">
+                                                        {leader.role}
+                                                    </p>
+                                                </div>
 
-                                            {/* Arrow - Only visible on hover with scale animation */}
-                                            <div className="flex justify-center mt-4">
-                                                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300">
-                                                    <ArrowRight className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
+                                                {/* Arrow - Only visible on hover with scale animation */}
+                                                <div className="flex justify-center mt-4">
+                                                    <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300">
+                                                        <ArrowRight className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
                     </section>
 
                     {/* Activities Section */}
