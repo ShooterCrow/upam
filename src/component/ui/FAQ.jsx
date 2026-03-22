@@ -8,29 +8,21 @@ const FAQ = () => {
 
     const faqs = [
         {
-            q: "What is UPAM (United Pan-Africanist Movement)?",
-            a: "UPAM is a Pan-African organization focused on unity, empowerment, leadership development, and sustainable progress across Africa and the diaspora."
+            q: "Can I donate from outside Nigeria?",
+            a: "Yes. UPAM welcomes support from Africans in the diaspora and global partners aligned with our mission."
         },
         {
-            q: "Where does UPAM operate?",
-            a: "UPAM operates a structured leadership system with a presence in countries including Kenya, Tanzania, Namibia, Cameroon, Nigeria, and Malawi."
+            q: "Can I donate anonymously?",
+            a: "Yes. Anonymous contributions are accepted."
         },
         {
-            q: "Who can become a member of UPAM?",
-            a: "Membership is open to various categories: UPAM Members, UPAM Executive, Students, and the Diaspora. We recognize all participants committed to our mission."
+            q: "How will I know my donation was received?",
+            a: "A confirmation or receipt will be issued upon successful processing."
         },
         {
-            q: "How can I join or get involved with UPAM?",
-            a: "You can join by clicking 'Join Now' or 'Volunteer Now' buttons on this page to start your application process."
+            q: "Can I direct my donation to a specific initiative?",
+            a: "Where applicable, you may indicate a preferred area of support."
         },
-        {
-            q: "What kind of programs and initiatives does UPAM run?",
-            a: "UPAM runs various programs including leadership development, community empowerment, and sustainable development projects."
-        },
-        {
-            q: "How is UPAM funded?",
-            a: "UPAM is funded through membership contributions, partnerships, and donations from supporters of the Pan-African movement."
-        }
     ];
     return (
         < section className="text-left py-10 grid md:grid-cols-2 md:gap-20 items-center" >
