@@ -52,6 +52,7 @@ import TermsOfService from './pages/legal/TermsOfService'
 import PrivacyDataPolicy from './pages/legal/PrivacyDataPolicy'
 import Cookies from './pages/legal/Cookies'
 import SearchMembers from './pages/search/SearchMembers'
+import TransactionCard from './component/transactions/TransactionCard'
 
 
 const App = () => {
@@ -73,6 +74,7 @@ const App = () => {
             <Route path="donation" element={<Donation />} />
             <Route path="donation/funds" element={<DonationFunds />} />
             <Route path="leadership" element={<Leadership />} />
+            <Route path="transaction" element={<TransactionCard/>}/>
             <Route path="events">
               <Route index element={<Events />} />
               <Route path="create" element={<CreateEvent />} />
