@@ -12,7 +12,7 @@ const Mission = () => {
                                 Our Mission
                             </h2>
                             <p className="text-sm text-neutral leading-[1.69] tracking-[0.56px]">
-                                To strengthen bonds of solidarity between all people of African descent, fostering unity and development in Africa; for enhanced independence, industrialization, economic self-reliance as well as promote peace, security and stability within African communities and states.
+                                To strengthen bonds of solidarity between all people of African descent, fostering unity and development in Africa; enhanced independence, industrialization, economic self-reliance as well as promote peace, security and stability within African communities and states.
                             </p>
                         </div>
 
@@ -22,7 +22,7 @@ const Mission = () => {
                                 Our Vission & Values
                             </h2>
                             <p className="text-sm text-neutral leading-[1.69] tracking-[0.56px]">
-                                A United Africa for sustainable development for all Africans Descent. UPAM is a continental evolution and an all-African organization, seeking to enhance the unification of African nations as a whole and reclaiming its hope for the destined future.
+                                A United Africa for sustainable development for all Africans Descent
                             </p>
                         </div>
                     </div>
