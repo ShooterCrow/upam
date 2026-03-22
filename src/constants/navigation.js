@@ -18,6 +18,7 @@ import {
   LogOutIcon,
   Calendar,
   Globe,
+  Heart,
 } from "lucide-react";
 
 export const ADMIN_LINKS = [
@@ -109,5 +110,6 @@ export const PUBLIC_LINKS = [
     ],
   },
   { name: "Get Involved", path: "/get-involved", icon: UserPlus },
+  { name: "Donation", path: "/donation", icon: Heart },
   { name: "Contact Us", path: "/contact-us", icon: Mail },
 ];
