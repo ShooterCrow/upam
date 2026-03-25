@@ -167,7 +167,7 @@ const Dashboard = () => {
                                                             </td>
                                                             <td className="py-4 text-sm text-slate-500">{v.user?.email}</td>
                                                             <td className="py-4 text-sm text-slate-500">{v.user?.country || 'N/A'}</td>
-                                                            <td className="py-4 text-sm font-bold text-slate-800">{v._id.slice(-7)}</td>
+                                                            <td className="py-4 text-sm font-bold text-slate-800">{v.user?.importedMember_id || v?.memberId}</td>
                                                         </tr>
                                                     ))
                                                 ) : (

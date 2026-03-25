@@ -21,7 +21,7 @@ const ForgottenPassword = () => {
       return;
     }
     try {
-      await forgotPassword({ email }).unwrap();
+      await forgotPassword({ email: email.toLowerCase() }).unwrap();
       setMsg("If an account with that email exists, we have sent a reset link.");
     } catch (err) {
       setErrorMsg("Something went wrong. Please try again.");

@@ -25,7 +25,7 @@ const Platform = () => {
             logo: jumuiyaLogo
         },
         {
-            name: "UPAM Events",
+            name: "UPAM",
             description: "Discover, promote, and participate in upcoming Pan-African events and conferences.",
             link: "/events",
             external: false,

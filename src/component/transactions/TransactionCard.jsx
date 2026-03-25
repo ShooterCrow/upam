@@ -1,279 +1,230 @@
 import React, { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Copy, Check, Search } from "lucide-react";
+import Pagination from "../ui/Pagination";
 
-const TransactionCard = () => {
+const MyTransactions = () => {
 
   // 🔵 States
   const [transactions, setTransactions] = useState([]);
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [search, setSearch] = useState("");
 
   const [page, setPage] = useState(1);
   const perPage = 10;
 
-  // Mock total transactions
-  const [totalTransactions] = useState(57);
+  const [totalTransactions, setTotalTransactions] = useState(0);
 
-  // 🔵 Fetch Data
+  // ✅ Track which ID was copied
+  const [copiedId, setCopiedId] = useState(null);
+
+  // 🔵 Fetch Transactions
   useEffect(() => {
     fetchTransactions();
-  }, [page]);
+  }, []);
+
+  useEffect(() => {
+    handleSearch();
+  }, [search, transactions]);
 
   const fetchTransactions = async () => {
     try {
       setLoading(true);
 
-      // 🔵 Mock Data
-      const mockData = Array.from(
-        { length: totalTransactions },
-        (_, i) => ({
-          id: i + 1,
-          date: "Aug 25, 2025",
-          amount: Math.floor(Math.random() * 200),
-          purpose: "Membership Fee",
-          status:
-            i % 3 === 0
-              ? "Succeeded"
-              : i % 3 === 1
-              ? "Pending"
-              : "Failed",
-          transactionId: `pi..${1000 + i}hds`,
-        })
-      );
+      const response = await fetch("");
 
-      // Pagination Logic
-      const start = (page - 1) * perPage;
-      const end = start + perPage;
+      if (!response.ok) throw new Error();
 
-      const paginatedData = mockData.slice(start, end);
+      const data = await response.json();
 
-      setTimeout(() => {
-        setTransactions(paginatedData);
-        setLoading(false);
-      }, 500);
+      setTransactions(data.transactions);
+      setTotalTransactions(data.total);
 
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      const dummy = Array.from({ length: 42 }, (_, i) => ({
+        _id: i + 1,
+        amount: Math.floor(Math.random() * 50000) + 1000,
+        currency: "USD",
+        purpose: ["Subscription", "Transfer", "Shopping", "Withdrawal"][i % 4],
+        status: ["succeeded", "pending", "failed"][i % 3],
+        transactionId: `TXN-${Math.random().toString(36).substring(2, 10).toUpperCase()}`,
+        createdAt: new Date(Date.now() - i * 86400000),
+      }));
+
+      setTransactions(dummy);
+      setTotalTransactions(dummy.length);
+    } finally {
       setLoading(false);
     }
   };
 
-  // 🔵 Status Styles
-  const getStatusStyles = (status) => {
-    switch (status.toLowerCase()) {
-      case "succeeded":
-      case "successful":
-        return "bg-green-100 text-green-700";
+  // 🔵 Search
+  const handleSearch = () => {
+    const filtered = transactions.filter((tx) =>
+      tx.purpose.toLowerCase().includes(search.toLowerCase()) ||
+      tx.transactionId.toLowerCase().includes(search.toLowerCase())
+    );
 
+    setFilteredTransactions(filtered);
+    setTotalTransactions(filtered.length);
+    setPage(1);
+  };
+
+  // 🔵 Pagination
+  const totalPages = Math.ceil(totalTransactions / perPage);
+
+  const paginatedTransactions = filteredTransactions.slice(
+    (page - 1) * perPage,
+    page * perPage
+  );
+
+  // 🔵 Helpers
+  const formatCurrency = (amount, currency) =>
+    new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: currency || "USD",
+    }).format(amount);
+
+  const formatDate = (dateString) =>
+    new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+
+  // ✅ COPY LOGIC WITH ICON SWITCH
+  const copyTransactionId = async (id) => {
+    try {
+      await navigator.clipboard.writeText(id);
+      setCopiedId(id);
+
+      setTimeout(() => {
+        setCopiedId(null);
+      }, 2000);
+    } catch (err) {
+      console.error("Copy failed");
+    }
+  };
+
+  const getStatusStyles = (status) => {
+    switch (status?.toLowerCase()) {
+      case "succeeded":
+        return "bg-green-100 text-green-700";
       case "pending":
         return "bg-orange-100 text-orange-700";
-
       case "failed":
         return "bg-red-100 text-red-700";
-
       default:
         return "bg-gray-100 text-gray-700";
     }
   };
 
-  // 🔵 Pagination Math
-  const totalPages = Math.ceil(
-    totalTransactions / perPage
-  );
-
-  const startItem =
-    (page - 1) * perPage + 1;
-
-  const endItem = Math.min(
-    page * perPage,
-    totalTransactions
-  );
-
-  const handleNext = () => {
-    if (page < totalPages) {
-      setPage(page + 1);
-    }
-  };
-
-  const handlePrevious = () => {
-    if (page > 1) {
-      setPage(page - 1);
-    }
-  };
-
   return (
-    <div className="p-3 md:p-4">
+    <div className="p-3 md:p-6 space-y-4">
 
-      <div className="bg-white rounded-xl shadow border border-gray-200 overflow-hidden">
+      {/* 🔥 Header */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 flex flex-col md:flex-row justify-between gap-4">
 
-        {/* 🔵 Responsive Table Wrapper */}
-        <div className="w-full overflow-x-auto">
+        <h2 className="text-lg font-bold text-slate-800">
+          My Transactions
+        </h2>
 
-          <table className="w-full min-w-[720px] border-collapse">
+        {/* 🔍 Search */}
+        <div className="relative w-full md:w-80">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
+          <input
+            type="text"
+            placeholder="Search transactions..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full pl-9 pr-4 py-2 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+          />
+        </div>
 
-            {/* 🔵 Table Head */}
-            <thead className="bg-gray-100 text-left">
+      </div>
 
+      {/* 🔥 Table */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[750px]">
+
+            <thead className="bg-slate-50 text-left">
               <tr>
-
-                <th className="px-3 md:px-4 py-2 text-xs md:text-sm font-semibold whitespace-nowrap">
-                  Date
-                </th>
-
-                <th className="px-3 md:px-4 py-2 text-xs md:text-sm font-semibold whitespace-nowrap">
-                  Amount
-                </th>
-
-                <th className="px-3 md:px-4 py-2 text-xs md:text-sm font-semibold whitespace-nowrap">
-                  Purpose
-                </th>
-
-                <th className="px-3 md:px-4 py-2 text-xs md:text-sm font-semibold whitespace-nowrap">
-                  Status
-                </th>
-
-                <th className="px-3 md:px-4 py-2 text-xs md:text-sm font-semibold whitespace-nowrap">
-                  Transaction ID
-                </th>
-
+                <th className="px-4 py-3 text-xs font-semibold">Date</th>
+                <th className="px-4 py-3 text-xs font-semibold">Amount</th>
+                <th className="px-4 py-3 text-xs font-semibold">Purpose</th>
+                <th className="px-4 py-3 text-xs font-semibold">Status</th>
+                <th className="px-4 py-3 text-xs font-semibold">Transaction ID</th>
               </tr>
-
             </thead>
 
-            {/* 🔵 Table Body */}
             <tbody>
 
-              {/* Loading */}
               {loading && (
                 <tr>
-                  <td
-                    colSpan="5"
-                    className="text-center py-6 text-gray-500 text-sm"
-                  >
+                  <td colSpan="5" className="text-center py-10 text-gray-500">
                     Loading transactions...
                   </td>
                 </tr>
               )}
 
-              {/* Empty */}
               {!loading &&
-                transactions.length === 0 && (
-                  <tr>
-                    <td
-                      colSpan="5"
-                      className="text-center py-6 text-gray-500 text-sm"
-                    >
-                      No transactions found
-                    </td>
-                  </tr>
-                )}
-
-              {/* Rows */}
-              {!loading &&
-                transactions.map((tx) => (
-
+                paginatedTransactions.map((tx) => (
                   <tr
-                    key={tx.id}
-                    className="border-t hover:bg-gray-50 transition"
+                    key={tx._id}
+                    className="border-t hover:bg-slate-50 transition"
                   >
-
-                    <td className="px-3 md:px-4 py-3 text-xs md:text-sm whitespace-nowrap">
-                      {tx.date}
+                    <td className="px-4 py-3 text-sm whitespace-nowrap">
+                      {formatDate(tx.createdAt)}
                     </td>
 
-                    <td className="px-3 md:px-4 py-3 text-xs md:text-sm font-medium whitespace-nowrap">
-                      ${tx.amount}
+                    <td className="px-4 py-3 text-sm font-medium whitespace-nowrap">
+                      {formatCurrency(tx.amount, tx.currency)}
                     </td>
 
-                    <td className="px-3 md:px-4 py-3 text-xs md:text-sm whitespace-nowrap">
+                    <td className="px-4 py-3 text-sm whitespace-nowrap">
                       {tx.purpose}
                     </td>
 
-                    <td className="px-3 md:px-4 py-3 text-xs md:text-sm whitespace-nowrap">
-
-                      <span
-                        className={`px-2 py-0.5 md:px-3 md:py-1 rounded-full text-xs font-medium ${getStatusStyles(
-                          tx.status
-                        )}`}
-                      >
+                    <td className="px-4 py-3 text-sm">
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold capitalize ${getStatusStyles(tx.status)}`}>
                         {tx.status}
                       </span>
-
                     </td>
 
-                    <td className="px-3 md:px-4 py-3 text-xs md:text-sm text-gray-500 whitespace-nowrap">
-                      {tx.transactionId}
-                    </td>
+                    <td className="px-4 py-3 text-sm flex items-center gap-2 text-gray-600">
+                      <span className="truncate max-w-[140px]">
+                        {tx.transactionId}
+                      </span>
 
+                      <button
+                        onClick={() => copyTransactionId(tx.transactionId)}
+                        className="text-gray-400 hover:text-gray-600"
+                      >
+                        {copiedId === tx.transactionId ? (
+                          <Check size={14} className="text-green-600" />
+                        ) : (
+                          <Copy size={14} />
+                        )}
+                      </button>
+
+                    </td>
                   </tr>
-
                 ))}
 
             </tbody>
 
           </table>
-
         </div>
 
         {/* 🔵 Pagination */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 py-3 border-t bg-gray-50">
-
-          <p className="text-xs sm:text-sm text-gray-600 text-center sm:text-left">
-
-            Showing{" "}
-
-            <span className="font-medium">
-              {startItem}
-            </span>
-
-            -
-
-            <span className="font-medium">
-              {endItem}
-            </span>{" "}
-
-            of{" "}
-
-            <span className="font-medium">
-              {totalTransactions}
-            </span>
-
-          </p>
-
-          <div className="flex items-center gap-2">
-
-            {/* Previous */}
-            <button
-              onClick={handlePrevious}
-              disabled={page === 1}
-              className={`flex items-center gap-1 px-3 py-1.5 text-sm rounded-md transition
-              ${
-                page === 1
-                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-              }`}
-            >
-              <ChevronLeft size={16} />
-              Previous
-            </button>
-
-            {/* Next */}
-            <button
-              onClick={handleNext}
-              disabled={page === totalPages}
-              className={`flex items-center gap-1 px-3 py-1.5 text-sm rounded-md transition
-              ${
-                page === totalPages
-                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-              }`}
-            >
-              Next
-              <ChevronRight size={16} />
-            </button>
-
-          </div>
-
-        </div>
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
 
       </div>
 
@@ -281,4 +232,4 @@ const TransactionCard = () => {
   );
 };
 
-export default TransactionCard;
+export default MyTransactions;

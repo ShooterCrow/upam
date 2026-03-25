@@ -39,8 +39,8 @@ const UserSidebar = () => {
     };
 
     const handleCopy = () => {
-        if (user?.id) {
-            navigator.clipboard.writeText(user.id);
+        if (user?.importedMember_id) {
+            navigator.clipboard.writeText(user.importedMember_id);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         }
@@ -68,7 +68,7 @@ const UserSidebar = () => {
                     title="Copy ID"
                 >
                     <span className="bg-slate-50 px-2 py-1 rounded border border-gray-100 group-hover:border-red-100">
-                        ID: {user?.id}
+                        ID: {user?.importedMember_id}
                     </span>
                     {copied ? (
                         <Check size={14} className="text-green-500" />
