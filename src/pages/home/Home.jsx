@@ -55,9 +55,9 @@ const UnitedAfricaHero = () => {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <Link to="/about">
+                    <Link to="/donation">
                         <Button variant="primary" className='cursor-pointer'>
-                            Learn About UPAM
+                            Donate
                         </Button>
                     </Link>
                     <Link to="/register">
