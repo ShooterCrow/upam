@@ -52,6 +52,7 @@ import TermsOfService from './pages/legal/TermsOfService'
 import PrivacyDataPolicy from './pages/legal/PrivacyDataPolicy'
 import Cookies from './pages/legal/Cookies'
 import SearchMembers from './pages/search/SearchMembers'
+import AllTransactionsTable from './pages/UserAdminPages/admin/AllTransactionsTable'
 
 
 const App = () => {
@@ -129,6 +130,8 @@ const App = () => {
               <Route path='notification' element={<Notification />} />
               <Route path='support' element={<Support />} />
               <Route path='all-members' element={<AllMembers />} />
+              <Route path='all-transactions' element={<AllTransactionsTable />} />
+              {/* <Route path='my-transactions' element={<MyTransactions />} /> */}
               <Route path='members-application'>
                 <Route index element={<MemberApplication />} />
                 <Route path=":id" element={<MemberDetail />} />

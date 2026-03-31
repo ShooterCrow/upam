@@ -19,6 +19,7 @@ import {
   Calendar,
   Globe,
   Heart,
+  ContactRoundIcon,
 } from "lucide-react";
 
 export const ADMIN_LINKS = [
@@ -41,6 +42,16 @@ export const ADMIN_LINKS = [
   },
   { name: "Notifications", path: "/admin/notification", icon: Bell },
   { name: "Support & Help", path: "/admin/support", icon: Headphones },
+  {
+    name: "All Transactions",
+    path: "/admin/all-transactions",
+    icon: Headphones,
+  },
+  {
+    name: "My Transactions",
+    path: "/admin/my-transactions",
+    icon: ContactRoundIcon,
+  },
   { name: "All Members", path: "/admin/all-members", icon: Users },
   {
     name: "Members Application",
