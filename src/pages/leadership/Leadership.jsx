@@ -6,13 +6,13 @@ const globalExecutive = [
         id: 1,
         name: "Benedicto Mbango",
         title: "Global President (UPAM)",
-        image: "/images/leadership/benedicto-mbango.jpg"
+        image: "/pics/Frame 37613.png"
     },
     {
         id: 2,
         name: "Priscilla Tsongavain",
         title: "Vice President (UPAM)",
-        image: "/images/leadership/priscilla-tsongavain.jpg"
+        image: "/pics/Frame 37615.png"
     },
     {
         id: 3,
@@ -120,13 +120,13 @@ const directors = [
         id: 19,
         name: "Benedicto Mbango",
         title: "Director of UPAM Holdings",
-        image: "/images/leadership/benedicto-mbango.jpg"
+        image: "/pics/Frame 37613.png"
     },
     {
         id: 20,
         name: "Hon. Lorraine Malekanya",
         title: "Secretary of UPAM Holdings",
-        image: "/images/leadership/lorraine-malekanya.jpg"
+        image: "/pics/leadership/lorraine-malekanya.jpg"
     },
     {
         id: 21,

@@ -20,6 +20,8 @@ import {
   Globe,
   Heart,
   ContactRoundIcon,
+  List,
+  Wallet,
 } from "lucide-react";
 
 export const ADMIN_LINKS = [
@@ -45,12 +47,12 @@ export const ADMIN_LINKS = [
   {
     name: "All Transactions",
     path: "/admin/all-transactions",
-    icon: Headphones,
+    icon: List,
   },
   {
     name: "My Transactions",
     path: "/admin/my-transactions",
-    icon: ContactRoundIcon,
+    icon: Wallet,
   },
   { name: "All Members", path: "/admin/all-members", icon: Users },
   {
