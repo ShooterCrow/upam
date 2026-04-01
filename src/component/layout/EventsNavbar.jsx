@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, X, Volume2 } from 'lucide-react';
+import GoogleTranslate from '../common/GoogleTranslate';
 
 const EVENTS_NAV_LINKS = [
   { name: 'Home', path: '/' },
@@ -44,9 +45,8 @@ const EventsNavbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`text-sm font-medium transition-colors ${
-                  isActive(link.path) ? 'text-[#EB010C]' : 'text-gray-800 hover:text-[#EB010C]'
-                }`}
+                className={`text-sm font-medium transition-colors ${isActive(link.path) ? 'text-[#EB010C]' : 'text-gray-800 hover:text-[#EB010C]'
+                  }`}
               >
                 {link.name}
               </Link>
@@ -55,26 +55,8 @@ const EventsNavbar = () => {
 
           {/* Right: Language + Login */}
           <div className="flex items-center gap-4">
-            <div ref={langRef} className="relative hidden sm:block">
-              <button
-                type="button"
-                onClick={() => setLangOpen(!langOpen)}
-                className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-gray-900"
-              >
-                <Volume2 className="w-4 h-4" />
-                <span>ENG</span>
-                <ChevronDown className={`w-4 h-4 transition-transform ${langOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {langOpen && (
-                <div className="absolute right-0 top-full mt-1 w-32 py-2 bg-white border border-gray-200 rounded-lg shadow-lg">
-                  <button type="button" className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-50">
-                    English
-                  </button>
-                  <button type="button" className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-50">
-                    Français
-                  </button>
-                </div>
-              )}
+            <div className="hidden sm:block">
+              <GoogleTranslate />
             </div>
             <Link
               to="/login"
@@ -98,14 +80,17 @@ const EventsNavbar = () => {
       {mobileOpen && (
         <div className="lg:hidden border-t border-gray-200 bg-white">
           <nav className="flex flex-col py-4 px-4 gap-1">
+            <div className="px-4 py-2 mb-2 border-b border-gray-100">
+              <p className="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Select Language</p>
+              <GoogleTranslate />
+            </div>
             {EVENTS_NAV_LINKS.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
                 onClick={() => setMobileOpen(false)}
-                className={`px-4 py-3 text-sm font-medium rounded ${
-                  isActive(link.path) ? 'text-[#EB010C] bg-red-50' : 'text-gray-800'
-                }`}
+                className={`px-4 py-3 text-sm font-medium rounded ${isActive(link.path) ? 'text-[#EB010C] bg-red-50' : 'text-gray-800'
+                  }`}
               >
                 {link.name}
               </Link>

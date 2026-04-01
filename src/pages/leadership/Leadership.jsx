@@ -164,7 +164,7 @@ function ProfileCard({ profile }) {
                 />
             </div>
             <div>
-                <h3 className="text-black font-normal text-sm leading-[139%] tracking-[0.28px]">
+                <h3 className="text-black font-normal text-sm leading-[139%] tracking-[0.28px]" translate="no">
                     {profile.name}
                 </h3>
                 <p className="text-[#666] font-normal text-sm leading-[139%] tracking-[0.28px] mt-1">

@@ -5,9 +5,62 @@
     <link rel="icon" type="image/svg+xml" href="/UPAM.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UPAM</title>
+    <style>
+      /* Hide the Google Translate top banner if it appears */
+      .skiptranslate iframe,
+      .goog-te-banner-frame.skiptranslate,
+      #goog-gt-tt {
+        display: none !important;
+      }
+      body {
+        top: 0px !important;
+      }
+      /* Optional: Hide the "Powered by Google" text but keep the dropdown */
+      .goog-logo-link {
+        display: none !important;
+      }
+      .goog-te-gadget {
+        color: transparent !important;
+        display: flex !important;
+        align-items: center !important;
+        flex-direction: row !important;
+        white-space: nowrap !important;
+      }
+      .goog-te-gadget .goog-te-combo {
+        margin: 4px 0 !important;
+        padding: 4px 8px !important;
+        border-radius: 4px !important;
+        border: 1px solid #e5e7eb !important; /* gray-200 */
+        background-color: white !important;
+        color: #374151 !important; /* gray-700 */
+        font-size: 14px !important;
+        cursor: pointer !important;
+        width: auto !important;
+        min-width: 150px !important;
+      }
+      .goog-te-gadget-simple {
+        display: flex !important;
+        padding: 5px 10px;
+      }
+      .goog-te-gadget-simple a {
+        display: flex !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false,
+          },
+          "google_translate_element",
+        );
+      }
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

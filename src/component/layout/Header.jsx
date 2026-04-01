@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from '../../pages/authenticationPages/authApiSlice';
 import useAuth from '../../hooks/useAuth';
 import ProfileBox from '../ui/ProfileBox';
+import GoogleTranslate from '../common/GoogleTranslate';
 import { PUBLIC_LINKS, USER_LINKS, USER_BOTTOM_LINKS } from '../../constants/navigation';
 
 // Mock user data - in real app, this would come from your auth context/store
@@ -70,14 +71,15 @@ const Header = () => {
                     <div className="flex items-center justify-between">
                         {/* Logo */}
                         <div className="flex items-center">
-                            <Link to="/">
+                            <Link to="/" translate="no">
                                 <img src="/logoupam.png" alt="UPAM Logo" />
                             </Link>
                         </div>
 
 
                         {/* Right side actions */}
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-10">
+                            <GoogleTranslate />
                             {
                                 isLoggedIn ? <ProfileBox show={true} /> :
                                     <Link to="/register" className="border-2 border-gray-800 px-4 py-2 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors">
@@ -147,7 +149,7 @@ const Header = () => {
                 <div className="flex items-center justify-between px-4 py-4">
                     <div className="flex items-center gap-2">
                         <div>
-                            <Link to="/">
+                            <Link to="/" translate="no">
                                 <img src="/logoupam.png" alt="UPAM Logo" />
                             </Link>
                         </div>
@@ -167,7 +169,7 @@ const Header = () => {
                     <div className="flex items-center justify-between px-4 py-4 bg-gray-200">
                         <div className="flex items-center gap-2">
                             <div>
-                                <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
+                                <Link to="/" onClick={() => setIsMobileMenuOpen(false)} translate="no">
                                     <img src="/logoupam.png" alt="UPAM Logo" className="h-8 w-auto" />
                                 </Link>
                             </div>
@@ -178,6 +180,12 @@ const Header = () => {
                     </div>
 
                     <div className="px-4 py-6">
+                        {/* Language Selection */}
+                        <div className="mb-4 pb-4 border-b">
+                            <p className="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Select Language</p>
+                            <GoogleTranslate />
+                        </div>
+
                         {/* User Profile Section - Only show if logged in */}
                         {isLoggedIn && (
                             <div className="mb-6 pb-6 border-b">
