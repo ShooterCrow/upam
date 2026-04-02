@@ -21,10 +21,22 @@
       }
       .goog-te-gadget {
         color: transparent !important;
+        font-size: 0 !important;
         display: flex !important;
         align-items: center !important;
         flex-direction: row !important;
         white-space: nowrap !important;
+      }
+      .goog-te-gadget::before {
+        content: "";
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        background-image: url("https://www.gstatic.com/images/branding/product/1x/translate_24dp.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-right: 4px;
+        flex-shrink: 0;
       }
       .goog-te-gadget .goog-te-combo {
         margin: 4px 0 !important;
@@ -33,27 +45,15 @@
         border: 1px solid #e5e7eb !important; /* gray-200 */
         background-color: white !important;
         color: #374151 !important; /* gray-700 */
-        font-size: 14px !important;
+        font-size: 13px !important;
         cursor: pointer !important;
-        width: auto !important;
-        min-width: 150px !important;
+        width: 140px !important;
+        min-width: 130px !important;
+        outline: none !important;
       }
-      .goog-te-gadget-simple {
-        display: flex !important;
-        padding: 2px 5px;
-        border-radius: 4px !important;
-        border: 1px solid #e5e7eb !important; /* gray-200 */
-        background-color: white !important;
-        width: auto !important;
-        min-width: 150px !important;
-      }
-      .goog-te-gadget-simple a {
-        display: flex !important;
-        font-family: "Poppins", sans-serif !important;
-        font-size: 12px !important;
-        color: #374151 !important;
-        cursor: pointer !important;
-        text-decoration: none !important;
+      .goog-te-gadget span,
+      .goog-te-gadget a {
+        display: none !important;
       }
     </style>
   </head>
@@ -64,7 +64,7 @@
         new google.translate.TranslateElement(
           {
             pageLanguage: "en",
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            layout: google.translate.TranslateElement.InlineLayout.VERTICAL,
             autoDisplay: false,
           },
           "google_translate_element",
