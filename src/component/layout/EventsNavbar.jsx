@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, X, Volume2 } from 'lucide-react';
 import GoogleTranslate from '../common/GoogleTranslate';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
 const EVENTS_NAV_LINKS = [
   { name: 'Home', path: '/' },
@@ -16,6 +17,7 @@ const EventsNavbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const langRef = useRef(null);
   const location = useLocation();
+  const isDesktop = useMediaQuery('(min-width: 1024px)');
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -55,9 +57,11 @@ const EventsNavbar = () => {
 
           {/* Right: Language + Login */}
           <div className="flex items-center gap-4">
-            <div className="hidden sm:block">
-              <GoogleTranslate />
-            </div>
+            {isDesktop && (
+              <div className="hidden lg:block">
+                <GoogleTranslate />
+              </div>
+            )}
             <Link
               to="/login"
               className="border border-gray-800 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-800 hover:text-white transition-colors rounded"
@@ -80,10 +84,6 @@ const EventsNavbar = () => {
       {mobileOpen && (
         <div className="lg:hidden border-t border-gray-200 bg-white">
           <nav className="flex flex-col py-4 px-4 gap-1">
-            <div className="px-4 py-2 mb-2 border-b border-gray-100">
-              <p className="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Select Language</p>
-              <GoogleTranslate />
-            </div>
             {EVENTS_NAV_LINKS.map((link) => (
               <Link
                 key={link.name}

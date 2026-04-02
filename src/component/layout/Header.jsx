@@ -5,6 +5,7 @@ import { useLogoutMutation } from '../../pages/authenticationPages/authApiSlice'
 import useAuth from '../../hooks/useAuth';
 import ProfileBox from '../ui/ProfileBox';
 import GoogleTranslate from '../common/GoogleTranslate';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import { PUBLIC_LINKS, USER_LINKS, USER_BOTTOM_LINKS } from '../../constants/navigation';
 
 // Mock user data - in real app, this would come from your auth context/store
@@ -23,6 +24,7 @@ const Header = () => {
     const [logout] = useLogoutMutation();
     const { isLoggedIn, user, roles } = useAuth();
     const isOnDashboard = location.pathname.startsWith('/user') || location.pathname.startsWith('/admin');
+    const isDesktop = useMediaQuery('(min-width: 1024px)');
 
     const navigationLinks = PUBLIC_LINKS;
 
@@ -79,7 +81,7 @@ const Header = () => {
 
                         {/* Right side actions */}
                         <div className="flex items-center gap-10">
-                            <GoogleTranslate />
+                            {isDesktop && <GoogleTranslate />}
                             {
                                 isLoggedIn ? <ProfileBox show={true} /> :
                                     <Link to="/register" className="border-2 border-gray-800 px-4 py-2 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors">
@@ -154,12 +156,15 @@ const Header = () => {
                             </Link>
                         </div>
                     </div>
-                    <button
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className="p-2"
-                    >
-                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
+                    <div className="flex items-center gap-2">
+                        {!isDesktop && <GoogleTranslate />}
+                        <button
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            className="p-2"
+                        >
+                            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
+                    </div>
                 </div>
             </header>
 
@@ -180,12 +185,6 @@ const Header = () => {
                     </div>
 
                     <div className="px-4 py-6">
-                        {/* Language Selection */}
-                        <div className="mb-4 pb-4 border-b">
-                            <p className="text-xs text-gray-500 mb-2 uppercase tracking-wider font-semibold">Select Language</p>
-                            <GoogleTranslate />
-                        </div>
-
                         {/* User Profile Section - Only show if logged in */}
                         {isLoggedIn && (
                             <div className="mb-6 pb-6 border-b">
