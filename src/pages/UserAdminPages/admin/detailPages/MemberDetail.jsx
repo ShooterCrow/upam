@@ -154,7 +154,7 @@ const MemberDetail = () => {
             {/* Content Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-12 gap-y-12 bg-white p-10">
                 {/* Main Details */}
-                <div className="lg:col-span-3 space-y-12">
+                <div className="lg:col-span-4 space-y-12">
                     {/* Top Stats Layer */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4">
                         <DetailItem label="Membership Type" value={application.membershipType} />
@@ -292,7 +292,7 @@ const MemberDetail = () => {
                 </div>
 
                 {/* Sidebar */}
-                <div className="lg:col-span-1 space-y-6">
+                {/* <div className="lg:col-span-1 space-y-6">
                     <div className="bg-white border border-slate-100 rounded-[2.5rem] p-8 space-y-8 ">
                         <div className="flex flex-col items-center text-center gap-4">
                             <div className="w-24 h-24 rounded-[2rem] bg-slate-50 flex items-center justify-center text-slate-300">
@@ -312,7 +312,7 @@ const MemberDetail = () => {
                             <SidebarItem icon={Calendar} label="Member Since" value={new Date(userData?.createdAt).toLocaleDateString()} />
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
             {/* Action Popup */}
