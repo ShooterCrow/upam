@@ -40,12 +40,17 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Users"],
     }),
+    getUserFullProfile: builder.query({
+      query: (id) => `/users/${id}/full-profile`,
+      providesTags: (result, error, id) => [{ type: "Users", id }],
+    }),
   }),
 });
 
 export const {
   useGetUsersQuery,
   useGetUserByIdQuery,
+  useGetUserFullProfileQuery,
   useGetMeQuery,
   useUpdateUserMutation,
   useUpdateMeMutation,

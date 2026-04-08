@@ -40,6 +40,7 @@ const MemberInfoModal = ({ isOpen, onClose, member }) => {
 
                 {/* Content */}
                 <div className="p-8 space-y-10">
+                    {console.log(member)}
                     {/* Basic Info */}
                     <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <InfoItem icon={User} label="Full Name" value={`${member.firstName} ${member.lastName}`} />

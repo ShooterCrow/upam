@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Menu, X, ChevronDown, LogOut } from 'lucide-react';
+import { Menu, X, ChevronDown, LogOut, ExternalLink } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from '../../pages/authenticationPages/authApiSlice';
 import useAuth from '../../hooks/useAuth';
@@ -134,9 +134,12 @@ const Header = () => {
                                     ) : (
                                         <Link
                                             to={link.path}
-                                            className={`transition-colors text-sm font-medium flex items-center gap-1 ${active ? 'text-red-600' : 'text-gray-800 hover:text-red-600'}`}
+                                            target={link.isExternal ? "_blank" : undefined}
+                                            rel={link.isExternal ? "noopener noreferrer" : undefined}
+                                            className={`transition-colors text-sm font-medium flex items-center gap-1.5 ${active ? 'text-red-600' : 'text-gray-800 hover:text-red-600'}`}
                                         >
                                             {link.name}
+                                            {link.isExternal && <ExternalLink size={14} className="ml-0.5" />}
                                         </Link>
                                     )}
                                 </div>
@@ -245,6 +248,8 @@ const Header = () => {
                                             <div key={link.name}>
                                                 <Link
                                                     to={link.hasDropdown ? '#' : link.path}
+                                                    target={!link.hasDropdown && link.isExternal ? "_blank" : undefined}
+                                                    rel={!link.hasDropdown && link.isExternal ? "noopener noreferrer" : undefined}
                                                     className={`flex items-center justify-between px-4 py-3 rounded transition-colors ${active ? 'bg-red-50 text-red-600 font-semibold' : 'text-gray-800 hover:bg-gray-100'}`}
                                                     onClick={(e) => {
                                                         if (link.hasDropdown) {
@@ -255,7 +260,10 @@ const Header = () => {
                                                         }
                                                     }}
                                                 >
-                                                    <span>{link.name}</span>
+                                                    <span className="flex items-center gap-2">
+                                                        {link.name}
+                                                        {!link.hasDropdown && link.isExternal && <ExternalLink size={16} />}
+                                                    </span>
                                                     {link.hasDropdown && <ChevronDown size={16} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />}
                                                 </Link>
                                                 {/* Mobile Dropdown */}
@@ -321,10 +329,15 @@ const Header = () => {
                                                 ) : (
                                                     <Link
                                                         to={link.path}
-                                                        className={`block px-4 py-3 rounded transition-colors ${active ? 'bg-red-50 text-red-600 font-semibold' : 'text-gray-800 hover:bg-gray-100'}`}
+                                                        target={link.isExternal ? "_blank" : undefined}
+                                                        rel={link.isExternal ? "noopener noreferrer" : undefined}
+                                                        className={`flex items-center justify-between px-4 py-3 rounded transition-colors ${active ? 'bg-red-50 text-red-600 font-semibold' : 'text-gray-800 hover:bg-gray-100'}`}
                                                         onClick={() => setIsMobileMenuOpen(false)}
                                                     >
-                                                        {link.name}
+                                                        <span className="flex items-center gap-2">
+                                                            {link.name}
+                                                            {link.isExternal && <ExternalLink size={16} />}
+                                                        </span>
                                                     </Link>
                                                 )}
                                             </div>

@@ -37,6 +37,7 @@ const AllMembers = () => {
     });
 
     const users = response?.data || [];
+    console.log(users)
     const totalPages = response?.totalPages || 1;
     const numberOfUsers = response?.totalUsersInDB || 0;
 

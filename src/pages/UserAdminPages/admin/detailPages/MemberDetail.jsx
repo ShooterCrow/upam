@@ -24,6 +24,7 @@ import {
     useGetVerificationByIdQuery,
     useUpdateVerificationStatusMutation
 } from '../../../platform/verificationApiSlice';
+import { useGetUserFullProfileQuery } from '../../../platform/usersApiSlice';
 
 const MemberDetail = () => {
     const { id } = useParams();
@@ -51,6 +52,15 @@ const MemberDetail = () => {
         }
     };
 
+    const application = response?.data;
+    const userData = application?.user;
+
+    // Fetch full user data including real-time stats (Total spent, balance etc)
+    // IMPORTANT: Hooks must be called before any early returns to avoid "Rendered more hooks" errors
+    const { data: userResponse, isLoading: isUserLoading } = useGetUserFullProfileQuery(userData?._id, {
+        skip: !userData?._id
+    });
+
     if (isLoading) {
         return (
             <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
@@ -60,7 +70,7 @@ const MemberDetail = () => {
         );
     }
 
-    if (isError || !response?.data) {
+    if (isError || !application) {
         return (
             <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6 text-center px-4">
                 <div className="w-20 h-20 rounded-full bg-red-50 flex items-center justify-center text-red-500">
@@ -80,8 +90,9 @@ const MemberDetail = () => {
         );
     }
 
-    const application = response.data;
-    const userData = application.user;
+    const fullProfile = userResponse?.data;
+    const stats = fullProfile?.stats;
+    const contactInfo = fullProfile?.contactInfo;
 
     const StatusBadge = ({ status }) => {
         const configs = {
@@ -218,34 +229,49 @@ const MemberDetail = () => {
                         </div>
                     </div>
 
-                    {/* Monetary Section - Note: These would normally come from a payment model, using placeholders as per image */}
+                    {/* Monetary Section - Real-time statistics from User endpoint */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-8 border-t border-slate-100">
-                        <DetailItem label="Membership Fee Payment" value="Not Paid" valueColor="text-red-500" />
-                        <DetailItem label="Outstanding Payment" value="$ - 32.00" valueColor="text-red-500" />
-                        <DetailItem label="Total Spent" value="$ 0.00" />
-                        <DetailItem label="Member ID.NO" value="20-10035" />
+                        <DetailItem
+                            label="Membership Fee Payment"
+                            value={stats?.membershipFeePaid ? "Paid" : "Not Paid"}
+                            valueColor={stats?.membershipFeePaid ? "text-emerald-500" : "text-red-500"}
+                        />
+                        <DetailItem
+                            label="Outstanding Payment"
+                            value={`$ ${stats?.outstandingBalance || 0}.00`}
+                            valueColor={stats?.outstandingBalance < 0 ? "text-red-500" : "text-slate-800"}
+                        />
+                        <DetailItem
+                            label="Total Spent"
+                            value={isUserLoading ? "Loading..." : `$ ${stats?.totalSpent || 0}.00`}
+                        />
+                        <DetailItem
+                            label="Member ID.NO"
+                            value={"20-" + fullProfile?.user?.member_id || "20-" + fullProfile?.user?.importedMember_id || 'N/A'}
+                        />
                     </div>
+                    {console.log(userData)}
 
                     {/* Emergency Contacts */}
                     <div className="space-y-8 pt-8 border-t border-slate-100">
                         <SectionHeader icon={Heart} title="Emergency Contact" />
                         <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-                            <DetailItem label="Name" value={userData?.emergencyContact?.fullName || 'N/A'} />
-                            <DetailItem label="Relationship" value={userData?.emergencyContact?.relationship || 'N/A'} />
-                            <DetailItem label="Email" value={userData?.emergencyContact?.email || 'N/A'} />
-                            <DetailItem label="Address" value={userData?.emergencyContact?.address || 'N/A'} />
-                            <DetailItem label="Country" value={userData?.emergencyContact?.country || 'N/A'} />
+                            <DetailItem label="Name" value={contactInfo?.emergencyContact?.fullName || contactInfo?.emergencyContact?.firstName + ' ' + contactInfo?.emergencyContact?.lastName || 'N/A'} />
+                            <DetailItem label="Relationship" value={contactInfo?.emergencyContact?.relationship || 'N/A'} />
+                            <DetailItem label="Email" value={contactInfo?.emergencyContact?.email || 'N/A'} />
+                            <DetailItem label="Address" value={contactInfo?.emergencyContact?.address || 'N/A'} />
+                            <DetailItem label="Country" value={contactInfo?.emergencyContact?.country || 'N/A'} />
                         </div>
                     </div>
 
                     <div className="space-y-8 pt-8 border-t border-slate-100">
                         <SectionHeader icon={Users} title="Next of Kin" />
                         <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-                            <DetailItem label="Name" value={userData?.nextOfKin?.fullName || 'N/A'} />
-                            <DetailItem label="Relationship" value={userData?.nextOfKin?.relationship || 'N/A'} />
-                            <DetailItem label="Email" value={userData?.nextOfKin?.email || 'N/A'} />
-                            <DetailItem label="Address" value={userData?.nextOfKin?.address || 'N/A'} />
-                            <DetailItem label="Country" value={userData?.nextOfKin?.country || 'N/A'} />
+                            <DetailItem label="Name" value={contactInfo?.nextOfKin?.fullName || contactInfo?.nextOfKin?.firstName + ' ' + contactInfo?.nextOfKin?.lastName || 'N/A'} />
+                            <DetailItem label="Relationship" value={contactInfo?.nextOfKin?.relationship || 'N/A'} />
+                            <DetailItem label="Email" value={contactInfo?.nextOfKin?.email || 'N/A'} />
+                            <DetailItem label="Address" value={contactInfo?.nextOfKin?.address || 'N/A'} />
+                            <DetailItem label="Country" value={contactInfo?.nextOfKin?.country || 'N/A'} />
                         </div>
                     </div>
 
