@@ -10,15 +10,6 @@ const UserHeader = () => {
                 {/* Placeholder Logo */}
                 <img src="/logoupam.png" alt="Logo" />
             </Link>
-            {/* Search Bar */}
-            <div className="hidden md:flex items-center w-96 relative">
-                <Search className="absolute left-3 text-slate-400" size={18} />
-                <input
-                    type="text"
-                    placeholder="search for all items..."
-                    className="w-full bg-slate-50 border-none rounded-lg pl-10 pr-4 py-2.5 text-sm focus:ring-1 focus:ring-red-500 outline-none text-slate-600 placeholder:text-slate-400"
-                />
-            </div>
 
             {/* Right Side Actions */}
             <div className="flex items-center gap-6 ml-auto">
