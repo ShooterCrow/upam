@@ -838,8 +838,8 @@ const Index = () => {
                                 <div className="lg:col-span-2">
                                     <Link to="/events/upam-academy-launch" className="relative h-[530px] rounded-2xl overflow-hidden group cursor-pointer block">
                                         <img
-                                            src="https://api.builder.io/api/v1/image/assets/TEMP/87a486687e349d2a5c9a964e45e9e666dd8b47a7?width=1760"
-                                            alt="UPAM Academy Launch"
+                                            src="/malawi-flyer.jpg"
+                                            alt="Global African Renaissance Summit 2026 (Malawi) Image"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
@@ -848,19 +848,19 @@ const Index = () => {
                                             <div className="flex flex-wrap items-center gap-4 mb-4">
                                                 <div className="flex items-center gap-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full">
                                                     <Calendar className="w-4 h-4" />
-                                                    <span className="text-sm font-medium">20th March 2025</span>
+                                                    <span className="text-sm font-medium">12th - 17th May 2026</span>
                                                 </div>
                                                 <div className="flex items-center gap-2 px-3 py-1.5 bg-[#EB010C] rounded-full">
-                                                    <span className="text-sm font-semibold">Featured Event</span>
+                                                    <span className="text-sm font-semibold">Lilongwe Malawi</span>
                                                 </div>
                                             </div>
 
                                             <div className="flex flex-col gap-4">
                                                 <h3 className="text-2xl lg:text-3xl font-bold tracking-tight">
-                                                    UPAM Academy Launch
+                                                    Global African Renaissance Summit 2026 (Malawi)
                                                 </h3>
                                                 <p className="text-white/90 leading-relaxed text-lg max-w-3xl">
-                                                    Get ready to unlock new skills and opportunities! We're excited to announce the launch of Upam Academy, where learning meets innovation. Join us for an exclusive event as we unveil our programs and opportunities for growth.
+                                                    Theme: From Vision to Action: Building Africa’s Prosperous Future Together
                                                 </p>
                                             </div>
                                         </div>
@@ -870,6 +870,39 @@ const Index = () => {
                                 {/* Side Events - Right Column (Two images split height) */}
                                 <div className="flex flex-col md:flex-row lg:flex-col gap-6 h-[350px] md:h-[250px] lg:h-[500px]">
                                     {/* Event 1 - Takes half height */}
+                                    <div className="group cursor-pointer h-1/2 md:h-full lg:h-1/2 md:flex-1">
+                                        <div className="relative h-full rounded-xl overflow-hidden shadow-lg">
+                                            <img
+                                                src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                                alt="UPAM Academy Launch"
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+
+                                            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                                <div className="flex items-center justify-between mb-3">
+                                                    <div className="flex items-center gap-2">
+                                                        <Calendar className="w-4 h-4" />
+                                                        <span className="text-sm font-medium">10th June 2025</span>
+                                                    </div>
+                                                    <div className="px-3 py-1 bg-blue-500/20 backdrop-blur-sm rounded-full">
+                                                        <span className="text-xs font-semibold text-white">Summit</span>
+                                                    </div>
+                                                </div>
+
+                                                <h3 className="text-xl font-bold mb-2 group-hover:text-upam-red transition-colors duration-300">
+                                                    UPAM Academy Launch
+                                                </h3>
+
+                                                <Link to="/events/upam-academy-launch" className="inline-flex items-center gap-2 text-white font-semibold text-sm mt-3 group-hover:gap-3 transition-all duration-300">
+                                                    View Details
+                                                    <ArrowRight className="w-4 h-4" />
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Event 2 - Takes half height */}
                                     <div className="group cursor-pointer h-1/2 md:h-full lg:h-1/2 md:flex-1">
                                         <div className="relative h-full rounded-xl overflow-hidden shadow-lg">
                                             <img
@@ -902,38 +935,6 @@ const Index = () => {
                                         </div>
                                     </div>
 
-                                    {/* Event 2 - Takes half height */}
-                                    <div className="group cursor-pointer h-1/2 md:h-full lg:h-1/2 md:flex-1">
-                                        <div className="relative h-full rounded-xl overflow-hidden shadow-lg">
-                                            <img
-                                                src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                                                alt="Youth Empowerment Summit"
-                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
-
-                                            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                                                <div className="flex items-center justify-between mb-3">
-                                                    <div className="flex items-center gap-2">
-                                                        <Calendar className="w-4 h-4" />
-                                                        <span className="text-sm font-medium">10th June 2025</span>
-                                                    </div>
-                                                    <div className="px-3 py-1 bg-blue-500/20 backdrop-blur-sm rounded-full">
-                                                        <span className="text-xs font-semibold text-white">Summit</span>
-                                                    </div>
-                                                </div>
-
-                                                <h3 className="text-xl font-bold mb-2 group-hover:text-upam-red transition-colors duration-300">
-                                                    Youth Empowerment Summit
-                                                </h3>
-
-                                                <Link to="/events/pan-african-youth-summit-2025" className="inline-flex items-center gap-2 text-white font-semibold text-sm mt-3 group-hover:gap-3 transition-all duration-300">
-                                                    View Details
-                                                    <ArrowRight className="w-4 h-4" />
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
 
