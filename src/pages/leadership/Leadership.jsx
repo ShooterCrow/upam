@@ -64,9 +64,9 @@ const globalExecutive = [
     },
     {
         id: 11,
-        name: "Dr Huvayla Mohamed Ali",
+        name: "Dr Huwayda Mohamed Ali",
         title: "Global Adviser",
-        image: "/images/leadership/huvayla-ali.jpg"
+        image: "/pics/huwayda.png"
     },
     {
         id: 12,
