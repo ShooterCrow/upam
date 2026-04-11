@@ -12,7 +12,7 @@ const globalExecutive = [
         id: 2,
         name: "Priscilla Tsongavain",
         title: "Vice President (UPAM)",
-        image: "/pics/Frame 37615.png"
+        image: "/pics/priscilla.jpg"
     },
     {
         id: 3,
