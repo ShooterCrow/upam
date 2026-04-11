@@ -18,19 +18,19 @@ const globalExecutive = [
         id: 3,
         name: "Petrina Nghipondilo Shilindi",
         title: "Global Executive Administrator II",
-        image: "/images/leadership/petrina-shilindi.jpg"
+        image: "/pics/petrina.png"
     },
     {
         id: 4,
         name: "Akpor Emmanuel Terfa",
         title: "Global Secretary General",
-        image: "/images/leadership/akpor-terfa.jpg"
+        image: "/pics/terfa.png"
     },
     {
         id: 5,
-        name: "Augustine Nyakaloma",
+        name: "Augustine Nyakatoma",
         title: "Speaker of National Representative",
-        image: "/images/leadership/augustine-nyakaloma.jpg"
+        image: "/pics/nyakatoma.png"
     },
     {
         id: 6,
@@ -40,27 +40,27 @@ const globalExecutive = [
     },
     {
         id: 7,
-        name: "Dr Venesta Mwengella",
+        name: "Dr Venetta Mwengella",
         title: "Global Secretary of Health",
-        image: "/images/leadership/venesta-mwengella.jpg"
+        image: "/pics/venetta.png"
     },
     {
         id: 8,
         name: "Hon. Lorraine Malekanya",
         title: "Global Secretary of Legal Affairs",
-        image: "/images/leadership/lorraine-malekanya.jpg"
+        image: "/pics/lorraine.png"
     },
     {
         id: 9,
         name: "Mrs. Muthoni Mwangi",
         title: "Global Secretary of Partnership and Networking",
-        image: "/images/leadership/muthoni-mwangi.jpg"
+        image: "/pics/minga.png"
     },
     {
         id: 10,
         name: "Miheret Gemida",
         title: "Global Secretary of Business and Enterprises",
-        image: "/images/leadership/miheret-gemida.jpg"
+        image: "/pics/mihiret.png"
     },
     {
         id: 11,
@@ -72,7 +72,7 @@ const globalExecutive = [
         id: 12,
         name: "Pius Ntitya",
         title: "Global Secretary of Climate Change and Environmental Protection",
-        image: "/images/leadership/pius-ntitya.jpg"
+        image: "/pics/pius.png"
     },
     {
         id: 13,
@@ -84,13 +84,13 @@ const globalExecutive = [
         id: 14,
         name: "Prisca Openna",
         title: "Global Secretary of Media and Communications",
-        image: "/images/leadership/prisca-openna.jpg"
+        image: "/pics/prisca.png"
     },
     {
         id: 15,
         name: "Dr Titus Orngu",
         title: "Global Secretary of Women Children and Youth",
-        image: "/images/leadership/titus-orngu.jpg"
+        image: "/pics/titus.png"
     }
 ];
 
@@ -111,7 +111,7 @@ const nationalRepresentatives = [
         id: 18,
         name: "Frank Minga",
         title: "National Representative Tanzania",
-        image: "/images/leadership/frank-minga.jpg"
+        image: "/pics/minga.png"
     }
 ];
 
@@ -126,7 +126,7 @@ const directors = [
         id: 20,
         name: "Hon. Lorraine Malekanya",
         title: "Secretary of UPAM Holdings",
-        image: "/pics/leadership/lorraine-malekanya.jpg"
+        image: "/pics/lorraine.png"
     },
     {
         id: 21,
@@ -138,7 +138,7 @@ const directors = [
         id: 22,
         name: "Dr Venesta Mwengella",
         title: "Treasurer",
-        image: "/images/leadership/venesta-mwengella.jpg"
+        image: "/pics/venetta.png"
     },
     {
         id: 23,
