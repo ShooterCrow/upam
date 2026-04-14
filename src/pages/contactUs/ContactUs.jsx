@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, ArrowUpRight, ChevronDown, ChevronUp, Facebook, Twitter, Instagram } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowUpRight, ChevronDown, ChevronUp, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import worldMap from '../../assets/world_map.png';
 import benefitsImg from '../../assets/benefits.png';
 import { useCreateContactMutation } from './contactsApiSlice';
@@ -213,14 +213,22 @@ const ContactUs = () => {
                         <div>
                             <h3 className="font-bold mb-6">Follow our updates</h3>
                             <div className="flex gap-4">
-                                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
+                                <a href="https://www.facebook.com/unitedpam" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
                                     <Facebook size={20} />
                                 </a>
-                                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
+                                <a href="https://x.com/UPAM_Official" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
                                     <Twitter size={20} />
                                 </a>
-                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
+                                <a href="https://www.instagram.com/unitedpam" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
                                     <Instagram size={20} />
+                                </a>
+                                <a href="https://www.linkedin.com/company/upamacademy" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
+                                    <Linkedin size={20} />
+                                </a>
+                                <a href="https://www.tiktok.com/@upam56" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11.6667 0H8.33333V13.3333C8.33333 14.2538 7.58714 15 6.66667 15C5.74619 15 5 14.2538 5 13.3333C5 12.4129 5.74619 11.6667 6.66667 11.6667V8.33333C3.916 8.33333 1.66667 10.5827 1.66667 13.3333C1.66667 16.084 3.916 18.3333 6.66667 18.3333C9.41733 18.3333 11.6667 16.084 11.6667 13.3333V5C13.5047 6.324 15.7533 7.08333 18.3333 7.08333V3.75C16.0333 3.75 13.9167 2.75 12.5 1.16667C12.1667 0.75 11.9167 0.333333 11.6667 0Z" />
+                                    </svg>
                                 </a>
                             </div>
                         </div>
