@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import eventHero from '../../assets/event.jpg';
 import { Calendar, MapPin, ArrowRight, Play, ChevronDown, ChevronUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import {
   events,
-  heroThumbnails,
   howItWorksSteps,
 } from './eventsData';
 
@@ -48,76 +48,41 @@ const Events = () => {
     <div className="min-h-screen bg-white">
 
       {/* ========== HERO ========== */}
-      <section className="bg-white py-16 lg:py-20 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr_1fr] gap-6 items-center">
+      <section className="relative min-h-[520px] lg:min-h-[620px] flex items-center overflow-hidden">
+        {/* Background image */}
+        <img
+          src={eventHero}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/65" />
 
-            {/* Left photo column */}
-            <div className="hidden lg:flex flex-col gap-4">
-              <div className="h-48 overflow-hidden rounded-lg">
-                <img
-                  src={heroThumbnails[0]}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="h-48 overflow-hidden rounded-lg">
-                <img
-                  src={heroThumbnails[1]}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Center text */}
-            <div className="text-center px-0 lg:px-6">
-              <span className="inline-block text-xs font-semibold tracking-widest uppercase text-[#EB010C] mb-4">
-                UPAM Platform
-              </span>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-5 leading-tight">
-                Discover Events that Unite, Inspire and Empower
-              </h1>
-              <p className="text-gray-500 text-base mb-8 leading-relaxed max-w-lg mx-auto">
-                UPAM is a Pan-African platform where organizers promote events, audiences
-                discover experiences, and communities come together — from conferences and
-                workshops to culture, music, and innovation.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Link
-                  to="#all-events"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3 bg-[#EB010C] text-white font-semibold rounded hover:bg-[#EB010C]/90 transition-colors"
-                >
-                  Explore Events
-                  <span className="font-mono text-sm">&gt;&gt;</span>
-                </Link>
-                <Link
-                  to="/events/create"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3 bg-white text-gray-900 font-semibold border border-gray-300 rounded hover:bg-gray-50 transition-colors"
-                >
-                  Create Event
-                  <span className="font-mono text-sm">&gt;&gt;</span>
-                </Link>
-              </div>
-            </div>
-
-            {/* Right photo column */}
-            <div className="hidden lg:flex flex-col gap-4">
-              <div className="h-48 overflow-hidden rounded-lg">
-                <img
-                  src={heroThumbnails[2]}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="h-48 overflow-hidden rounded-lg">
-                <img
-                  src={heroThumbnails[3]}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
+        {/* Content */}
+        <div className="relative w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-24 lg:py-32">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Discover Events that Unite,<br className="hidden sm:block" /> Inspire and Empower
+          </h1>
+          <p className="text-white/75 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
+            UPAM Events is a Pan-African platform where organizers promote events, audiences
+            discover experiences, and communities come together from conferences and workshops
+            to culture, music, and innovation.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="#all-events"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#EB010C] text-white font-semibold rounded hover:bg-[#EB010C]/90 transition-colors"
+            >
+              Explore Events
+              <span className="font-mono text-sm">&gt;&gt;</span>
+            </Link>
+            <Link
+              to="/events/create"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-transparent text-white font-semibold border border-white/60 rounded hover:bg-white/10 transition-colors"
+            >
+              Create Event
+              <span className="font-mono text-sm">&gt;&gt;</span>
+            </Link>
           </div>
         </div>
       </section>
