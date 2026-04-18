@@ -832,15 +832,19 @@ const Index = () => {
                                 <ReadMore text={"View All Events"} link={"/events"} />
                             </div>
 
+                            <div className='flex flex-1'>
+                                <img className='w-full' src="/malawievent.png" alt="Malawi Event poster" />
+                            </div>
+
                             {/* Main Content Grid - Fixed Height Layout */}
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                                 {/* Featured Event - Left Column (Full height) */}
                                 <div className="lg:col-span-2">
                                     <Link to="/events/upam-academy-launch" className="relative h-[530px] rounded-2xl overflow-hidden group cursor-pointer block">
                                         <img
-                                            src="/malawi-flyer.jpg"
-                                            alt="Global African Renaissance Summit 2026 (Malawi) Image"
-                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                            src="/academy_logo.png"
+                                            alt="UPAM Academy Launch Image"
+                                            className="w-full h-full object-cover group-hover:scale-105 bg-black-900 transition-transform duration-500"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
 
@@ -848,19 +852,19 @@ const Index = () => {
                                             <div className="flex flex-wrap items-center gap-4 mb-4">
                                                 <div className="flex items-center gap-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full">
                                                     <Calendar className="w-4 h-4" />
-                                                    <span className="text-sm font-medium">12th - 17th May 2026</span>
+                                                    <span className="text-sm font-medium">20th March 2025</span>
                                                 </div>
-                                                <div className="flex items-center gap-2 px-3 py-1.5 bg-[#EB010C] rounded-full">
+                                                {/* <div className="flex items-center gap-2 px-3 py-1.5 bg-[#EB010C] rounded-full">
                                                     <span className="text-sm font-semibold">Lilongwe Malawi</span>
-                                                </div>
+                                                </div> */}
                                             </div>
 
                                             <div className="flex flex-col gap-4">
                                                 <h3 className="text-2xl lg:text-3xl font-bold tracking-tight">
-                                                    Global African Renaissance Summit 2026 (Malawi)
+                                                    UPAM Academy Launch
                                                 </h3>
                                                 <p className="text-white/90 leading-relaxed text-lg max-w-3xl">
-                                                    Theme: From Vision to Action: Building Africa’s Prosperous Future Together
+                                                    Get ready to unlock new skills and opportunities!  We're excited to announce the launch of Upam Academy, where learning meets innovation. Join us for an exclusive event as we unveil our programs and opportunities for growth.
                                                 </p>
                                             </div>
                                         </div>
