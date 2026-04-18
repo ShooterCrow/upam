@@ -864,7 +864,7 @@ const Index = () => {
                                                     UPAM Academy Launch
                                                 </h3>
                                                 <p className="text-white/90 leading-relaxed text-lg max-w-3xl">
-                                                    Get ready to unlock new skills and opportunities!  We're excited to announce the launch of Upam Academy, where learning meets innovation. Join us for an exclusive event as we unveil our programs and opportunities for growth.
+                                                    Get ready to unlock new skills and opportunities! We're excited to announce the launch of Upam Academy, where learning meets innovation.
                                                 </p>
                                             </div>
                                         </div>
