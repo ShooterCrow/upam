@@ -40,7 +40,7 @@ const AdminSidebar = () => {
 
     const handleCopy = () => {
         if (user?.importedMember_id) {
-            navigator.clipboard.writeText(user.importedMember_id);
+            navigator.clipboard.writeText(user.importedMember_id || user.memberId);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         }

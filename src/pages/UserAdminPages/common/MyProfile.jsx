@@ -51,7 +51,7 @@ const MyProfile = () => {
                 email: user.email || '',
                 phone: user.phone || '',
                 country: user.country || '',
-                chapter: user.chapter || '',
+                chapter: user.chapter?._id || user.chapter || '',
                 password: '',
                 confirmPassword: ''
             });
