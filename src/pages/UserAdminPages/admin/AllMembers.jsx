@@ -4,6 +4,7 @@ import { MoreVertical, Filter, ChevronLeft, ChevronRight, SlidersHorizontal, Sea
 import LoadingState from '../../../component/ui/LoadingState';
 import ErrorState from '../../../component/ui/ErrorState';
 import MemberInfoModal from './modals/MemberInfoModal';
+import Pagination from '../../../component/ui/Pagination';
 
 const AllMembers = () => {
     const [page, setPage] = useState(1);
@@ -242,42 +243,11 @@ const AllMembers = () => {
             </div>
 
             {/* Pagination */}
-            {totalPages > 1 && (
-                <div className="flex justify-center mt-8 px-6">
-                    <div className="flex items-center bg-white border border-gray-100 rounded-2xl p-1.5 shadow-sm max-w-full overflow-hidden">
-                        <button
-                            onClick={() => setPage(prev => Math.max(1, prev - 1))}
-                            disabled={page === 1}
-                            className="p-2 rounded-xl text-slate-500 disabled:opacity-20 hover:bg-slate-50 transition-colors flex-shrink-0"
-                        >
-                            <ChevronLeft size={22} />
-                        </button>
-
-                        <div className="flex items-center gap-1 overflow-x-auto no-scrollbar px-2 max-w-[240px] sm:max-w-md">
-                            {[...Array(totalPages)].map((_, i) => (
-                                <button
-                                    key={i + 1}
-                                    onClick={() => setPage(i + 1)}
-                                    className={`min-w-[40px] h-10 rounded-xl text-sm font-bold transition-all flex-shrink-0 ${page === i + 1
-                                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-200'
-                                        : 'text-slate-500 hover:bg-slate-100'
-                                        }`}
-                                >
-                                    {i + 1}
-                                </button>
-                            ))}
-                        </div>
-
-                        <button
-                            onClick={() => setPage(prev => Math.min(totalPages, prev + 1))}
-                            disabled={page === totalPages}
-                            className="p-2 rounded-xl text-slate-500 disabled:opacity-20 hover:bg-slate-50 transition-colors flex-shrink-0"
-                        >
-                            <ChevronRight size={22} />
-                        </button>
-                    </div>
-                </div>
-            )}
+            <Pagination
+                currentPage={page}
+                totalPages={totalPages}
+                onPageChange={setPage}
+            />
         </div>
     );
 };

@@ -88,6 +88,11 @@ export const USER_LINKS = [
   },
   { name: "Notifications", path: "/user/notification", icon: Bell },
   { name: "Support & Help", path: "/user/support", icon: Headphones },
+  {
+    name: "My Transactions",
+    path: "/user/my-transactions",
+    icon: Wallet,
+  },
 ];
 
 export const USER_BOTTOM_LINKS = [

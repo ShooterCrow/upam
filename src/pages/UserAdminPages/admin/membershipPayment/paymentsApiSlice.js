@@ -11,21 +11,21 @@ export const paymentsApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ["Payment"],
     }),
     getPayments: builder.query({
-      query: () => "/payments",
+      query: ({ page = 1, limit = 10 } = {}) => `/payments?page=${page}&limit=${limit}`,
       providesTags: (result) =>
-        result
+        result?.data
           ? [
-              ...result.map(({ _id }) => ({ type: "Payment", id: _id })),
+              ...result.data.map(({ _id }) => ({ type: "Payment", id: _id })),
               { type: "Payment", id: "LIST" },
             ]
           : [{ type: "Payment", id: "LIST" }],
     }),
     getMyPayments: builder.query({
-      query: () => "/payments/my-payments",
+      query: ({ page = 1, limit = 10 } = {}) => `/payments/my-payments?page=${page}&limit=${limit}`,
       providesTags: (result) =>
-        result
+        result?.data
           ? [
-              ...result.map(({ _id }) => ({ type: "Payment", id: _id })),
+              ...result.data.map(({ _id }) => ({ type: "Payment", id: _id })),
               { type: "Payment", id: "LIST" },
             ]
           : [{ type: "Payment", id: "LIST" }],

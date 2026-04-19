@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { useGetPaymentsQuery } from "./membershipPayment/paymentsApiSlice";
-import { List, Calendar, DollarSign, User as UserIcon, Loader2, Search } from "lucide-react";
+import { useGetMyPaymentsQuery } from "../admin/membershipPayment/paymentsApiSlice";
+import { Wallet, Calendar, DollarSign, Loader2 } from "lucide-react";
 import LoadingState from "../../../component/ui/LoadingState";
 import ErrorState from "../../../component/ui/ErrorState";
 import Pagination from "../../../component/ui/Pagination";
 
-const AllTransactionsTable = () => {
+const MyTransactions = () => {
   const [page, setPage] = useState(1);
   const limit = 10;
 
-  const { data: response, isLoading, isFetching, isError, error, refetch } = useGetPaymentsQuery({
+  const { data: response, isLoading, isFetching, isError, error, refetch } = useGetMyPaymentsQuery({
     page,
     limit,
   });
@@ -42,7 +42,7 @@ const AllTransactionsTable = () => {
   if (isLoading && !transactions.length) {
     return (
       <div className="h-[70vh] flex items-center justify-center">
-        <LoadingState message="Fetching transactions..." />
+        <LoadingState message="Fetching your transactions..." />
       </div>
     );
   }
@@ -51,7 +51,7 @@ const AllTransactionsTable = () => {
     return (
       <div className="h-[70vh] flex items-center justify-center">
         <ErrorState
-          message={error?.data?.message || "Could not load transactions"}
+          message={error?.data?.message || "Could not load your transactions"}
           onRetry={refetch}
         />
       </div>
@@ -64,9 +64,9 @@ const AllTransactionsTable = () => {
       <div className="bg-white px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
         <div className="flex items-center gap-3">
             <div className="p-2 bg-blue-50 text-blue-600 rounded-lg">
-                <List size={20} />
+                <Wallet size={20} />
             </div>
-            <h2 className="text-lg font-bold text-slate-800">All Transactions ({totalPayments})</h2>
+            <h2 className="text-lg font-bold text-slate-800">My Transactions ({totalPayments})</h2>
         </div>
       </div>
 
@@ -83,9 +83,9 @@ const AllTransactionsTable = () => {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-slate-50/50">
-                <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">User</th>
                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Amount</th>
                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Purpose</th>
+                <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Plan</th>
                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Status</th>
                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Date</th>
               </tr>
@@ -94,20 +94,6 @@ const AllTransactionsTable = () => {
               {transactions.map((tx) => (
                 <tr key={tx._id} className="group hover:bg-slate-50 transition-colors">
                   <td className="px-6 py-5">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
-                        <UserIcon size={14} />
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-slate-700">
-                          {tx.user ? `${tx.user.firstName} ${tx.user.lastName}` : "Unknown User"}
-                        </p>
-                        <p className="text-xs text-slate-400">{tx.user?.email || "No email provided"}</p>
-                      </div>
-                    </div>
-                  </td>
-
-                  <td className="px-6 py-5">
                     <div className="flex items-center gap-1.5 font-bold text-slate-700">
                         <span className="text-xs text-slate-400 font-medium">{tx.currency}</span>
                         {Number(tx.amount).toLocaleString()}
@@ -115,7 +101,11 @@ const AllTransactionsTable = () => {
                   </td>
 
                   <td className="px-6 py-5">
-                    <span className="text-sm text-slate-600">{tx.purpose}</span>
+                    <span className="text-sm text-slate-600 font-medium">{tx.purpose}</span>
+                  </td>
+
+                  <td className="px-6 py-5">
+                    <span className="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded-md">{tx.paymentPlan || "N/A"}</span>
                   </td>
 
                   <td className="px-6 py-5">
@@ -132,7 +122,7 @@ const AllTransactionsTable = () => {
               {transactions.length === 0 && !isFetching && (
                 <tr>
                   <td colSpan="5" className="px-6 py-20 text-center text-slate-400 font-medium">
-                    No transactions found.
+                    You haven't made any transactions yet.
                   </td>
                 </tr>
               )}
@@ -151,4 +141,4 @@ const AllTransactionsTable = () => {
   );
 };
 
-export default AllTransactionsTable;
+export default MyTransactions;
