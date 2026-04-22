@@ -12,12 +12,15 @@ import {
     X,
     CheckCircle2,
     AlertCircle,
-    ArrowRight
+    ArrowRight,
+    Mail
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useGetEventsQuery, useCreateEventMutation } from '../admin/calendarApiSlice';
+import { useGetEventsQuery, useCreateEventMutation, useUpdateEventMutation, useDeleteEventMutation } from '../admin/calendarApiSlice';
+import { toast } from 'react-toastify';
 import useAuth from '../../../hooks/useAuth';
 import CommunityCalendar from '../../../component/calendar/CommunityCalendar';
+import RichTextEditor from '../../../component/ui/RichTextEditor';
 
 const UPAMCalender = () => {
     const [selectedDate, setSelectedDate] = useState(new Date(2026, 1, 12)); // Feb 12, 2026
@@ -36,20 +39,40 @@ const UPAMCalender = () => {
         date: '',
         category: 'Event',
         imageFile: null,
-        imagePreview: null
+        imagePreview: null,
+        sendEmailTo: 'none', // none, all, email_verified, member_verified
+        manualEmails: ''
     });
 
-    const [createEvent, { isLoading: isCreating, isSuccess: isSuccessState }] = useCreateEventMutation();
+    const [createEvent, { isLoading: isCreating }] = useCreateEventMutation();
+    const [updateEvent, { isLoading: isUpdating }] = useUpdateEventMutation();
+    const [deleteEvent] = useDeleteEventMutation();
 
-    const handleAddClick = () => {
+    const handleClear = () => {
+        setFormData({
+            title: '',
+            description: '',
+            date: selectedDate.toISOString().split('T')[0],
+            category: 'Event',
+            imageFile: null,
+            imagePreview: null,
+            sendEmailTo: 'none',
+            manualEmails: ''
+        });
+    };
+
+    const handleAddClick = (category = 'Event') => {
         const dateStr = selectedDate.toISOString().split('T')[0];
+        setSelectedEvent(null); // Clear selected event for new creations
         setFormData({
             title: '',
             description: '',
             date: dateStr,
-            category: 'Event',
+            category: category,
             imageFile: null,
-            imagePreview: null
+            imagePreview: null,
+            sendEmailTo: 'none',
+            manualEmails: ''
         });
         setViewMode('add');
     };
@@ -73,15 +96,56 @@ const UPAMCalender = () => {
             submitData.append('description', formData.description);
             submitData.append('date', formData.date);
             submitData.append('category', formData.category);
+            submitData.append('sendEmailTo', formData.sendEmailTo);
+            submitData.append('manualEmails', formData.manualEmails);
             if (formData.imageFile) {
                 submitData.append('image', formData.imageFile);
             }
 
-            await createEvent(submitData).unwrap();
+            if (selectedEvent && viewMode === 'add') {
+                // Editing mode (using 'add' view for editing too)
+                await updateEvent({ id: selectedEvent._id, data: submitData }).unwrap();
+                toast.success('Updated successfully');
+            } else {
+                // Creation mode
+                await createEvent(submitData).unwrap();
+                toast.success('Created successfully');
+            }
+
             refetch();
             setViewMode('calendar');
+            setSelectedEvent(null);
         } catch (err) {
-            console.error('Failed to create event/announcement:', err);
+            console.error('Failed to save:', err);
+            toast.error('Operation failed');
+        }
+    };
+
+    const handleEdit = (event) => {
+        setFormData({
+            title: event.title,
+            description: event.description,
+            date: new Date(event.date).toISOString().split('T')[0],
+            category: event.category || 'Event',
+            imageFile: null,
+            imagePreview: event.image,
+            sendEmailTo: 'none',
+            manualEmails: ''
+        });
+        setViewMode('add');
+    };
+
+    const handleDelete = async (id) => {
+        if (window.confirm('Are you sure you want to delete this?')) {
+            try {
+                await deleteEvent(id).unwrap();
+                toast.success('Deleted successfully');
+                setViewMode('calendar');
+                refetch();
+            } catch (err) {
+                console.error('Failed to delete:', err);
+                toast.error('Delete failed');
+            }
         }
     };
 
@@ -126,13 +190,22 @@ const UPAMCalender = () => {
                     {/* Add Event Button & List */}
                     <div className="flex flex-col gap-4">
                         {isAdmin && (
-                            <button
-                                onClick={handleAddClick}
-                                className={`w-full text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${viewMode === 'add' ? 'bg-blue-600' : 'bg-blue-600 hover:bg-blue-600'}`}
-                            >
-                                <Plus size={20} />
-                                Add Events & Annoucements
-                            </button>
+                            <div className="flex flex-col gap-2">
+                                <button
+                                    onClick={() => handleAddClick('Event')}
+                                    className={`w-full text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 transition-all bg-blue-600 hover:bg-blue-700 shadow-sm`}
+                                >
+                                    <Plus size={18} />
+                                    Add Event
+                                </button>
+                                <button
+                                    onClick={() => handleAddClick('Announcement')}
+                                    className={`w-full text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 transition-all bg-red-600 hover:bg-red-700 shadow-sm`}
+                                >
+                                    <Plus size={18} />
+                                    Add Announcement
+                                </button>
+                            </div>
                         )}
 
                         <div className="relative group">
@@ -154,13 +227,18 @@ const UPAMCalender = () => {
                                     <button
                                         key={event._id}
                                         onClick={() => handleEventClick(event)}
-                                        className={`w-full p-4 rounded-2xl flex items-center gap-4 text-left transition-all group ${selectedEvent?._id === event._id ? 'bg-blue-50 border-blue-100' : 'bg-white border border-gray-50 hover:border-blue-200'}`}
+                                        className={`w-full p-4 rounded-2xl flex items-center gap-4 text-left transition-all group relative ${selectedEvent?._id === event._id ? 'bg-blue-50 border-blue-100' : 'bg-white border border-gray-50 hover:border-blue-200'}`}
                                     >
                                         <div className={`p-2 rounded-lg transition-colors ${event.category === 'Announcement' ? 'bg-red-50 text-red-500' : 'bg-blue-50 text-blue-500'}`}>
                                             {event.category === 'Announcement' ? <MessageSquare size={18} /> : <CalendarIcon size={18} />}
                                         </div>
                                         <div className="flex-1 min-w-0">
-                                            <h4 className="text-sm font-bold text-slate-800 truncate">{event.title}</h4>
+                                            <div className="flex justify-between items-start">
+                                                <h4 className="text-sm font-bold text-slate-800 truncate">{event.title}</h4>
+                                                <span className={`text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase ${event.category === 'Announcement' ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>
+                                                    {event.category}
+                                                </span>
+                                            </div>
                                             <p className="text-[10px] text-slate-500">{new Date(event.date).toLocaleDateString()}</p>
                                         </div>
                                     </button>
@@ -259,14 +337,40 @@ const UPAMCalender = () => {
                                 className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden flex flex-col lg:flex-row h-full min-h-[600px]"
                             >
                                 <div className="flex-1 p-10 space-y-8 flex flex-col">
-                                    <button
-                                        onClick={() => setViewMode('calendar')}
-                                        className="flex items-center gap-2 text-slate-400 hover:text-blue-600 transition-colors self-start"
-                                    >
-                                        <ChevronLeft size={20} /> Back to Calendar
-                                    </button>
+                                    <div className="flex items-center justify-between">
+                                        <button
+                                            onClick={() => setViewMode('calendar')}
+                                            className="flex items-center gap-2 text-slate-400 hover:text-blue-600 transition-colors self-start"
+                                        >
+                                            <ChevronLeft size={20} /> Back to Calendar
+                                        </button>
 
-                                    <div className="space-y-8">
+                                        {isAdmin && (
+                                            <div className="flex gap-2">
+                                                <button
+                                                    onClick={() => handleEdit(selectedEvent)}
+                                                    className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl font-bold text-sm transition-all"
+                                                >
+                                                    Edit
+                                                </button>
+                                                <button
+                                                    onClick={() => handleDelete(selectedEvent._id)}
+                                                    className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl font-bold text-sm transition-all"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <div className="space-y-8 relative">
+                                        {/* Corner Tag */}
+                                        <div className="absolute -top-4 -right-4">
+                                            <span className={`px-4 py-2 rounded-bl-2xl font-black text-[10px] tracking-widest uppercase shadow-sm ${selectedEvent.category === 'Announcement' ? 'bg-red-600 text-white' : 'bg-blue-600 text-white'}`}>
+                                                {selectedEvent.category}
+                                            </span>
+                                        </div>
+
                                         <div>
                                             <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Title</h4>
                                             <h2 className="text-3xl font-bold text-slate-800 leading-tight">{selectedEvent.title}</h2>
@@ -328,8 +432,8 @@ const UPAMCalender = () => {
                             >
                                 <div className="flex items-center justify-between bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
                                     <div>
-                                        <h2 className="text-2xl font-bold text-slate-800">Add Events & Announcements</h2>
-                                        <p className="text-sm text-slate-500">Create new entries for the African community calendar</p>
+                                        <h2 className="text-2xl font-bold text-slate-800">{selectedEvent ? 'Edit' : 'Add'} {formData.category}</h2>
+                                        <p className="text-sm text-slate-500">Create or update entries for the African community calendar</p>
                                     </div>
                                     <button
                                         onClick={() => setViewMode('calendar')}
@@ -342,32 +446,27 @@ const UPAMCalender = () => {
                                 <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                                     <div className="space-y-6 bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
                                         <div className="space-y-2">
-                                            <label className="text-sm font-bold text-slate-700">Event Title</label>
+                                            <label className="text-sm font-bold text-slate-700">{formData.category} Title</label>
                                             <input
                                                 type="text"
                                                 required
                                                 className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-blue-500 transition-all font-medium"
-                                                placeholder="Enter event title"
+                                                placeholder={`Enter ${formData.category.toLowerCase()} title`}
                                                 value={formData.title}
                                                 onChange={e => setFormData({ ...formData, title: e.target.value })}
                                             />
                                         </div>
 
-                                        <div className="space-y-2">
-                                            <label className="text-sm font-bold text-slate-700">Event Description</label>
-                                            <textarea
-                                                rows="4"
-                                                required
-                                                className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-blue-500 transition-all resize-none"
-                                                placeholder="Detailed description..."
-                                                value={formData.description}
-                                                onChange={e => setFormData({ ...formData, description: e.target.value })}
-                                            ></textarea>
-                                        </div>
+                                        <RichTextEditor
+                                            label={`${formData.category} Description`}
+                                            value={formData.description}
+                                            onChange={e => setFormData({ ...formData, description: e.target.value })}
+                                            placeholder={`Detailed ${formData.category.toLowerCase()} description with HTML support...`}
+                                        />
 
                                         <div className="grid grid-cols-2 gap-4">
                                             <div className="space-y-2">
-                                                <label className="text-sm font-bold text-slate-700">Event Date</label>
+                                                <label className="text-sm font-bold text-slate-700">{formData.category} Date</label>
                                                 <input
                                                     type="date"
                                                     required
@@ -389,20 +488,72 @@ const UPAMCalender = () => {
                                             </div>
                                         </div>
 
-                                        <div className="flex gap-4 pt-4">
+                                        {/* Email Notification Section - Only for Announcements */}
+                                        {formData.category === 'Announcement' && (
+                                            <div className="pt-6 border-t border-slate-100 space-y-6">
+                                                <div className="flex items-center gap-2 text-blue-600">
+                                                    <Mail size={20} />
+                                                    <h3 className="font-bold">Email Broadcast Options</h3>
+                                                </div>
+
+                                                <div className="space-y-4">
+                                                    <div className="space-y-2">
+                                                        <label className="text-sm font-bold text-slate-700">Send Email Notification To</label>
+                                                        <select
+                                                            className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-blue-500 transition-all font-medium cursor-pointer"
+                                                            value={formData.sendEmailTo}
+                                                            onChange={e => setFormData({ ...formData, sendEmailTo: e.target.value })}
+                                                        >
+                                                            <option value="none">No Email Notification</option>
+                                                            <option value="all">All Registered Members</option>
+                                                            <option value="email_verified">Email Verified Members</option>
+                                                            <option value="member_verified">Member Verified Members</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div className="space-y-2">
+                                                        <label className="text-sm font-bold text-slate-700">
+                                                            Manual Emails (Optional)
+                                                        </label>
+                                                        <textarea
+                                                            rows="3"
+                                                            className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-blue-500 transition-all resize-none"
+                                                            placeholder="Enter up to 5 emails, each on a new line"
+                                                            value={formData.manualEmails}
+                                                            onChange={e => setFormData({ ...formData, manualEmails: e.target.value })}
+                                                        ></textarea>
+                                                        <p className="text-[10px] text-slate-400">Add extra recipients not in the selected group.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        <div className="flex flex-wrap gap-4 pt-4">
                                             <button
                                                 type="button"
                                                 onClick={() => setViewMode('calendar')}
-                                                className="flex-1 py-4 border border-slate-200 rounded-xl font-bold text-slate-500 hover:bg-slate-50 transition-all"
+                                                className="flex-1 min-w-[100px] py-4 border border-slate-200 rounded-xl font-bold text-slate-500 hover:bg-slate-50 transition-all"
                                             >
                                                 Cancel
                                             </button>
                                             <button
-                                                type="submit"
-                                                disabled={isCreating}
-                                                className="flex-1 py-4 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold shadow-lg shadow-red-100 transition-all disabled:opacity-50"
+                                                type="button"
+                                                onClick={handleClear}
+                                                className="flex-1 min-w-[100px] py-4 border border-slate-200 rounded-xl font-bold text-slate-400 hover:bg-slate-50 transition-all"
                                             >
-                                                {isCreating ? 'Creating...' : 'Add Event'}
+                                                Clear
+                                            </button>
+                                            <button
+                                                type="submit"
+                                                disabled={isCreating || isUpdating}
+                                                className="flex-[2] min-w-[150px] py-4 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold shadow-lg shadow-red-100 transition-all disabled:opacity-50"
+                                            >
+                                                {isCreating || isUpdating ? (
+                                                    <span className="flex items-center justify-center gap-2">
+                                                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                                                        Saving...
+                                                    </span>
+                                                ) : selectedEvent ? `Update ${formData.category}` : `Add ${formData.category}`}
                                             </button>
                                         </div>
                                     </div>

@@ -15,7 +15,7 @@ export const calendarApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ["Events"],
     }),
     updateEvent: builder.mutation({
-      query: ({ id, ...data }) => ({
+      query: ({ id, data }) => ({
         url: `/events/${id}`,
         method: "PUT",
         body: data,

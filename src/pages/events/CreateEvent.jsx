@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, ArrowLeft, Upload } from 'lucide-react';
+import { ChevronDown, ArrowLeft, Upload, Mail } from 'lucide-react';
+import RichTextEditor from '../../component/ui/RichTextEditor';
 
 const EVENT_CATEGORIES = [
   'Conference & Summit',
@@ -39,6 +40,8 @@ const CreateEvent = () => {
     ticketPrice: '',
     ticketQuantity: '',
     bannerFile: null,
+    sendEmailTo: 'none',
+    manualEmails: ''
   });
   const [fileName, setFileName] = useState('No File Chosen');
 
@@ -159,22 +162,13 @@ const CreateEvent = () => {
             </select>
           </div>
 
-          {/* Event Description */}
-          <div>
-            <label htmlFor="eventDescription" className={labelClass}>
-              Event Description
-            </label>
-            <textarea
-              id="eventDescription"
-              name="eventDescription"
-              value={formData.eventDescription}
-              onChange={handleChange}
-              rows={4}
-              placeholder="Describe..."
-              className={`${inputClass} resize-none`}
-              required
-            />
-          </div>
+          {/* Event Description (Rich Text) */}
+          <RichTextEditor
+            label="Event Description"
+            value={formData.eventDescription}
+            onChange={(e) => setFormData(prev => ({ ...prev, eventDescription: e.target.value }))}
+            placeholder="Describe your event with HTML support..."
+          />
 
           {/* Event Format */}
           <div>
@@ -426,42 +420,41 @@ const CreateEvent = () => {
             />
           </div>
 
-          {/* Upload Banner Image */}
-          <div>
-            <h2 className="text-base font-bold text-gray-900 mb-2">Upload Banner Image</h2>
-            <div
-              className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer"
-              onClick={() => fileInputRef.current?.click()}
-              onDragOver={(e) => e.preventDefault()}
-              onDrop={(e) => {
-                e.preventDefault();
-                const file = e.dataTransfer.files?.[0];
-                if (file && file.type.startsWith('image/')) {
-                  setFormData((prev) => ({ ...prev, bannerFile: file }));
-                  setFileName(file.name);
-                }
-              }}
-            >
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                className="hidden"
-              />
-              <Upload className="w-10 h-10 text-gray-600 mx-auto mb-2" />
-              <p className="text-sm font-medium text-gray-700 mb-3">Upload Banner Image</p>
-              <button
-                type="button"
-                className="px-4 py-2 bg-gray-200 text-gray-700 text-sm font-medium rounded border border-gray-300 hover:bg-gray-300"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  fileInputRef.current?.click();
-                }}
-              >
-                Choose Files
-              </button>
-              <span className="ml-2 text-sm text-gray-500">{fileName}</span>
+          {/* Email Notification Section */}
+          <div className="pt-8 border-t border-gray-200 space-y-6">
+            <div className="flex items-center gap-2 text-[#EB010C]">
+              <Mail className="w-5 h-5" />
+              <h2 className="text-lg font-bold text-gray-900">Email Broadcast Options</h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className={labelClass}>Send Email Notification To</label>
+                <select
+                  name="sendEmailTo"
+                  value={formData.sendEmailTo}
+                  onChange={handleChange}
+                  className={inputClass}
+                >
+                  <option value="none">No Email Notification</option>
+                  <option value="all">All Registered Members</option>
+                  <option value="email_verified">Email Verified Members</option>
+                  <option value="member_verified">Member Verified Members</option>
+                </select>
+              </div>
+
+              <div>
+                <label className={labelClass}>Manual Emails (Optional)</label>
+                <textarea
+                  name="manualEmails"
+                  value={formData.manualEmails}
+                  onChange={handleChange}
+                  rows={3}
+                  placeholder="Enter emails, each on a new line..."
+                  className={`${inputClass} resize-none`}
+                />
+                <p className="text-xs text-gray-500 mt-1">Add extra recipients not in the selected group.</p>
+              </div>
             </div>
           </div>
 

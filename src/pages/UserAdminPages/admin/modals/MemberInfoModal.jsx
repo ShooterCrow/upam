@@ -29,7 +29,6 @@ const MemberInfoModal = ({ isOpen, onClose, member }) => {
     const fullMember = response?.data?.user || member;
     const contactInfo = response?.data?.contactInfo || {};
     const stats = response?.data?.stats || {};
-    console.log(fullMember)
 
     return (
         <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">

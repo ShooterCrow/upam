@@ -44,7 +44,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(isSuccess)
     if (isSuccess) navigate("/admin");
   }, [isSuccess, navigate])
 
@@ -56,7 +55,6 @@ const Login = () => {
       // dispatch(setCredentials({ ...userData }));
       // For now redirect to home or user profile
       // navigate("/admin");
-      console.log(isSuccess)
     } catch (err) {
       console.log(err);
       if (err?.data.message) {
