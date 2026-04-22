@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Bold, List, Link as LinkIcon, Info } from 'lucide-react';
+import { Bold, List, Link as LinkIcon, Info, User as UserIcon } from 'lucide-react';
 
 const RichTextEditor = ({ value, onChange, placeholder, label }) => {
   const textareaRef = useRef(null);
@@ -43,6 +43,41 @@ const RichTextEditor = ({ value, onChange, placeholder, label }) => {
     }
   };
 
+  const PLACEHOLDERS = [
+    { label: 'Full Name', value: '{{name}}' },
+    { label: 'First Name', value: '{{firstName}}' },
+    { label: 'Last Name', value: '{{lastName}}' },
+    { label: 'Email', value: '{{email}}' },
+    { label: 'Member ID', value: '{{member_id}}' },
+    { label: 'Imported ID', value: '{{importedMember_id}}' },
+    { label: 'Username', value: '{{userName}}' },
+    { label: 'Membership Type', value: '{{membershipType}}' },
+    { label: 'Country', value: '{{country}}' },
+    { label: 'City', value: '{{city}}' },
+    { label: 'State', value: '{{state}}' },
+    { label: 'Address', value: '{{address}}' },
+    { label: 'Phone', value: '{{phone}}' },
+    { label: 'Chapter', value: '{{chapter}}' },
+    { label: 'Position', value: '{{position}}' },
+    { label: 'Title', value: '{{title}}' },
+    { label: 'Gender', value: '{{gender}}' },
+    { label: 'DOB', value: '{{dob}}' },
+    { label: 'Reside', value: '{{reside}}' },
+    { label: 'Origin Country', value: '{{originCountry}}' },
+    { label: 'Roles', value: '{{roles}}' },
+    { label: 'Email Verified', value: '{{emailVerified}}' },
+    { label: 'Created At', value: '{{createdAt}}' },
+  ];
+
+  const handlePlaceholderChange = (e) => {
+    const placeholder = e.target.value;
+    if (placeholder) {
+      insertTag(placeholder, '');
+      // Reset dropdown
+      e.target.value = '';
+    }
+  };
+
   return (
     <div className="space-y-2">
       {label && <label className="text-sm font-bold text-slate-700">{label}</label>}
@@ -73,6 +108,22 @@ const RichTextEditor = ({ value, onChange, placeholder, label }) => {
           >
             <LinkIcon size={18} />
           </button>
+
+          <div className="h-6 w-[1px] bg-slate-200 self-center mx-1"></div>
+
+          <div className="flex items-center gap-2">
+            <UserIcon size={16} className="text-blue-500" />
+            <select
+              onChange={handlePlaceholderChange}
+              className="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200 rounded-lg px-2 py-1 focus:ring-1 focus:ring-blue-500 outline-none cursor-pointer hover:bg-white transition-all max-w-[140px]"
+              defaultValue=""
+            >
+              <option value="" disabled>Personalization Tags</option>
+              {PLACEHOLDERS.map((p) => (
+                <option key={p.value} value={p.value}>{p.label}</option>
+              ))}
+            </select>
+          </div>
           <div className="ml-auto flex items-center text-[10px] text-slate-400 gap-1 px-2">
             <Info size={12} /> HTML Supported
           </div>

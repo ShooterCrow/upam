@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChevronDown, ArrowLeft, Upload, Mail } from 'lucide-react';
+import { toast } from 'react-toastify';
+import { useCreateEventMutation } from '../UserAdminPages/admin/calendarApiSlice';
 import RichTextEditor from '../../component/ui/RichTextEditor';
 
 const EVENT_CATEGORIES = [
@@ -19,6 +21,8 @@ const TICKET_NAMES = ['General', 'VIP'];
 
 const CreateEvent = () => {
   const fileInputRef = useRef(null);
+  const navigate = useNavigate();
+  const [createEvent, { isLoading }] = useCreateEventMutation();
   const [formData, setFormData] = useState({
     eventTitle: '',
     eventCategory: '',
@@ -41,7 +45,10 @@ const CreateEvent = () => {
     ticketQuantity: '',
     bannerFile: null,
     sendEmailTo: 'none',
-    manualEmails: ''
+    manualEmails: '',
+    showButton: true,
+    buttonText: '',
+    buttonLink: ''
   });
   const [fileName, setFileName] = useState('No File Chosen');
 
@@ -66,9 +73,35 @@ const CreateEvent = () => {
     setFileName(file ? file.name : 'No File Chosen');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Create Event submitted:', formData);
+    try {
+      const submitData = new FormData();
+      // Map frontend fields to backend expected fields
+      submitData.append('title', formData.eventTitle);
+      submitData.append('category', formData.eventCategory.includes('Announcement') ? 'Announcement' : 'Event');
+      submitData.append('description', formData.eventDescription);
+      submitData.append('date', formData.eventStartDate || new Date().toISOString());
+      submitData.append('sendEmailTo', formData.sendEmailTo);
+      submitData.append('manualEmails', formData.manualEmails);
+      submitData.append('showButton', formData.showButton);
+      submitData.append('buttonText', formData.buttonText);
+      submitData.append('buttonLink', formData.buttonLink);
+      
+      // Additional fields from CreateEvent page
+      submitData.append('organizer', 'UPAM');
+      
+      if (formData.bannerFile) {
+        submitData.append('image', formData.bannerFile);
+      }
+
+      await createEvent(submitData).unwrap();
+      toast.success('Event published successfully!');
+      navigate('/events');
+    } catch (err) {
+      console.error('Failed to create event:', err);
+      toast.error(err?.data?.message || 'Failed to publish event');
+    }
   };
 
   const isPhysicalOrHybrid = formData.eventFormat === 'physical' || formData.eventFormat === 'hybrid';
@@ -456,14 +489,58 @@ const CreateEvent = () => {
                 <p className="text-xs text-gray-500 mt-1">Add extra recipients not in the selected group.</p>
               </div>
             </div>
+
+            <div className="pt-4 border-t border-gray-100 flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  name="showButton"
+                  id="showButton"
+                  className="w-5 h-5 rounded border-gray-300 text-[#EB010C] focus:ring-[#EB010C]"
+                  checked={formData.showButton}
+                  onChange={(e) => setFormData(prev => ({ ...prev, showButton: e.target.checked }))}
+                />
+                <label htmlFor="showButton" className="text-sm font-bold text-gray-800">
+                  Include Action Button in Email
+                </label>
+              </div>
+
+              {formData.showButton && (
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Button Text</label>
+                    <input
+                      type="text"
+                      name="buttonText"
+                      className={inputClass}
+                      placeholder="e.g. Visit Website"
+                      value={formData.buttonText}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Button Link (URL)</label>
+                    <input
+                      type="url"
+                      name="buttonLink"
+                      className={inputClass}
+                      placeholder="https://example.com"
+                      value={formData.buttonLink}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="pt-4">
             <button
               type="submit"
-              className="w-full bg-[#EB010C] text-white py-4 font-bold hover:bg-[#EB010C]/90 transition-colors rounded shadow-sm"
+              disabled={isLoading}
+              className="w-full bg-[#EB010C] text-white py-4 font-bold hover:bg-[#EB010C]/90 transition-colors rounded shadow-sm disabled:opacity-50"
             >
-              Publish Event
+              {isLoading ? 'Publishing...' : 'Publish Event'}
             </button>
           </div>
         </form>

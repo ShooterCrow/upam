@@ -41,7 +41,10 @@ const UPAMCalender = () => {
         imageFile: null,
         imagePreview: null,
         sendEmailTo: 'none', // none, all, email_verified, member_verified
-        manualEmails: ''
+        manualEmails: '',
+        showButton: true,
+        buttonText: '',
+        buttonLink: ''
     });
 
     const [createEvent, { isLoading: isCreating }] = useCreateEventMutation();
@@ -57,7 +60,10 @@ const UPAMCalender = () => {
             imageFile: null,
             imagePreview: null,
             sendEmailTo: 'none',
-            manualEmails: ''
+            manualEmails: '',
+            showButton: true,
+            buttonText: '',
+            buttonLink: ''
         });
     };
 
@@ -72,7 +78,10 @@ const UPAMCalender = () => {
             imageFile: null,
             imagePreview: null,
             sendEmailTo: 'none',
-            manualEmails: ''
+            manualEmails: '',
+            showButton: true,
+            buttonText: '',
+            buttonLink: ''
         });
         setViewMode('add');
     };
@@ -98,6 +107,9 @@ const UPAMCalender = () => {
             submitData.append('category', formData.category);
             submitData.append('sendEmailTo', formData.sendEmailTo);
             submitData.append('manualEmails', formData.manualEmails);
+            submitData.append('showButton', formData.showButton);
+            submitData.append('buttonText', formData.buttonText);
+            submitData.append('buttonLink', formData.buttonLink);
             if (formData.imageFile) {
                 submitData.append('image', formData.imageFile);
             }
@@ -130,7 +142,10 @@ const UPAMCalender = () => {
             imageFile: null,
             imagePreview: event.image,
             sendEmailTo: 'none',
-            manualEmails: ''
+            manualEmails: '',
+            showButton: event.showButton !== undefined ? event.showButton : true,
+            buttonText: event.buttonText || '',
+            buttonLink: event.buttonLink || ''
         });
         setViewMode('add');
     };
@@ -523,6 +538,46 @@ const UPAMCalender = () => {
                                                             onChange={e => setFormData({ ...formData, manualEmails: e.target.value })}
                                                         ></textarea>
                                                         <p className="text-[10px] text-slate-400">Add extra recipients not in the selected group.</p>
+                                                    </div>
+
+                                                    <div className="pt-4 border-t border-slate-100 flex flex-col gap-4">
+                                                        <div className="flex items-center gap-3">
+                                                            <input
+                                                                type="checkbox"
+                                                                id="showButton"
+                                                                className="w-5 h-5 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                                                                checked={formData.showButton}
+                                                                onChange={e => setFormData({ ...formData, showButton: e.target.checked })}
+                                                            />
+                                                            <label htmlFor="showButton" className="text-sm font-bold text-slate-700">
+                                                                Include Action Button in Email
+                                                            </label>
+                                                        </div>
+
+                                                        {formData.showButton && (
+                                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                                <div className="space-y-2">
+                                                                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Button Text</label>
+                                                                    <input
+                                                                        type="text"
+                                                                        className="w-full px-4 py-2 text-sm rounded-lg bg-white border border-slate-200 focus:ring-2 focus:ring-blue-500 transition-all font-medium"
+                                                                        placeholder="e.g. Visit Website"
+                                                                        value={formData.buttonText}
+                                                                        onChange={e => setFormData({ ...formData, buttonText: e.target.value })}
+                                                                    />
+                                                                </div>
+                                                                <div className="space-y-2">
+                                                                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Button Link (URL)</label>
+                                                                    <input
+                                                                        type="url"
+                                                                        className="w-full px-4 py-2 text-sm rounded-lg bg-white border border-slate-200 focus:ring-2 focus:ring-blue-500 transition-all font-medium"
+                                                                        placeholder="https://example.com"
+                                                                        value={formData.buttonLink}
+                                                                        onChange={e => setFormData({ ...formData, buttonLink: e.target.value })}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
