@@ -16,19 +16,31 @@ import {
     TrendingUp,
     CreditCard
 } from 'lucide-react';
-import { useGetUserFullProfileQuery } from '../../../platform/usersApiSlice';
+import { useGetUserFullProfileQuery, useUpdateUserMutation } from '../../../platform/usersApiSlice';
 
 const MemberInfoModal = ({ isOpen, onClose, member }) => {
     // Only call the query if the modal is open and we have a member ID
     const { data: response, isLoading, isError, error } = useGetUserFullProfileQuery(member?._id, {
         skip: !isOpen || !member?._id,
     });
+    const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
 
     if (!isOpen || !member) return null;
 
     const fullMember = response?.data?.user || member;
     const contactInfo = response?.data?.contactInfo || {};
     const stats = response?.data?.stats || {};
+
+    const handleToggleEmailVerification = async () => {
+        try {
+            await updateUser({
+                id: fullMember._id,
+                emailVerified: !fullMember.emailVerified
+            }).unwrap();
+        } catch (err) {
+            alert(err?.data?.message || "Failed to update verification status");
+        }
+    };
 
     return (
         <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
@@ -83,6 +95,23 @@ const MemberInfoModal = ({ isOpen, onClose, member }) => {
                         <InfoItem icon={MapPin} label="Chapter" value={fullMember.chapter?.chapter_name || fullMember.chapter || 'N/A'} />
                         <InfoItem icon={IdCard} label="Member ID" value={fullMember.importedMember_id || fullMember._id} />
                         <InfoItem icon={Calendar} label="Member Since" value={new Date(fullMember.createdAt).toLocaleDateString()} />
+                        <InfoItem 
+                            icon={Mail} 
+                            label="Email Verification" 
+                            value={fullMember.emailVerified ? 'VERIFIED' : 'PENDING'} 
+                            isBadge 
+                            variant={fullMember.emailVerified ? 'success' : 'danger'} 
+                            action={
+                                <button 
+                                    disabled={isUpdating}
+                                    onClick={handleToggleEmailVerification}
+                                    className="text-[10px] font-bold text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-1 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-100"
+                                >
+                                    {isUpdating && <Loader2 size={10} className="animate-spin" />}
+                                    {fullMember.emailVerified ? 'Revoke' : 'Verify Now'}
+                                </button>
+                            }
+                        />
                         <InfoItem icon={Shield} label="Roles" value={fullMember.roles?.join(', ').toUpperCase() || 'USER'} isBadge />
                         {/* <InfoItem icon={User} label="Username" value={fullMember.userName ? `@${fullMember.userName}` : 'N/A'} /> */}
                     </div>
@@ -170,23 +199,35 @@ const MemberInfoModal = ({ isOpen, onClose, member }) => {
     );
 };
 
-const InfoItem = ({ icon: Icon, label, value, isBadge }) => (
-    <div className="space-y-2">
-        <div className="flex items-center gap-2 text-slate-400">
-            {Icon && <Icon size={14} />}
-            <span className="text-[10px] font-black uppercase tracking-widest">{label}</span>
+const InfoItem = ({ icon: Icon, label, value, isBadge, variant, action }) => {
+    const getBadgeStyle = () => {
+        if (variant === 'success') return 'bg-green-50 text-green-600 border-green-100';
+        if (variant === 'danger') return 'bg-red-50 text-red-600 border-red-100';
+        if (variant === 'warning') return 'bg-amber-50 text-amber-600 border-amber-100';
+        
+        return value?.toLowerCase().includes('admin')
+            ? 'bg-red-50 text-red-600 border-red-100'
+            : 'bg-blue-50 text-blue-600 border-blue-100';
+    };
+
+    return (
+        <div className="space-y-2">
+            <div className="flex items-center gap-2 text-slate-400">
+                <div className="flex items-center gap-2 flex-1">
+                    {Icon && <Icon size={14} />}
+                    <span className="text-[10px] font-black uppercase tracking-widest">{label}</span>
+                </div>
+                {action}
+            </div>
+            {isBadge ? (
+                <span className={`inline-block px-2.5 py-1 rounded-lg text-xs font-black border ${getBadgeStyle()}`}>
+                    {value || '---'}
+                </span>
+            ) : (
+                <p className="text-sm font-bold text-slate-800 leading-tight truncate" title={value}>{value || '---'}</p>
+            )}
         </div>
-        {isBadge ? (
-            <span className={`inline-block px-2.5 py-1 rounded-lg text-xs font-black border ${value?.toLowerCase().includes('admin')
-                ? 'bg-red-50 text-red-600 border-red-100'
-                : 'bg-blue-50 text-blue-600 border-blue-100'
-                }`}>
-                {value || '---'}
-            </span>
-        ) : (
-            <p className="text-sm font-bold text-slate-800 leading-tight truncate" title={value}>{value || '---'}</p>
-        )}
-    </div>
-);
+    );
+};
 
 export default MemberInfoModal;

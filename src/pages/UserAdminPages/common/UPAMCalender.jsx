@@ -522,6 +522,7 @@ const UPAMCalender = () => {
                                                             <option value="none">No Email Notification</option>
                                                             <option value="all">All Registered Members</option>
                                                             <option value="email_verified">Email Verified Members</option>
+                                                            <option value="email_unverified">Unverified Email Members</option>
                                                             <option value="member_verified">Member Verified Members</option>
                                                         </select>
                                                     </div>

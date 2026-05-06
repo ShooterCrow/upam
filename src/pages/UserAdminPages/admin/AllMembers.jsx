@@ -156,6 +156,7 @@ const AllMembers = () => {
                                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">S/N</th>
                                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Name</th>
                                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Email</th>
+                                <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider text-center">Email Verified</th>
                                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Country</th>
                                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Role</th>
                                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Status</th>
@@ -179,6 +180,17 @@ const AllMembers = () => {
                                         {member.firstName} {member.lastName}
                                     </td>
                                     <td className="px-6 py-5 text-sm text-slate-500">{member.email}</td>
+                                    <td className="px-6 py-5 text-sm text-center">
+                                        {member.emailVerified ? (
+                                            <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-100 text-green-700 rounded-md text-[10px] font-black uppercase tracking-wider border border-green-200">
+                                                <ShieldCheck size={12} strokeWidth={3} /> Verified
+                                            </span>
+                                        ) : (
+                                            <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-red-50 text-red-600 rounded-md text-[10px] font-black uppercase tracking-wider border border-red-100">
+                                                 Pending
+                                            </span>
+                                        )}
+                                    </td>
                                     <td className="px-6 py-5 text-sm text-slate-500">{member.country || '---'}</td>
                                     <td className="px-6 py-5 text-sm" onClick={(e) => e.stopPropagation()}>
                                         <div className="relative group/role">
@@ -222,7 +234,7 @@ const AllMembers = () => {
                             ))}
                             {users.length === 0 && !isFetching && (
                                 <tr>
-                                    <td colSpan="6" className="px-6 py-20 text-center text-slate-400 font-medium">
+                                    <td colSpan="8" className="px-6 py-20 text-center text-slate-400 font-medium">
                                         {searchTerm ? `No results found for "${searchTerm}"` : 'No members found'}
                                     </td>
                                 </tr>
