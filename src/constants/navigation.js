@@ -22,6 +22,7 @@ import {
   ContactRoundIcon,
   List,
   Wallet,
+  Settings,
 } from "lucide-react";
 
 export const ADMIN_LINKS = [
@@ -61,6 +62,7 @@ export const ADMIN_LINKS = [
     icon: FileText,
   },
   { name: "Chapters", path: "/admin/chapters", icon: Globe },
+  { name: "Settings", path: "/admin/settings", icon: Settings },
 ];
 
 export const ADMIN_BOTTOM_LINKS = [

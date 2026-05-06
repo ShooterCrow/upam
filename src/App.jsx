@@ -54,7 +54,7 @@ import Cookies from './pages/legal/Cookies'
 import SearchMembers from './pages/search/SearchMembers'
 import AllTransactionsTable from './pages/UserAdminPages/admin/AllTransactionsTable'
 import MyTransactions from './pages/UserAdminPages/common/MyTransactions'
-
+import Settings from './pages/UserAdminPages/admin/settings/Settings'
 
 const App = () => {
   return (
@@ -140,6 +140,7 @@ const App = () => {
               <Route path='chapters' element={<Chapters />} />
               <Route path='my-profile' element={<MyProfile />} />
               <Route path='calendar' element={<UPAMCalender />} />
+              <Route path='settings' element={<Settings />} />
             </Route>
           </Route>
 
