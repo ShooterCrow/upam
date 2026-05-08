@@ -8,6 +8,7 @@ const Settings = () => {
     const [requireEmailVerification, setRequireEmailVerification] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    //ewwewe
 
     useEffect(() => {
         if (response?.data?.hotelInfo) {
@@ -21,17 +22,17 @@ const Settings = () => {
         try {
             const currentSettings = response?.data || {};
             const hotelInfo = currentSettings.hotelInfo || {};
-            
+
             // The backend updateSettings expects formData for image uploads, but can handle JSON
             // Since we are only updating text/boolean fields, we'll construct a FormData
             const formData = new FormData();
-            
+
             // Construct the updated hotelInfo
             const updatedHotelInfo = {
                 ...hotelInfo,
                 requireEmailVerification
             };
-            
+
             formData.append('hotelInfo', JSON.stringify(updatedHotelInfo));
 
             await updateSettings(formData).unwrap();
@@ -54,7 +55,7 @@ const Settings = () => {
     return (
         <div className="p-6 max-w-4xl mx-auto font-sans">
             <h1 className="text-2xl font-bold mb-6 text-gray-900">Platform Settings</h1>
-            
+
             {successMessage && (
                 <div className="mb-6 p-4 bg-green-50 text-green-700 rounded-lg flex items-center gap-2">
                     <CheckCircle2 size={20} />
@@ -72,7 +73,7 @@ const Settings = () => {
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                 <div className="p-6 border-b border-gray-200">
                     <h2 className="text-lg font-semibold text-gray-800 mb-4">Authentication Settings</h2>
-                    
+
                     <div className="flex items-center justify-between py-4">
                         <div>
                             <h3 className="font-medium text-gray-900">Require Email Verification</h3>
@@ -81,8 +82,8 @@ const Settings = () => {
                             </p>
                         </div>
                         <label className="relative inline-flex items-center cursor-pointer">
-                            <input 
-                                type="checkbox" 
+                            <input
+                                type="checkbox"
                                 className="sr-only peer"
                                 checked={requireEmailVerification}
                                 onChange={(e) => setRequireEmailVerification(e.target.checked)}
