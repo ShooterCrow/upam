@@ -366,7 +366,7 @@ const MemberVerification = () => {
                             {["Tier A - Defined Diaspora", "Tier A - Africa & Caribbean"].map(tier => (
                                 <RadioField
                                     key={tier}
-                                    label={tier + " (Outside Africa & Caribbean)"}
+                                    label={tier}
                                     name="tierClassification"
                                     value={tier}
                                     checked={formData.tierClassification === tier}
