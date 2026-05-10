@@ -12,8 +12,7 @@ const MemberVerification = () => {
     const [submitVerification, { isLoading: isSubmitting }] = useSubmitVerificationMutation();
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState(null);
-    const r = useAuth();
-    console.log(r)
+    const { user } = useAuth();
 
     const [formData, setFormData] = useState({
         membershipType: '',
@@ -380,7 +379,7 @@ const MemberVerification = () => {
                     <Section title="Contact Information">
                         <div className="space-y-5">
                             <InputField label="Phone number (WhatsApp Preferred)" name="phone" value={formData.phone} onChange={handleChange} placeholder="+234 800 000 0000" />
-                            <InputField label="Email Address" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="john@example.com" />
+                            <InputField label="Email Address" name="email" type="email" value={user?.email} placeholder="john@example.com" />
                         </div>
                     </Section>
 
