@@ -363,7 +363,7 @@ const MemberVerification = () => {
                     {/* Tier Classification */}
                     <Section title="Tier Classification">
                         <div className="space-y-3">
-                            {["Tier A - Defined Diaspora", "Tier A - Africa & Caribbean"].map(tier => (
+                            {["Tier A - Africa & Caribbean", "Tier B - Defined Diaspora"].map(tier => (
                                 <RadioField
                                     key={tier}
                                     label={tier}
