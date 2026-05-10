@@ -1,11 +1,23 @@
-const imgWillowyManDeliversALargeBoxWithAnOrderToTheHouse1ResultResult =
-  "https://www.figma.com/api/mcp/asset/f3506085-9f5f-41ff-bdaf-81cdf5618e95";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
 const imgArrowRightDoubleDesktop =
   "https://www.figma.com/api/mcp/asset/51bd4d8a-1e4d-427c-b441-180140fc4834";
 const imgArrowRightDoubleMobile =
   "https://www.figma.com/api/mcp/asset/94276fcf-c295-47cd-9316-e3c662ab1272";
 
 const MembershipAgreement = () => {
+  const [agreed, setAgreed] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNext = () => {
+    if (agreed) {
+      navigate("/register");
+    } else {
+      alert("Please agree to the membership terms before proceeding.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <section className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
@@ -71,12 +83,15 @@ const MembershipAgreement = () => {
                   </div>
                 </div>
                 <div
-                  className="content-stretch flex gap-[19px] items-center justify-start relative shrink-0"
+                  className="content-stretch flex gap-[19px] items-center justify-start relative shrink-0 cursor-pointer"
                   data-node-id="4792:29056"
+                  onClick={() => setAgreed(!agreed)}
                 >
-                  <div
-                    className="border-[0.917px] border-[var(--color-neutral\/neutral-dark,#444)] border-solid shrink-0 size-[22px]"
-                    data-node-id="4792:29046"
+                  <input
+                    type="checkbox"
+                    checked={agreed}
+                    onChange={(e) => setAgreed(e.target.checked)}
+                    className="shrink-0 size-[22px] cursor-pointer accent-[#eb010c]"
                   />
                   <p
                     className="font-['Lato:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--color-neutral\/neutral-dark,#444)] tracking-[0.28px]"
@@ -90,9 +105,13 @@ const MembershipAgreement = () => {
                 className="content-stretch flex flex-col gap-[27px] items-start relative shrink-0 w-full"
                 data-node-id="4792:29055"
               >
-                <div
-                  className="bg-[var(--upam-website-brand-color-,#eb010c)] content-stretch flex gap-[10px] items-center justify-center px-[22px] py-[10px] relative shrink-0 w-full"
+                <button
+                  className={`${agreed
+                    ? "bg-[var(--upam-website-brand-color-,#eb010c)]"
+                    : "bg-gray-400 cursor-not-allowed"
+                    } content-stretch flex gap-[10px] items-center justify-center px-[22px] py-[10px] relative shrink-0 w-full transition-colors duration-200`}
                   data-node-id="4792:29048"
+                  onClick={handleNext}
                 >
                   <p
                     className="font-['Lato:Regular',sans-serif] leading-[1.56] not-italic relative shrink-0 text-[16px] text-center text-white tracking-[0.32px]"
@@ -111,7 +130,7 @@ const MembershipAgreement = () => {
                       src={imgArrowRightDoubleDesktop}
                     />
                   </div>
-                </div>
+                </button>
                 <p
                   className="font-['Lato:Regular',sans-serif] font-['Roboto:Regular',sans-serif] font-normal h-[16px] leading-[0] not-italic relative shrink-0 text-[14px] text-black text-center tracking-[0.25px] w-full whitespace-pre-wrap"
                   data-node-id="4792:29053"
@@ -120,31 +139,19 @@ const MembershipAgreement = () => {
                   <span className="leading-[28px]">
                     {`Already a member? `}
                   </span>
-                  <span className="[text-decoration-skip-ink:none] decoration-solid leading-[28px] text-[#eb010c] underline">
+                  <Link
+                    to="/login"
+                    className="[text-decoration-skip-ink:none] decoration-solid leading-[28px] text-[#eb010c] underline"
+                  >
                     sign in
-                  </span>
+                  </Link>
                 </p>
               </div>
             </div>
 
-            {/* Right: Illustration */}
-            <div className="flex items-start justify-center relative shrink-0">
-              <div className="-scale-y-100 flex-none rotate-180">
-                <div
-                  className="h-[295.999px] relative w-[317.679px]"
-                  data-name="willowy-man-delivers-a-large-box-with-an-order-to-the-house-1_result_result"
-                  data-node-id="4792:29061"
-                >
-                  <img
-                    alt=""
-                    className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
-                    src={imgWillowyManDeliversALargeBoxWithAnOrderToTheHouse1ResultResult}
-                  />
-                </div>
-              </div>
-            </div>
           </div>
         </div>
+        {/* </div> */}
 
         {/* Mobile view */}
         <div className="block lg:hidden">
@@ -152,22 +159,6 @@ const MembershipAgreement = () => {
             className="content-stretch flex flex-col gap-[24px] items-start relative size-full"
             data-node-id="4791:28783"
           >
-            {/* Mobile image on top */}
-            <div className="w-full flex items-center justify-center">
-              <div className="-scale-y-100 flex-none rotate-180">
-                <div
-                  className="h-[220px] w-[236px] relative"
-                  data-name="willowy-man-delivers-a-large-box-with-an-order-to-the-house-1_result_result"
-                  data-node-id="4792:29061-mobile"
-                >
-                  <img
-                    alt=""
-                    className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
-                    src={imgWillowyManDeliversALargeBoxWithAnOrderToTheHouse1ResultResult}
-                  />
-                </div>
-              </div>
-            </div>
             <div
               className="content-stretch flex flex-col gap-[27px] items-start relative shrink-0 w-full"
               data-node-id="4791:28758"
@@ -218,12 +209,15 @@ const MembershipAgreement = () => {
                 data-node-id="4791:28756"
               >
                 <div
-                  className="content-stretch flex gap-[16px] items-center relative shrink-0"
+                  className="content-stretch flex gap-[16px] items-center relative shrink-0 cursor-pointer"
                   data-node-id="4791:28616"
+                  onClick={() => setAgreed(!agreed)}
                 >
-                  <div
-                    className="border-[0.583px] border-[var(--color-neutral\/neutral-dark,#444)] border-solid shrink-0 size-[14px]"
-                    data-node-id="4791:28400"
+                  <input
+                    type="checkbox"
+                    checked={agreed}
+                    onChange={(e) => setAgreed(e.target.checked)}
+                    className="shrink-0 size-[14px] cursor-pointer accent-[#eb010c]"
                   />
                   <p
                     className="font-['Lato:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--color-neutral\/neutral-dark,#444)] tracking-[0.28px]"
@@ -232,9 +226,13 @@ const MembershipAgreement = () => {
                     Yes, i agreed to bound by the agreement
                   </p>
                 </div>
-                <div
-                  className="bg-[var(--upam-website-brand-color-,#eb010c)] content-stretch flex gap-[10px] items-center justify-center px-[22px] py-[10px] relative shrink-0 w-full"
+                <button
+                  className={`${agreed
+                    ? "bg-[var(--upam-website-brand-color-,#eb010c)]"
+                    : "bg-gray-400 cursor-not-allowed"
+                    } content-stretch flex gap-[10px] items-center justify-center px-[22px] py-[10px] relative shrink-0 w-full transition-colors duration-200`}
                   data-node-id="4791:28746"
+                  onClick={handleNext}
                 >
                   <p
                     className="font-['Lato:Regular',sans-serif] leading-[1.56] not-italic relative shrink-0 text-[16px] text-center text-white tracking-[0.32px]"
@@ -253,7 +251,7 @@ const MembershipAgreement = () => {
                       src={imgArrowRightDoubleMobile}
                     />
                   </div>
-                </div>
+                </button>
               </div>
             </div>
             <p
@@ -261,15 +259,18 @@ const MembershipAgreement = () => {
               data-node-id="4791:28759"
               style={{ fontVariationSettings: "'wdth' 100" }}
             >
-              <span className="leading-[28px]">{`Allready a member? `}</span>
-              <span className="[text-decoration-skip-ink:none] decoration-solid leading-[28px] text-[#eb010c] underline">
+              <span className="leading-[28px]">{`Already a member? `}</span>
+              <Link
+                to="/login"
+                className="[text-decoration-skip-ink:none] decoration-solid leading-[28px] text-[#eb010c] underline"
+              >
                 sign in
-              </span>
+              </Link>
             </p>
           </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 };
 
