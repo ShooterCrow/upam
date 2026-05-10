@@ -161,9 +161,9 @@ const App = () => {
 
           </Route>
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {/* Catch-all route */}
-      <Route path="*" element={<NotFound />} />
     </div>
   )
 }
