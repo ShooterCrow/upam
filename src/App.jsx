@@ -60,8 +60,8 @@ const App = () => {
   return (
     <div>
       <Routes>
-        <Route element={<PersistLogin />}>
-          <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Layout />}>
+          <Route element={<PersistLogin />}>
             <Route index element={<Home />} />
             {/* Public Routes */}
             <Route path="gallery" element={<Gallery />} />
@@ -119,51 +119,51 @@ const App = () => {
             </Route>
 
 
-          </Route>
+            {/* </Route> */}
 
-          {/* Admin Routes */}
-          <Route element={<RequireAuth allowedRoles={['admin', "manager"]} />}>
-            <Route path="/admin" element={<AdminLayoutContext />}>
-              <Route index element={<Dashboard />} />
-              <Route path='member-verification' element={<MemberVerification />} />
-              <Route path='membership-payment' element={<MembershipPayment />} />
-              <Route path='emergency-contact' element={<EmergencyContact />} />
-              <Route path='notification' element={<Notification />} />
-              <Route path='support' element={<Support />} />
-              <Route path='all-members' element={<AllMembers />} />
-              <Route path='all-transactions' element={<AllTransactionsTable />} />
-              <Route path='my-transactions' element={<MyTransactions />} />
-              <Route path='members-application'>
-                <Route index element={<MemberApplication />} />
-                <Route path=":id" element={<MemberDetail />} />
+            {/* Admin Routes */}
+            <Route element={<RequireAuth allowedRoles={['admin', "manager"]} />}>
+              <Route path="/admin" element={<AdminLayoutContext />}>
+                <Route index element={<Dashboard />} />
+                <Route path='member-verification' element={<MemberVerification />} />
+                <Route path='membership-payment' element={<MembershipPayment />} />
+                <Route path='emergency-contact' element={<EmergencyContact />} />
+                <Route path='notification' element={<Notification />} />
+                <Route path='support' element={<Support />} />
+                <Route path='all-members' element={<AllMembers />} />
+                <Route path='all-transactions' element={<AllTransactionsTable />} />
+                <Route path='my-transactions' element={<MyTransactions />} />
+                <Route path='members-application'>
+                  <Route index element={<MemberApplication />} />
+                  <Route path=":id" element={<MemberDetail />} />
+                </Route>
+                <Route path='chapters' element={<Chapters />} />
+                <Route path='my-profile' element={<MyProfile />} />
+                <Route path='calendar' element={<UPAMCalender />} />
+                <Route path='settings' element={<Settings />} />
               </Route>
-              <Route path='chapters' element={<Chapters />} />
-              <Route path='my-profile' element={<MyProfile />} />
-              <Route path='calendar' element={<UPAMCalender />} />
-              <Route path='settings' element={<Settings />} />
             </Route>
-          </Route>
 
-          {/* User Routes */}
-          <Route element={<RequireAuth allowedRoles={['user', "admin", "manager"]} />}>
-            <Route path="/user" element={<UserLayoutContext />}>
-              <Route index element={<Dashboard />} />
-              <Route path='member-verification' element={<MemberVerification />} />
-              <Route path='calendar' element={<UPAMCalender />} />
-              <Route path='membership-payment' element={<MembershipPayment />} />
-              <Route path='emergency-contact' element={<EmergencyContact />} />
-              <Route path='notification' element={<Notification />} />
-              <Route path='support' element={<Support />} />
-              <Route path='my-transactions' element={<MyTransactions />} />
-              <Route path='my-profile' element={<MyProfile />} />
+            {/* User Routes */}
+            <Route element={<RequireAuth allowedRoles={['user', "admin", "manager"]} />}>
+              <Route path="/user" element={<UserLayoutContext />}>
+                <Route index element={<Dashboard />} />
+                <Route path='member-verification' element={<MemberVerification />} />
+                <Route path='calendar' element={<UPAMCalender />} />
+                <Route path='membership-payment' element={<MembershipPayment />} />
+                <Route path='emergency-contact' element={<EmergencyContact />} />
+                <Route path='notification' element={<Notification />} />
+                <Route path='support' element={<Support />} />
+                <Route path='my-transactions' element={<MyTransactions />} />
+                <Route path='my-profile' element={<MyProfile />} />
+              </Route>
             </Route>
+
           </Route>
-
-          {/* Catch-all route */}
-          <Route path="*" element={<NotFound />} />
-
         </Route>
       </Routes>
+      {/* Catch-all route */}
+      <Route path="*" element={<NotFound />} />
     </div>
   )
 }
