@@ -23,6 +23,7 @@ import {
   List,
   Wallet,
   Settings,
+  ClipboardList,
 } from "lucide-react";
 
 export const ADMIN_LINKS = [
@@ -55,6 +56,8 @@ export const ADMIN_LINKS = [
     path: "/admin/my-transactions",
     icon: Wallet,
   },
+  { name: "Dues", path: "/admin/dues", icon: ClipboardList },
+  { name: "My Dues", path: "/admin/my-dues", icon: ClipboardList },
   { name: "All Members", path: "/admin/all-members", icon: Users },
   {
     name: "Members Application",
@@ -95,6 +98,7 @@ export const USER_LINKS = [
     path: "/user/my-transactions",
     icon: Wallet,
   },
+  { name: "My Dues", path: "/user/my-dues", icon: ClipboardList },
 ];
 
 export const USER_BOTTOM_LINKS = [
@@ -107,7 +111,12 @@ export const PUBLIC_LINKS = [
   { name: "About Us", path: "/about", icon: Info },
   { name: "Leadership", path: "/leadership", icon: Users },
   { name: "Platforms & Initiatives", path: "/platforms", icon: Grid },
-  { name: "Events & Conferences", path: "/events", icon: Calendar, isExternal: true },
+  {
+    name: "Events & Conferences",
+    path: "/events",
+    icon: Calendar,
+    isExternal: true,
+  },
   {
     name: "Resources & Media",
     path: "/resources",

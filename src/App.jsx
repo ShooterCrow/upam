@@ -55,6 +55,8 @@ import SearchMembers from './pages/search/SearchMembers'
 import AllTransactionsTable from './pages/UserAdminPages/admin/AllTransactionsTable'
 import MyTransactions from './pages/UserAdminPages/common/MyTransactions'
 import Settings from './pages/UserAdminPages/admin/settings/Settings'
+import Dues from './pages/UserAdminPages/admin/Dues'
+import MyDues from './pages/UserAdminPages/common/MyDues'
 
 const App = () => {
   return (
@@ -132,11 +134,13 @@ const App = () => {
               <Route path='all-members' element={<AllMembers />} />
               <Route path='all-transactions' element={<AllTransactionsTable />} />
               <Route path='my-transactions' element={<MyTransactions />} />
+              <Route path='my-dues' element={<MyDues />} />
               <Route path='members-application'>
                 <Route index element={<MemberApplication />} />
                 <Route path=":id" element={<MemberDetail />} />
               </Route>
               <Route path='chapters' element={<Chapters />} />
+              <Route path='dues' element={<Dues />} />
               <Route path='my-profile' element={<MyProfile />} />
               <Route path='calendar' element={<UPAMCalender />} />
               <Route path='settings' element={<Settings />} />
@@ -154,6 +158,7 @@ const App = () => {
               <Route path='notification' element={<Notification />} />
               <Route path='support' element={<Support />} />
               <Route path='my-transactions' element={<MyTransactions />} />
+              <Route path='my-dues' element={<MyDues />} />
               <Route path='my-profile' element={<MyProfile />} />
             </Route>
           </Route>
