@@ -36,7 +36,7 @@ const globalExecutive = [
         id: 6,
         name: "Prof. Njoroge Gitomeh",
         title: "Global Secretary of Finance",
-        image: "/images/leadership/njoroge-gitomeh.jpg"
+        image: "/pics/prof-njoroge.jpeg"
     },
     {
         id: 7,
@@ -49,6 +49,12 @@ const globalExecutive = [
         name: "Hon. Lorraine Malekanya",
         title: "Global Secretary of Legal Affairs",
         image: "/pics/lorraine.png"
+    },
+    {
+        id: 17,
+        name: "Mr. Standa Sani",
+        title: "Legal Affairs",
+        image: "/pics/standa.jpeg"
     },
     {
         id: 9,
@@ -82,7 +88,7 @@ const globalExecutive = [
     },
     {
         id: 14,
-        name: "Prisca Openna",
+        name: "Prisca Iweobi",
         title: "Global Secretary of Media and Communications",
         image: "/pics/prisca.png"
     },
@@ -91,12 +97,18 @@ const globalExecutive = [
         name: "Dr Titus Orngu",
         title: "Global Secretary of Women Children and Youth",
         image: "/pics/titus.png"
+    },
+    {
+        id: 16,
+        name: "Nagh Anwi Awa",
+        title: "Global Secretary of Agriculture",
+        image: "/pics/Anwi.jpeg"
     }
 ];
 
 const nationalRepresentatives = [
     {
-        id: 16,
+        id: 17,
         name: "Rachel Eleojo Sunday",
         title: "National Representative Nigeria",
         image: "/images/leadership/rachel-sunday.jpg"
@@ -132,7 +144,7 @@ const directors = [
         id: 21,
         name: "Prof. Njoroge Gitomeh",
         title: "Finance Officer",
-        image: "/images/leadership/njoroge-gitomeh.jpg"
+        image: "/pics/prof-njoroge.jpeg"
     },
     {
         id: 22,
