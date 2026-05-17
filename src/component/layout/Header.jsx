@@ -7,6 +7,7 @@ import ProfileBox from '../ui/ProfileBox';
 import GoogleTranslate from '../common/GoogleTranslate';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import { PUBLIC_LINKS, USER_LINKS, USER_BOTTOM_LINKS } from '../../constants/navigation';
+import { useGetMeQuery } from '../../pages/platform/usersApiSlice';
 
 // Mock user data - in real app, this would come from your auth context/store
 const mockUser = {
@@ -25,6 +26,8 @@ const Header = () => {
     const { isLoggedIn, user, roles } = useAuth();
     const isOnDashboard = location.pathname.startsWith('/user') || location.pathname.startsWith('/admin');
     const isDesktop = useMediaQuery('(min-width: 1024px)');
+    const { data: profileData, isLoading: isProfileLoading, isError: isProfileError, error: profileFetchError, refetch } = useGetMeQuery();
+
 
     const navigationLinks = PUBLIC_LINKS;
 
@@ -83,7 +86,7 @@ const Header = () => {
                         <div className="flex items-center gap-10">
                             {isDesktop && <GoogleTranslate />}
                             {
-                                isLoggedIn ? <ProfileBox show={true} /> :
+                                isLoggedIn ? <ProfileBox show={true} profilePicture={profileData?.data?.image?.url} /> :
                                     <Link to="/register" className="border-2 border-gray-800 px-4 py-2 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors">
                                         Register/Login
                                     </Link>
@@ -194,7 +197,7 @@ const Header = () => {
                                 <div className="flex items-center gap-3 mb-2">
                                     <div className="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center">
 
-                                        <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.firstName}`} alt={user?.name} className="w-full h-full rounded-full" />
+                                        <img src={profileData?.data?.image?.url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.firstName}`} alt={user?.name} className="w-full h-full rounded-full object-cover" />
 
                                     </div>
                                     <div>

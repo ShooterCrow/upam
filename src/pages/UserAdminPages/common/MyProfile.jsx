@@ -11,7 +11,8 @@ import {
     Building2,
     Loader2,
     Smartphone,
-    Laptop
+    Laptop,
+    X
 } from 'lucide-react';
 import useAuth from '../../../hooks/useAuth';
 import { useGetMeQuery, useUpdateMeMutation } from '../../platform/usersApiSlice';
@@ -29,6 +30,10 @@ const MyProfile = () => {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [updateStatus, setUpdateStatus] = useState({ type: null, message: '' }); // 'success', 'error'
     const [isUpdated, setIsUpdated] = useState(false);
+
+    const [imageFile, setImageFile] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
+    const [isViewModalOpen, setIsViewModalOpen] = useState(false);
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -72,13 +77,18 @@ const MyProfile = () => {
         }
 
         try {
-            const updateData = { ...formData };
-            if (!updateData.password) {
-                delete updateData.password;
-                delete updateData.confirmPassword;
-            }
+            const formDataToSend = new FormData();
 
-            await updateMe(updateData).unwrap();
+            if (formData.firstName) formDataToSend.append('firstName', formData.firstName);
+            if (formData.lastName) formDataToSend.append('lastName', formData.lastName);
+            if (formData.email) formDataToSend.append('email', formData.email);
+            if (formData.phone) formDataToSend.append('phone', formData.phone);
+            if (formData.country) formDataToSend.append('country', formData.country);
+            if (formData.chapter) formDataToSend.append('chapter', formData.chapter);
+            if (formData.password) formDataToSend.append('password', formData.password);
+            if (imageFile) formDataToSend.append('profileImage', imageFile);
+
+            await updateMe(formDataToSend).unwrap();
             setIsUpdated(true);
             refetch();
         } catch (err) {
@@ -123,6 +133,14 @@ const MyProfile = () => {
 
     const user = profileData?.data;
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setImageFile(file);
+            setImagePreview(URL.createObjectURL(file));
+        }
+    };
+
     return (
         <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
             <h1 className="text-2xl font-bold text-slate-800">Account Settings</h1>
@@ -132,19 +150,31 @@ const MyProfile = () => {
                 <div className="space-y-6">
                     {/* Profile Picture Card */}
                     <div className="bg-white p-6 rounded-2xl border border-gray-100 flex items-center gap-6">
-                        <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-slate-100 flex-shrink-0">
-                            <img
-                                src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.firstName}`}
-                                alt="Profile"
-                                className="w-full h-full object-cover"
-                            />
-                            <button type="button" className="absolute bottom-0 right-0 p-1.5 bg-white border border-gray-100 rounded-full hover:bg-slate-50 transition-colors z-10">
-                                <Upload size={12} className="text-slate-600" />
-                            </button>
+                        <div className="relative w-24 h-24 flex-shrink-0 group cursor-pointer">
+                            <div className="w-full h-full rounded-full overflow-hidden border-4 border-slate-100 shadow-sm">
+                                <img
+                                    src={imagePreview || user?.image?.url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.firstName}`}
+                                    alt="Profile"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                            <label className="absolute inset-0 bg-black/50 rounded-full flex flex-col items-center justify-center lg:opacity-20 group-hover:opacity-100 transition-opacity cursor-pointer z-10 backdrop-blur-[2px]">
+                                <Upload size={24} className="text-white mb-1 drop-shadow-md" />
+                                <span className="text-[10px] font-bold text-white uppercase tracking-wider drop-shadow-md">Change</span>
+                                <input type="file" className="hidden" accept="image/*" onChange={handleImageChange} />
+                            </label>
                         </div>
                         <div>
                             <h3 className="font-bold text-slate-800 text-sm">Profile Picture</h3>
-                            <p className="text-xs text-slate-400 mt-1">Recommended: Square image, at least 200x200px</p>
+                            <p className="text-xs text-slate-400 mt-1 mb-2">Recommended: Square image, at least 200x200px</p>
+                            <button 
+                                type="button" 
+                                onClick={() => setIsViewModalOpen(true)}
+                                className="text-xs font-bold text-red-600 hover:text-red-700 flex items-center gap-1 transition-colors"
+                            >
+                                <Eye size={14} />
+                                View Photo
+                            </button>
                         </div>
                     </div>
 
@@ -330,6 +360,32 @@ const MyProfile = () => {
                     </div>
                 </div>
             </form>
+            {/* View Profile Picture Modal */}
+            {isViewModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+                    <div className="relative bg-white rounded-2xl p-2 max-w-lg w-full max-h-[85vh] overflow-hidden flex flex-col items-center shadow-2xl animate-in zoom-in-95 duration-200">
+                        {/* Header */}
+                        <div className="w-full flex justify-between items-center px-4 py-2 border-b border-gray-100">
+                            <h3 className="font-bold text-slate-800 text-sm">Profile Picture</h3>
+                            <button 
+                                type="button" 
+                                onClick={() => setIsViewModalOpen(false)}
+                                className="p-1 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-full transition-all"
+                            >
+                                <X size={20} />
+                            </button>
+                        </div>
+                        {/* Image body */}
+                        <div className="flex-1 overflow-auto p-4 flex items-center justify-center">
+                            <img
+                                src={imagePreview || user?.image?.url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.firstName}`}
+                                alt="Profile Full Size"
+                                className="max-w-full max-h-[60vh] object-contain rounded-lg shadow-sm border border-slate-100"
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

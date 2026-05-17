@@ -19,6 +19,7 @@ import {
     Headphones
 } from 'lucide-react'
 import { ADMIN_LINKS, ADMIN_BOTTOM_LINKS, USER_LINKS, USER_BOTTOM_LINKS } from '../../constants/navigation'
+import { useGetMeQuery } from '../../pages/platform/usersApiSlice'
 
 const ProfileBox = ({ show = false }) => {
     const { user, roles } = useAuth()
@@ -26,6 +27,9 @@ const ProfileBox = ({ show = false }) => {
     const [logout] = useLogoutMutation()
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const dropdownRef = useRef(null)
+    const { data: profileData, isLoading: isProfileLoading, isError: isProfileError, error: profileFetchError, refetch } = useGetMeQuery();
+    const profilePicture = profileData?.data?.image?.url;
+
 
     const handleLogout = async () => {
         try {
@@ -65,7 +69,7 @@ const ProfileBox = ({ show = false }) => {
             >
                 <div className="w-9 h-9 rounded-full bg-slate-200 overflow-hidden border border-gray-200">
                     <img
-                        src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.firstName}`}
+                        src={profilePicture || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.firstName}`}
                         alt="Profile"
                         className="w-full h-full object-cover"
                     />
