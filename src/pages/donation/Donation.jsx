@@ -236,13 +236,13 @@ const Donation = () => {
                             </div>
 
                             {/* Dynamic Impact Indicator */}
-                            <div className="p-4 bg-red-50/50 border border-red-100/50 rounded-2xl flex gap-3 items-start animate-in fade-in duration-300">
+                            {/* <div className="p-4 bg-red-50/50 border border-red-100/50 rounded-2xl flex gap-3 items-start animate-in fade-in duration-300">
                                 <CheckCircle2 className="text-[#EB010C] shrink-0 mt-0.5" size={16} />
                                 <div className="text-xs text-red-800 leading-relaxed font-semibold">
                                     <span className="text-red-950 font-bold uppercase tracking-wider block mb-0.5">Your Impact:</span>
                                     {activeImpactText}
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* Destination Dropdown */}
                             <div>
