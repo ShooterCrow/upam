@@ -144,7 +144,7 @@ const UnitedAfricaHero = () => {
                 <ScrollReveal direction="up">
                     <div className="space-y-8">
 
-                        <h1 className="text-2xl md:text-4xl lg:text-6xl font-black text-slate-900 leading-[1.05] tracking-tight uppercase">
+                        <h1 className="text-3xl md:text-4xl lg:text-6xl font-black text-slate-900 leading-[1.05] tracking-tight uppercase">
                             A United Africa, Rising Together
                             <div className="flex flex-wrap justify-center items-center gap-x-4 mt-2">
                                 <span>With One</span>

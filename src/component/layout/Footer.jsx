@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Phone } from "lucide-react";
 
 const Footer = () => {
     return (
@@ -16,13 +17,10 @@ const Footer = () => {
                                     Contact us
                                 </Link>
                                 <Link to="/leadership" className="text-white font-lato text-sm font-normal hover:underline">
-                                    Executive
-                                </Link>
-                                <Link to="/leadership" className="text-white font-lato text-sm font-normal hover:underline">
-                                    Representative
+                                    Leadership
                                 </Link>
                                 <Link to="/platforms" className="text-white font-lato text-sm font-normal hover:underline">
-                                    Platforms
+                                    Initiatives
                                 </Link>
                             </div>
                         </div>
@@ -55,15 +53,9 @@ const Footer = () => {
                                     CITY CO, 80022 U.S.A
                                 </p>
                             </div>
-                            <a
-                                href="tel:+17207179288"
-                                className="text-white font-lato text-base font-normal leading-[23px] underline hover:no-underline"
-                            >
-                                Phone: +1-720-717-9288
-                            </a>
                         </div>
 
-                        <div className="flex flex-col items-start md:items-center gap-8 md:gap-[50px] w-full md:w-auto md:min-w-[200px]">
+                        <div className="flex flex-col items-start md:items-start gap-8 md:gap-[50px] w-full md:w-auto md:min-w-[200px]">
                             <div>
                                 <p className="text-white font-lato text-sm font-normal leading-[23px]">
                                     GLOBAL HEADQUARTERS.<br />
@@ -73,36 +65,16 @@ const Footer = () => {
                             </div>
                             <a
                                 href="tel:+264812101200"
-                                className="text-white font-lato text-base font-semibold leading-normal underline hover:no-underline"
+                                className="flex items-center gap-2 text-white font-lato text-base font-semibold leading-normal hover:text-[#EB010C] transition-colors"
                             >
-                                Phone: +264 81 210 1200
+                                <Phone size={16} />
+                                +264 81 210 1200
                             </a>
                         </div>
                     </div>
 
-                    {/* Right Section - CTA */}
-                    <div className="flex flex-col items-start gap-8 md:gap-[46px] w-full xl:w-[320px] xl:flex-shrink-0">
-                        {/* Title and Buttons */}
-                        <div className="flex flex-col items-start gap-[26px] w-full">
-                            <h3 className="text-white font-lato text-xl font-semibold leading-[35px] w-full">
-                                Join the movement and help bring change to Africa
-                            </h3>
-                            <div className="flex items-start gap-3 w-full">
-                                <Link
-                                    to="/about"
-                                    className="flex-1 flex justify-center items-center px-6 py-3 bg-[#EB010C] text-white font-poppins text-base font-medium hover:bg-[#d00109] transition-colors"
-                                >
-                                    Learn more
-                                </Link>
-                                <Link
-                                    to="/register"
-                                    className="flex-1 flex justify-center items-center px-6 py-3 border border-white text-white font-poppins text-base font-medium hover:bg-white hover:text-black transition-colors"
-                                >
-                                    Join now
-                                </Link>
-                            </div>
-                        </div>
-
+                    {/* Right Section - Socials */}
+                    <div className="flex flex-col items-start lg:items-end lg:justify-end w-full lg:w-auto mt-4 md:mt-0 xl:flex-shrink-0">
                         {/* Social Media Icons */}
                         <div className="flex flex-wrap items-center gap-6 sm:gap-8 md:gap-[52px]">
                             <a href="https://www.tiktok.com/@upam56" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
