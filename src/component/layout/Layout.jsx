@@ -13,7 +13,7 @@ const Layout = () => {
     return (
         <>
             {isEventsPage ? <EventsNavbar /> : <Header />}
-            <main className={`${noPaddingComponents.includes(pathname) ? '' : isEventsPage ? 'pt-[72px] lg:pt-[80px]' : 'pt-[160px] lg:pt-[180px]'}`}>
+            <main className={`${noPaddingComponents.includes(pathname) ? '' : isEventsPage ? 'pt-[72px] lg:pt-[80px]' : 'pt-[100px] lg:pt-[120px]'}`}>
                 <Outlet />
             </main>
             <Footer />

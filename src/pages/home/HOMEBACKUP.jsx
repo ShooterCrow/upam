@@ -1167,66 +1167,6 @@ const Index = () => {
 
                     {/* FAQ Section */}
                     <FAQ />
-                    {/* <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-                        <div className="flex flex-col gap-10">
-                            <div className="flex flex-col gap-6">
-                                <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 tracking-tight">
-                                    Frequently Asked Questions
-                                </h2>
-                                <p className="text-base text-gray-600 leading-relaxed">
-                                    Welcome to our FAQ section! Here, you'll find answers to common questions about UPAM. If you need further assistance, feel free to send us an email.
-                                </p>
-                            </div>
-
-                            <div className="flex flex-col gap-4">
-                                <div className="flex flex-col gap-3">
-                                    <button
-                                        onClick={() => setOpenFaq(openFaq === 0 ? -1 : 0)}
-                                        className="flex items-center justify-between gap-4 text-left p-4 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow"
-                                    >
-                                        <h3 className="text-lg font-semibold text-upam-red">
-                                            What is UPAM (United Pan-Africanist Movement)?
-                                        </h3>
-                                        <ChevronDown className={`w-5 h-5 flex-shrink-0 text-upam-red transition-transform ${openFaq === 0 ? 'rotate-180' : ''}`} />
-                                    </button>
-                                    {openFaq === 0 && (
-                                        <div className="p-4 bg-gray-50 rounded-lg">
-                                            <p className="text-base text-gray-600 leading-relaxed">
-                                                UPAM is a Pan-African organization focused on unity, empowerment, leadership development, and sustainable progress across Africa and the diaspora.
-                                            </p>
-                                        </div>
-                                    )}
-                                </div>
-
-                                {[1, 2, 3, 4, 5].map((index) => (
-                                    <button
-                                        key={index}
-                                        onClick={() => setOpenFaq(openFaq === index ? -1 : index)}
-                                        className="flex items-center justify-between gap-4 text-left p-4 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow"
-                                    >
-                                        <h3 className="text-lg font-semibold text-gray-900">
-                                            {index === 1 && "Who can become a member of UPAM?"}
-                                            {index === 2 && "How can I join or get involved with UPAM?"}
-                                            {index === 3 && "Where does UPAM operate?"}
-                                            {index === 4 && "What kind of programs and initiatives does UPAM run?"}
-                                            {index === 5 && "How is UPAM funded?"}
-                                        </h3>
-                                        <ChevronDown className={`w-5 h-5 flex-shrink-0 text-gray-400 transition-transform ${openFaq === index ? 'rotate-180' : ''}`} />
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="flex items-center justify-center">
-                            <div className="relative overflow-hidden w-full max-w-lg">
-                                <img
-                                    src="https://api.builder.io/api/v1/image/assets/TEMP/8b553fc5ee46c49c7770ecda17fa30afaf62ddfc?width=1263"
-                                    alt="FAQ Map"
-                                    className="w-full h-auto"
-                                />
-                            </div>
-                        </div>
-                    </section> */}
                 </div>
             </div>
         </div>

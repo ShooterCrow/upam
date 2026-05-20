@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Download, ArrowRight } from 'lucide-react';
+import { Download, ArrowRight, BookOpen, FileText, Share2, FileDown, BookMarked } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ScrollReveal from '../../components/ScrollReveal';
 
 export default function Publications() {
     const [activeTab, setActiveTab] = useState('articles');
@@ -9,7 +10,7 @@ export default function Publications() {
         {
             id: 1,
             title: "UPAM Annual Report 2025",
-            description: "An overview of UPAM's youth engagement programs, leadership training outcomes, and community impact across Africa and the diaspora"
+            description: "An overview of UPAM's youth engagement programs, leadership training outcomes, and community impact across Africa and the diaspora."
         }
     ];
 
@@ -53,185 +54,180 @@ export default function Publications() {
     ];
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            {/* Hero Section */}
-            <div className="bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-16">
-                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                        {/* Left Content */}
-                        <div>
-                            <p className="text-sm text-gray-600 mb-3">Publications & Policy Insights</p>
-                            <h1 className="text-2xl sm:text-xl lg:text-3xl font-bold text-gray-900 mb-6 leading-tight">
-                                Knowledge that strengthens African unity, informs policy, and drives sustainable development.
+        <div className="bg-white min-h-screen pb-24 overflow-hidden selection:bg-[#EB010C] selection:text-white">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+
+                {/* Hero Section */}
+                <div className="flex flex-col lg:flex-row gap-3">
+                    <ScrollReveal direction="right">
+                        <header className="max-w-4xl mb-24 md:mb-32">
+                            <div className="flex items-center gap-3 mb-8">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-bold w-fit uppercase tracking-widest border-l-2 border-[#EB010C]">
+                                    Resources & Perspectives
+                                </div>
+                            </div>
+                            <h1 className="text-2xl md:text-3xl font-semibold text-slate-900 uppercase leading-[1.2] mb-10">
+                                Knowledge that strengthens African unity, <br className="hidden md:block" />
+                                informs policy, and drives sustainable development.
                             </h1>
-                            <p className="text-gray-600 mb-8 leading-relaxed">
-                                UPAM publications reflect our commitment to research, advocacy, and evidence-based action. From
-                                departmental reports to policy papers and research documents, these resources support informed
-                                decision-making and Pan-African progress.
+                            <p className="text-base text-slate-600 leading-relaxed font-medium max-w-2xl">
+                                UPAM publications reflect our commitment to research, advocacy, and evidence-based action.
+                                From policy papers to research documents, these resources support informed decision-making.
                             </p>
-                            <div className="flex flex-wrap gap-4">
-                                <button
-                                    onClick={() => setActiveTab('articles')}
-                                    className={`px-6 py-3 font-medium transition-colors ${activeTab === 'articles'
-                                        ? 'bg-red-600 text-white hover:bg-red-700'
-                                        : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-50'
-                                        }`}
-                                >
-                                    Articles/Research
-                                </button>
-                                <button
-                                    onClick={() => setActiveTab('reports')}
-                                    className={`px-6 py-3 font-medium transition-colors ${activeTab === 'reports'
-                                        ? 'bg-red-600 text-white hover:bg-red-700'
-                                        : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-50'
-                                        }`}
-                                >
-                                    Reports
-                                </button>
+                        </header>
+                    </ScrollReveal>
+                    <ScrollReveal direction="left">
+                        <img src="https://res.cloudinary.com/dyy6gisnk/image/upload/v1779283260/photo-1488521787991-ed7bbaae773c_ovjeaw.jpg" alt="" />
+                    </ScrollReveal>
+
+                </div>
+
+                {/* Tab Switcher */}
+                <ScrollReveal direction="up" delay={0.1}>
+                    <div className="flex flex-wrap gap-0 mb-16 border-b border-slate-100">
+                        <button
+                            onClick={() => setActiveTab('articles')}
+                            className={`px-10 py-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 relative group ${activeTab === 'articles' ? 'text-[#EB010C]' : 'text-slate-400 hover:text-slate-900'}`}
+                        >
+                            Articles & Research
+                            {activeTab === 'articles' && <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#EB010C]" />}
+                            <div className={`absolute bottom-0 left-0 w-0 h-[2px] bg-[#EB010C] transition-all duration-500 group-hover:w-full ${activeTab === 'articles' ? 'hidden' : ''}`} />
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('reports')}
+                            className={`px-10 py-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 relative group ${activeTab === 'reports' ? 'text-[#EB010C]' : 'text-slate-400 hover:text-slate-900'}`}
+                        >
+                            Reports & Policy
+                            {activeTab === 'reports' && <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#EB010C]" />}
+                            <div className={`absolute bottom-0 left-0 w-0 h-[2px] bg-[#EB010C] transition-all duration-500 group-hover:w-full ${activeTab === 'reports' ? 'hidden' : ''}`} />
+                        </button>
+                    </div>
+                </ScrollReveal>
+
+                {/* Content Area */}
+                <div className="min-h-[600px]">
+                    {activeTab === 'articles' ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-slate-100">
+                            {articles.map((article, index) => (
+                                <ScrollReveal key={index} direction="up" delay={index * 0.1}>
+                                    <div className="group relative bg-white border-r border-b border-slate-100 flex flex-col h-full transition-all duration-700 hover:bg-slate-50">
+                                        <div className="relative aspect-[16/10] overflow-hidden grayscale-0">
+                                            <img
+                                                src={article.image}
+                                                alt={article.title}
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                            />
+                                            <div className="absolute top-0 left-0 w-full h-full bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        </div>
+
+                                        <div className="p-10 flex flex-col flex-grow">
+                                            <div className="flex items-center gap-3 mb-6">
+                                                <div className="w-6 h-[1px] bg-[#EB010C]" />
+                                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#EB010C]">RESEARCH</span>
+                                            </div>
+
+                                            <Link to={`/publications/${article.slug}`} className="block mb-4">
+                                                <h3 className="text-xl font-black text-slate-900 uppercase tracking-tighter leading-[1.1] transition-colors duration-300 group-hover:text-[#EB010C]">
+                                                    {article.title}
+                                                </h3>
+                                            </Link>
+
+                                            <p className="text-sm text-slate-500 leading-relaxed font-medium mb-8 flex-grow">
+                                                {article.description}
+                                            </p>
+
+                                            <Link
+                                                to={`/publications/${article.slug}`}
+                                                className="inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 transition-all duration-300 hover:gap-6"
+                                            >
+                                                Read Analysis
+                                                <ArrowRight size={14} className="text-[#EB010C]" />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </ScrollReveal>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="space-y-32">
+                            {/* Evaluation Reports */}
+                            <div>
+                                <ScrollReveal direction="left">
+                                    <div className="flex items-center gap-4 mb-16 px-2">
+                                        <h2 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em]">Evaluation Reports</h2>
+                                        <div className="h-[1px] flex-1 bg-slate-100" />
+                                    </div>
+                                </ScrollReveal>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-slate-100">
+                                    {reports.map((report, index) => (
+                                        <ScrollReveal key={index} direction="up" delay={index * 0.1}>
+                                            <div className="group relative p-12 min-h-[400px] bg-white border-r border-b border-slate-100 flex flex-col justify-between transition-all duration-700 hover:bg-slate-50">
+                                                <div>
+                                                    <div className="mb-8">
+                                                        <FileDown className="w-8 h-8 text-slate-200 group-hover:text-[#EB010C] transition-colors duration-500" />
+                                                    </div>
+                                                    <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tighter leading-tight mb-6 transition-colors duration-300 group-hover:text-[#EB010C]">
+                                                        {report.title}
+                                                    </h3>
+                                                    <p className="text-sm text-slate-500 leading-relaxed font-medium">
+                                                        {report.description}
+                                                    </p>
+                                                </div>
+
+                                                <div className="pt-10">
+                                                    <button className="inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-[#EB010C] transition-all duration-300 hover:gap-6">
+                                                        Download PDF
+                                                        <Download size={14} />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </ScrollReveal>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Policy Papers */}
+                            <div>
+                                <ScrollReveal direction="right">
+                                    <div className="flex items-center gap-4 mb-16 px-2">
+                                        <h2 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Policy Papers</h2>
+                                        <div className="h-[1px] flex-1 bg-slate-100" />
+                                    </div>
+                                </ScrollReveal>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-slate-100">
+                                    {reports.map((report, index) => (
+                                        <ScrollReveal key={index} direction="up" delay={index * 0.1 + 0.2}>
+                                            <div className="group relative p-12 min-h-[400px] bg-white border-r border-b border-slate-100 flex flex-col justify-between transition-all duration-700 hover:bg-slate-50">
+                                                <div>
+                                                    <div className="mb-8">
+                                                        <BookMarked className="w-8 h-8 text-slate-200 group-hover:text-[#EB010C] transition-colors duration-500" />
+                                                    </div>
+                                                    <h3 className="text-2xl font-black text-slate-300 uppercase tracking-tighter leading-tight mb-6 transition-colors duration-300 group-hover:text-[#EB010C]">
+                                                        {report.title}
+                                                    </h3>
+                                                    <p className="text-sm text-slate-400 leading-relaxed font-medium italic">
+                                                        {report.description}
+                                                    </p>
+                                                </div>
+
+                                                <div className="pt-10">
+                                                    <button className="inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 transition-all duration-300 hover:text-[#EB010C] hover:gap-6">
+                                                        Access Document
+                                                        <ArrowRight size={14} />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </ScrollReveal>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-
-                        {/* Right Image */}
-                        <div className="relative">
-                            <img
-                                src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&h=600&fit=crop"
-                                alt="African children"
-                                className="w-full h-64 lg:h-96 object-cover rounded-lg shadow-lg"
-                            />
-                        </div>
-                    </div>
+                    )}
                 </div>
+
             </div>
-
-            {/* Tab Content */}
-            {activeTab === 'reports' && (
-                <>
-                    {/* Reports Section */}
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-                        <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-8">
-                            Evaluational and Departmental Report
-                        </h2>
-
-                        {/* Reports Grid */}
-                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {reports.map((report) => (
-                                <div
-                                    key={report.id}
-                                    className="rounded-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
-                                >
-                                    {/* Logo Section */}
-                                    <div className="p-8 pb-6">
-                                        <div className="flex items-start gap-2 mb-6">
-                                            <div className="">
-                                                <img src="logoupam.png" alt="Upam Logo" />
-                                            </div>
-                                        </div>
-
-                                        {/* Report Info */}
-                                        <h3 className="font-bold text-gray-900 mb-3 text-xl leading-tight">
-                                            {report.title}
-                                        </h3>
-                                        <p className="text-sm text-gray-600 leading-relaxed">
-                                            {report.description}
-                                        </p>
-                                    </div>
-
-                                    {/* Download Button */}
-                                    <div className="px-8 pb-8 flex justify-end">
-                                        <button className="flex items-center gap-2 text-gray-900 text-sm font-medium hover:text-red-600 transition-colors group">
-                                            <span>Download</span>
-                                            <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-                                        </button>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Policy Section */}
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24">
-                        <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-8">
-                            Policy Papers
-                        </h2>
-
-                        {/* Reports Grid */}
-                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {reports.map((report) => (
-                                <div
-                                    key={report.id}
-                                    className="rounded-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
-                                >
-                                    {/* Logo Section */}
-                                    <div className="p-8 pb-6">
-                                        <div className="flex items-start gap-2 mb-6">
-                                            <div className="">
-                                                <img src="logoupam.png" alt="Upam Logo" />
-                                            </div>
-                                        </div>
-
-                                        {/* Report Info */}
-                                        <h3 className="font-bold text-gray-900 mb-3 text-xl leading-tight">
-                                            {report.title}
-                                        </h3>
-                                        <p className="text-sm text-gray-600 leading-relaxed">
-                                            {report.description}
-                                        </p>
-                                    </div>
-
-                                    {/* Download Button */}
-                                    <div className="px-8 pb-8 flex justify-end">
-                                        <button className="flex items-center gap-2 text-gray-900 text-sm font-medium hover:text-red-600 transition-colors group">
-                                            <span>Download</span>
-                                            <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-                                        </button>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </>
-            )}
-
-            {activeTab === 'articles' && (
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {articles.map((article, index) => (
-                            <div
-                                key={index}
-                                className="bg-white shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden flex flex-col"
-                            >
-                                <div className="relative h-48 overflow-hidden">
-                                    <img
-                                        src={article.image}
-                                        alt={article.title}
-                                        className="w-full h-full object-cover"
-                                    />
-                                </div>
-
-                                <div className="p-6 flex flex-col flex-grow">
-                                    <div className="text-sm text-red-600 font-medium mb-3">
-                                        Articles/Research
-                                    </div>
-                                    <Link to={`/publications/${article.slug}`}>
-                                        <h3 className="text-lg font-bold text-gray-900 mb-3 leading-tight">
-                                            {article.title}
-                                        </h3>
-                                    </Link>
-
-                                    <p className="text-sm text-gray-600 mb-4 flex-grow leading-relaxed">
-                                        {article.description}
-                                    </p>
-
-                                    <Link to={`/publications/${article.slug}`} className="inline-flex items-center text-red-600 hover:text-red-700 font-medium text-sm transition-colors group">
-                                        Read more
-                                        <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                    </Link>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
         </div>
     );
 }

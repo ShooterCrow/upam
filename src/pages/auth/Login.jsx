@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import loginIllustration from "../../assets/Register.png"; // Reuse register image if login image not found (user didn't specify)
+import loginIllustration from "../../assets/Register.png";
 import { useLoginMutation } from "../../pages/authenticationPages/authApiSlice";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../pages/authenticationPages/authSlice";
+import ScrollReveal from "../../components/ScrollReveal";
+import { ArrowRight } from "lucide-react";
 
 /** Google "G" logo for Sign in with Google */
 const GoogleIcon = () => (
@@ -15,23 +17,15 @@ const GoogleIcon = () => (
   </svg>
 );
 
-/** Eye icon - visible password */
 const EyeOpenIcon = () => (
-  <svg className="w-5 h-5 text-[#666]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-  </svg>
+  <svg className="w-5 h-5 text-slate-400 hover:text-slate-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
 );
 
-/** Eye-off icon - hidden password */
 const EyeOffIcon = () => (
-  <svg className="w-5 h-5 text-[#666]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878a4.5 4.5 0 106.262 6.262M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-  </svg>
+  <svg className="w-5 h-5 text-slate-400 hover:text-slate-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878a4.5 4.5 0 106.262 6.262M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>
 );
 
-const inputBase =
-  "w-full text-[16px] text-[#222] bg-transparent border-0 border-b border-[#ccc] rounded-none py-2.5 pr-10 tracking-[0.32px] outline-none focus:border-[#eb010c] focus:ring-0";
+const inputBase = "w-full text-base text-slate-900 bg-transparent border-0 border-b-2 border-slate-200 rounded-none py-3 pr-10 outline-none focus:border-[#eb010c] focus:ring-0 transition-colors placeholder:text-slate-400";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -45,19 +39,15 @@ const Login = () => {
 
   useEffect(() => {
     if (isSuccess) navigate("/admin");
-  }, [isSuccess, navigate])
-
+  }, [isSuccess, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const userData = await login({ email, password }).unwrap();
       // dispatch(setCredentials({ ...userData }));
-      // For now redirect to home or user profile
-      // navigate("/admin");
     } catch (err) {
-      console.log(err);
-      if (err?.data.message) {
+      if (err?.data?.message) {
         setErrMsg(err?.data.message);
       } else if (err.originalStatus === 400) {
         setErrMsg("Missing Username or Password");
@@ -70,133 +60,45 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <section className="pt-[100px] lg:pt-[110px]">
-        {/* Desktop: two-column — form left, illustration right */}
-        <div
-          className="hidden lg:flex justify-center w-full overflow-hidden"
-        >
-          <div className="flex flex-row gap-[60px] items-center justify-around w-full">
-            {/* Left: Form */}
-            <div className="p-20 flex-1 min-w-0 flex flex-col gap-6 max-w-[500px]">
-              <div>
-                <h1 className="text-[28px] text-black tracking-[0.56px]">
-                  Log in
-                </h1>
-                <p className="text-[16px] text-[#666] tracking-[0.32px] mt-2">
-                  Log in to your account
-                </p>
-                {errMsg && <p className="text-red-600 mt-2">{errMsg}</p>}
+    <div className="bg-white min-h-screen pt-[40px] lg:pt-0">
+      <div className="flex flex-col lg:flex-row min-h-screen bg-white">
+        {/* Form Container */}
+        <div className="flex-1 flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:px-32 py-12">
+          <ScrollReveal direction="up" className="w-full max-w-[450px] mx-auto">
+            <div className="mb-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] mb-6">
+                Welcome Back
               </div>
-              <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-                <div>
-                  <label className="block text-[14px] text-[#444] tracking-[0.28px] mb-1.5">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    placeholder="Example999@gmail.com"
-                    className={inputBase + " pr-0"}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block font-['Lato',sans-serif] text-[14px] text-[#444] tracking-[0.28px] mb-1.5">
-                    Password
-                  </label>
-                  <div className="relative">
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      placeholder="••••••••"
-                      className={inputBase}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword((s) => !s)}
-                      className="absolute right-0 top-1/2 -translate-y-1/2 p-1 hover:opacity-80"
-                      aria-label={showPassword ? "Hide password" : "Show password"}
-                    >
-                      {showPassword ? <EyeOffIcon /> : <EyeOpenIcon />}
-                    </button>
-                  </div>
-                  <div className="text-right mt-1">
-                    <Link
-                      to="/forgot-password"
-                      className="text-[14px] text-[#666] hover:text-[#eb010c] transition-colors"
-                    >
-                      Forgot password?
-                    </Link>
-                  </div>
-                </div>
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full bg-[#eb010c] text-[16px] text-white py-3 px-4 rounded tracking-[0.32px] hover:bg-[#d0010b] transition-colors mt-1 disabled:opacity-50"
-                >
-                  {isLoading ? "Logging in..." : "Log In"}
-                </button>
-              </form>
-              <button
-                type="button"
-                className="w-full flex items-center justify-center gap-3 text-[16px] text-[#444] tracking-[0.32px] border border-[#ccc] rounded px-4 py-3 bg-white hover:bg-gray-50 hover:border-[#999] transition-colors"
-              >
-                <GoogleIcon />
-                Sign in with Google
-              </button>
-              <p className="text-[14px] text-[#444] tracking-[0.28px] text-center pt-1">
-                Don&apos;t have an account?{" "}
-                <Link
-                  to="/register"
-                  className="text-[#eb010c] underline decoration-solid underline-offset-2"
-                >
-                  Register
-                </Link>
-              </p>
-            </div>
-            {/* Right: Illustration */}
-            <div className="shrink-0 flex-1 h-full p-10 flex items-center justify-center overflow-hidden bg-gray-100">
-              <img
-                src={loginIllustration}
-                alt="Login Illustration"
-                className="w-[80%] md:w-[60%] h-full object-contain object-center"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile: stacked form, no illustration */}
-        <div className="block lg:hidden py-12 px-6 lg:px-12">
-          <div className="flex flex-col gap-6 w-full max-w-[400px] mx-auto">
-            <div>
-              <h1 className="font-medium text-[24px] text-black tracking-[0.48px]">
-                Log in
+              <h1 className="text-3xl lg:text-4xl font-black text-slate-900 uppercase tracking-tighter leading-[1.1] mb-4">
+                Log In To <br />Your Account.
               </h1>
-              <p className="text-[14px] text-[#666] tracking-[0.28px] mt-1.5">
-                Log in to your account
+              <p className="text-base text-slate-600 font-medium">
+                Enter your details to access your dashboard.
               </p>
-              {errMsg && <p className="text-red-600 mt-2">{errMsg}</p>}
+              {errMsg && (
+                <div className="mt-4 p-4 bg-red-50 border-l-4 border-[#EB010C] text-[#EB010C] text-sm font-bold">
+                  {errMsg}
+                </div>
+              )}
             </div>
-            <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-              <div>
-                <label className="block text-[14px] text-[#444] tracking-[0.28px] mb-1">
-                  Email
+
+            <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+              <div className="space-y-2">
+                <label className="block text-xs font-black text-slate-900 tracking-widest uppercase">
+                  Email Address
                 </label>
                 <input
                   type="email"
                   placeholder="Example999@gmail.com"
-                  className={inputBase + " pr-0"}
+                  className={inputBase}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </div>
-              <div>
-                <label className="block font-['Lato',sans-serif] text-[14px] text-[#444] tracking-[0.28px] mb-1">
+
+              <div className="space-y-2">
+                <label className="block text-xs font-black text-slate-900 tracking-widest uppercase">
                   Password
                 </label>
                 <div className="relative">
@@ -211,48 +113,64 @@ const Login = () => {
                   <button
                     type="button"
                     onClick={() => setShowPassword((s) => !s)}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 p-1 hover:opacity-80"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 p-2 hover:bg-slate-50 rounded-full transition-colors"
                     aria-label={showPassword ? "Hide password" : "Show password"}
                   >
                     {showPassword ? <EyeOffIcon /> : <EyeOpenIcon />}
                   </button>
                 </div>
-                <div className="text-right mt-1">
+                <div className="flex justify-end pt-2">
                   <Link
                     to="/forgot-password"
-                    className="text-[14px] text-[#666] hover:text-[#eb010c] transition-colors"
+                    className="text-[10px] font-black text-slate-400 hover:text-[#EB010C] uppercase tracking-widest transition-colors"
                   >
                     Forgot password?
                   </Link>
                 </div>
               </div>
+
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-[#eb010c] text-[16px] text-white py-3 px-4 rounded tracking-[0.32px] hover:bg-[#d0010b] transition-colors disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-4 bg-[#EB010C] text-white py-4 px-6 font-black text-xs uppercase tracking-widest hover:bg-slate-900 transition-all duration-300 disabled:opacity-50 mt-4 group"
               >
                 {isLoading ? "Logging in..." : "Log In"}
+                {!isLoading && <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />}
               </button>
             </form>
+
+            {/* <div className="flex items-center gap-4 my-8">
+              <div className="h-[1px] flex-1 bg-slate-100"></div>
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Or</span>
+              <div className="h-[1px] flex-1 bg-slate-100"></div>
+            </div> */}
+            {/* 
             <button
               type="button"
-              className="w-full flex items-center justify-center gap-3 text-[16px] text-[#444] tracking-[0.32px] border border-[#ccc] rounded px-4 py-3 bg-white hover:bg-gray-50 hover:border-[#999] transition-colors"
+              className="w-full border-2 border-slate-100 hover:border-slate-900 flex items-center justify-center gap-3 py-4 bg-white hover:bg-slate-50 transition-colors font-black uppercase text-[10px] tracking-widest text-slate-700"
             >
               <GoogleIcon />
               Sign in with Google
-            </button>
-            <p className="text-[14px] text-[#444] tracking-[0.28px] text-center">
+            </button> */}
+
+            <p className="text-[11px] font-black uppercase tracking-widest text-slate-400 text-center mt-8">
               Don&apos;t have an account?{" "}
-              <Link
-                to="/register"
-                className="text-[#eb010c] underline decoration-solid underline-offset-2"
-              >
-                Register
+              <Link to="/register" className="text-[#EB010C] hover:text-slate-900 transition-colors">
+                Register Now
               </Link>
             </p>
-          </div>
+          </ScrollReveal>
         </div>
-      </section>
+
+        {/* Visual Side */}
+        <div className="hidden lg:flex flex-2 relative bg-gray-200 group overflow-hidden justify-center items-center">
+          <img
+            src={loginIllustration}
+            alt="Login Header"
+            className="w-[80%] md:w-[60%] h-full object-contain object-center opacity-100 transition-transform duration-[2s] group-hover:scale-105"
+          />
+        </div>
+      </div>
     </div>
   );
 };

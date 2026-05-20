@@ -254,11 +254,11 @@ const Index = () => {
                                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C]">
                                             Mission
                                         </div>
-                                        <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
-                                            Building Shared Growth Together.
+                                        <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                            Building Shared <br />Growth Together.
                                         </h2>
-                                        <p className="text-base text-slate-600 leading-relaxed font-medium">
-                                            To strengthen bonds of solidarity between all people of African descent, fostering unity and development in Africa; for enhanced independence, industrialization, economic self- reliance as well as promote peace, security and stability within African communities and states.
+                                        <p className="text-base text-slate-600 leading-relaxed font-medium border-l-2 border-slate-100 pl-6 max-w-xl">
+                                            To strengthen bonds of solidarity between all people of African descent, fostering unity and development in Africa; enhanced independence, industrialization, economic self-reliance as well as promote peace, security and stability within African communities and states.
                                         </p>
                                     </div>
                                 </div>
@@ -268,23 +268,30 @@ const Index = () => {
                                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C]">
                                             Vision
                                         </div>
-                                        <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
-                                            A United Africa For All.
+                                        <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                            A United Africa <br />For All.
                                         </h2>
-                                        <p className="text-base text-slate-600 leading-relaxed font-medium">
-                                            A United Africa for sustainable development for all Africans Descent. UPAM is a continental evolution and an all-African organization, seeking to enhance the unification of African nations as a whole and reclaiming its hope for the destined future.
+                                        <p className="text-base text-slate-600 leading-relaxed font-medium border-l-2 border-slate-100 pl-6 max-w-xl">
+                                            A United Africa for sustainable development for all Africans Descent.
                                         </p>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Right Column - Video / Image */}
-                            <div className="relative group overflow-hidden bg-slate-900">
+                            <div className="relative group overflow-hidden shadow-2xl bg-slate-900">
                                 <img
-                                    src="https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg"
+                                    src="https://api.builder.io/api/v1/image/assets/TEMP/b3564abd0e1fb1dfb19649f1092e28adc8a02548?width=1310"
                                     alt="UPAM Mission"
-                                    className="w-full object-cover opacity-80 transition-transform duration-1000 group-hover:scale-110"
+                                    className="w-full aspect-[4/5] object-cover opacity-80 transition-transform duration-1000 group-hover:scale-110"
                                 />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                                <div className="absolute bottom-10 left-10 right-10">
+                                    <div className="w-12 h-1 bg-[#EB010C] mb-4" />
+                                    <p className="text-white font-black text-xl uppercase tracking-tighter italic">
+                                        "Collective Renewal Through Unity"
+                                    </p>
+                                </div>
                             </div>
                         </section>
                     </ScrollReveal>
@@ -298,23 +305,23 @@ const Index = () => {
                                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit">
                                             The Movement
                                         </div>
-                                        <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                        <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
                                             The Spirit Of <br />Pan-Africanism.
                                         </h2>
                                         <p className="text-base text-slate-600 leading-relaxed font-medium">
                                             This call invites every African, at home and in the diaspora, to embrace a future where our combined strength becomes the foundation for lasting development.
                                         </p>
                                     </div>
-                                    <div >
+                                    <div className="relative bg-slate-50 border border-slate-100 overflow-hidden py-12">
                                         <WorldMapWithMarkers />
                                     </div>
                                 </div>
 
-                                <div className="hidden lg:block order-1 lg:order-2 relative group overflow-hidden">
+                                <div className="order-1 lg:order-2 relative group overflow-hidden shadow-2xl">
                                     <img
                                         src="https://api.builder.io/api/v1/image/assets/TEMP/3aff55db95a13f272ccc48de58a70673598f80db?width=862"
                                         alt="Pan-African Unity"
-                                        className="w-full lg:aspect-square object-cover transition-transform duration-1000 group-hover:scale-110"
+                                        className="w-full aspect-[4/5] lg:aspect-square object-cover transition-transform duration-1000 group-hover:scale-110"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                                 </div>
@@ -326,7 +333,7 @@ const Index = () => {
                         {/* Who We Are Section */}
                         <section className="mb-24 lg:mb-32">
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-                                <div className="relative group overflow-hidden">
+                                <div className="relative group overflow-hidden shadow-2xl">
                                     <img
                                         src="https://api.builder.io/api/v1/image/assets/TEMP/45370172fe42ffd55b6009588f5603c9aeb8c1b3?width=1086"
                                         alt="UPAM Community"
@@ -341,7 +348,7 @@ const Index = () => {
                                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit">
                                             Who We Are
                                         </div>
-                                        <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                        <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
                                             A Continental <br />Evolution.
                                         </h2>
                                         <p className="text-base text-slate-600 leading-relaxed font-medium">
@@ -361,18 +368,42 @@ const Index = () => {
 
                     {/* What We Stand For Section */}
                     <section className="mb-24 lg:mb-32">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
                             <div className="flex flex-col gap-8">
                                 <div className="space-y-4">
                                     <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit">
                                         Values & Focus
                                     </div>
-                                    <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
-                                        What We Stand For.
+                                    <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                        What We <br />Stand For.
                                     </h2>
                                 </div>
 
                                 <div className="space-y-8">
+                                    <div className="relative group overflow-hidden aspect-[16/9] bg-slate-900 shadow-xl">
+                                        {focusAreas.map((area, index) => (
+                                            <div
+                                                key={index}
+                                                className={`absolute inset-0 transition-all duration-700 ease-in-out ${activeFocus === index
+                                                    ? 'opacity-100 scale-100'
+                                                    : 'opacity-0 scale-105 pointer-events-none'
+                                                    }`}
+                                            >
+                                                <img
+                                                    src={area.image}
+                                                    alt={area.title}
+                                                    className="w-full h-full object-cover opacity-80"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                                                <div className="absolute bottom-0 left-0 p-8">
+                                                    <h3 className="text-2xl font-black text-white uppercase tracking-tighter">
+                                                        {area.title}
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+
                                     <div className="space-y-6">
                                         <p className="text-lg text-slate-600 font-medium leading-relaxed italic border-l-4 border-[#EB010C] pl-6">
                                             "{focusAreas[activeFocus].description}"
@@ -384,7 +415,7 @@ const Index = () => {
                                                     key={index}
                                                     onClick={() => setActiveFocus(index)}
                                                     className={`group relative flex items-center justify-between p-5 transition-all duration-300 border ${activeFocus === index
-                                                        ? 'bg-slate-900 border-slate-900 text-white'
+                                                        ? 'bg-slate-900 border-slate-900 text-white shadow-lg'
                                                         : 'bg-white border-slate-100 text-slate-600 hover:border-[#EB010C]/30'
                                                         }`}
                                                 >
@@ -402,28 +433,20 @@ const Index = () => {
                                 </div>
                             </div>
 
-                            <div className="relative group overflow-hidden aspect-[16/9] bg-slate-900">
-                                {focusAreas.map((area, index) => (
-                                    <div
-                                        key={index}
-                                        className={`absolute inset-0 transition-all duration-700 ease-in-out ${activeFocus === index
-                                            ? 'opacity-100 scale-100'
-                                            : 'opacity-0 scale-105 pointer-events-none'
-                                            }`}
-                                    >
-                                        <img
-                                            src={area.image}
-                                            alt={area.title}
-                                            className="w-full h-full object-cover opacity-80"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                                        <div className="absolute bottom-0 left-0 p-8">
-                                            <h3 className="text-2xl font-black text-white uppercase tracking-tighter">
-                                                {area.title}
-                                            </h3>
-                                        </div>
+                            <div className="relative hidden lg:block group overflow-hidden shadow-2xl h-full">
+                                <img
+                                    src="/education_leadership.png"
+                                    alt="Focus Area Detail"
+                                    className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:scale-110 group-hover:grayscale-0"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/60 via-transparent to-[#EB010C]/20" />
+                                <div className="absolute inset-0 flex items-center justify-center p-12 text-center">
+                                    <div className="space-y-4 border-2 border-white/20 p-8 backdrop-blur-sm">
+                                        <h3 className="text-4xl font-black text-white uppercase tracking-widest">Empowering Nations</h3>
+                                        <div className="w-16 h-1 bg-[#EB010C] mx-auto" />
+                                        <p className="text-white/80 font-medium">Laying the foundation for a prosperous African future.</p>
                                     </div>
-                                ))}
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -434,8 +457,8 @@ const Index = () => {
                             <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C]">
                                 Visual Impact
                             </div>
-                            <h2 className="text-2xl md:text-4xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
-                                Moments That Inspire Change.
+                            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                Moments That <br />Inspire Change.
                             </h2>
                             <p className="text-lg text-slate-600 font-medium max-w-2xl px-6">
                                 Moments of unity, culture, advocacy, and community impact captured across Africa and the diaspora.
@@ -443,7 +466,7 @@ const Index = () => {
                         </div>
 
                         {/* Horizontal Scrolling Carousel */}
-                        <div className="w-full relative py-2">
+                        <div className="w-full relative py-4">
                             <div className="relative overflow-hidden">
                                 {/* Gradient overlays for fade effect on sides */}
                                 <div className="absolute hidden lg:block left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
@@ -452,18 +475,18 @@ const Index = () => {
                                 {/* Scrolling container with slow animation */}
                                 <div className="flex animate-scroll-slow hover:pause-animation">
                                     {[
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288535/c5dbbb8bc42b46092812e5f987dc66eaf6cb2b68_urieei.jpg",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/b25f74c0c208851c995df3fe41a15ea551fbb960?width=400",
+                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/683f693939e917cd3297ff8c6e8af8554e42eae3?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/1baa487a59315c54db38e9d2509b9139cca12f04?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/07536e0af663886d7094bb2f428fbad257f117cd?width=400",
                                         "https://api.builder.io/api/v1/image/assets/TEMP/e30f23ba83e18af62762d04d97d7fb23736884ea?width=400",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288902/c78f0671096d20f62827357b9a362ac828bdbbf9_kzt0tj.jpg",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg"
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/abfd27d9caa30b255c52b305f32ea927babe0a7c?width=400",
+                                        "https://api.builder.io/api/v1/image/assets/TEMP/ac234c04876489cf67819ff29fd69111a0cb2551?width=400"
                                     ].map((src, index) => (
                                         <div key={`gallery-${index}`} className="flex-shrink-0 w-64 md:w-80 lg:w-96 mx-3 group">
                                             <div className="relative overflow-hidden bg-slate-900 shadow-lg transition-all duration-500">
-                                                <div className="aspect-[4/3] overflow-hidden grayscale-20 group-hover:grayscale-0 transition-all duration-700">
+                                                <div className="aspect-[4/3] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
                                                     <img
                                                         src={src}
                                                         alt={`Gallery ${index + 1}`}
@@ -510,7 +533,7 @@ const Index = () => {
                                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit mx-auto lg:mx-0">
                                     Impact & Projects
                                 </div>
-                                <h2 className="text-2xl md:text-4xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
                                     Transforming Lives <br />Across Africa.
                                 </h2>
                                 <p className="text-lg text-slate-600 font-medium max-w-2xl">
@@ -569,7 +592,7 @@ const Index = () => {
                     <ScrollReveal direction="scale">
                         {/* Be Part of The Movement Section (CTA) */}
                         <section className="mb-24 lg:mb-32">
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 overflow-hidden">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 overflow-hidden shadow-2xl">
                                 <div className="relative group overflow-hidden h-[400px] lg:h-auto">
                                     <img
                                         src="https://api.builder.io/api/v1/image/assets/TEMP/743da7307db5c6f3802fcc3250631182d6dcce9b?width=1422"
@@ -609,11 +632,9 @@ const Index = () => {
                         {/* Leadership Section */}
                         <section className="mb-10 lg:mb-24 w-full overflow-hidden">
                             <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-4 mb-8">
-                                <div className="space-y-4">
-                                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit">
-                                        Our Team
-                                    </div>
-                                    <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                <div>
+                                    <p className="text-xs font-medium text-upam-red tracking-wider uppercase mb-2">OUR TEAM</p>
+                                    <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 tracking-tight">
                                         Meet Our Leadership
                                     </h2>
                                 </div>
@@ -704,12 +725,12 @@ const Index = () => {
                             {/* Header Section */}
                             <div className="flex flex-col lg:flex-row items-center lg:items-end justify-between gap-6">
                                 <div className="flex flex-col gap-2 max-w-2xl">
-                                    <div className="space-y-4">
-                                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit">
+                                    <div className="text-center lg:text-left">
+                                        <p className="text-xs font-medium mb-2 text-upam-red tracking-wider uppercase">
                                             Activities & Events
-                                        </div>
-                                        <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
-                                            Activities Lined Up for {new Date().getFullYear()}
+                                        </p>
+                                        <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 tracking-tight">
+                                            Activities Lined Up for 2026
                                         </h2>
                                     </div>
                                     <div className="flex flex-col gap-3">
@@ -756,7 +777,7 @@ const Index = () => {
                                                                 </div>
                                                             )}
                                                         </div>
-                                                        <h3 className="text-2xl lg:text-3xl font-black uppercase tracking-tight mb-4 group-hover:text-[#EB010C] transition-colors">
+                                                        <h3 className="text-3xl lg:text-5xl font-black uppercase tracking-tight mb-4 group-hover:text-[#EB010C] transition-colors">
                                                             {events[0].title}
                                                         </h3>
                                                         <div className="flex items-center gap-2 text-[#EB010C] font-black uppercase tracking-widest text-xs">
@@ -800,6 +821,24 @@ const Index = () => {
                         </div>
                     </section>
 
+                    {/* World Map Section */}
+                    <section className="mb-24 lg:mb-32">
+                        <div className="flex flex-col gap-6 mb-16 text-center">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit mx-auto">
+                                Global Footprint
+                            </div>
+                            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                Africa United.
+                            </h2>
+                            <p className="text-lg text-slate-600 font-medium max-w-2xl mx-auto">
+                                Our presence span across nations, fostering collaboration and growth for all African people.
+                            </p>
+                        </div>
+                        <div className="relative border border-slate-100 shadow-2xl p-4 lg:p-8 bg-white">
+                            <WorldMapWithMarkers locations={locations} />
+                        </div>
+                    </section>
+
                     {/* News Section */}
                     <section className="mb-24 lg:mb-32">
                         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-16">
@@ -807,7 +846,7 @@ const Index = () => {
                                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C]">
                                     Announcements
                                 </div>
-                                <h2 className="text-2xl md:text-4xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
                                     Wakanda <br />Network News.
                                 </h2>
                                 <p className="text-lg text-slate-600 font-medium max-w-xl">
@@ -841,7 +880,7 @@ const Index = () => {
                                 }
                             ].map((news, index) => (
                                 <a href={news.link} target='_blank' rel="noreferrer" key={index} className="group flex flex-col gap-8 bg-white border border-transparent hover:border-slate-100 transition-all duration-500">
-                                    <div className="relative aspect-[4/3] overflow-hidden">
+                                    <div className="relative aspect-[4/3] overflow-hidden shadow-lg">
                                         <img
                                             src={news.image}
                                             alt={news.title}
@@ -867,18 +906,18 @@ const Index = () => {
                     </section>
 
                     {/* Media Section */}
-                    <section className="">
-                        <div className="flex flex-col gap-6 mb-10 text-center">
+                    <section className="mb-24 lg:mb-32">
+                        <div className="flex flex-col gap-6 mb-16 text-center">
                             <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit mx-auto">
                                 Multimedia
                             </div>
-                            <h2 className="text-2xl md:text-4xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
                                 Media Highlights.
                             </h2>
                         </div>
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                             {videos.slice(0, 2).map((video, index) => (
-                                <div key={index} className="relative aspect-video group">
+                                <div key={index} className="relative aspect-video group shadow-2xl">
                                     <iframe
                                         className="w-full h-full transition-all duration-700"
                                         src={`https://www.youtube.com/embed/${video.youtubeId}`}
