@@ -51,32 +51,35 @@ function ProfileCard({ profile }) {
 
 function Section({ title, subtitle, profiles, description, icon: Icon }) {
     return (
-        <section className="mb-24 md:mb-32">
-            <ScrollReveal direction="left">
-                <div className="mb-12 md:mb-16 max-w-3xl">
-                    <div className="flex items-center gap-3 mb-4">
-                        {Icon && <Icon className="w-5 h-5 text-[#EB010C]" />}
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#EB010C]/60 italic">
-                            {subtitle || "Administrative"}
-                        </span>
-                    </div>
-                    <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-6 uppercase tracking-tight">
-                        {title}
-                    </h2>
-                    {description && (
-                        <p className="text-base text-slate-600 leading-relaxed font-medium border-l-2 border-slate-100 pl-6">
-                            {description}
-                        </p>
-                    )}
-                </div>
-            </ScrollReveal>
+        <>
+            {profiles.length > 0 && (
+                <section className="mb-24 md:mb-32">
+                    <ScrollReveal direction="left">
+                        <div className="mb-12 md:mb-16 max-w-3xl">
+                            <div className="flex items-center gap-3 mb-4">
+                                {Icon && <Icon className="w-5 h-5 text-[#EB010C]" />}
+                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#EB010C]/60 italic">
+                                    {subtitle || "Administrative"}
+                                </span>
+                            </div>
+                            <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-6 uppercase tracking-tight">
+                                {title}
+                            </h2>
+                            {description && (
+                                <p className="text-base text-slate-600 leading-relaxed font-medium border-l-2 border-slate-100 pl-6">
+                                    {description}
+                                </p>
+                            )}
+                        </div>
+                    </ScrollReveal>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-6 gap-y-12">
-                {profiles.map((profile, index) => (
-                    <ProfileCard key={`${title}-${index}`} profile={profile} />
-                ))}
-            </div>
-        </section>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-6 gap-y-12">
+                        {profiles.map((profile, index) => (
+                            <ProfileCard key={`${title}-${index}`} profile={profile} />
+                        ))}
+                    </div>
+                </section>)}
+        </>
     );
 }
 
