@@ -67,7 +67,7 @@ const Header = () => {
     return (
         <div ref={headerRef} className="fixed top-0 left-0 w-full z-[100] transition-all duration-300">
             {/* Background Colorful Blur Blobs */}
-            <div className="absolute inset-x-0 top-0 h-18 lg:h-24 overflow-hidden pointer-events-none z-[-1]">
+            <div className="absolute inset-x-0 top-0 h-18 overflow-hidden pointer-events-none z-[-1]">
                 <motion.div
                     animate={{
                         x: [0, 50, 0],
@@ -108,9 +108,64 @@ const Header = () => {
                             </Link>
                         </div>
 
+                        {/* Desktop Navigation */}
+                        <nav className="flex items-center space-x-6 xl:space-x-10">
+                            {navigationLinks.map((link) => {
+                                const active = link.hasDropdown ? isDropdownActive(link.children) : isActiveLink(link.path);
+
+                                return (
+                                    <div
+                                        key={link.name}
+                                        className="relative"
+                                        onMouseEnter={() => link.hasDropdown && setOpenDropdown(link.name)}
+                                        onMouseLeave={() => link.hasDropdown && setOpenDropdown(null)}
+                                    >
+                                        {link.hasDropdown ? (
+                                            <>
+                                                <button
+                                                    className={`transition-all text-[11px] font-black uppercase tracking-[0.2em] flex items-center gap-1.5 focus:outline-none ${active || openDropdown === link.name ? 'text-[#EB010C]' : 'text-slate-500 hover:text-slate-900'}`}
+                                                >
+                                                    {link.name}
+                                                    <ChevronDown size={14} className={`transition-transform duration-300 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
+                                                </button>
+                                                {/* Dropdown Menu */}
+                                                <div
+                                                    className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-white/95 backdrop-blur-md border border-gray-100 shadow-2xl py-3 z-50 transition-all duration-300 ease-out transform origin-top ${openDropdown === link.name
+                                                        ? 'opacity-100 translate-y-0 scale-100 visible'
+                                                        : 'opacity-0 -translate-y-4 scale-95 invisible'
+                                                        }`}
+                                                >
+                                                    <div className="absolute top-0 left-0 w-full h-1 bg-[#EB010C]" />
+                                                    {link.children.map((child) => (
+                                                        <Link
+                                                            key={child.name}
+                                                            to={child.path}
+                                                            className={`block px-6 py-3 text-[10px] font-black uppercase tracking-[0.1em] transition-all ${isActiveLink(child.path) ? 'text-[#EB010C] bg-slate-50' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'}`}
+                                                            onClick={() => setOpenDropdown(null)}
+                                                        >
+                                                            {child.name}
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <Link
+                                                to={link.path}
+                                                target={link.isExternal ? "_blank" : undefined}
+                                                rel={link.isExternal ? "noopener noreferrer" : undefined}
+                                                className={`transition-all text-[11px] font-black uppercase tracking-[0.2em] flex items-center gap-1.5 ${active ? 'text-[#EB010C]' : 'text-slate-500 hover:text-slate-900 group'}`}
+                                            >
+                                                {link.name}
+                                                {link.isExternal && <ExternalLink size={14} className="opacity-40 group-hover:opacity-100 transition-opacity" />}
+                                            </Link>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </nav>
 
                         {/* Right side actions */}
-                        <div className="flex items-center gap-10">
+                        <div className="flex items-center gap-6 xl:gap-10">
                             {isDesktop && <GoogleTranslate />}
                             {
                                 isLoggedIn ? <ProfileBox show={true} profilePicture={profileData?.data?.image?.url} /> :
@@ -148,64 +203,7 @@ const Header = () => {
                                     </div>
                             }
                         </div>
-
                     </div>
-
-                    {/* Desktop Navigation */}
-                    <nav className="flex items-center space-x-10 pt-5 w-full justify-center">
-                        {navigationLinks.map((link) => {
-                            const active = link.hasDropdown ? isDropdownActive(link.children) : isActiveLink(link.path);
-
-                            return (
-                                <div
-                                    key={link.name}
-                                    className="relative"
-                                    onMouseEnter={() => link.hasDropdown && setOpenDropdown(link.name)}
-                                    onMouseLeave={() => link.hasDropdown && setOpenDropdown(null)}
-                                >
-                                    {link.hasDropdown ? (
-                                        <>
-                                            <button
-                                                className={`transition-all text-[11px] font-black uppercase tracking-[0.2em] flex items-center gap-1.5 focus:outline-none ${active || openDropdown === link.name ? 'text-[#EB010C]' : 'text-slate-500 hover:text-slate-900'}`}
-                                            >
-                                                {link.name}
-                                                <ChevronDown size={14} className={`transition-transform duration-300 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
-                                            </button>
-                                            {/* Dropdown Menu */}
-                                            <div
-                                                className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-white/95 backdrop-blur-md border border-gray-100 shadow-2xl py-3 z-50 transition-all duration-300 ease-out transform origin-top ${openDropdown === link.name
-                                                    ? 'opacity-100 translate-y-0 scale-100 visible'
-                                                    : 'opacity-0 -translate-y-4 scale-95 invisible'
-                                                    }`}
-                                            >
-                                                <div className="absolute top-0 left-0 w-full h-1 bg-[#EB010C]" />
-                                                {link.children.map((child) => (
-                                                    <Link
-                                                        key={child.name}
-                                                        to={child.path}
-                                                        className={`block px-6 py-3 text-[10px] font-black uppercase tracking-[0.1em] transition-all ${isActiveLink(child.path) ? 'text-[#EB010C] bg-slate-50' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'}`}
-                                                        onClick={() => setOpenDropdown(null)}
-                                                    >
-                                                        {child.name}
-                                                    </Link>
-                                                ))}
-                                            </div>
-                                        </>
-                                    ) : (
-                                        <Link
-                                            to={link.path}
-                                            target={link.isExternal ? "_blank" : undefined}
-                                            rel={link.isExternal ? "noopener noreferrer" : undefined}
-                                            className={`transition-all text-[11px] font-black uppercase tracking-[0.2em] flex items-center gap-1.5 ${active ? 'text-[#EB010C]' : 'text-slate-500 hover:text-slate-900 group'}`}
-                                        >
-                                            {link.name}
-                                            {link.isExternal && <ExternalLink size={14} className="opacity-40 group-hover:opacity-100 transition-opacity" />}
-                                        </Link>
-                                    )}
-                                </div>
-                            );
-                        })}
-                    </nav>
                 </div>
             </header>
 

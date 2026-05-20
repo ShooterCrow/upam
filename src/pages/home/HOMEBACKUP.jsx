@@ -12,6 +12,37 @@ import { globalExecutive } from '../../constants/leaders';
 import ScrollReveal from '../../components/ScrollReveal';
 import { useGetEventsQuery } from '../UserAdminPages/admin/calendarApiSlice';
 
+const FallingStars = () => {
+    return (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {[...Array(20)].map((_, i) => (
+                <motion.div
+                    key={i}
+                    className="absolute bg-slate-900 rounded-full opacity-60"
+                    initial={{
+                        top: "-5%",
+                        left: `${Math.random() * 100}%`,
+                        width: "1px",
+                        height: "1px",
+                        scale: 0
+                    }}
+                    animate={{
+                        top: "105%",
+                        left: `${(Math.random() * 100) - 10}%`,
+                        scale: [0, 1, 0],
+                        height: ["1px", "40px", "1px"]
+                    }}
+                    transition={{
+                        duration: Math.random() * 2 + 1.5,
+                        repeat: Infinity,
+                        delay: Math.random() * 5,
+                        ease: "linear"
+                    }}
+                />
+            ))}
+        </div>
+    );
+};
 
 const ReadMore = ({ text, newTab, link }) => {
     return (
@@ -26,6 +57,7 @@ const ReadMore = ({ text, newTab, link }) => {
         </>
     )
 }
+
 const UnitedAfricaHero = () => {
     const [titleNumber, setTitleNumber] = useState(0);
     const titles = useMemo(
@@ -45,65 +77,72 @@ const UnitedAfricaHero = () => {
     }, [titleNumber, titles]);
 
     return (
-        <div className="relative overflow-hidden flex flex-col items-center justify-center">
-            {/* Background decorative elements - Left side */}
-            <div className="absolute left-0 top-0 w-full lg:w-64 h-full opacity-20">
-                <img alt="Countries" src="/world_map.png" />
+        <div className="relative overflow-hidden flex flex-col items-center justify-center pt-12 ">
+
+            {/* Background decorative elements */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(235,1,12,0.02),transparent_50%)] pointer-events-none" />
+            <div className="absolute top-0 left-0 w-full lg:w-64 h-full opacity-10 pointer-events-none">
+                <img alt="Countries" src="/world_map.png" className="w-full h-full object-contain" />
             </div>
 
-            <div className="absolute right-0 top-0 w-64 h-full opacity-20 hidden lg:block">
-                <img alt="Countries" src="/world_map.png" />
+            <div className="absolute top-0 right-0 w-64 h-full opacity-10 hidden lg:block pointer-events-none">
+                <img alt="Countries" src="/world_map.png" className="w-full h-full object-contain" />
             </div>
 
             {/* Main content */}
-            <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-                <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight flex flex-col items-center">
-                    <span>A United Africa, Rising Together</span>
-                    <span className="flex flex-wrap justify-center items-center gap-x-2">
-                        <span>With One</span>
-                        <span className="relative inline-flex overflow-hidden h-[1.5em] min-w-[120px] sm:min-w-[140px] md:min-w-[180px] justify-center items-center">
-                            {titles.map((title, index) => (
-                                <motion.span
-                                    key={index}
-                                    className="absolute font-bold text-red-700"
-                                    initial={{ opacity: 0, y: "-100%" }}
-                                    transition={{ type: "spring", stiffness: 50 }}
-                                    animate={
-                                        titleNumber === index
-                                            ? {
-                                                y: 0,
-                                                opacity: 1,
-                                            }
-                                            : {
-                                                y: titleNumber > index ? "-150%" : "150%",
-                                                opacity: 0,
-                                            }
-                                    }
-                                >
-                                    {title}.
-                                </motion.span>
-                            ))}
-                        </span>
-                    </span>
-                </h1>
+            <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+                <ScrollReveal direction="up">
+                    <div className="space-y-8">
 
-                <p className="text-gray-700 text-md mb-10 max-w-2xl mx-auto">
-                    This call invites every African, at home and in the diaspora, to embrace a future where
-                    our combined strength becomes the foundation for lasting development.
-                </p>
+                        <h1 className="text-2xl md:text-4xl lg:text-6xl font-black text-slate-900 leading-[1.05] tracking-tight uppercase">
+                            A United Africa, Rising Together
+                            <div className="flex flex-wrap justify-center items-center gap-x-4 mt-2">
+                                <span>With One</span>
+                                <span className="relative inline-flex overflow-hidden h-[1.1em] min-w-[140px] md:min-w-[200px] lg:min-w-[260px] justify-center items-center text-[#EB010C]">
+                                    {titles.map((title, index) => (
+                                        <motion.span
+                                            key={index}
+                                            className="absolute font-black"
+                                            initial={{ opacity: 0, y: "100%" }}
+                                            animate={
+                                                titleNumber === index
+                                                    ? { y: 0, opacity: 1 }
+                                                    : { y: titleNumber > index ? "-100%" : "100%", opacity: 0 }
+                                            }
+                                            transition={{ type: "spring", damping: 15, stiffness: 100 }}
+                                        >
+                                            {title}.
+                                        </motion.span>
+                                    ))}
+                                </span>
+                            </div>
+                        </h1>
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <Link to="/donation">
-                        <Button variant="primary" className='cursor-pointer'>
-                            Donate
-                        </Button>
-                    </Link>
-                    <Link to="/register">
-                        <Button variant="secondary" className='cursor-pointer'>
-                            Join the Movement
-                        </Button>
-                    </Link>
-                </div>
+                        <p className="text-slate-600 text-lg md:text-xl font-medium max-w-3xl mx-auto leading-relaxed">
+                            This call invites every African, at home and in the diaspora, to embrace a future where
+                            our combined strength becomes the foundation for lasting development.
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-4">
+                            <Link to="/donation">
+                                <motion.div whileHover={{ scale: 1.05, x: 5 }} whileTap={{ scale: 0.95 }}>
+                                    <button className="px-10 py-5 bg-[#EB010C] text-white font-black text-xs uppercase tracking-widest shadow-xl shadow-red-500/10 flex items-center gap-3">
+                                        Support The Vision
+                                        <ArrowRight size={16} />
+                                    </button>
+                                </motion.div>
+                            </Link>
+                            <Link to="/register">
+                                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                    <button className="px-10 py-5 bg-slate-900 text-white font-black text-xs uppercase tracking-widest flex items-center gap-3">
+                                        Join The Movement
+                                        <ArrowRight size={16} className="text-[#EB010C]" />
+                                    </button>
+                                </motion.div>
+                            </Link>
+                        </div>
+                    </div>
+                </ScrollReveal>
             </div>
         </div>
     );
@@ -1198,11 +1237,14 @@ const Index = () => {
 const Home = () => {
     return (
         <div className="min-h-screen">
-            <UnitedAfricaHero />
-            {/* Hero Section with Curved 3D Slider */}
-            <section className="relative">
-                <Curved3DCarousel />
-            </section>
+            <div className="relative">
+                <FallingStars />
+                <UnitedAfricaHero />
+                {/* Hero Section with Curved 3D Slider */}
+                <section className="relative">
+                    <Curved3DCarousel />
+                </section>
+            </div>
             <Index />
             <Newsletter />
 
