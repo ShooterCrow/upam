@@ -1,211 +1,77 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
-const globalExecutive = [
-    {
-        id: 1,
-        name: "Benedicto Mbango",
-        title: "Global President (UPAM)",
-        image: "/pics/Frame 37613.png"
-    },
-    {
-        id: 2,
-        name: "Priscilla Tsongavain",
-        title: "Vice President (UPAM)",
-        image: "/pics/priscilla.jpg"
-    },
-    {
-        id: 3,
-        name: "Petrina Nghipondilo Shilindi",
-        title: "Global Executive Administrator II",
-        image: "/pics/petrina.png"
-    },
-    {
-        id: 4,
-        name: "Akpor Emmanuel Terfa",
-        title: "Global Secretary General",
-        image: "/pics/terfa.png"
-    },
-    {
-        id: 5,
-        name: "Augustine Nyakatoma",
-        title: "Speaker of National Representative",
-        image: "/pics/nyakatoma.png"
-    },
-    {
-        id: 6,
-        name: "Prof. Njoroge Gitomeh",
-        title: "Global Secretary of Finance",
-        image: "/pics/prof-njoroge.jpeg"
-    },
-    {
-        id: 7,
-        name: "Dr Venetta Mwengella",
-        title: "Global Secretary of Health",
-        image: "/pics/venetta.png"
-    },
-    {
-        id: 8,
-        name: "Hon. Lorraine Malekanya",
-        title: "Global Secretary of Legal Affairs",
-        image: "/pics/lorraine.png"
-    },
-    {
-        id: 17,
-        name: "Mr. Standa Sani",
-        title: "Legal Affairs",
-        image: "/pics/standa.jpeg"
-    },
-    {
-        id: 9,
-        name: "Mrs. Muthoni Mwangi",
-        title: "Global Secretary of Partnership and Networking",
-        image: "/pics/minga.png"
-    },
-    {
-        id: 10,
-        name: "Miheret Gemida",
-        title: "Global Secretary of Business and Enterprises",
-        image: "/pics/mihiret.png"
-    },
-    {
-        id: 11,
-        name: "Dr Huwayda Mohamed Ali",
-        title: "Global Adviser",
-        image: "/pics/huwayda.png"
-    },
-    {
-        id: 12,
-        name: "Pius Ntitya",
-        title: "Global Secretary of Climate Change and Environmental Protection",
-        image: "/pics/pius.png"
-    },
-    {
-        id: 13,
-        name: "Abdulhamid Idris Yusuf",
-        title: "Global Secretary of ICT",
-        image: "/images/leadership/abdulhamid-yusuf.jpg"
-    },
-    {
-        id: 14,
-        name: "Prisca Iweobi",
-        title: "Global Secretary of Media and Communications",
-        image: "/pics/prisca.png"
-    },
-    {
-        id: 15,
-        name: "Dr Titus Orngu",
-        title: "Global Secretary of Women Children and Youth",
-        image: "/pics/titus.png"
-    },
-    {
-        id: 16,
-        name: "Nagh Anwi Awa",
-        title: "Global Secretary of Agriculture",
-        image: "/pics/Anwi.jpeg"
-    }
-];
+import { globalExecutive, nationalRepresentatives, directors } from '../../constants/leaders';
+import ScrollReveal from '../../components/ScrollReveal';
+import { Users, Globe, Building2, ArrowRight } from 'lucide-react';
 
-const nationalRepresentatives = [
-    {
-        id: 17,
-        name: "Rachel Eleojo Sunday",
-        title: "National Representative Nigeria",
-        image: "/images/leadership/rachel-sunday.jpg"
-    },
-    {
-        id: 17,
-        name: "Kettie Mchekeni",
-        title: "National Representative Malawi",
-        image: "/images/leadership/kettie-mchekeni.jpg"
-    },
-    {
-        id: 18,
-        name: "Frank Minga",
-        title: "National Representative Tanzania",
-        image: "/pics/minga.png"
-    }
-];
-
-const directors = [
-    {
-        id: 19,
-        name: "Benedicto Mbango",
-        title: "Director of UPAM Holdings",
-        image: "/pics/Frame 37613.png"
-    },
-    {
-        id: 20,
-        name: "Hon. Lorraine Malekanya",
-        title: "Secretary of UPAM Holdings",
-        image: "/pics/lorraine.png"
-    },
-    {
-        id: 21,
-        name: "Prof. Njoroge Gitomeh",
-        title: "Finance Officer",
-        image: "/pics/prof-njoroge.jpeg"
-    },
-    {
-        id: 22,
-        name: "Dr Venesta Mwengella",
-        title: "Treasurer",
-        image: "/pics/venetta.png"
-    },
-    {
-        id: 23,
-        name: "Rachel Eleojo Sunday",
-        title: "Director of UPAM Academy",
-        image: "/images/leadership/rachel-sunday.jpg"
-    }
-];
-
+const imageRevealVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    visible: (i) => ({
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: {
+            delay: i * 0.1,
+            duration: 0.8,
+            ease: [0.21, 1.11, 0.81, 0.99]
+        }
+    })
+};
 
 function ProfileCard({ profile }) {
     return (
-        <div className="flex flex-col gap-3">
-            <div className="w-full aspect-[4/5] bg-gray-200 overflow-hidden">
-                <img
-                    src={profile.image}
-                    alt={profile.name}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "/images/default-avatar.jpg";
-                    }}
-                />
+        <ScrollReveal direction="up">
+            <div className="group flex flex-col gap-4">
+                <div className="relative w-full aspect-[3/4] bg-slate-100 overflow-hidden shadow-sm">
+                    <img
+                        src={profile.image}
+                        alt={profile.name}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "/images/default-avatar.jpg";
+                        }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute bottom-0 left-0 w-1 h-0 bg-[#EB010C] group-hover:h-full transition-all duration-500" />
+                </div>
+                <div className="space-y-1">
+                    <h3 className="text-slate-900 font-black text-sm uppercase tracking-tight" translate="no">
+                        {profile.name}
+                    </h3>
+                    <p className="text-[#EB010C] font-bold text-[10px] uppercase tracking-widest">
+                        {profile.title}
+                    </p>
+                </div>
             </div>
-            <div>
-                <h3 className="text-black font-normal text-sm leading-[139%] tracking-[0.28px]" translate="no">
-                    {profile.name}
-                </h3>
-                <p className="text-[#666] font-normal text-sm leading-[139%] tracking-[0.28px] mt-1">
-                    {profile.title}
-                </p>
-            </div>
-        </div>
+        </ScrollReveal>
     );
 }
 
-function Section({ title, subtitle, profiles, description }) {
+function Section({ title, subtitle, profiles, description, icon: Icon }) {
     return (
-        <section className="mb-16 md:mb-20">
-            <div className="mb-8 md:mb-10">
-                {subtitle && (
-                    <p className="text-black text-base leading-[139%] tracking-[0.32px] mb-3">
-                        {subtitle}
-                    </p>
-                )}
-                <h2 className="text-black text-[32px] font-semibold leading-[139%] tracking-[0.64px] mb-3">
-                    {title}
-                </h2>
-                {description && (
-                    <p className="text-[#666] text-base leading-[139%] tracking-[0.32px] max-w-[637px]">
-                        {description}
-                    </p>
-                )}
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10">
+        <section className="mb-24 md:mb-32">
+            <ScrollReveal direction="left">
+                <div className="mb-12 md:mb-16 max-w-3xl">
+                    <div className="flex items-center gap-3 mb-4">
+                        {Icon && <Icon className="w-5 h-5 text-[#EB010C]" />}
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#EB010C]/60 italic">
+                            {subtitle || "Administrative"}
+                        </span>
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-6 uppercase tracking-tight">
+                        {title}
+                    </h2>
+                    {description && (
+                        <p className="text-base text-slate-600 leading-relaxed font-medium border-l-2 border-slate-100 pl-6">
+                            {description}
+                        </p>
+                    )}
+                </div>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-6 gap-y-12">
                 {profiles.map((profile, index) => (
                     <ProfileCard key={`${title}-${index}`} profile={profile} />
                 ))}
@@ -215,61 +81,65 @@ function Section({ title, subtitle, profiles, description }) {
 }
 
 const Leadership = () => {
-    const auth = useAuth()
-    console.log(auth)
-    return (
-        <div className="min-h-screen bg-white">
-            <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 pb-12 md:pb-16 lg:pb-20">
-                {/* Page Header */}
-                <div className="mb-12 md:mb-16">
-                    <h1 className="text-black text-4xl md:text-5xl font-bold leading-[139%] tracking-[0.8px] mb-4">
-                        Our Leadership Team
-                    </h1>
-                    <p className="text-[#666] text-lg leading-[139%] tracking-[0.36px] max-w-3xl">
-                        Meet the dedicated leaders who guide UPAM's vision and drive our mission forward through their expertise and commitment.
-                    </p>
-                </div>
+    // Get a subset of images for the hero grid
+    const heroImages = [...globalExecutive].slice(0, 4).map(p => p.image);
 
+    return (
+        <div className="bg-[#FAFAFC] text-slate-900 font-['Inter',_sans-serif] pt-[90px] lg:pt-[110px] overflow-x-hidden">
+            {/* Hero Section */}
+            <div className="relative bg-gradient-to-br from-[#FAFAFC] to-[#F3F4F6] pt-10 pb-10 px-4 md:px-8 border-b border-gray-100 overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(235,1,12,0.03),transparent_50%)] pointer-events-none" />
+                <div className="absolute -right-20 -top-20 w-80 h-80 bg-[#EB010C]/5 blur-3xl pointer-events-none" />
+
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <ScrollReveal direction="up">
+                        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 lg:gap-12 w-full">
+                            <div className="flex flex-col gap-4 flex-1 max-w-7xl">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-bold w-fit uppercase tracking-widest border-l-2 border-[#EB010C]">
+                                    Leadership
+                                </div>
+                                <h1 className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tight leading-[1.05] text-slate-900 uppercase">
+                                    Our Leadership Team.
+                                </h1>
+                                <p className="text-base text-slate-600 leading-relaxed font-medium">
+                                    Meet the dedicated leaders who guide UPAM's vision and drive our mission forward through their expertise and commitment.
+                                </p>
+                            </div>
+                        </div>
+                    </ScrollReveal>
+                </div>
+            </div>
+
+            <main className="max-w-7xl mx-auto py-12 px-6">
                 {/* Global Executive Section */}
                 <Section
-                    title="Global Executive"
-                    subtitle="Leadership"
+                    title="Global Executives"
+                    subtitle="Visionary Board"
+                    icon={Globe}
                     profiles={globalExecutive}
-                    description="UPAM thrives through committed leaders, dedicated volunteers, and strategic partners."
+                    description="Our Global Executive team brings together experts from across the continent to spearhead initiatives in education, health, and economic sovereignty."
                 />
 
                 {/* National Representatives Section */}
                 <Section
                     title="National Representatives"
+                    subtitle="Regional Impact"
+                    icon={Users}
                     profiles={nationalRepresentatives}
+                    description="Bridging the gap between continental vision and local action, our representatives ensure every program is tailored to the needs of individual nations."
                 />
 
                 {/* Directors Section */}
                 <Section
                     title="Directors"
+                    subtitle="Strategic Oversight"
+                    icon={Building2}
                     profiles={directors}
+                    description="Oversight and financial governance to ensure long-term stability and impact."
                 />
-
-                {/* Join Our Team CTA */}
-                <div className="mt-20 pt-10 border-t border-gray-200">
-                    <div className="text-center max-w-2xl mx-auto">
-                        <h3 className="text-black text-2xl font-semibold leading-[139%] tracking-[0.48px] mb-4">
-                            Want to Join Our Team?
-                        </h3>
-                        <p className="text-[#666] text-base leading-[139%] tracking-[0.32px] mb-6">
-                            We're always looking for passionate individuals to help drive our mission forward.
-                        </p>
-                        <Link
-                            to="/contact-us"
-                            className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors duration-200"
-                        >
-                            Get in Touch
-                        </Link>
-                    </div>
-                </div>
-            </div>
+            </main>
         </div>
     );
 }
 
-export default Leadership
+export default Leadership;

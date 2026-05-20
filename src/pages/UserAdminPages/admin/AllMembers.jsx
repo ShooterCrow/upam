@@ -187,7 +187,7 @@ const AllMembers = () => {
                                             </span>
                                         ) : (
                                             <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-red-50 text-red-600 rounded-md text-[10px] font-black uppercase tracking-wider border border-red-100">
-                                                 Pending
+                                                Pending
                                             </span>
                                         )}
                                     </td>

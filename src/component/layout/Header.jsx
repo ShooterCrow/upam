@@ -9,12 +9,8 @@ import useMediaQuery from '../../hooks/useMediaQuery';
 import { PUBLIC_LINKS, USER_LINKS, USER_BOTTOM_LINKS } from '../../constants/navigation';
 import { useGetMeQuery } from '../../pages/platform/usersApiSlice';
 
-// Mock user data - in real app, this would come from your auth context/store
-const mockUser = {
-    name: "Victor Onyekwere",
-    id: "20-1175",
-    avatar: null // Could be an image URL
-};
+
+import { motion } from 'framer-motion';
 
 const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -69,15 +65,46 @@ const Header = () => {
     };
 
     return (
-        <div ref={headerRef} className="fixed top-0 left-0 w-full z-[100]">
+        <div ref={headerRef} className="fixed top-0 left-0 w-full z-[100] transition-all duration-300">
+            {/* Background Colorful Blur Blobs */}
+            <div className="absolute inset-x-0 top-0 h-18 lg:h-24 overflow-hidden pointer-events-none z-[-1]">
+                <motion.div
+                    animate={{
+                        x: [0, 50, 0],
+                        y: [-10, 10, -10],
+                        scale: [1, 1.1, 1]
+                    }}
+                    transition={{
+                        duration: 10,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                    }}
+                    className="absolute -left-10 -top-10 w-64 h-64 bg-[#EB010C]/10 blur-[80px] rounded-full"
+                />
+                <motion.div
+                    animate={{
+                        x: [0, -40, 0],
+                        y: [10, -10, 10],
+                        scale: [1, 1.2, 1]
+                    }}
+                    transition={{
+                        duration: 12,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 1
+                    }}
+                    className="absolute right-0 -top-20 w-80 h-80 bg-blue-400/5 blur-[100px] rounded-full"
+                />
+            </div>
+
             {/* Desktop Header */}
-            <header className="hidden lg:block bg-gray-200 shadow-sm mb-0">
+            <header className="hidden lg:block bg-white/70 backdrop-blur-xl border-b border-gray-100/50 shadow-sm transition-all duration-300">
                 <div className="max-w-7xl mx-auto px-6 py-4">
                     <div className="flex items-center justify-between">
                         {/* Logo */}
                         <div className="flex items-center">
-                            <Link to="/" translate="no">
-                                <img src="/logoupam.png" alt="UPAM Logo" />
+                            <Link to="/" translate="no" className="hover:opacity-80 transition-opacity">
+                                <img src="/logoupam.png" alt="UPAM Logo" className="h-10 w-auto" />
                             </Link>
                         </div>
 
@@ -87,46 +114,76 @@ const Header = () => {
                             {isDesktop && <GoogleTranslate />}
                             {
                                 isLoggedIn ? <ProfileBox show={true} profilePicture={profileData?.data?.image?.url} /> :
-                                    <Link to="/register" className="border-2 border-gray-800 px-4 py-2 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors">
-                                        Register/Login
-                                    </Link>
+                                    <div className="relative">
+                                        <button
+                                            onClick={() => toggleDropdown('auth')}
+                                            className="px-6 py-2.5 text-[11px] font-black uppercase tracking-[0.2em] border-2 border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white transition-all duration-300 flex items-center gap-3 group"
+                                        >
+                                            Register/Login
+                                            <ChevronDown size={14} className={`transition-transform duration-300 ${openDropdown === 'auth' ? 'rotate-180' : ''}`} />
+                                        </button>
+
+                                        {/* Auth Dropdown */}
+                                        <div
+                                            className={`absolute top-full right-0 mt-3 w-48 bg-white/90 backdrop-blur-md border border-gray-100 shadow-2xl py-2 z-[110] transition-all duration-300 ease-out transform origin-top-right ${openDropdown === 'auth'
+                                                ? 'opacity-100 translate-y-0 scale-100'
+                                                : 'opacity-0 -translate-y-4 scale-95 invisible'
+                                                }`}
+                                        >
+                                            <Link
+                                                to="/login"
+                                                className="block px-5 py-3 text-xs font-black uppercase tracking-widest text-slate-600 hover:bg-slate-50 hover:text-[#EB010C] transition-all"
+                                                onClick={() => setOpenDropdown(null)}
+                                            >
+                                                Login
+                                            </Link>
+                                            <Link
+                                                to="/register"
+                                                className="block px-5 py-3 text-xs font-black uppercase tracking-widest text-slate-600 hover:bg-slate-50 hover:text-[#EB010C] transition-all"
+                                                onClick={() => setOpenDropdown(null)}
+                                            >
+                                                Register
+                                            </Link>
+                                        </div>
+                                    </div>
                             }
                         </div>
 
                     </div>
 
                     {/* Desktop Navigation */}
-                    <nav className="flex items-center space-x-8 pt-5 w-full justify-center">
+                    <nav className="flex items-center space-x-10 pt-5 w-full justify-center">
                         {navigationLinks.map((link) => {
                             const active = link.hasDropdown ? isDropdownActive(link.children) : isActiveLink(link.path);
 
                             return (
                                 <div
                                     key={link.name}
-                                    className="relative group"
+                                    className="relative"
                                     onMouseEnter={() => link.hasDropdown && setOpenDropdown(link.name)}
                                     onMouseLeave={() => link.hasDropdown && setOpenDropdown(null)}
                                 >
                                     {link.hasDropdown ? (
                                         <>
                                             <button
-                                                className={`transition-colors text-sm font-medium flex items-center gap-1 ${active || openDropdown === link.name ? 'text-red-600' : 'text-gray-800 hover:text-red-600'}`}
+                                                className={`transition-all text-[11px] font-black uppercase tracking-[0.2em] flex items-center gap-1.5 focus:outline-none ${active || openDropdown === link.name ? 'text-[#EB010C]' : 'text-slate-500 hover:text-slate-900'}`}
                                             >
                                                 {link.name}
-                                                <ChevronDown size={16} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
+                                                <ChevronDown size={14} className={`transition-transform duration-300 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
                                             </button>
                                             {/* Dropdown Menu */}
                                             <div
-                                                className={`absolute top-full left-0 mt-2 w-48 bg-white border border-gray-100 shadow-lg rounded-md py-2 z-50 transition-all duration-300 ease-in-out transform origin-top ${openDropdown === link.name
-                                                    ? 'opacity-100 translate-y-0 visible'
-                                                    : 'opacity-0 -translate-y-2 invisible'
+                                                className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-white/95 backdrop-blur-md border border-gray-100 shadow-2xl py-3 z-50 transition-all duration-300 ease-out transform origin-top ${openDropdown === link.name
+                                                    ? 'opacity-100 translate-y-0 scale-100 visible'
+                                                    : 'opacity-0 -translate-y-4 scale-95 invisible'
                                                     }`}
                                             >
+                                                <div className="absolute top-0 left-0 w-full h-1 bg-[#EB010C]" />
                                                 {link.children.map((child) => (
                                                     <Link
                                                         key={child.name}
                                                         to={child.path}
-                                                        className={`block px-4 py-2 text-sm transition-colors ${isActiveLink(child.path) ? 'text-red-600 bg-gray-50' : 'text-gray-700 hover:bg-gray-50 hover:text-red-600'}`}
+                                                        className={`block px-6 py-3 text-[10px] font-black uppercase tracking-[0.1em] transition-all ${isActiveLink(child.path) ? 'text-[#EB010C] bg-slate-50' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'}`}
                                                         onClick={() => setOpenDropdown(null)}
                                                     >
                                                         {child.name}
@@ -139,10 +196,10 @@ const Header = () => {
                                             to={link.path}
                                             target={link.isExternal ? "_blank" : undefined}
                                             rel={link.isExternal ? "noopener noreferrer" : undefined}
-                                            className={`transition-colors text-sm font-medium flex items-center gap-1.5 ${active ? 'text-red-600' : 'text-gray-800 hover:text-red-600'}`}
+                                            className={`transition-all text-[11px] font-black uppercase tracking-[0.2em] flex items-center gap-1.5 ${active ? 'text-[#EB010C]' : 'text-slate-500 hover:text-slate-900 group'}`}
                                         >
                                             {link.name}
-                                            {link.isExternal && <ExternalLink size={14} className="ml-0.5" />}
+                                            {link.isExternal && <ExternalLink size={14} className="opacity-40 group-hover:opacity-100 transition-opacity" />}
                                         </Link>
                                     )}
                                 </div>
@@ -152,13 +209,19 @@ const Header = () => {
                 </div>
             </header>
 
+
             {/* Mobile Header */}
-            <header className="lg:hidden bg-gray-200 shadow-sm">
+            <header className="lg:hidden bg-white/80 backdrop-blur-lg border-b border-gray-100 shadow-sm relative overflow-hidden">
+                {/* Mobile Background Blob */}
+                <div className="absolute inset-0 pointer-events-none z-[-1]">
+                    <div className="absolute -left-10 -top-10 w-32 h-32 bg-[#EB010C]/5 blur-2xl rounded-full" />
+                </div>
+
                 <div className="flex items-center justify-between px-4 py-4">
                     <div className="flex items-center gap-2">
                         <div>
-                            <Link to="/" translate="no">
-                                <img src="/logoupam.png" alt="UPAM Logo" />
+                            <Link to="/" translate="no" className="hover:opacity-80 transition-opacity">
+                                <img src="/logoupam.png" alt="UPAM Logo" className="h-8 w-auto" />
                             </Link>
                         </div>
                     </div>
@@ -166,7 +229,7 @@ const Header = () => {
                         {!isDesktop && <GoogleTranslate />}
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="p-2"
+                            className="p-2 text-slate-900 hover:text-[#EB010C] transition-colors"
                         >
                             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
@@ -176,8 +239,8 @@ const Header = () => {
 
             {/* Mobile Menu */}
             {isMobileMenuOpen && (
-                <div className="lg:hidden fixed inset-0 bg-white z-50 overflow-y-auto">
-                    <div className="flex items-center justify-between px-4 py-4 bg-gray-200">
+                <div className="lg:hidden fixed inset-0 bg-white/95 backdrop-blur-xl z-[150] overflow-y-auto animate-in fade-in duration-300">
+                    <div className="flex items-center justify-between px-4 py-4 bg-white/50 border-b border-gray-100">
                         <div className="flex items-center gap-2">
                             <div>
                                 <Link to="/" onClick={() => setIsMobileMenuOpen(false)} translate="no">
@@ -185,10 +248,11 @@ const Header = () => {
                                 </Link>
                             </div>
                         </div>
-                        <button onClick={() => setIsMobileMenuOpen(false)} className="p-2">
+                        <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-slate-900">
                             <X size={24} />
                         </button>
                     </div>
+
 
                     <div className="px-4 py-6">
                         {/* User Profile Section - Only show if logged in */}
@@ -346,10 +410,25 @@ const Header = () => {
                                             </div>
                                         );
                                     })}
-                                    <div className="px-4 mt-6">
-                                        <Link to="/register" className="block w-full text-center border-2 border-gray-800 px-6 py-3 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <div className="px-4 mt-6 space-y-3">
+                                        <button
+                                            onClick={() => toggleDropdown('auth-mobile')}
+                                            className="w-full text-center border-2 border-gray-800 px-6 py-3 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors flex items-center justify-center gap-2"
+                                        >
                                             Register / Login
-                                        </Link>
+                                            <ChevronDown size={18} className={`transition-transform duration-200 ${openDropdown === 'auth-mobile' ? 'rotate-180' : ''}`} />
+                                        </button>
+
+                                        {openDropdown === 'auth-mobile' && (
+                                            <div className="space-y-2 animate-in slide-in-from-top-1 duration-200">
+                                                <Link to="/login" className="block w-full text-center bg-gray-100 px-6 py-3 text-sm font-semibold text-gray-800 rounded-md" onClick={() => setIsMobileMenuOpen(false)}>
+                                                    Login
+                                                </Link>
+                                                <Link to="/register" className="block w-full text-center bg-gray-100 px-6 py-3 text-sm font-semibold text-gray-800 rounded-md" onClick={() => setIsMobileMenuOpen(false)}>
+                                                    Register
+                                                </Link>
+                                            </div>
+                                        )}
                                     </div>
                                 </>
                             )}

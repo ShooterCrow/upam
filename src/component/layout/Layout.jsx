@@ -7,7 +7,7 @@ import useScrollRestoration from '../../hooks/useScrollRestoration'
 const Layout = () => {
     const { pathname } = useLocation()
     useScrollRestoration()
-    const noPaddingComponents = ["/register", "/login", "/verify-email", "/reset-password"]
+    const noPaddingComponents = ["/register", "/login", "/verify-email", "/reset-password", "/donation", "/about", "/leadership"]
     const isEventsPage = pathname.startsWith('/events')
 
     return (

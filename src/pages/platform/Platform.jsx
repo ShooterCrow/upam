@@ -27,14 +27,14 @@ const Platform = () => {
         {
             name: "UPAM",
             description: "Discover, promote, and participate in upcoming Pan-African events and conferences.",
-            link: "/events",
-            external: false,
+            link: "https://upamevents.com/",
+            external: true,
             logo: upamEventsLogo
         },
         {
             name: "UPAM Academy",
             description: "Educational resources, leadership training, and skill development for Africans.",
-            link: "https://academy.upam.org/",
+            link: "https://www.upamschools.africa/",
             external: true,
             logo: academyLogo
         }

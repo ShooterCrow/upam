@@ -3,26 +3,11 @@ import { Download, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Publications() {
-    const [activeTab, setActiveTab] = useState('reports');
+    const [activeTab, setActiveTab] = useState('articles');
 
     const reports = [
         {
             id: 1,
-            title: "UPAM Annual Report 2025",
-            description: "An overview of UPAM's youth engagement programs, leadership training outcomes, and community impact across Africa and the diaspora"
-        },
-        {
-            id: 2,
-            title: "UPAM Annual Report 2025",
-            description: "An overview of UPAM's youth engagement programs, leadership training outcomes, and community impact across Africa and the diaspora"
-        },
-        {
-            id: 3,
-            title: "UPAM Annual Report 2025",
-            description: "An overview of UPAM's youth engagement programs, leadership training outcomes, and community impact across Africa and the diaspora"
-        },
-        {
-            id: 4,
             title: "UPAM Annual Report 2025",
             description: "An overview of UPAM's youth engagement programs, leadership training outcomes, and community impact across Africa and the diaspora"
         }
@@ -30,7 +15,7 @@ export default function Publications() {
 
     const articles = [
         {
-            image: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&q=80",
+            image: "https://res.cloudinary.com/dyy6gisnk/image/upload/c645d8992aef0ef8111a956b8c6c5ab794d951f5_l3dnts.jpg",
             slug: "panafrican-unity",
             title: "Pan-African Unity in the 21st Century: From Ideology to Institutional Action",
             description: "Pan-Africanism has historically served as both an ideological framework and a political movement aimed at the liberation, unity, and advancement of African peoples globally."
@@ -43,25 +28,25 @@ export default function Publications() {
         },
         {
             image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80",
-            slug: "",
+            slug: "african-economic-ecosystem",
             title: "Building an African Economic Ecosystem Owned by Africans",
             description: "Africa's economic structure have long been shaped by external ownership and extractive models that limit local value creation. Building an African-owned economic ecosystem requires reimagining production, trade, finance, and entrepreneurship in ways that prioritize African control and benefit."
         },
         {
             image: "https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=800&q=80",
-            slug: "",
+            slug: "colonial-boundaries",
             title: "One People, Many Borders: How Colonial Boundaries Continue to Shape African Disunity",
             description: "The artificial borders imposed during colonial rule fragmented African societies, cultures, and economies, creating divisions that persist today. These boundaries disrupted pre-existing systems of cooperation and continue to influence political instability, ethnic tension, and weak regional integration."
         },
         {
             image: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=800&q=80",
-            slug: "",
+            slug: "african-self-reliance",
             title: "African Self-Reliance: Moving Beyond Aid to Sustainable Development",
             description: "Foreign aid has played a role in addressing humanitarian crises in Africa, but long-term reliance on aid has often undermined local capacity, accountability, and innovation. African self-reliance emphasizes development strategies driven by local knowledge, resources, and institutions."
         },
         {
             image: "https://images.unsplash.com/photo-1511376777868-611b54f68947?w=800&q=80",
-            slug: "",
+            slug: "healing-historical-divides",
             title: "Healing Historical Divides: Slavery, Colonialism, and the Path to Collective Renewal",
             description: "The legacies of slavery and colonialism have left deep psychological, social, and economic scars across Africa and the African diaspora. These histories foster mistrust, fragmentation, and internalized narratives that weaken collective progress."
         }
@@ -86,15 +71,6 @@ export default function Publications() {
                             </p>
                             <div className="flex flex-wrap gap-4">
                                 <button
-                                    onClick={() => setActiveTab('reports')}
-                                    className={`px-6 py-3 font-medium transition-colors ${activeTab === 'reports'
-                                        ? 'bg-red-600 text-white hover:bg-red-700'
-                                        : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-50'
-                                        }`}
-                                >
-                                    Reports
-                                </button>
-                                <button
                                     onClick={() => setActiveTab('articles')}
                                     className={`px-6 py-3 font-medium transition-colors ${activeTab === 'articles'
                                         ? 'bg-red-600 text-white hover:bg-red-700'
@@ -102,6 +78,15 @@ export default function Publications() {
                                         }`}
                                 >
                                     Articles/Research
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('reports')}
+                                    className={`px-6 py-3 font-medium transition-colors ${activeTab === 'reports'
+                                        ? 'bg-red-600 text-white hover:bg-red-700'
+                                        : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-50'
+                                        }`}
+                                >
+                                    Reports
                                 </button>
                             </div>
                         </div>
@@ -213,7 +198,7 @@ export default function Publications() {
                         {articles.map((article, index) => (
                             <div
                                 key={index}
-                                className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden flex flex-col"
+                                className="bg-white shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden flex flex-col"
                             >
                                 <div className="relative h-48 overflow-hidden">
                                     <img

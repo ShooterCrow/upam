@@ -3,7 +3,10 @@ import { apiSlice } from "../../../app/api/apiSlice";
 export const calendarApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getEvents: builder.query({
-      query: () => "/events",
+      query: (params) => ({
+        url: "/events",
+        params: params,
+      }),
       providesTags: ["Events"],
     }),
     createEvent: builder.mutation({

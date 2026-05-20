@@ -1,22 +1,43 @@
-import React from 'react'
+import React from 'react';
+import { motion } from 'framer-motion';
+import {
+    Users,
+    Target,
+    Eye,
+    Shield,
+    Zap,
+    Activity,
+    Globe,
+    ArrowRight,
+    ChevronRight,
+    Play,
+    CheckCircle2
+} from 'lucide-react';
+import ScrollReveal from '../../components/ScrollReveal';
+import WorldMapWithMarkers from '../../component/ui/WorldMapWithMarkers';
+import { Link } from 'react-router-dom';
 
 const About = () => {
     const projects = [
         {
             title: "Clean energy with the Sudan National Energy Research Center",
-            description: "Powering a brighter future for Sudan! UPAM is proud to partner with the Sudan National Energy Research Center on a groundbreaking clean energy project."
+            description: "Powering a brighter future for Sudan! UPAM is proud to partner with the Sudan National Energy Research Center on a groundbreaking clean energy project.",
+            icon: <Zap className="w-6 h-6 text-[#EB010C]" />
         },
         {
             title: "UPAM Finance to Support Vulnerable Communities",
-            description: "Making a difference, one community at a time. UPAM Finance is stepping up to support vulnerable communities with financial inclusion initiatives"
+            description: "Making a difference, one community at a time. UPAM Finance is stepping up to support vulnerable communities with financial inclusion initiatives",
+            icon: <Activity className="w-6 h-6 text-[#EB010C]" />
         },
         {
             title: "Health Program Across Africa",
-            description: "Healthy lives, brighter futures UPAM is rolling out health programs across Africa, touching lives and building stronger communities."
+            description: "Healthy lives, brighter futures UPAM is rolling out health programs across Africa, touching lives and building stronger communities.",
+            icon: <Shield className="w-6 h-6 text-[#EB010C]" />
         },
         {
             title: "UPAM Schools/Academy to Prepare Skilled Professionals for Today's Job Market",
-            description: "Empowering the next-gen workforce, UPAM Schools/Academy is equipping students with in-demand skills to thrive in today's job market. Future-ready professionals, rising from Africa"
+            description: "Empowering the next-gen workforce, UPAM Schools/Academy is equipping students with in-demand skills to thrive in today's job market. Future-ready professionals, rising from Africa",
+            icon: <Users className="w-6 h-6 text-[#EB010C]" />
         }
     ];
 
@@ -24,337 +45,397 @@ const About = () => {
         {
             title: "Board of trustees",
             description: "Provides strategic direction and oversees UPAM's global mission.",
-            link: "#"
+            icon: <Shield className="w-5 h-5" />
         },
         {
             title: "Global Executives",
             description: "Focused on education, community outreach, innovation, partnerships, and media.",
-            link: "#"
+            icon: <Globe className="w-5 h-5" />
         },
         {
             title: "National Executives",
             description: "Active teams across African countries driving local programs and initiatives.",
-            link: "#"
+            icon: <Activity className="w-5 h-5" />
         },
         {
             title: "Members",
             description: "The heartbeat of UPAM — everyday Africans working together to build a stronger continent.",
-            link: "#"
+            icon: <Users className="w-5 h-5" />
         }
     ];
 
+    const imageRevealVariants = {
+        hidden: { opacity: 0, scale: 0.8, rotate: -5, y: 50 },
+        visible: (i) => ({
+            opacity: 1,
+            scale: 1,
+            rotate: 0,
+            y: 0,
+            transition: {
+                type: "spring",
+                damping: 12,
+                stiffness: 100,
+                delay: i * 0.15,
+                duration: 0.8
+            }
+        })
+    };
+
     return (
-        <main className="w-full">
+        <div className="bg-[#FAFAFC] text-slate-900 font-['Inter',_sans-serif] overflow-x-hidden pt-[72px] lg:pt-[100px]">
             {/* Hero Section */}
-            <section className="w-full max-w-7xl mx-auto px-6 lg:px-12">
-                <div className="flex flex-col items-center gap-12 lg:gap-20">
-                    {/* Header Text */}
-                    <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 lg:gap-12 w-full">
-                        <div className="flex flex-col gap-2 flex-1 max-w-[573px]">
-                            <p className="text-base text-foreground tracking-wide">About Us</p>
-                            <h1 className="text-[28px] lg:text-[32px] font-semibold leading-[1.39] tracking-wide text-foreground">
-                                Uniting Africa. Empowering People.
-                            </h1>
-                            <p className="text-sm text-neutral leading-[1.56] tracking-wide">
-                                This call invites every African, at home and in the diaspora, to embrace a future where our combined strength becomes the foundation for lasting development.
-                            </p>
-                        </div>
-                        <div className="text-sm text-neutral leading-[1.56] tracking-wide max-w-[340px]">
-                            <p>
-                                1. Blessed Mukonka, University of Lusaka-Zambia
-                                2. Emmanuel Kpan, University of Monrovia-Liberia
-                                3. Lord Malvin Harare- Zimbabwe
-                            </p>
-                        </div>
-                    </div>
+            <div className="relative bg-gradient-to-br from-[#FAFAFC] to-[#F3F4F6] pt-24 pb-20 px-4 md:px-8 border-b border-gray-100 overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(235,1,12,0.03),transparent_50%)] pointer-events-none" />
+                <div className="absolute -right-20 -top-20 w-80 h-80 bg-[#EB010C]/5 blur-3xl pointer-events-none" />
 
-                    {/* Image Grid */}
-                    <div className="flex flex-row justify-between items-center gap-2 sm:gap-4 lg:gap-8 w-full">
-                        {/* Left Group */}
-                        <div className="flex flex-row items-center gap-0 flex-[1.33]">
-                            <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/7fe6a4a6f31d3a5de91463aff776e511431d8ec3?width=520"
-                                alt="UPAM team meeting"
-                                className="w-[31.6%] h-auto object-cover"
-                            />
-                            <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf?width=1126"
-                                alt="UPAM conference"
-                                className="w-[68.4%] h-auto object-cover"
-                            />
-                        </div>
-
-                        {/* Right Group */}
-                        <div className="flex flex-row items-center gap-0 flex-1">
-                            <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/0939de8e4e557c4e75f688148d4757b3f0e275bb?width=520"
-                                alt="Community members"
-                                className="w-[42.1%] h-auto object-cover"
-                            />
-                            <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/65edfbd6618650ee6c39d6d3e581e169f2567595?width=714"
-                                alt="Cultural celebration"
-                                className="w-[57.9%] h-auto object-cover"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* First Executive */}
-            <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-                <div className="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-16">
-                    <div className="flex-1 max-w-3xl">
-                        <p className="text-base text-neutral/80 leading-relaxed">
-                            These young men met on Facebook right at the beginning of the COVID-19 pandemic, when Africa went on shut down leaving 90% of the African population in hunger, students stranded, and schools closed. No hope for young people and so UPAM was created on April 6th, 2020, to build a new Africa for Africans, giving hope to the people of African descent, encouraging, and strengthening bonds of solidarity between all indigenous and diasporas people of African descent. UPAM is guided by the African Union's vision of "an integrated, prosperous, and peaceful Africa, driven by its own citizens and representing a dynamic force in the global arena.
-                        </p>
-                    </div>
-                    <div className="flex flex-col gap-6 max-w-md bg-brand/5 p-8 rounded-xl">
-                        <h2 className="text-2xl lg:text-3xl font-bold tracking-tight text-foreground">
-                            First Executive
-                        </h2>
-                        <div className="space-y-3">
-                            <p className="text-base text-neutral/80">
-                                <span className="font-semibold">Global Chairman:</span> Nelson Mansare (Finland)
-                            </p>
-                            <p className="text-base text-neutral/80">
-                                <span className="font-semibold">Global Vice Chairman:</span> Blessed Mukonka (Zambia)
-                            </p>
-                            <p className="text-base text-neutral/80">
-                                <span className="font-semibold">Global Secretary General:</span> Emmanuel Kpan (Liberia)
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Mission & Vision */}
-            <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12">
-                    <div className="flex flex-col gap-10 max-w-xl">
-                        <div className="space-y-4">
-                            <h2 className="text-2xl lg:text-3xl font-bold text-foreground">Our Mission</h2>
-                            <p className="text-base text-neutral/80 leading-relaxed">
-                                To strengthen bonds of solidarity between all people of African descent, fostering unity and development in Africa; for enhanced independence, industrialization, economic self-reliance as well as promote peace, security and stability within African communities and states.
-                            </p>
-                        </div>
-                        <div className="space-y-4">
-                            <h2 className="text-2xl lg:text-3xl font-bold text-foreground">Our Vision & Values</h2>
-                            <p className="text-base text-neutral/80 leading-relaxed">
-                                A United Africa for sustainable development for all Africans Descent. UPAM is a continental evolution and an all-African organization, seeking to enhance the unification of African nations as a whole and reclaiming its hope for the destined future.
-                            </p>
-                        </div>
-                    </div>
-                    <div className="relative w-full max-w-2xl h-64 md:h-80 lg:h-96 bg-gray-900 rounded-xl overflow-hidden">
-                        <img
-                            src="https://api.builder.io/api/v1/image/assets/TEMP/b3564abd0e1fb1dfb19649f1092e28adc8a02548?width=1310"
-                            alt="Video thumbnail"
-                            className="w-full h-full object-cover"
-                        />
-                        <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-brand rounded-full flex items-center justify-center hover:bg-brand/90 transition-all hover:scale-110">
-                            <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4 3V17L16 10L4 3Z" fill="white" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            {/* Objectives */}
-            <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-                <div className="flex flex-col lg:flex-row justify-between items-center gap-12">
-                    <img
-                        src="https://api.builder.io/api/v1/image/assets/TEMP/494bd64452c17d8f73dc5f162ce9131d86969c3b?width=970"
-                        alt="UPAM team in action"
-                        className="w-full lg:w-1/2 rounded-xl shadow-lg"
-                    />
-                    <div className="space-y-6 max-w-xl">
-                        <h2 className="text-2xl lg:text-3xl font-bold text-foreground">Our Objectives</h2>
-                        <p className="text-base text-neutral/80 leading-relaxed">
-                            UPAM is a continental evolution and an all-African organization, seeking to enhance the unification of African nations as a whole and reclaiming its hope for the destined future. To encourage and strengthen bonds of solidarity between all people of African descent, Foster the development and unity of Africa, to enhanced independence.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            {/* Impacts */}
-            <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-                <div className="flex flex-col lg:flex-row justify-between items-start gap-12">
-                    <div className="flex-1 max-w-2xl">
-                        <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-10">Our Impact / Projects</h2>
-                        <div className="space-y-8">
-                            {projects.map((project, index) => (
-                                <div key={index} className="flex gap-4">
-                                    <div className="flex-shrink-0 mt-2">
-                                        <div className="w-3 h-3 bg-success rounded-full"></div>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <h3 className="text-lg font-semibold text-foreground">{project.title}</h3>
-                                        <p className="text-base text-neutral/80">{project.description}</p>
-                                    </div>
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <ScrollReveal direction="up">
+                        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 lg:gap-12 w-full">
+                            <div className="flex flex-col gap-4 flex-1 max-w-2xl">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-bold w-fit uppercase tracking-widest border-l-2 border-[#EB010C]">
+                                    About Us
                                 </div>
-                            ))}
+                                <h1 className="text-2xl md:text-4xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900 uppercase">
+                                    Uniting Africa.<br /> Empowering People.
+                                </h1>
+                                <p className="text-base text-slate-600 leading-relaxed font-medium">
+                                    This call invites every African, at home and in the diaspora, to embrace a future where our combined strength becomes the foundation for lasting development.
+                                </p>
+                            </div>
+                            <div className="lg:max-w-xs border-l-2 border-[#EB010C]/20 pl-6 py-2">
+                                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Core Leadership</p>
+                                <ul className="space-y-2 text-sm font-black text-slate-800 tracking-tight">
+                                    <li>1. Blessed Mukonka, University of Lusaka-Zambia</li>
+                                    <li>2. Emmanuel Kpan, University of Monrovia-Liberia</li>
+                                    <li>3. Lord Malvin, Harare- Zimbabwe</li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2 w-full lg:w-1/2">
-                        <div className='flex flex-col gap-2'>
-                            <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/299e1480b26e20d4a93c2dae4e9560f6a5f58062?width=312"
-                                alt="Project impact 1"
-                                className="w-full h-35 object-cover rounded-lg"
-                            />
-                            <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/32886d3aafeab31c00dd5c46ff637405d3d29ced?width=312"
-                                alt="Project impact 2"
-                                className="w-full h-35 object-cover rounded-lg"
-                            />
-                            <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/7eea108d6e47b681fd09479390dadef157489196?width=312"
-                                alt="Project impact 3"
-                                className="w-full h-35 object-cover rounded-lg"
-                            />
-                            <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/8e8740269f0348d2dbdac7ec20c3eca4a4b2279d?width=312"
-                                alt="Project impact 4"
-                                className="w-full h-35 object-cover rounded-lg"
-                            />
-                        </div>
-                        <img
-                            src="https://api.builder.io/api/v1/image/assets/TEMP/69e8a713eff97bf06eb064b12e7f33ad52b7b61d?width=634"
-                            alt="Community impact showcase"
-                            className="w-full h-48 md:h-146 object-cover rounded-lg lg:col-span-2 lg:row-span-2"
-                        />
-                    </div>
-                </div>
-            </section>
+                    </ScrollReveal>
 
-            {/* Gallery */}
-            <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-                <div className="space-y-12">
-                    <div className="text-center max-w-3xl mx-auto">
-                        <p className="text-base font-medium text-foreground mb-2">GALLERY</p>
-                        <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">Moments that inspire change</h2>
-                        <p className="text-base text-neutral/80">
-                            Moments of unity, culture, advocacy, and community impact captured across Africa and the diaspora.
-                        </p>
-                    </div>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    {/* Stimulating Image Grid */}
+                    <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                         {[
-                            "https://api.builder.io/api/v1/image/assets/TEMP/b25f74c0c208851c995df3fe41a15ea551fbb960?width=336",
-                            "https://api.builder.io/api/v1/image/assets/TEMP/0ac49176818ab6dbe13202ff503abf2227cb2069?width=560",
-                            "https://api.builder.io/api/v1/image/assets/TEMP/683f693939e917cd3297ff8c6e8af8554e42eae3?width=560",
-                            "https://api.builder.io/api/v1/image/assets/TEMP/1baa487a59315c54db38e9d2509b9139cca12f04?width=560",
-                            "https://api.builder.io/api/v1/image/assets/TEMP/07536e0af663886d7094bb2f428fbad257f117cd?width=560",
-                            "https://api.builder.io/api/v1/image/assets/TEMP/e30f23ba83e18af62762d04d97d7fb23736884ea?width=166",
-                        ].map((src, index) => (
-                            <img
-                                key={index}
-                                src={src}
-                                alt={`Gallery ${index + 1}`}
-                                className="w-full h-48 object-cover rounded-lg"
-                            />
+                            { src: "https://api.builder.io/api/v1/image/assets/TEMP/7fe6a4a6f31d3a5de91463aff776e511431d8ec3?width=520", alt: "meeting", y: 0 },
+                            { src: "https://res.cloudinary.com/dyy6gisnk/image/upload/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png", alt: "conference", y: 20 },
+                            { src: "https://api.builder.io/api/v1/image/assets/TEMP/0939de8e4e557c4e75f688148d4757b3f0e275bb?width=520", alt: "community", y: -20 },
+                            { src: "https://api.builder.io/api/v1/image/assets/TEMP/65edfbd6618650ee6c39d6d3e581e169f2567595?width=714", alt: "celebration", y: 10 }
+                        ].map((img, idx) => (
+                            <motion.div
+                                key={idx}
+                                custom={idx}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                variants={imageRevealVariants}
+                                style={{ translateY: img.y }}
+                                className="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden group shadow-lg"
+                            >
+                                <img
+                                    src={img.src}
+                                    alt={img.alt}
+                                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 group-hover:rotate-1"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            </motion.div>
                         ))}
                     </div>
                 </div>
+            </div>
+
+            {/* Executives Section */}
+            <section className="py-24 px-4 md:px-8 max-w-7xl mx-auto">
+                <div className="grid lg:grid-cols-[1fr_400px] gap-16 items-start">
+                    <ScrollReveal direction="left" className="space-y-8">
+                        <div className="space-y-6">
+                            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight uppercase">
+                                Our Foundation & Purpose
+                            </h2>
+                            <p className="text-base text-slate-600 leading-relaxed font-normal">
+                                These young men met on Facebook right at the beginning of the COVID-19 pandemic, when Africa went on shut down leaving 90% of the African population in hunger, students stranded, and schools closed. No hope for young people and so UPAM was created on April 6th, 2020, to build a new Africa for Africans, giving hope to the people of African descent, encouraging, and strengthening bonds of solidarity between all indigenous and diasporas people of African descent. UPAM is guided by the African Union's vision of "an integrated, prosperous, and peaceful Africa, driven by its own citizens and representing a dynamic force in the global arena.
+                            </p>
+                        </div>
+                    </ScrollReveal>
+
+                    <ScrollReveal direction="right" className="space-y-6">
+                        <div className="bg-[#EB010C]/5 p-8 border border-[#EB010C]/10 space-y-6">
+                            <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">First Executive</h3>
+                            <div className="space-y-4">
+                                {[
+                                    { rank: "Global Chairman", name: "Nelson Mansare", loc: "Finland" },
+                                    { rank: "Global Vice Chairman", name: "Blessed Mukonka", loc: "Zambia" },
+                                    { rank: "Global Sec. General", name: "Emmanuel Kpan", loc: "Liberia" }
+                                ].map((leader, i) => (
+                                    <div key={i} className="flex gap-4 items-start pb-4 border-b border-[#EB010C]/10 last:border-0 last:pb-0">
+                                        <div className="shrink-0 w-8 h-8 flex items-center justify-center bg-white text-[#EB010C] font-black text-xs border border-red-50">
+                                            0{i + 1}
+                                        </div>
+                                        <div className="space-y-0.5">
+                                            <p className="text-[10px] font-bold text-[#EB010C] uppercase tracking-widest">{leader.rank}</p>
+                                            <p className="text-base font-black text-slate-900 tracking-tight">{leader.name}</p>
+                                            <p className="text-[11px] text-slate-500 font-medium">({leader.loc})</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </ScrollReveal>
+                </div>
             </section>
 
-            {/* Organizational Structure */}
-            <section className="w-full bg-gray-50 py-12 md:py-16">
-                <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex flex-col lg:flex-row justify-between items-start gap-12">
-                        <div className="space-y-6 max-w-2xl">
-                            <div>
-                                <p className="text-base font-medium text-foreground mb-2">Organizational Structure</p>
-                                <h2 className="text-2xl lg:text-3xl font-bold text-foreground">
-                                    Built on leadership, powered by community
-                                </h2>
+            {/* Mission & Vision Section */}
+            <section className="py-24 bg-[#F8F9FB] border-y border-gray-100">
+                <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-16 items-center">
+                    <ScrollReveal direction="left" className="space-y-12">
+                        <div className="flex gap-6">
+                            <div className="shrink-0 w-12 h-12 bg-[#EB010C] flex items-center justify-center text-white">
+                                <Target size={24} />
                             </div>
-                            <div className="space-y-4">
-                                <p className="text-base text-neutral/80">
-                                    UPAM operates through a structured leadership system that ensures transparency, accountability, and impact. Our organization includes:
-                                </p>
-                                <p className="text-base text-neutral/80">
-                                    This structure allows us to coordinate large-scale programs while staying connected to community needs.
+                            <div className="space-y-3">
+                                <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tight">Our Mission</h3>
+                                <p className="text-base text-slate-600 leading-relaxed font-normal">
+                                    To strengthen bonds of solidarity between all people of African descent, fostering unity and development in Africa; for enhanced independence, industrialization, economic self-reliance as well as promote peace, security and stability within African communities and states.
                                 </p>
                             </div>
                         </div>
-                        <div className="space-y-8 max-w-xl">
-                            {structureLevels.map((level, index) => (
-                                <div key={index} className="space-y-2">
-                                    <div className="flex items-start gap-3">
-                                        <div className="w-2 h-2 bg-brand rounded-full mt-2"></div>
-                                        <div>
-                                            <h3 className="text-lg font-semibold text-foreground mb-1">{level.title}</h3>
-                                            <p className="text-base text-neutral/80 mb-2">{level.description}</p>
-                                            <a href={level.link} className="inline-flex items-center gap-2 text-brand hover:text-brand/80 font-medium">
-                                                View Here
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="mt-0.5">
-                                                    <path d="M8.94 12.127L13.156 7.89L8.94 3.653a.8.8 0 0 1 .22-1.305.8.8 0 0 1 .874.164l3.154 3.18h-9.67a.8.8 0 0 0-.8.8c0 .442.358.8.8.8h9.67l-3.154 3.18a.8.8 0 0 0 .005 1.131.8.8 0 0 0 1.131-.005z" fill="currentColor" />
-                                                </svg>
-                                            </a>
+                        <div className="flex gap-6">
+                            <div className="shrink-0 w-12 h-12 bg-white flex items-center justify-center text-[#EB010C] border border-slate-100">
+                                <Eye size={24} />
+                            </div>
+                            <div className="space-y-3">
+                                <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tight">Our Vision & Values</h3>
+                                <p className="text-base text-slate-600 leading-relaxed font-normal">
+                                    A United Africa for sustainable development for all Africans Descent. UPAM is a continental evolution and an all-African organization, seeking to enhance the unification of African nations as a whole and reclaiming its hope for the destined future.
+                                </p>
+                            </div>
+                        </div>
+                    </ScrollReveal>
+
+                    <ScrollReveal direction="right" className="relative group cursor-pointer">
+                        <div className="relative aspect-video overflow-hidden shadow-2xl">
+                            <img
+                                src="https://api.builder.io/api/v1/image/assets/TEMP/b3564abd0e1fb1dfb19649f1092e28adc8a02548?width=1310"
+                                alt="Manifesto Video"
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div className="absolute inset-0 transition-all duration-300" />
+                            {/* <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="w-16 h-16 bg-white flex items-center justify-center text-[#EB010C] shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                                    <Play size={28} className="fill-[#EB010C] ml-1" />
+                                </div>
+                            </div> */}
+                        </div>
+                    </ScrollReveal>
+                </div>
+            </section>
+
+            {/* Objectives Section */}
+            <section className="py-24 px-4 md:px-8 max-w-7xl mx-auto">
+                <div className="flex flex-col lg:flex-row-reverse justify-between items-center gap-16">
+                    <ScrollReveal direction="right" className="lg:w-1/2">
+                        <img
+                            src="https://api.builder.io/api/v1/image/assets/TEMP/494bd64452c17d8f73dc5f162ce9131d86969c3b?width=970"
+                            alt="UPAM team in action"
+                            className="w-full shadow-lg"
+                        />
+                    </ScrollReveal>
+                    <ScrollReveal direction="left" className="lg:w-1/2 space-y-6">
+                        <div className="inline-block px-3 py-1 bg-red-50 text-[#EB010C] text-[10px] font-bold uppercase tracking-widest border-l-2 border-[#EB010C]">
+                            Continental Evolution
+                        </div>
+                        <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight uppercase">Our Objectives</h2>
+                        <p className="text-lg text-slate-600 leading-relaxed font-normal">
+                            UPAM is a continental evolution and an all-African organization, seeking to enhance the unification of African nations as a whole and reclaiming its hope for the destined future. To encourage and strengthen bonds of solidarity between all people of African descent, Foster the development and unity of Africa, to enhanced independence.
+                        </p>
+                        <div className="grid grid-cols-2 gap-6 pt-4">
+                            <div className="space-y-2">
+                                <CheckCircle2 className="text-[#EB010C]" size={20} />
+                                <p className="text-xs font-bold text-slate-800 uppercase tracking-tight leading-snug">Strengthen Continental Bonds</p>
+                            </div>
+                            <div className="space-y-2">
+                                <CheckCircle2 className="text-[#EB010C]" size={20} />
+                                <p className="text-xs font-bold text-slate-800 uppercase tracking-tight leading-snug">Foster Sustainable Development</p>
+                            </div>
+                        </div>
+                    </ScrollReveal>
+                </div>
+            </section>
+
+            {/* Impacts Section */}
+            <section className="py-24 px-4 md:px-8 bg-white border-y border-gray-100">
+                <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-start">
+                    <div className="lg:w-1/2 space-y-10">
+                        <ScrollReveal direction="up" className="space-y-4">
+                            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight uppercase">
+                                Our Impact / Projects
+                            </h2>
+                            <p className="text-lg text-slate-500 font-medium leading-relaxed">
+                                Transforming vision into reality through localized initiatives.
+                            </p>
+                        </ScrollReveal>
+
+                        <div className="space-y-6">
+                            {projects.map((project, idx) => (
+                                <ScrollReveal key={idx} delay={idx * 0.1} direction="left">
+                                    <div className="group p-6 bg-[#FAFAFC] border border-slate-100 hover:border-[#EB010C]/30 transition-all duration-300">
+                                        <div className="flex gap-6">
+                                            <div className="shrink-0 w-12 h-12 flex items-center justify-center bg-white border border-slate-50 group-hover:scale-110 transition-transform duration-300">
+                                                {project.icon}
+                                            </div>
+                                            <div className="space-y-2">
+                                                <h3 className="text-lg font-black text-slate-900 tracking-tight">{project.title}</h3>
+                                                <p className="text-sm text-slate-500 leading-relaxed font-normal">{project.description}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </ScrollReveal>
                             ))}
                         </div>
                     </div>
+
+                    <div className="lg:w-1/2 w-full">
+                        <ScrollReveal direction="right" className="grid grid-cols-2 gap-2">
+                            <div className="space-y-2">
+                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/299e1480b26e20d4a93c2dae4e9560f6a5f58062?width=312" className="w-full h-40 object-cover shadow-sm" />
+                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/32886d3aafeab31c00dd5c46ff637405d3d29ced?width=312" className="w-full h-60 object-cover shadow-sm" />
+                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/7eea108d6e47b681fd09479390dadef157489196?width=312" className="w-full h-40 object-cover shadow-sm" />
+                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/8e8740269f0348d2dbdac7ec20c3eca4a4b2279d?width=312" className="w-full h-40 object-cover shadow-sm" />
+                            </div>
+                            <div className="h-full">
+                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/69e8a713eff97bf06eb064b12e7f33ad52b7b61d?width=634" className="w-full h-full object-cover shadow-sm" />
+                            </div>
+                        </ScrollReveal>
+                    </div>
                 </div>
             </section>
 
-            {/* Global Presence */}
-            <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            {/* Gallery Section */}
+            <section className="py-24 px-4 md:px-8 max-w-7xl mx-auto space-y-16">
+                <ScrollReveal direction="up" className="text-center max-w-3xl mx-auto space-y-4">
+                    <p className="text-[#EB010C] font-black text-xs uppercase tracking-widest">GALLERY</p>
+                    <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight uppercase">Moments that Inspire Change</h2>
+                    <p className="text-base text-slate-500 font-medium leading-relaxed">
+                        Moments of unity, culture, advocacy, and community impact captured across Africa and the diaspora.
+                    </p>
+                </ScrollReveal>
+
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    {[
+                        "https://api.builder.io/api/v1/image/assets/TEMP/b25f74c0c208851c995df3fe41a15ea551fbb960?width=336",
+                        "https://api.builder.io/api/v1/image/assets/TEMP/0ac49176818ab6dbe13202ff503abf2227cb2069?width=560",
+                        "https://api.builder.io/api/v1/image/assets/TEMP/683f693939e917cd3297ff8c6e8af8554e42eae3?width=560",
+                        "https://api.builder.io/api/v1/image/assets/TEMP/1baa487a59315c54db38e9d2509b9139cca12f04?width=560",
+                        "https://api.builder.io/api/v1/image/assets/TEMP/07536e0af663886d7094bb2f428fbad257f117cd?width=560",
+                        "https://api.builder.io/api/v1/image/assets/TEMP/e30f23ba83e18af62762d04d97d7fb23736884ea?width=166",
+                    ].map((src, idx) => (
+                        <ScrollReveal key={idx} delay={idx * 0.05} direction="up">
+                            <div className="aspect-[3/4] overflow-hidden hover:scale-[1.02] transition-transform duration-500 shadow-sm">
+                                <img src={src} className="w-full h-full object-cover" alt={`gallery-${idx}`} />
+                            </div>
+                        </ScrollReveal>
+                    ))}
+                </div>
+            </section>
+
+            {/* Structure Section */}
+            <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-[#EB010C]/20 opacity-50" />
+                <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+                    <ScrollReveal direction="left" className="space-y-8">
+                        <div className="space-y-4">
+                            <p className="text-[#EB010C] font-black text-xs uppercase tracking-widest">Organizational Structure</p>
+                            <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight uppercase">
+                                Built on Leadership,<br /> Powered by Community.
+                            </h2>
+                            <p className="text-base text-slate-300 font-normal leading-relaxed max-w-xl">
+                                UPAM operates through a structured leadership system that ensures transparency, accountability, and impact. Our organization includes:
+                            </p>
+                            <p className="text-sm text-slate-400 font-medium italic">
+                                This structure allows us to coordinate large-scale programs while staying connected to community needs.
+                            </p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="p-6 bg-white/5 border border-white/10">
+                                <p className="text-3xl font-black text-[#EB010C]">50+</p>
+                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Country Chapters</p>
+                            </div>
+                            <div className="p-6 bg-white/5 border border-white/10">
+                                <p className="text-3xl font-black text-[#EB010C]">250+</p>
+                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Active Members</p>
+                            </div>
+                        </div>
+                    </ScrollReveal>
+
+                    <ScrollReveal direction="right" className="space-y-4">
+                        {structureLevels.map((level, idx) => (
+                            <div key={idx} className="group p-6 bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 border-l-4 hover:border-l-[#EB010C] border-l-transparent">
+                                <div className="flex gap-5 items-center">
+                                    <div className="shrink-0 p-3 bg-white/10 text-[#EB010C]">
+                                        {level.icon}
+                                    </div>
+                                    <div className="space-y-1">
+                                        <h3 className="text-lg font-black tracking-tight uppercase">{level.title}</h3>
+                                        <p className="text-sm text-slate-400 font-normal leading-relaxed">{level.description}</p>
+                                    </div>
+                                    <ChevronRight className="ml-auto text-slate-600 group-hover:text-white transition-colors" size={20} />
+                                </div>
+                            </div>
+                        ))}
+                    </ScrollReveal>
+                </div>
+            </section>
+
+            {/* Global Presence Section */}
+            <section className="py-24 px-4 md:px-8 max-w-7xl mx-auto overflow-hidden">
                 <div className="flex flex-col lg:flex-row justify-between items-center gap-12">
-                    <div className="space-y-6 max-w-2xl">
-                        <div>
-                            <p className="text-base font-medium text-foreground mb-2">Our Global Presence</p>
-                            <h2 className="text-2xl lg:text-3xl font-bold text-foreground">
+                    <ScrollReveal direction="left" className="space-y-8 max-w-2xl">
+                        <div className="space-y-4">
+                            <p className="text-[#EB010C] font-black text-xs uppercase tracking-widest">Our Global Presence</p>
+                            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight uppercase">
                                 A growing network across Africa and beyond
                             </h2>
                         </div>
-                        <p className="text-base text-neutral/80 leading-relaxed">
+                        <p className="text-base text-slate-600 leading-relaxed font-normal">
                             UPAM's presence spans multiple African nations and international communities, creating a global movement of Africans committed to unity and development. Through our chapters, partners, and digital platforms, we engage thousands of young leaders, professionals, activists, and volunteers worldwide.
                         </p>
-                    </div>
-                    <img
-                        src="https://api.builder.io/api/v1/image/assets/TEMP/f122f099fc34ad51219ddd7f7cfb887e3acb9f12?width=1176"
-                        alt="Global presence map"
-                        className="w-full lg:w-1/2"
-                    />
+                    </ScrollReveal>
+                    <ScrollReveal direction="right" className="lg:w-1/2">
+                        <WorldMapWithMarkers />
+                    </ScrollReveal>
                 </div>
             </section>
 
-            {/* Get Involved */}
-            <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-16">
-                <div className="flex flex-col lg:flex-row justify-between items-center gap-12">
-                    <div className="space-y-8 max-w-2xl">
-                        <p className="text-base font-medium text-foreground">GET INVOLVED</p>
+            {/* CTA Section */}
+            <section className="py-24 px-4 md:px-8 bg-[#FAFAFC] border-t border-gray-100">
+                <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center gap-12">
+                    <ScrollReveal direction="left" className="space-y-8 max-w-2xl">
+                        <p className="text-[#EB010C] font-black text-xs uppercase tracking-widest">GET INVOLVED</p>
                         <div className="space-y-4">
-                            <h2 className="text-2xl lg:text-3xl font-bold text-foreground">Be Part of The Movement</h2>
-                            <p className="text-base text-neutral/80 leading-relaxed">
+                            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight uppercase leading-tight">Be Part of The Movement</h2>
+                            <p className="text-base text-slate-600 leading-relaxed font-normal">
                                 We the African People Stand United for Economically Self-sustainable, Development, Freedom, Equality, Justice, Free Trade, Open Borders, Effective Governance, One Nation and the Protection of Our motherland, one people united for Africa, Home of the Brave.
                             </p>
                         </div>
-                        <a
-                            href="#join"
-                            className="inline-flex items-center gap-3 px-8 py-4 bg-brand text-white rounded-lg hover:bg-brand/90 transition-all hover:gap-4 font-semibold"
+                        <motion.a
+                            whileHover={{ x: 10 }}
+                            className="inline-flex items-center gap-4 bg-slate-900 text-white px-10 py-5 font-black text-xs uppercase tracking-widest group shadow-lg"
                         >
-                            Join Now
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M4 10h12m0 0l-5-5m5 5l-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </a>
-                    </div>
-                    <div className="relative w-full lg:w-1/2 h-64 md:h-80 lg:h-96 rounded-xl overflow-hidden">
+                            <Link to={"/register"}>Join The Movement Now</Link>
+
+                            <ArrowRight size={18} className="text-[#EB010C]" />
+                        </motion.a>
+                    </ScrollReveal>
+                    <ScrollReveal direction="right" className="relative lg:w-1/2 aspect-video overflow-hidden shadow-xl">
                         <img
                             src="https://api.builder.io/api/v1/image/assets/TEMP/743da7307db5c6f3802fcc3250631182d6dcce9b?width=1422"
                             alt="Community gathering"
                             className="w-full h-full object-cover"
                         />
-                    </div>
+                    </ScrollReveal>
                 </div>
             </section>
-        </main>
-    )
-}
+        </div>
+    );
+};
 
-export default About
+export default About;

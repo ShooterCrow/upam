@@ -48,7 +48,8 @@ const CreateEvent = () => {
     manualEmails: '',
     showButton: true,
     buttonText: '',
-    buttonLink: ''
+    buttonLink: '',
+    isFeatured: false
   });
   const [fileName, setFileName] = useState('No File Chosen');
 
@@ -87,13 +88,15 @@ const CreateEvent = () => {
       submitData.append('showButton', formData.showButton);
       submitData.append('buttonText', formData.buttonText);
       submitData.append('buttonLink', formData.buttonLink);
-      
+
       // Additional fields from CreateEvent page
       submitData.append('organizer', 'UPAM');
-      
+
       if (formData.bannerFile) {
         submitData.append('image', formData.bannerFile);
       }
+
+      submitData.append('isFeatured', formData.isFeatured);
 
       await createEvent(submitData).unwrap();
       toast.success('Event published successfully!');
@@ -453,6 +456,38 @@ const CreateEvent = () => {
             />
           </div>
 
+          {/* Event Banner Image */}
+          <div className="pt-4 border-t border-gray-100">
+            <label className={labelClass}>Event Banner Image</label>
+            <div
+              onClick={() => fileInputRef.current?.click()}
+              className="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md cursor-pointer hover:border-[#EB010C] transition-colors bg-gray-50"
+            >
+              <div className="space-y-1 text-center">
+                <Upload className="mx-auto h-12 w-12 text-gray-400 group-hover:text-[#EB010C]" />
+                <div className="flex text-sm text-gray-600">
+                  <span className="relative rounded-md font-medium text-[#EB010C] hover:text-[#EB010C]/80">
+                    {fileName !== 'No File Chosen' ? fileName : 'Upload a file'}
+                  </span>
+                  <p className="pl-1">or drag and drop</p>
+                </div>
+                <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+              </div>
+              <input
+                ref={fileInputRef}
+                type="file"
+                className="hidden"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+            </div>
+            {formData.bannerFile && (
+              <p className="mt-2 text-sm text-green-600 font-medium flex items-center gap-1">
+                ✓ {formData.bannerFile.name} selected
+              </p>
+            )}
+          </div>
+
           {/* Email Notification Section */}
           <div className="pt-8 border-t border-gray-200 space-y-6">
             <div className="flex items-center gap-2 text-[#EB010C]">
@@ -532,6 +567,20 @@ const CreateEvent = () => {
                 </div>
               )}
             </div>
+          </div>
+
+          <div className="pt-4 border-t border-gray-100 flex items-center gap-3">
+            <input
+              type="checkbox"
+              name="isFeatured"
+              id="isFeatured"
+              className="w-5 h-5 rounded border-gray-300 text-[#EB010C] focus:ring-[#EB010C]"
+              checked={formData.isFeatured}
+              onChange={(e) => setFormData(prev => ({ ...prev, isFeatured: e.target.checked }))}
+            />
+            <label htmlFor="isFeatured" className="text-sm font-bold text-gray-800">
+              Mark as Featured Event (Prioritized on Home Page)
+            </label>
           </div>
 
           <div className="pt-4">

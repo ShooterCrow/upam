@@ -1,151 +1,140 @@
+import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
+
 const PanAfricanUnity = () => {
     return (
         <div className="min-h-screen bg-white">
-            <article className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24">
-                <div className="flex flex-col gap-12 lg:gap-[50px]">
-                    {/* Header Section */}
-                    <header className="flex flex-col gap-7 lg:gap-[31px] max-w-[1218px]">
-                        <h1 className="text-[28px] sm:text-[32px] font-semibold text-black leading-[139%] tracking-[0.64px]">
-                            Pan-African Unity in the 21st Century: From Ideology to Action
-                        </h1>
-                        <p className="text-base text-neutral leading-[170%] tracking-[0.32px]">
-                            Pan-Africanism has long stood as one of the most powerful ideological movements to emerge from the African experience, rooted in resistance to slavery, colonialism, and racial oppression. While the ideology has inspired generations of leaders, activists, and intellectuals, its practical realization remains incomplete. In the 21st century, Africa faces both unprecedented challenges and new opportunities: globalization, digital transformation, demographic growth, climate change, and shifting geopolitical power. This paper examines Pan-African unity beyond ideology, focusing on actionable pathways toward political cooperation, economic integration, cultural solidarity, and people-centered institutions. It argues that Pan-Africanism must evolve from a symbolic ideal into a lived, functional system that shapes governance, trade, education, and collective identity across Africa and the diaspora
-                        </p>
-                    </header>
+            {/* Main Content Container */}
+            <article className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8">
 
-                    {/* Introduction Section */}
-                    <section className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-8 lg:gap-4">
-                        <div className="flex flex-col gap-6 lg:gap-[25px] lg:w-[840px]">
-                            <h2 className="text-xl text-neutral-darker font-semibold leading-[156%] tracking-[0.4px]">
+                {/* Back navigation link */}
+                <div className="mb-12">
+                    <Link to="/publications" className="inline-flex items-center gap-2 text-sm font-black text-[#EB010C] hover:text-[#EB010C]/80 uppercase tracking-widest group">
+                        <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
+                        Back to Publications
+                    </Link>
+                </div>
+
+                {/* Header Section */}
+                <header className="mb-12 lg:mb-16">
+                    <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-black leading-[130%] tracking-tight text-slate-900 mb-6 uppercase">
+                        Pan-African Unity in the 21st Century: From Ideology to Action
+                    </h1>
+                    <p className="text-base leading-[170%] text-slate-600">
+                        Pan-Africanism has long stood as one of the most powerful ideological movements to emerge from the African experience, rooted in resistance to slavery, colonialism, and racial oppression. While the ideology has inspired generations of leaders, activists, and intellectuals, its practical realization remains incomplete. In the 21st century, Africa faces both unprecedented challenges and new opportunities: globalization, digital transformation, demographic growth, climate change, and shifting geopolitical power. This paper examines Pan-African unity beyond ideology, focusing on actionable pathways toward political cooperation, economic integration, cultural solidarity, and people-centered institutions. It argues that Pan-Africanism must evolve from a symbolic ideal into a lived, functional system that shapes governance, trade, education, and collective identity across Africa and the diaspora.
+                    </p>
+                </header>
+
+                {/* Introduction Section */}
+                <section className="mb-12 lg:mb-16">
+                    <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
+                        <div className="flex-1">
+                            <h2 className="text-xl lg:text-2xl font-black text-slate-900 mb-4 uppercase">
                                 Introduction: The Enduring Promise of Pan-Africanism
                             </h2>
-                            <p className="text-base text-neutral leading-[170%] tracking-[0.32px]">
-                                Pan-Africanism emerged as both a response and a vision—a response to centuries of exploitation and fragmentation, and a vision of unity, dignity, and self-determination for African people worldwide. From early thinkers such as Henry Sylvester-Williams and W.E.B. Du Bois to continental leaders like Kwame Nkrumah, Julius Nyerere, and Patrice Lumumba, Pan-Africanism has consistently called for African unity as the foundation for freedom and progress. Yet, more than half a century after the political independence of most African states, the continent remains divided economically, politically, and psychologically. Borders imposed by colonial powers persist, intra-African trade remains low compared to other regions, and African voices are often fragmented on the global stage. This gap between Pan-African ideology and practical unity raises a central question: How can Pan-Africanism be translated into concrete action in the 21st century?
+                            <p className="text-base text-slate-600 leading-relaxed mb-4">
+                                Pan-Africanism emerged as both a response and a vision—a response to centuries of exploitation and fragmentation, and a vision of unity, dignity, and self-determination for African people worldwide. From early thinkers such as Henry Sylvester-Williams and W.E.B. Du Bois to continental leaders like Kwame Nkrumah, Julius Nyerere, and Patrice Lumumba, Pan-Africanism has consistently called for African unity as the foundation for freedom and progress.
+                            </p>
+                            <p className="text-base text-slate-600 leading-relaxed">
+                                Yet, more than half a century after the political independence of most African states, the continent remains divided economically, politically, and psychologically. Borders imposed by colonial powers persist, intra-African trade remains low, and African voices are often fragmented. This gap between ideology and practical unity raises a central question: How can Pan-Africanism be translated into concrete action in the 21st century?
                             </p>
                         </div>
-                        <img
-                            src="https://api.builder.io/api/v1/image/assets/TEMP/e1b1b535606945c904fc477fdf2307feba2ba2b9?width=860"
-                            alt="Pan-African gathering"
-                            className="w-full lg:w-[430px] h-auto lg:h-[319px] object-cover rounded-sm"
-                        />
-                    </section>
+                        <div className="w-full lg:w-[430px] shrink-0">
+                            <img
+                                src="https://res.cloudinary.com/dyy6gisnk/image/upload/c645d8992aef0ef8111a956b8c6c5ab794d951f5_l3dnts.jpg"
+                                alt="Pan-African community"
+                                className="w-full h-auto object-cover"
+                            />
+                        </div>
+                    </div>
+                </section>
 
-                    {/* Pan-Africanism Context Section */}
-                    <section className="flex flex-col gap-8 lg:gap-10">
-                        <div className="flex flex-col gap-7 lg:gap-[30px]">
-                            <h2 className="text-xl text-neutral-darker font-semibold leading-[156%] tracking-[0.4px]">
-                                Pan-Africanism: From Historical Ideology to Contemporary Context
-                            </h2>
-                            <p className="text-base text-neutral leading-[170%] tracking-[0.32px]">
-                                Historically, Pan-Africanism was shaped by the shared experience of oppression. Early Pan-African congresses focused on racial justice, anti-colonial resistance, and civil rights. As African nations gained independence, the ideology shifted toward continental unity, with the formation of the Organization of African Unity (OAU) in 1963 marking a significant milestone. However, the OAU prioritized state sovereignty over deeper integration, reflecting the political realities of newly independent states. While this approach prevented further external domination, it also limited the scope of continental cooperation. The transformation of the OAU into the African Union (AU) in 2002 signaled a renewed commitment to integration, peace, and development. In the 21st century, Pan-Africanism operates within a different global environment. Africa is no longer isolated from global systems; instead, it is deeply entangled in international trade, digital networks, migration flows, and geopolitical competition. This context demands a more pragmatic, results-oriented Pan-Africanism—one that balances idealism with institutional effectiveness.
-                            </p>
-                        </div>
-                        <img
-                            src="https://api.builder.io/api/v1/image/assets/TEMP/8a58bbcbd9be0a6474c574c2153cbc75e370ee75?width=2660"
-                            alt="Historical Pan-African movement"
-                            className="w-full h-auto max-h-[373px] object-cover rounded-sm"
-                        />
-                        <div className="flex flex-col gap-7 lg:gap-[30px]">
-                            <h2 className="text-xl text-neutral-darker font-semibold leading-[156%] tracking-[0.4px]">
-                                Political Unity: Cooperation Without Erasing Diversity
-                            </h2>
-                            <p className="text-base text-neutral leading-[170%] tracking-[0.32px]">
-                                One of the most debated aspects of Pan-Africanism is political unity. While some early thinkers advocated for a single African state, contemporary realities suggest a more flexible approach. Political unity in the 21st century does not require uniform governance systems but rather coordinated action, shared standards, and collective decision-making. Regional bodies such as ECOWAS, SADC, EAC, and others demonstrate that cooperation is possible when states align around common interests. However, these regional blocs often operate in isolation from one another. A stronger Pan-African framework would harmonize regional efforts under a continental vision, enabling Africa to speak with a unified voice on global issues such as climate change, trade negotiations, peacekeeping, and debt relief. Moreover, political unity must extend beyond governments. Civil society organizations, youth movements, professional associations, and traditional institutions play crucial roles in shaping public life. A people-centered Pan-Africanism recognizes that unity cannot be imposed from above but must be built through inclusive participation and shared ownership.
-                            </p>
-                        </div>
-                    </section>
+                {/* Context Section */}
+                <section className="mb-12 lg:mb-16 max-w-4xl">
+                    <h2 className="text-xl lg:text-2xl font-black text-slate-900 mb-4 uppercase">
+                        From Historical Ideology to Contemporary Context
+                    </h2>
+                    <p className="text-base text-slate-600 leading-relaxed mb-6">
+                        Historically, Pan-Africanism was shaped by the shared experience of oppression. Early congresses focused on racial justice and anti-colonial resistance. The transition from the OAU to the African Union (AU) in 2002 signaled a renewed commitment to integration. Today, Pan-Africanism operates within a complex global environment—deeply entangled in international trade, digital networks, and migration flows. This demands a more pragmatic, results-oriented Pan-Africanism that balances idealism with institutional effectiveness.
+                    </p>
+                </section>
 
-                    {/* Economic Integration Section */}
-                    <section className="flex flex-col gap-7 lg:gap-[30px]">
-                        <h2 className="text-xl text-neutral-darker font-semibold leading-[156%] tracking-[0.4px]">
-                            Economic Integration: From Fragmentation to Collective Prosperity
-                        </h2>
-                        <p className="text-base text-neutral leading-[170%] tracking-[0.32px]">
-                            Economic disunity remains one of the greatest barriers to Pan-African unity. Despite vast natural resources and a growing population, Africa accounts for a small percentage of global trade, and much of its economic activity is oriented toward external markets rather than internal exchange. The African Continental Free Trade Area (AfCFTA) represents one of the most promising steps toward economic unity. By reducing trade barriers and encouraging intra-African commerce, AfCFTA has the potential to stimulate industrialization, create jobs, and retain value within the continent. However, policy frameworks alone are insufficient without supporting infrastructure, financial systems, and skilled labor. True Pan-African economic integration requires investment in transport networks, digital connectivity, energy systems, and education. It also requires empowering African entrepreneurs, small businesses, and cooperatives to participate meaningfully in the continental economy. Economic unity must be felt at the grassroots level—where farmers, artisans, traders, and innovators experience tangible benefits from cooperation.
+                {/* Political Unity Block */}
+                <section className="mb-12 lg:mb-16 p-8 bg-slate-50 border-l-4 border-[#EB010C]">
+                    <h2 className="text-xl lg:text-2xl font-black text-slate-900 mb-4 uppercase">
+                        Political Unity: Cooperation Without Erasing Diversity
+                    </h2>
+                    <p className="text-base text-slate-600 leading-relaxed">
+                        Political unity in the 21st century does not require uniform governance but rather coordinated action and shared standards. Regional bodies demonstrate that cooperation is possible when states align around common interests. A stronger Pan-African framework would harmonize these regional efforts, enabling Africa to speak with a unified voice on global issues like climate change and trade. Unity must also be people-centered, involving civil society and youth movements in inclusive participation.
+                    </p>
+                </section>
+
+                {/* Economic & Cultural Section */}
+                <div className="grid lg:grid-cols-2 gap-12 mb-12 lg:mb-16">
+                    <section>
+                        <h2 className="text-lg lg:text-xl font-black text-slate-900 mb-3 uppercase">Economic Integration</h2>
+                        <p className="text-base text-slate-600 leading-relaxed">
+                            Economic disunity is a massive barrier. The AfCFTA is a promising step, but policy must be supported by infrastructure, finance, and skilled labor. Investment in transport, energy, and digital connectivity is essential to empower African entrepreneurs and ensure benefits reach the grassroots level.
                         </p>
                     </section>
-
-                    {/* Cultural Unity Section */}
-                    <section className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-[72px]">
-                        <img
-                            src="https://api.builder.io/api/v1/image/assets/TEMP/f7c3e660879781d97f5b3969e5ca777094487b3e?width=860"
-                            alt="African cultural celebration"
-                            className="w-full lg:w-[430px] h-auto lg:h-[350px] object-cover rounded-sm"
-                        />
-                        <div className="flex flex-col gap-7 lg:gap-[30px] lg:flex-1">
-                            <h2 className="text-xl text-neutral-darker font-semibold leading-[156%] tracking-[0.4px]">
-                                Cultural and Psychological Unity: Rebuilding the African Consciousness
-                            </h2>
-                            <p className="text-base text-neutral leading-[170%] tracking-[0.32px]">
-                                Perhaps the most overlooked dimension of Pan-Africanism is psychological unity. Colonialism not only divided territories but also reshaped identities, languages, and perceptions of self-worth. The lingering effects of this legacy continue to influence how Africans view one another and their place in the world. Cultural unity does not imply homogeneity; Africa's diversity is one of its greatest strengths. Instead, Pan-African cultural unity emphasizes mutual respect, shared heritage, and collective storytelling. Language, music, art, history, and spirituality serve as powerful tools for reconnecting African people across borders and generations. Education plays a central role in this process. Curricula that prioritize African history, philosophy, and contributions can foster a sense of pride and belonging. Media platforms and digital technologies also offer new opportunities for cross-cultural exchange, allowing Africans and people of African descent to share narratives and collaborate beyond physical boundaries.
-                            </p>
-                        </div>
-                    </section>
-
-                    {/* Youth Section */}
-                    <section className="flex flex-col gap-7 lg:gap-[30px]">
-                        <h2 className="text-xl text-neutral-darker font-semibold leading-[156%] tracking-[0.4px]">
-                            Youth and the Future of Pan-African Action
-                        </h2>
-                        <p className="text-base text-neutral leading-[170%] tracking-[0.32px]">
-                            Africa's demographic reality makes youth engagement not just important but essential. With a majority of the population under the age of 30, the future of Pan-Africanism depends on how young people interpret and apply its principles. Young Africans today are navigating a complex world shaped by globalization, unemployment, digital innovation, and social movements. They are also redefining Pan-Africanism through entrepreneurship, activism, technology, and creative expression. Supporting youth-led initiatives, leadership development, and cross-border collaboration can transform Pan-Africanism from a historical ideology into a living movement. Institutions like UPAM play a critical role in providing platforms for youth participation, mentorship, and collective action. By connecting young Africans across regions and the diaspora, such organizations help translate unity into practical collaboration.
-                        </p>
-                    </section>
-
-                    {/* Practical Pathways Section */}
-                    <section className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-8 lg:gap-4">
-                        <div className="flex flex-col gap-7 lg:gap-[30px] lg:w-[768px]">
-                            <h2 className="text-xl text-neutral-darker font-semibold leading-[156%] tracking-[0.4px]">
-                                From Ideology to Action: Practical Pathways Forward
-                            </h2>
-                            <div className="text-base leading-[170%] tracking-[0.32px] space-y-4">
-                                <p className="text-neutral">
-                                    For Pan-Africanism to move from ideology to action, several practical steps are necessary:
-                                </p>
-                                <div className="space-y-3">
-                                    <div>
-                                        <p className="font-medium text-neutral-darker">1. Strengthening Continental Institutions</p>
-                                        <p className="text-neutral">Institutions must be transparent, accountable, and responsive to the needs of African people.</p>
-                                    </div>
-                                    <div>
-                                        <p className="font-medium text-neutral-darker">2. Encouraging Cross-Border Collaboration</p>
-                                        <p className="text-neutral">Programs that facilitate exchange in education, business, and culture can build trust and shared purpose.</p>
-                                    </div>
-                                    <div>
-                                        <p className="font-medium text-neutral-darker">3. Promoting Economic Self-Reliance</p>
-                                        <p className="text-neutral">African-owned industries, finance systems, and trade networks are essential for sustainable unity.</p>
-                                    </div>
-                                    <div>
-                                        <p className="font-medium text-neutral-darker">4. Centering People, Not Just States</p>
-                                        <p className="text-neutral">Unity must be experienced by citizens, not only negotiated by governments.</p>
-                                    </div>
-                                    <div>
-                                        <p className="font-medium text-neutral-darker">5. Leveraging Technology</p>
-                                        <p className="text-neutral">Digital platforms can overcome physical borders and accelerate cooperation.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <img
-                            src="https://api.builder.io/api/v1/image/assets/TEMP/bdfe30bb423d4ddb47a8105bd3022ee9cfa6a7e1?width=1014"
-                            alt="Pan-African action and collaboration"
-                            className="w-full lg:w-[507px] h-auto lg:h-[414px] object-cover rounded-sm"
-                        />
-                    </section>
-
-                    {/* Conclusion Section */}
-                    <section className="flex flex-col gap-7 lg:gap-[30px]">
-                        <h2 className="text-xl text-neutral-darker font-semibold leading-[156%] tracking-[0.4px]">
-                            Reimagining Pan-African Unity
-                        </h2>
-                        <p className="text-base text-neutral leading-[170%] tracking-[0.32px]">
-                            Pan-Africanism in the 21st century stands at a crossroads. The ideology remains powerful, but its future relevance depends on its ability to produce real outcomes. Unity must move beyond slogans and summits toward systems that improve livelihoods, strengthen identity, and amplify Africa's collective voice. By grounding Pan-Africanism in action—political coordination, economic integration, cultural renewal, and youth leadership—Africa and its diaspora can transform a historic vision into a functional reality. The task before this generation is not merely to inherit Pan-Africanism but to build it.
+                    <section>
+                        <h2 className="text-lg lg:text-xl font-black text-slate-900 mb-3 uppercase">Cultural & Psychological Unity</h2>
+                        <p className="text-base text-slate-600 leading-relaxed">
+                            Colonialism fragmented identities and devalued cultures. Cultural unity emphasizes mutual respect and shared heritage. Education curricula that prioritize African history and contributions are central to fostering pride. Media and digital platforms now offer new opportunities to transcend physical boundaries.
                         </p>
                     </section>
                 </div>
+
+                {/* Youth Section */}
+                <section className="mb-12 lg:mb-16">
+                    <h2 className="text-xl lg:text-2xl font-black text-slate-900 mb-4 uppercase">
+                        Youth and the Future of Pan-African Action
+                    </h2>
+                    <p className="text-base text-slate-600 leading-relaxed">
+                        With a majority of the population under 30, the future of Pan-Africanism depends on today's youth. They are redefining the movement through entrepreneurship, technology, and activism. Supporting youth-led initiatives and cross-border collaboration transforms Pan-Africanism from a historical ideology into a living movement. Organizations like UPAM provide the platforms for this essential collective action.
+                    </p>
+                </section>
+
+                {/* Practical Pathways List */}
+                <section className="mb-12 lg:mb-16 bg-slate-900 text-white p-8 lg:p-12">
+                    <h2 className="text-xl lg:text-2xl font-black mb-8 uppercase">
+                        Practical Pathways Forward
+                    </h2>
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {[
+                            { title: "Strengthening Institutions", body: "Building transparent, accountable continental systems responsive to African people." },
+                            { title: "Cross-Border Collaboration", body: "Facilitating exchange in education, business, and culture to build shared purpose." },
+                            { title: "Economic Self-Reliance", body: "Developing African-owned industries, finance systems, and trade networks." },
+                            { title: "Centering People", body: "Ensuring unity is experienced by citizens, not just negotiated by governments." }
+                        ].map((path, i) => (
+                            <div key={i} className="flex gap-4 border-l border-red-600 pl-6">
+                                <div>
+                                    <h3 className="font-black uppercase text-sm mb-2">{path.title}</h3>
+                                    <p className="text-slate-400 text-sm leading-relaxed">{path.body}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* Conclusion Section */}
+                <footer className="pt-8 border-t border-slate-100 max-w-7xl mx-auto">
+                    <h2 className="text-2xl lg:text-3xl font-black text-slate-900 mb-6 uppercase text-center">Reimagining Pan-African Unity</h2>
+                    <div className="text-base lg:text-lg text-slate-600 leading-relaxed space-y-6">
+                        <p>
+                            Pan-Africanism in the 21st century stands at a crossroads. Its future relevance depends on producing real outcomes—improving livelihoods, strengthening identity, and amplifying Africa's collective voice.
+                        </p>
+                        <p>
+                            By grounding the movement in action—political coordination, economic integration, cultural renewal, and youth leadership—Africa can transform this historic vision into a functional reality. The task before this generation is not merely to inherit Pan-Africanism but to build it.
+                        </p>
+                        <div className="text-slate-900 font-black text-center pt-8 border-b-2 border-[#EB010C] w-fit mx-auto pb-2 uppercase text-xl">
+                            BUILDING THE VISION. LIVING THE UNITY.
+                        </div>
+                    </div>
+                </footer>
             </article>
         </div>
     );
-}
+};
 
-export default PanAfricanUnity
+export default PanAfricanUnity;
