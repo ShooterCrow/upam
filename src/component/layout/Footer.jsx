@@ -157,7 +157,7 @@ const Footer = () => {
                 {/* Bottom Section */}
                 <div className="flex flex-col md:flex-row justify-between items-center border-t border-white/10 pt-6 md:pt-8 pb-6 md:pb-8 gap-4">
                     <p className="text-white font-poppins text-sm font-normal text-center md:text-left">
-                        © 2025 UPAM. All rights reserved.
+                        © {new Date().getFullYear()} UPAM. All rights reserved.
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8">
                         <Link to="/terms" className="text-white font-poppins text-sm font-normal hover:underline">
