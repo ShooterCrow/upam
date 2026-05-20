@@ -108,37 +108,49 @@ export const USER_BOTTOM_LINKS = [
 
 export const PUBLIC_LINKS = [
   { name: "Home", path: "/", icon: Home },
-  { name: "About Us", path: "/about", icon: Info },
-  { name: "Leadership", path: "/leadership", icon: Users },
-  { name: "Platforms & Initiatives", path: "/platforms", icon: Grid },
   {
-    name: "Events & Conferences",
-    path: "/events",
-    icon: Calendar,
-    isExternal: true,
+    name: "About",
+    path: "/about",
+    icon: Info,
+    hasDropdown: true,
+    children: [
+      { name: "About Us", path: "/about" },
+      { name: "Leadership", path: "/leadership" },
+    ],
   },
   {
-    name: "Resources & Media",
+    name: "Initiatives",
+    path: "/platforms",
+    icon: Grid,
+    hasDropdown: true,
+    children: [
+      { name: "Platforms & Initiatives", path: "/platforms" },
+      { name: "Events & Conferences", path: "/events", isExternal: true },
+    ],
+  },
+  {
+    name: "Resources",
     path: "/resources",
     icon: FileText,
     hasDropdown: true,
     children: [
+      { name: "Resources & Media", path: "/resources" },
       { name: "Publications", path: "/publications" },
       { name: "Gallery", path: "/gallery" },
     ],
   },
   {
-    name: "Membership & Donation",
-    path: "/membership",
+    name: "Community",
+    path: "/get-involved",
     icon: UserPlus,
     hasDropdown: true,
     children: [
+      { name: "Get Involved", path: "/get-involved" },
       { name: "Membership Policy", path: "/membership-policy" },
       { name: "Membership Agreement", path: "/membership-agreement" },
       { name: "Search Members", path: "/search" },
       { name: "Donation", path: "/donation", icon: Heart },
+      { name: "Contact Us", path: "/contact-us" },
     ],
   },
-  { name: "Get Involved", path: "/get-involved", icon: UserPlus },
-  { name: "Contact Us", path: "/contact-us", icon: Mail },
 ];
