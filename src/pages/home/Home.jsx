@@ -241,7 +241,7 @@ const Index = () => {
     ]);
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-white to-gray-50/30">
+        <div className="min-h-screen bg-gradient-to-b from-white to-gray-50/30 overflow-x-hidden">
             {/* Main Content Container */}
             <div className="flex flex-col items-center gap-16 lg:gap-24 pb-12 lg:py-24 px-4 lg:px-8">
                 <div className="w-full max-w-7xl">

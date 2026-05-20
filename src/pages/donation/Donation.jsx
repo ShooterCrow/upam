@@ -20,6 +20,7 @@ import {
 import FAQ from '../../component/ui/FAQ';
 import DonationPaymentModal from './DonationPaymentModal';
 import WorldMapWithMarkers from '../../component/ui/WorldMapWithMarkers';
+import { useGetEventsQuery } from '../../pages/UserAdminPages/admin/calendarApiSlice';
 
 const Donation = () => {
     const formRef = useRef(null);
@@ -37,6 +38,11 @@ const Donation = () => {
         phoneNo: '',
         country: '',
     });
+
+    // Fetch Events Data
+    const { data: eventsData, isLoading: eventsLoading } = useGetEventsQuery({ category: 'Event' });
+    const events = eventsData?.data || [];
+    const featuredEvent = events.find(e => e.isFeatured) || events[0];
 
     const presetAmounts = ['10', '25', '50', '100'];
 
@@ -75,7 +81,7 @@ const Donation = () => {
     const activeImpactText = getImpactText(displayAmount);
 
     return (
-        <div className="min-h-screen bg-[#FAFAFC] text-slate-900 font-['Inter',_sans-serif] overflow-x-hidden pt-[72px] lg:pt-[80px]">
+        <div className="min-h-screen bg-[#FAFAFC] text-slate-900 font-['Inter',_sans-serif] overflow-x-hidden">
             {/* Header Hero Area */}
             <div className="relative bg-gradient-to-br from-[#FAFAFC] to-[#F3F4F6] text-slate-900 pt-24 pb-20 px-4 md:px-8 border-b border-gray-100 overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(235,1,12,0.03),transparent_50%)] pointer-events-none" />
@@ -85,44 +91,51 @@ const Donation = () => {
 
                     {/* Left Hero Story */}
                     <div className="space-y-6">
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#EB010C]/10 border border-[#EB010C]/20 text-[#EB010C] text-xs font-bold uppercase tracking-wider">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit">
                             <Sparkles size={14} />
                             Empower Africa's Next Generation
                         </div>
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-slate-900">
                             Fuel the Pan-African Dream.
                         </h1>
-                        <p className="text-base md:text-lg text-slate-650 max-w-xl font-normal leading-relaxed">
-                            Your contribution directly builds digital training academies, local youth hubs, and sustainable infrastructure to connect Africa's future leaders.
-                        </p>
 
                         {/* Latest Event Card */}
-                        <div className="bg-white border border-gray-200 p-6 max-w-xl">
-                            <div className="flex items-center gap-2 text-xs font-bold text-[#EB010C] uppercase tracking-wider mb-3">
-                                <Calendar size={14} />
-                                Upcoming Event Supported by Donations
-                            </div>
-                            <h3 className="text-lg md:text-xl font-extrabold text-slate-900 leading-snug">
-                                UPAM Pan-African Youth Leadership & Economic Summit 2026
-                            </h3>
-                            <p className="text-xs text-slate-500 mt-2 leading-relaxed">
-                                Sponsoring physical space, workshop logistics, training materials, and travel grants for emerging delegates representing over 15 African nations.
-                            </p>
+                        <div className="bg-white border border-gray-200 p-6 max-w-xl transition-all">
+                            {eventsLoading ? (
+                                <div className="animate-pulse space-y-4">
+                                    <div className="h-4 bg-slate-200 rounded w-1/3"></div>
+                                    <div className="h-6 bg-slate-200 rounded w-3/4"></div>
+                                    <div className="h-4 bg-slate-200 rounded w-full"></div>
+                                </div>
+                            ) : featuredEvent ? (
+                                <>
+                                    <div className="flex items-center gap-2 text-xs font-bold text-[#EB010C] uppercase tracking-wider mb-3">
+                                        <Calendar size={14} />
+                                        Featured Event
+                                    </div>
+                                    <h3 className="text-lg md:text-xl font-extrabold text-slate-900 leading-snug">
+                                        {featuredEvent.title}
+                                    </h3>
+                                    <p className="text-xs text-slate-500 mt-2 leading-relaxed line-clamp-2">
+                                        {featuredEvent.description || "Support this critical upcoming initiative."}
+                                    </p>
 
-                            <div className="mt-4 pt-4 border-t border-slate-100 flex flex-wrap gap-4 text-xs font-bold text-slate-700">
-                                <span className="flex items-center gap-1.5">
-                                    <MapPin size={14} className="text-[#EB010C]" />
-                                    Accra, Ghana & Virtual
-                                </span>
-                                <span className="flex items-center gap-1.5">
-                                    <Users size={14} className="text-[#EB010C]" />
-                                    500+ Attendees Sponsoring
-                                </span>
-                            </div>
+                                    <div className="mt-4 pt-4 border-t border-slate-100 flex flex-wrap gap-4 text-xs font-bold text-slate-700">
+                                        <span className="flex items-center gap-1.5">
+                                            <MapPin size={14} className="text-[#EB010C]" />
+                                            {featuredEvent.location || "Virtual / Multiple Locations"}
+                                        </span>
+                                        <span className="flex items-center gap-1.5">
+                                            <Users size={14} className="text-[#EB010C]" />
+                                            {new Date(featuredEvent.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                        </span>
+                                    </div>
+                                </>
+                            ) : null}
                         </div>
 
                         {/* Interactive Trust Badges */}
-                        <div className="grid grid-cols-3 gap-4 max-w-xl pt-4 border-t border-slate-200">
+                        <div className="hidden lg:grid grid-cols-3 gap-4 max-w-xl pt-4 border-t border-slate-200">
                             <div className="flex gap-2.5 items-start">
                                 <div className="p-1 rounded bg-[#EB010C]/5 border border-[#EB010C]/10 text-[#EB010C]">
                                     <Lock size={16} />
@@ -417,7 +430,7 @@ const Donation = () => {
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
 
                     <div className="space-y-6">
-                        <div className="inline-block px-3 py-1 bg-red-50 border border-red-100 text-[#EB010C] text-xs font-bold uppercase tracking-wider rounded-full">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit">
                             Transparency & Accountability
                         </div>
                         <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">
