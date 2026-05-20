@@ -69,8 +69,8 @@ const Donation = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!formData.fullName || !formData.email) {
-            alert('Please fill out your Full Name and Email to continue.');
+        if (!anonymous && (!formData.fullName || !formData.email)) {
+            alert('Please fill out your Full Name and Email to continue, or select Anonymous.');
             return;
         }
         setIsPaymentModalOpen(true);
@@ -260,16 +260,34 @@ const Donation = () => {
                             </div>
 
                             {/* Donor Details */}
-                            <div className="space-y-3 pt-2 border-t border-slate-100">
-                                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Your Information</label>
+                            <div className="space-y-3 pt-4 border-t border-slate-100">
+                                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Your Information</label>
+
+                                <div className="flex items-center gap-2 mb-4 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                    <input
+                                        type="checkbox"
+                                        id="anonymous-check"
+                                        checked={anonymous}
+                                        onChange={(e) => {
+                                            setAnonymous(e.target.checked);
+                                            if (e.target.checked) setFormData({ ...formData, fullName: '', email: '' });
+                                        }}
+                                        className="rounded border-slate-300 text-[#EB010C] focus:ring-[#EB010C] cursor-pointer w-4 h-4"
+                                    />
+                                    <label htmlFor="anonymous-check" className="text-xs text-slate-600 font-bold cursor-pointer select-none">
+                                        Make this donation anonymous
+                                    </label>
+                                </div>
+
                                 <input
                                     type="text"
                                     name="fullName"
                                     value={formData.fullName}
                                     onChange={handleFormChange}
                                     placeholder="Full Name"
-                                    className="w-full bg-slate-50 border border-slate-200 py-3 px-4 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EB010C] focus:border-[#EB010C] transition-all font-medium"
-                                    required
+                                    className={`w-full bg-slate-50 border border-slate-200 py-3 px-4 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EB010C] focus:border-[#EB010C] transition-all font-medium ${anonymous ? 'opacity-40 cursor-not-allowed bg-slate-100 pointer-events-none' : ''}`}
+                                    required={!anonymous}
+                                    disabled={anonymous}
                                 />
                                 <input
                                     type="email"
@@ -277,21 +295,10 @@ const Donation = () => {
                                     value={formData.email}
                                     onChange={handleFormChange}
                                     placeholder="Email Address"
-                                    className="w-full bg-slate-50 border border-slate-200 py-3 px-4 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EB010C] focus:border-[#EB010C] transition-all font-medium"
-                                    required
+                                    className={`w-full bg-slate-50 border border-slate-200 py-3 px-4 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EB010C] focus:border-[#EB010C] transition-all font-medium ${anonymous ? 'opacity-40 cursor-not-allowed bg-slate-100 pointer-events-none' : ''}`}
+                                    required={!anonymous}
+                                    disabled={anonymous}
                                 />
-                                <div className="flex items-center gap-2 pt-1">
-                                    <input
-                                        type="checkbox"
-                                        id="anonymous-check"
-                                        checked={anonymous}
-                                        onChange={(e) => setAnonymous(e.target.checked)}
-                                        className="rounded border-slate-300 text-[#EB010C] focus:ring-[#EB010C] cursor-pointer w-4 h-4"
-                                    />
-                                    <label htmlFor="anonymous-check" className="text-xs text-slate-500 font-bold cursor-pointer select-none">
-                                        Make this donation anonymous
-                                    </label>
-                                </div>
                             </div>
 
                             {/* Submit and Pay */}
