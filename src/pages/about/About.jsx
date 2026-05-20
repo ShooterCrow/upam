@@ -82,7 +82,7 @@ const About = () => {
     };
 
     return (
-        <div className="bg-[#FAFAFC] text-slate-900 font-['Inter',_sans-serif] overflow-x-hidden pt-[72px] lg:pt-[100px]">
+        <div className="bg-[#FAFAFC] text-slate-900 font-['Inter',_sans-serif] overflow-x-hidden pt-[72px] lg:pt-[75px]">
             {/* Hero Section */}
             <div className="relative bg-gradient-to-br from-[#FAFAFC] to-[#F3F4F6] pt-24 pb-20 px-4 md:px-8 border-b border-gray-100 overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(235,1,12,0.03),transparent_50%)] pointer-events-none" />
@@ -129,7 +129,7 @@ const About = () => {
                                 viewport={{ once: true }}
                                 variants={imageRevealVariants}
                                 style={{ translateY: img.y }}
-                                className="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden group shadow-lg"
+                                className="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden group"
                             >
                                 <img
                                     src={img.src}
@@ -212,7 +212,7 @@ const About = () => {
                     </ScrollReveal>
 
                     <ScrollReveal direction="right" className="relative group cursor-pointer">
-                        <div className="relative aspect-video overflow-hidden shadow-2xl">
+                        <div className="relative aspect-video overflow-hidden">
                             <img
                                 src="https://api.builder.io/api/v1/image/assets/TEMP/b3564abd0e1fb1dfb19649f1092e28adc8a02548?width=1310"
                                 alt="Manifesto Video"
@@ -236,7 +236,7 @@ const About = () => {
                         <img
                             src="https://api.builder.io/api/v1/image/assets/TEMP/494bd64452c17d8f73dc5f162ce9131d86969c3b?width=970"
                             alt="UPAM team in action"
-                            className="w-full shadow-lg"
+                            className="w-full"
                         />
                     </ScrollReveal>
                     <ScrollReveal direction="left" className="lg:w-1/2 space-y-6">
@@ -418,14 +418,14 @@ const About = () => {
                         </div>
                         <motion.a
                             whileHover={{ x: 10 }}
-                            className="inline-flex items-center gap-4 bg-slate-900 text-white px-10 py-5 font-black text-xs uppercase tracking-widest group shadow-lg"
+                            className="inline-flex items-center gap-4 bg-slate-900 text-white px-10 py-5 font-black text-xs uppercase tracking-widest group"
                         >
                             <Link to={"/register"}>Join The Movement Now</Link>
 
                             <ArrowRight size={18} className="text-[#EB010C]" />
                         </motion.a>
                     </ScrollReveal>
-                    <ScrollReveal direction="right" className="relative lg:w-1/2 aspect-video overflow-hidden shadow-xl">
+                    <ScrollReveal direction="right" className="relative lg:w-1/2 aspect-video overflow-hidden">
                         <img
                             src="https://api.builder.io/api/v1/image/assets/TEMP/743da7307db5c6f3802fcc3250631182d6dcce9b?width=1422"
                             alt="Community gathering"

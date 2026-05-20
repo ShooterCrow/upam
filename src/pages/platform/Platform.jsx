@@ -96,7 +96,7 @@ const Platform = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-slate-100">
                         {activePlatforms.map((platform, index) => (
                             <ScrollReveal key={index} direction="up" delay={index * 0.1}>
-                                <div className={`group relative p-12 min-h-[420px] flex flex-col justify-between transition-all duration-700 hover:z-10 border-r border-b border-slate-100 overflow-hidden ${platform.isActive ? 'bg-[#EB010C] text-white' : 'bg-white hover:bg-slate-50'}`}>
+                                <div className={`group relative p-12 min-h-[350px] flex flex-col justify-between transition-all duration-700 hover:z-10 border-r border-b border-slate-200 overflow-hidden ${platform.isActive ? 'bg-[#EB010C] text-white' : 'bg-white hover:bg-slate-50'}`}>
                                     {/* Abstract BG Decor */}
                                     <div className={`absolute -right-4 -top-4 w-24 h-24 blur-3xl opacity-20 rounded-full transition-transform duration-700 group-hover:scale-150 ${platform.isActive ? 'bg-white' : 'bg-[#EB010C]'}`} />
 
@@ -145,10 +145,10 @@ const Platform = () => {
                         </div>
                     </ScrollReveal>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-slate-100">
+                    <div className="pb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-slate-100">
                         {developmentPlatforms.map((platform, index) => (
                             <ScrollReveal key={index} direction="up" delay={index * 0.1}>
-                                <div className="group relative p-12 min-h-[420px] flex flex-col justify-between bg-white border-r border-b border-slate-100 transition-all duration-700">
+                                <div className="group relative p-12 min-h-[350px] flex flex-col justify-between bg-white border-r border-b border-slate-100 transition-all duration-700">
                                     <div className="relative z-10">
                                         {platform.logo && (
                                             <div className="mb-10 h-10 w-auto opacity-40">

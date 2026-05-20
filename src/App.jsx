@@ -46,6 +46,7 @@ import UPAMCalender from './pages/UserAdminPages/common/UPAMCalender'
 import AllMembers from './pages/UserAdminPages/admin/AllMembers'
 import MemberDetail from './pages/UserAdminPages/admin/detailPages/MemberDetail'
 import Chapters from './pages/UserAdminPages/admin/chapters/Chapters'
+import PublicChapters from './pages/chapters/Chapters'
 import NotFound from './pages/NotFound'
 import MembershipPayment from './pages/UserAdminPages/common/MembershipPayment'
 import TermsOfService from './pages/legal/TermsOfService'
@@ -107,6 +108,7 @@ const App = () => {
             <Route path="platforms" element={<Platform />} />
 
             {/* Redirects for nav parent paths */}
+            <Route path="chapters" element={<PublicChapters />} />
             <Route path="resources" element={<Navigate to="/publications" replace />} />
             <Route path="membership" element={<Navigate to="/membership-policy" replace />} />
 

@@ -11,8 +11,10 @@ const Footer = () => {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 xl:gap-16 w-full xl:w-auto">
                         {/* Column 1 */}
                         <div className="flex flex-col items-start gap-4">
-                            <h3 className="text-white font-lato text-sm font-normal">About us</h3>
                             <div className="flex flex-col items-start gap-4">
+                                <Link to="/about" className="text-white font-lato text-sm font-normal hover:underline">
+                                    About us
+                                </Link>
                                 <Link to="/contact-us" className="text-white font-lato text-sm font-normal hover:underline">
                                     Contact us
                                 </Link>
@@ -27,18 +29,17 @@ const Footer = () => {
 
                         {/* Column 2 */}
                         <div className="flex flex-col items-start gap-4">
-                            <h3 className="text-white font-lato text-sm font-normal">Join the Movement</h3>
                             <div className="flex flex-col items-start gap-4">
-                                <Link to="/login" className="text-white font-lato text-sm font-normal hover:underline">
-                                    Account
+                                <Link to="/register" className="text-white font-lato text-sm font-normal hover:underline">
+                                    Join the Movement
                                 </Link>
-                                <Link to="/contact-us" className="text-white font-lato text-sm font-normal hover:underline">
-                                    Newsletters
+                                <Link to="/gallery" className="text-white font-lato text-sm font-normal hover:underline">
+                                    Gallery
                                 </Link>
-                                <Link to="/get-involved" className="text-white font-lato text-sm font-normal hover:underline">
-                                    Projects
+                                <Link to="/events" className="text-white font-lato text-sm font-normal hover:underline">
+                                    Events
                                 </Link>
-                                <Link to="/about" className="text-white font-lato text-sm font-normal hover:underline">
+                                <Link to="/chapters" className="text-white font-lato text-sm font-normal hover:underline">
                                     Chapters
                                 </Link>
                             </div>
