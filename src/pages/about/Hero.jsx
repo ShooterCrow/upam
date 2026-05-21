@@ -32,7 +32,7 @@ export function Hero() {
                             className="w-full sm:w-[200px] lg:w-[260px] h-auto lg:h-[340px] object-cover"
                         />
                         <img
-                            src="https://res.cloudinary.com/dyy6gisnk/image/upload/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png"
+                            src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png"
                             alt="UPAM conference"
                             className="w-full sm:w-[400px] lg:w-[563px] h-auto lg:h-[471px] object-cover"
                         />

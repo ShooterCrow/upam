@@ -16,7 +16,7 @@ export default function Publications() {
 
     const articles = [
         {
-            image: "https://res.cloudinary.com/dyy6gisnk/image/upload/c645d8992aef0ef8111a956b8c6c5ab794d951f5_l3dnts.jpg",
+            image: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/c645d8992aef0ef8111a956b8c6c5ab794d951f5_l3dnts.jpg",
             slug: "panafrican-unity",
             title: "Pan-African Unity in the 21st Century: From Ideology to Institutional Action",
             description: "Pan-Africanism has historically served as both an ideological framework and a political movement aimed at the liberation, unity, and advancement of African peoples globally."
@@ -77,7 +77,7 @@ export default function Publications() {
                         </header>
                     </ScrollReveal>
                     <ScrollReveal direction="left">
-                        <img src="https://res.cloudinary.com/dyy6gisnk/image/upload/v1779283260/photo-1488521787991-ed7bbaae773c_ovjeaw.jpg" alt="" />
+                        <img src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779283260/photo-1488521787991-ed7bbaae773c_ovjeaw.jpg" alt="" />
                     </ScrollReveal>
 
                 </div>

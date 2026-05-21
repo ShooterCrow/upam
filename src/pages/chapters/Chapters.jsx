@@ -11,7 +11,7 @@ const Chapters = () => {
     const filtered = (chapters || []).filter(ch =>
         ch.chapter_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         ch.chapter_note?.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    ).sort();
 
     return (
         <div className="min-h-screen bg-[#FAFAFC] text-slate-900 overflow-x-hidden">
@@ -110,7 +110,7 @@ const Chapters = () => {
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-100 border border-slate-100">
-                            {filtered.map((chapter, index) => (
+                            {filtered.sort().map((chapter, index) => (
                                 <ScrollReveal key={chapter._id} direction="up" delay={Math.min(index * 0.05, 0.3)}>
                                     <div className="group bg-white p-8 flex flex-col justify-between hover:bg-slate-50 transition-colors duration-300 h-full min-h-[100px]">
                                         <div>

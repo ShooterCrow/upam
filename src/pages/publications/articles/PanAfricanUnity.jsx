@@ -41,7 +41,7 @@ const PanAfricanUnity = () => {
                         </div>
                         <div className="w-full lg:w-[430px] shrink-0">
                             <img
-                                src="https://res.cloudinary.com/dyy6gisnk/image/upload/c645d8992aef0ef8111a956b8c6c5ab794d951f5_l3dnts.jpg"
+                                src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/c645d8992aef0ef8111a956b8c6c5ab794d951f5_l3dnts.jpg"
                                 alt="Pan-African community"
                                 className="w-full h-auto object-cover"
                             />

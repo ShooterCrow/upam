@@ -15,7 +15,7 @@ const Platform = () => {
             description: "Global media network and radio services covering Pan-African news, politics, culture, and more.",
             link: "https://wnn.africa/",
             external: true,
-            logo: 'https://res.cloudinary.com/dyy6gisnk/image/upload/v1779280898/images_c5qqg3.png'
+            logo: 'https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779280898/images_c5qqg3.png'
         },
         {
             name: "Jumuiya Forum",

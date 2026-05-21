@@ -117,7 +117,7 @@ const About = () => {
                     <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                         {[
                             { src: "https://api.builder.io/api/v1/image/assets/TEMP/7fe6a4a6f31d3a5de91463aff776e511431d8ec3?width=520", alt: "meeting", y: 0 },
-                            { src: "https://res.cloudinary.com/dyy6gisnk/image/upload/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png", alt: "conference", y: 20 },
+                            { src: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png", alt: "conference", y: 20 },
                             { src: "https://api.builder.io/api/v1/image/assets/TEMP/0939de8e4e557c4e75f688148d4757b3f0e275bb?width=520", alt: "community", y: -20 },
                             { src: "https://api.builder.io/api/v1/image/assets/TEMP/65edfbd6618650ee6c39d6d3e581e169f2567595?width=714", alt: "celebration", y: 10 }
                         ].map((img, idx) => (

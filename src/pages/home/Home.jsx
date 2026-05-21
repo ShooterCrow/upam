@@ -281,7 +281,7 @@ const Index = () => {
                             {/* Right Column - Video / Image */}
                             <div className="relative group overflow-hidden bg-slate-900">
                                 <img
-                                    src="https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg"
+                                    src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg"
                                     alt="UPAM Mission"
                                     className="w-full object-cover opacity-80 transition-transform duration-1000 group-hover:scale-110"
                                 />
@@ -452,14 +452,14 @@ const Index = () => {
                                 {/* Scrolling container with slow animation */}
                                 <div className="flex animate-scroll-slow hover:pause-animation">
                                     {[
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288535/c5dbbb8bc42b46092812e5f987dc66eaf6cb2b68_urieei.jpg",
+                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg",
+                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
+                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
+                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
+                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288535/c5dbbb8bc42b46092812e5f987dc66eaf6cb2b68_urieei.jpg",
                                         "https://api.builder.io/api/v1/image/assets/TEMP/e30f23ba83e18af62762d04d97d7fb23736884ea?width=400",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288902/c78f0671096d20f62827357b9a362ac828bdbbf9_kzt0tj.jpg",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg"
+                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288902/c78f0671096d20f62827357b9a362ac828bdbbf9_kzt0tj.jpg",
+                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg"
                                     ].map((src, index) => (
                                         <div key={`gallery-${index}`} className="flex-shrink-0 w-64 md:w-80 lg:w-96 mx-3 group">
                                             <div className="relative overflow-hidden bg-slate-900 shadow-lg transition-all duration-500">
@@ -477,7 +477,7 @@ const Index = () => {
                                     {/* Duplicate set */}
                                     {[
                                         "https://api.builder.io/api/v1/image/assets/TEMP/b25f74c0c208851c995df3fe41a15ea551fbb960?width=400",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
+                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
                                         "https://api.builder.io/api/v1/image/assets/TEMP/683f693939e917cd3297ff8c6e8af8554e42eae3?width=400",
                                         "https://api.builder.io/api/v1/image/assets/TEMP/1baa487a59315c54db38e9d2509b9139cca12f04?width=400",
                                         "https://api.builder.io/api/v1/image/assets/TEMP/07536e0af663886d7094bb2f428fbad257f117cd?width=400",

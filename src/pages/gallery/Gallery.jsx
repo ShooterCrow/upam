@@ -6,15 +6,15 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const galleryImages = [
-    { id: 1, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg", alt: "Get High on Ambitions not Drugs by VMF & UPAM" },
-    { id: 2, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png", alt: "Leaders Meeting" },
-    { id: 3, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg", alt: "Solar Project by UPAM" },
-    { id: 4, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288535/c5dbbb8bc42b46092812e5f987dc66eaf6cb2b68_urieei.jpg", alt: "Community Sanitation by The Team" },
-    { id: 5, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg", alt: "School Outreach | VMF & UPAM" },
-    { id: 6, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288902/c78f0671096d20f62827357b9a362ac828bdbbf9_kzt0tj.jpg", alt: "Advocacy | UPAM Team Nigeria" },
-    { id: 7, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288971/e4f08dd2f9052c23931f4dc05204bf77ec2f38df_ildtog.jpg", alt: "VMF Outreach to Suleja Prison | VMF & UPAM" },
-    { id: 8, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779289067/13fcb39e74661c7a9c2b958ca967f5f9bdb3d4d2_htywqy.jpg", alt: "Sanitation UPAM Team" },
-    { id: 9, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779289158/86de539d2a97e136c3c2d19e422562df9c06e468_n8r0xw.jpg", alt: "UPAM Community Development" },
+    { id: 1, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg", alt: "Get High on Ambitions not Drugs by VMF & UPAM" },
+    { id: 2, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png", alt: "Leaders Meeting" },
+    { id: 3, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg", alt: "Solar Project by UPAM" },
+    { id: 4, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288535/c5dbbb8bc42b46092812e5f987dc66eaf6cb2b68_urieei.jpg", alt: "Community Sanitation by The Team" },
+    { id: 5, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg", alt: "School Outreach | VMF & UPAM" },
+    { id: 6, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288902/c78f0671096d20f62827357b9a362ac828bdbbf9_kzt0tj.jpg", alt: "Advocacy | UPAM Team Nigeria" },
+    { id: 7, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288971/e4f08dd2f9052c23931f4dc05204bf77ec2f38df_ildtog.jpg", alt: "VMF Outreach to Suleja Prison | VMF & UPAM" },
+    { id: 8, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779289067/13fcb39e74661c7a9c2b958ca967f5f9bdb3d4d2_htywqy.jpg", alt: "Sanitation UPAM Team" },
+    { id: 9, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779289158/86de539d2a97e136c3c2d19e422562df9c06e468_n8r0xw.jpg", alt: "UPAM Community Development" },
   ];
 
   return (

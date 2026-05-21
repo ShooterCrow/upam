@@ -78,7 +78,7 @@ const About = () => {
                                 className="w-[31.6%] h-auto object-cover"
                             />
                             <img
-                                src="https://res.cloudinary.com/dyy6gisnk/image/upload/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png"
+                                src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png"
                                 alt="UPAM conference"
                                 className="w-[68.4%] h-auto object-cover"
                             />

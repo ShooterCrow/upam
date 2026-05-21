@@ -41,7 +41,7 @@ const DigitalLiteracy = () => {
             </div>
             <div className="w-full lg:w-[430px] shrink-0">
               <img
-                src="https://res.cloudinary.com/dyy6gisnk/image/upload/v1779263591/03844d6c8c31f7c08718fa4374cf6d00fa346904_lpol7w.png"
+                src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779263591/03844d6c8c31f7c08718fa4374cf6d00fa346904_lpol7w.png"
                 alt="African technology and community"
                 className="w-full h-auto object-cover"
               />
@@ -150,7 +150,7 @@ const DigitalLiteracy = () => {
             The digital economy offers new avenues for wealth creation, yet ownership remains a critical concern. Many digital platforms operating in Africa—social media, e-commerce, cloud services—are owned by foreign corporations. This raises questions about data sovereignty, profit extraction, and long-term dependency. African self-sufficiency requires building and supporting African-owned digital platforms, fintech systems, and data infrastructure. Ownership ensures that value generated within African digital spaces circulates locally, funding further innovation and development. Data, often described as the “new oil,” must be treated as a strategic resource. African control over data governance and digital infrastructure is essential for economic and political autonomy.
           </p>
           <img
-            src="https://res.cloudinary.com/dyy6gisnk/image/upload/v1779263497/1586336c8630d744a01c5e9365c019966728c838_tcmo19.png"
+            src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779263497/1586336c8630d744a01c5e9365c019966728c838_tcmo19.png"
             alt="African markets and vendors"
             className="w-full h-auto object-cover mb-8"
           />
