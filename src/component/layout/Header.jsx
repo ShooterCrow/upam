@@ -215,7 +215,7 @@ const Header = () => {
                     <div className="absolute -left-10 -top-10 w-32 h-32 bg-[#EB010C]/5 blur-2xl rounded-full" />
                 </div>
 
-                <div className="flex items-center justify-between py-4">
+                <div className="flex items-center justify-between py-4 px-4">
                     <div className="flex items-center gap-2">
                         <div>
                             <Link to="/" translate="no" className="hover:opacity-80 transition-opacity">

@@ -64,13 +64,6 @@ const Footer = () => {
                                     NAMIBIA
                                 </p>
                             </div>
-                            <a
-                                href="tel:+264812101200"
-                                className="flex items-center gap-2 text-white font-lato text-base font-semibold leading-normal hover:text-[#EB010C] transition-colors"
-                            >
-                                <Phone size={16} />
-                                +264 81 210 1200
-                            </a>
                         </div>
                     </div>
 

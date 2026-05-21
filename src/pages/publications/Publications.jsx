@@ -60,7 +60,7 @@ export default function Publications() {
                 {/* Hero Section */}
                 <div className="flex flex-col lg:flex-row gap-3">
                     <ScrollReveal direction="right">
-                        <header className="max-w-4xl mb-24 md:mb-32">
+                        <header className="max-w-4xl mb-5 md:mb-32">
                             <div className="flex items-center gap-3 mb-8">
                                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-bold w-fit uppercase tracking-widest border-l-2 border-[#EB010C]">
                                     Resources & Perspectives
@@ -70,24 +70,24 @@ export default function Publications() {
                                 Knowledge that strengthens African unity, <br className="hidden md:block" />
                                 informs policy, and drives sustainable development.
                             </h1>
-                            <p className="text-base text-slate-600 leading-relaxed font-medium max-w-2xl">
+                            <p className="text-base max-w-xl text-slate-600 leading-relaxed font-medium">
                                 UPAM publications reflect our commitment to research, advocacy, and evidence-based action.
                                 From policy papers to research documents, these resources support informed decision-making.
                             </p>
                         </header>
                     </ScrollReveal>
                     <ScrollReveal direction="left">
-                        <img src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779283260/photo-1488521787991-ed7bbaae773c_ovjeaw.jpg" alt="" />
+                        <img className='mb-10' width={500} src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779283260/photo-1488521787991-ed7bbaae773c_ovjeaw.jpg" alt="" />
                     </ScrollReveal>
 
                 </div>
 
                 {/* Tab Switcher */}
                 <ScrollReveal direction="up" delay={0.1}>
-                    <div className="flex flex-wrap gap-0 mb-16 border-b border-slate-100">
+                    <div className="flex flex-wrap gap-0 mb-10 border-b border-slate-100">
                         <button
                             onClick={() => setActiveTab('articles')}
-                            className={`px-10 py-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 relative group ${activeTab === 'articles' ? 'text-[#EB010C]' : 'text-slate-400 hover:text-slate-900'}`}
+                            className={`px-5 py-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 relative group ${activeTab === 'articles' ? 'text-[#EB010C]' : 'text-slate-400 hover:text-slate-900'}`}
                         >
                             Articles & Research
                             {activeTab === 'articles' && <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#EB010C]" />}
@@ -95,7 +95,7 @@ export default function Publications() {
                         </button>
                         <button
                             onClick={() => setActiveTab('reports')}
-                            className={`px-10 py-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 relative group ${activeTab === 'reports' ? 'text-[#EB010C]' : 'text-slate-400 hover:text-slate-900'}`}
+                            className={`px-5 py-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 relative group ${activeTab === 'reports' ? 'text-[#EB010C]' : 'text-slate-400 hover:text-slate-900'}`}
                         >
                             Reports & Policy
                             {activeTab === 'reports' && <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#EB010C]" />}

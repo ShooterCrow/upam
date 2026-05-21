@@ -23,12 +23,13 @@ export const globalExecutive = [
     title: "Global Secretary General",
     image: "/pics/terfa.png",
   },
-  //   {
-  //     id: 5,
-  //     name: "Augustine Nyakatoma",
-  //     title: "Speaker of National Representative",
-  //     image: "/pics/nyakatoma.png",
-  //   },
+  {
+    id: 5,
+    name: "Augustine Nyakatoma",
+    title: "Speaker of National Representative",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779380142/WhatsApp_Image_2026-05-21_at_16.55.29_e0ushp.jpg",
+  },
   // {
   //     id: 6,
   //     name: "Prof. Njoroge Gitomeh",
@@ -53,12 +54,13 @@ export const globalExecutive = [
     title: "Legal Affairs",
     image: "/pics/standa.jpeg",
   },
-  // {
-  //     id: 9,
-  //     name: "Mrs. Muthoni Mwangi",
-  //     title: "Global Secretary of Partnership and Networking",
-  //     image: "/pics/minga.png"
-  // },
+  {
+    id: 9,
+    name: "Mrs. Muthoni Mwangi",
+    title: "Global Secretary of Partnership and Networking",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779380148/WhatsApp_Image_2026-05-21_at_17.02.29_wxvgj5.jpg",
+  },
   // {
   //     id: 10,
   //     name: "Miheret Gemida",
@@ -75,7 +77,8 @@ export const globalExecutive = [
     id: 12,
     name: "Pius Ntitya",
     title: "Global Secretary of Climate Change and Environmental Protection",
-    image: "/pics/pius.png",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779381405/pius-removebg-preview_1_zigjla.png",
   },
   // {
   //     id: 13,
@@ -154,5 +157,19 @@ export const directors = [
   //     name: "Rachel Eleojo Sunday",
   //     title: "Director of UPAM Academy",
   //     image: "/images/leadership/rachel-sunday.jpg"
-  // }
+  // },
+  {
+    id: 24,
+    name: "Rita Agu",
+    title: "Director of internal communications",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779380144/WhatsApp_Image_2026-05-21_at_16.58.27_yb5mhj.jpg",
+  },
+  {
+    id: 25,
+    name: "Faith Augustine",
+    title: "Reporter",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779380144/1779157735407_2_aslqrt.jpg",
+  },
 ];

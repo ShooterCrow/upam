@@ -526,12 +526,6 @@ const Support = () => {
                     </p>
                 </div>
 
-                {isAdmin && (
-                    <div className="flex items-center gap-2 text-sm font-bold text-green-500 bg-green-50 px-4 py-2 rounded-full">
-                        <Clock size={16} />
-                        Average response: 24h
-                    </div>
-                )}
             </div>
 
             {/* Main Content */}
