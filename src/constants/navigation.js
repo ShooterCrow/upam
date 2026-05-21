@@ -145,12 +145,12 @@ export const PUBLIC_LINKS = [
     icon: UserPlus,
     hasDropdown: true,
     children: [
+      { name: "Donation", path: "/donation", icon: Heart },
       { name: "Get Involved", path: "/get-involved" },
       { name: "Membership Policy", path: "/membership-policy" },
       { name: "Membership Agreement", path: "/membership-agreement" },
       { name: "Search Members", path: "/search" },
       { name: "Chapters", path: "/chapters" },
-      { name: "Donation", path: "/donation", icon: Heart },
       { name: "Contact Us", path: "/contact-us" },
     ],
   },

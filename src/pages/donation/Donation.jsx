@@ -254,8 +254,8 @@ const Donation = () => {
                                 >
                                     <option value="general">General Support (Allocated where needed)</option>
                                     <option value="education">UPAM Academy & Scholarships</option>
-                                    <option value="digital">Digital Infrastructure & Connectivity</option>
-                                    <option value="youth">Youth Leadership Initiatives</option>
+                                    <option value="digital">Jumuiya Forum</option>
+                                    <option value="youth">Wakanda News Network</option>
                                 </select>
                             </div>
 
@@ -330,7 +330,7 @@ const Donation = () => {
                         <div className="space-y-4">
                             <div className="h-48 rounded-2xl overflow-hidden relative">
                                 <img
-                                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&fit=crop"
+                                    src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779376625/2026-03-14_wcb9kc.webp"
                                     alt="UPAM Academy"
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                 />
@@ -373,7 +373,7 @@ const Donation = () => {
                                     Digital Forums
                                 </div>
                             </div>
-                            <h3 className="text-xl font-black text-slate-900">Jumuiya Forum & WNN Africa</h3>
+                            <h3 className="text-xl font-black text-slate-900">Jumuiya Forum</h3>
                             <p className="text-xs text-slate-500 leading-relaxed">
                                 Promotes digital integration and unified media across the continent. Donations fund server support, development of safe collaborative forums, and public media broadcasts.
                             </p>
@@ -389,7 +389,7 @@ const Donation = () => {
                                 onClick={() => handleQuickSponsor('digital', '25')}
                                 className="w-full py-2.5 bg-white hover:bg-slate-900 border border-slate-200 text-slate-800 hover:text-white rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1 group-hover:bg-[#EB010C] group-hover:text-white group-hover:border-[#EB010C]"
                             >
-                                Support Media & Forums
+                                Support Jumuiya
                                 <ArrowRight size={14} />
                             </button>
                         </div>
@@ -400,17 +400,17 @@ const Donation = () => {
                         <div className="space-y-4">
                             <div className="h-48 rounded-2xl overflow-hidden relative">
                                 <img
-                                    src="https://images.unsplash.com/photo-1542385151-efd9000785a0?w=600&fit=crop"
-                                    alt="Sudan Clean Energy"
+                                    src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779280898/images_c5qqg3.png"
+                                    alt="WNN Africa"
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                 />
                                 <div className="absolute top-3 left-3 px-3 py-1 bg-[#EB010C] text-white text-[10px] font-bold uppercase tracking-wider rounded-full">
-                                    Energy & Health
+                                    Wakanda News Network - WNN Africa
                                 </div>
                             </div>
-                            <h3 className="text-xl font-black text-slate-900">Sudan Energy & Health Programs</h3>
+                            <h3 className="text-xl font-black text-slate-900">WNN Africa</h3>
                             <p className="text-xs text-slate-500 leading-relaxed">
-                                Supporting Sudan National Energy Research Center with clean energy systems, while conducting healthcare programs and humanitarian support cross-continentally.
+                                Wakanda News Network (WNN) Africa is a Pan-African media platform dedicated to telling the stories of Africa, by Africans. We provide a platform for African voices to be heard, and for African stories to be told.
                             </p>
 
                             <ul className="text-xs text-slate-600 space-y-1.5 pt-2 border-t border-slate-200/60">
@@ -424,7 +424,7 @@ const Donation = () => {
                                 onClick={() => handleQuickSponsor('youth', '100')}
                                 className="w-full py-2.5 bg-white hover:bg-slate-900 border border-slate-200 text-slate-800 hover:text-white rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1 group-hover:bg-[#EB010C] group-hover:text-white group-hover:border-[#EB010C]"
                             >
-                                Support Energy & Health
+                                Support WNN Africa
                                 <ArrowRight size={14} />
                             </button>
                         </div>

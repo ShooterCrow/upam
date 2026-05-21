@@ -312,7 +312,7 @@ const Index = () => {
 
                                 <div className="hidden lg:block order-1 lg:order-2 relative group overflow-hidden">
                                     <img
-                                        src="https://api.builder.io/api/v1/image/assets/TEMP/3aff55db95a13f272ccc48de58a70673598f80db?width=862"
+                                        src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg"
                                         alt="Pan-African Unity"
                                         className="w-full lg:aspect-square object-cover transition-transform duration-1000 group-hover:scale-110"
                                     />
