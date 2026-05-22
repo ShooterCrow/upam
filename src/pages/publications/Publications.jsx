@@ -87,7 +87,7 @@ export default function Publications() {
                     <div className="flex flex-wrap gap-0 mb-10 border-b border-slate-100">
                         <button
                             onClick={() => setActiveTab('articles')}
-                            className={`px-5 py-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 relative group ${activeTab === 'articles' ? 'text-[#EB010C]' : 'text-slate-400 hover:text-slate-900'}`}
+                            className={`px-2 py-4 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 relative group ${activeTab === 'articles' ? 'text-[#EB010C]' : 'text-slate-400 hover:text-slate-900'}`}
                         >
                             Articles & Research
                             {activeTab === 'articles' && <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#EB010C]" />}
@@ -95,7 +95,7 @@ export default function Publications() {
                         </button>
                         <button
                             onClick={() => setActiveTab('reports')}
-                            className={`px-5 py-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 relative group ${activeTab === 'reports' ? 'text-[#EB010C]' : 'text-slate-400 hover:text-slate-900'}`}
+                            className={`px-2 py-4 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 relative group ${activeTab === 'reports' ? 'text-[#EB010C]' : 'text-slate-400 hover:text-slate-900'}`}
                         >
                             Reports & Policy
                             {activeTab === 'reports' && <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#EB010C]" />}
