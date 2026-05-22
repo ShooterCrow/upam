@@ -3,11 +3,11 @@ import React from 'react';
 import worldMapImg from '../../assets/world_map.png';
 const mapMarkers = [
     { top: '50%', left: '28%', label: 'Nigeria', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face' },
-    { top: '24%', left: '15%', label: 'Kenya', img: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=80&h=80&fit=crop&crop=face' },
-    { top: '36%', left: '51%', label: 'Tanzania', img: 'https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=80&h=80&fit=crop&crop=face' },
-    { top: '22%', left: '80%', label: 'Cameroon', img: 'https://images.unsplash.com/photo-1548142813-c348350df52b?w=80&h=80&fit=crop&crop=face' },
-    { top: '12%', left: '36%', label: 'Namibia', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=80&h=80&fit=crop&crop=face' },
-    { top: '64%', left: '56%', label: 'Malawi', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=80&h=80&fit=crop&crop=face' },
+    { top: '24%', left: '15%', label: 'Kenya', img: 'https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779463331/shot-of-a-beautiful-young-woman-wearing-traditional-african-clothing-against-an-urban_ej1nse.jpg' },
+    { top: '36%', left: '51%', label: 'Tanzania', img: 'https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779463313/Screenshot_2026-05-22_162006_xms8iu.png' },
+    { top: '22%', left: '80%', label: 'Cameroon', img: 'https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779463277/images_3_kcpv3z.jpg' },
+    { top: '12%', left: '36%', label: 'Namibia', img: 'https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779463280/istockphoto-1394347360-612x612_lrfa6f.jpg' },
+    { top: '64%', left: '56%', label: 'Malawi', img: 'https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779463276/istockphoto-2052274106-612x612_saiybs.jpg' },
 ];
 
 const WorldMapWithMarkers = () => (
