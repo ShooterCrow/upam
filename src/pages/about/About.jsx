@@ -95,7 +95,7 @@ const About = () => {
                                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-bold w-fit uppercase tracking-widest border-l-2 border-[#EB010C]">
                                     About Us
                                 </div>
-                                <h1 className="text-2xl md:text-4xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900 uppercase">
+                                <h1 className="text-3xl md:text-4xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900 uppercase">
                                     Uniting Africa.<br /> Empowering People.
                                 </h1>
                                 <p className="text-base text-slate-600 leading-relaxed font-medium">

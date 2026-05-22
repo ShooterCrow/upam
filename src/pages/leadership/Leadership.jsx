@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { globalExecutive, nationalRepresentatives, directors } from '../../constants/leaders';
+import { globalExecutive, nationalRepresentatives, directors, members } from '../../constants/leaders';
 import ScrollReveal from '../../components/ScrollReveal';
 import { Users, Globe, Building2, ArrowRight } from 'lucide-react';
 
@@ -113,7 +113,7 @@ const Leadership = () => {
                 </div>
             </div>
 
-            <main className="max-w-7xl mx-auto py-12 px-6">
+            <div className="max-w-7xl mx-auto py-12 px-6">
                 {/* Global Executive Section */}
                 <Section
                     title="Global Executives"
@@ -140,7 +140,16 @@ const Leadership = () => {
                     profiles={directors}
                     description="Oversight and financial governance to ensure long-term stability and impact."
                 />
-            </main>
+
+                {/* Members Section */}
+                <Section
+                    title="Members"
+                    subtitle="Strategic Oversight"
+                    icon={Building2}
+                    profiles={members}
+                    description="Oversight and financial governance to ensure long-term stability and impact."
+                />
+            </div>
         </div>
     );
 }

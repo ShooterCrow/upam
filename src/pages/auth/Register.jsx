@@ -85,7 +85,7 @@ const Register = () => {
     <div className="bg-white min-h-screen pt-[40px] lg:pt-0">
       <div className="flex flex-col lg:flex-row-reverse min-h-screen bg-white">
         {/* Form Container */}
-        <div className="flex-1 flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:px-32 py-12">
+        <div className="flex-1 flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:px-32 lg:pt-32 py-12">
           <ScrollReveal direction="up" className="w-full max-w-[450px] mx-auto">
             <div className="mb-10">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] mb-6">

@@ -49,12 +49,6 @@ export const globalExecutive = [
   //     image: "/pics/lorraine.png"
   // },
   {
-    id: 17,
-    name: "Mr. Standa Sani",
-    title: "Legal Affairs",
-    image: "/pics/standa.jpeg",
-  },
-  {
     id: 9,
     name: "Mrs. Muthoni Mwangi",
     title: "Global Secretary of Partnership and Networking",
@@ -164,6 +158,15 @@ export const directors = [
     title: "Director of internal communications",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779380144/WhatsApp_Image_2026-05-21_at_16.58.27_yb5mhj.jpg",
+  },
+];
+
+export const members = [
+  {
+    id: 17,
+    name: "Standa Sani",
+    title: "Legal Affairs",
+    image: "/pics/standa.jpeg",
   },
   {
     id: 25,

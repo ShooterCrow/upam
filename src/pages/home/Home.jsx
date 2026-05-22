@@ -11,6 +11,7 @@ import WorldMapWithMarkers from '../../component/ui/WorldMapWithMarkers';
 import { globalExecutive } from '../../constants/leaders';
 import ScrollReveal from '../../components/ScrollReveal';
 import { useGetEventsQuery } from '../UserAdminPages/admin/calendarApiSlice';
+import SingleSlider from '../../components/SingleSlider';
 
 
 const ReadMore = ({ text, newTab, link }) => {
@@ -144,7 +145,7 @@ const UnitedAfricaHero = () => {
                 <ScrollReveal direction="up">
                     <div className="space-y-8">
 
-                        <h1 className="text-3xl md:text-4xl lg:text-6xl font-black text-slate-900 leading-[1.05] tracking-tight uppercase">
+                        <h1 className="text-3xl md:text-4xl lg:text-6xl font-black text-slate-900 lg:leading-[1.05] lg:tracking-tight uppercase">
                             A United Africa, Rising Together
                             <div className="flex flex-wrap justify-center items-center gap-x-4">
                                 <span>With One</span>
@@ -205,6 +206,11 @@ const Index = () => {
     const [openFaq, setOpenFaq] = useState(0);
     const [activeFocus, setActiveFocus] = useState(0);
     const locations = []; // Markers are hardcoded in WorldMapWithMarkers
+    const images = [
+        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779449532/ae109f1f9e9b12a967427c8a6e5f7c76190fb577_ncxlu7.jpg",
+        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
+        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
+    ]
 
     const focusAreas = [
         {
@@ -311,13 +317,9 @@ const Index = () => {
                                 </div>
 
                                 <div className="hidden lg:block order-1 lg:order-2 relative group overflow-hidden">
-                                    <img
-                                        src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg"
-                                        alt="Pan-African Unity"
-                                        className="w-full lg:aspect-square object-cover transition-transform duration-1000 group-hover:scale-110"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                                    <SingleSlider slides={images} />
                                 </div>
+
                             </div>
                         </section>
                     </ScrollReveal>
