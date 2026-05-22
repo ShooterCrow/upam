@@ -62,7 +62,7 @@ const Platform = () => {
 
                 {/* Hero Section */}
                 <ScrollReveal direction="up">
-                    <header className="max-w-4xl mb-24 md:mb-32">
+                    <header className="max-w-4xl mb-12 md:mb-20">
                         <div className="flex items-center gap-3 mb-8">
                             <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-bold w-fit uppercase tracking-widest border-l-2 border-[#EB010C]">
                                 Our Ecosystem
@@ -74,7 +74,7 @@ const Platform = () => {
                                 Platforms
                                 <Orbit className="w-12 h-12 md:w-16 md:h-16 stroke-[1.5]" />
                             </span> */}
-                            Welcome to upam platforms, here you have various platforms that are operated by the organization
+                            Welcome to <span className='text-[#EB010C]'>upam platforms</span>, here you have various platforms that are operated by the organization
                         </h1>
                         {/* <p className="text-xl md:text-2xl text-slate-600 leading-relaxed font-medium max-w-2xl">
                             Driving Pan-African unity and economic growth through a

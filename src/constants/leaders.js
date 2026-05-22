@@ -101,12 +101,13 @@ export const globalExecutive = [
 ];
 
 export const nationalRepresentatives = [
-  // {
-  //     id: 17,
-  //     name: "Rachel Eleojo Sunday",
-  //     title: "National Representative Nigeria",
-  //     image: "/images/leadership/rachel-sunday.jpg"
-  // },
+  {
+    id: 17,
+    name: "Rachel Eleojo Sunday",
+    title: "National Representative Nigeria",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779469977/51a261deb6322848cacaa311437b061078360c6c-removebg-preview_dv0zoi.png",
+  },
   // {
   //     id: 17,
   //     name: "Kettie Mchekeni",
@@ -119,6 +120,13 @@ export const nationalRepresentatives = [
   //     title: "National Representative Tanzania",
   //     image: "/pics/minga.png",
   //   },
+  {
+    id: 19,
+    name: "Clement McDonald",
+    title: "National Representative Jamaica",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779469978/baaa595454893fe572eb9897f235aaf4aeaf854c_yjdaoa.jpg",
+  },
 ];
 
 export const directors = [

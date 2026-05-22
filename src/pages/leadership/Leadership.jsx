@@ -144,10 +144,10 @@ const Leadership = () => {
                 {/* Members Section */}
                 <Section
                     title="Members"
-                    subtitle="Strategic Oversight"
-                    icon={Building2}
+                    subtitle="Dedicated Contributors"
+                    icon={Users}
                     profiles={members}
-                    description="Oversight and financial governance to ensure long-term stability and impact."
+                    description="Members dedicated to ensure the continuos progress and growth of the movement."
                 />
             </div>
         </div>
