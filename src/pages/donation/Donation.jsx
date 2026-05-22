@@ -536,7 +536,7 @@ const Donation = () => {
             </section>
 
             {/* Bottom secure banner CTA */}
-            <section className="bg-slate-100 py-20 px-4 md:px-8 text-center text-slate-900 relative overflow-hidden border-t border-slate-200">
+            {/* <section className="bg-slate-100 py-20 px-4 md:px-8 text-center text-slate-900 relative overflow-hidden border-t border-slate-200">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(235,1,12,0.02),transparent_50%)] pointer-events-none" />
                 <div className="max-w-2xl mx-auto space-y-6 relative z-10">
                     <Heart size={44} className="text-[#EB010C] mx-auto animate-pulse fill-red-500/10" />
@@ -552,7 +552,7 @@ const Donation = () => {
                         <ArrowUpRight size={16} />
                     </button>
                 </div>
-            </section>
+            </section> */}
 
             {/* Secure Payment Modal wrapper */}
             <DonationPaymentModal
