@@ -1,56 +1,36 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, ArrowUpRight, ChevronDown, ChevronUp, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Send, ArrowRight } from 'lucide-react';
 import worldMap from '../../assets/world_map.png';
-import benefitsImg from '../../assets/benefits.png';
 import { useCreateContactMutation } from './contactsApiSlice';
-import LoadingState from '../../component/ui/LoadingState';
-import ErrorState from '../../component/ui/ErrorState';
-import SuccessState from '../../component/ui/SuccessState';
+import ScrollReveal from '../../components/ScrollReveal';
+import FAQ from '../../component/ui/FAQ';
+
+const TikTokIcon = () => (
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11.6667 0H8.33333V13.3333C8.33333 14.2538 7.58714 15 6.66667 15C5.74619 15 5 14.2538 5 13.3333C5 12.4129 5.74619 11.6667 6.66667 11.6667V8.33333C3.916 8.33333 1.66667 10.5827 1.66667 13.3333C1.66667 16.084 3.916 18.3333 6.66667 18.3333C9.41733 18.3333 11.6667 16.084 11.6667 13.3333V5C13.5047 6.324 15.7533 7.08333 18.3333 7.08333V3.75C16.0333 3.75 13.9167 2.75 12.5 1.16667C12.1667 0.75 11.9167 0.333333 11.6667 0Z" />
+    </svg>
+);
+
+const socials = [
+    { label: 'Facebook', href: 'https://www.facebook.com/unitedpam', icon: Facebook },
+    { label: 'X (Twitter)', href: 'https://x.com/UPAM_Official', icon: Twitter },
+    { label: 'Instagram', href: 'https://www.instagram.com/unitedpam', icon: Instagram },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/company/upamacademy', icon: Linkedin },
+    { label: 'TikTok', href: 'https://www.tiktok.com/@upam56', icon: TikTokIcon },
+];
 
 const ContactUs = () => {
-    const [createContact, { isLoading, isSuccess, isError, error, reset }] = useCreateContactMutation();
-    const [openFaq, setOpenFaq] = useState(null);
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        phone: '',
-        message: ''
-    });
-
-    const faqs = [
-        {
-            q: "What is UPAM (United Pan-Africanist Movement)?",
-            a: "UPAM is a Pan-African organization focused on unity, empowerment, leadership development, and sustainable progress across Africa and the diaspora."
-        },
-        {
-            q: "Who can become a member of UPAM?",
-            a: "Membership is open to various categories: UPAM Members, UPAM Executive, Students, and the Diaspora. We recognize all participants committed to our mission."
-        },
-        {
-            q: "How can I join or get involved with UPAM?",
-            a: "You can join by clicking 'Join Now' or 'Volunteer Now' buttons on our Get Involved page to start your application process."
-        },
-        {
-            q: "Where does UPAM operate?",
-            a: "UPAM operates a structured leadership system with a presence in countries including Kenya, Tanzania, Namibia, Cameroon, Nigeria, and Malawi."
-        },
-        {
-            q: "What kind of programs and initiatives does UPAM run?",
-            a: "UPAM runs various programs including leadership development, community empowerment, and sustainable development projects."
-        },
-        {
-            q: "How is UPAM funded?",
-            a: "UPAM is funded through membership contributions, partnerships, and donations from supporters of the Pan-African movement."
-        }
-    ];
+    const [createContact, { isLoading, isSuccess, reset }] = useCreateContactMutation();
+    const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
+    const [submitError, setSubmitError] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setSubmitError(null);
         try {
             await createContact(formData).unwrap();
-            // Form clearing is handled in the SuccessState onAction, or you can do it here if you prefer not to wait for user action
         } catch (err) {
-            console.error('Failed to save contact message: ', err);
+            setSubmitError(err?.data?.message || 'Failed to send message. Please try again.');
         }
     };
 
@@ -59,257 +39,206 @@ const ContactUs = () => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    const inputClass = "w-full bg-[#F9F9F9] border-b-2 border-slate-200 focus:border-[#EB010C] px-0 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none transition-colors font-medium";
+    const labelClass = "block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1";
+
     return (
-        <div className="bg-white min-h-screen font-['Lato',_sans-serif] text-black">
-            {/* Hero & Form Section */}
-            <div className="max-w-7xl mx-auto container mx-auto px-4 md:px-8 pb-16 md:pb-24">
+        <div className="min-h-screen bg-[#FAFAFC] text-slate-900 overflow-x-hidden">
 
-                <h1 className="text-[32px] md:text-[48px] font-semibold leading-[1.2] mb-12">
-                    Get in touch with us. We're here to assist you.
-                </h1><div className="grid md:grid-cols-2 gap-12 items-center">
-                    {/* Left: Heading and Form */}
-                    {isSuccess ? (
-                        <SuccessState
-                            title="Message Sent Successfully!"
-                            message="Thank you for reaching out. We have received your message and will get back to you shortly."
-                            actionLabel="Send Another Message"
-                            onAction={() => {
-                                reset();
-                                setFormData({ name: '', email: '', phone: '', message: '' });
-                            }}
-                        />
-                    ) : (
-                        <>
-
-                            {isError && (
-                                <div className="mb-6">
-                                    <ErrorState
-                                        message={error?.data?.message || "Failed to send message. Please try again."}
-                                    />
-                                </div>
-                            )}
-
-                            <form onSubmit={handleSubmit} className="space-y-6">
-                                <div>
-                                    <label className="block text-sm font-medium mb-2">Your Name</label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        placeholder="Enter your name"
-                                        className="w-full px-4 py-3 bg-[#F9F9F9] border border-gray-100 focus:outline-none focus:border-red-600 transition-colors"
-                                        required
-                                        disabled={isLoading}
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium mb-2">Email Address</label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        placeholder="Enter your email"
-                                        className="w-full px-4 py-3 bg-[#F9F9F9] border border-gray-100 focus:outline-none focus:border-red-600 transition-colors"
-                                        required
-                                        disabled={isLoading}
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium mb-2">Phone Number (optional)</label>
-                                    <input
-                                        type="tel"
-                                        name="phone"
-                                        value={formData.phone}
-                                        onChange={handleChange}
-                                        placeholder="Enter your phone number"
-                                        className="w-full px-4 py-3 bg-[#F9F9F9] border border-gray-100 focus:outline-none focus:border-red-600 transition-colors"
-                                        disabled={isLoading}
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium mb-2">Message</label>
-                                    <textarea
-                                        name="message"
-                                        value={formData.message}
-                                        onChange={handleChange}
-                                        placeholder="Write your message here"
-                                        rows="5"
-                                        className="w-full px-4 py-3 bg-[#F9F9F9] border border-gray-100 focus:outline-none focus:border-red-600 transition-colors resize-none"
-                                        required
-                                        disabled={isLoading}
-                                    ></textarea>
-                                </div>
-                                <button
-                                    type="submit"
-                                    disabled={isLoading}
-                                    className="bg-red-600 text-white px-10 py-4 uppercase font-bold tracking-wider hover:bg-red-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center gap-2"
-                                >
-                                    {isLoading ? 'Sending...' : 'Send Message'}
-                                </button>
-                            </form>
-                        </>
-                    )}
-
-                    {/* Right: Map Image */}
-                    <div className="relative">
-                        <img src={worldMap} alt="World Map" className="w-full h-auto opacity-80" />
-                        {/* Markers could be added here overlaying the map if desired */}
-                    </div>
-                </div>
-            </div>
-
-            {/* Contact Details Section */}
-            <div className="bg-[#F9F9F9] py-16 md:py-24">
-                <div className="max-w-7xl mx-auto px-4 md:px-8">
-                    <h2 className="text-[28px] md:text-[36px] font-semibold mb-12">We are always happy to assist you</h2>
-
-                    <div className="grid md:grid-cols-3 gap-12">
-                        {/* Office Locations */}
-                        <div className="space-y-8">
-                            <div>
-                                <h3 className="flex items-center gap-2 font-bold mb-4">
-                                    <MapPin size={20} className="text-red-600" />
-                                    Operation Office
-                                </h3>
-                                <p className="text-[#4A4A4A] leading-relaxed">
-                                    14141 E 102nd Ave, Commerce City<br />
-                                    Colorado 80022 United States
-                                </p>
-                            </div>
-                            <div>
-                                <h3 className="flex items-center gap-2 font-bold mb-4">
-                                    <MapPin size={20} className="text-red-600" />
-                                    Global Head Quarter
-                                </h3>
-                                <p className="text-[#4A4A4A] leading-relaxed">
-                                    P.O. Box 21336,<br />
-                                    Windhoek Namibia
-                                </p>
-                            </div>
+            {/* Hero */}
+            <div className="relative pt-32 px-4 md:px-8 border-b border-gray-100 overflow-hidden">
+                {/* <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(235,1,12,0.03),transparent_50%)] pointer-events-none" /> */}
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <ScrollReveal direction="up" delay={0.1}>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit mb-6">
+                            <Mail size={13} />
+                            Reach Out
                         </div>
-
-                        {/* Contact Numbers & Email */}
-                        <div className="space-y-8">
-                            <div>
-                                <h3 className="flex items-center gap-2 font-bold mb-4">
-                                    <Phone size={20} className="text-red-600" />
-                                    Phone Number
-                                </h3>
-                                <p className="text-[#4A4A4A]">Global Operation: +1-720-717-9288</p>
-                                <p className="text-[#4A4A4A]">Global Head Quarter: +264-81-210-1200</p>
-                            </div>
-                            <div>
-                                <h3 className="flex items-center gap-2 font-bold mb-4">
-                                    <Mail size={20} className="text-red-600" />
-                                    Email
-                                </h3>
-                                <p className="text-[#4A4A4A]">info@unitedpam.org</p>
-                            </div>
-                        </div>
-
-                        {/* Social Media links */}
-                        <div>
-                            <h3 className="font-bold mb-6">Follow our updates</h3>
-                            <div className="flex gap-4">
-                                <a href="https://www.facebook.com/unitedpam" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
-                                    <Facebook size={20} />
-                                </a>
-                                <a href="https://x.com/UPAM_Official" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
-                                    <Twitter size={20} />
-                                </a>
-                                <a href="https://www.instagram.com/unitedpam" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
-                                    <Instagram size={20} />
-                                </a>
-                                <a href="https://www.linkedin.com/company/upamacademy" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
-                                    <Linkedin size={20} />
-                                </a>
-                                <a href="https://www.tiktok.com/@upam56" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="p-3 bg-white border border-gray-100 rounded-full hover:bg-red-600 hover:text-white transition-all">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M11.6667 0H8.33333V13.3333C8.33333 14.2538 7.58714 15 6.66667 15C5.74619 15 5 14.2538 5 13.3333C5 12.4129 5.74619 11.6667 6.66667 11.6667V8.33333C3.916 8.33333 1.66667 10.5827 1.66667 13.3333C1.66667 16.084 3.916 18.3333 6.66667 18.3333C9.41733 18.3333 11.6667 16.084 11.6667 13.3333V5C13.5047 6.324 15.7533 7.08333 18.3333 7.08333V3.75C16.0333 3.75 13.9167 2.75 12.5 1.16667C12.1667 0.75 11.9167 0.333333 11.6667 0Z" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* FAQ Section */}
-            <div className="max-w-7xl mx-auto container mx-auto px-4 md:px-8 py-16 md:py-24">
-                <div className="grid md:grid-cols-2 gap-20">
-                    <div>
-                        <h2 className="text-[32px] md:text-[40px] font-bold mb-6">Frequently Asked Questions</h2>
-                        <p className="text-[#666666] leading-relaxed mb-8 max-w-md">
-                            Welcome to our FAQ section! Here, you'll find answers to common questions about joining with us.
-                            If you need further assistance, feel free to reach out to our customer support team.
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.06] text-slate-900">
+                            Get in Touch.
+                            <span className="text-[#EB010C]"> We're Here.</span>
+                        </h1>
+                        <p className="text-sm text-slate-500 max-w-md leading-relaxed mt-4">
+                            Have a question, partnership idea, or want to learn more about the movement? We'd love to hear from you.
                         </p>
-                    </div>
-
-                    <div className="space-y-4 border-t border-gray-100 pt-4">
-                        {faqs.map((faq, idx) => (
-                            <div key={idx} className="border-b border-gray-100 py-4">
-                                <button
-                                    className={`w-full flex justify-between items-center text-left py-2 transition-colors ${openFaq === idx ? 'text-red-600' : 'text-black'}`}
-                                    onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                                >
-                                    <span className="text-[16px] font-semibold">{faq.q}</span>
-                                    {openFaq === idx ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                                </button>
-                                {openFaq === idx && (
-                                    <div className="mt-4 text-[#4A4A4A] leading-relaxed text-[15px]">
-                                        {faq.a}
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
+                    </ScrollReveal>
                 </div>
             </div>
 
-            {/* Newsletter Section */}
-            <div>
-                {/* Full-width top image */}
-                <img
-                    src={benefitsImg}
-                    alt="Newsletter Benefits"
-                    className="w-full h-auto object-cover max-h-[400px]"
-                />
+            {/* Form + Map */}
+            <section className="py-12 px-4 md:px-8 max-w-7xl mx-auto">
+                <div className="grid lg:grid-cols-2 gap-16 items-start">
 
-                {/* Content Block */}
-                <div className="bg-red-600 text-white py-12 md:py-20">
-                    <div className="container mx-auto px-4 md:px-8 max-w-6xl">
-                        <div className="grid lg:grid-cols-2 gap-10 items-center">
-                            {/* Text Content */}
-                            <div>
-                                <h2 className="text-[32px] md:text-[40px] font-bold mb-4">Subscribe to our Newsletter</h2>
-                                <p className="text-white/90 text-lg leading-relaxed max-w-xl">
-                                    Subscribe for Updates: Stay informed about the latest investor updates, financial results, and announcements by subscribing to our newsletter.
-                                </p>
-                            </div>
+                    {/* Form */}
+                    <ScrollReveal direction="right">
+                        <div className="p-8 md:p-12">
+                            <h2 className="text-2xl font-black text-slate-900 tracking-tight mb-1">Send Us a Message</h2>
+                            <p className="text-xs text-slate-400 mb-8 font-medium">We typically reply within 24–48 hours.</p>
 
-                            {/* Form */}
-                            <div>
-                                <form className="flex flex-col sm:flex-row gap-0 overflow-hidden rounded-sm">
-                                    <input
-                                        type="email"
-                                        placeholder="Email Address"
-                                        className="flex-1 px-6 py-4 bg-transparent border border-white text-white placeholder:text-white/60 focus:outline-none"
-                                        required
-                                    />
+                            {isSuccess ? (
+                                <div className="py-12 text-center">
+                                    <div className="w-14 h-14 bg-[#EB010C]/10 text-[#EB010C] flex items-center justify-center mx-auto mb-4">
+                                        <Send size={24} />
+                                    </div>
+                                    <h3 className="text-xl font-black text-slate-900 mb-2">Message Sent!</h3>
+                                    <p className="text-sm text-slate-500 mb-6">Thank you for reaching out. We'll get back to you shortly.</p>
+                                    <button
+                                        onClick={() => { reset(); setFormData({ name: '', email: '', phone: '', message: '' }); }}
+                                        className="text-xs font-black text-[#EB010C] uppercase tracking-widest hover:underline"
+                                    >
+                                        Send Another Message
+                                    </button>
+                                </div>
+                            ) : (
+                                <form onSubmit={handleSubmit} className="space-y-7">
+                                    {submitError && (
+                                        <div className="p-3 bg-red-50 border-l-2 border-[#EB010C] text-xs text-red-700 font-bold">
+                                            {submitError}
+                                        </div>
+                                    )}
+                                    <div>
+                                        <label className={labelClass}>Your Name</label>
+                                        <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Full name" className={inputClass} required disabled={isLoading} />
+                                    </div>
+                                    <div>
+                                        <label className={labelClass}>Email Address</label>
+                                        <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="your@email.com" className={inputClass} required disabled={isLoading} />
+                                    </div>
+                                    <div>
+                                        <label className={labelClass}>Phone <span className="normal-case font-normal text-slate-400">(optional)</span></label>
+                                        <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+1 234 567 890" className={inputClass} disabled={isLoading} />
+                                    </div>
+                                    <div>
+                                        <label className={labelClass}>Message</label>
+                                        <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Write your message here..." rows="5" className={`${inputClass} resize-none`} required disabled={isLoading} />
+                                    </div>
                                     <button
                                         type="submit"
-                                        className="bg-white text-red-600 px-10 py-4 font-bold uppercase tracking-wider hover:bg-gray-100 transition-colors whitespace-nowrap"
+                                        disabled={isLoading}
+                                        className="flex items-center gap-2 px-8 py-4 bg-[#EB010C] text-white text-xs font-black uppercase tracking-widest hover:bg-[#c9000a] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                                     >
-                                        Subscribe
+                                        {isLoading ? 'Sending...' : 'Send Message'}
+                                        <ArrowRight size={14} />
                                     </button>
                                 </form>
+                            )}
+                        </div>
+                    </ScrollReveal>
+
+                    {/* Map + Contact Info */}
+                    <ScrollReveal direction="left">
+                        <div className="space-y-8">
+
+                            {/* Contact Info */}
+                            <div className="grid sm:grid-cols-2 gap-6">
+                                <div className="bg-white border border-slate-100 p-6">
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <div className="p-1.5 bg-[#EB010C]/10 text-[#EB010C]"><MapPin size={16} /></div>
+                                        <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-500">USA Office</h3>
+                                    </div>
+                                    <p className="text-sm text-slate-700 font-medium leading-relaxed">
+                                        14141 E 102nd Ave,<br />Commerce City,<br />Colorado 80022, USA
+                                    </p>
+                                </div>
+
+                                <div className="bg-white border border-slate-100 p-6">
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <div className="p-1.5 bg-[#EB010C]/10 text-[#EB010C]"><MapPin size={16} /></div>
+                                        <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-500">Namibia Office</h3>
+                                    </div>
+                                    <p className="text-sm text-slate-700 font-medium leading-relaxed">
+                                        P.O. Box 21336,<br />Windhoek,<br />Namibia
+                                    </p>
+                                </div>
+
+                                <div className="bg-white border border-slate-100 p-6">
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <div className="p-1.5 bg-[#EB010C]/10 text-[#EB010C]"><Phone size={16} /></div>
+                                        <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-500">Phone</h3>
+                                    </div>
+                                    <a href="tel:+264812101200" className="text-sm text-slate-700 font-medium hover:text-[#EB010C] transition-colors block">+264 81 210 1200</a>
+                                </div>
+
+                                <div className="bg-white border border-slate-100 p-6">
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <div className="p-1.5 bg-[#EB010C]/10 text-[#EB010C]"><Mail size={16} /></div>
+                                        <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-500">Email</h3>
+                                    </div>
+                                    <a href="mailto:info@unitedpam.org" className="text-sm text-slate-700 font-medium hover:text-[#EB010C] transition-colors block">info@unitedpam.org</a>
+                                </div>
+                            </div>
+
+                            {/* Socials */}
+                            <div className="bg-white border border-slate-100 p-6">
+                                <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-4">Follow Our Updates</h3>
+                                <div className="flex flex-wrap gap-3">
+                                    {socials.map(({ label, href, icon: Icon }) => (
+                                        <a
+                                            key={label}
+                                            href={href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label={label}
+                                            className="p-3 border border-slate-100 text-slate-500 hover:bg-[#EB010C] hover:text-white hover:border-[#EB010C] transition-all"
+                                        >
+                                            <Icon size={18} />
+                                        </a>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </ScrollReveal>
                 </div>
-            </div>
+            </section>
+
+            {/* FAQ */}
+            <section className="bg-white border-t border-slate-100 py-24 px-4 md:px-8">
+                <div className="max-w-7xl mx-auto">
+                    <ScrollReveal direction="up">
+                        <div className="">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit mb-5">
+                                Common Questions
+                            </div>
+                        </div>
+                    </ScrollReveal>
+                    <FAQ />
+                </div>
+            </section>
+
+            {/* Newsletter Banner */}
+            <section className="bg-slate-900 py-20 px-4 md:px-8">
+                <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+                    <ScrollReveal direction="right">
+                        <div>
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/20 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit mb-5">
+                                Newsletter
+                            </div>
+                            <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
+                                Stay in the Loop
+                            </h2>
+                            <p className="text-sm text-slate-400 leading-relaxed mt-4 max-w-md">
+                                Subscribe for updates on events, programs, and announcements from the Pan-African movement.
+                            </p>
+                        </div>
+                    </ScrollReveal>
+                    <ScrollReveal direction="left">
+                        <form className="flex flex-col sm:flex-row gap-0">
+                            <input
+                                type="email"
+                                placeholder="Your email address"
+                                className="flex-1 px-6 py-4 bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:outline-none focus:border-[#EB010C] text-sm transition-colors"
+                                required
+                            />
+                            <button
+                                type="submit"
+                                className="px-8 py-4 bg-[#EB010C] text-white text-xs font-black uppercase tracking-widest hover:bg-[#c9000a] transition-colors whitespace-nowrap"
+                            >
+                                Subscribe
+                            </button>
+                        </form>
+                    </ScrollReveal>
+                </div>
+            </section>
         </div>
     );
 };

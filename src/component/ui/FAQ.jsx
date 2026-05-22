@@ -30,7 +30,7 @@ const FAQ = () => {
         <section className="text-left py-10 grid md:grid-cols-2 md:gap-20 items-center">
             <ScrollReveal direction="left">
                 <div>
-                    <h2 className="text-[31px] font-bold mb-4">Frequently Asked Questions</h2>
+                    <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-4">Frequently Asked Questions</h2>
                     <p className="text-[14px] text-gray-500 mb-8">
                         Welcome to our FAQ section! Here, you'll find answers to common questions about joining with us.
                         If you need further assistance, feel free to reach out to our customer support team.
