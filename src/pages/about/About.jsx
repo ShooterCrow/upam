@@ -152,7 +152,7 @@ const About = () => {
                                 Our Foundation & Purpose
                             </h2>
                             <p className="text-base text-slate-600 leading-relaxed font-normal">
-                                These young men met on Facebook right at the beginning of the COVID-19 pandemic, when Africa went on shut down leaving 90% of the African population in hunger, students stranded, and schools closed. No hope for young people and so UPAM was created on April 6th, 2020, to build a new Africa for Africans, giving hope to the people of African descent, encouraging, and strengthening bonds of solidarity between all indigenous and diasporas people of African descent. UPAM is guided by the African Union's vision of "an integrated, prosperous, and peaceful Africa, driven by its own citizens and representing a dynamic force in the global arena.
+                                These young men met on Facebook right at the beginning of the COVID-19 pandemic, when Africa went on shut down leaving a significant amount of the African population in hunger, students stranded, and schools closed. No hope for young people and so UPAM was created on April 6th, 2020, to build a new Africa for Africans, giving hope to the people of African descent, encouraging, and strengthening bonds of solidarity between all indigenous and diasporas people of African descent. UPAM is guided by the African Union's vision of "an integrated, prosperous, and peaceful Africa, driven by its own citizens and representing a dynamic force in the global arena.
                             </p>
                         </div>
                     </ScrollReveal>

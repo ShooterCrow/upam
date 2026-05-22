@@ -5,7 +5,7 @@ const FirstExecutive = () => {
                 {/* Left: Story Text */}
                 <div className="flex-1 max-w-[768px]">
                     <p className="text-base text-neutral leading-[1.56] tracking-wide">
-                        These young men met on Facebook right at the beginning of the COVID-19 pandemic, when Africa went on shut down leaving 90% of the African population in hunger, students stranded, and schools closed. No hope for young people and so UPAM was created on April 6th, 2020, to build a new Africa for Africans, giving hope to the people of African descent, encouraging, and strengthening bonds of solidarity between all indigenous and diasporas people of African descent. UPAM is guided by the African Union's vision of "an integrated, prosperous, and peaceful Africa, driven by its own citizens and representing a dynamic force in the global arena.
+                        These young men met on Facebook right at the beginning of the COVID-19 pandemic, when Africa went on shut down leaving significant amount of the African population in hunger, students stranded, and schools closed. No hope for young people and so UPAM was created on April 6th, 2020, to build a new Africa for Africans, giving hope to the people of African descent, encouraging, and strengthening bonds of solidarity between all indigenous and diasporas people of African descent. UPAM is guided by the African Union's vision of "an integrated, prosperous, and peaceful Africa, driven by its own citizens and representing a dynamic force in the global arena.
                     </p>
                 </div>
 

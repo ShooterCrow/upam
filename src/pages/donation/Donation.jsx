@@ -502,7 +502,7 @@ const Donation = () => {
                             </div>
                             <div>
                                 <h4 className="font-bold text-sm text-slate-900">Amina K.</h4>
-                                <p className="text-[10px] text-[#EB010C] font-bold uppercase tracking-wider">Scholarship Beneficiary, Kenya Chapter</p>
+                                <p className="text-[10px] text-[#EB010C] font-bold uppercase tracking-wider">Scholarship Beneficiary, Nigeria Chapter</p>
                             </div>
                         </div>
                     </div>
