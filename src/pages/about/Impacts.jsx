@@ -66,7 +66,7 @@ const Impacts = () => {
                             className="w-full max-w-[156px] h-[104px] object-cover"
                         />
                         <img
-                            src="https://api.builder.io/api/v1/image/assets/TEMP/7eea108d6e47b681fd09479390dadef157489196?width=312"
+                            src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288535/c5dbbb8bc42b46092812e5f987dc66eaf6cb2b68_urieei.jpg"
                             alt="Project impact 3"
                             className="w-full max-w-[156px] h-[104px] object-cover"
                         />

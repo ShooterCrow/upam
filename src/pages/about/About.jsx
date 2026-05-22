@@ -35,8 +35,8 @@ const About = () => {
             icon: <Shield className="w-6 h-6 text-[#EB010C]" />
         },
         {
-            title: "UPAM Schools/Academy to Prepare Skilled Professionals for Today's Job Market",
-            description: "Empowering the next-gen workforce, UPAM Schools/Academy is equipping students with in-demand skills to thrive in today's job market. Future-ready professionals, rising from Africa",
+            title: "UPAM Academy to Prepare Skilled Professionals for Today's Job Market",
+            description: "Empowering the next-gen workforce, UPAM Academy is equipping students with in-demand skills to thrive in today's job market. Future-ready professionals, rising from Africa",
             icon: <Users className="w-6 h-6 text-[#EB010C]" />
         }
     ];
@@ -214,8 +214,8 @@ const About = () => {
                     <ScrollReveal direction="right" className="relative group cursor-pointer">
                         <div className="relative aspect-video overflow-hidden">
                             <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/b3564abd0e1fb1dfb19649f1092e28adc8a02548?width=1310"
-                                alt="Manifesto Video"
+                                src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg"
+                                alt="Manifesto"
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                             />
                             <div className="absolute inset-0 transition-all duration-300" />
@@ -231,11 +231,11 @@ const About = () => {
 
             {/* Objectives Section */}
             <section className="py-24 px-4 md:px-8 max-w-7xl mx-auto">
-                <div className="flex flex-col lg:flex-row-reverse justify-between items-center gap-16">
+                <div className="flex flex-col lg:flex-row justify-between items-center gap-16">
                     <ScrollReveal direction="right" className="lg:w-1/2">
                         <img
-                            src="https://api.builder.io/api/v1/image/assets/TEMP/494bd64452c17d8f73dc5f162ce9131d86969c3b?width=970"
-                            alt="UPAM team in action"
+                            src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779444587/b39e14ad312073a43c669522ff40f459de6562d7_kj94sw.jpg"
+                            alt="Children"
                             className="w-full"
                         />
                     </ScrollReveal>
@@ -296,13 +296,13 @@ const About = () => {
                     <div className="lg:w-1/2 w-full">
                         <ScrollReveal direction="right" className="grid grid-cols-2 gap-2">
                             <div className="space-y-2">
-                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/299e1480b26e20d4a93c2dae4e9560f6a5f58062?width=312" className="w-full h-40 object-cover shadow-sm" />
-                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/32886d3aafeab31c00dd5c46ff637405d3d29ced?width=312" className="w-full h-60 object-cover shadow-sm" />
-                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/7eea108d6e47b681fd09479390dadef157489196?width=312" className="w-full h-40 object-cover shadow-sm" />
-                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/8e8740269f0348d2dbdac7ec20c3eca4a4b2279d?width=312" className="w-full h-40 object-cover shadow-sm" />
+                                <img src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779444118/a86b14415310e14f4ed5a4cb89951ad0db7ae864_fyhfr1.jpg" className="w-full h-40 object-cover shadow-sm" />
+                                <img src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779444118/70dd0b520993a5333ae91ad3aea4a5c1f9c28bda_jof0bx.jpg" className="w-full h-60 object-cover shadow-sm" />
+                                <img src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288535/c5dbbb8bc42b46092812e5f987dc66eaf6cb2b68_urieei.jpg" className="w-full h-40 object-cover shadow-sm" />
+                                <img src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779444118/01074a347ad2a5893730f4eb52ea1f748655c398_dfon1e.jpg" className="w-full h-40 object-cover shadow-sm" />
                             </div>
                             <div className="h-full">
-                                <img src="https://api.builder.io/api/v1/image/assets/TEMP/69e8a713eff97bf06eb064b12e7f33ad52b7b61d?width=634" className="w-full h-full object-cover shadow-sm" />
+                                <img src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779444119/eaf2f006b2f7aa3519db89bfdf88db9c4fb75418_o3onl3.jpg" className="w-full h-full object-cover shadow-sm" />
                             </div>
                         </ScrollReveal>
                     </div>
@@ -321,12 +321,12 @@ const About = () => {
 
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                     {[
-                        "https://api.builder.io/api/v1/image/assets/TEMP/b25f74c0c208851c995df3fe41a15ea551fbb960?width=336",
-                        "https://api.builder.io/api/v1/image/assets/TEMP/0ac49176818ab6dbe13202ff503abf2227cb2069?width=560",
-                        "https://api.builder.io/api/v1/image/assets/TEMP/683f693939e917cd3297ff8c6e8af8554e42eae3?width=560",
-                        "https://api.builder.io/api/v1/image/assets/TEMP/1baa487a59315c54db38e9d2509b9139cca12f04?width=560",
-                        "https://api.builder.io/api/v1/image/assets/TEMP/07536e0af663886d7094bb2f428fbad257f117cd?width=560",
-                        "https://api.builder.io/api/v1/image/assets/TEMP/e30f23ba83e18af62762d04d97d7fb23736884ea?width=166",
+                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg",
+                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
+                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
+                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
+                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443390/4295b57ab6d99005f92560cffef9c5e1d2acc0f4_unr3mf.jpg",
+                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443386/9ab71b884c373f83d32fabdda6f6590c98490278_jprsen.jpg",
                     ].map((src, idx) => (
                         <ScrollReveal key={idx} delay={idx * 0.05} direction="up">
                             <div className="aspect-[3/4] overflow-hidden hover:scale-[1.02] transition-transform duration-500 shadow-sm">

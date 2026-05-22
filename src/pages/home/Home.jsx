@@ -146,7 +146,7 @@ const UnitedAfricaHero = () => {
 
                         <h1 className="text-3xl md:text-4xl lg:text-6xl font-black text-slate-900 leading-[1.05] tracking-tight uppercase">
                             A United Africa, Rising Together
-                            <div className="flex flex-wrap justify-center items-center gap-x-4 mt-2">
+                            <div className="flex flex-wrap justify-center items-center gap-x-4">
                                 <span>With One</span>
                                 <span className="relative inline-flex overflow-hidden h-[1.1em] min-w-[140px] md:min-w-[200px] lg:min-w-[260px] justify-center items-center text-[#EB010C]">
                                     {titles.map((title, index) => (
