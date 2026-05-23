@@ -147,7 +147,7 @@ const Leadership = () => {
                     subtitle="Dedicated Contributors"
                     icon={Users}
                     profiles={members}
-                    description="Members dedicated to ensure the continuos progress and growth of the movement."
+                    description="Members dedicated to ensure the continuous progress and growth of the movement."
                 />
             </div>
         </div>
