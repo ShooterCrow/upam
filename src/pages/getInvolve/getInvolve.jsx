@@ -242,10 +242,10 @@ const GetInvolve = () => {
                 <ArrowRight size={14} />
               </Link>
               <Link
-                to="/contact-us"
+                to="/donate"
                 className="inline-flex items-center gap-2 px-8 py-4 border border-white/30 text-white font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-colors"
               >
-                Contact Us
+                Donate
               </Link>
             </div>
           </ScrollReveal>

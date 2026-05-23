@@ -8,7 +8,6 @@ import useAuth from '../../../hooks/useAuth';
 
 const MemberVerification = () => {
     const { data: myVerification, isLoading: isFetching } = useGetMyVerificationQuery();
-    console.log(myVerification)
     const [submitVerification, { isLoading: isSubmitting }] = useSubmitVerificationMutation();
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState(null);
@@ -215,7 +214,7 @@ const MemberVerification = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-md">
                         <div className="bg-slate-50 p-4 border border-slate-100 flex flex-col items-center">
                             <span className="text-xs uppercase tracking-widest font-bold text-slate-400 mb-1">Membership ID</span>
-                            <span className="text-slate-800 font-bold">{r?.importedMember_id || 'UPAM-VER-100'}</span>
+                            <span className="text-slate-800 font-bold">{user?.importedMember_id || 'UPAM-VER-100'}</span>
                         </div>
                         <div className="bg-slate-50 p-4 border border-slate-100 flex flex-col items-center">
                             <span className="text-xs uppercase tracking-widest font-bold text-slate-400 mb-1">Country</span>
