@@ -183,4 +183,11 @@ export const members = [
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779380144/1779157735407_2_aslqrt.jpg",
   },
+  {
+    id: 26,
+    name: "Sampson D.Wesseh",
+    title: "Membership Admin",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779380143/WhatsApp_Image_2026-05-21_at_16.55.02_nof2vg.jpg",
+  },
 ];
