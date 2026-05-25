@@ -123,7 +123,7 @@ const Header = () => {
                                         {link.hasDropdown ? (
                                             <>
                                                 <button
-                                                    className={`transition-all text-[11px] font-black uppercase tracking-[0.2em] flex items-center gap-1.5 focus:outline-none ${active || openDropdown === link.name ? 'text-[#EB010C]' : 'text-slate-500 hover:text-slate-900'}`}
+                                                    className={`transition-all text-[11px] font-black uppercase tracking-[0.2em] flex items-center gap-1.5 focus:outline-none ${active || openDropdown === link.name ? 'text-[#EB010C]' : 'text-[#555555] hover:text-[#333333]'}`}
                                                 >
                                                     {link.name}
                                                     <ChevronDown size={14} className={`transition-transform duration-300 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
@@ -140,7 +140,7 @@ const Header = () => {
                                                         <Link
                                                             key={child.name}
                                                             to={child.path}
-                                                            className={`block px-6 py-3 text-[10px] font-black uppercase tracking-[0.1em] transition-all ${isActiveLink(child.path) ? 'text-[#EB010C] bg-slate-50' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'}`}
+                                                            className={`block px-6 py-3 text-[10px] font-black uppercase tracking-[0.1em] transition-all ${isActiveLink(child.path) ? 'text-[#EB010C] bg-slate-50' : 'text-[#555555] hover:bg-slate-50 hover:text-[#333333]'}`}
                                                             onClick={() => setOpenDropdown(null)}
                                                         >
                                                             {child.name}
@@ -153,7 +153,7 @@ const Header = () => {
                                                 to={link.path}
                                                 target={link.isExternal ? "_blank" : undefined}
                                                 rel={link.isExternal ? "noopener noreferrer" : undefined}
-                                                className={`transition-all text-[11px] font-black uppercase tracking-[0.2em] flex items-center gap-1.5 ${active ? 'text-[#EB010C]' : 'text-slate-500 hover:text-slate-900 group'}`}
+                                                className={`transition-all text-[11px] font-black uppercase tracking-[0.2em] flex items-center gap-1.5 ${active ? 'text-[#EB010C]' : 'text-[#555555] hover:text-[#333333] group'}`}
                                             >
                                                 {link.name}
                                                 {link.isExternal && <ExternalLink size={14} className="opacity-40 group-hover:opacity-100 transition-opacity" />}
@@ -172,7 +172,7 @@ const Header = () => {
                                     <div className="relative">
                                         <button
                                             onClick={() => toggleDropdown('auth')}
-                                            className="px-6 py-2.5 text-[11px] font-black uppercase tracking-[0.2em] border-2 border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white transition-all duration-300 flex items-center gap-3 group"
+                                            className="px-6 py-2.5 text-[11px] font-black uppercase tracking-[0.2em] border-2 border-[#555555] text-[#555555] hover:bg-[#555555] hover:text-white transition-all duration-300 flex items-center gap-3 group"
                                         >
                                             Register/Login
                                             <ChevronDown size={14} className={`transition-transform duration-300 ${openDropdown === 'auth' ? 'rotate-180' : ''}`} />
@@ -187,14 +187,14 @@ const Header = () => {
                                         >
                                             <Link
                                                 to="/login"
-                                                className="block px-5 py-3 text-xs font-black uppercase tracking-widest text-slate-600 hover:bg-slate-50 hover:text-[#EB010C] transition-all"
+                                                className="block px-5 py-3 text-xs font-black uppercase tracking-widest text-[#555555] hover:bg-slate-50 hover:text-[#EB010C] transition-all"
                                                 onClick={() => setOpenDropdown(null)}
                                             >
                                                 Login
                                             </Link>
                                             <Link
                                                 to="/register"
-                                                className="block px-5 py-3 text-xs font-black uppercase tracking-widest text-slate-600 hover:bg-slate-50 hover:text-[#EB010C] transition-all"
+                                                className="block px-5 py-3 text-xs font-black uppercase tracking-widest text-[#555555] hover:bg-slate-50 hover:text-[#EB010C] transition-all"
                                                 onClick={() => setOpenDropdown(null)}
                                             >
                                                 Register
@@ -227,7 +227,7 @@ const Header = () => {
                         {!isDesktop && <GoogleTranslate />}
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="p-2 text-slate-900 hover:text-[#EB010C] transition-colors"
+                            className="p-2 text-[#555555] hover:text-[#EB010C] transition-colors"
                         >
                             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
@@ -246,7 +246,7 @@ const Header = () => {
                                 </Link>
                             </div>
                         </div>
-                        <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-slate-900">
+                        <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-[#555555]">
                             <X size={24} />
                         </button>
                     </div>
@@ -263,8 +263,8 @@ const Header = () => {
 
                                     </div>
                                     <div>
-                                        <div className="font-semibold text-gray-900">{user?.firstName} {user?.lastName}</div>
-                                        <div className="text-sm text-gray-600">Email: {user.email}</div>
+                                        <div className="font-semibold text-[#555555]">{user?.firstName} {user?.lastName}</div>
+                                        <div className="text-sm text-[#555555]">Email: {user.email}</div>
                                     </div>
                                 </div>
                             </div>
@@ -284,7 +284,7 @@ const Header = () => {
                                                 to={link.path}
                                                 className={`flex items-center gap-3 px-4 py-3 rounded transition-colors ${active
                                                     ? 'bg-red-600 text-white'
-                                                    : 'text-gray-800 hover:bg-gray-100'
+                                                    : 'text-[#555555] hover:bg-gray-100'
                                                     }`}
                                                 onClick={() => setIsMobileMenuOpen(false)}
                                             >
@@ -295,7 +295,7 @@ const Header = () => {
                                     })}
                                     <button
                                         onClick={handleLogout}
-                                        className="flex items-center gap-3 px-4 py-3 text-gray-800 hover:bg-gray-100 w-full rounded transition-colors"
+                                        className="flex items-center gap-3 px-4 py-3 text-[#555555] hover:bg-gray-100 w-full rounded transition-colors"
                                     >
                                         <LogOut size={20} />
                                         Log out
@@ -315,7 +315,7 @@ const Header = () => {
                                                     to={link.hasDropdown ? '#' : link.path}
                                                     target={!link.hasDropdown && link.isExternal ? "_blank" : undefined}
                                                     rel={!link.hasDropdown && link.isExternal ? "noopener noreferrer" : undefined}
-                                                    className={`flex items-center justify-between px-4 py-3 rounded transition-colors ${active ? 'bg-red-50 text-red-600 font-semibold' : 'text-gray-800 hover:bg-gray-100'}`}
+                                                    className={`flex items-center justify-between px-4 py-3 rounded transition-colors ${active ? 'bg-red-50 text-red-600 font-semibold' : 'text-[#555555] hover:bg-gray-100'}`}
                                                     onClick={(e) => {
                                                         if (link.hasDropdown) {
                                                             e.preventDefault();
@@ -338,7 +338,7 @@ const Header = () => {
                                                             <Link
                                                                 key={child.name}
                                                                 to={child.path}
-                                                                className={`block px-4 py-3 text-sm transition-colors ${isActiveLink(child.path) ? 'text-red-600 font-medium' : 'text-gray-600 hover:text-red-600'}`}
+                                                                className={`block px-4 py-3 text-sm transition-colors ${isActiveLink(child.path) ? 'text-red-600 font-medium' : 'text-[#555555] hover:text-red-600'}`}
                                                                 onClick={() => {
                                                                     setIsMobileMenuOpen(false);
                                                                     setOpenDropdown(null);
@@ -367,7 +367,7 @@ const Header = () => {
                                                     <>
                                                         <button
                                                             onClick={() => toggleDropdown(link.name)}
-                                                            className={`flex items-center justify-between w-full px-4 py-3 rounded transition-colors ${active || openDropdown === link.name ? 'bg-red-50 text-red-600 font-semibold' : 'text-gray-800 hover:bg-gray-100'}`}
+                                                            className={`flex items-center justify-between w-full px-4 py-3 rounded transition-colors ${active || openDropdown === link.name ? 'bg-red-50 text-red-600 font-semibold' : 'text-[#555555] hover:bg-gray-100'}`}
                                                         >
                                                             <span>{link.name}</span>
                                                             <ChevronDown size={16} className={`transition-transform duration-200 ${openDropdown === link.name ? 'rotate-180' : ''}`} />
@@ -379,7 +379,7 @@ const Header = () => {
                                                                     <Link
                                                                         key={child.name}
                                                                         to={child.path}
-                                                                        className={`block px-4 py-3 text-sm transition-colors ${isActiveLink(child.path) ? 'text-red-600 font-medium' : 'text-gray-600 hover:text-red-600'}`}
+                                                                        className={`block px-4 py-3 text-sm transition-colors ${isActiveLink(child.path) ? 'text-red-600 font-medium' : 'text-[#555555] hover:text-red-600'}`}
                                                                         onClick={() => {
                                                                             setIsMobileMenuOpen(false);
                                                                             setOpenDropdown(null);
@@ -396,7 +396,7 @@ const Header = () => {
                                                         to={link.path}
                                                         target={link.isExternal ? "_blank" : undefined}
                                                         rel={link.isExternal ? "noopener noreferrer" : undefined}
-                                                        className={`flex items-center justify-between px-4 py-3 rounded transition-colors ${active ? 'bg-red-50 text-red-600 font-semibold' : 'text-gray-800 hover:bg-gray-100'}`}
+                                                        className={`flex items-center justify-between px-4 py-3 rounded transition-colors ${active ? 'bg-red-50 text-red-600 font-semibold' : 'text-[#555555] hover:bg-gray-100'}`}
                                                         onClick={() => setIsMobileMenuOpen(false)}
                                                     >
                                                         <span className="flex items-center gap-2">
@@ -419,10 +419,10 @@ const Header = () => {
 
                                         {openDropdown === 'auth-mobile' && (
                                             <div className="space-y-2 animate-in slide-in-from-top-1 duration-200">
-                                                <Link to="/login" className="block w-full text-center bg-gray-100 px-6 py-3 text-sm font-semibold text-gray-800 rounded-md" onClick={() => setIsMobileMenuOpen(false)}>
+                                                <Link to="/login" className="block w-full text-center bg-gray-100 px-6 py-3 text-sm font-semibold text-[#555555] rounded-md" onClick={() => setIsMobileMenuOpen(false)}>
                                                     Login
                                                 </Link>
-                                                <Link to="/register" className="block w-full text-center bg-gray-100 px-6 py-3 text-sm font-semibold text-gray-800 rounded-md" onClick={() => setIsMobileMenuOpen(false)}>
+                                                <Link to="/register" className="block w-full text-center bg-gray-100 px-6 py-3 text-sm font-semibold text-[#555555] rounded-md" onClick={() => setIsMobileMenuOpen(false)}>
                                                     Register
                                                 </Link>
                                             </div>

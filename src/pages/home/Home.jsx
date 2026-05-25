@@ -145,7 +145,7 @@ const UnitedAfricaHero = () => {
                 <ScrollReveal direction="up">
                     <div className="space-y-8">
 
-                        <h1 className="text-3xl md:text-4xl lg:text-6xl font-black text-slate-900 lg:leading-[1.05] lg:tracking-tight uppercase">
+                        <h1 className="text-3xl md:text-4xl lg:text-6xl font-black text-[#555555] lg:leading-[1.05] lg:tracking-tight uppercase">
                             A United Africa, Rising Together
                             <div className="flex flex-wrap justify-center items-center gap-x-4">
                                 <span>With One</span>
@@ -169,7 +169,7 @@ const UnitedAfricaHero = () => {
                             </div>
                         </h1>
 
-                        <p className="text-slate-600 text-lg md:text-xl font-medium max-w-3xl mx-auto leading-relaxed">
+                        <p className="text-[#555555] text-lg md:text-xl font-medium max-w-3xl mx-auto leading-relaxed">
                             This call invites every African, at home and in the diaspora, to embrace a future where
                             our combined strength becomes the foundation for lasting development.
                         </p>
@@ -260,10 +260,10 @@ const Index = () => {
                                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C]">
                                             Mission
                                         </div>
-                                        <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                        <h2 className="text-2xl md:text-3xl font-black text-[#555555] tracking-tight uppercase leading-[1.1]">
                                             Building Shared Growth Together.
                                         </h2>
-                                        <p className="text-base text-slate-600 leading-relaxed font-medium">
+                                        <p className="text-base text-[#555555] leading-relaxed font-medium">
                                             To strengthen bonds of solidarity between all people of African descent, fostering unity and development in Africa; for enhanced independence, industrialization, economic self- reliance as well as promote peace, security and stability within African communities and states.
                                         </p>
                                     </div>
@@ -274,10 +274,10 @@ const Index = () => {
                                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C]">
                                             Vision
                                         </div>
-                                        <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                        <h2 className="text-2xl md:text-3xl font-black text-[#555555] tracking-tight uppercase leading-[1.1]">
                                             A United Africa For All.
                                         </h2>
-                                        <p className="text-base text-slate-600 leading-relaxed font-medium">
+                                        <p className="text-base text-[#555555] leading-relaxed font-medium">
                                             A United Africa for sustainable development for all Africans Descent. UPAM is a continental evolution and an all-African organization, seeking to enhance the unification of African nations as a whole and reclaiming its hope for the destined future.
                                         </p>
                                     </div>
@@ -304,10 +304,10 @@ const Index = () => {
                                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit">
                                             The Movement
                                         </div>
-                                        <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                        <h2 className="text-2xl md:text-3xl font-black text-[#555555] tracking-tight uppercase leading-[1.1]">
                                             The Spirit Of <br />Pan-Africanism.
                                         </h2>
-                                        <p className="text-base text-slate-600 leading-relaxed font-medium">
+                                        <p className="text-base text-[#555555] leading-relaxed font-medium">
                                             This call invites every African, at home and in the diaspora, to embrace a future where our combined strength becomes the foundation for lasting development.
                                         </p>
                                     </div>
@@ -343,13 +343,13 @@ const Index = () => {
                                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit">
                                             Who We Are
                                         </div>
-                                        <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                        <h2 className="text-2xl md:text-3xl font-black text-[#555555] tracking-tight uppercase leading-[1.1]">
                                             A Continental <br />Evolution.
                                         </h2>
-                                        <p className="text-base text-slate-600 leading-relaxed font-medium">
+                                        <p className="text-base text-[#555555] leading-relaxed font-medium">
                                             UPAM is a continental evolution and an all-African organization, seeking to enhance the unification of African nations as a whole and reclaiming its hope for the destined future.
                                         </p>
-                                        <p className="text-base text-slate-600 leading-relaxed font-medium mb-4">
+                                        <p className="text-base text-[#555555] leading-relaxed font-medium mb-4">
                                             To encourage and strengthen bonds of solidarity between all people of African descent, Foster the development and unity of Africa, to enhanced independence.
                                         </p>
                                         <div className="w-fit">
@@ -369,14 +369,14 @@ const Index = () => {
                                     <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit">
                                         Values & Focus
                                     </div>
-                                    <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                    <h2 className="text-2xl md:text-3xl font-black text-[#555555] tracking-tight uppercase leading-[1.1]">
                                         What We Stand For.
                                     </h2>
                                 </div>
 
                                 <div className="space-y-8">
                                     <div className="space-y-6">
-                                        <p className="text-lg text-slate-600 font-medium leading-relaxed italic border-l-4 border-[#EB010C] pl-6">
+                                        <p className="text-lg text-[#555555] font-medium leading-relaxed italic border-l-4 border-[#EB010C] pl-6">
                                             "{focusAreas[activeFocus].description}"
                                         </p>
 
@@ -387,10 +387,10 @@ const Index = () => {
                                                     onClick={() => setActiveFocus(index)}
                                                     className={`group relative flex items-center justify-between p-5 transition-all duration-300 border ${activeFocus === index
                                                         ? 'bg-slate-900 border-slate-900 text-white'
-                                                        : 'bg-white border-slate-100 text-slate-600 hover:border-[#EB010C]/30'
+                                                        : 'bg-white border-slate-100 text-[#555555] hover:border-[#EB010C]/30'
                                                         }`}
                                                 >
-                                                    <span className={`text-[10px] font-black uppercase tracking-widest ${activeFocus === index ? 'text-[#EB010C]' : 'text-slate-400'}`}>
+                                                    <span className={`text-[10px] font-black uppercase tracking-widest ${activeFocus === index ? 'text-[#EB010C]' : 'text-[#555555]'}`}>
                                                         0{index + 1}
                                                     </span>
                                                     <span className={`text-sm font-black uppercase tracking-tight flex-1 px-4 text-left`}>
@@ -436,10 +436,10 @@ const Index = () => {
                             <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C]">
                                 Visual Impact
                             </div>
-                            <h2 className="text-2xl md:text-4xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                            <h2 className="text-2xl md:text-4xl font-black text-[#555555] tracking-tight uppercase leading-[1.1]">
                                 Moments That Inspire Change.
                             </h2>
-                            <p className="text-lg text-slate-600 font-medium max-w-2xl px-6">
+                            <p className="text-lg text-[#555555] font-medium max-w-2xl px-6">
                                 Moments of unity, culture, advocacy, and community impact captured across Africa and the diaspora.
                             </p>
                         </div>
@@ -512,10 +512,10 @@ const Index = () => {
                                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit mx-auto lg:mx-0">
                                     Impact & Projects
                                 </div>
-                                <h2 className="text-2xl md:text-4xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                <h2 className="text-2xl md:text-4xl font-black text-[#555555] tracking-tight uppercase leading-[1.1]">
                                     Transforming Lives <br />Across Africa.
                                 </h2>
-                                <p className="text-lg text-slate-600 font-medium max-w-2xl">
+                                <p className="text-lg text-[#555555] font-medium max-w-2xl">
                                     Transforming lives across the continent through sustainable development, financial inclusion, and educational excellence.
                                 </p>
                             </div>
@@ -554,10 +554,10 @@ const Index = () => {
                                                 {item.icon}
                                             </div>
                                             <div className="space-y-4">
-                                                <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight group-hover:text-[#EB010C] transition-colors">
+                                                <h3 className="text-xl font-black text-[#555555] uppercase tracking-tight group-hover:text-[#EB010C] transition-colors">
                                                     {item.title}
                                                 </h3>
-                                                <p className="text-sm text-slate-600 leading-relaxed font-medium">
+                                                <p className="text-sm text-[#555555] leading-relaxed font-medium">
                                                     {item.desc}
                                                 </p>
                                             </div>
@@ -596,7 +596,7 @@ const Index = () => {
                                     </div>
                                     <div className="pt-4 relative z-10">
                                         <Link to="/get-involved">
-                                            <button className="px-10 py-5 bg-[#EB010C] text-white font-black text-xs uppercase tracking-widest hover:bg-white hover:text-slate-900 transition-all duration-300 flex items-center gap-4">
+                                            <button className="px-10 py-5 bg-[#EB010C] text-white font-black text-xs uppercase tracking-widest hover:bg-white hover:text-[#555555] transition-all duration-300 flex items-center gap-4">
                                                 Join Now
                                                 <ArrowRight size={16} />
                                             </button>
@@ -615,7 +615,7 @@ const Index = () => {
                                     <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit">
                                         Our Team
                                     </div>
-                                    <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                    <h2 className="text-2xl md:text-3xl font-black text-[#555555] tracking-tight uppercase leading-[1.1]">
                                         Meet Our Leadership
                                     </h2>
                                 </div>
@@ -656,10 +656,10 @@ const Index = () => {
                                                 </div>
 
                                                 <div className="flex flex-col text-left px-1">
-                                                    <h4 className="text-gray-900 font-bold text-sm sm:text-base leading-snug group-hover:text-[#EB010C] transition-colors duration-200" translate="no">
+                                                    <h4 className="text-[#555555] font-bold text-sm sm:text-base leading-snug group-hover:text-[#EB010C] transition-colors duration-200" translate="no">
                                                         {leader.name}
                                                     </h4>
-                                                    <p className="text-gray-500 text-xs sm:text-sm font-medium leading-snug mt-0.5">
+                                                    <p className="text-[#555555] text-xs sm:text-sm font-medium leading-snug mt-0.5">
                                                         {leader.title || leader.role}
                                                     </p>
                                                 </div>
@@ -685,10 +685,10 @@ const Index = () => {
                                                 </div>
 
                                                 <div className="flex flex-col text-left px-1">
-                                                    <h4 className="text-gray-900 font-bold text-sm sm:text-base leading-snug group-hover:text-[#EB010C] transition-colors duration-200" translate="no">
+                                                    <h4 className="text-[#555555] font-bold text-sm sm:text-base leading-snug group-hover:text-[#EB010C] transition-colors duration-200" translate="no">
                                                         {leader.name}
                                                     </h4>
-                                                    <p className="text-gray-500 text-xs sm:text-sm font-medium leading-snug mt-0.5">
+                                                    <p className="text-[#555555] text-xs sm:text-sm font-medium leading-snug mt-0.5">
                                                         {leader.title || leader.role}
                                                     </p>
                                                 </div>
@@ -710,12 +710,12 @@ const Index = () => {
                                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit">
                                             Activities & Events
                                         </div>
-                                        <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                        <h2 className="text-2xl md:text-3xl font-black text-[#555555] tracking-tight uppercase leading-[1.1]">
                                             Activities Lined Up for {new Date().getFullYear()}
                                         </h2>
                                     </div>
                                     <div className="flex flex-col gap-3">
-                                        <p className="text-gray-600 leading-relaxed">
+                                        <p className="text-[#555555] leading-relaxed">
                                             Stay updated with UPAM activities, announcements, and Pan-African happenings throughout the year.
                                         </p>
                                     </div>
@@ -731,7 +731,7 @@ const Index = () => {
                                     </div>
                                 ) : events.length === 0 ? (
                                     <div className="lg:col-span-3 text-center py-20 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
-                                        <p className="text-gray-500 font-medium">No recent activities or events found.</p>
+                                        <p className="text-[#555555] font-medium">No recent activities or events found.</p>
                                     </div>
                                 ) : (
                                     <>
@@ -786,10 +786,10 @@ const Index = () => {
                                                         </div>
                                                     </div>
                                                     <div className="p-6 space-y-3">
-                                                        <h4 className="font-black text-slate-900 uppercase tracking-tight group-hover:text-[#EB010C] transition-colors line-clamp-2">
+                                                        <h4 className="font-black text-[#555555] uppercase tracking-tight group-hover:text-[#EB010C] transition-colors line-clamp-2">
                                                             {event.title}
                                                         </h4>
-                                                        <div className="flex items-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                                                        <div className="flex items-center gap-2 text-[10px] font-black text-[#555555] uppercase tracking-widest">
                                                             Learn More <ArrowRight className="w-3 h-3" />
                                                         </div>
                                                     </div>
@@ -809,10 +809,10 @@ const Index = () => {
                                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C]">
                                     Announcements
                                 </div>
-                                <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                                <h2 className="text-3xl md:text-4xl font-black text-[#555555] tracking-tight uppercase leading-[1.1]">
                                     Wakanda <br />Network News.
                                 </h2>
-                                <p className="text-lg text-slate-600 font-medium max-w-xl">
+                                <p className="text-lg text-[#555555] font-medium max-w-xl">
                                     Trusted Pan-African news curated for an informed and empowered continent.
                                 </p>
                             </div>
@@ -856,10 +856,10 @@ const Index = () => {
                                         </div>
                                     </div>
                                     <div className="space-y-4">
-                                        <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight group-hover:text-[#EB010C] transition-colors leading-tight">
+                                        <h3 className="text-xl font-black text-[#555555] uppercase tracking-tight group-hover:text-[#EB010C] transition-colors leading-tight">
                                             {news.title}
                                         </h3>
-                                        <p className="text-sm text-slate-500 leading-relaxed font-medium">
+                                        <p className="text-sm text-[#555555] leading-relaxed font-medium">
                                             {news.desc}
                                         </p>
                                     </div>
@@ -874,7 +874,7 @@ const Index = () => {
                             <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit mx-auto">
                                 Multimedia
                             </div>
-                            <h2 className="text-2xl md:text-4xl font-black text-slate-900 tracking-tight uppercase leading-[1.1]">
+                            <h2 className="text-2xl md:text-4xl font-black text-[#555555] tracking-tight uppercase leading-[1.1]">
                                 Media Highlights.
                             </h2>
                         </div>
