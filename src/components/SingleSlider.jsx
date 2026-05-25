@@ -1,71 +1,57 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 
-export default function SingleSlider({ slides }) {
-
+export default function SingleSlider({ slides, interval = 4000 }) {
     const [current, setCurrent] = useState(0)
+    const [prev, setPrev] = useState(null)
 
-    const nextSlide = () => {
-        setCurrent((prev) => (prev + 1) % slides.length)
-    }
+    const goTo = useCallback((index) => {
+        setPrev(current)
+        setCurrent(index)
+    }, [current])
 
-    const prevSlide = () => {
-        setCurrent((prev) => (prev - 1 + slides.length) % slides.length)
-    }
+    const next = useCallback(() => {
+        goTo((current + 1) % slides.length)
+    }, [current, slides.length, goTo])
 
-    // Autoplay
     useEffect(() => {
-        const interval = setInterval(() => {
-            nextSlide()
-        }, 4000)
-
-        return () => clearInterval(interval)
-    }, [])
+        const timer = setInterval(next, interval)
+        return () => clearInterval(timer)
+    }, [next, interval])
 
     return (
-        <div className="relative mx-auto w-full overflow-hidden rounded-xl">
+        <div className="relative w-full overflow-hidden aspect-[4/5]">
+            {slides.map((slide, index) => {
+                const isActive = index === current
+                const isLeaving = index === prev
 
-            {/* Slides */}
-            <div className="relative h-56 md:h-96">
-                {slides.map((slide, index) => (
+                return (
                     <img
                         key={index}
                         src={slide}
                         alt={`Slide ${index + 1}`}
-                        className={`absolute left-0 top-0 h-full w-full object-cover transition-opacity duration-700 ${current === index ? "opacity-100" : "opacity-0"
-                            }`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out
+                            ${isActive ? "opacity-100 scale-100 z-10" : ""}
+                            ${isLeaving ? "opacity-0 scale-105 z-0" : ""}
+                            ${!isActive && !isLeaving ? "opacity-0 scale-100 z-0" : ""}
+                        `}
                     />
-                ))}
-            </div>
+                )
+            })}
 
-            {/* Indicators */}
-            {/* <div className="absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+            {/* Dot indicators */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
                 {slides.map((_, index) => (
                     <button
                         key={index}
-                        onClick={() => setCurrent(index)}
-                        className={`h-3 w-3 rounded-full transition-all ${current === index
-                            ? "bg-white"
-                            : "bg-white/50 hover:bg-white/80"
-                            }`}
+                        onClick={() => goTo(index)}
+                        className={`transition-all duration-300 rounded-full ${
+                            current === index
+                                ? "w-6 h-2 bg-[#EB010C]"
+                                : "w-2 h-2 bg-white/60 hover:bg-white"
+                        }`}
                     />
                 ))}
-            </div> */}
-
-            {/* Previous Button */}
-            {/* <button
-                onClick={prevSlide}
-                className="absolute left-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
-            >
-                ❮
-            </button> */}
-
-            {/* Next Button */}
-            {/* <button
-                onClick={nextSlide}
-                className="absolute right-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
-            >
-                ❯
-            </button> */}
+            </div>
         </div>
     )
 }
