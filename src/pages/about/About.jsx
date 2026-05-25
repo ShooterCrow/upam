@@ -385,8 +385,8 @@ const About = () => {
             </section>
 
             {/* Structure Section */}
-            <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-[#EB010C]/20 opacity-50" />
+            <section className="py-24 bg-[#003115] text-white relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#003115] via-[#004a1f] to-[#EB010C]/20 opacity-50" />
                 <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
                     <ScrollReveal direction="left" className="space-y-8">
                         <div className="space-y-4">
