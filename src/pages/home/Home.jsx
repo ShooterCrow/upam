@@ -128,7 +128,7 @@ const UnitedAfricaHero = () => {
     }, [titleNumber, titles]);
 
     return (
-        <div className="relative overflow-hidden flex flex-col items-center justify-center pt-12 ">
+        <div className="relative overflow-hidden flex flex-col items-center justify-center pt-4 lg:pt-8 pb-8 lg:pb-14">
 
             {/* Background decorative elements */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(235,1,12,0.02),transparent_50%)] pointer-events-none" />
@@ -143,11 +143,11 @@ const UnitedAfricaHero = () => {
             {/* Main content */}
             <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
                 <ScrollReveal direction="up">
-                    <div className="space-y-8">
+                    <div className="space-y-6 lg:space-y-8">
 
-                        <h1 className="text-3xl md:text-4xl lg:text-6xl font-black text-[#555555] lg:leading-[1.05] lg:tracking-tight uppercase">
+                        <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-[#555555] leading-tight md:leading-[1.05] tracking-tight uppercase">
                             A United Africa, Rising Together
-                            <div className="flex flex-wrap justify-center items-center gap-x-4">
+                            <div className="flex flex-wrap justify-center items-center gap-x-4 mt-1">
                                 <span>With One</span>
                                 <span className="relative inline-flex overflow-hidden h-[1.1em] min-w-[140px] md:min-w-[200px] lg:min-w-[260px] justify-center items-center text-[#EB010C]">
                                     {titles.map((title, index) => (
@@ -169,12 +169,12 @@ const UnitedAfricaHero = () => {
                             </div>
                         </h1>
 
-                        <p className="text-[#555555] text-lg md:text-xl font-medium max-w-3xl mx-auto leading-relaxed">
+                        <p className="text-[#555555] text-base md:text-lg lg:text-xl font-medium max-w-3xl mx-auto leading-relaxed">
                             This call invites every African, at home and in the diaspora, to embrace a future where
                             our combined strength becomes the foundation for lasting development.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-4">
+                        <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center items-center pt-2 lg:pt-4">
                             <Link to="/donation">
                                 <motion.div whileHover={{ scale: 1.05, x: 5 }} whileTap={{ scale: 0.95 }}>
                                     <button className="px-10 py-5 bg-[#EB010C] text-white font-black text-xs uppercase tracking-widest shadow-xl shadow-red-500/10 flex items-center gap-3">
