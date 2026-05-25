@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import ScrollReveal from '../../../components/ScrollReveal';
 
 const AfricanSelfReliance = () => {
   return (
@@ -16,14 +17,14 @@ const AfricanSelfReliance = () => {
         </div>
 
         {/* Header Section */}
-        <header className="mb-12 lg:mb-16">
+        <ScrollReveal direction="up"><header className="mb-12 lg:mb-16">
           <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-black leading-[130%] tracking-tight text-slate-900 mb-6 uppercase">
             African Self-Reliance: Moving Beyond Aid to Sustainable Development
           </h1>
           <p className="text-base leading-[170%] text-slate-600">
             For decades, Africa’s development trajectory has been shaped by foreign aid, loans, and external interventions. While aid has played a role in humanitarian relief and short-term stabilization, it has not delivered lasting economic independence or structural transformation. This paper argues that true African development must be rooted in self-reliance—defined as the capacity of African societies to determine their priorities, mobilize internal resources, and build sustainable systems that serve their people. By examining the limitations of aid-dependent development models, the paper explores alternative pathways centered on local production, institutional strengthening, knowledge sovereignty, and Pan-African cooperation. African self-reliance is presented not as isolationism, but as a foundation for dignity, resilience, and long-term prosperity.
           </p>
-        </header>
+        </header></ScrollReveal>
 
         {/* Introduction Section */}
         <section className="mb-12 lg:mb-16">

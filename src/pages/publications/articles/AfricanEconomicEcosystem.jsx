@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import ScrollReveal from '../../../components/ScrollReveal';
 
 const AfricanEconomicEcosystem = () => {
   return (
@@ -16,14 +17,14 @@ const AfricanEconomicEcosystem = () => {
         </div>
 
         {/* Header Section */}
-        <header className="mb-12 lg:mb-16">
+        <ScrollReveal direction="up"><header className="mb-12 lg:mb-16">
           <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-black leading-[130%] tracking-tight text-slate-900 mb-6 uppercase">
             Building an African Economic Ecosystem Owned by Africans
           </h1>
           <p className="text-base leading-[170%] text-slate-600">
             Economic ownership remains one of the most critical challenges facing Africa and people of African descent in the post-colonial era. Despite vast natural resources, human capital, and cultural wealth, African economies remain largely dependent on external ownership, foreign capital, and extractive systems that limit long-term development. This paper argues that true African liberation and Pan-African unity cannot be achieved without an African-owned economic ecosystem. It explores the historical roots of economic dependency, examines present structural challenges, and proposes pathways toward building systems of production, finance, trade, and innovation that are controlled and sustained by Africans. By centering ownership, cooperation, and self-reliance, the paper positions economic sovereignty as a foundation for political stability, cultural dignity, and generational prosperity.
           </p>
-        </header>
+        </header></ScrollReveal>
 
         {/* Introduction Section */}
         <section className="mb-12 lg:mb-16">

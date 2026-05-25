@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import ScrollReveal from '../../components/ScrollReveal';
 
 const Partnership = () => {
     const [formData, setFormData] = useState({
@@ -61,6 +62,7 @@ const Partnership = () => {
     return (
         <div className="bg-[#F4F4F4] min-h-screen font-['Inter',_sans-serif] text-black pb-20">
             {/* Header Section */}
+            <ScrollReveal direction="up">
             <div className="bg-white py-12 mb-12 shadow-sm">
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-3xl md:text-4xl font-extrabold">
@@ -68,9 +70,11 @@ const Partnership = () => {
                     </h1>
                 </div>
             </div>
+            </ScrollReveal>
 
             {/* Form Section */}
             <div className="container mx-auto px-4 max-w-4xl">
+                <ScrollReveal direction="up" delay={0.1}>
                 <form onSubmit={handleSubmit} className="space-y-12">
                     {/* Organization Details */}
                     <div className="space-y-6">
@@ -180,6 +184,7 @@ const Partnership = () => {
                         Submit Information
                     </button>
                 </form>
+                </ScrollReveal>
             </div>
         </div>
     );

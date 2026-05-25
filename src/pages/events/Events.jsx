@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import eventHero from '../../assets/event.jpg';
 import { Calendar, MapPin, ArrowRight, Play, ChevronDown, ChevronUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ScrollReveal from '../../components/ScrollReveal';
 import {
   events,
   howItWorksSteps,
@@ -91,7 +92,7 @@ const Events = () => {
       <section className="py-12 md:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div>
+            <ScrollReveal direction="left">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
                 About UPAM
               </h2>
@@ -102,7 +103,8 @@ const Events = () => {
                 Whether it's a leadership summit, cultural festival, training, concert, or virtual
                 event — UPAM provides the space to make it visible and accessible.
               </p>
-            </div>
+            </ScrollReveal>
+            <ScrollReveal direction="right">
             <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-200">
               <img
                 src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80"
@@ -119,6 +121,7 @@ const Events = () => {
                 </div>
               </button>
             </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -152,6 +155,7 @@ const Events = () => {
       {/* ========== ALL EVENTS ========== */}
       <section id="all-events" className="py-12 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal direction="up">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
@@ -171,8 +175,10 @@ const Events = () => {
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
+          </ScrollReveal>
 
           {/* 2 featured event cards */}
+          <ScrollReveal direction="up" delay={0.1}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
             {featuredEvents.map((event) => (
               <div
@@ -215,6 +221,7 @@ const Events = () => {
               </div>
             ))}
           </div>
+          </ScrollReveal>
 
           {/* 3 smaller event cards */}
           <div id="event-cards" className="grid md:grid-cols-3 gap-6">
@@ -272,14 +279,17 @@ const Events = () => {
       {/* ========== HOW UPAM WORKS ========== */}
       <section className="py-12 md:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal direction="up">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-10">
             How UPAM Works
           </h2>
+          </ScrollReveal>
 
           {/* 4 steps in a horizontal row */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {howItWorksSteps.map((step) => (
-              <div key={step.number} className="bg-white p-6 rounded-lg shadow-sm">
+            {howItWorksSteps.map((step, i) => (
+              <ScrollReveal key={step.number} direction="up" delay={i * 0.1}>
+              <div className="bg-white p-6 rounded-lg shadow-sm">
                 <span className="text-2xl font-bold text-gray-900 block mb-2">
                   {step.number}
                 </span>
@@ -290,6 +300,7 @@ const Events = () => {
                   {step.description}
                 </p>
               </div>
+              </ScrollReveal>
             ))}
           </div>
 
@@ -319,6 +330,7 @@ const Events = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
             {/* FAQ accordion */}
+            <ScrollReveal direction="left">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
                 Frequently Asked Questions
@@ -347,8 +359,10 @@ const Events = () => {
                 ))}
               </div>
             </div>
+            </ScrollReveal>
 
             {/* World map */}
+            <ScrollReveal direction="right">
             <div className="hidden lg:block">
               <img
                 src="/world_map.png"
@@ -356,6 +370,7 @@ const Events = () => {
                 className="w-full h-auto object-contain opacity-80"
               />
             </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -371,6 +386,7 @@ const Events = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal direction="left">
           <div className="max-w-xl">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Bring Your Event to Life
@@ -387,6 +403,7 @@ const Events = () => {
               <span className="font-mono text-sm">&gt;&gt;</span>
             </Link>
           </div>
+          </ScrollReveal>
         </div>
       </section>
 

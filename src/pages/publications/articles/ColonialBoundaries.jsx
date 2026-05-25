@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import ScrollReveal from '../../../components/ScrollReveal';
 
 const ColonialBoundaries = () => {
   return (
@@ -16,14 +17,14 @@ const ColonialBoundaries = () => {
         </div>
 
         {/* Header Section */}
-        <header className="mb-12 lg:mb-16">
+        <ScrollReveal direction="up"><header className="mb-12 lg:mb-16">
           <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-black leading-[130%] tracking-tight text-slate-900 mb-6 uppercase">
             One People, Many Borders: How Colonial Boundaries Continue to Shape African Disunity
           </h1>
           <p className="text-base leading-[170%] text-slate-600">
             Africa is home to immense cultural, linguistic, and historical interconnectedness, yet it remains one of the most politically fragmented regions in the world. The borders that divide the continent today were largely imposed during colonial rule, with little regard for existing African societies, identities, or systems of governance. This paper examines how colonial boundaries continue to shape African disunity in the 21st century—politically, economically, socially, and psychologically. It argues that these borders are not merely geographic lines but enduring structures of division that hinder Pan-African unity and development. By analyzing their historical origins, contemporary impacts, and possible pathways toward transcending them, the paper positions border re-imagining as a central task in the realization of Pan-Africanism as a lived reality.
           </p>
-        </header>
+        </header></ScrollReveal>
 
         {/* Introduction Section */}
         <section className="mb-12 lg:mb-16">

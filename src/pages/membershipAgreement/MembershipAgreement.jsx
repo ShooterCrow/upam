@@ -1,10 +1,37 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
-const imgArrowRightDoubleDesktop =
-  "https://www.figma.com/api/mcp/asset/51bd4d8a-1e4d-427c-b441-180140fc4834";
-const imgArrowRightDoubleMobile =
-  "https://www.figma.com/api/mcp/asset/94276fcf-c295-47cd-9316-e3c662ab1272";
+const clauses = [
+  {
+    title: "Acceptance of Terms",
+    body: "By proceeding, you confirm that you have read, understood, and agree to be fully bound by this Membership Agreement, the UPAM Constitution, and all related policies including but not limited to the Non-Disclosure Policy, Zero Tolerance Policy, and Financial Policy."
+  },
+  {
+    title: "Eligibility",
+    body: "Membership is open to all people of African descent aged 18 years and above who share the values of Pan-African unity, dignity, and collective progress. UPAM reserves the right to approve or decline any membership application at its discretion."
+  },
+  {
+    title: "Member Conduct",
+    body: "Members are expected to uphold exemplary conduct within their communities and within UPAM spaces — physical and digital. Any form of discrimination, harassment, or misconduct is grounds for immediate suspension or termination of membership."
+  },
+  {
+    title: "Financial Obligations",
+    body: "Members agree to pay the applicable membership fee as determined by UPAM's financial policy. Fees contribute directly to the organisation's programs, operations, and the advancement of Pan-African objectives in every country of membership."
+  },
+  {
+    title: "Non-Disclosure",
+    body: "Members agree not to disclose confidential information, internal communications, or proprietary strategies of UPAM to any third party without prior written consent from authorised leadership."
+  },
+  {
+    title: "Support of Vision",
+    body: "Members commit to actively supporting UPAM's vision of a united, prosperous, and self-reliant Africa. This includes participating in initiatives, respecting organisational decisions, and contributing positively to the movement's growth."
+  },
+  {
+    title: "Termination",
+    body: "UPAM reserves the right to terminate membership for breach of this agreement, the UPAM Constitution, or any associated policies. Members may also voluntarily withdraw by submitting a formal notice to their chapter administrator."
+  },
+];
 
 const MembershipAgreement = () => {
   const [agreed, setAgreed] = useState(false);
@@ -20,259 +47,95 @@ const MembershipAgreement = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
-        {/* Desktop view */}
-        <div className="hidden lg:flex justify-center w-full overflow-hidden">
-          <div
-            className="flex flex-row gap-[60px] items-start w-full max-w-[1000px] min-w-0"
-            data-node-id="4792:29063"
-          >
-            {/* Left: Text content */}
-            <div
-              className="flex flex-col gap-[122px] items-start flex-1 min-w-0"
-              data-node-id="4792:29060"
-            >
-              <div
-                className="content-stretch flex flex-col gap-[26px] items-start relative shrink-0 w-full"
-                data-node-id="4792:29059"
-              >
-                <div
-                  className="content-stretch flex flex-col gap-[38px] items-start not-italic relative shrink-0 w-full"
-                  data-node-id="4792:29058"
-                >
-                  <div
-                    className="grid-cols-[max-content] grid-rows-[max-content] inline-grid items-[start] justify-items-[start] leading-[normal] relative shrink-0"
-                    data-node-id="4792:29039"
-                  >
-                    <p
-                      className="col-1 font-['Lato:Medium',sans-serif] ml-0 mt-0 relative row-1 text-[28px] text-black tracking-[0.56px]"
-                      data-node-id="4792:29040"
-                    >
-                      Membership Agreement
-                    </p>
-                    <p
-                      className="col-1 font-['Lato:Regular',sans-serif] ml-0 mt-[36px] relative row-1 text-[18px] text-[color:var(--upam-website-brand-color-,#eb010c)] tracking-[0.36px]"
-                      data-node-id="4792:29041"
-                    >
-                      Read Carefully!!!
-                    </p>
-                  </div>
-                  <div
-                    className="content-stretch flex flex-col font-['Lato:Regular',sans-serif] gap-[22px] items-start leading-[24px] relative shrink-0 text-[16px] text-[color:var(--color-neutral\/neutral,#666)] tracking-[0.32px] w-full whitespace-pre-wrap"
-                    data-node-id="4792:29057"
-                  >
-                    <p
-                      className="relative shrink-0 w-full"
-                      data-node-id="4792:29042"
-                    >
-                      This membership agreement covers all those who are
-                      interested in full time membership with UPAM By
-                      accepting, you are agreeing to all the terms and
-                      conditions including UPAM constitution, non-disclosure,
-                      zero tolerance policy, financial policy and etc.
-                    </p>
-                    <p
-                      className="relative shrink-0 w-full"
-                      data-node-id="4792:29043"
-                    >
-                      Members should be willing to be of good conduct in their
-                      communities, support the vision of UPAM and be willing to
-                      pay a membership fee in other to foster objectives in
-                      every country of membership.
-                    </p>
-                  </div>
-                </div>
-                <div
-                  className="content-stretch flex gap-[19px] items-center justify-start relative shrink-0 cursor-pointer"
-                  data-node-id="4792:29056"
-                  onClick={() => setAgreed(!agreed)}
-                >
-                  <input
-                    type="checkbox"
-                    checked={agreed}
-                    onChange={(e) => setAgreed(e.target.checked)}
-                    className="shrink-0 size-[22px] cursor-pointer accent-[#eb010c]"
-                  />
-                  <p
-                    className="font-['Lato:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--color-neutral\/neutral-dark,#444)] tracking-[0.28px]"
-                    data-node-id="4792:29047"
-                  >
-                    Yes, i agreed to be bound by the agreement
-                  </p>
-                </div>
-              </div>
-              <div
-                className="content-stretch flex flex-col gap-[27px] items-start relative shrink-0 w-full"
-                data-node-id="4792:29055"
-              >
-                <button
-                  className={`${agreed
-                    ? "bg-[var(--upam-website-brand-color-,#eb010c)]"
-                    : "bg-gray-400 cursor-not-allowed"
-                    } content-stretch flex gap-[10px] items-center justify-center px-[22px] py-[10px] relative shrink-0 w-full transition-colors duration-200`}
-                  data-node-id="4792:29048"
-                  onClick={handleNext}
-                >
-                  <p
-                    className="font-['Lato:Regular',sans-serif] leading-[1.56] not-italic relative shrink-0 text-[16px] text-center text-white tracking-[0.32px]"
-                    data-node-id="4792:29049"
-                  >
-                    Next
-                  </p>
-                  <div
-                    className="relative shrink-0 size-[18px]"
-                    data-name="arrow-right-double"
-                    data-node-id="4792:29050"
-                  >
-                    <img
-                      alt=""
-                      className="block max-w-none size-full"
-                      src={imgArrowRightDoubleDesktop}
-                    />
-                  </div>
-                </button>
-                <p
-                  className="font-['Lato:Regular',sans-serif] font-['Roboto:Regular',sans-serif] font-normal h-[16px] leading-[0] not-italic relative shrink-0 text-[14px] text-black text-center tracking-[0.25px] w-full whitespace-pre-wrap"
-                  data-node-id="4792:29053"
-                  style={{ fontVariationSettings: "'wdth' 100" }}
-                >
-                  <span className="leading-[28px]">
-                    {`Already a member? `}
-                  </span>
-                  <Link
-                    to="/login"
-                    className="[text-decoration-skip-ink:none] decoration-solid leading-[28px] text-[#eb010c] underline"
-                  >
-                    sign in
-                  </Link>
-                </p>
-              </div>
-            </div>
-
+      {/* Hero */}
+      <div className="bg-[#003115] text-white py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 text-white text-[10px] font-bold uppercase tracking-widest border-l-2 border-[#EB010C] mb-6">
+            Membership
           </div>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tight leading-tight mb-4">
+            Membership Agreement
+          </h1>
+          <p className="text-white/70 text-base font-medium max-w-2xl">
+            Please read the following agreement carefully before proceeding with your UPAM membership registration.
+          </p>
         </div>
-        {/* </div> */}
+      </div>
 
-        {/* Mobile view */}
-        <div className="block lg:hidden">
-          <div
-            className="content-stretch flex flex-col gap-[24px] items-start relative size-full"
-            data-node-id="4791:28783"
-          >
-            <div
-              className="content-stretch flex flex-col gap-[27px] items-start relative shrink-0 w-full"
-              data-node-id="4791:28758"
-            >
-              <div
-                className="content-stretch flex flex-col gap-[24px] items-start not-italic relative shrink-0 w-full"
-                data-node-id="4791:28757"
-              >
-                <div
-                  className="grid-cols-[max-content] grid-rows-[max-content] inline-grid items-[start] justify-items-[start] leading-[normal] relative shrink-0"
-                  data-node-id="4791:28382"
-                >
-                  <p
-                    className="col-1 font-['Lato:Medium',sans-serif] ml-0 mt-0 relative row-1 text-[24px] text-black tracking-[0.48px]"
-                    data-node-id="4791:28383"
-                  >
-                    Membership Agreement
-                  </p>
-                  <p
-                    className="col-1 font-['Lato:Regular',sans-serif] ml-0 mt-[36px] relative row-1 text-[14px] text-[color:var(--upam-website-brand-color-,#eb010c)] tracking-[0.28px]"
-                    data-node-id="4791:28384"
-                  >
-                    Read Carefully!!!
-                  </p>
-                </div>
-                <p
-                  className="font-['Lato:Regular',sans-serif] leading-[24px] min-w-full relative shrink-0 text-[16px] text-[color:var(--color-neutral\/neutral-dark,#444)] tracking-[0.32px] w-[min-content] whitespace-pre-wrap"
-                  data-node-id="4791:28609"
-                >
-                  This membership agreement covers all those who are interested
-                  in full time membership with UPAM By accepting, you are
-                  agreeing to all the terms and conditions including UPAM
-                  constitution, non-disclosure, zero tolerance policy, financial
-                  policy and etc.
-                </p>
-                <p
-                  className="font-['Lato:Regular',sans-serif] leading-[24px] min-w-full relative shrink-0 text-[16px] text-[color:var(--color-neutral\/neutral-dark,#444)] tracking-[0.32px] w-[min-content] whitespace-pre-wrap"
-                  data-node-id="4791:28611"
-                >
-                  Members should be willing to be of good conduct in their
-                  communities, support the vision of UPAM and be willing to pay
-                  a membership fee in other to foster objectives in every
-                  country of membership.
-                </p>
+      {/* Content */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+        {/* Preamble */}
+        <div className="mb-12 p-6 border-l-4 border-[#EB010C] bg-[#EB010C]/5">
+          <p className="text-[10px] font-black uppercase tracking-widest text-[#EB010C] mb-2">Read Carefully</p>
+          <p className="text-[#555555] text-base leading-relaxed">
+            This Membership Agreement governs the relationship between you and the United Pan-Africanist Movement (UPAM). By accepting, you agree to all terms and conditions herein, including the UPAM Constitution, Non-Disclosure Policy, Zero Tolerance Policy, and Financial Policy.
+          </p>
+        </div>
+
+        {/* Clauses */}
+        <div className="space-y-6 mb-14">
+          {clauses.map((clause, idx) => (
+            <div key={idx} className="flex gap-5 items-start p-6 border border-slate-100 hover:border-[#003115]/20 transition-colors duration-300">
+              <div className="shrink-0 w-8 h-8 bg-[#003115] flex items-center justify-center">
+                <span className="text-white text-xs font-black">{String(idx + 1).padStart(2, "0")}</span>
               </div>
-              <div
-                className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full"
-                data-node-id="4791:28756"
-              >
-                <div
-                  className="content-stretch flex gap-[16px] items-center relative shrink-0 cursor-pointer"
-                  data-node-id="4791:28616"
-                  onClick={() => setAgreed(!agreed)}
-                >
-                  <input
-                    type="checkbox"
-                    checked={agreed}
-                    onChange={(e) => setAgreed(e.target.checked)}
-                    className="shrink-0 size-[14px] cursor-pointer accent-[#eb010c]"
-                  />
-                  <p
-                    className="font-['Lato:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--color-neutral\/neutral-dark,#444)] tracking-[0.28px]"
-                    data-node-id="4791:28614"
-                  >
-                    Yes, i agreed to bound by the agreement
-                  </p>
-                </div>
-                <button
-                  className={`${agreed
-                    ? "bg-[var(--upam-website-brand-color-,#eb010c)]"
-                    : "bg-gray-400 cursor-not-allowed"
-                    } content-stretch flex gap-[10px] items-center justify-center px-[22px] py-[10px] relative shrink-0 w-full transition-colors duration-200`}
-                  data-node-id="4791:28746"
-                  onClick={handleNext}
-                >
-                  <p
-                    className="font-['Lato:Regular',sans-serif] leading-[1.56] not-italic relative shrink-0 text-[16px] text-center text-white tracking-[0.32px]"
-                    data-node-id="4791:28747"
-                  >
-                    Next
-                  </p>
-                  <div
-                    className="relative shrink-0 size-[18px]"
-                    data-name="arrow-right-double"
-                    data-node-id="4791:28748"
-                  >
-                    <img
-                      alt=""
-                      className="block max-w-none size-full"
-                      src={imgArrowRightDoubleMobile}
-                    />
-                  </div>
-                </button>
+              <div className="space-y-1">
+                <h3 className="text-sm font-black text-[#555555] uppercase tracking-tight">{clause.title}</h3>
+                <p className="text-sm text-[#555555] leading-relaxed">{clause.body}</p>
               </div>
             </div>
-            <p
-              className="font-['Lato:Regular',sans-serif] font-['Roboto:Regular',sans-serif] font-normal h-[16px] leading-[0] not-italic relative shrink-0 text-[#4743e0] text-[14px] tracking-[0.25px] w-full whitespace-pre-wrap"
-              data-node-id="4791:28759"
-              style={{ fontVariationSettings: "'wdth' 100" }}
+          ))}
+        </div>
+
+        {/* Agreement checkbox */}
+        <div className="border-t border-slate-100 pt-10 space-y-8">
+          <label className="flex items-start gap-4 cursor-pointer group">
+            <input
+              type="checkbox"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+              className="mt-0.5 shrink-0 size-5 cursor-pointer accent-[#EB010C]"
+            />
+            <span className="text-sm text-[#555555] leading-relaxed font-medium group-hover:text-[#333333] transition-colors">
+              I have read and fully understood this Membership Agreement. I agree to be bound by all its terms and conditions, as well as the UPAM Constitution and associated policies.
+            </span>
+          </label>
+
+          {/* CTA */}
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <button
+              onClick={handleNext}
+              className={`inline-flex items-center gap-3 px-8 py-4 text-sm font-black uppercase tracking-widest transition-all duration-200 ${
+                agreed
+                  ? "bg-[#EB010C] text-white hover:bg-[#EB010C]/90"
+                  : "bg-slate-200 text-slate-400 cursor-not-allowed"
+              }`}
+              disabled={!agreed}
             >
-              <span className="leading-[28px]">{`Already a member? `}</span>
-              <Link
-                to="/login"
-                className="[text-decoration-skip-ink:none] decoration-solid leading-[28px] text-[#eb010c] underline"
-              >
-                sign in
+              Proceed to Register
+              <ArrowRight size={16} />
+            </button>
+
+            <p className="text-sm text-[#555555]">
+              Already a member?{" "}
+              <Link to="/login" className="text-[#EB010C] font-bold hover:underline">
+                Sign in
               </Link>
             </p>
           </div>
         </div>
-      </section >
-    </div >
+
+        {/* Bottom */}
+        <div className="mt-16 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <Link to="/membership-policy" className="text-xs font-black text-[#555555] hover:text-[#EB010C] uppercase tracking-widest transition-colors">
+            ← View Membership Policy
+          </Link>
+          <p className="text-xs text-slate-400 uppercase tracking-widest font-medium">United Pan-African Movement</p>
+        </div>
+      </section>
+    </div>
   );
 };
 
 export default MembershipAgreement;
-
