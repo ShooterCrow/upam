@@ -411,7 +411,7 @@ const Header = () => {
                                     <div className="px-4 mt-6 space-y-3">
                                         <button
                                             onClick={() => toggleDropdown('auth-mobile')}
-                                            className="w-full text-center border-2 border-gray-800 px-6 py-3 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors flex items-center justify-center gap-2"
+                                            className="w-full text-center border-2 border-[#003115] px-6 py-3 text-sm font-semibold hover:bg-[#003115] hover:text-white transition-colors flex items-center justify-center gap-2"
                                         >
                                             Register / Login
                                             <ChevronDown size={18} className={`transition-transform duration-200 ${openDropdown === 'auth-mobile' ? 'rotate-180' : ''}`} />

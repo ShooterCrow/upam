@@ -83,7 +83,7 @@ const FallingStars = () => {
             {[...Array(20)].map((_, i) => (
                 <motion.div
                     key={i}
-                    className="absolute bg-slate-900 rounded-full opacity-60"
+                    className="absolute bg-black rounded-full opacity-60"
                     initial={{
                         top: "-5%",
                         left: `${Math.random() * 100}%`,
@@ -128,7 +128,7 @@ const UnitedAfricaHero = () => {
     }, [titleNumber, titles]);
 
     return (
-        <div className="relative overflow-hidden flex flex-col items-center justify-center pt-12 ">
+        <div className="relative overflow-hidden flex flex-col items-center justify-center pt-4 lg:pt-8 pb-8 lg:pb-14">
 
             {/* Background decorative elements */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(235,1,12,0.02),transparent_50%)] pointer-events-none" />
@@ -143,11 +143,11 @@ const UnitedAfricaHero = () => {
             {/* Main content */}
             <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
                 <ScrollReveal direction="up">
-                    <div className="space-y-8">
+                    <div className="space-y-6 lg:space-y-8">
 
-                        <h1 className="text-3xl md:text-4xl lg:text-6xl font-black text-[#555555] lg:leading-[1.05] lg:tracking-tight uppercase">
+                        <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-[#555555] leading-tight md:leading-[1.05] tracking-tight uppercase">
                             A United Africa, Rising Together
-                            <div className="flex flex-wrap justify-center items-center gap-x-4">
+                            <div className="flex flex-wrap justify-center items-center gap-x-4 mt-1">
                                 <span>With One</span>
                                 <span className="relative inline-flex overflow-hidden h-[1.1em] min-w-[140px] md:min-w-[200px] lg:min-w-[260px] justify-center items-center text-[#EB010C]">
                                     {titles.map((title, index) => (
@@ -169,12 +169,12 @@ const UnitedAfricaHero = () => {
                             </div>
                         </h1>
 
-                        <p className="text-[#555555] text-lg md:text-xl font-medium max-w-3xl mx-auto leading-relaxed">
+                        <p className="text-[#555555] text-base md:text-lg lg:text-xl font-medium max-w-3xl mx-auto leading-relaxed">
                             This call invites every African, at home and in the diaspora, to embrace a future where
                             our combined strength becomes the foundation for lasting development.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-4">
+                        <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center items-center pt-2 lg:pt-4">
                             <Link to="/donation">
                                 <motion.div whileHover={{ scale: 1.05, x: 5 }} whileTap={{ scale: 0.95 }}>
                                     <button className="px-10 py-5 bg-[#EB010C] text-white font-black text-xs uppercase tracking-widest shadow-xl shadow-red-500/10 flex items-center gap-3">
@@ -185,7 +185,7 @@ const UnitedAfricaHero = () => {
                             </Link>
                             <Link to="/register">
                                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                    <button className="px-10 py-5 bg-slate-900 text-white font-black text-xs uppercase tracking-widest flex items-center gap-3">
+                                    <button className="px-10 py-5 bg-black text-white font-black text-xs uppercase tracking-widest flex items-center gap-3">
                                         Join The Movement
                                         <ArrowRight size={16} className="text-[#EB010C]" />
                                     </button>
@@ -285,7 +285,7 @@ const Index = () => {
                             </div>
 
                             {/* Right Column - Video / Image */}
-                            <div className="relative group overflow-hidden bg-slate-900">
+                            <div className="relative group overflow-hidden bg-black">
                                 <img
                                     src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg"
                                     alt="UPAM Mission"
@@ -335,7 +335,7 @@ const Index = () => {
                                         className="w-full aspect-[16/10] object-cover transition-transform duration-1000 group-hover:scale-105"
                                     />
                                     <div className="absolute top-0 right-0 w-32 h-32 bg-[#EB010C]/10 backdrop-blur-sm border-l border-b border-white/20" />
-                                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-slate-900/10 backdrop-blur-sm border-r border-t border-white/20" />
+                                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-black/10 backdrop-blur-sm border-r border-t border-white/20" />
                                 </div>
 
                                 <div className="flex flex-col gap-8">
@@ -386,7 +386,7 @@ const Index = () => {
                                                     key={index}
                                                     onClick={() => setActiveFocus(index)}
                                                     className={`group relative flex items-center justify-between p-5 transition-all duration-300 border ${activeFocus === index
-                                                        ? 'bg-slate-900 border-slate-900 text-white'
+                                                        ? 'bg-[#003115] border-[#003115] text-white'
                                                         : 'bg-white border-slate-100 text-[#555555] hover:border-[#EB010C]/30'
                                                         }`}
                                                 >
@@ -404,7 +404,7 @@ const Index = () => {
                                 </div>
                             </div>
 
-                            <div className="relative group overflow-hidden aspect-[16/9] bg-slate-900">
+                            <div className="relative group overflow-hidden aspect-[16/9] bg-[#003115]">
                                 {focusAreas.map((area, index) => (
                                     <div
                                         key={index}
@@ -464,7 +464,7 @@ const Index = () => {
                                         "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg"
                                     ].map((src, index) => (
                                         <div key={`gallery-${index}`} className="flex-shrink-0 w-64 md:w-80 lg:w-96 mx-3 group">
-                                            <div className="relative overflow-hidden bg-slate-900 shadow-lg transition-all duration-500">
+                                            <div className="relative overflow-hidden bg-black shadow-lg transition-all duration-500">
                                                 <div className="aspect-[4/3] overflow-hidden grayscale-20 group-hover:grayscale-0 transition-all duration-700">
                                                     <img
                                                         src={src}
@@ -488,7 +488,7 @@ const Index = () => {
                                         "https://api.builder.io/api/v1/image/assets/TEMP/ac234c04876489cf67819ff29fd69111a0cb2551?width=400"
                                     ].map((src, index) => (
                                         <div key={`gallery-dup-${index}`} className="flex-shrink-0 w-64 md:w-80 lg:w-96 mx-3 group">
-                                            <div className="relative overflow-hidden bg-slate-900 shadow-lg transition-all duration-500">
+                                            <div className="relative overflow-hidden bg-black shadow-lg transition-all duration-500">
                                                 <div className="aspect-[4/3] overflow-hidden transition-all duration-700">
                                                     <img
                                                         src={src}
@@ -550,7 +550,7 @@ const Index = () => {
                                     <ScrollReveal key={index} direction="up" delay={item.delay}>
                                         <div className="group bg-white p-8 border border-slate-100 shadow-sm transition-all duration-500 hover:shadow-2xl hover:border-[#EB010C]/30 flex flex-col gap-8 h-full border-b-4 border-b-slate-200 hover:border-b-[#EB010C] relative overflow-hidden">
                                             <div className="absolute top-0 right-0 w-24 h-24 bg-slate-50 translate-x-12 -translate-y-12 rotate-45 group-hover:bg-[#EB010C]/5 transition-colors" />
-                                            <div className="w-16 h-16 bg-slate-900 text-white flex items-center justify-center group-hover:bg-[#EB010C] transition-colors duration-500">
+                                            <div className="w-16 h-16 bg-[#003115] text-white flex items-center justify-center group-hover:bg-[#EB010C] transition-colors duration-500">
                                                 {item.icon}
                                             </div>
                                             <div className="space-y-4">
@@ -578,10 +578,10 @@ const Index = () => {
                                         alt="Join Movement"
                                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                                     />
-                                    <div className="absolute inset-0 bg-slate-900/20" />
+                                    <div className="absolute inset-0 bg-black/20" />
                                 </div>
 
-                                <div className="bg-slate-900 p-12 lg:p-20 flex flex-col justify-center gap-8 relative overflow-hidden">
+                                <div className="bg-[#003115] p-12 lg:p-20 flex flex-col justify-center gap-8 relative overflow-hidden">
                                     <div className="absolute top-0 right-0 w-32 h-32 bg-[#EB010C]/20 -translate-y-16 translate-x-16 rotate-45" />
                                     <div className="space-y-4 relative z-10">
                                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/20 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C]">
@@ -738,13 +738,13 @@ const Index = () => {
                                         {/* Featured Event - Left Column (Full height) */}
                                         <div className="lg:col-span-2">
                                             {events[0] && (
-                                                <Link to={`/events/${events[0]._id}`} className="relative h-[530px] border border-slate-100 overflow-hidden group cursor-pointer block bg-slate-900">
+                                                <Link to={`/events/${events[0]._id}`} className="relative h-[530px] border border-slate-100 overflow-hidden group cursor-pointer block bg-black">
                                                     <img
                                                         src={events[0].image ? (events[0].image.startsWith('http') ? events[0].image : `http://localhost:5000/${events[0].image}`) : "/academy_logo.png"}
                                                         alt={events[0].title}
                                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-60 grayscale group-hover:grayscale-0"
                                                     />
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
 
                                                     <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12 text-white">
                                                         <div className="flex flex-wrap items-center gap-4 mb-4">
@@ -889,7 +889,7 @@ const Index = () => {
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowFullScreen
                                     ></iframe>
-                                    <div className="absolute inset-0 pointer-events-none border-4 border-slate-900/10 group-hover:border-[#EB010C]/20 transition-colors" />
+                                    <div className="absolute inset-0 pointer-events-none border-4 border-black/10 group-hover:border-[#EB010C]/20 transition-colors" />
                                 </div>
                             ))}
                         </div>
