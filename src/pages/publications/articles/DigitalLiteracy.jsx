@@ -218,6 +218,15 @@ const DigitalLiteracy = () => {
             </p>
           </div>
         </footer>
+
+        {/* Bottom navigation */}
+        <div className="py-16 mt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <Link to="/publications" className="inline-flex items-center gap-2 text-sm font-black text-[#EB010C] hover:text-[#EB010C]/80 uppercase tracking-widest group">
+            <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
+            Back to Publications
+          </Link>
+          <p className="text-xs text-slate-400 uppercase tracking-widest font-medium">United Pan-African Movement</p>
+        </div>
       </article>
     </div>
   );
