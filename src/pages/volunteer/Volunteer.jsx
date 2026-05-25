@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import ScrollReveal from '../../components/ScrollReveal';
 
 const Volunteer = () => {
   const [formData, setFormData] = useState({
@@ -29,6 +30,7 @@ const Volunteer = () => {
   return (
     <div className="bg-white min-h-screen font-['Inter',_sans-serif] text-black pb-20">
       {/* Header Section */}
+      <ScrollReveal direction="up">
       <div className="bg-white py-12 mb-8">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-3xl md:text-3xl font-bold">
@@ -36,9 +38,11 @@ const Volunteer = () => {
           </h1>
         </div>
       </div>
+      </ScrollReveal>
 
       {/* Form Section */}
       <div className="container mx-auto px-4 max-w-[768px]">
+        <ScrollReveal direction="up" delay={0.1}>
         <form onSubmit={handleSubmit} className="space-y-8">
 
           <InputField
@@ -146,6 +150,7 @@ const Volunteer = () => {
           </button>
 
         </form>
+        </ScrollReveal>
       </div>
     </div>
   );

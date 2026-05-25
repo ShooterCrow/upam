@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import ScrollReveal from '../../../components/ScrollReveal';
 
 const HealingHistoricalDivides = () => {
   return (
@@ -16,14 +17,14 @@ const HealingHistoricalDivides = () => {
         </div>
 
         {/* Header Section */}
-        <header className="mb-12 lg:mb-16">
+        <ScrollReveal direction="up"><header className="mb-12 lg:mb-16">
           <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-black leading-[130%] tracking-tight text-slate-900 mb-6 uppercase">
             Healing Historical Divides: Slavery, Colonialism, and the Path to Collective Renewal
           </h1>
           <p className="text-base font-medium leading-[170%] text-slate-600">
             The African world comprising the continent and its global diaspora has been profoundly shaped by the historical traumas of slavery and colonialism. These systems inflicted deep social, economic, psychological, and cultural wounds that continue to influence African unity, identity, and development. This paper examines how historical divisions created by slavery and colonial rule persist into the present, fragmenting African peoples and weakening collective power. It argues that Pan-African renewal requires more than economic or political reform; it demands intentional healing, historical truth, and reconnection among Africans and people of African descent. By exploring memory, identity, reparative justice, and cultural restoration, the paper outlines pathways toward collective renewal grounded in dignity, unity, and shared responsibility.
           </p>
-        </header>
+        </header></ScrollReveal>
 
         {/* Introduction Section */}
         <section className="mb-12 lg:mb-16">

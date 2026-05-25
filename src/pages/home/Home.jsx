@@ -570,6 +570,30 @@ const Index = () => {
                         </section>
                     </ScrollReveal>
 
+                    {/* Metrics Section */}
+                    <ScrollReveal direction="up">
+                        <section className="mb-24 lg:mb-32">
+                            <div className="bg-[#003115] py-16 px-8">
+                                <div className="grid grid-cols-2 lg:grid-cols-4 divide-y-2 lg:divide-y-0 lg:divide-x divide-white/10">
+                                    {[
+                                        { value: "50+", label: "Countries & Chapters", desc: "A growing global network across Africa and the diaspora" },
+                                        { value: "200+", label: "Lives Impacted", desc: "Lives impacted by UPAM programs and initiatives" },
+                                        { value: "10+", label: "Countries Reached", desc: "Countries impacted meaningfully by UPAM" },
+                                        { value: "800+", label: "Volunteers", desc: "The organisation thrived on the remarkable dedication of over 800 volunteers" },
+                                    ].map((stat, i) => (
+                                        <ScrollReveal key={i} direction="up" delay={i * 0.1}>
+                                            <div className="text-center px-6 py-8 lg:py-4">
+                                                <p className="text-4xl md:text-5xl lg:text-6xl font-black text-[#EB010C] mb-2">{stat.value}</p>
+                                                <p className="text-white font-black text-xs uppercase tracking-widest mb-2">{stat.label}</p>
+                                                <p className="text-white/60 text-xs leading-relaxed max-w-[180px] mx-auto">{stat.desc}</p>
+                                            </div>
+                                        </ScrollReveal>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+                    </ScrollReveal>
+
                     <ScrollReveal direction="scale">
                         {/* Be Part of The Movement Section (CTA) */}
                         <section className="mb-24 lg:mb-32">

@@ -309,6 +309,28 @@ const About = () => {
                 </div>
             </section>
 
+            {/* Metrics Section */}
+            <ScrollReveal direction="up">
+                <section className="py-0">
+                    <div className="bg-[#003115] py-16 px-8">
+                        <div className="grid grid-cols-2 lg:grid-cols-4 divide-y-2 lg:divide-y-0 lg:divide-x divide-white/10">
+                            {[
+                                { value: "50+", label: "Countries & Chapters", desc: "A growing global network across Africa and the diaspora" },
+                                { value: "200+", label: "Lives Impacted", desc: "Lives impacted by UPAM programs and initiatives" },
+                                { value: "10+", label: "Countries Reached", desc: "Countries impacted meaningfully by UPAM" },
+                                { value: "800+", label: "Volunteers", desc: "The organisation thrived on the remarkable dedication of over 800 volunteers" },
+                            ].map((stat, i) => (
+                                <div key={i} className="text-center px-6 py-8 lg:py-4">
+                                    <p className="text-4xl md:text-5xl lg:text-6xl font-black text-[#EB010C] mb-2">{stat.value}</p>
+                                    <p className="text-white font-black text-xs uppercase tracking-widest mb-2">{stat.label}</p>
+                                    <p className="text-white/60 text-xs leading-relaxed max-w-[180px] mx-auto">{stat.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            </ScrollReveal>
+
             {/* Gallery Section */}
             <section className="py-24 px-4 md:px-8 max-w-7xl mx-auto space-y-16">
                 <ScrollReveal direction="up" className="text-center max-w-3xl mx-auto space-y-4">

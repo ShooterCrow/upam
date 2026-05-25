@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import ScrollReveal from '../../../components/ScrollReveal';
 
 const DigitalLiteracy = () => {
   return (
@@ -14,14 +15,14 @@ const DigitalLiteracy = () => {
           </Link>
         </div>
         {/* Header Section */}
-        <header className="mb-12 lg:mb-16">
+        <ScrollReveal direction="up"><header className="mb-12 lg:mb-16">
           <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-black leading-[130%] tracking-tight text-slate-900 mb-6 uppercase">
             Digital Literacy and Innovation as Tools for African Self-Sufficiency
           </h1>
           <p className="text-base leading-[170%] text-slate-600">
             In the 21st century, digital literacy and technological innovation have become decisive forces shaping economic power, governance, education, and global influence. For Africa, these forces present both an opportunity and a risk. While digital tools offer pathways to self-sufficiency, innovation, and inclusion, the continent remains largely positioned as a consumer rather than a creator of digital technologies. This paper argues that African self-sufficiency in the modern era is inseparable from digital literacy and innovation. It explores the historical context of technological dependency, examines current gaps in digital capacity, and proposes strategic approaches to building African-led digital ecosystems. By centering people, education, and ownership, the paper positions digital empowerment as a cornerstone of Pan-African development and collective independence.
           </p>
-        </header>
+        </header></ScrollReveal>
 
         {/* Introduction Section */}
         <section className="mb-12 lg:mb-16">

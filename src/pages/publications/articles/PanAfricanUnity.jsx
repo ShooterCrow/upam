@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import ScrollReveal from '../../../components/ScrollReveal';
 
 const PanAfricanUnity = () => {
     return (
@@ -16,14 +17,14 @@ const PanAfricanUnity = () => {
                 </div>
 
                 {/* Header Section */}
-                <header className="mb-12 lg:mb-16">
+                <ScrollReveal direction="up"><header className="mb-12 lg:mb-16">
                     <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-black leading-[130%] tracking-tight text-slate-900 mb-6 uppercase">
                         Pan-African Unity in the 21st Century: From Ideology to Action
                     </h1>
                     <p className="text-base leading-[170%] text-slate-600">
                         Pan-Africanism has long stood as one of the most powerful ideological movements to emerge from the African experience, rooted in resistance to slavery, colonialism, and racial oppression. While the ideology has inspired generations of leaders, activists, and intellectuals, its practical realization remains incomplete. In the 21st century, Africa faces both unprecedented challenges and new opportunities: globalization, digital transformation, demographic growth, climate change, and shifting geopolitical power. This paper examines Pan-African unity beyond ideology, focusing on actionable pathways toward political cooperation, economic integration, cultural solidarity, and people-centered institutions. It argues that Pan-Africanism must evolve from a symbolic ideal into a lived, functional system that shapes governance, trade, education, and collective identity across Africa and the diaspora.
                     </p>
-                </header>
+                </header></ScrollReveal>
 
                 {/* Introduction Section */}
                 <section className="mb-12 lg:mb-16">
