@@ -319,21 +319,68 @@ const About = () => {
                     </p>
                 </ScrollReveal>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    {[
-                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg",
-                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
-                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
-                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
-                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443390/4295b57ab6d99005f92560cffef9c5e1d2acc0f4_unr3mf.jpg",
-                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443386/9ab71b884c373f83d32fabdda6f6590c98490278_jprsen.jpg",
-                    ].map((src, idx) => (
-                        <ScrollReveal key={idx} delay={idx * 0.05} direction="up">
-                            <div className="aspect-[3/4] overflow-hidden hover:scale-[1.02] transition-transform duration-500 shadow-sm">
-                                <img src={src} className="w-full h-full object-cover" alt={`gallery-${idx}`} />
-                            </div>
-                        </ScrollReveal>
-                    ))}
+                <div className="w-full -mx-4 md:-mx-8">
+                    {/* Row 1 — scrolls left */}
+                    <div className="relative overflow-hidden py-1">
+                        <div className="absolute hidden lg:block left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+                        <div className="absolute hidden lg:block right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+                        <div className="flex animate-scroll-slow">
+                            {[
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443390/4295b57ab6d99005f92560cffef9c5e1d2acc0f4_unr3mf.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443386/9ab71b884c373f83d32fabdda6f6590c98490278_jprsen.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443390/4295b57ab6d99005f92560cffef9c5e1d2acc0f4_unr3mf.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443386/9ab71b884c373f83d32fabdda6f6590c98490278_jprsen.jpg",
+                            ].map((src, idx) => (
+                                <div key={idx} className="flex-shrink-0 w-60 md:w-72 lg:w-80 mx-2 group">
+                                    <div className="relative overflow-hidden bg-black shadow-md">
+                                        <div className="aspect-[4/3] overflow-hidden">
+                                            <img src={src} alt={`gallery-${idx}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                        </div>
+                                        <div className="absolute inset-x-0 bottom-0 h-1 bg-[#EB010C] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Row 2 — scrolls right */}
+                    <div className="relative overflow-hidden py-1 mt-3">
+                        <div className="absolute hidden lg:block left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+                        <div className="absolute hidden lg:block right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+                        <div className="flex animate-scroll-slow-reverse">
+                            {[
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443386/9ab71b884c373f83d32fabdda6f6590c98490278_jprsen.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443390/4295b57ab6d99005f92560cffef9c5e1d2acc0f4_unr3mf.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443386/9ab71b884c373f83d32fabdda6f6590c98490278_jprsen.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443390/4295b57ab6d99005f92560cffef9c5e1d2acc0f4_unr3mf.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg",
+                            ].map((src, idx) => (
+                                <div key={idx} className="flex-shrink-0 w-60 md:w-72 lg:w-80 mx-2 group">
+                                    <div className="relative overflow-hidden bg-black shadow-md">
+                                        <div className="aspect-[4/3] overflow-hidden">
+                                            <img src={src} alt={`gallery-${idx}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                        </div>
+                                        <div className="absolute inset-x-0 bottom-0 h-1 bg-[#EB010C] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </section>
 
