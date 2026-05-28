@@ -169,14 +169,14 @@ const Chapters = () => {
             </section>
 
             {/* Bottom CTA Banner */}
-            <section className="bg-slate-900 py-20 px-4 md:px-8 text-center">
+            <section className="bg-[#003115] py-20 px-4 md:px-8 text-center">
                 <div className="max-w-2xl mx-auto">
                     <ScrollReveal direction="up">
                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/20 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit mb-6 mx-auto">
                             <MapPin size={13} />
                             Start a Chapter
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight mb-4">
+                        <h2 className="headerWhite text-3xl md:text-4xl font-black text-white tracking-tight leading-tight mb-4">
                             Don't see your region?
                         </h2>
                         <p className="text-sm text-slate-400 leading-relaxed mb-8">

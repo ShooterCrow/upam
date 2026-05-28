@@ -206,14 +206,14 @@ const ContactUs = () => {
             </section>
 
             {/* Newsletter Banner */}
-            <section className="bg-slate-900 py-20 px-4 md:px-8">
+            <section className="bg-[#003115] py-20 px-4 md:px-8">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
                     <ScrollReveal direction="right">
                         <div>
                             <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/20 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit mb-5">
                                 Newsletter
                             </div>
-                            <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
+                            <h2 className="headerWhite text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
                                 Stay in the Loop
                             </h2>
                             <p className="text-sm text-slate-400 leading-relaxed mt-4 max-w-md">
