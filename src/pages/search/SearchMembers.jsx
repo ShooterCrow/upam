@@ -1,157 +1,268 @@
-import React, { useState } from 'react';
-import { Search, User, Calendar, IdCard } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Search, User, Calendar, IdCard, Users, ArrowRight, Shield, Globe, MapPin, Eye } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useSearchMembersQuery } from './searchApiSlice';
+import useAuth from '../../hooks/useAuth';
+import ScrollReveal from '../../components/ScrollReveal';
 
 const TABS = [
   { id: 'name', label: 'By Name', icon: User },
   { id: 'id', label: 'By Member ID', icon: IdCard },
-  { id: 'dob', label: 'By Date of Birth', icon: Calendar },
 ];
 
 const SearchMembers = () => {
+  const { isLoggedIn } = useAuth();
   const [activeTab, setActiveTab] = useState('name');
-  const [nameQuery, setNameQuery] = useState('');
-  const [idQuery, setIdQuery] = useState('');
-  const [dob, setDob] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedTerm, setDebouncedTerm] = useState('');
 
-  const inputClass =
-    'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#EB010C] focus:border-transparent outline-none text-gray-800 bg-white';
+  // Debounce search term
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedTerm(searchTerm);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
+  // Fetch members based on search criteria
+  const { data: results, isLoading, isError, error } = useSearchMembersQuery(
+    debouncedTerm.length >= (activeTab === 'name' ? 3 : 1)
+      ? { [activeTab === 'name' ? 'searchTerm' : 'memberId']: debouncedTerm }
+      : { skip: true },
+    { skip: debouncedTerm.length < (activeTab === 'name' ? 3 : 1) }
+  );
+
+  const members = results?.data || [];
+
+  const inputClass = "w-full bg-[#F9F9F9] border-b-2 border-slate-200 focus:border-[#EB010C] px-2 py-4 text-base text-slate-900 placeholder:text-slate-400 focus:outline-none transition-colors font-medium";
+  const labelClass = "block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1";
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Page Header */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <p className="text-xs font-semibold tracking-widest uppercase text-[#EB010C] mb-2">
-            Members Directory
-          </p>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-            Search Members
-          </h1>
-          <p className="text-gray-600 max-w-xl">
-            Find and connect with UPAM members across Africa and the diaspora.
-            Search by name, unique member ID, or date of birth.
-          </p>
+    <div className="min-h-screen bg-[#FAFAFC] text-slate-900 overflow-x-hidden">
+
+      {/* Hero Section */}
+      <div className="relative bg-gradient-to-br from-[#FAFAFC] to-[#F3F4F6] pt-32 pb-20 px-4 md:px-8 border-b border-gray-100 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(235,1,12,0.03),transparent_50%)] pointer-events-none" />
+        <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-[#EB010C]/5 blur-3xl pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] w-fit mb-6">
+              <Users size={13} />
+              Members Directory
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.06] text-slate-900 mb-4">
+              Connect with<br />the Movement.
+            </h1>
+            <p className="text-sm text-slate-500 max-w-xl leading-relaxed">
+              Search and find UPAM members across Africa and the diaspora.
+              Our directory is built for unity, transparency, and collective growth.
+            </p>
+          </ScrollReveal>
         </div>
       </div>
 
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      {/* Search Section */}
+      <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-3 gap-16 items-start">
 
-        {/* Tab Switcher */}
-        <div className="flex gap-2 mb-8 bg-white rounded-xl border border-gray-200 p-1.5 w-fit">
-          {TABS.map(({ id, label, icon: Icon }) => (
-            <button
-              key={id}
-              onClick={() => setActiveTab(id)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                activeTab === id
-                  ? 'bg-[#EB010C] text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-              }`}
-            >
-              <Icon className="w-4 h-4" />
-              {label}
-            </button>
-          ))}
-        </div>
+          {/* Search Controls */}
+          <ScrollReveal direction="right" className="lg:col-span-1 border border-slate-100 bg-white p-8 md:p-10">
+            <h2 className="text-xl font-black text-slate-900 tracking-tight mb-8">Search Filters</h2>
 
-        {/* Search Panel */}
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 mb-6">
+            {/* Tab Switcher */}
+            <div className="flex gap-px bg-slate-100 border border-slate-100 mb-10 overflow-hidden">
+              {TABS.map(({ id, label, icon: Icon }) => (
+                <button
+                  key={id}
+                  onClick={() => {
+                    setActiveTab(id);
+                    setSearchTerm('');
+                    setDebouncedTerm('');
+                  }}
+                  className={`flex-1 flex items-center justify-center gap-2 py-4 text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === id
+                    ? 'bg-slate-900 text-white'
+                    : 'bg-white text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+                    }`}
+                >
+                  <Icon size={14} />
+                  {label}
+                </button>
+              ))}
+            </div>
 
-          {/* Search by Name */}
-          {activeTab === 'name' && (
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Full Name or Chapter
-              </label>
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search by name, location, or chapter..."
-                  value={nameQuery}
-                  onChange={(e) => setNameQuery(e.target.value)}
-                  className={`${inputClass} pl-12`}
-                />
+            {/* Search Input */}
+            <div className="space-y-6">
+              <div>
+                <label className={labelClass}>
+                  {activeTab === 'name' ? 'Full Name or Region' : 'Search Member Number'}
+                </label>
+                <div className="relative flex items-center gap-1">
+                  {activeTab === 'id' && (
+                    <span className="text-base font-black text-slate-900 border-b-2 border-slate-200 py-4 h-full flex items-center">20-</span>
+                  )}
+                  <input
+                    type="text"
+                    placeholder={activeTab === 'name' ? "e.g. John Doe" : "e.g. 1045"}
+                    value={searchTerm}
+                    onChange={(e) => {
+                      let val = e.target.value;
+                      if (activeTab === 'id') {
+                        // Strip '20-' or anything leading up to '-' if user paste full ID
+                        if (val.includes('-')) {
+                          val = val.split('-').pop();
+                        }
+                      }
+                      setSearchTerm(val);
+                    }}
+                    className={inputClass}
+                  />
+                  <Search size={18} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-300 pointer-events-none" />
+                </div>
+                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-3">
+                  {searchTerm.length < (activeTab === 'name' ? 3 : 1) ? 'Start typing to search...' : 'Searching...'}
+                </p>
               </div>
-              <p className="text-xs text-gray-500 mt-2">
-                Enter at least 3 characters to search.
+            </div>
+
+            {/* Privacy Shield Notice */}
+            <div className="mt-12 p-6 bg-[#FAFAFC] border-l-4 border-[#EB010C]">
+              <div className="flex items-center gap-2 mb-2">
+                <Shield size={16} className="text-[#EB010C]" />
+                <h3 className="text-[11px] font-black text-slate-900 uppercase tracking-widest">Privacy Protected</h3>
+              </div>
+              <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
+                We protect our members' data. Contact details are never shared publicly.
+                Guests see restricted profiles.
               </p>
             </div>
-          )}
+          </ScrollReveal>
 
-          {/* Search by Member ID */}
-          {activeTab === 'id' && (
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Member ID Number
-              </label>
-              <div className="relative">
-                <IdCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="e.g. UPAM-2024-00123"
-                  value={idQuery}
-                  onChange={(e) => setIdQuery(e.target.value)}
-                  className={`${inputClass} pl-12`}
-                />
+          {/* Results Area */}
+          <div className="lg:col-span-2">
+            {isLoading && (
+              <div className="grid sm:grid-cols-2 gap-px bg-slate-100 border border-slate-100">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="bg-white p-8 h-48 animate-pulse shadow-sm" />
+                ))}
               </div>
-              <p className="text-xs text-gray-500 mt-2">
-                Enter your unique UPAM Member ID (found on your membership card or welcome email).
-              </p>
-            </div>
-          )}
+            )}
 
-          {/* Search by Date of Birth */}
-          {activeTab === 'dob' && (
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Date of Birth
-              </label>
-              <div className="relative">
-                <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="date"
-                  value={dob}
-                  onChange={(e) => setDob(e.target.value)}
-                  className={`${inputClass} pl-12`}
-                />
+            {!isLoading && debouncedTerm.length >= 3 && members.length === 0 && (
+              <ScrollReveal direction="up">
+                <div className="text-center py-20 bg-white border border-slate-100">
+                  <Globe size={48} className="mx-auto text-slate-200 mb-4" />
+                  <h3 className="text-lg font-black text-slate-900 tracking-tight">No Results Found</h3>
+                  <p className="text-sm text-slate-400 mt-2">Try adjusting your search terms or filters.</p>
+                </div>
+              </ScrollReveal>
+            )}
+
+            {!isLoading && debouncedTerm.length < 3 && (
+              <div className="text-center py-32 opacity-50">
+                <Search size={48} className="mx-auto text-slate-100 mb-4" />
+                <h3 className="text-base font-black text-slate-300 uppercase tracking-[0.2em]">Start Typing to Search</h3>
               </div>
-              <p className="text-xs text-gray-500 mt-2">
-                Select your date of birth to locate your member profile.
-              </p>
-            </div>
-          )}
+            )}
 
-          <button
-            type="button"
-            className="mt-5 inline-flex items-center gap-2 px-6 py-3 bg-[#EB010C] text-white font-medium rounded-lg hover:bg-[#EB010C]/90 transition-colors"
-          >
-            <Search className="w-4 h-4" />
-            Search
-          </button>
-        </div>
+            {!isLoading && members.length > 0 && (
+              <div className="grid sm:grid-cols-2 gap-px bg-slate-100 border border-slate-100">
+                {members.map((member, index) => (
+                  <ScrollReveal key={member._id} direction="up" delay={index * 0.05}>
+                    <div className="group bg-white p-8 h-full flex flex-col justify-between hover:bg-slate-50 transition-colors duration-300 relative overflow-hidden">
+                      {/* Decorative Background ID Number for Guests */}
+                      {!isLoggedIn && (
+                        <div className="absolute -right-4 -bottom-4 opacity-[0.03] select-none pointer-events-none">
+                          <span className="text-8xl font-black italic">HIDDEN</span>
+                        </div>
+                      )}
 
-        {/* Auth notice */}
-        <div className="bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-3">
-          <div className="flex-1">
-            <p className="text-sm font-semibold text-amber-800 mb-1">
-              Members-only directory
-            </p>
-            <p className="text-sm text-amber-700">
-              Full search results are available to registered members.{' '}
-              <Link to="/login" className="text-[#EB010C] font-medium hover:underline">
-                Log in
-              </Link>{' '}
-              or{' '}
-              <Link to="/register" className="text-[#EB010C] font-medium hover:underline">
-                register
-              </Link>{' '}
-              to access the complete member directory.
-            </p>
+                      <div>
+                        <div className="flex items-start justify-between mb-6">
+                          <div className="w-16 h-16 bg-[#EB010C]/5 border border-[#EB010C]/10 flex items-center justify-center text-[#EB010C]">
+                            {member.profilePicture ? (
+                              <img src={member.profilePicture} alt={member.firstName} className="w-full h-full object-cover" />
+                            ) : (
+                              <User size={32} />
+                            )}
+                          </div>
+                          <div className="text-right">
+                            <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-1 ${isLoggedIn ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-500'}`}>
+                              {isLoggedIn ? 'Verified Member' : 'Protected'}
+                            </span>
+                          </div>
+                        </div>
+
+                        <h3 className="text-lg font-black text-slate-900 group-hover:text-[#EB010C] transition-colors leading-tight mb-2 uppercase">
+                          {member.firstName} {isLoggedIn ? member.lastName : member.lastName?.charAt(0) + '.'}
+                        </h3>
+
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">
+                            <MapPin size={12} className="text-[#EB010C]" />
+                            {isLoggedIn ? (member.region || 'Chapter Member') : 'Regional Info Restricted'}
+                          </div>
+                          {isLoggedIn && member.memberId && (
+                            <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">
+                              <IdCard size={12} className="text-[#EB010C]" />
+                              {member.memberId}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Action / Notice */}
+                      <div className="mt-8 pt-6 border-t border-slate-50">
+                        {!isLoggedIn ? (
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-1.5 text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                              <Shield size={12} />
+                              Private Account
+                            </div>
+                            <Link to="/login" className="text-[10px] font-black text-[#EB010C] uppercase tracking-widest hover:underline flex items-center gap-1 group/btn">
+                              Log In
+                              <ArrowRight size={12} className="group-hover/btn:translate-x-1 transition-transform" />
+                            </Link>
+                          </div>
+                        ) : (
+                          <button className="flex items-center gap-2 text-[10px] font-black text-slate-900 uppercase tracking-widest hover:text-[#EB010C] transition-colors">
+                            <Eye size={14} />
+                            View Brief Profile
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
+            )}
+
+            {/* CTA for Guests */}
+            {!isLoggedIn && !isLoading && (
+              <ScrollReveal direction="up" className="mt-16 bg-slate-900 p-10 md:p-12 relative overflow-hidden">
+                <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none">
+                  <Users size={200} className="text-white" />
+                </div>
+                <div className="relative z-10 max-w-md">
+                  <h3 className="text-2xl font-black text-white tracking-tight leading-tight mb-4">
+                    Access the Full<br />Pan-African Directory.
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed mb-8">
+                    Verified members can search by exact ID, location, and connect directly with leadership structures across the continent.
+                  </p>
+                  <div className="flex flex-wrap gap-4">
+                    <Link to="/register" className="px-6 py-3 bg-[#EB010C] text-white text-[10px] font-black uppercase tracking-widest hover:bg-[#c9000a] transition-colors">
+                      Register Member
+                    </Link>
+                    <Link to="/login" className="px-6 py-3 border border-white/30 text-white text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-colors">
+                      Sign In
+                    </Link>
+                  </div>
+                </div>
+              </ScrollReveal>
+            )}
           </div>
         </div>
-
       </section>
     </div>
   );

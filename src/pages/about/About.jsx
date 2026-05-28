@@ -413,7 +413,7 @@ const About = () => {
                     <ScrollReveal direction="left" className="space-y-8">
                         <div className="space-y-4">
                             <p className="text-[#EB010C] font-black text-xs uppercase tracking-widest">Organizational Structure</p>
-                            <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight uppercase">
+                            <h2 className="headerWhite text-3xl md:text-5xl font-black tracking-tight leading-tight uppercase">
                                 Built on Leadership,<br /> Powered by Community.
                             </h2>
                             <p className="text-base text-slate-300 font-normal leading-relaxed max-w-xl">
@@ -443,7 +443,7 @@ const About = () => {
                                         {level.icon}
                                     </div>
                                     <div className="space-y-1">
-                                        <h3 className="text-lg font-black tracking-tight uppercase">{level.title}</h3>
+                                        <h3 className="headerWhite text-lg font-black tracking-tight uppercase">{level.title}</h3>
                                         <p className="text-sm text-slate-400 font-normal leading-relaxed">{level.description}</p>
                                     </div>
                                     <ChevronRight className="ml-auto text-slate-600 group-hover:text-white transition-colors" size={20} />

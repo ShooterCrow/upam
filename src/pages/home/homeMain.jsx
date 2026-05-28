@@ -608,7 +608,7 @@ const Index = () => {
                                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/20 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C]">
                                             Get Involved
                                         </div>
-                                        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight uppercase leading-[1.1]">
+                                        <h2 className="headerWhite text-3xl md:text-5xl font-black text-white tracking-tight uppercase leading-[1.1]">
                                             Be Part Of <br />The Movement.
                                         </h2>
                                         <p className="text-base text-white/70 leading-relaxed font-medium">
