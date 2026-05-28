@@ -117,7 +117,7 @@ const GetInvolve = () => {
               </p>
               <Link
                 to="/donation"
-                className="inline-flex items-center gap-2 px-6 py-3.5 border-2 border-slate-900 text-slate-900 text-xs font-black uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-colors w-fit"
+                className="inline-flex items-center gap-2 px-6 py-3.5 border-2 border-slate-900 text-slate-900 text-xs font-black uppercase tracking-widest hover:bg-[#003115] hover:text-white transition-colors w-fit"
               >
                 Donate Now
                 <ArrowRight size={14} />
@@ -208,7 +208,7 @@ const GetInvolve = () => {
               </div>
               <Link
                 to="/membership-policy"
-                className="inline-flex items-center gap-2 mt-10 px-6 py-3.5 border-2 border-slate-900 text-slate-900 text-xs font-black uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 mt-10 px-6 py-3.5 border-2 border-slate-900 text-slate-900 text-xs font-black uppercase tracking-widest hover:bg-[#003115] hover:text-white transition-colors"
               >
                 View Membership Policy
                 <ArrowRight size={14} />
@@ -224,10 +224,10 @@ const GetInvolve = () => {
       </section>
 
       {/* CTA Banner */}
-      <section className="bg-slate-900 py-20 px-4 md:px-8 text-center">
+      <section className="bg-[#003115] py-20 px-4 md:px-8 text-center">
         <div className="max-w-2xl mx-auto">
           <ScrollReveal direction="up">
-            <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight mb-4">
+            <h2 className="headerWhite text-3xl md:text-4xl font-black text-white tracking-tight leading-tight mb-4">
               Ready to be part of something greater?
             </h2>
             <p className="text-sm text-slate-400 leading-relaxed mb-8">
