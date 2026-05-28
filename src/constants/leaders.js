@@ -106,7 +106,7 @@ export const nationalRepresentatives = [
     name: "Rachel Eleojo Sunday",
     title: "National Representative Nigeria",
     image:
-      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779469977/51a261deb6322848cacaa311437b061078360c6c-removebg-preview_dv0zoi.png",
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1780001980/WhatsApp_Image_2026-05-27_at_04.11.51-removebg-preview_2_gmemka.png",
   },
   // {
   //     id: 17,
@@ -154,12 +154,13 @@ export const directors = [
     title: "Treasurer",
     image: "/pics/venetta.png",
   },
-  // {
-  //     id: 23,
-  //     name: "Rachel Eleojo Sunday",
-  //     title: "Director of UPAM Academy",
-  //     image: "/images/leadership/rachel-sunday.jpg"
-  // },
+  {
+    id: 23,
+    name: "Rachel Eleojo Sunday",
+    title: "Director of UPAM Academy",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1780001980/WhatsApp_Image_2026-05-27_at_04.11.51-removebg-preview_2_gmemka.png",
+  },
   {
     id: 24,
     name: "Rita Agu",
