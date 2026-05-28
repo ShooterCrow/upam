@@ -53,7 +53,7 @@ const MembershipAgreement = () => {
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 text-white text-[10px] font-bold uppercase tracking-widest border-l-2 border-[#EB010C] mb-6">
             Membership
           </div>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tight leading-tight mb-4">
+          <h1 className="headerWhite text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tight leading-tight mb-4">
             Membership Agreement
           </h1>
           <p className="text-white/70 text-base font-medium max-w-2xl">
@@ -106,11 +106,10 @@ const MembershipAgreement = () => {
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <button
               onClick={handleNext}
-              className={`inline-flex items-center gap-3 px-8 py-4 text-sm font-black uppercase tracking-widest transition-all duration-200 ${
-                agreed
+              className={`inline-flex items-center gap-3 px-8 py-4 text-sm font-black uppercase tracking-widest transition-all duration-200 ${agreed
                   ? "bg-[#EB010C] text-white hover:bg-[#EB010C]/90"
                   : "bg-slate-200 text-slate-400 cursor-not-allowed"
-              }`}
+                }`}
               disabled={!agreed}
             >
               Proceed to Register

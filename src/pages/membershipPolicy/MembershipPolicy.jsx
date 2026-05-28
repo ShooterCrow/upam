@@ -4,7 +4,7 @@ import ScrollReveal from '../../components/ScrollReveal';
 
 const SectionTitle = ({ number, title }) => (
   <div className="flex items-center gap-4 mb-8">
-    <span className="flex items-center justify-center w-10 h-10 bg-slate-900 text-white text-sm font-black ">
+    <span className="flex items-center justify-center w-10 h-10 bg-[#003115] text-white text-sm font-black ">
       {number}
     </span>
     <h2 className="text-2xl md:text-3xl font-black text-slate-900 uppercase tracking-tighter ">
@@ -81,8 +81,8 @@ const MembershipPolicy = () => {
           <div className="lg:col-span-4 space-y-12">
             <div className="sticky top-32 space-y-12">
               <ScrollReveal direction="left">
-                <div className="p-8 bg-slate-900 text-white ">
-                  <h3 className="text-xl font-black uppercase mb-4 tracking-tighter">Core Principle</h3>
+                <div className="p-8 bg-[#003115] text-white ">
+                  <h3 className="headerWhite text-xl font-black uppercase mb-4 tracking-tighter">Core Principle</h3>
                   <p className="text-slate-400 text-sm leading-relaxed mb-6 font-medium">
                     Membership is open to all people of African descent. Members shall be treated with respect, dignity and have the right to free will and freedom of expression without retaliation.
                   </p>
@@ -246,7 +246,7 @@ const MembershipPolicy = () => {
                       </tbody>
                     </table>
                   </div>
-                  <div className="mt-8 p-4 bg-slate-900 text-white  text-xs">
+                  <div className="mt-8 p-4 bg-[#003115] text-white  text-xs">
                     <p><strong>Youth Symbolic Dues:</strong> Youth can contribute through Pan African Club programs and activities.</p>
                   </div>
                 </SubSection>
@@ -332,7 +332,7 @@ const MembershipPolicy = () => {
                   <p className="text-lg text-slate-600 leading-relaxed font-medium">
                     The UPAM Membership Policy defines who may join, how they join, their expected contributions, members benefits and how UPAM ensures fairness, accountability, and structured participation.
                   </p>
-                  <div className="p-8 bg-slate-900 text-white italic">
+                  <div className="p-8 bg-[#003115] text-white italic">
                     <p className="text-sm leading-loose font-medium">
                       Membership is open to all people of African descent and strongly uphold equality across the organization despite their color of skin, the way they talk, cultural differences, religion or beliefs education, social, political, economic, internal and community status.
                     </p>

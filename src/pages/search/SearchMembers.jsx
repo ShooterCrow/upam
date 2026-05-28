@@ -81,7 +81,7 @@ const SearchMembers = () => {
                     setDebouncedTerm('');
                   }}
                   className={`flex-1 flex items-center justify-center gap-2 py-4 text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === id
-                    ? 'bg-slate-900 text-white'
+                    ? 'bg-[#003115] text-white'
                     : 'bg-white text-slate-500 hover:text-slate-900 hover:bg-slate-50'
                     }`}
                 >
@@ -187,7 +187,7 @@ const SearchMembers = () => {
                             )}
                           </div>
                           <div className="text-right">
-                            <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-1 ${isLoggedIn ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-500'}`}>
+                            <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-1 ${isLoggedIn ? 'bg-[#003115] text-white' : 'bg-slate-100 text-slate-500'}`}>
                               {isLoggedIn ? 'Verified Member' : 'Protected'}
                             </span>
                           </div>
@@ -239,16 +239,16 @@ const SearchMembers = () => {
 
             {/* CTA for Guests */}
             {!isLoggedIn && !isLoading && (
-              <ScrollReveal direction="up" className="mt-16 bg-slate-900 p-10 md:p-12 relative overflow-hidden">
+              <ScrollReveal direction="up" className="mt-16 bg-[#003115] p-10 md:p-12 relative overflow-hidden">
                 <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none">
                   <Users size={200} className="text-white" />
                 </div>
                 <div className="relative z-10 max-w-md">
-                  <h3 className="text-2xl font-black text-white tracking-tight leading-tight mb-4">
+                  <h3 className="headerWhite text-2xl font-black text-white tracking-tight leading-tight mb-4">
                     Access the Full<br />Pan-African Directory.
                   </h3>
                   <p className="text-sm text-slate-400 leading-relaxed mb-8">
-                    Verified members can search by exact ID, location, and connect directly with leadership structures across the continent.
+                    Verified members can search by name or exact ID, and see more information.
                   </p>
                   <div className="flex flex-wrap gap-4">
                     <Link to="/register" className="px-6 py-3 bg-[#EB010C] text-white text-[10px] font-black uppercase tracking-widest hover:bg-[#c9000a] transition-colors">
