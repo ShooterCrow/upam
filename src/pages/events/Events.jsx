@@ -61,7 +61,7 @@ const Events = () => {
 
         {/* Content */}
         <div className="relative w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-24 lg:py-32">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+          <h1 className="headerWhite text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
             Discover Events that Unite,<br className="hidden sm:block" /> Inspire and Empower
           </h1>
           <p className="text-white/75 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
@@ -105,22 +105,22 @@ const Events = () => {
               </p>
             </ScrollReveal>
             <ScrollReveal direction="right">
-            <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-200">
-              <img
-                src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80"
-                alt="UPAM"
-                className="w-full h-full object-cover"
-              />
-              <button
-                type="button"
-                className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
-                aria-label="Play video"
-              >
-                <div className="w-16 h-16 rounded-full bg-[#EB010C] flex items-center justify-center shadow-lg">
-                  <Play className="w-8 h-8 text-white fill-white ml-1" />
-                </div>
-              </button>
-            </div>
+              <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-200">
+                <img
+                  src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80"
+                  alt="UPAM"
+                  className="w-full h-full object-cover"
+                />
+                <button
+                  type="button"
+                  className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
+                  aria-label="Play video"
+                >
+                  <div className="w-16 h-16 rounded-full bg-[#EB010C] flex items-center justify-center shadow-lg">
+                    <Play className="w-8 h-8 text-white fill-white ml-1" />
+                  </div>
+                </button>
+              </div>
             </ScrollReveal>
           </div>
         </div>
@@ -139,11 +139,10 @@ const Events = () => {
                 key={id}
                 type="button"
                 onClick={() => setActiveTab(id)}
-                className={`px-4 py-2.5 rounded text-sm font-medium transition-colors ${
-                  activeTab === id
-                    ? 'bg-[#EB010C] text-white'
-                    : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-50'
-                }`}
+                className={`px-4 py-2.5 rounded text-sm font-medium transition-colors ${activeTab === id
+                  ? 'bg-[#EB010C] text-white'
+                  : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-50'
+                  }`}
               >
                 {label}
               </button>
@@ -156,71 +155,71 @@ const Events = () => {
       <section id="all-events" className="py-12 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal direction="up">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                All Events
-              </h2>
-              <p className="text-gray-500 max-w-2xl text-sm leading-relaxed">
-                UPAM is a Pan-African event platform where conferences, cultural festivals,
-                workshops, and community gatherings are discovered, promoted, and experienced
-                across Africa and the diaspora.
-              </p>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                  All Events
+                </h2>
+                <p className="text-gray-500 max-w-2xl text-sm leading-relaxed">
+                  UPAM is a Pan-African event platform where conferences, cultural festivals,
+                  workshops, and community gatherings are discovered, promoted, and experienced
+                  across Africa and the diaspora.
+                </p>
+              </div>
+              <Link
+                to="#event-cards"
+                className="inline-flex items-center gap-1 text-[#EB010C] font-medium text-sm hover:underline shrink-0"
+              >
+                View all events
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
-            <Link
-              to="#event-cards"
-              className="inline-flex items-center gap-1 text-[#EB010C] font-medium text-sm hover:underline shrink-0"
-            >
-              View all events
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
           </ScrollReveal>
 
           {/* 2 featured event cards */}
           <ScrollReveal direction="up" delay={0.1}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-            {featuredEvents.map((event) => (
-              <div
-                key={event.id}
-                className="bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="relative h-52">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-5">
-                  <div className="flex justify-between items-start gap-2 mb-2">
-                    <h3 className="text-base font-bold text-gray-900 flex-1 leading-snug">
-                      {event.title}
-                    </h3>
-                    {event.dateShort && (
-                      <span className="text-xs text-gray-400 shrink-0">{event.dateShort}</span>
-                    )}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+              {featuredEvents.map((event) => (
+                <div
+                  key={event.id}
+                  className="bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div className="relative h-52">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <p className="text-sm text-gray-500 leading-relaxed mb-3 line-clamp-2">
-                    {event.description || event.fullDescription}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <span className="flex items-center gap-1.5 text-sm text-gray-500">
-                      <MapPin className="w-3.5 h-3.5 text-gray-400" />
-                      {event.location}
-                    </span>
-                    <Link
-                      to={`/events/${event.slug}`}
-                      className="inline-flex items-center gap-1 text-[#EB010C] font-medium text-sm hover:underline"
-                    >
-                      View
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                  <div className="p-5">
+                    <div className="flex justify-between items-start gap-2 mb-2">
+                      <h3 className="text-base font-bold text-gray-900 flex-1 leading-snug">
+                        {event.title}
+                      </h3>
+                      {event.dateShort && (
+                        <span className="text-xs text-gray-400 shrink-0">{event.dateShort}</span>
+                      )}
+                    </div>
+                    <p className="text-sm text-gray-500 leading-relaxed mb-3 line-clamp-2">
+                      {event.description || event.fullDescription}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="flex items-center gap-1.5 text-sm text-gray-500">
+                        <MapPin className="w-3.5 h-3.5 text-gray-400" />
+                        {event.location}
+                      </span>
+                      <Link
+                        to={`/events/${event.slug}`}
+                        className="inline-flex items-center gap-1 text-[#EB010C] font-medium text-sm hover:underline"
+                      >
+                        View
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
           </ScrollReveal>
 
           {/* 3 smaller event cards */}
@@ -280,26 +279,26 @@ const Events = () => {
       <section className="py-12 md:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal direction="up">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-10">
-            How UPAM Works
-          </h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-10">
+              How UPAM Works
+            </h2>
           </ScrollReveal>
 
           {/* 4 steps in a horizontal row */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {howItWorksSteps.map((step, i) => (
               <ScrollReveal key={step.number} direction="up" delay={i * 0.1}>
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <span className="text-2xl font-bold text-gray-900 block mb-2">
-                  {step.number}
-                </span>
-                <h3 className="text-sm font-bold text-gray-900 mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-xs text-gray-500 leading-relaxed">
-                  {step.description}
-                </p>
-              </div>
+                <div className="bg-white p-6 rounded-lg shadow-sm">
+                  <span className="text-2xl font-bold text-gray-900 block mb-2">
+                    {step.number}
+                  </span>
+                  <h3 className="text-sm font-bold text-gray-900 mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs text-gray-500 leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
               </ScrollReveal>
             ))}
           </div>
@@ -331,45 +330,45 @@ const Events = () => {
 
             {/* FAQ accordion */}
             <ScrollReveal direction="left">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-sm text-gray-500 mb-8 leading-relaxed">
-                Welcome to our FAQ section! Here, you'll find answers to common questions about
-                UPAM. If you need further assistance, feel free to reach out to us.
-              </p>
-              <div className="border-t border-gray-100">
-                {eventFaqs.map((faq, idx) => (
-                  <div key={idx} className="border-b border-gray-100">
-                    <button
-                      type="button"
-                      className="w-full flex justify-between items-center text-left gap-4 py-4 hover:text-gray-600 transition-colors"
-                      onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                    >
-                      <span className="text-sm font-semibold text-gray-900">{faq.q}</span>
-                      {openFaq === idx
-                        ? <ChevronUp className="w-4 h-4 text-gray-400 shrink-0" />
-                        : <ChevronDown className="w-4 h-4 text-gray-400 shrink-0" />}
-                    </button>
-                    {openFaq === idx && (
-                      <p className="text-sm text-gray-500 leading-relaxed pb-4">{faq.a}</p>
-                    )}
-                  </div>
-                ))}
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+                  Frequently Asked Questions
+                </h2>
+                <p className="text-sm text-gray-500 mb-8 leading-relaxed">
+                  Welcome to our FAQ section! Here, you'll find answers to common questions about
+                  UPAM. If you need further assistance, feel free to reach out to us.
+                </p>
+                <div className="border-t border-gray-100">
+                  {eventFaqs.map((faq, idx) => (
+                    <div key={idx} className="border-b border-gray-100">
+                      <button
+                        type="button"
+                        className="w-full flex justify-between items-center text-left gap-4 py-4 hover:text-gray-600 transition-colors"
+                        onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                      >
+                        <span className="text-sm font-semibold text-gray-900">{faq.q}</span>
+                        {openFaq === idx
+                          ? <ChevronUp className="w-4 h-4 text-gray-400 shrink-0" />
+                          : <ChevronDown className="w-4 h-4 text-gray-400 shrink-0" />}
+                      </button>
+                      {openFaq === idx && (
+                        <p className="text-sm text-gray-500 leading-relaxed pb-4">{faq.a}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
             </ScrollReveal>
 
             {/* World map */}
             <ScrollReveal direction="right">
-            <div className="hidden lg:block">
-              <img
-                src="/world_map.png"
-                alt="UPAM worldwide"
-                className="w-full h-auto object-contain opacity-80"
-              />
-            </div>
+              <div className="hidden lg:block">
+                <img
+                  src="/world_map.png"
+                  alt="UPAM worldwide"
+                  className="w-full h-auto object-contain opacity-80"
+                />
+              </div>
             </ScrollReveal>
           </div>
         </div>
@@ -387,22 +386,22 @@ const Events = () => {
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal direction="left">
-          <div className="max-w-xl">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Bring Your Event to Life
-            </h2>
-            <p className="text-white/90 mb-6 leading-relaxed text-sm md:text-base">
-              Whether you're organizing a conference, workshop, festival, or community gathering.
-              UPAM gives you the tools to reach your audience and sell tickets with ease.
-            </p>
-            <Link
-              to="/events/create"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#EB010C] text-white font-medium rounded hover:bg-[#EB010C]/90 transition-colors"
-            >
-              Create Events
-              <span className="font-mono text-sm">&gt;&gt;</span>
-            </Link>
-          </div>
+            <div className="max-w-xl">
+              <h2 className="headerWhite text-3xl md:text-4xl font-bold text-white mb-4">
+                Bring Your Event to Life
+              </h2>
+              <p className="text-white/90 mb-6 leading-relaxed text-sm md:text-base">
+                Whether you're organizing a conference, workshop, festival, or community gathering.
+                UPAM gives you the tools to reach your audience and sell tickets with ease.
+              </p>
+              <Link
+                to="/events/create"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#EB010C] text-white font-medium rounded hover:bg-[#EB010C]/90 transition-colors"
+              >
+                Create Events
+                <span className="font-mono text-sm">&gt;&gt;</span>
+              </Link>
+            </div>
           </ScrollReveal>
         </div>
       </section>

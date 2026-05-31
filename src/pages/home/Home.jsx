@@ -186,7 +186,7 @@ const UnitedAfricaHero = () => {
                             </Link>
                             <Link to="/register">
                                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                    <button className="px-10 py-5 bg-black text-white font-black text-xs uppercase tracking-widest flex items-center gap-3">
+                                    <button className="px-10 py-5 bg-[#003115] text-white font-black text-xs uppercase tracking-widest flex items-center gap-3">
                                         Join The Movement
                                         <ArrowRight size={16} className="text-[#EB010C]" />
                                     </button>
@@ -552,46 +552,54 @@ const Index = () => {
                             </div>
                         </section>
                     </ScrollReveal>
+                </div>
+            </div>
 
-                    <ScrollReveal direction="scale">
-                        {/* Be Part of The Movement Section (CTA) */}
-                        <section className="mb-24 lg:mb-32">
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 overflow-hidden">
-                                <div className="relative group overflow-hidden h-[400px] lg:h-auto">
-                                    <img
-                                        src="https://api.builder.io/api/v1/image/assets/TEMP/743da7307db5c6f3802fcc3250631182d6dcce9b?width=1422"
-                                        alt="Join Movement"
-                                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                                    />
-                                    <div className="absolute inset-0 bg-black/20" />
+            {/* Be Part of The Movement Section (CTA) - Full Width */}
+            <ScrollReveal direction="scale">
+                <section className="relative mb-24 lg:mb-32 w-full bg-[#003115] overflow-hidden min-h-[600px] flex items-center">
+                    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-0">
+                        <div className="relative group overflow-hidden h-[400px] lg:h-auto">
+                            <img
+                                src="https://api.builder.io/api/v1/image/assets/TEMP/743da7307db5c6f3802fcc3250631182d6dcce9b?width=1422"
+                                alt="Join Movement"
+                                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                            />
+                            <div className="absolute inset-0 bg-black/20" />
+                        </div>
+
+                        <div className="bg-[#003115] p-12 lg:p-20 flex flex-col justify-center gap-8 relative overflow-hidden">
+                            {/* Content wrapper to maintain alignment with the rest of the page's max-width if needed */}
+                            {/* But user usually wants the color to fill the side. We'll add generous horizontal padding to ensure it's not sticking to edges on smaller screens */}
+                            <div className="max-w-xl lg:ml-0">
+                                <div className="space-y-4 relative z-10">
+                                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/20 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C]">
+                                        Get Involved
+                                    </div>
+                                    <h2 className="headerWhite text-3xl md:text-5xl font-black text-white tracking-tight uppercase leading-[1.1]">
+                                        Be Part Of <br />The Movement.
+                                    </h2>
+                                    <p className="text-base text-white/70 leading-relaxed font-medium">
+                                        We the African People Stand United for Economically Self-sustainable Development, Freedom, Equality, Justice, Free Trade, Open Borders, and the Protection of Our motherland.
+                                    </p>
                                 </div>
-
-                                <div className="bg-[#003115] p-12 lg:p-20 flex flex-col justify-center gap-8 relative overflow-hidden">
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#EB010C]/20 -translate-y-16 translate-x-16 rotate-45" />
-                                    <div className="space-y-4 relative z-10">
-                                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/20 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C]">
-                                            Get Involved
-                                        </div>
-                                        <h2 className="headerWhite text-3xl md:text-5xl font-black text-white tracking-tight uppercase leading-[1.1]">
-                                            Be Part Of <br />The Movement.
-                                        </h2>
-                                        <p className="text-base text-white/70 leading-relaxed font-medium">
-                                            We the African People Stand United for Economically Self-sustainable Development, Freedom, Equality, Justice, Free Trade, Open Borders, and the Protection of Our motherland.
-                                        </p>
-                                    </div>
-                                    <div className="pt-4 relative z-10">
-                                        <Link to="/get-involved">
-                                            <button className="px-10 py-5 bg-[#EB010C] text-white font-black text-xs uppercase tracking-widest hover:bg-white hover:text-[#555555] transition-all duration-300 flex items-center gap-4">
-                                                Join Now
-                                                <ArrowRight size={16} />
-                                            </button>
-                                        </Link>
-                                    </div>
+                                <div className="pt-8 relative z-10">
+                                    <Link to="/get-involved">
+                                        <button className="px-10 py-5 bg-[#EB010C] text-white font-black text-xs uppercase tracking-widest hover:bg-white hover:text-[#555555] transition-all duration-300 flex items-center gap-4">
+                                            Join Now
+                                            <ArrowRight size={16} />
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
-                        </section>
-                    </ScrollReveal>
+                        </div>
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-[#EB010C]/20 -translate-y-16 translate-x-16 rotate-45" />
+                    </div>
+                </section>
+            </ScrollReveal>
 
+            <div className="flex flex-col items-center gap-16 lg:gap-24 pb-12 lg:py-24 px-4 lg:px-8">
+                <div className="w-full max-w-7xl">
                     <ScrollReveal direction="up">
                         {/* Leadership Section */}
                         <section className="mb-10 lg:mb-24 w-full overflow-hidden">
@@ -727,15 +735,22 @@ const Index = () => {
                                                     <img
                                                         src={events[0].image ? (events[0].image.startsWith('http') ? events[0].image : `http://localhost:5000/${events[0].image}`) : "/academy_logo.png"}
                                                         alt={events[0].title}
-                                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-60 grayscale group-hover:grayscale-0"
+                                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-60 grayscale-20 group-hover:grayscale-0"
                                                     />
                                                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
 
                                                     <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12 text-white">
                                                         <div className="flex flex-wrap items-center gap-4 mb-4">
-                                                            <span className="px-3 py-1 bg-[#EB010C] text-[10px] font-black uppercase tracking-widest">
-                                                                Featured Event
-                                                            </span>
+                                                            {events[0].isFeatured && (
+                                                                <span className="px-3 py-1 bg-[#EB010C] text-[10px] font-black uppercase tracking-widest">
+                                                                    Featured Event
+                                                                </span>
+                                                            )}
+                                                            {!events[0].isFeatured && (
+                                                                <span className="px-2 py-1 bg-white/20 backdrop-blur-md text-[10px] font-black uppercase tracking-widest outline outline-1 outline-white/30">
+                                                                    {events[0].category || 'Recent Event'}
+                                                                </span>
+                                                            )}
                                                             {events[0].date && (
                                                                 <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white/80">
                                                                     <Calendar className="w-3 h-3" />
@@ -757,27 +772,44 @@ const Index = () => {
                                         {/* Other Events - Right Column (Stacked cards) */}
                                         <div className="flex flex-col gap-6">
                                             {events.slice(1, 3).map((event) => (
-                                                <Link key={event._id} to={`/events/${event._id}`} className="flex-1 bg-white border border-slate-100 flex flex-col group transition-all duration-500 hover:shadow-xl hover:border-[#EB010C]/30">
+                                                <Link key={event._id} to={`/events/${event._id}`} className="flex-1 border-none flex flex-col group transition-all duration-500">
                                                     <div className="relative aspect-video overflow-hidden bg-slate-100">
                                                         <img
                                                             src={event.image ? (event.image.startsWith('http') ? event.image : `http://localhost:5000/${event.image}`) : "/academy_logo.png"}
                                                             alt={event.title}
-                                                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                                                            className="w-full h-full object-cover grayscale-10 group-hover:grayscale-0 transition-all duration-700"
                                                         />
                                                         <div className="absolute top-0 left-0 p-4">
                                                             <div className="bg-[#EB010C] text-white p-2">
                                                                 <Calendar className="w-4 h-4" />
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="p-6 space-y-3">
-                                                        <h4 className="headerWhite font-black text-[#555555] uppercase tracking-tight group-hover:text-[#EB010C] transition-colors line-clamp-2">
-                                                            {event.title}
-                                                        </h4>
-                                                        <div className="flex items-center gap-2 text-[10px] font-black text-[#555555] uppercase tracking-widest">
-                                                            Learn More <ArrowRight className="w-3 h-3" />
+                                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+
+
+                                                        <div className="absolute bottom-0 left-0 right-0 p-4 pb-6 text-white">
+                                                            <div className="flex flex-wrap items-center gap-4 mb-1">
+                                                                {/* <span className="px-2 py-1 bg-white/20 backdrop-blur-md text-[10px] font-black uppercase tracking-widest outline outline-1 outline-white/30">
+                                                                    {event.category || 'Recent Event'}
+                                                                </span> */}
+
+                                                                {event.date && (
+                                                                    <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white/80">
+                                                                        <Calendar className="w-3 h-3" />
+                                                                        {new Date(event.date).toLocaleDateString()}
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                            <h4 className="headerWhite my-1 font-black text-[#555555] uppercase tracking-tight group-hover:text-[#EB010C] transition-colors line-clamp-2">
+                                                                {event.title}
+                                                            </h4>
+                                                            <div className="flex items-center gap-2 text-[#EB010C] font-black uppercase tracking-widest text-xs">
+                                                                Read More <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    {/* <div className="p-2">
+                                                    </div> */}
                                                 </Link>
                                             ))}
                                         </div>
@@ -882,7 +914,7 @@ const Index = () => {
                     </section>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

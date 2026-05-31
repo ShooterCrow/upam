@@ -44,7 +44,8 @@ const UPAMCalender = () => {
         manualEmails: '',
         showButton: true,
         buttonText: '',
-        buttonLink: ''
+        buttonLink: '',
+        isFeatured: false
     });
 
     const [createEvent, { isLoading: isCreating }] = useCreateEventMutation();
@@ -63,7 +64,8 @@ const UPAMCalender = () => {
             manualEmails: '',
             showButton: true,
             buttonText: '',
-            buttonLink: ''
+            buttonLink: '',
+            isFeatured: false
         });
     };
 
@@ -81,7 +83,8 @@ const UPAMCalender = () => {
             manualEmails: '',
             showButton: true,
             buttonText: '',
-            buttonLink: ''
+            buttonLink: '',
+            isFeatured: false
         });
         setViewMode('add');
     };
@@ -110,6 +113,7 @@ const UPAMCalender = () => {
             submitData.append('showButton', formData.showButton);
             submitData.append('buttonText', formData.buttonText);
             submitData.append('buttonLink', formData.buttonLink);
+            submitData.append('isFeatured', formData.isFeatured);
             if (formData.imageFile) {
                 submitData.append('image', formData.imageFile);
             }
@@ -145,7 +149,8 @@ const UPAMCalender = () => {
             manualEmails: '',
             showButton: event.showButton !== undefined ? event.showButton : true,
             buttonText: event.buttonText || '',
-            buttonLink: event.buttonLink || ''
+            buttonLink: event.buttonLink || '',
+            isFeatured: event.isFeatured || false
         });
         setViewMode('add');
     };
@@ -583,6 +588,19 @@ const UPAMCalender = () => {
                                                 </div>
                                             </div>
                                         )}
+
+                                        <div className="pt-6 border-t border-slate-100 flex items-center gap-3">
+                                            <input
+                                                type="checkbox"
+                                                id="isFeatured"
+                                                className="w-5 h-5 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                                                checked={formData.isFeatured}
+                                                onChange={e => setFormData({ ...formData, isFeatured: e.target.checked })}
+                                            />
+                                            <label htmlFor="isFeatured" className="text-sm font-bold text-slate-700">
+                                                Mark as Featured Event (Prioritized on Home Page)
+                                            </label>
+                                        </div>
 
                                         <div className="flex flex-wrap gap-4 pt-4">
                                             <button
