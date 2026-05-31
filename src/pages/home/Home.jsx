@@ -743,7 +743,7 @@ const Index = () => {
                                                                 </div>
                                                             )}
                                                         </div>
-                                                        <h3 className="text-2xl lg:text-3xl font-black uppercase tracking-tight mb-4 group-hover:text-[#EB010C] transition-colors">
+                                                        <h3 className="headerWhite text-2xl lg:text-3xl font-black uppercase tracking-tight mb-4 group-hover:text-[#EB010C] transition-colors">
                                                             {events[0].title}
                                                         </h3>
                                                         <div className="flex items-center gap-2 text-[#EB010C] font-black uppercase tracking-widest text-xs">
@@ -771,7 +771,7 @@ const Index = () => {
                                                         </div>
                                                     </div>
                                                     <div className="p-6 space-y-3">
-                                                        <h4 className="font-black text-[#555555] uppercase tracking-tight group-hover:text-[#EB010C] transition-colors line-clamp-2">
+                                                        <h4 className="headerWhite font-black text-[#555555] uppercase tracking-tight group-hover:text-[#EB010C] transition-colors line-clamp-2">
                                                             {event.title}
                                                         </h4>
                                                         <div className="flex items-center gap-2 text-[10px] font-black text-[#555555] uppercase tracking-widest">

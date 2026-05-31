@@ -167,8 +167,8 @@ const MyProfile = () => {
                         <div>
                             <h3 className="font-bold text-slate-800 text-sm">Profile Picture</h3>
                             <p className="text-xs text-slate-400 mt-1 mb-2">Recommended: Square image, at least 200x200px</p>
-                            <button 
-                                type="button" 
+                            <button
+                                type="button"
                                 onClick={() => setIsViewModalOpen(true)}
                                 className="text-xs font-bold text-red-600 hover:text-red-700 flex items-center gap-1 transition-colors"
                             >
@@ -367,8 +367,8 @@ const MyProfile = () => {
                         {/* Header */}
                         <div className="w-full flex justify-between items-center px-4 py-2 border-b border-gray-100">
                             <h3 className="font-bold text-slate-800 text-sm">Profile Picture</h3>
-                            <button 
-                                type="button" 
+                            <button
+                                type="button"
                                 onClick={() => setIsViewModalOpen(false)}
                                 className="p-1 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-full transition-all"
                             >

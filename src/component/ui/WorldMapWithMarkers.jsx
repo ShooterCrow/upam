@@ -17,7 +17,7 @@ const WorldMapWithMarkers = () => (
             alt="Africa presence map"
             className="w-full h-auto object-contain max-h-[400px] opacity-80"
         />
-        {mapMarkers.map((marker, i) => (
+        {/* {mapMarkers.map((marker, i) => (
             <div
                 key={i}
                 className="absolute flex flex-col items-center group"
@@ -38,7 +38,7 @@ const WorldMapWithMarkers = () => (
                     {marker.label}
                 </div>
             </div>
-        ))}
+        ))} */}
     </div>
 );
 
