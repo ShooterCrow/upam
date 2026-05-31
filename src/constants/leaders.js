@@ -168,6 +168,13 @@ export const directors = [
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779380144/WhatsApp_Image_2026-05-21_at_16.58.27_yb5mhj.jpg",
   },
+  {
+    id: 25,
+    name: "Victor Onyekwere",
+    title: "Director of Intern Programme & Training",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779376626/d9331509-c158-479b-8428-b6a3d0c1163e_wj9hqv.png",
+  },
 ];
 
 export const members = [

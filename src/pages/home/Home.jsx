@@ -731,7 +731,7 @@ const Index = () => {
                                         {/* Featured Event - Left Column (Full height) */}
                                         <div className="lg:col-span-2">
                                             {events[0] && (
-                                                <Link to={`/events`} className="relative h-[530px] border border-slate-100 overflow-hidden group cursor-pointer block bg-black">
+                                                <Link to={`/events/${events[0]._id}`} className="relative h-[530px] border border-slate-100 overflow-hidden group cursor-pointer block bg-black">
                                                     <img
                                                         src={events[0].image ? (events[0].image.startsWith('http') ? events[0].image : `http://localhost:5000/${events[0].image}`) : "/academy_logo.png"}
                                                         alt={events[0].title}
@@ -772,7 +772,7 @@ const Index = () => {
                                         {/* Other Events - Right Column (Stacked cards) */}
                                         <div className="flex flex-col gap-6">
                                             {events.slice(1, 3).map((event) => (
-                                                <Link key={event._id} to={`/events`} className="flex-1 border-none flex flex-col group transition-all duration-500">
+                                                <Link key={event._id} to={`/events/}`} className="flex-1 border-none flex flex-col group transition-all duration-500">
                                                     <div className="relative aspect-video overflow-hidden bg-slate-100">
                                                         <img
                                                             src={event.image ? (event.image.startsWith('http') ? event.image : `http://localhost:5000/${event.image}`) : "/academy_logo.png"}
