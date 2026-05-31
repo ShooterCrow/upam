@@ -202,7 +202,7 @@ const MembershipPolicy = () => {
                       'Executive Board Member (after 6 months + service hours)',
                       'Institution Membership'
                     ].map((c, i) => (
-                      <li key={i} className="flex items-center gap-3 p-4 bg-slate-50 italic">
+                      <li key={i} className="flex items-center gap-3 p-4 bg-slate-50">
                         <div className="w-1.5 h-1.5 bg-[#EB010C] flex-shrink-0" />
                         <span className="text-sm font-black text-slate-900">{c}</span>
                       </li>
@@ -332,7 +332,7 @@ const MembershipPolicy = () => {
                   <p className="text-lg text-slate-600 leading-relaxed font-medium">
                     The UPAM Membership Policy defines who may join, how they join, their expected contributions, members benefits and how UPAM ensures fairness, accountability, and structured participation.
                   </p>
-                  <div className="p-8 bg-[#003115] text-white italic">
+                  <div className="p-8 bg-[#003115] text-white">
                     <p className="text-sm leading-loose font-medium">
                       Membership is open to all people of African descent and strongly uphold equality across the organization despite their color of skin, the way they talk, cultural differences, religion or beliefs education, social, political, economic, internal and community status.
                     </p>

@@ -11,6 +11,7 @@ import WorldMapWithMarkers from '../../component/ui/WorldMapWithMarkers';
 import { globalExecutive } from '../../constants/leaders';
 import ScrollReveal from '../../components/ScrollReveal';
 import { useGetEventsQuery } from '../UserAdminPages/admin/calendarApiSlice';
+import DualScrollingGallery from '../../component/ui/DualScrollingGallery';
 import SingleSlider from '../../components/SingleSlider';
 
 
@@ -363,6 +364,30 @@ const Index = () => {
                         </section>
                     </ScrollReveal>
 
+                    {/* Metrics Section */}
+                    <ScrollReveal direction="up">
+                        <section className="mb-24 lg:mb-32">
+                            <div className="bg-[#003115] py-16 px-8">
+                                <div className="grid grid-cols-2 lg:grid-cols-4 divide-y-2 lg:divide-y-0 lg:divide-x divide-white/10">
+                                    {[
+                                        { value: "50+", label: "Countries & Chapters", desc: "A growing global network across Africa and the diaspora" },
+                                        { value: "200+", label: "Lives Impacted", desc: "Lives impacted by UPAM programs and initiatives" },
+                                        { value: "10+", label: "Countries Reached", desc: "Countries impacted meaningfully by UPAM" },
+                                        { value: "800+", label: "Volunteers", desc: "The organisation thrived on the remarkable dedication of over 800 volunteers" },
+                                    ].map((stat, i) => (
+                                        <ScrollReveal key={i} direction="up" delay={i * 0.1}>
+                                            <div className="text-center px-6 py-8 lg:py-4">
+                                                <p className="text-4xl md:text-5xl lg:text-6xl font-black text-[#EB010C] mb-2">{stat.value}</p>
+                                                <p className="text-white font-black text-xs uppercase tracking-widest mb-2">{stat.label}</p>
+                                                <p className="text-white/60 text-xs leading-relaxed max-w-[180px] mx-auto">{stat.desc}</p>
+                                            </div>
+                                        </ScrollReveal>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+                    </ScrollReveal>
+
                     {/* What We Stand For Section */}
                     <section className="mb-24 lg:mb-32">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -447,64 +472,22 @@ const Index = () => {
                         </div>
 
                         {/* Horizontal Scrolling Carousel */}
-                        <div className="w-full relative py-2">
-                            <div className="relative overflow-hidden">
-                                {/* Gradient overlays for fade effect on sides */}
-                                <div className="absolute hidden lg:block left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-                                <div className="absolute hidden lg:block right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
-
-                                {/* Scrolling container with slow animation */}
-                                <div className="flex animate-scroll-slow hover:pause-animation">
-                                    {[
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288535/c5dbbb8bc42b46092812e5f987dc66eaf6cb2b68_urieei.jpg",
-                                        "https://api.builder.io/api/v1/image/assets/TEMP/e30f23ba83e18af62762d04d97d7fb23736884ea?width=400",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288902/c78f0671096d20f62827357b9a362ac828bdbbf9_kzt0tj.jpg",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg"
-                                    ].map((src, index) => (
-                                        <div key={`gallery-${index}`} className="flex-shrink-0 w-64 md:w-80 lg:w-96 mx-3 group">
-                                            <div className="relative overflow-hidden bg-black shadow-lg transition-all duration-500">
-                                                <div className="aspect-[4/3] overflow-hidden grayscale-20 group-hover:grayscale-0 transition-all duration-700">
-                                                    <img
-                                                        src={src}
-                                                        alt={`Gallery ${index + 1}`}
-                                                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                                                    />
-                                                </div>
-                                                <div className="absolute inset-x-0 bottom-0 h-1 bg-[#EB010C] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                                            </div>
-                                        </div>
-                                    ))}
-                                    {/* Duplicate set */}
-                                    {[
-                                        "https://api.builder.io/api/v1/image/assets/TEMP/b25f74c0c208851c995df3fe41a15ea551fbb960?width=400",
-                                        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
-                                        "https://api.builder.io/api/v1/image/assets/TEMP/683f693939e917cd3297ff8c6e8af8554e42eae3?width=400",
-                                        "https://api.builder.io/api/v1/image/assets/TEMP/1baa487a59315c54db38e9d2509b9139cca12f04?width=400",
-                                        "https://api.builder.io/api/v1/image/assets/TEMP/07536e0af663886d7094bb2f428fbad257f117cd?width=400",
-                                        "https://api.builder.io/api/v1/image/assets/TEMP/e30f23ba83e18af62762d04d97d7fb23736884ea?width=400",
-                                        "https://api.builder.io/api/v1/image/assets/TEMP/abfd27d9caa30b255c52b305f32ea927babe0a7c?width=400",
-                                        "https://api.builder.io/api/v1/image/assets/TEMP/ac234c04876489cf67819ff29fd69111a0cb2551?width=400"
-                                    ].map((src, index) => (
-                                        <div key={`gallery-dup-${index}`} className="flex-shrink-0 w-64 md:w-80 lg:w-96 mx-3 group">
-                                            <div className="relative overflow-hidden bg-black shadow-lg transition-all duration-500">
-                                                <div className="aspect-[4/3] overflow-hidden transition-all duration-700">
-                                                    <img
-                                                        src={src}
-                                                        alt={`Gallery ${index + 1}`}
-                                                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                                                    />
-                                                </div>
-                                                <div className="absolute inset-x-0 bottom-0 h-1 bg-[#EB010C] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                        {/* Bi-directional Scrolling Gallery */}
+                        <DualScrollingGallery
+                            row1={[
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288535/c5dbbb8bc42b46092812e5f987dc66eaf6cb2b68_urieei.jpg"
+                            ]}
+                            row2={[
+                                "https://api.builder.io/api/v1/image/assets/TEMP/e30f23ba83e18af62762d04d97d7fb23736884ea?width=400",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288902/c78f0671096d20f62827357b9a362ac828bdbbf9_kzt0tj.jpg",
+                                "https://api.builder.io/api/v1/image/assets/TEMP/b25f74c0c208851c995df3fe41a15ea551fbb960?width=400",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png"
+                            ]}
+                        />
                     </section>
 
                     <ScrollReveal direction="up">
@@ -566,30 +549,6 @@ const Index = () => {
                                         </div>
                                     </ScrollReveal>
                                 ))}
-                            </div>
-                        </section>
-                    </ScrollReveal>
-
-                    {/* Metrics Section */}
-                    <ScrollReveal direction="up">
-                        <section className="mb-24 lg:mb-32">
-                            <div className="bg-[#003115] py-16 px-8">
-                                <div className="grid grid-cols-2 lg:grid-cols-4 divide-y-2 lg:divide-y-0 lg:divide-x divide-white/10">
-                                    {[
-                                        { value: "50+", label: "Countries & Chapters", desc: "A growing global network across Africa and the diaspora" },
-                                        { value: "200+", label: "Lives Impacted", desc: "Lives impacted by UPAM programs and initiatives" },
-                                        { value: "10+", label: "Countries Reached", desc: "Countries impacted meaningfully by UPAM" },
-                                        { value: "800+", label: "Volunteers", desc: "The organisation thrived on the remarkable dedication of over 800 volunteers" },
-                                    ].map((stat, i) => (
-                                        <ScrollReveal key={i} direction="up" delay={i * 0.1}>
-                                            <div className="text-center px-6 py-8 lg:py-4">
-                                                <p className="text-4xl md:text-5xl lg:text-6xl font-black text-[#EB010C] mb-2">{stat.value}</p>
-                                                <p className="text-white font-black text-xs uppercase tracking-widest mb-2">{stat.label}</p>
-                                                <p className="text-white/60 text-xs leading-relaxed max-w-[180px] mx-auto">{stat.desc}</p>
-                                            </div>
-                                        </ScrollReveal>
-                                    ))}
-                                </div>
                             </div>
                         </section>
                     </ScrollReveal>

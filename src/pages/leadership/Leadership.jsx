@@ -58,7 +58,7 @@ function Section({ title, subtitle, profiles, description, icon: Icon }) {
                         <div className="mb-12 md:mb-16 max-w-3xl">
                             <div className="flex items-center gap-3 mb-4">
                                 {Icon && <Icon className="w-5 h-5 text-[#EB010C]" />}
-                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#EB010C]/60 italic">
+                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#EB010C]/60">
                                     {subtitle || "Administrative"}
                                 </span>
                             </div>
