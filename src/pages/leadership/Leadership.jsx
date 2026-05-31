@@ -37,10 +37,10 @@ function ProfileCard({ profile }) {
                     <div className="absolute bottom-0 left-0 w-1 h-0 bg-[#EB010C] group-hover:h-full transition-all duration-500" />
                 </div>
                 <div className="space-y-1">
-                    <h3 className="text-slate-900 font-black text-sm uppercase tracking-tight" translate="no">
+                    <h3 className="text-[#555555] font-bold text-sm sm:text-base leading-snug group-hover:text-[#EB010C] transition-colors duration-200" translate="no">
                         {profile.name}
                     </h3>
-                    <p className="text-[#EB010C] font-bold text-[10px] uppercase tracking-widest">
+                    <p className="text-[#555555] text-xs sm:text-sm font-medium leading-snug mt-0.5">
                         {profile.title}
                     </p>
                 </div>
