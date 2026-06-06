@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, User, Calendar, IdCard, Users, ArrowRight, Shield, Globe, MapPin, Eye } from 'lucide-react';
+import { Search, User, Calendar, IdCard, Users, ArrowRight, Shield, Globe, MapPin, Eye, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useSearchMembersQuery } from './searchApiSlice';
 import useAuth from '../../hooks/useAuth';
@@ -15,6 +15,8 @@ const SearchMembers = () => {
   const [activeTab, setActiveTab] = useState('name');
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedTerm, setDebouncedTerm] = useState('');
+  const [showCTAModal, setShowCTAModal] = useState(false);
+  const [hasShownModal, setHasShownModal] = useState(false);
 
   // Debounce search term
   useEffect(() => {
@@ -23,6 +25,7 @@ const SearchMembers = () => {
     }, 500);
     return () => clearTimeout(timer);
   }, [searchTerm]);
+
 
   // Fetch members based on search criteria
   const { data: results, isLoading, isError, error } = useSearchMembersQuery(
@@ -33,6 +36,18 @@ const SearchMembers = () => {
   );
 
   const members = results?.data || [];
+
+
+  // Trigger CTA Modal for guests when results are found
+  useEffect(() => {
+    if (!isLoggedIn && members?.length > 0 && !hasShownModal) {
+      const timer = setTimeout(() => {
+        setShowCTAModal(true);
+        setHasShownModal(true);
+      }, 1500); // Wait a bit so they see the results first
+      return () => clearTimeout(timer);
+    }
+  }, [isLoggedIn, members?.length, hasShownModal]);
 
   const inputClass = "w-full bg-[#F9F9F9] border-b-2 border-slate-200 focus:border-[#EB010C] px-2 py-4 text-base text-slate-900 placeholder:text-slate-400 focus:outline-none transition-colors font-medium";
   const labelClass = "block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1";
@@ -264,6 +279,72 @@ const SearchMembers = () => {
           </div>
         </div>
       </section>
+
+      {/* CTA Modal for Guest Users */}
+      <CTAModal
+        isOpen={showCTAModal}
+        onClose={() => setShowCTAModal(false)}
+      />
+    </div>
+  );
+};
+
+const CTAModal = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6">
+      <div
+        className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300"
+        onClick={onClose}
+      />
+      <div className="relative bg-white w-full max-w-lg overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-8 duration-300 shadow-2xl">
+        {/* Top Accent Bar */}
+        <div className="h-1.5 bg-gradient-to-r from-[#EB010C] via-[#003115] to-[#EB010C]" />
+
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-6 text-slate-400 hover:text-slate-900 transition-colors z-10"
+        >
+          <X size={20} />
+        </button>
+
+        <div className="p-8 md:p-12 text-center">
+          <div className="w-16 h-16 bg-[#EB010C]/10 rounded-full flex items-center justify-center mx-auto mb-8 text-[#EB010C]">
+            <Users size={32} />
+          </div>
+
+          <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight leading-tight mb-4 uppercase">
+            Join the Movement.
+          </h2>
+
+          <p className="text-slate-500 text-sm md:text-base leading-relaxed mb-10 font-medium">
+            You've found some members! Create an account to unlock full profiles,
+            see exact member IDs, and connect with the Pan-African community.
+          </p>
+
+          <div className="flex flex-col gap-4">
+            <Link
+              to="/register"
+              className="w-full py-4 bg-[#EB010C] text-white text-[11px] font-black uppercase tracking-[0.2em] hover:bg-[#c9000a] transition-all transform hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-red-100 flex items-center justify-center gap-2 group"
+            >
+              Become a Member
+              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+
+            <Link
+              to="/login"
+              className="w-full py-4 border-2 border-slate-900 text-slate-900 text-[11px] font-black uppercase tracking-[0.2em] hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center gap-2"
+            >
+              Sign In
+            </Link>
+          </div>
+
+          <p className="mt-8 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+            Registration is free and only takes 2 minutes.
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

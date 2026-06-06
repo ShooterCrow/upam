@@ -12,7 +12,8 @@ import {
     Loader2,
     Smartphone,
     Laptop,
-    X
+    X,
+    Lock
 } from 'lucide-react';
 import useAuth from '../../../hooks/useAuth';
 import { useGetMeQuery, useUpdateMeMutation } from '../../platform/usersApiSlice';
@@ -42,6 +43,7 @@ const MyProfile = () => {
         phone: '',
         country: '',
         chapter: '',
+        dob: '',
         password: '',
         confirmPassword: ''
     });
@@ -57,11 +59,25 @@ const MyProfile = () => {
                 phone: user.phone || '',
                 country: user.country || '',
                 chapter: user.chapter?._id || user.chapter || '',
+                dob: user.dob ? user.dob.split('T')[0] : '',
                 password: '',
                 confirmPassword: ''
             });
         }
     }, [profileData]);
+
+    const isVerified = profileData?.data?.isVerifiedMember;
+    const user = profileData?.data;
+
+    const isFieldLocked = (fieldName) => {
+        if (!isVerified) return false;
+        const val = user?.[fieldName];
+        // For chapter, check if it exists as an object or id
+        if (fieldName === 'chapter') {
+            return !!(user?.chapter?._id || user?.chapter);
+        }
+        return !!val;
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -85,6 +101,7 @@ const MyProfile = () => {
             if (formData.phone) formDataToSend.append('phone', formData.phone);
             if (formData.country) formDataToSend.append('country', formData.country);
             if (formData.chapter) formDataToSend.append('chapter', formData.chapter);
+            if (formData.dob) formDataToSend.append('dob', formData.dob);
             if (formData.password) formDataToSend.append('password', formData.password);
             if (imageFile) formDataToSend.append('profileImage', imageFile);
 
@@ -131,7 +148,6 @@ const MyProfile = () => {
         );
     }
 
-    const user = profileData?.data;
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -143,7 +159,29 @@ const MyProfile = () => {
 
     return (
         <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
-            <h1 className="text-2xl font-bold text-slate-800">Account Settings</h1>
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <h1 className="text-2xl font-bold text-slate-800">Account Settings</h1>
+                {isVerified && (
+                    <div className="flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-100 slide-in-from-right duration-500">
+                        <Shield size={18} className="fill-emerald-700/10" />
+                        <span className="text-xs font-black uppercase tracking-widest">Verified Member</span>
+                    </div>
+                )}
+            </div>
+
+            {isVerified && (
+                <div className="p-4 bg-blue-50 border border-blue-100 rounded-2xl flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-500 border border-blue-50 shrink-0">
+                        <Lock size={20} />
+                    </div>
+                    <div>
+                        <h4 className="font-bold text-blue-900">Identity Protection</h4>
+                        <p className="text-blue-700 text-sm mt-1 leading-relaxed">
+                            Your identity has been verified. To maintain account integrity, fields you have already filled (such as your name, email, or DOB) are now permanently locked. You can still set any missing information once.
+                        </p>
+                    </div>
+                </div>
+            )}
 
             <form id="profile-form" onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                 {/* Left Column */}
@@ -163,6 +201,11 @@ const MyProfile = () => {
                                 <span className="text-[10px] font-bold text-white uppercase tracking-wider drop-shadow-md">Change</span>
                                 <input type="file" className="hidden" accept="image/*" onChange={handleImageChange} />
                             </label>
+                            {isVerified && (
+                                <div className="absolute right-0 bottom-0 p-1.5 bg-emerald-500 text-white rounded-full border-2 border-white shadow-sm z-10">
+                                    <Shield size={12} />
+                                </div>
+                            )}
                         </div>
                         <div>
                             <h3 className="font-bold text-slate-800 text-sm">Profile Picture</h3>
@@ -189,8 +232,10 @@ const MyProfile = () => {
                                     name="firstName"
                                     value={formData.firstName}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800"
+                                    disabled={isFieldLocked('firstName')}
+                                    className={`w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('firstName') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
                                 />
+                                {isFieldLocked('firstName') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
                             <div className="space-y-2">
                                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Last Name</label>
@@ -199,8 +244,10 @@ const MyProfile = () => {
                                     name="lastName"
                                     value={formData.lastName}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800"
+                                    disabled={isFieldLocked('lastName')}
+                                    className={`w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('lastName') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
                                 />
+                                {isFieldLocked('lastName') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
                             <div className="space-y-2">
                                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Email Address</label>
@@ -209,8 +256,10 @@ const MyProfile = () => {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800"
+                                    disabled={isFieldLocked('email')}
+                                    className={`w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('email') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
                                 />
+                                {isFieldLocked('email') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
                             <div className="space-y-2">
                                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Phone No</label>
@@ -220,8 +269,22 @@ const MyProfile = () => {
                                     placeholder="+234"
                                     value={formData.phone}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800"
+                                    disabled={isFieldLocked('phone')}
+                                    className={`w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('phone') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
                                 />
+                                {isFieldLocked('phone') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Date of Birth</label>
+                                <input
+                                    type="date"
+                                    name="dob"
+                                    value={formData.dob}
+                                    onChange={handleChange}
+                                    disabled={isFieldLocked('dob')}
+                                    className={`w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('dob') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
+                                />
+                                {isFieldLocked('dob') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
                             <div className="space-y-2">
                                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Country</label>
@@ -230,8 +293,10 @@ const MyProfile = () => {
                                     name="country"
                                     value={formData.country}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800"
+                                    disabled={isFieldLocked('country')}
+                                    className={`w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('country') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
                                 />
+                                {isFieldLocked('country') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
                             <div className="space-y-2">
                                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Chapter</label>
@@ -239,7 +304,8 @@ const MyProfile = () => {
                                     name="chapter"
                                     value={formData.chapter}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 appearance-none"
+                                    disabled={isFieldLocked('chapter')}
+                                    className={`w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 appearance-none ${isFieldLocked('chapter') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
                                 >
                                     <option value="">Select a Chapter</option>
                                     {profileData?.chapters?.map((ch) => (
@@ -248,6 +314,7 @@ const MyProfile = () => {
                                         </option>
                                     ))}
                                 </select>
+                                {isFieldLocked('chapter') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
                         </div>
                     </div>
