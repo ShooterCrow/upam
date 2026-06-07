@@ -69,7 +69,7 @@ export const globalExecutive = [
   },
   {
     id: 12,
-    name: "Pius Ntitya",
+    name: "Pius Ntinya",
     title: "Global Secretary for Education",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779381405/pius-removebg-preview_1_zigjla.png",
