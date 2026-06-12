@@ -351,7 +351,7 @@ const MalawiSummit = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
             {/* Left: intro + standing image */}
             <div>
-              <h2 className="text-2xl lg:text-3xl font-bold mb-4">
+              <h2 className="text-2xl lg:text-3xl font-bold mb-4 text-white">
                 Programs And Agenda
               </h2>
               <p className="text-sm text-white/60 leading-relaxed mb-8 max-w-md">
@@ -394,7 +394,7 @@ const MalawiSummit = () => {
 
               {/* key on activeDay re-triggers the reveal animation per tab */}
               <ScrollReveal key={activeDay} direction="up" duration={0.5}>
-                <h3 className="text-xl font-semibold mb-3">{day.title}</h3>
+                <h3 className="text-xl font-semibold mb-3 text-white">{day.title}</h3>
                 <p className="text-sm text-white/60 leading-relaxed mb-6 max-w-lg">{day.text}</p>
                 <Placeholder tone="dark" className="w-full aspect-[16/9]" />
               </ScrollReveal>
@@ -514,7 +514,7 @@ const MalawiSummit = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
             {/* Left: numbered selector */}
             <div>
-              <h2 className="text-2xl lg:text-3xl font-bold mb-10 leading-tight">
+              <h2 className="text-2xl lg:text-3xl font-bold mb-10 leading-tight text-white">
                 Travel & Accommodation Information
               </h2>
               <ul className="space-y-3">
@@ -540,7 +540,7 @@ const MalawiSummit = () => {
 
             {/* Right: detail panel */}
             <ScrollReveal key={activeTravel} direction="up" duration={0.5}>
-              <h3 className="text-xl font-semibold mb-3">{travel.heading}</h3>
+              <h3 className="text-xl font-semibold mb-3 text-white">{travel.heading}</h3>
               <p className="text-sm text-white/85 leading-relaxed mb-6 max-w-md">{travel.text}</p>
               <Placeholder tone="light" className="w-full aspect-[16/10]" />
             </ScrollReveal>
