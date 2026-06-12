@@ -21,14 +21,14 @@ import ScrollReveal from '../../components/ScrollReveal';
 /*  Reusable image placeholder. Swap each <Placeholder /> for a real <img />   */
 /*  once the event photography is available.                                   */
 /* -------------------------------------------------------------------------- */
-const Placeholder = ({ className = '', tone = 'light', rounded = 'rounded-lg' }) => {
+const Placeholder = ({ className = '', tone = 'light' }) => {
   const tones = {
     light: 'bg-gradient-to-br from-gray-200 to-gray-300 text-gray-400',
-    dark: 'bg-gradient-to-br from-neutral-800 to-neutral-700 text-neutral-500',
+    dark: 'bg-gradient-to-br from-neutral-600 to-neutral-500 text-neutral-300',
   };
   return (
     <div
-      className={`relative flex items-center justify-center overflow-hidden ${tones[tone]} ${rounded} ${className}`}
+      className={`relative flex items-center justify-center overflow-hidden ${tones[tone]} ${className}`}
       aria-hidden="true"
     >
       <ImageIcon className="w-7 h-7 opacity-70" />
@@ -235,7 +235,7 @@ const MalawiSummit = () => {
             </ScrollReveal>
 
             <ScrollReveal direction="left" delay={0.1}>
-              <div className="bg-white/10 border border-white/15 rounded-lg px-6 py-5 space-y-3 lg:min-w-[280px]">
+              <div className="bg-white/10 border border-white/15 px-6 py-5 space-y-3 lg:min-w-[280px]">
                 <p className="flex items-center gap-2 text-sm">
                   <MapPin className="w-4 h-4 shrink-0 text-[#EB010C]" />
                   <span className="font-semibold">Location:</span> Lilongwe, Malawi
@@ -249,16 +249,13 @@ const MalawiSummit = () => {
           </div>
 
           {/* Thumbnail strip — seamless infinite marquee (set duplicated for the loop) */}
-          <div className="relative overflow-hidden mt-12">
-            <div className="absolute hidden lg:block left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#003115] to-transparent z-10 pointer-events-none" />
-            <div className="absolute hidden lg:block right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#003115] to-transparent z-10 pointer-events-none" />
+          <div className="relative left-1/2 -ml-[50vw] w-screen overflow-hidden mt-12">
             <div className="flex animate-scroll-slow">
-              {Array.from({ length: 14 }).map((_, i) => (
+              {Array.from({ length: 20 }).map((_, i) => (
                 <Placeholder
                   key={i}
                   tone="light"
                   className="flex-shrink-0 w-40 sm:w-48 lg:w-56 aspect-[3/4] mx-2"
-                  rounded="rounded-md"
                 />
               ))}
             </div>
@@ -286,7 +283,7 @@ const MalawiSummit = () => {
           </div>
 
           <ScrollReveal direction="up" delay={0.1}>
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-5">
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-0">
               {Array.from({ length: 3 }).map((_, i) => (
                 <Placeholder key={i} tone="dark" className="aspect-[4/3]" />
               ))}
@@ -310,17 +307,20 @@ const MalawiSummit = () => {
               </ul>
             </ScrollReveal>
             <ScrollReveal direction="left" delay={0.1}>
-              <Placeholder tone="light" className="w-full aspect-[4/3]" rounded="rounded-xl" />
+              <Placeholder tone="light" className="w-full aspect-[4/3]" />
             </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* ================= FRAME 4 — EVENT DETAILS ================= */}
-      <section className="bg-[#003115] text-white">
-        <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            <ScrollReveal direction="right">
+      {/* 50/50 split: left content aligns to the site gutter, right two-image
+          frame is full-bleed to the right edge of the screen. */}
+      <section className="bg-[#003115] text-white overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-stretch">
+          {/* Left — content */}
+          <div className="flex items-center px-4 sm:px-6 lg:pl-[calc(max((100vw_-_1330px)/2,0px)_+_2rem)] lg:pr-12 py-14 lg:py-20">
+            <ScrollReveal direction="right" className="w-full">
               <h2 className="text-2xl lg:text-3xl font-bold mb-8 text-white">
                 Event Details
               </h2>
@@ -332,15 +332,15 @@ const MalawiSummit = () => {
                   </div>
                 ))}
               </dl>
-              
             </ScrollReveal>
+          </div>
 
-            <ScrollReveal direction="left" delay={0.1}>
-              <div className="grid grid-cols-2 gap-4">
-                <Placeholder tone="dark" className="aspect-[3/4] mt-8" rounded="rounded-xl" />
-                <Placeholder tone="dark" className="aspect-[3/4]" rounded="rounded-xl" />
-              </div>
-            </ScrollReveal>
+          {/* Right — two-image frame, full-bleed to the right edge */}
+          <div className="relative min-h-[320px] lg:min-h-[480px]">
+            <div className="absolute inset-0 grid grid-cols-2 gap-3 p-3 lg:p-4">
+              <Placeholder tone="dark" className="w-full h-1/2 self-end" />
+              <Placeholder tone="dark" className="w-full h-full" />
+            </div>
           </div>
         </div>
       </section>
@@ -361,7 +361,7 @@ const MalawiSummit = () => {
                 experiences designed to foster learning, collaboration, networking, and impactful
                 dialogue throughout the event.
               </p>
-              <Placeholder tone="dark" className="w-full aspect-[16/10]" rounded="rounded-xl" />
+              <Placeholder tone="dark" className="w-full aspect-[16/10]" />
             </div>
 
             {/* Right: day tabs + content */}
@@ -369,7 +369,7 @@ const MalawiSummit = () => {
               <div
                 role="tablist"
                 aria-label="Programme days"
-                className="flex flex-wrap gap-x-6 gap-y-2 border-b border-white/15 pb-4 mb-8"
+                className="flex items-center justify-between gap-2 border-b border-white/15 pb-4 mb-8"
               >
                 {agendaDays.map((d, i) => {
                   const active = i === activeDay;
@@ -396,7 +396,7 @@ const MalawiSummit = () => {
               <ScrollReveal key={activeDay} direction="up" duration={0.5}>
                 <h3 className="text-xl font-semibold mb-3">{day.title}</h3>
                 <p className="text-sm text-white/60 leading-relaxed mb-6 max-w-lg">{day.text}</p>
-                <Placeholder tone="dark" className="w-full aspect-[16/9]" rounded="rounded-xl" />
+                <Placeholder tone="dark" className="w-full aspect-[16/9]" />
               </ScrollReveal>
 
               <div className="flex justify-end mt-6">
@@ -421,7 +421,7 @@ const MalawiSummit = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-5 gap-y-8">
             {guests.map((g, i) => (
               <ScrollReveal key={`${g.name}-${i}`} direction="up" delay={(i % 6) * 0.05}>
-                <Placeholder tone="light" className="w-full aspect-square mb-3" rounded="rounded-lg" />
+                <Placeholder tone="light" className="w-full aspect-square mb-3" />
                 <p className="text-sm font-semibold text-gray-900 leading-snug">{g.name}</p>
                 <p className="text-xs text-gray-500 mt-1 leading-snug">{g.role}</p>
               </ScrollReveal>
@@ -431,7 +431,7 @@ const MalawiSummit = () => {
       </section>
 
       {/* ================= FRAME 8 — EVENT REGISTRATION ================= */}
-      <section className="bg-gray-100">
+      <section id="event-registration" className="bg-gray-100 scroll-mt-20">
         <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <h2 className="text-2xl lg:text-3xl font-bold text-center text-gray-900 mb-10">
             Event Registration
@@ -517,7 +517,7 @@ const MalawiSummit = () => {
               <h2 className="text-2xl lg:text-3xl font-bold mb-10 leading-tight">
                 Travel & Accommodation Information
               </h2>
-              <ul className="space-y-1">
+              <ul className="space-y-3">
                 {travelItems.map((t, i) => {
                   const active = i === activeTravel;
                   return (
@@ -525,12 +525,12 @@ const MalawiSummit = () => {
                       <button
                         onClick={() => setActiveTravel(i)}
                         aria-pressed={active}
-                        className={`w-full flex items-center gap-6 text-left py-5 border-b border-white/25 transition-colors ${
+                        className={`w-full flex items-center gap-8 text-left py-7 px-4 border-b border-white/25 transition-colors ${
                           active ? 'bg-white/10' : 'hover:bg-white/5'
-                        } px-3 rounded`}
+                        }`}
                       >
-                        <span className="text-sm font-semibold w-8 shrink-0">{t.num}</span>
-                        <span className="text-sm font-medium">{t.title}</span>
+                        <span className="text-base font-semibold w-8 shrink-0">{t.num}</span>
+                        <span className="text-base font-medium">{t.title}</span>
                       </button>
                     </li>
                   );
@@ -542,7 +542,7 @@ const MalawiSummit = () => {
             <ScrollReveal key={activeTravel} direction="up" duration={0.5}>
               <h3 className="text-xl font-semibold mb-3">{travel.heading}</h3>
               <p className="text-sm text-white/85 leading-relaxed mb-6 max-w-md">{travel.text}</p>
-              <Placeholder tone="light" className="w-full aspect-[16/10]" rounded="rounded-xl" />
+              <Placeholder tone="light" className="w-full aspect-[16/10]" />
             </ScrollReveal>
           </div>
         </div>
@@ -565,7 +565,7 @@ const MalawiSummit = () => {
               </ul>
             </ScrollReveal>
             <ScrollReveal direction="left" delay={0.1}>
-              <Placeholder tone="light" className="w-full aspect-[4/3]" rounded="rounded-xl" />
+              <Placeholder tone="light" className="w-full aspect-[4/3]" />
             </ScrollReveal>
           </div>
 
@@ -590,9 +590,10 @@ const MalawiSummit = () => {
 
       {/* ================= FRAME 11 — MEDIA & COVERAGE (carousel) ========== */}
       <section className="bg-black text-white">
-        <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
-          <Placeholder tone="dark" className="w-full aspect-[21/9] mb-12" rounded="rounded-xl" />
+        {/* Full-bleed top image — spans the entire screen width */}
+        <Placeholder tone="dark" className="w-full aspect-[21/9]" />
 
+        <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <div className="text-center mb-10">
             <h2 className="text-2xl lg:text-3xl font-bold mb-2">
               Media & Coverage
@@ -604,8 +605,8 @@ const MalawiSummit = () => {
 
           {/* Carousel slide */}
           <ScrollReveal key={mediaIndex} direction="scale" duration={0.5}>
-            <div className="relative max-w-3xl mx-auto">
-              <Placeholder tone="dark" className="w-full aspect-video" rounded="rounded-xl" />
+            <div className="relative max-w-5xl mx-auto">
+              <Placeholder tone="dark" className="w-full aspect-video" />
               <button
                 aria-label="Play video"
                 className="absolute inset-0 flex items-center justify-center group"
@@ -618,7 +619,7 @@ const MalawiSummit = () => {
           </ScrollReveal>
 
           {/* Controls */}
-          <div className="flex items-center justify-between max-w-3xl mx-auto mt-8">
+          <div className="flex items-center justify-between max-w-5xl mx-auto mt-8">
             <button
               aria-label="Previous"
               onClick={() => setMediaIndex((p) => (p - 1 + totalMedia) % totalMedia)}
@@ -657,19 +658,24 @@ const MalawiSummit = () => {
                   <CheckItem key={b}>{b}</CheckItem>
                 ))}
               </ul>
-              <Link
-                to="/volunteer"
-                className="inline-flex items-center gap-2 px-8 py-3 bg-[#003115] text-white font-medium rounded transition-opacity hover:opacity-90"
+              <button
+                type="button"
+                onClick={() =>
+                  document
+                    .getElementById('event-registration')
+                    ?.scrollIntoView({ behavior: 'smooth' })
+                }
+                className="inline-flex items-center gap-4 text-gray-900 hover:opacity-70 transition-opacity"
               >
-                Volunteer now
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+                <span className="text-lg font-medium">Volunteer now</span>
+                <CircleArrow />
+              </button>
             </ScrollReveal>
 
             <ScrollReveal direction="left" delay={0.1}>
               <div className="grid grid-cols-1 gap-5">
-                <Placeholder tone="light" className="w-full aspect-[16/9]" rounded="rounded-xl" />
-                <Placeholder tone="light" className="w-full aspect-[16/9]" rounded="rounded-xl" />
+                <Placeholder tone="light" className="w-full aspect-[16/9]" />
+                <Placeholder tone="light" className="w-full aspect-[16/9]" />
               </div>
             </ScrollReveal>
           </div>
