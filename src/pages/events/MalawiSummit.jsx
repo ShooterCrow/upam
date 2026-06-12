@@ -223,7 +223,7 @@ const MalawiSummit = () => {
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
             <ScrollReveal direction="up" className="max-w-3xl">
               <h1
-                className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight"
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-white"
                
               >
                 Global African Renaissance Summit 2026 (Malawi)
@@ -321,7 +321,7 @@ const MalawiSummit = () => {
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <ScrollReveal direction="right">
-              <h2 className="text-2xl lg:text-3xl font-bold mb-8">
+              <h2 className="text-2xl lg:text-3xl font-bold mb-8 text-white">
                 Event Details
               </h2>
               <dl className="space-y-4">
