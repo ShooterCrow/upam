@@ -151,4 +151,22 @@ export const events = [
       "The Pan-African Youth Summit brings together young leaders from across the continent and the diaspora to share ideas, build networks, and advance the cause of African unity and development.",
     status: "upcoming",
   },
+  {
+    id: 7,
+    slug: "global-african-renaissance-summit-2026",
+    // This event has a dedicated custom landing page (MalawiSummit.jsx),
+    // routed ahead of the generic :slug detail page in App.jsx.
+    title: "Global African Renaissance Summit 2026 (Malawi)",
+    date: "12th – 17th May, 2026",
+    dateShort: "May 12–17, 2026",
+    location: "Lilongwe, Malawi",
+    theme: "From Vision to Action: Building Africa's Prosperous Future Together",
+    description:
+      "A platform where policy, investment, culture, and people converge to build a prosperous and united Africa — igniting a new generation of Pan-African leadership and economic collaboration.",
+    image:
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80",
+    fullDescription:
+      "The Global African Renaissance Summit is a platform where policy, investment, culture, and people converge to build a prosperous and united Africa expanding across the continent. Join us in Lilongwe as Africa moves from vision to action.",
+    status: "upcoming",
+  },
 ];
