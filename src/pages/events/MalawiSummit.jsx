@@ -13,11 +13,9 @@ import {
 import ScrollReveal from '../../components/ScrollReveal';
 
 /* -------------------------------------------------------------------------- */
-/*  Brand colours (matches the Figma frames)                                  */
-/*  Green: #003115 · Black: #000000 · Red: #EB010C · White                    */
+/*  Brand colours (applied via Tailwind arbitrary classes, matching the rest  */
+/*  of the codebase): Green bg-[#003115] · Black bg-black · Red bg-[#EB010C]   */
 /* -------------------------------------------------------------------------- */
-const GREEN = '#003115';
-const RED = '#EB010C';
 
 /* -------------------------------------------------------------------------- */
 /*  Reusable image placeholder. Swap each <Placeholder /> for a real <img />   */
@@ -155,7 +153,7 @@ const volunteerBenefits = [
 /* Small check-list row used across light sections */
 const CheckItem = ({ children, dark = false }) => (
   <li className="flex items-start gap-3">
-    <Check className={`w-5 h-5 shrink-0 mt-0.5 ${dark ? 'text-white' : ''}`} style={dark ? {} : { color: GREEN }} />
+    <Check className={`w-5 h-5 shrink-0 mt-0.5 ${dark ? 'text-white' : 'text-[#003115]'}`} />
     <span className={`text-sm leading-relaxed ${dark ? 'text-white/80' : 'text-gray-600'}`}>{children}</span>
   </li>
 );
@@ -210,9 +208,9 @@ const MalawiSummit = () => {
   const labelClass = 'block text-sm font-medium text-gray-700 mb-2';
 
   return (
-    <div className="bg-white">
+    <div className="bg-white overflow-x-hidden">
       {/* ================= FRAME 1 — HERO ================= */}
-      <section style={{ backgroundColor: GREEN }} className="text-white">
+      <section className="bg-[#003115] text-white">
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
           <Link
             to="/events"
@@ -226,7 +224,7 @@ const MalawiSummit = () => {
             <ScrollReveal direction="up" className="max-w-3xl">
               <h1
                 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight"
-                style={{ fontFamily: 'Lato' }}
+               
               >
                 Global African Renaissance Summit 2026 (Malawi)
               </h1>
@@ -239,11 +237,11 @@ const MalawiSummit = () => {
             <ScrollReveal direction="left" delay={0.1}>
               <div className="bg-white/10 border border-white/15 rounded-lg px-6 py-5 space-y-3 lg:min-w-[280px]">
                 <p className="flex items-center gap-2 text-sm">
-                  <MapPin className="w-4 h-4 shrink-0" style={{ color: RED }} />
+                  <MapPin className="w-4 h-4 shrink-0 text-[#EB010C]" />
                   <span className="font-semibold">Location:</span> Lilongwe, Malawi
                 </p>
                 <p className="flex items-center gap-2 text-sm">
-                  <Calendar className="w-4 h-4 shrink-0" style={{ color: RED }} />
+                  <Calendar className="w-4 h-4 shrink-0 text-[#EB010C]" />
                   <span className="font-semibold">Date:</span> 12th - 17th May, 2026
                 </p>
               </div>
@@ -273,7 +271,7 @@ const MalawiSummit = () => {
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <div className="flex items-start justify-between gap-6">
             <ScrollReveal direction="up" className="max-w-3xl">
-              <h2 className="text-2xl lg:text-3xl font-bold mb-4" style={{ fontFamily: 'Lato' }}>
+              <h2 className="text-2xl lg:text-3xl font-bold mb-4">
                 About the Conference (Malawi)
               </h2>
               <p className="text-sm lg:text-base text-white/70 leading-relaxed">
@@ -302,7 +300,7 @@ const MalawiSummit = () => {
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <ScrollReveal direction="right">
-              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-8" style={{ fontFamily: 'Lato' }}>
+              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-8">
                 Conference Objectives
               </h2>
               <ul className="space-y-4">
@@ -319,11 +317,11 @@ const MalawiSummit = () => {
       </section>
 
       {/* ================= FRAME 4 — EVENT DETAILS ================= */}
-      <section style={{ backgroundColor: GREEN }} className="text-white">
+      <section className="bg-[#003115] text-white">
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <ScrollReveal direction="right">
-              <h2 className="text-2xl lg:text-3xl font-bold mb-8" style={{ fontFamily: 'Lato' }}>
+              <h2 className="text-2xl lg:text-3xl font-bold mb-8">
                 Event Details
               </h2>
               <dl className="space-y-4">
@@ -353,7 +351,7 @@ const MalawiSummit = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
             {/* Left: intro + standing image */}
             <div>
-              <h2 className="text-2xl lg:text-3xl font-bold mb-4" style={{ fontFamily: 'Lato' }}>
+              <h2 className="text-2xl lg:text-3xl font-bold mb-4">
                 Programs And Agenda
               </h2>
               <p className="text-sm text-white/60 leading-relaxed mb-8 max-w-md">
@@ -412,7 +410,7 @@ const MalawiSummit = () => {
       <section className="bg-white">
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <ScrollReveal direction="up">
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'Lato' }}>
+            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
               Special Guests
             </h2>
             <p className="text-sm text-gray-500 mb-10">
@@ -435,16 +433,13 @@ const MalawiSummit = () => {
       {/* ================= FRAME 8 — EVENT REGISTRATION ================= */}
       <section className="bg-gray-100">
         <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
-          <h2 className="text-2xl lg:text-3xl font-bold text-center text-gray-900 mb-10" style={{ fontFamily: 'Lato' }}>
+          <h2 className="text-2xl lg:text-3xl font-bold text-center text-gray-900 mb-10">
             Event Registration
           </h2>
 
           {submitted ? (
             <div className="max-w-xl mx-auto text-center bg-white border border-gray-200 rounded-xl p-10">
-              <div
-                className="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center"
-                style={{ backgroundColor: GREEN }}
-              >
+              <div className="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center bg-[#003115]">
                 <Check className="w-7 h-7 text-white" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Registration received</h3>
@@ -503,8 +498,7 @@ const MalawiSummit = () => {
               <div className="md:col-span-2">
                 <button
                   type="submit"
-                  className="px-10 py-3 text-white font-medium rounded transition-opacity hover:opacity-90"
-                  style={{ backgroundColor: RED }}
+                  className="px-10 py-3 bg-[#EB010C] text-white font-medium rounded transition-opacity hover:opacity-90"
                 >
                   Submit
                 </button>
@@ -515,12 +509,12 @@ const MalawiSummit = () => {
       </section>
 
       {/* ================= FRAME 9 — TRAVEL & ACCOMMODATION (interactive) === */}
-      <section style={{ backgroundColor: RED }} className="text-white">
+      <section className="bg-[#EB010C] text-white">
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
             {/* Left: numbered selector */}
             <div>
-              <h2 className="text-2xl lg:text-3xl font-bold mb-10 leading-tight" style={{ fontFamily: 'Lato' }}>
+              <h2 className="text-2xl lg:text-3xl font-bold mb-10 leading-tight">
                 Travel & Accommodation Information
               </h2>
               <ul className="space-y-1">
@@ -560,7 +554,7 @@ const MalawiSummit = () => {
           {/* Expected Outcomes */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <ScrollReveal direction="right">
-              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-1" style={{ fontFamily: 'Lato' }}>
+              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-1">
                 Expected Outcomes
               </h2>
               <p className="text-sm text-gray-500 mb-8">What Will Come Out of This Conference?</p>
@@ -578,7 +572,7 @@ const MalawiSummit = () => {
           {/* Networking Opportunities */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center mt-16 lg:mt-24">
             <ScrollReveal direction="right">
-              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-1" style={{ fontFamily: 'Lato' }}>
+              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-1">
                 Networking Opportunities
               </h2>
               <p className="text-sm text-gray-500 mb-8">Connect, Collaborate and Grow</p>
@@ -600,7 +594,7 @@ const MalawiSummit = () => {
           <Placeholder tone="dark" className="w-full aspect-[21/9] mb-12" rounded="rounded-xl" />
 
           <div className="text-center mb-10">
-            <h2 className="text-2xl lg:text-3xl font-bold mb-2" style={{ fontFamily: 'Lato' }}>
+            <h2 className="text-2xl lg:text-3xl font-bold mb-2">
               Media & Coverage
             </h2>
             <p className="text-sm text-white/50">
@@ -652,7 +646,7 @@ const MalawiSummit = () => {
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <ScrollReveal direction="right">
-              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-1" style={{ fontFamily: 'Lato' }}>
+              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-1">
                 Volunteer for the Conference
               </h2>
               <p className="text-sm text-gray-500 mb-8">
@@ -665,8 +659,7 @@ const MalawiSummit = () => {
               </ul>
               <Link
                 to="/volunteer"
-                className="inline-flex items-center gap-2 px-8 py-3 text-white font-medium rounded transition-opacity hover:opacity-90"
-                style={{ backgroundColor: GREEN }}
+                className="inline-flex items-center gap-2 px-8 py-3 bg-[#003115] text-white font-medium rounded transition-opacity hover:opacity-90"
               >
                 Volunteer now
                 <ArrowRight className="w-4 h-4" />
