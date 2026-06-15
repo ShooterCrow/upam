@@ -22,7 +22,7 @@ const CompletionBanner = ({ completeness }) => {
     const info = stepInfo[currentStep.id];
 
     return (
-        <div className="bg-red-600 border-b border-red-700 py-2.5 px-4 md:px-8 animate-in slide-in-from-top duration-500 sticky top-0 z-[100] w-[70%] mx-auto">
+        <div className="bg-red-600 border-b border-red-700 py-2.5 px-4 md:px-8 animate-in slide-in-from-top duration-500 sticky top-0 z-[100] w-[100%] lg:w-[70%] mx-auto">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white shrink-0">
