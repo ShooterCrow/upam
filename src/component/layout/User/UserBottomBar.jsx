@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from '../../../pages/authenticationPages/authApiSlice';
+import LoadingState from '../../ui/LoadingState';
 import {
     LayoutDashboard,
     CheckCircle,
@@ -19,10 +20,14 @@ import {
 } from 'lucide-react';
 import { USER_LINKS } from '../../../constants/navigation';
 
+import { selectCompleteness } from '../../../pages/authenticationPages/authSlice';
+import { useSelector } from 'react-redux';
+
 const UserBottomBar = () => {
+    const completeness = useSelector(selectCompleteness);
     const location = useLocation();
     const navigate = useNavigate();
-    const [logout] = useLogoutMutation();
+    const [logout, { isLoading: isLoggingOut }] = useLogoutMutation();
     const [showMore, setShowMore] = useState(false);
 
     const handleLogout = async () => {
@@ -33,6 +38,14 @@ const UserBottomBar = () => {
             console.error('Failed to logout:', err);
         }
     };
+
+    const isComplete = completeness?.isAllComplete ?? true;
+    const allowedPaths = [
+        '/user/my-profile',
+        '/user/member-verification',
+        '/user/emergency-contact',
+        '/logout'
+    ];
 
     // Priority links for bottom bar
     const mainLinks = USER_LINKS.slice(0, 3);
@@ -45,6 +58,11 @@ const UserBottomBar = () => {
 
     return (
         <>
+            {isLoggingOut && (
+                <div className="fixed inset-0 bg-white/80 backdrop-blur-sm z-[9999] flex items-center justify-center">
+                    <LoadingState message="Logging out..." />
+                </div>
+            )}
             {/* More Menu Overlay */}
             {showMore && (
                 <div
@@ -57,6 +75,8 @@ const UserBottomBar = () => {
                 <div className="p-2 grid grid-cols-2 gap-2 max-h-[60vh] overflow-y-auto">
                     {moreLinks.map((link) => {
                         const Icon = link.icon;
+                        const isRestricted = !isComplete && !allowedPaths.includes(link.path);
+
                         return link.path === '/logout' ? (
                             <button
                                 key={link.path}
@@ -69,15 +89,20 @@ const UserBottomBar = () => {
                         ) : (
                             <Link
                                 key={link.path}
-                                to={link.path}
-                                onClick={() => setShowMore(false)}
+                                to={isRestricted ? "#" : link.path}
+                                onClick={() => {
+                                    if (!isRestricted) setShowMore(false);
+                                }}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${link.isDanger
                                     ? 'text-red-600 hover:bg-red-50'
-                                    : 'text-gray-900 hover:bg-slate-50'
+                                    : isRestricted
+                                        ? 'text-gray-300 cursor-not-allowed'
+                                        : 'text-gray-900 hover:bg-slate-50'
                                     }`}
                             >
                                 <Icon size={18} />
-                                {link.name}
+                                <span className="flex-1">{link.name}</span>
+                                {isRestricted && <Shield size={14} className="text-gray-300" />}
                             </Link>
                         );
                     })}
@@ -89,14 +114,18 @@ const UserBottomBar = () => {
                 {mainLinks.map((link) => {
                     const isActive = location.pathname === link.path || (link.path !== '/user' && location.pathname.startsWith(link.path));
                     const Icon = link.icon;
+                    const isRestricted = !isComplete && !allowedPaths.includes(link.path);
+
                     return (
                         <Link
                             key={link.path}
-                            to={link.path}
-                            onClick={() => setShowMore(false)}
+                            to={isRestricted ? "#" : link.path}
+                            onClick={() => !isRestricted && setShowMore(false)}
                             className={`flex flex-col text-center items-center justify-center w-full h-full space-y-1 transition-colors ${isActive
                                 ? 'text-red-600'
-                                : 'text-slate-400'
+                                : isRestricted
+                                    ? 'text-gray-200 cursor-not-allowed'
+                                    : 'text-slate-400'
                                 }`}
                         >
                             <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />

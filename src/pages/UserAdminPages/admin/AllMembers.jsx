@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useGetUsersQuery, useUpdateUserMutation } from '../../platform/usersApiSlice';
 import { MoreVertical, Filter, ChevronLeft, ChevronRight, SlidersHorizontal, Search, ShieldCheck, User as UserIcon, Loader2 } from 'lucide-react';
 import LoadingState from '../../../component/ui/LoadingState';
 import ErrorState from '../../../component/ui/ErrorState';
-import MemberInfoModal from './modals/MemberInfoModal';
 import Pagination from '../../../component/ui/Pagination';
 
 const AllMembers = () => {
+    const navigate = useNavigate();
     const [page, setPage] = useState(1);
     const [limit] = useState(10);
     const [searchTerm, setSearchTerm] = useState('');
     const [debouncedSearch, setDebouncedSearch] = useState('');
     const [verifiedFilter, setVerifiedFilter] = useState('all'); // 'all', 'true', 'false'
     const [showFilterMenu, setShowFilterMenu] = useState(false);
-    const [selectedMember, setSelectedMember] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [updatingRoleId, setUpdatingRoleId] = useState(null);
 
     // Mutations
@@ -168,10 +167,7 @@ const AllMembers = () => {
                                 <tr
                                     key={member._id}
                                     className={`group hover:bg-slate-50 transition-colors cursor-pointer ${isFetching ? 'opacity-40 pointer-events-none' : ''}`}
-                                    onClick={() => {
-                                        setSelectedMember(member);
-                                        setIsModalOpen(true);
-                                    }}
+                                    onClick={() => navigate(`/admin/all-members/${member._id}`)}
                                 >
                                     <td className="px-6 py-5 text-sm text-slate-400">
                                         {String((page - 1) * limit + idx + 1).padStart(2, '0')}
@@ -242,15 +238,6 @@ const AllMembers = () => {
                         </tbody>
                     </table>
                 </div>
-
-                <MemberInfoModal
-                    isOpen={isModalOpen}
-                    onClose={() => {
-                        setIsModalOpen(false);
-                        setSelectedMember(null);
-                    }}
-                    member={selectedMember}
-                />
             </div>
 
             {/* Pagination */}

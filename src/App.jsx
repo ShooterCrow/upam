@@ -35,6 +35,7 @@ import VerifyEmail from './pages/auth/VerifyEmail'
 import ResetPassword from './pages/auth/ResetPassword'
 import PersistLogin from './pages/authenticationPages/PersistLogin'
 import RequireAuth from './pages/authenticationPages/RequireAuth'
+import ProfileCompletionGuard from './pages/authenticationPages/ProfileCompletionGuard'
 import Dashboard from './pages/UserAdminPages/common/Dashboard'
 import MemberVerification from './pages/UserAdminPages/common/MemberVerification'
 import EmergencyContact from './pages/UserAdminPages/common/EmergencyContact'
@@ -45,7 +46,9 @@ import MyProfile from './pages/UserAdminPages/common/MyProfile'
 import UPAMCalender from './pages/UserAdminPages/common/UPAMCalender'
 import AllMembers from './pages/UserAdminPages/admin/AllMembers'
 import MemberDetail from './pages/UserAdminPages/admin/detailPages/MemberDetail'
+import MemberProfile from './pages/UserAdminPages/admin/detailPages/MemberProfile'
 import Chapters from './pages/UserAdminPages/admin/chapters/Chapters'
+import ChapterDetail from './pages/UserAdminPages/admin/detailPages/ChapterDetail'
 import PublicChapters from './pages/chapters/Chapters'
 import NotFound from './pages/NotFound'
 import MembershipPayment from './pages/UserAdminPages/common/MembershipPayment'
@@ -58,10 +61,12 @@ import MyTransactions from './pages/UserAdminPages/common/MyTransactions'
 import Settings from './pages/UserAdminPages/admin/settings/Settings'
 import Dues from './pages/UserAdminPages/admin/Dues'
 import MyDues from './pages/UserAdminPages/common/MyDues'
+import AutoRecovery from './component/common/AutoRecovery'
 
 const App = () => {
   return (
     <div>
+      <AutoRecovery />
       <Routes>
         <Route element={<PersistLogin />}>
           <Route path="/" element={<Layout />}>
@@ -126,42 +131,52 @@ const App = () => {
 
           {/* Admin Routes */}
           <Route element={<RequireAuth allowedRoles={['admin', "manager"]} />}>
-            <Route path="/admin" element={<AdminLayoutContext />}>
-              <Route index element={<Dashboard />} />
-              <Route path='member-verification' element={<MemberVerification />} />
-              <Route path='membership-payment' element={<MembershipPayment />} />
-              <Route path='emergency-contact' element={<EmergencyContact />} />
-              <Route path='notification' element={<Notification />} />
-              <Route path='support' element={<Support />} />
-              <Route path='all-members' element={<AllMembers />} />
-              <Route path='all-transactions' element={<AllTransactionsTable />} />
-              <Route path='my-transactions' element={<MyTransactions />} />
-              <Route path='my-dues' element={<MyDues />} />
-              <Route path='members-application'>
-                <Route index element={<MemberApplication />} />
-                <Route path=":id" element={<MemberDetail />} />
+            <Route element={<ProfileCompletionGuard />}>
+              <Route path="/admin" element={<AdminLayoutContext />}>
+                <Route index element={<Dashboard />} />
+                <Route path='member-verification' element={<MemberVerification />} />
+                <Route path='membership-payment' element={<MembershipPayment />} />
+                <Route path='emergency-contact' element={<EmergencyContact />} />
+                <Route path='notification' element={<Notification />} />
+                <Route path='support' element={<Support />} />
+                <Route path='all-members'>
+                  <Route index element={<AllMembers />} />
+                  <Route path=":id" element={<MemberProfile />} />
+                </Route>
+                <Route path='all-transactions' element={<AllTransactionsTable />} />
+                <Route path='my-transactions' element={<MyTransactions />} />
+                <Route path='my-dues' element={<MyDues />} />
+                <Route path='members-application'>
+                  <Route index element={<MemberApplication />} />
+                  <Route path=":id" element={<MemberDetail />} />
+                </Route>
+                <Route path='chapters'>
+                  <Route index element={<Chapters />} />
+                  <Route path=":id" element={<ChapterDetail />} />
+                </Route>
+                <Route path='dues' element={<Dues />} />
+                <Route path='my-profile' element={<MyProfile />} />
+                <Route path='calendar' element={<UPAMCalender />} />
+                <Route path='settings' element={<Settings />} />
               </Route>
-              <Route path='chapters' element={<Chapters />} />
-              <Route path='dues' element={<Dues />} />
-              <Route path='my-profile' element={<MyProfile />} />
-              <Route path='calendar' element={<UPAMCalender />} />
-              <Route path='settings' element={<Settings />} />
             </Route>
           </Route>
 
           {/* User Routes */}
           <Route element={<RequireAuth allowedRoles={['user', "admin", "manager"]} />}>
-            <Route path="/user" element={<UserLayoutContext />}>
-              <Route index element={<Dashboard />} />
-              <Route path='member-verification' element={<MemberVerification />} />
-              <Route path='calendar' element={<UPAMCalender />} />
-              <Route path='membership-payment' element={<MembershipPayment />} />
-              <Route path='emergency-contact' element={<EmergencyContact />} />
-              <Route path='notification' element={<Notification />} />
-              <Route path='support' element={<Support />} />
-              <Route path='my-transactions' element={<MyTransactions />} />
-              <Route path='my-dues' element={<MyDues />} />
-              <Route path='my-profile' element={<MyProfile />} />
+            <Route element={<ProfileCompletionGuard />}>
+              <Route path="/user" element={<UserLayoutContext />}>
+                <Route index element={<Dashboard />} />
+                <Route path='member-verification' element={<MemberVerification />} />
+                <Route path='calendar' element={<UPAMCalender />} />
+                <Route path='membership-payment' element={<MembershipPayment />} />
+                <Route path='emergency-contact' element={<EmergencyContact />} />
+                <Route path='notification' element={<Notification />} />
+                <Route path='support' element={<Support />} />
+                <Route path='my-transactions' element={<MyTransactions />} />
+                <Route path='my-dues' element={<MyDues />} />
+                <Route path='my-profile' element={<MyProfile />} />
+              </Route>
             </Route>
           </Route>
 

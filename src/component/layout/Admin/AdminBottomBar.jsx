@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from '../../../pages/authenticationPages/authApiSlice';
+import LoadingState from '../../ui/LoadingState';
 import {
     LayoutDashboard,
     Users,
@@ -19,10 +20,14 @@ import {
 } from 'lucide-react';
 import { ADMIN_LINKS } from '../../../constants/navigation';
 
+import { selectCompleteness } from '../../../pages/authenticationPages/authSlice';
+import { useSelector } from 'react-redux';
+
 const AdminBottomBar = () => {
+    const completeness = useSelector(selectCompleteness);
     const location = useLocation();
     const navigate = useNavigate();
-    const [logout] = useLogoutMutation();
+    const [logout, { isLoading: isLoggingOut }] = useLogoutMutation();
     const [showMore, setShowMore] = useState(false);
 
     const handleLogout = async () => {
@@ -35,6 +40,14 @@ const AdminBottomBar = () => {
     };
 
 
+    const isComplete = completeness?.isAllComplete ?? true;
+    const allowedPaths = [
+        '/admin/my-profile',
+        '/admin/member-verification',
+        '/admin/emergency-contact',
+        '/logout'
+    ];
+
     const mainLinks = ADMIN_LINKS.slice(0, 3);
     const moreLinks = ADMIN_LINKS.slice(3).concat([
         { name: 'Account', path: '/admin/my-profile', icon: User },
@@ -43,6 +56,11 @@ const AdminBottomBar = () => {
 
     return (
         <>
+            {isLoggingOut && (
+                <div className="fixed inset-0 bg-white/80 backdrop-blur-sm z-[9999] flex items-center justify-center">
+                    <LoadingState message="Logging out..." />
+                </div>
+            )}
             {/* More Menu Overlay */}
             {showMore && (
                 <div
@@ -55,6 +73,8 @@ const AdminBottomBar = () => {
                 <div className="p-2 grid grid-cols-2 gap-2 max-h-[60vh] overflow-y-auto">
                     {moreLinks.map((link) => {
                         const Icon = link.icon;
+                        const isRestricted = !isComplete && !allowedPaths.includes(link.path);
+
                         return link.path === '/logout' ? (
                             <button
                                 key={link.path}
@@ -67,15 +87,20 @@ const AdminBottomBar = () => {
                         ) : (
                             <Link
                                 key={link.path}
-                                to={link.path}
-                                onClick={() => setShowMore(false)}
+                                to={isRestricted ? "#" : link.path}
+                                onClick={() => {
+                                    if (!isRestricted) setShowMore(false);
+                                }}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${link.isDanger
                                     ? 'text-red-600 hover:bg-red-50'
-                                    : 'text-gray-900 hover:bg-slate-50'
+                                    : isRestricted
+                                        ? 'text-gray-300 cursor-not-allowed'
+                                        : 'text-gray-900 hover:bg-slate-50'
                                     }`}
                             >
                                 <Icon size={18} />
-                                {link.name}
+                                <span className="flex-1">{link.name}</span>
+                                {isRestricted && <Shield size={14} className="text-gray-300" />}
                             </Link>
                         );
                     })}
@@ -87,14 +112,18 @@ const AdminBottomBar = () => {
                 {mainLinks.map((link) => {
                     const isActive = location.pathname === link.path || (link.path !== '/admin' && location.pathname.startsWith(link.path));
                     const Icon = link.icon;
+                    const isRestricted = !isComplete && !allowedPaths.includes(link.path);
+
                     return (
                         <Link
                             key={link.path}
-                            to={link.path}
-                            onClick={() => setShowMore(false)}
+                            to={isRestricted ? "#" : link.path}
+                            onClick={() => !isRestricted && setShowMore(false)}
                             className={`flex flex-col items-center text-center justify-center w-full h-full space-y-1 transition-colors ${isActive
                                 ? 'text-red-600'
-                                : 'text-slate-400'
+                                : isRestricted
+                                    ? 'text-gray-200 cursor-not-allowed'
+                                    : 'text-slate-400'
                                 }`}
                         >
                             <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />

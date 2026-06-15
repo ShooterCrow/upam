@@ -5,11 +5,13 @@ import LoadingState from '../../../../component/ui/LoadingState';
 import ErrorState from '../../../../component/ui/ErrorState';
 import ChapterForm from './ChapterForm';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Chapters = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedChapter, setSelectedChapter] = useState(null);
     const [showActionMenu, setShowActionMenu] = useState(null);
+    const navigate = useNavigate();
 
     const { data: chapters, isLoading, isError, error, refetch } = useGetChaptersQuery();
     const [deleteChapter] = useDeleteChapterMutation();
@@ -90,7 +92,11 @@ const Chapters = () => {
                         </thead>
                         <tbody className="divide-y divide-slate-50">
                             {chapters?.map((chapter) => (
-                                <tr key={chapter._id} className="group hover:bg-slate-50 transition-colors">
+                                <tr
+                                    key={chapter._id}
+                                    className="group hover:bg-slate-50 transition-colors cursor-pointer"
+                                    onClick={() => navigate(`/admin/chapters/${chapter._id}`)}
+                                >
                                     <td className="px-6 py-5 text-sm font-bold text-slate-700">
                                         {chapter.chapter_id}
                                     </td>
@@ -126,7 +132,7 @@ const Chapters = () => {
                                             {chapter.chapter_note || '---'}
                                         </div>
                                     </td>
-                                    <td className="px-6 py-5 relative">
+                                    <td className="px-6 py-5 relative" onClick={(e) => e.stopPropagation()}>
                                         <button
                                             onClick={() => setShowActionMenu(showActionMenu === chapter._id ? null : chapter._id)}
                                             className="text-slate-400 hover:text-slate-600 p-1"
@@ -136,6 +142,13 @@ const Chapters = () => {
 
                                         {showActionMenu === chapter._id && (
                                             <div className="absolute right-6 top-12 w-36 bg-white rounded-xl border border-gray-100 z-10 py-1 shadow-xl animate-in fade-in zoom-in-95">
+                                                <button
+                                                    onClick={() => navigate(`/admin/chapters/${chapter._id}`)}
+                                                    className="w-full text-left px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 flex items-center gap-2"
+                                                >
+                                                    <Eye size={14} />
+                                                    View Details
+                                                </button>
                                                 <button
                                                     onClick={() => handleEdit(chapter)}
                                                     className="w-full text-left px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 flex items-center gap-2"

@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import registerIllustration from "../../assets/Register.png";
-import { useSignupMutation } from "../../pages/authenticationPages/authApiSlice";
+import { useSignupMutation, useSendOtpMutation } from "../../pages/authenticationPages/authApiSlice";
 import { useDispatch } from "react-redux";
 import ScrollReveal from "../../components/ScrollReveal";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CheckCircle2, Loader2, Phone, MessageSquare, ShieldCheck, Globe, Calendar } from "lucide-react";
+import { Country } from "country-state-city";
+import { useGetSettingsQuery } from "../platform/settingsApiSlice";
 
 /** Google "G" logo for Sign up with Google */
 const GoogleIcon = () => (
@@ -34,12 +36,26 @@ const Register = () => {
     lastName: "",
     email: "",
     password: "",
+    dob: "",
+    country: "",
+    phone: "",
+    otpCode: "",
   });
 
-  const [signup, { isLoading }] = useSignupMutation();
-  const dispatch = useDispatch();
+  const [otpId, setOtpId] = useState("");
+  const [isOtpSent, setIsOtpSent] = useState(false);
+  const [isPhoneVerified, setIsPhoneVerified] = useState(false);
+  const [otpMethod, setOtpMethod] = useState("whatsapp");
+
+  const [signup, { isLoading: isSigningUp }] = useSignupMutation();
+  const [sendOtp, { isLoading: isSendingOtp }] = useSendOtpMutation();
+  const { data: settingsResponse } = useGetSettingsQuery();
   const navigate = useNavigate();
   const [errMsg, setErrMsg] = useState("");
+
+  const requirePhoneVerification = settingsResponse?.data?.hotelInfo?.requirePhoneVerification ?? false;
+
+  const countries = useMemo(() => Country.getAllCountries(), []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -54,30 +70,54 @@ const Register = () => {
     setFormData((prev) => ({
       ...prev,
       firstName: firstName,
-      lastName: lastName || firstName,
+      lastName: lastName,
     }));
+  };
+
+  const handleSendOtp = async (method = "whatsapp") => {
+    if (!formData.phone) {
+      setErrMsg("Please enter a phone number first");
+      return;
+    }
+    setErrMsg("");
+    setOtpMethod(method);
+    try {
+      const response = await sendOtp({ phone: formData.phone, method }).unwrap();
+      setOtpId(response.data.otpId);
+      setIsOtpSent(true);
+    } catch (err) {
+      setErrMsg(err?.data?.message || "Failed to send verification code");
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrMsg("");
-    try {
-      if (!formData.firstName || !formData.email || !formData.password) {
-        setErrMsg("Please fill in all fields");
-        return;
-      }
 
-      await signup(formData).unwrap();
+    if (!formData.firstName || !formData.email || !formData.password || !formData.dob || !formData.country || (requirePhoneVerification && !formData.phone)) {
+      setErrMsg("Please fill in all required fields");
+      return;
+    }
+
+    if (requirePhoneVerification && !isOtpSent) {
+      setErrMsg("Please verify your phone number first");
+      return;
+    }
+
+    if (requirePhoneVerification && !formData.otpCode) {
+      setErrMsg("Please enter the verification code sent to your phone");
+      return;
+    }
+
+    try {
+      await signup({
+        ...formData,
+        otpId
+      }).unwrap();
       navigate("/login");
       alert("Registration successful! Please check your email to verify your account before logging in.");
     } catch (err) {
-      if (err?.data?.message) {
-        setErrMsg(err?.data.message);
-      } else if (err.originalStatus === 409) {
-        setErrMsg("Email or Username Taken");
-      } else {
-        setErrMsg("Registration Failed");
-      }
+      setErrMsg(err?.data?.message || "Registration Failed");
     }
   };
 
@@ -85,8 +125,8 @@ const Register = () => {
     <div className="bg-white min-h-screen pt-[40px] lg:pt-0">
       <div className="flex flex-col lg:flex-row-reverse min-h-screen bg-white">
         {/* Form Container */}
-        <div className="flex-1 flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:px-32 lg:pt-32 py-12">
-          <ScrollReveal direction="up" className="w-full max-w-[450px] mx-auto">
+        <div className="flex-1 flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:px-32 lg:pt-32 py-12 scrollbar-hide overflow-y-auto">
+          <ScrollReveal direction="up" className="w-full max-w-[500px] mx-auto">
             <div className="mb-10">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EB010C]/10 text-[#EB010C] text-[10px] font-black uppercase tracking-widest border-l-2 border-[#EB010C] mb-6">
                 Join UPAM
@@ -105,34 +145,153 @@ const Register = () => {
             </div>
 
             <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
-              <div className="space-y-2">
-                <label className="block text-xs font-black text-slate-900 tracking-widest uppercase">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  placeholder="Maxwell Diamein"
-                  className={inputBase}
-                  onChange={handleNameChange} // Simple handler for single input
-                  required
-                />
+              {/* Name Row */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="block text-xs font-black text-slate-900 tracking-widest uppercase">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Maxwell Diamein"
+                    className={inputBase}
+                    onChange={handleNameChange}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-xs font-black text-slate-900 tracking-widest uppercase flex items-center gap-2">
+                    <Calendar size={12} className="text-[#EB010C]" /> Date of Birth
+                  </label>
+                  <input
+                    type="date"
+                    name="dob"
+                    className={inputBase}
+                    value={formData.dob}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="block text-xs font-black text-slate-900 tracking-widest uppercase">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Example999@gmail.com"
-                  className={inputBase}
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
+              {/* Email & Country */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="block text-xs font-black text-slate-900 tracking-widest uppercase">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Example999@gmail.com"
+                    className={inputBase}
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-xs font-black text-slate-900 tracking-widest uppercase flex items-center gap-2">
+                    <Globe size={12} className="text-[#EB010C]" /> Country/Chapter
+                  </label>
+                  <select
+                    name="country"
+                    className={inputBase}
+                    value={formData.country}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Select Country</option>
+                    {countries.map((c) => (
+                      <option key={c.isoCode} value={c.name}>
+                        {c.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
+              {/* Phone & OTP Section */}
+              <div className="space-y-4 pt-2 border-t border-slate-100">
+                <div className="space-y-2">
+                  <label className="block text-xs font-black text-slate-900 tracking-widest uppercase flex items-center gap-2">
+                    <Phone size={12} className="text-[#EB010C]" /> Phone Number
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="tel"
+                      name="phone"
+                      placeholder="+234 800 000 0000"
+                      className={inputBase}
+                      value={formData.phone}
+                      onChange={handleChange}
+                      disabled={isOtpSent}
+                      required
+                    />
+                    {isPhoneVerified && (
+                      <CheckCircle2 className="absolute right-0 top-1/2 -translate-y-1/2 text-green-500" size={20} />
+                    )}
+                  </div>
+                </div>
+                {console.log(requirePhoneVerification)}
+
+                {requirePhoneVerification && !isOtpSent && (
+                  <div className="flex flex-col gap-3">
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Verify your phone:</p>
+                    <div className="flex gap-4">
+                      <button
+                        type="button"
+                        onClick={() => handleSendOtp("whatsapp")}
+                        disabled={isSendingOtp || !formData.phone}
+                        className="flex-1 flex items-center justify-center gap-2 bg-emerald-500/10 text-emerald-600 py-3 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20 hover:bg-emerald-500 hover:text-white transition-all disabled:opacity-50"
+                      >
+                        {isSendingOtp && otpMethod === 'whatsapp' ? <Loader2 size={14} className="animate-spin" /> : <MessageSquare size={14} />}
+                        WhatsApp Secure
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleSendOtp("sms")}
+                        disabled={isSendingOtp || !formData.phone}
+                        className="flex-1 flex items-center justify-center gap-2 bg-blue-500/10 text-blue-600 py-3 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 hover:bg-blue-500 hover:text-white transition-all disabled:opacity-50"
+                      >
+                        {isSendingOtp && otpMethod === 'sms' ? <Loader2 size={14} className="animate-spin" /> : <Phone size={14} />}
+                        Send SMS
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {requirePhoneVerification && isOtpSent && (
+                  <div className="bg-slate-50 p-4 border border-slate-100 flex flex-col gap-4 animate-in fade-in duration-300">
+                    <div className="flex items-center justify-between">
+                      <label className="text-[10px] font-black text-slate-900 tracking-widest uppercase flex items-center gap-2">
+                        <ShieldCheck size={14} className="text-[#EB010C]" /> Enter {formData.otpCode.length}/6 Digit Code
+                      </label>
+                      <button
+                        type="button"
+                        onClick={() => { setIsOtpSent(false); setFormData(p => ({ ...p, otpCode: "" })) }}
+                        className="text-[10px] font-black text-[#EB010C] uppercase"
+                      >
+                        Change Number
+                      </button>
+                    </div>
+                    <input
+                      type="text"
+                      name="otpCode"
+                      maxLength={6}
+                      placeholder="000000"
+                      className="w-full bg-white border-2 border-slate-200 py-3 text-center text-2xl font-black tracking-[0.5em] focus:border-[#EB010C] outline-none transition-all"
+                      value={formData.otpCode}
+                      onChange={handleChange}
+                    />
+                    <p className="text-[9px] font-medium text-slate-500 text-center uppercase tracking-wider">
+                      A verification code was sent to your phone via {otpMethod.toUpperCase()}.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* Password */}
               <div className="space-y-2">
                 <label className="block text-xs font-black text-slate-900 tracking-widest uppercase">
                   Password
@@ -160,15 +319,15 @@ const Register = () => {
 
               <button
                 type="submit"
-                disabled={isLoading}
+                disabled={isSigningUp || (requirePhoneVerification && !isOtpSent)}
                 className="w-full flex items-center justify-center gap-4 bg-[#EB010C] text-white py-4 px-6 font-black text-xs uppercase tracking-widest hover:bg-slate-900 transition-all duration-300 disabled:opacity-50 mt-4 group"
               >
-                {isLoading ? "Registering..." : "Register Now"}
-                {!isLoading && <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />}
+                {isSigningUp ? <Loader2 className="animate-spin" size={16} /> : "Finalize Registration"}
+                {!isSigningUp && <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />}
               </button>
             </form>
 
-            <p className="text-[11px] font-black uppercase tracking-widest text-slate-400 text-center mt-8">
+            <p className="text-[11px] font-black uppercase tracking-widest text-slate-400 text-center mt-8 pb-10">
               Already have an account?{" "}
               <Link to="/login" className="text-[#EB010C] hover:text-slate-900 transition-colors">
                 Sign In
@@ -184,17 +343,6 @@ const Register = () => {
             alt="Register Context"
             className="w-[80%] md:w-[60%] h-full object-contain object-center opacity-100 transition-transform duration-[2s] group-hover:scale-105"
           />
-          {/* <div className="absolute inset-0 bg-gradient-to-tr from-gray-200 via-gray-200/40 to-transparent" /> */}
-
-          {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-full min-h-[300px] flex flex-col justify-center px-12">
-            <h2 className="text-4xl xl:text-5xl font-black text-white uppercase tracking-tighter leading-[1.1] mb-6 drop-shadow-xl">
-              Building <br />The Future.
-            </h2>
-            <div className="w-16 h-1 bg-[#EB010C] mx-auto mb-6"></div>
-            <p className="text-base text-white/80 font-medium max-w-sm mx-auto">
-              Become part of a continental evolution and secure a brighter tomorrow for all.
-            </p>
-          </div> */}
         </div>
       </div>
     </div>
@@ -202,3 +350,4 @@ const Register = () => {
 };
 
 export default Register;
+

@@ -6,6 +6,7 @@ const Settings = () => {
     const { data: response, isLoading, isError, error } = useGetSettingsQuery();
     const [updateSettings, { isLoading: isUpdating }] = useUpdateSettingsMutation();
     const [requireEmailVerification, setRequireEmailVerification] = useState(false);
+    const [requirePhoneVerification, setRequirePhoneVerification] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     //ewwewe
@@ -13,6 +14,7 @@ const Settings = () => {
     useEffect(() => {
         if (response?.data?.hotelInfo) {
             setRequireEmailVerification(response.data.hotelInfo.requireEmailVerification ?? false);
+            setRequirePhoneVerification(response.data.hotelInfo.requirePhoneVerification ?? false);
         }
     }, [response]);
 
@@ -30,7 +32,8 @@ const Settings = () => {
             // Construct the updated hotelInfo
             const updatedHotelInfo = {
                 ...hotelInfo,
-                requireEmailVerification
+                requireEmailVerification,
+                requirePhoneVerification
             };
 
             formData.append('hotelInfo', JSON.stringify(updatedHotelInfo));
@@ -91,7 +94,26 @@ const Settings = () => {
                             <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
                         </label>
                     </div>
+
+                    <div className="flex items-center justify-between py-4 border-t border-gray-100">
+                        <div>
+                            <h3 className="font-medium text-gray-900">Require Phone Verification</h3>
+                            <p className="text-sm text-gray-500 mt-1 max-w-xl">
+                                When enabled, new users must verify their phone number via WhatsApp or SMS (Bird.com) during registration.
+                            </p>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                            <input
+                                type="checkbox"
+                                className="sr-only peer"
+                                checked={requirePhoneVerification}
+                                onChange={(e) => setRequirePhoneVerification(e.target.checked)}
+                            />
+                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+                        </label>
+                    </div>
                 </div>
+                {console.log(requirePhoneVerification)}
 
                 <div className="p-6 bg-gray-50 flex justify-end">
                     <button

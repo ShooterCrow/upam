@@ -51,7 +51,7 @@ const Dashboard = () => {
             </div>
 
             {/* Stats Cards */}
-            <DashboardStats data={stats} isLoading={isDashboardLoading} />
+            <DashboardStats data={stats} role={user?.roles[0]} isLoading={isDashboardLoading} />
 
             <div className="grid grid-cols-1 gap-8">
                 {/* Left side: Banner and Announcement */}

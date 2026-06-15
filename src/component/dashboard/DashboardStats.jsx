@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreditCard, Wallet, Share2, Users, ChartCandlestick } from 'lucide-react';
+import { CreditCard, Wallet, Share2, Users, ChartCandlestick, Timer } from 'lucide-react';
 
 const StatCard = ({ title, value, subValue, type, trend, icon: Icon, iconBg, iconColor, onClickLink, linkText }) => {
     return (
@@ -29,7 +29,7 @@ const StatCard = ({ title, value, subValue, type, trend, icon: Icon, iconBg, ico
     );
 };
 
-export const DashboardStats = ({ data, isLoading }) => {
+export const DashboardStats = ({ data, role, isLoading }) => {
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
@@ -72,9 +72,9 @@ export const DashboardStats = ({ data, isLoading }) => {
             trend: 'up'
         },
         {
-            title: "Total Members",
-            value: isLoading ? "..." : formatNumber(data?.totalMembers),
-            icon: Users,
+            title: role === 'admin' ? "Total Members" : "Total Hours",
+            value: isLoading ? "..." : role === 'admin' ? formatNumber(data?.totalMembers) : formatNumber(0),
+            icon: role === 'admin' ? Users : Timer,
             iconBg: "bg-indigo-50",
             iconColor: "text-indigo-500"
         }

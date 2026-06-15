@@ -11,7 +11,7 @@ const Chapters = () => {
     const filtered = (chapters || []).filter(ch =>
         ch.chapter_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         ch.chapter_note?.toLowerCase().includes(searchQuery.toLowerCase())
-    ).sort();
+    ).sort((a, b) => a.chapter_name.localeCompare(b.chapter_name));
 
     return (
         <div className="min-h-screen bg-[#FAFAFC] text-slate-900 overflow-x-hidden">

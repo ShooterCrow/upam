@@ -84,6 +84,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: { password },
       }),
     }),
+    sendOtp: builder.mutation({
+      query: (otpData) => ({
+        url: "/auth/send-otp",
+        method: "POST",
+        body: otpData,
+      }),
+    }),
   }),
 });
 
@@ -96,4 +103,5 @@ export const {
   useVerifyEmailMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
+  useSendOtpMutation,
 } = authApiSlice;

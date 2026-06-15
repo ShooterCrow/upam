@@ -28,23 +28,25 @@ const EyeOffIcon = () => (
 const inputBase = "w-full text-base text-slate-900 bg-transparent border-0 border-b-2 border-slate-200 rounded-none py-3 pr-10 outline-none focus:border-[#eb010c] focus:ring-0 transition-colors placeholder:text-slate-400";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errMsg, setErrMsg] = useState("");
+  const [navTo, setNavTo] = useState("");
 
   const [login, { isLoading, isSuccess }] = useLoginMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isSuccess) navigate("/admin");
-  }, [isSuccess, navigate]);
+    if (isSuccess) navigate(navTo);
+  }, [isSuccess, navigate, navTo]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userData = await login({ email, password }).unwrap();
+      const userData = await login({ identifier, password }).unwrap();
+      setNavTo(userData.data.user.roles[0] === "admin" ? "/admin" : "/user");
       // dispatch(setCredentials({ ...userData }));
     } catch (err) {
       if (err?.data?.message) {
@@ -85,14 +87,14 @@ const Login = () => {
             <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
               <div className="space-y-2">
                 <label className="block text-xs font-black text-slate-900 tracking-widest uppercase">
-                  Email Address
+                  Email or Phone Number
                 </label>
                 <input
-                  type="email"
-                  placeholder="Example999@gmail.com"
+                  type="text"
+                  placeholder="user@gmail.com or +123..."
                   className={inputBase}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={identifier}
+                  onChange={(e) => setIdentifier(e.target.value)}
                   required
                 />
               </div>

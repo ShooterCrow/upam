@@ -44,6 +44,14 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       query: (id) => `/users/${id}/full-profile`,
       providesTags: (result, error, id) => [{ type: "Users", id }],
     }),
+    verifyPhone: builder.mutation({
+      query: (data) => ({
+        url: "/users/profile/verify-phone",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Users"],
+    }),
   }),
 });
 
@@ -55,4 +63,5 @@ export const {
   useUpdateUserMutation,
   useUpdateMeMutation,
   useDeleteUserMutation,
+  useVerifyPhoneMutation,
 } = usersApiSlice;

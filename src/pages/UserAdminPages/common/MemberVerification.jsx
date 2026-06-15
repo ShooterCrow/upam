@@ -12,6 +12,7 @@ const MemberVerification = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState(null);
     const { user } = useAuth();
+    const fullName = user?.firstName + ' ' + user?.lastName;
 
     const [formData, setFormData] = useState({
         membershipType: '',
@@ -44,13 +45,22 @@ const MemberVerification = () => {
     const [selectedCountryCode, setSelectedCountryCode] = useState('');
 
     // Pre-fill form if verification exists
+    // Reverse-map: API getter returns a label string, form needs the numeric value
+    const tierLabelToNumber = {
+        'Tier A - Diaspora': 1,
+        'Tier B - Africa & Caribbean': 2,
+        // Legacy labels
+        'Tier B - Defined Diaspora': 1,
+        'Tier A - Africa & Caribbean': 2,
+    };
+
     useEffect(() => {
         if (myVerification?.data) {
             const data = myVerification.data;
             setFormData({
                 membershipType: data.membershipType || '',
-                tierClassification: data.tierClassification || '',
-                fullLegalAge: data.fullLegalAge || '',
+                tierClassification: tierLabelToNumber[data.tierClassification] || data.tierClassification || '',
+                fullLegalAge: fullName || data.fullLegalAge || '',
                 dateOfBirth: data.dateOfBirth ? data.dateOfBirth.split('T')[0] : '',
                 gender: data.gender || '',
                 phone: data.phone || '',
@@ -96,6 +106,8 @@ const MemberVerification = () => {
                 ? [...formData.departmentsOfInterest, value]
                 : formData.departmentsOfInterest.filter(dept => dept !== value);
             setFormData(prev => ({ ...prev, departmentsOfInterest: updatedDepartments }));
+        } else if (name === 'tierClassification') {
+            setFormData(prev => ({ ...prev, tierClassification: Number(value) }));
         } else {
             setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
         }
@@ -279,7 +291,7 @@ const MemberVerification = () => {
                     {/* Membership Type */}
                     <Section title="Membership Type (Select One)">
                         <div className="space-y-3">
-                            {["General Member", "Institutional Member"].map(type => (
+                            {["General Member (Individuals)", "Institutional Member (Companies/Organizations)"].map(type => (
                                 <RadioField
                                     key={type}
                                     label={type}
@@ -295,7 +307,7 @@ const MemberVerification = () => {
                     {/* Personal Info */}
                     <Section title="Personal Information">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            <InputField label="Full Legal Age" name="fullLegalAge" value={formData.fullLegalAge} onChange={handleChange} placeholder="John..." />
+                            <InputField label="Full Legal Name" name="fullLegalAge" value={formData.fullLegalAge} onChange={handleChange} placeholder="John..." />
                             <InputField label="Date of Birth" name="dateOfBirth" type="date" value={formData.dateOfBirth} onChange={handleChange} />
                         </div>
                         <div className="mt-6 flex flex-col gap-3">
@@ -361,13 +373,13 @@ const MemberVerification = () => {
                     {/* Tier Classification */}
                     <Section title="Tier Classification">
                         <div className="space-y-3">
-                            {["Tier A - Africa & Caribbean", "Tier B - Defined Diaspora"].map(tier => (
+                            {[{ value: 1, label: 'Tier A - Diaspora' }, { value: 2, label: 'Tier B - Africa & Caribbean' }].map(tier => (
                                 <RadioField
-                                    key={tier}
-                                    label={tier}
+                                    key={tier.value}
+                                    label={tier.label}
                                     name="tierClassification"
-                                    value={tier}
-                                    checked={formData.tierClassification === tier}
+                                    value={tier.value}
+                                    checked={formData.tierClassification === tier.value}
                                     onChange={handleChange}
                                 />
                             ))}

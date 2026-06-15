@@ -13,13 +13,20 @@ import {
     Smartphone,
     Laptop,
     X,
-    Lock
+    Lock,
+    CheckCircle2,
+    MessageSquare,
+    ShieldCheck,
+    Phone as PhoneIcon
 } from 'lucide-react';
 import useAuth from '../../../hooks/useAuth';
 import { useGetMeQuery, useUpdateMeMutation } from '../../platform/usersApiSlice';
 import LoadingState from '../../../component/ui/LoadingState';
 import ErrorState from '../../../component/ui/ErrorState';
 import SuccessState from '../../../component/ui/SuccessState';
+import { useSendOtpMutation } from '../../authenticationPages/authApiSlice';
+import { useVerifyPhoneMutation } from '../../platform/usersApiSlice';
+import { useGetSettingsQuery } from '../../platform/settingsApiSlice';
 
 const MyProfile = () => {
     const { user: authUser } = useAuth();
@@ -35,6 +42,19 @@ const MyProfile = () => {
     const [imageFile, setImageFile] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
     const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+
+    // Phone Verification State
+    const [sendOtp, { isLoading: isSendingOtp }] = useSendOtpMutation();
+    const [verifyPhone, { isLoading: isVerifyingOTP }] = useVerifyPhoneMutation();
+    const { data: settingsResponse } = useGetSettingsQuery();
+    const [otpId, setOtpId] = useState("");
+    const [isOtpSent, setIsOtpSent] = useState(false);
+    const [otpCode, setOtpCode] = useState("");
+    const [otpMethod, setOtpMethod] = useState("whatsapp");
+    const [phoneVerified, setPhoneVerified] = useState(false);
+    const [phoneError, setPhoneError] = useState("");
+
+    const requirePhoneVerification = settingsResponse?.data?.hotelInfo?.requirePhoneVerification ?? false;
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -63,6 +83,7 @@ const MyProfile = () => {
                 password: '',
                 confirmPassword: ''
             });
+            setPhoneVerified(user.phoneVerified || false);
         }
     }, [profileData]);
 
@@ -113,6 +134,39 @@ const MyProfile = () => {
                 type: 'error',
                 message: err?.data?.message || "Failed to update profile"
             });
+        }
+    };
+
+    const handleSendOtp = async (method = "whatsapp") => {
+        if (!formData.phone) {
+            setPhoneError("Please enter a phone number first");
+            return;
+        }
+        setPhoneError("");
+        setOtpMethod(method);
+        try {
+            const response = await sendOtp({ phone: formData.phone, method }).unwrap();
+            setOtpId(response.data.otpId);
+            setIsOtpSent(true);
+        } catch (err) {
+            setPhoneError(err?.data?.message || "Failed to send verification code");
+        }
+    };
+
+    const handleVerifyOtp = async () => {
+        if (otpCode.length !== 6) {
+            setPhoneError("Please enter a 6-digit code");
+            return;
+        }
+        setPhoneError("");
+        try {
+            await verifyPhone({ otpId, otpCode }).unwrap();
+            setPhoneVerified(true);
+            setIsOtpSent(false);
+            setOtpCode("");
+            refetch();
+        } catch (err) {
+            setPhoneError(err?.data?.message || "Invalid verification code");
         }
     };
 
@@ -170,7 +224,7 @@ const MyProfile = () => {
             </div>
 
             {isVerified && (
-                <div className="p-4 bg-blue-50 border border-blue-100 rounded-2xl flex items-start gap-4">
+                <div className="p-4 bg-blue-50 border border-blue-100 flex items-start gap-4">
                     <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-500 border border-blue-50 shrink-0">
                         <Lock size={20} />
                     </div>
@@ -187,7 +241,7 @@ const MyProfile = () => {
                 {/* Left Column */}
                 <div className="space-y-6">
                     {/* Profile Picture Card */}
-                    <div className="bg-white p-6 rounded-2xl border border-gray-100 flex items-center gap-6">
+                    <div className="bg-white p-6 border border-gray-100 flex items-center gap-6">
                         <div className="relative w-24 h-24 flex-shrink-0 group cursor-pointer">
                             <div className="w-full h-full rounded-full overflow-hidden border-4 border-slate-100 shadow-sm">
                                 <img
@@ -222,7 +276,7 @@ const MyProfile = () => {
                     </div>
 
                     {/* Personal Information Card */}
-                    <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 space-y-5">
+                    <div className="bg-white p-6 md:p-8 border border-gray-100 space-y-5">
                         <h3 className="text-xl font-bold text-slate-800">Personal Information</h3>
                         <div className="grid grid-cols-1 gap-5">
                             <div className="space-y-2">
@@ -233,19 +287,19 @@ const MyProfile = () => {
                                     value={formData.firstName}
                                     onChange={handleChange}
                                     disabled={isFieldLocked('firstName')}
-                                    className={`w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('firstName') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
+                                    className={`w-full px-4 py-3  bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('firstName') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
                                 />
                                 {isFieldLocked('firstName') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Last Name</label>
+                                <label className="flex justify-between w-full text-xs font-bold text-slate-700 uppercase tracking-wider"><span>Last Name</span> {!formData.lastName && <span className="text-[10px] text-red-600 font-black uppercase tracking-widest flex items-center gap-1"><Shield size={10} /> Lastname Required</span>} </label>
                                 <input
                                     type="text"
                                     name="lastName"
                                     value={formData.lastName}
                                     onChange={handleChange}
                                     disabled={isFieldLocked('lastName')}
-                                    className={`w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('lastName') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
+                                    className={`w-full px-4 py-3  bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('lastName') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
                                 />
                                 {isFieldLocked('lastName') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
@@ -257,22 +311,91 @@ const MyProfile = () => {
                                     value={formData.email}
                                     onChange={handleChange}
                                     disabled={isFieldLocked('email')}
-                                    className={`w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('email') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
+                                    className={`w-full px-4 py-3  bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('email') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
                                 />
                                 {isFieldLocked('email') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Phone No</label>
-                                <input
-                                    type="text"
-                                    name="phone"
-                                    placeholder="+234"
-                                    value={formData.phone}
-                                    onChange={handleChange}
-                                    disabled={isFieldLocked('phone')}
-                                    className={`w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('phone') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
-                                />
+                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center justify-between">
+                                    <span>Phone No</span> {!formData.phone ? <span className="text-[10px] text-red-600 font-black uppercase tracking-widest flex items-center gap-1"><Shield size={10} /> Phone Number Required</span> : (requirePhoneVerification && !phoneVerified) && <span className="text-[10px] text-red-600 font-black uppercase tracking-widest flex items-center gap-1"><Shield size={10} /> Unverified Number</span>}
+                                    {phoneVerified && <span className="text-[10px] text-emerald-600 font-black uppercase tracking-widest flex items-center gap-1"><CheckCircle2 size={12} /> Verified</span>}
+                                </label>
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        name="phone"
+                                        placeholder="+234"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        disabled={isFieldLocked('phone') || isOtpSent}
+                                        className={`w-full px-4 py-3  bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('phone') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
+                                    />
+                                    {phoneVerified && <CheckCircle2 className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500" size={18} />}
+                                </div>
                                 {isFieldLocked('phone') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
+
+                                {/* Phone Verification Logic */}
+                                {!phoneVerified && formData.phone && !isOtpSent && (
+                                    <div className="mt-4 p-4 bg-slate-50 border border-dashed border-slate-200 space-y-4">
+                                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Verify your phone number:</p>
+                                        <div className="flex flex-col sm:flex-row gap-2">
+                                            <button
+                                                type="button"
+                                                onClick={() => handleSendOtp("whatsapp")}
+                                                disabled={isSendingOtp}
+                                                className="flex-1 flex items-center justify-center gap-2 bg-emerald-500/10 text-emerald-600 py-2.5 rounded-lg text-[10px] font-black uppercase tracking-widest border border-emerald-500/20 hover:bg-emerald-500 hover:text-white transition-all disabled:opacity-50"
+                                            >
+                                                {isSendingOtp && otpMethod === 'whatsapp' ? <Loader2 size={14} className="animate-spin" /> : <MessageSquare size={14} />}
+                                                WhatsApp
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => handleSendOtp("sms")}
+                                                disabled={isSendingOtp}
+                                                className="flex-1 flex items-center justify-center gap-2 bg-blue-500/10 text-blue-600 py-2.5 rounded-lg text-[10px] font-black uppercase tracking-widest border border-blue-500/20 hover:bg-blue-500 hover:text-white transition-all disabled:opacity-50"
+                                            >
+                                                {isSendingOtp && otpMethod === 'sms' ? <Loader2 size={14} className="animate-spin" /> : <PhoneIcon size={14} />}
+                                                SMS OTP
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {isOtpSent && (
+                                    <div className="mt-4 p-4 bg-red-50 border border-red-100 space-y-4 animate-in fade-in slide-in-from-top-2">
+                                        <div className="flex items-center justify-between">
+                                            <label className="text-[10px] font-black text-red-900 tracking-widest uppercase flex items-center gap-2">
+                                                <ShieldCheck size={14} className="text-red-600" /> Enter 6 Digit Code
+                                            </label>
+                                            <button
+                                                type="button"
+                                                onClick={() => setIsOtpSent(false)}
+                                                className="text-[10px] font-black text-red-600 uppercase"
+                                            >
+                                                Cancel
+                                            </button>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            maxLength={6}
+                                            placeholder="000000"
+                                            className="w-full bg-white border-2 border-red-100 py-3  text-center text-xl font-black tracking-[0.5em] focus:border-red-500 outline-none transition-all"
+                                            value={otpCode}
+                                            onChange={(e) => setOtpCode(e.target.value)}
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={handleVerifyOtp}
+                                            disabled={isVerifyingOTP || otpCode.length !== 6}
+                                            className="w-full py-3 bg-red-600 text-white  font-bold text-xs uppercase tracking-widest hover:bg-slate-900 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                                        >
+                                            {isVerifyingOTP && <Loader2 size={14} className="animate-spin" />}
+                                            Verify Code
+                                        </button>
+                                    </div>
+                                )}
+
+                                {phoneError && <p className="text-[10px] text-red-600 font-bold uppercase tracking-wider mt-2">{phoneError}</p>}
                             </div>
                             <div className="space-y-2">
                                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Date of Birth</label>
@@ -282,7 +405,7 @@ const MyProfile = () => {
                                     value={formData.dob}
                                     onChange={handleChange}
                                     disabled={isFieldLocked('dob')}
-                                    className={`w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('dob') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
+                                    className={`w-full px-4 py-3  bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('dob') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
                                 />
                                 {isFieldLocked('dob') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
@@ -294,7 +417,7 @@ const MyProfile = () => {
                                     value={formData.country}
                                     onChange={handleChange}
                                     disabled={isFieldLocked('country')}
-                                    className={`w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('country') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
+                                    className={`w-full px-4 py-3  bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('country') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
                                 />
                                 {isFieldLocked('country') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
@@ -305,7 +428,7 @@ const MyProfile = () => {
                                     value={formData.chapter}
                                     onChange={handleChange}
                                     disabled={isFieldLocked('chapter')}
-                                    className={`w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 appearance-none ${isFieldLocked('chapter') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
+                                    className={`w-full px-4 py-3  bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 appearance-none ${isFieldLocked('chapter') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
                                 >
                                     <option value="">Select a Chapter</option>
                                     {profileData?.chapters?.map((ch) => (
@@ -323,13 +446,13 @@ const MyProfile = () => {
                 {/* Right Column */}
                 <div className="flex flex-col-reverse lg:flex-col h-full lg:max-w-md w-full gap-6">
                     {/* Last Logins Card */}
-                    <div className="bg-white p-8 rounded-2xl border border-gray-100 flex flex-col max-h-[500px] h-full">
+                    <div className="bg-white p-8 border border-gray-100 flex flex-col max-h-[500px] h-full">
                         <h3 className="text-lg font-bold text-slate-800 mb-6 border-b border-gray-50 pb-4 flex-shrink-0">Login History</h3>
 
                         <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar space-y-4">
                             {user?.lastLogins && user.lastLogins.length > 0 ? (
                                 user.lastLogins.map((login, index) => (
-                                    <div key={index} className="flex items-center gap-4 p-4 rounded-xl border border-gray-50 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                                    <div key={index} className="flex items-center gap-4 p-4  border border-gray-50 bg-slate-50/50 hover:bg-slate-50 transition-colors">
                                         <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-gray-100 text-slate-400 flex-shrink-0">
                                             {login.deviceType?.toLowerCase().includes('android') || login.deviceType?.toLowerCase().includes('phone') || login.deviceType?.toLowerCase().includes('iphone') ? (
                                                 <Smartphone size={20} />
@@ -363,7 +486,7 @@ const MyProfile = () => {
                     </div>
 
                     {/* Security Card */}
-                    <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 space-y-6">
+                    <div className="bg-white p-6 md:p-8 border border-gray-100 space-y-6">
                         <h3 className="text-xl font-bold text-slate-800">Security</h3>
                         <div className="space-y-4">
                             <div className="space-y-2">
@@ -374,7 +497,7 @@ const MyProfile = () => {
                                         name="password"
                                         value={formData.password}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium"
+                                        className="w-full px-4 py-3  bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium"
                                         autoComplete="new-password"
                                     />
                                     <button
@@ -395,7 +518,7 @@ const MyProfile = () => {
                                         name="confirmPassword"
                                         value={formData.confirmPassword}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium"
+                                        className="w-full px-4 py-3  bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium"
                                         autoComplete="new-password"
                                     />
                                     <button
@@ -410,7 +533,7 @@ const MyProfile = () => {
                         </div>
 
                         {updateStatus.type === 'error' && (
-                            <div className="p-4 bg-red-50 border border-red-100 rounded-xl flex items-center gap-3 text-red-600 text-sm font-medium animate-in fade-in slide-in-from-top-2">
+                            <div className="p-4 bg-red-50 border border-red-100  flex items-center gap-3 text-red-600 text-sm font-medium animate-in fade-in slide-in-from-top-2">
                                 <Shield size={18} className="flex-shrink-0" />
                                 {updateStatus.message}
                             </div>
@@ -419,7 +542,7 @@ const MyProfile = () => {
                         <button
                             type="submit"
                             disabled={isUpdating}
-                            className="w-full py-4 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold shadow-lg shadow-red-100 transition-all transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            className="w-full py-4 bg-red-600 hover:bg-red-700 text-white  font-bold shadow-lg shadow-red-100 transition-all transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                         >
                             {isUpdating && <Loader2 className="animate-spin" size={20} />}
                             {isUpdating ? 'Saving Changes...' : 'Save Changes'}
@@ -430,7 +553,7 @@ const MyProfile = () => {
             {/* View Profile Picture Modal */}
             {isViewModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-                    <div className="relative bg-white rounded-2xl p-2 max-w-lg w-full max-h-[85vh] overflow-hidden flex flex-col items-center shadow-2xl animate-in zoom-in-95 duration-200">
+                    <div className="relative bg-white p-2 max-w-lg w-full max-h-[85vh] overflow-hidden flex flex-col items-center shadow-2xl animate-in zoom-in-95 duration-200">
                         {/* Header */}
                         <div className="w-full flex justify-between items-center px-4 py-2 border-b border-gray-100">
                             <h3 className="font-bold text-slate-800 text-sm">Profile Picture</h3>

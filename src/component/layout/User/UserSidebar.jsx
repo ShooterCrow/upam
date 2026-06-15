@@ -18,16 +18,29 @@ import {
     Check
 } from 'lucide-react';
 import { USER_LINKS, USER_BOTTOM_LINKS } from '../../../constants/navigation';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectCompleteness } from '../../../pages/authenticationPages/authSlice';
 import useAuth from '../../../hooks/useAuth';
 import { useLogoutMutation } from '../../../pages/authenticationPages/authApiSlice';
-import { useNavigate } from 'react-router-dom';
+import LoadingState from '../../ui/LoadingState';
 
 const UserSidebar = () => {
     const { user } = useAuth()
+    console.log(user)
+    const completeness = useSelector(selectCompleteness);
     const location = useLocation();
     const navigate = useNavigate();
-    const [logout] = useLogoutMutation();
+    const [logout, { isLoading: isLoggingOut }] = useLogoutMutation();
     const [copied, setCopied] = React.useState(false);
+
+    const isComplete = completeness?.isAllComplete ?? true;
+    const allowedPaths = [
+        '/user/my-profile',
+        '/user/member-verification',
+        '/user/emergency-contact',
+        '/logout'
+    ];
 
     const handleLogout = async () => {
         try {
@@ -51,80 +64,103 @@ const UserSidebar = () => {
     const bottomLinks = USER_BOTTOM_LINKS;
 
     return (
-        <aside className="fixed top-0 left-0 h-full w-64 bg-white border-r border-gray-100 z-40 hidden lg:flex flex-col font-sans">
-            {/* Logo Section */}
-            <div className="h-24 flex flex-col justify-center px-6 border-b border-gray-50">
-                <Link to="/" className="flex items-center">
-                    {/* Placeholder Logo */}
-                    <img src="/logoupam.png" alt="Logo" />
-                </Link>
-            </div>
+        <>
+            {isLoggingOut && (
+                <div className="fixed inset-0 bg-white/80 backdrop-blur-sm z-[9999] flex items-center justify-center">
+                    <LoadingState message="Logging out..." />
+                </div>
+            )}
+            <aside className="fixed top-0 left-0 h-full w-64 bg-white border-r border-gray-100 z-40 hidden lg:flex flex-col font-sans">
+                {/* Logo Section */}
+                <div className="h-24 flex flex-col justify-center px-6 border-b border-gray-50">
+                    <Link to="/" className="flex items-center">
+                        {/* Placeholder Logo */}
+                        <img src="/logoupam.png" alt="Logo" />
+                    </Link>
+                </div>
 
-            {/* User ID Section */}
-            <div className="px-6 mb-2">
-                <button
-                    onClick={handleCopy}
-                    className="flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-red-600 transition-colors group"
-                    title="Copy ID"
-                >
-                    <span className="bg-slate-50 px-2 py-1 rounded border border-gray-100 group-hover:border-red-100">
-                        ID: {user?.importedMember_id}
-                    </span>
-                    {copied ? (
-                        <Check size={14} className="text-green-500" />
-                    ) : (
-                        <Copy size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                    )}
-                </button>
-            </div>
+                {/* User ID Section */}
+                <div className="px-6 mb-2">
+                    <button
+                        onClick={handleCopy}
+                        className="flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-red-600 transition-colors group"
+                        title="Copy ID"
+                    >
+                        <span className="bg-slate-50 px-2 py-1 rounded border border-gray-100 group-hover:border-red-100">
+                            ID: {user?.importedMember_id}
+                        </span>
+                        {copied ? (
+                            <Check size={14} className="text-green-500" />
+                        ) : (
+                            <Copy size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                        )}
+                    </button>
+                </div>
 
-            {/* Main Navigation */}
-            <nav className="flex-1 overflow-y-auto py-2 px-4 space-y-1">
-                {links.map((link) => {
-                    const isActive = location.pathname === link.path || (link.path !== '/user' && location.pathname.startsWith(link.path));
-                    const Icon = link.icon;
-                    return (
-                        <Link
-                            key={link.path}
-                            to={link.path}
-                            className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${isActive
-                                ? 'bg-red-600 text-white shadow-sm'
-                                : 'text-gray-900 hover:bg-slate-50 hover:text-red-500'
-                                }`}
-                        >
-                            <Icon size={18} />
-                            {link.name}
-                        </Link>
-                    );
-                })}
-            </nav>
+                {/* Main Navigation */}
+                <nav className="flex-1 overflow-y-auto py-2 px-4 space-y-1">
+                    {links.map((link) => {
+                        const isActive = location.pathname === link.path || (link.path !== '/user' && location.pathname.startsWith(link.path));
+                        const Icon = link.icon;
+                        const isRestricted = !isComplete && !allowedPaths.includes(link.path);
 
-            {/* Bottom Navigation (Account/Logout) */}
-            <div className="p-4 border-t border-gray-50 space-y-1">
-                {bottomLinks.map((link) => {
-                    const Icon = link.icon;
-                    return link.path === '/logout' ? (
-                        <button
-                            key={link.path}
-                            onClick={handleLogout}
-                            className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-red-500 transition-colors w-full"
-                        >
-                            <Icon size={18} />
-                            {link.name}
-                        </button>
-                    ) : (
-                        <Link
-                            key={link.path}
-                            to={link.path}
-                            className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-red-500 transition-colors"
-                        >
-                            <Icon size={18} />
-                            {link.name}
-                        </Link>
-                    );
-                })}
-            </div>
-        </aside>
+                        return (
+                            <Link
+                                key={link.path}
+                                to={isRestricted ? "#" : link.path}
+                                onClick={(e) => isRestricted && e.preventDefault()}
+                                className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${isActive
+                                    ? 'bg-red-600 text-white shadow-sm'
+                                    : isRestricted
+                                        ? 'text-gray-300 cursor-not-allowed'
+                                        : 'text-gray-900 hover:bg-slate-50 hover:text-red-500'
+                                    }`}
+                            >
+                                <Icon size={18} />
+                                <span className="flex-1">{link.name}</span>
+                                {isRestricted && <Shield size={14} className="text-gray-300" />}
+                            </Link>
+                        );
+                    })}
+                </nav>
+
+                {/* Bottom Navigation (Account/Logout) */}
+                <div className="p-4 border-t border-gray-50 space-y-1">
+                    {bottomLinks.map((link) => {
+                        const Icon = link.icon;
+                        const isActive = location.pathname === link.path || (link.path !== '/user' && location.pathname.startsWith(link.path));
+                        const isRestricted = !isComplete && !allowedPaths.includes(link.path);
+
+                        return link.path === '/logout' ? (
+                            <button
+                                key={link.path}
+                                onClick={handleLogout}
+                                className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-red-500 transition-colors w-full"
+                            >
+                                <Icon size={18} />
+                                {link.name}
+                            </button>
+                        ) : (
+                            <Link
+                                key={link.path}
+                                to={isRestricted ? "#" : link.path}
+                                onClick={(e) => isRestricted && e.preventDefault()}
+                                className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${isActive
+                                    ? 'bg-red-600 text-white shadow-sm'
+                                    : isRestricted
+                                        ? 'text-gray-300 cursor-not-allowed'
+                                        : 'text-slate-500 hover:bg-slate-50 hover:text-red-500'
+                                    }`}
+                            >
+                                <Icon size={18} />
+                                <span className="flex-1">{link.name}</span>
+                                {isRestricted && <Shield size={14} className="text-gray-300" />}
+                            </Link>
+                        );
+                    })}
+                </div>
+            </aside>
+        </>
     );
 };
 
