@@ -24,6 +24,7 @@ import Donation from './pages/donation/Donation'
 import DonationFunds from './pages/donation/DonationFunds'
 import Events from './pages/events/Events'
 import EventDetail from './pages/events/EventDetail'
+import MalawiSummit from './pages/events/MalawiSummit'
 import CreateEvent from './pages/events/CreateEvent'
 import EventsHelpSupport from './pages/events/EventsHelpSupport'
 import EventsTickets from './pages/events/EventsTickets'
@@ -91,6 +92,7 @@ const App = () => {
                 <Route index element={<EventsTickets />} />
                 <Route path="form" element={<TicketsForm />} />
               </Route>
+              <Route path="global-african-renaissance-summit-2026" element={<MalawiSummit />} />
               <Route path=":slug" element={<EventDetail />} />
             </Route>
 
