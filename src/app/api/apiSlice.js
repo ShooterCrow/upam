@@ -9,7 +9,7 @@ import {
  * Set to false to disable specific reload/refresh criteria.
  */
 const ENABLE_PERIODIC_RELOAD = true; // Reload after every 6 API requests for stability
-const ENABLE_ERROR_RELOAD = true; // Reload on consecutive GET errors for recovery
+const ENABLE_ERROR_RELOAD = false; // Reload on consecutive GET errors for recovery
 
 const EXCLUDED_ROUTES = ["/register"];
 
