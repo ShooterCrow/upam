@@ -4,6 +4,13 @@ import {
   clearCredentials,
 } from "../../pages/authenticationPages/authSlice";
 
+/**
+ * apiSlice configuration flags for AutoRecovery.
+ * Set to false to disable specific reload/refresh criteria.
+ */
+const ENABLE_PERIODIC_RELOAD = true; // Reload after every 6 API requests for stability
+const ENABLE_ERROR_RELOAD = true; // Reload on consecutive GET errors for recovery
+
 const EXCLUDED_ROUTES = ["/register"];
 
 const isExcluded = () => {
@@ -43,6 +50,11 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       );
       if (isExcluded()) {
         console.log("Route is excluded. Skipping periodic reload.");
+        sessionStorage.setItem("api_request_count", "0");
+      } else if (!ENABLE_PERIODIC_RELOAD) {
+        console.log(
+          "6 API requests made, but ENABLE_PERIODIC_RELOAD is false. Skipping.",
+        );
         sessionStorage.setItem("api_request_count", "0");
       } else {
         window.location.reload();
@@ -118,6 +130,10 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
         );
         if (isExcluded()) {
           console.log("Route is excluded. Skipping error recovery reload.");
+        } else if (!ENABLE_ERROR_RELOAD) {
+          console.log(
+            "Consecutive API errors found, but ENABLE_ERROR_RELOAD is false. Skipping.",
+          );
         } else {
           window.location.reload();
         }

@@ -8,7 +8,15 @@ import { useEffect, useRef } from 'react';
  * 2. Internet connection is restored (online event).
  * 3. After every 6 API requests made (tracked in apiSlice.js).
  */
+/**
+ * AutoRecovery configuration flags.
+ * Set to false to disable specific reload/refresh criteria.
+ */
+const ENABLE_IDLE_RELOAD = true; // Reload when tab is inactive for more than 1 minute
+const ENABLE_ONLINE_RELOAD = true; // Reload when internet connection is restored
+
 const EXCLUDED_ROUTES = ["/register", "/admin/settings"];
+
 
 const AutoRecovery = () => {
     const lastHiddenTime = useRef(Date.now());
@@ -27,6 +35,10 @@ const AutoRecovery = () => {
 
                 // If idle for more than 1 minute, reload.
                 if (idleDuration > 1 * 60 * 1000) {
+                    if (!ENABLE_IDLE_RELOAD) {
+                        console.log('Idle duration exceeded 1 minute, but ENABLE_IDLE_RELOAD is false. Skipping.');
+                        return;
+                    }
                     if (isExcluded()) {
                         console.log('Idle duration exceeded 1 minute, but route is excluded. Skipping reload.');
                         return;
@@ -38,6 +50,10 @@ const AutoRecovery = () => {
         };
 
         const handleOnline = () => {
+            if (!ENABLE_ONLINE_RELOAD) {
+                console.log('Internet connection restored, but ENABLE_ONLINE_RELOAD is false. Skipping.');
+                return;
+            }
             if (isExcluded()) {
                 console.log('Internet connection restored, but route is excluded. Skipping reload.');
                 return;
