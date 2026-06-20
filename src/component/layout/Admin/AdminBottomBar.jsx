@@ -48,6 +48,12 @@ const AdminBottomBar = () => {
         '/logout'
     ];
 
+    const requiredPath = completeness && !isComplete ? (
+        !completeness.step1.complete ? completeness.step1.path :
+            !completeness.step2.complete ? completeness.step2.path :
+                completeness.step3.path
+    ) : null;
+
     const mainLinks = ADMIN_LINKS.slice(0, 3);
     const moreLinks = ADMIN_LINKS.slice(3).concat([
         { name: 'Account', path: '/admin/my-profile', icon: User },
@@ -101,6 +107,11 @@ const AdminBottomBar = () => {
                                 <Icon size={18} />
                                 <span className="flex-1">{link.name}</span>
                                 {isRestricted && <Shield size={14} className="text-gray-300" />}
+                                {link.path === requiredPath && (
+                                    <span className="flex items-center px-1.5 py-0.5 rounded-full bg-red-100 text-red-600 text-[8px] font-black uppercase animate-pulse border border-red-200">
+                                        Action
+                                    </span>
+                                )}
                             </Link>
                         );
                     })}
@@ -119,14 +130,22 @@ const AdminBottomBar = () => {
                             key={link.path}
                             to={isRestricted ? "#" : link.path}
                             onClick={() => !isRestricted && setShowMore(false)}
-                            className={`flex flex-col items-center text-center justify-center w-full h-full space-y-1 transition-colors ${isActive
+                            className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${isActive
                                 ? 'text-red-600'
                                 : isRestricted
-                                    ? 'text-gray-200 cursor-not-allowed'
-                                    : 'text-slate-400'
+                                    ? 'text-gray-200 cursor-not-allowed font-light'
+                                    : 'text-slate-400 font-medium'
                                 }`}
                         >
-                            <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
+                            <div className="relative">
+                                <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
+                                {link.path === requiredPath && (
+                                    <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-ping" />
+                                )}
+                                {link.path === requiredPath && (
+                                    <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full" />
+                                )}
+                            </div>
                             <span className="text-[10px] font-medium text-center">{link.name}</span>
                         </Link>
                     );
@@ -140,7 +159,15 @@ const AdminBottomBar = () => {
                         : 'text-slate-400'
                         }`}
                 >
-                    <MoreHorizontal size={20} strokeWidth={2} />
+                    <div className="relative">
+                        <MoreHorizontal size={20} strokeWidth={2} />
+                        {moreLinks.some(l => l.path === requiredPath) && (
+                            <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-ping" />
+                        )}
+                        {moreLinks.some(l => l.path === requiredPath) && (
+                            <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full" />
+                        )}
+                    </div>
                     <span className="text-[10px] font-medium">More</span>
                 </button>
             </div>

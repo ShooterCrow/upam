@@ -41,6 +41,12 @@ const AdminSidebar = () => {
         '/logout'
     ];
 
+    const requiredPath = completeness && !isComplete ? (
+        !completeness.step1.complete ? completeness.step1.path :
+            !completeness.step2.complete ? completeness.step2.path :
+                completeness.step3.path
+    ) : null;
+
     const handleLogout = async () => {
         try {
             await logout().unwrap();
@@ -116,7 +122,14 @@ const AdminSidebar = () => {
                                     }`}
                             >
                                 <Icon size={18} />
-                                <span className="flex-1">{link.name}</span>
+                                <span className="flex-1">
+                                    {link.name}
+                                    {link.path === requiredPath && (
+                                        <span className="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full bg-red-100 text-red-600 text-[8px] font-black uppercase tracking-widest animate-pulse border border-red-200">
+                                            Action
+                                        </span>
+                                    )}
+                                </span>
                                 {isRestricted && <Shield size={14} className="text-gray-300" />}
                             </Link>
                         );
@@ -152,7 +165,14 @@ const AdminSidebar = () => {
                                     }`}
                             >
                                 <Icon size={18} />
-                                <span className="flex-1">{link.name}</span>
+                                <span className="flex-1">
+                                    {link.name}
+                                    {link.path === requiredPath && (
+                                        <span className="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full bg-red-100 text-red-600 text-[8px] font-black uppercase tracking-widest animate-pulse border border-red-200">
+                                            Action
+                                        </span>
+                                    )}
+                                </span>
                                 {isRestricted && <Shield size={14} className="text-gray-300" />}
                             </Link>
                         );
