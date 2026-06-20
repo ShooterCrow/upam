@@ -115,22 +115,24 @@ const UserSidebar = () => {
                                 key={link.path}
                                 to={isRestricted ? "#" : link.path}
                                 onClick={(e) => isRestricted && e.preventDefault()}
-                                className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${isActive
+                                className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium justify-between transition-colors ${isActive
                                     ? 'bg-red-600 text-white shadow-sm'
                                     : isRestricted
                                         ? 'text-gray-300 cursor-not-allowed'
                                         : 'text-gray-900 hover:bg-slate-50 hover:text-red-500'
                                     }`}
                             >
-                                <Icon size={18} />
-                                <span className="flex items-center justify-between">
-                                    {link.name}
-                                    {link.path === requiredPath && (
-                                        <span className={`ml-2 inline-flex items-center w-2 h-2 rounded-full ${isActive ? 'bg-white' : 'bg-red-600'} text-red-800 text-[8px] font-black uppercase tracking-widest animate-pulse border border-red-200`}>
+                                <div className="flex items-center gap-3">
+                                    <Icon size={18} />
+                                    <span className="flex items-center justify-between">
+                                        {link.name}
+                                        {link.path === requiredPath && (
+                                            <span className={`ml-2 inline-flex items-center w-2 h-2 rounded-full ${isActive ? 'bg-white' : 'bg-red-600'} text-red-800 text-[8px] font-black uppercase tracking-widest animate-pulse border border-red-200`}>
 
-                                        </span>
-                                    )}
-                                </span>
+                                            </span>
+                                        )}
+                                    </span>
+                                </div>
                                 {isRestricted && <Shield size={14} className="text-gray-300" />}
                             </Link>
                         );
