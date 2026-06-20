@@ -27,8 +27,14 @@ import SuccessState from '../../../component/ui/SuccessState';
 import { useSendOtpMutation } from '../../authenticationPages/authApiSlice';
 import { useVerifyPhoneMutation } from '../../platform/usersApiSlice';
 import { useGetSettingsQuery } from '../../platform/settingsApiSlice';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectCompleteness } from '../../authenticationPages/authSlice';
 
 const MyProfile = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const completeness = useSelector(selectCompleteness);
     const { user: authUser } = useAuth();
     const { data: profileData, isLoading: isProfileLoading, isError: isProfileError, error: profileFetchError, refetch } = useGetMeQuery();
     const [updateMe, { isLoading: isUpdating }] = useUpdateMeMutation();
@@ -37,7 +43,6 @@ const MyProfile = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [updateStatus, setUpdateStatus] = useState({ type: null, message: '' }); // 'success', 'error'
-    const [isUpdated, setIsUpdated] = useState(false);
 
     const [imageFile, setImageFile] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
@@ -105,6 +110,15 @@ const MyProfile = () => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    React.useEffect(() => {
+        if (completeness?.step1?.complete && !completeness.isAllComplete && location.pathname === completeness.step1.path) {
+            const timer = setTimeout(() => {
+                navigate(completeness.step2.path);
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [completeness?.step1?.complete, completeness?.step2?.path, completeness?.isAllComplete, navigate, location.pathname, completeness?.step1?.path]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setUpdateStatus({ type: null, message: '' });
@@ -127,7 +141,6 @@ const MyProfile = () => {
             if (imageFile) formDataToSend.append('profileImage', imageFile);
 
             await updateMe(formDataToSend).unwrap();
-            setIsUpdated(true);
             refetch();
         } catch (err) {
             setUpdateStatus({
@@ -184,19 +197,6 @@ const MyProfile = () => {
                 <ErrorState
                     message={profileFetchError?.data?.message || "Could not load profile data"}
                     onRetry={refetch}
-                />
-            </div>
-        );
-    }
-
-    if (isUpdated) {
-        return (
-            <div className="h-[70vh] flex items-center justify-center">
-                <SuccessState
-                    title="Profile Updated!"
-                    message="Your changes have been saved successfully."
-                    actionLabel="Back to Profile"
-                    onAction={() => setIsUpdated(false)}
                 />
             </div>
         );

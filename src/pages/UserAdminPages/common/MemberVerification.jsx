@@ -5,8 +5,14 @@ import { useSubmitVerificationMutation, useGetMyVerificationQuery } from '../../
 import SuccessState from '../../../component/ui/SuccessState';
 import ErrorState from '../../../component/ui/ErrorState';
 import useAuth from '../../../hooks/useAuth';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectCompleteness } from '../../authenticationPages/authSlice';
 
 const MemberVerification = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const completeness = useSelector(selectCompleteness);
     const { data: myVerification, isLoading: isFetching } = useGetMyVerificationQuery();
     const [submitVerification, { isLoading: isSubmitting }] = useSubmitVerificationMutation();
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -112,6 +118,15 @@ const MemberVerification = () => {
             setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
         }
     };
+
+    useEffect(() => {
+        if (completeness?.step2?.complete && !completeness.isAllComplete && location.pathname === completeness.step2.path) {
+            const timer = setTimeout(() => {
+                navigate(completeness.step3.path);
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [completeness?.step2?.complete, completeness?.step3?.path, completeness?.isAllComplete, navigate, location.pathname, completeness?.step2?.path]);
 
     const handleResidenceCountryChange = (e) => {
         if (myVerification?.data?.status === 'Pending') return;

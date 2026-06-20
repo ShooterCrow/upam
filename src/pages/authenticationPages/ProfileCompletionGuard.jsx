@@ -90,51 +90,19 @@ const CompletionBanner = ({ completeness }) => {
 const ProfileCompletionGuard = () => {
     const completeness = useSelector(selectCompleteness);
     const location = useLocation();
-    const navigate = useNavigate();
-    const prevCompletenessRef = useRef(completeness);
-
-    const stepPaths = completeness ? [
-        completeness.step1.path,
-        completeness.step2.path,
-        completeness.step3.path
-    ] : [];
-
-    // Effect to handle automatic navigation once a step is completed
-    useEffect(() => {
-        if (!completeness || !prevCompletenessRef.current) return;
-
-        const prev = prevCompletenessRef.current;
-        const current = completeness;
-
-        // Check if a step just finished while we were on that path
-        const steps = [
-            { id: 1, path: current.step1.path, wasComplete: prev.step1.complete, isComplete: current.step1.complete },
-            { id: 2, path: current.step2.path, wasComplete: prev.step2.complete, isComplete: current.step2.complete },
-            { id: 3, path: current.step3.path, wasComplete: prev.step3.complete, isComplete: current.step3.complete },
-        ];
-
-        const finishedStep = steps.find(s => !s.wasComplete && s.isComplete && location.pathname === s.path);
-
-        if (finishedStep) {
-            // Find next incomplete step
-            const nextIncomplete = steps.find(s => !s.isComplete);
-            if (nextIncomplete) {
-                console.log(`Step ${finishedStep.id} completed. Directing to ${nextIncomplete.path} professionally.`);
-                // Small delay for professional feel (allows success UI on page to be seen)
-                setTimeout(() => {
-                    navigate(nextIncomplete.path);
-                }, 1500);
-            }
-        }
-
-        prevCompletenessRef.current = current;
-    }, [completeness, location.pathname, navigate]);
 
     if (!completeness) return <Outlet />;
 
-    // If NOT all complete, redirect to completion pages IF we aren't on one already
+    // Step paths for allowed navigation during restriction
+    const allowedPaths = [
+        completeness.step1.path,
+        completeness.step2.path,
+        completeness.step3.path
+    ];
+
+    // If NOT all complete, handle mandatory redirection unless already on an allowed path
     if (!completeness.isAllComplete) {
-        const isCurrentlyOnCompletionPath = stepPaths.includes(location.pathname);
+        const isCurrentlyOnCompletionPath = allowedPaths.includes(location.pathname);
 
         if (!isCurrentlyOnCompletionPath) {
             // Find the first incomplete step path
@@ -146,6 +114,7 @@ const ProfileCompletionGuard = () => {
         }
     }
 
+    // Wrap the content with the Completion Banner if still incomplete but on an allowed path
     return (
         <div className="flex flex-col min-h-screen">
             {!completeness.isAllComplete && <CompletionBanner completeness={completeness} />}

@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useGetMyEmergencyContactQuery, useUpdateMyEmergencyContactMutation } from '../../../app/api/emergencyContactsApiSlice';
 import LoadingState from '../../../component/ui/LoadingState';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectCompleteness } from '../../authenticationPages/authSlice';
 
 const EmergencyContact = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const completeness = useSelector(selectCompleteness);
     const { data: contactData, isLoading, isError } = useGetMyEmergencyContactQuery();
     const [updateEmergencyContact, { isLoading: isUpdating }] = useUpdateMyEmergencyContactMutation();
 
@@ -45,6 +51,15 @@ const EmergencyContact = () => {
             nextOfKin: { ...prev.nextOfKin, [name]: value }
         }));
     };
+
+    useEffect(() => {
+        if (completeness?.step3?.complete && !completeness.isAllComplete && location.pathname === completeness.step3.path) {
+            const timer = setTimeout(() => {
+                navigate('/dashboard'); // Final step redirects to dashboard
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [completeness?.step3?.complete, completeness?.isAllComplete, navigate, location.pathname, completeness?.step3?.path]);
 
     const handleSaveChanges = async (e) => {
         e.preventDefault();
