@@ -81,7 +81,7 @@ const MemberProfile = () => {
                 </div>
             </div>
 
-            <div className="p-6 space-y-6 max-w-6xl mx-auto">
+            <div className="py-6 space-y-6 max-w-7xl mx-auto">
                 {/* Top Section: Overview */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {/* Identity Card */}
