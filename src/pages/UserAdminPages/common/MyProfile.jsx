@@ -335,7 +335,7 @@ const MyProfile = () => {
                                 {isFieldLocked('phone') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
 
                                 {/* Phone Verification Logic */}
-                                {!phoneVerified && formData.phone && !isOtpSent && (
+                                {requirePhoneVerification && !phoneVerified && formData.phone && !isOtpSent && (
                                     <div className="mt-4 p-4 bg-slate-50 border border-dashed border-slate-200 space-y-4">
                                         <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Verify your phone number:</p>
                                         <div className="flex flex-col sm:flex-row gap-2">
