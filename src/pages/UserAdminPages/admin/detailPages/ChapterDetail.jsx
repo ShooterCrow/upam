@@ -52,14 +52,14 @@ const ChapterDetail = () => {
                 </div>
 
                 <div className="flex gap-2">
-                    <div className="px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-full border border-blue-100 flex items-center gap-1">
-                        <Users size={12} />
+                    <div className="px-2 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-full border border-blue-100 flex items-center gap-1">
+                        <Users size={10} />
                         {members.length} Members
                     </div>
                 </div>
             </div>
 
-            <div className="p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="py-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Information Sidebar */}
                 <div className="lg:col-span-1 space-y-6">
                     {/* Chapter Card */}
@@ -207,12 +207,12 @@ const ChapterDetail = () => {
                                     <tr className="bg-slate-50/30">
                                         <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Member</th>
                                         <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Status</th>
-                                        <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">Actions</th>
+                                        {/* <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">Actions</th> */}
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-slate-50">
                                     {filteredMembers.map((m) => (
-                                        <tr key={m._id} className="group hover:bg-slate-50 transition-colors">
+                                        <tr onClick={() => navigate(`/admin/all-members/${m._id}`)} key={m._id} className="group cursor-pointer hover:bg-slate-50 transition-colors">
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center gap-3">
                                                     <div className="w-10 h-10 rounded-full overflow-hidden bg-slate-100 flex-shrink-0 border border-slate-200">
@@ -234,14 +234,14 @@ const ChapterDetail = () => {
                                                     </p>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 text-right">
+                                            {/* <td className="px-6 py-4 text-right">
                                                 <button
                                                     onClick={() => navigate(`/admin/all-members/${m._id}`)}
                                                     className="text-xs font-bold text-blue-600 hover:underline"
                                                 >
                                                     Detail
                                                 </button>
-                                            </td>
+                                            </td> */}
                                         </tr>
                                     ))}
                                     {filteredMembers.length === 0 && (
