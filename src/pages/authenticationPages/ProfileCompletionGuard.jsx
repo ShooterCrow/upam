@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { selectCompleteness } from "./authSlice";
 import { Shield, CheckCircle2, ArrowRight } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { useGetCompletenessQuery } from "./authApiSlice";
 
 const CompletionBanner = ({ completeness }) => {
     const location = useLocation();
@@ -90,6 +91,12 @@ const CompletionBanner = ({ completeness }) => {
 const ProfileCompletionGuard = () => {
     const completeness = useSelector(selectCompleteness);
     const location = useLocation();
+
+    // Background fetch to keep completeness state in sync across redirects
+    useGetCompletenessQuery(undefined, {
+        pollingInterval: 30000, // Optional: fallback polling
+        refetchOnMountOrArgChange: true
+    });
 
     if (!completeness) return <Outlet />;
 

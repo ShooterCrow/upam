@@ -31,7 +31,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ["Users"],
+      invalidatesTags: ["Users", "Completeness"],
     }),
     deleteUser: builder.mutation({
       query: (id) => ({

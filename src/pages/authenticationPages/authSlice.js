@@ -23,10 +23,14 @@ const authSlice = createSlice({
       state.token = null;
       state.completeness = null;
     },
+    setCompleteness: (state, action) => {
+      state.completeness = action.payload;
+    },
   },
 });
 
-export const { setCredentials, clearCredentials } = authSlice.actions;
+export const { setCredentials, clearCredentials, setCompleteness } =
+  authSlice.actions;
 export const selectCurrentUser = (state) => state.auth.user;
 export const selectCurrentToken = (state) => state.auth.token;
 export const selectCompleteness = (state) => state.auth.completeness;

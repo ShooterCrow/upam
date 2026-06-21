@@ -20,7 +20,7 @@ export const verificationApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["MyVerification", "Verifications"],
+      invalidatesTags: ["MyVerification", "Verifications", "Completeness"],
     }),
     updateVerificationStatus: builder.mutation({
       query: ({ id, ...data }) => ({

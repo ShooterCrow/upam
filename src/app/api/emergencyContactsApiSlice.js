@@ -12,7 +12,7 @@ export const emergencyContactsApiSlice = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ["EmergencyContact"],
+      invalidatesTags: ["EmergencyContact", "Completeness"],
     }),
   }),
 });

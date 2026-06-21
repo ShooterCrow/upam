@@ -19,6 +19,8 @@ const MemberVerification = () => {
     const [submitError, setSubmitError] = useState(null);
     const { user } = useAuth();
     const fullName = user?.firstName + ' ' + user?.lastName;
+    const DRAFT_KEY = React.useMemo(() => `urbanice_member_verification_draft_${user?.id}`, [user?.id]);
+    const [isInitialized, setIsInitialized] = useState(false);
 
     const [formData, setFormData] = useState({
         membershipType: '',
@@ -27,7 +29,7 @@ const MemberVerification = () => {
         dateOfBirth: '',
         gender: '',
         phone: '',
-        email: '',
+        email: user?.email || '',
         nationality: '',
         countryOfResidence: '',
         city: '',
@@ -61,47 +63,79 @@ const MemberVerification = () => {
     };
 
     useEffect(() => {
-        if (myVerification?.data) {
-            const data = myVerification.data;
-            setFormData({
-                membershipType: data.membershipType || '',
-                tierClassification: tierLabelToNumber[data.tierClassification] || data.tierClassification || '',
-                fullLegalAge: fullName || data.fullLegalAge || '',
-                dateOfBirth: data.dateOfBirth ? data.dateOfBirth.split('T')[0] : '',
-                gender: data.gender || '',
-                phone: data.phone || '',
-                email: data.email || '',
-                nationality: data.nationality || '',
-                countryOfResidence: data.countryOfResidence || '',
-                city: data.city || '',
-                stateProvince: data.stateProvince || '',
-                governmentIdType: data.governmentIdType || '',
-                idNumber: data.idNumber || '',
-                departmentsOfInterest: data.departmentsOfInterest || [],
-                serviceHoursAgreed: data.serviceHoursAgreed || false,
-                benefitsAcknowledged: data.benefitsAcknowledged || false,
-                termsAgreed: data.termsAgreed || false
-            });
-            setExistingIdUrl(data.idDocumentUrl);
+        if (!isFetching) {
+            const savedDraft = localStorage.getItem(DRAFT_KEY);
+            if (savedDraft && !myVerification?.data && !isInitialized) {
+                try {
+                    const draft = JSON.parse(savedDraft);
+                    console.log("Found draft, restoring...", draft);
+                    setFormData(prev => ({ ...prev, ...draft }));
 
-            // Re-populate state/city lists
-            if (data.countryOfResidence) {
-                const country = Country.getAllCountries().find(c => c.name === data.countryOfResidence);
-                if (country) {
-                    setSelectedCountryCode(country.isoCode);
-                    const states = State.getStatesOfCountry(country.isoCode);
-                    setResidenceStates(states);
+                    if (draft.countryOfResidence) {
+                        const country = Country.getAllCountries().find(c => c.name === draft.countryOfResidence);
+                        if (country) {
+                            setSelectedCountryCode(country.isoCode);
+                            const states = State.getStatesOfCountry(country.isoCode);
+                            setResidenceStates(states);
+                            if (draft.stateProvince) {
+                                const state = states.find(s => s.name === draft.stateProvince);
+                                if (state) {
+                                    setResidenceCities(City.getCitiesOfState(country.isoCode, state.isoCode));
+                                }
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.error("Draft restore failed:", e);
+                }
+            } else if (myVerification?.data) {
+                const data = myVerification.data;
+                setFormData({
+                    membershipType: data.membershipType || '',
+                    tierClassification: tierLabelToNumber[data.tierClassification] || data.tierClassification || '',
+                    fullLegalAge: fullName || data.fullLegalAge || '',
+                    dateOfBirth: data.dateOfBirth ? data.dateOfBirth.split('T')[0] : '',
+                    gender: data.gender || '',
+                    phone: data.phone || '',
+                    email: data.email || '',
+                    nationality: data.nationality || '',
+                    countryOfResidence: data.countryOfResidence || '',
+                    city: data.city || '',
+                    stateProvince: data.stateProvince || '',
+                    governmentIdType: data.governmentIdType || '',
+                    idNumber: data.idNumber || '',
+                    departmentsOfInterest: data.departmentsOfInterest || [],
+                    serviceHoursAgreed: data.serviceHoursAgreed || false,
+                    benefitsAcknowledged: data.benefitsAcknowledged || false,
+                    termsAgreed: data.termsAgreed || false
+                });
+                setExistingIdUrl(data.idDocumentUrl);
 
-                    if (data.stateProvince) {
-                        const state = states.find(s => s.name === data.stateProvince);
-                        if (state) {
-                            setResidenceCities(City.getCitiesOfState(country.isoCode, state.isoCode));
+                if (data.countryOfResidence) {
+                    const country = Country.getAllCountries().find(c => c.name === data.countryOfResidence);
+                    if (country) {
+                        setSelectedCountryCode(country.isoCode);
+                        const states = State.getStatesOfCountry(country.isoCode);
+                        setResidenceStates(states);
+                        if (data.stateProvince) {
+                            const state = states.find(s => s.name === data.stateProvince);
+                            if (state) {
+                                setResidenceCities(City.getCitiesOfState(country.isoCode, state.isoCode));
+                            }
                         }
                     }
                 }
             }
+            setIsInitialized(true);
         }
-    }, [myVerification]);
+    }, [myVerification, isFetching, user?.id, isInitialized, DRAFT_KEY]);
+
+    // Save draft on every change
+    useEffect(() => {
+        if (isInitialized && formData && user?.id && !myVerification?.data) {
+            localStorage.setItem(DRAFT_KEY, JSON.stringify(formData));
+        }
+    }, [formData, user?.id, myVerification?.data, isInitialized]);
 
     const handleChange = (e) => {
         const { name, value, type, checked, files } = e.target;
@@ -173,6 +207,10 @@ const MemberVerification = () => {
 
         if (myVerification?.data?.status === 'Pending') return;
 
+        if (formData.departmentsOfInterest.length === 0) {
+            return setSubmitError("Please select at least one primary department of interest.");
+        }
+
         if (!idFile && !existingIdUrl) {
             return setSubmitError("Please upload your government-issued ID document.");
         }
@@ -193,6 +231,7 @@ const MemberVerification = () => {
             data.append('idDocument', idFile);
 
             await submitVerification(data).unwrap();
+            localStorage.removeItem(DRAFT_KEY);
             setIsSubmitted(true);
         } catch (err) {
             setSubmitError(err?.data?.message || "Failed to submit verification application");
@@ -306,7 +345,7 @@ const MemberVerification = () => {
                     {/* Membership Type */}
                     <Section title="Membership Type (Select One)">
                         <div className="space-y-3">
-                            {["General Member (Individuals)", "Institutional Member (Companies/Organizations)"].map(type => (
+                            {["General Member", "Institutional Member"].map(type => (
                                 <RadioField
                                     key={type}
                                     label={type}
@@ -314,6 +353,7 @@ const MemberVerification = () => {
                                     value={type}
                                     checked={formData.membershipType === type}
                                     onChange={handleChange}
+                                    required
                                 />
                             ))}
                         </div>
@@ -322,8 +362,8 @@ const MemberVerification = () => {
                     {/* Personal Info */}
                     <Section title="Personal Information">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            <InputField label="Full Legal Name" name="fullLegalAge" value={formData.fullLegalAge} onChange={handleChange} placeholder="John..." />
-                            <InputField label="Date of Birth" name="dateOfBirth" type="date" value={formData.dateOfBirth} onChange={handleChange} />
+                            <InputField label="Full Legal Name" name="fullLegalAge" value={formData.fullLegalAge} onChange={handleChange} placeholder="John..." required />
+                            <InputField label="Date of Birth" name="dateOfBirth" type="date" value={formData.dateOfBirth} onChange={handleChange} required />
                         </div>
                         <div className="mt-6 flex flex-col gap-3">
                             <label className="text-sm font-bold text-slate-700">Gender</label>
@@ -336,6 +376,7 @@ const MemberVerification = () => {
                                         value={g}
                                         checked={formData.gender === g}
                                         onChange={handleChange}
+                                        required
                                     />
                                 ))}
                             </div>
@@ -351,6 +392,7 @@ const MemberVerification = () => {
                                 value={formData.nationality}
                                 onChange={handleChange}
                                 options={countries.map(c => ({ label: c.name, value: c.name }))}
+                                required
                             />
                         </div>
                         <div className="grid grid-cols-2 gap-5 mt-5">
@@ -360,6 +402,7 @@ const MemberVerification = () => {
                                 value={formData.countryOfResidence}
                                 onChange={handleResidenceCountryChange}
                                 options={countries.map(c => ({ label: c.name, value: c.name }))}
+                                required
                             />
                             <SelectField
                                 label="State / Province"
@@ -368,6 +411,7 @@ const MemberVerification = () => {
                                 onChange={handleResidenceStateChange}
                                 disabled={!formData.countryOfResidence}
                                 options={residenceStates.map(s => ({ label: s.name, value: s.name }))}
+                                required
                             />
                         </div>
                         <div className="mt-5">
@@ -378,6 +422,7 @@ const MemberVerification = () => {
                                 onChange={handleChange}
                                 disabled={!formData.stateProvince}
                                 options={residenceCities.map(c => ({ label: c.name, value: c.name }))}
+                                required
                             />
                         </div>
                     </Section>
@@ -396,6 +441,7 @@ const MemberVerification = () => {
                                     value={tier.value}
                                     checked={formData.tierClassification === tier.value}
                                     onChange={handleChange}
+                                    required
                                 />
                             ))}
                         </div>
@@ -404,8 +450,8 @@ const MemberVerification = () => {
                     {/* Contact Info */}
                     <Section title="Contact Information">
                         <div className="space-y-5">
-                            <InputField label="Phone number (WhatsApp Preferred)" name="phone" value={formData.phone} onChange={handleChange} placeholder="+234 800 000 0000" />
-                            <InputField label="Email Address" name="email" type="email" value={user?.email} placeholder="john@example.com" />
+                            <InputField label="Phone number (WhatsApp Preferred)" name="phone" value={formData.phone} onChange={handleChange} placeholder="+234 800 000 0000" required />
+                            <InputField label="Email Address" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="john@example.com" required />
                         </div>
                     </Section>
 
@@ -422,6 +468,7 @@ const MemberVerification = () => {
                                         value={id}
                                         checked={formData.governmentIdType === id}
                                         onChange={handleChange}
+                                        required
                                     />
                                 ))}
                             </div>
@@ -436,6 +483,7 @@ const MemberVerification = () => {
                                     className="hidden"
                                     onChange={handleChange}
                                     accept=".pdf,.jpg,.jpeg,.png"
+                                    required={!existingIdUrl}
                                 />
                                 <div className={`w-12 h-12 rounded-full bg-white flex items-center justify-center border border-gray-100 transition-transform group-hover:-translate-y-1 ${idFile ? 'text-green-500' : 'text-slate-400'}`}>
                                     {idFile ? <CheckCircle2 size={24} /> : <Upload size={24} />}
@@ -450,7 +498,7 @@ const MemberVerification = () => {
                                 </div>
                             </div>
 
-                            <InputField label="ID Number /Optional" name="idNumber" value={formData.idNumber} onChange={handleChange} placeholder="Enter your ID number" />
+                            <InputField label="ID Number" name="idNumber" value={formData.idNumber} onChange={handleChange} placeholder="Enter your ID number" required />
                         </div>
                     </Section>
                 </div>
@@ -480,6 +528,7 @@ const MemberVerification = () => {
                             name="serviceHoursAgreed"
                             checked={formData.serviceHoursAgreed}
                             onChange={handleChange}
+                            required
                         />
                         <p className="text-sm text-slate-600 leading-relaxed font-medium">
                             I agree to complete a minimum of 12 service hours per month (or 36 per quarter) and log activities in the Digital Activity Register.
@@ -501,6 +550,7 @@ const MemberVerification = () => {
                                 name="benefitsAcknowledged"
                                 checked={formData.benefitsAcknowledged}
                                 onChange={handleChange}
+                                required
                             />
                             <p className="text-sm text-slate-600 font-medium">
                                 I acknowledge that all benefits are subject to program-specific terms, conditions, and eligibility requirements.
@@ -527,6 +577,7 @@ const MemberVerification = () => {
                                 name="termsAgreed"
                                 checked={formData.termsAgreed}
                                 onChange={handleChange}
+                                required
                             />
                             <p className="text-sm text-blue-600 font-semibold">
                                 I agree to all the terms and condition and to abide by all the rules and regulations
@@ -545,7 +596,7 @@ const MemberVerification = () => {
 
             <button
                 type="submit"
-                disabled={isSubmitting || !formData.termsAgreed || isPending}
+                disabled={isSubmitting || !formData.termsAgreed || !formData.serviceHoursAgreed || !formData.benefitsAcknowledged || isPending}
                 className="w-full py-5 bg-red-600 hover:bg-red-700 text-white font-bold shadow-xs shadow-red-100 transition-all transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
             >
                 {isSubmitting && <Loader2 className="animate-spin" size={24} />}

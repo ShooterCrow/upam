@@ -91,6 +91,20 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: otpData,
       }),
     }),
+    getCompleteness: builder.query({
+      query: () => "/users/me/completeness",
+      providesTags: ["Completeness"],
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          if (data?.success) {
+            dispatch(setCompleteness(data.data));
+          }
+        } catch (err) {
+          console.error("Failed to fetch completeness:", err);
+        }
+      },
+    }),
   }),
 });
 
@@ -104,4 +118,5 @@ export const {
   useForgotPasswordMutation,
   useResetPasswordMutation,
   useSendOtpMutation,
+  useGetCompletenessQuery,
 } = authApiSlice;
