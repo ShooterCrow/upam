@@ -434,7 +434,7 @@ const MemberVerification = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Left Column */}
                 <div className="space-y-8 bg-white py-6 lg:py-8">
-                    <Section title="Membership Type (General Member for is Individuals | Institutional Member for is Organizations & Companies etc)" isMissing={isMissing('membershipType')}>
+                    <Section title="Membership Type" isMissing={isMissing('membershipType')}>
                         <div className="space-y-3">
                             {["General Member", "Institutional Member"].map(type => (
                                 <RadioField
