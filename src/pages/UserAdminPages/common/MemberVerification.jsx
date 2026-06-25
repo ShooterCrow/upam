@@ -138,6 +138,48 @@ const MemberVerification = () => {
         }
     }, [myVerification, isFetching, user?.id, isInitialized, DRAFT_KEY]);
 
+    // Derrive missing fields from formData
+    useEffect(() => {
+        if (!isInitialized) return;
+
+        const requiredFields = [
+            "membershipType",
+            "tierClassification",
+            "fullLegalAge",
+            "dateOfBirth",
+            "gender",
+            "phone",
+            "email",
+            "nationality",
+            "countryOfResidence",
+            "stateProvince",
+            "city",
+            "governmentIdType",
+            "idNumber",
+            "departmentsOfInterest",
+            "serviceHoursAgreed",
+            "benefitsAcknowledged",
+            "termsAgreed",
+        ];
+
+        const missing = requiredFields.filter((field) => {
+            const value = formData[field];
+            if (field === "departmentsOfInterest") {
+                return !Array.isArray(value) || value.length === 0;
+            }
+            if (typeof value === "string") {
+                return !value.trim();
+            }
+            return value === undefined || value === null || value === "";
+        });
+
+        if (!idFile && !existingIdUrl) {
+            missing.push("idDocument");
+        }
+
+        setMissingFields(missing);
+    }, [formData, idFile, existingIdUrl, isInitialized]);
+
     // Auto-scroll to first missing field
     useEffect(() => {
         if (missingFields.length > 0 && !hasScrolled.current && isInitialized) {
@@ -167,19 +209,12 @@ const MemberVerification = () => {
         if (type === 'file') {
             const file = files[0];
             setIdFile(file);
-            setMissingFields(prev => prev.filter(f => f !== 'idDocument'));
             return;
         } else if (type === 'checkbox' && name === 'departmentsOfInterest') {
             const updatedDepartments = checked
                 ? [...formData.departmentsOfInterest, value]
                 : formData.departmentsOfInterest.filter(dept => dept !== value);
             setFormData(prev => ({ ...prev, departmentsOfInterest: updatedDepartments }));
-
-            if (updatedDepartments.length > 0) {
-                setMissingFields(prev => prev.filter(f => f !== 'departmentsOfInterest'));
-            } else {
-                setMissingFields(prev => prev.includes('departmentsOfInterest') ? prev : [...prev, 'departmentsOfInterest']);
-            }
             return;
         } else if (name === 'tierClassification') {
             newValue = Number(value);
@@ -188,14 +223,6 @@ const MemberVerification = () => {
         }
 
         setFormData(prev => ({ ...prev, [name]: newValue }));
-
-        // Reactive missing field clearing
-        const isFilled = type === 'checkbox' ? checked : !!value.toString().trim();
-        if (isFilled) {
-            setMissingFields(prev => prev.filter(f => f !== name));
-        } else {
-            setMissingFields(prev => prev.includes(name) ? prev : [...prev, name]);
-        }
     };
 
     useEffect(() => {
@@ -226,13 +253,6 @@ const MemberVerification = () => {
             city: ''
         }));
 
-        setMissingFields(prev => {
-            let next = prev.filter(f => f !== 'countryOfResidence');
-            if (!next.includes('stateProvince')) next.push('stateProvince');
-            if (!next.includes('city')) next.push('city');
-            return next;
-        });
-
         if (country) {
             setSelectedCountryCode(country.isoCode);
             setResidenceStates(State.getStatesOfCountry(country.isoCode));
@@ -253,12 +273,6 @@ const MemberVerification = () => {
             stateProvince: stateName,
             city: ''
         }));
-
-        setMissingFields(prev => {
-            let next = prev.filter(f => f !== 'stateProvince');
-            if (!next.includes('city')) next.push('city');
-            return next;
-        });
 
         if (state) {
             setResidenceCities(City.getCitiesOfState(selectedCountryCode, state.isoCode));
