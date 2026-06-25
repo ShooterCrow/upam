@@ -8,7 +8,7 @@ import {
  * apiSlice configuration flags for AutoRecovery.
  * Set to false to disable specific reload/refresh criteria.
  */
-const ENABLE_PERIODIC_RELOAD = true; // Reload after every 6 API requests for stability
+const ENABLE_PERIODIC_RELOAD = false; // Reload after every 6 API requests for stability
 const ENABLE_ERROR_RELOAD = false; // Reload on consecutive GET errors for recovery
 
 const EXCLUDED_ROUTES = ["/register"];
@@ -43,17 +43,17 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   if (state.auth?.token && args.url !== "/auth/refresh") {
     const reqCount =
       parseInt(sessionStorage.getItem("api_request_count") || "0") + 1;
-    if (reqCount >= 6) {
+    if (reqCount >= 15) {
       sessionStorage.setItem("api_request_count", "0");
       console.log(
-        "6 API requests made. Triggering periodic reload for stability.",
+        "15 API requests made. Triggering periodic reload for stability.",
       );
       if (isExcluded()) {
         console.log("Route is excluded. Skipping periodic reload.");
         sessionStorage.setItem("api_request_count", "0");
       } else if (!ENABLE_PERIODIC_RELOAD) {
         console.log(
-          "6 API requests made, but ENABLE_PERIODIC_RELOAD is false. Skipping.",
+          "15 API requests made, but ENABLE_PERIODIC_RELOAD is false. Skipping.",
         );
         sessionStorage.setItem("api_request_count", "0");
       } else {

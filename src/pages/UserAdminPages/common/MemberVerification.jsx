@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Upload, Shield, CheckCircle2, CheckCircle, ChevronRight, Info, AlertCircle, Loader2 } from 'lucide-react';
 import { Country, State, City } from 'country-state-city';
 import { useSubmitVerificationMutation, useGetMyVerificationQuery } from '../../platform/verificationApiSlice';
@@ -44,6 +44,14 @@ const MemberVerification = () => {
     const [idFile, setIdFile] = useState(null);
     const [existingIdUrl, setExistingIdUrl] = useState(null);
 
+    const [missingFields, setMissingFields] = useState([]);
+    const fieldRefs = useRef({});
+    const hasScrolled = useRef(false);
+
+    const registerRef = useCallback((fieldKey, el) => {
+        if (el) fieldRefs.current[fieldKey] = el;
+    }, []);
+
     // Geographic Data State
     const [countries] = useState(Country.getAllCountries());
     const [residenceStates, setResidenceStates] = useState([]);
@@ -52,23 +60,23 @@ const MemberVerification = () => {
     // codes for lookups
     const [selectedCountryCode, setSelectedCountryCode] = useState('');
 
-    // Pre-fill form if verification exists
-    // Reverse-map: API getter returns a label string, form needs the numeric value
     const tierLabelToNumber = {
         'Tier A - Diaspora': 1,
         'Tier B - Africa & Caribbean': 2,
-        // Legacy labels
         'Tier B - Defined Diaspora': 1,
         'Tier A - Africa & Caribbean': 2,
     };
 
     useEffect(() => {
         if (!isFetching) {
+            if (myVerification?.missingFields) {
+                setMissingFields(myVerification.missingFields);
+            }
+
             const savedDraft = localStorage.getItem(DRAFT_KEY);
             if (savedDraft && !myVerification?.data && !isInitialized) {
                 try {
                     const draft = JSON.parse(savedDraft);
-                    console.log("Found draft, restoring...", draft);
                     setFormData(prev => ({ ...prev, ...draft }));
 
                     if (draft.countryOfResidence) {
@@ -130,6 +138,21 @@ const MemberVerification = () => {
         }
     }, [myVerification, isFetching, user?.id, isInitialized, DRAFT_KEY]);
 
+    // Auto-scroll to first missing field
+    useEffect(() => {
+        if (missingFields.length > 0 && !hasScrolled.current && isInitialized) {
+            const firstMissing = missingFields[0];
+            const el = fieldRefs.current[firstMissing];
+            if (el) {
+                hasScrolled.current = true;
+                setTimeout(() => {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    el.focus();
+                }, 400);
+            }
+        }
+    }, [missingFields, isInitialized]);
+
     // Save draft on every change
     useEffect(() => {
         if (isInitialized && formData && user?.id && !myVerification?.data) {
@@ -139,17 +162,39 @@ const MemberVerification = () => {
 
     const handleChange = (e) => {
         const { name, value, type, checked, files } = e.target;
+        let newValue = value;
+
         if (type === 'file') {
-            setIdFile(files[0]);
+            const file = files[0];
+            setIdFile(file);
+            setMissingFields(prev => prev.filter(f => f !== 'idDocument'));
+            return;
         } else if (type === 'checkbox' && name === 'departmentsOfInterest') {
             const updatedDepartments = checked
                 ? [...formData.departmentsOfInterest, value]
                 : formData.departmentsOfInterest.filter(dept => dept !== value);
             setFormData(prev => ({ ...prev, departmentsOfInterest: updatedDepartments }));
+
+            if (updatedDepartments.length > 0) {
+                setMissingFields(prev => prev.filter(f => f !== 'departmentsOfInterest'));
+            } else {
+                setMissingFields(prev => prev.includes('departmentsOfInterest') ? prev : [...prev, 'departmentsOfInterest']);
+            }
+            return;
         } else if (name === 'tierClassification') {
-            setFormData(prev => ({ ...prev, tierClassification: Number(value) }));
+            newValue = Number(value);
+        } else if (type === 'checkbox') {
+            newValue = checked;
+        }
+
+        setFormData(prev => ({ ...prev, [name]: newValue }));
+
+        // Reactive missing field clearing
+        const isFilled = type === 'checkbox' ? checked : !!value.toString().trim();
+        if (isFilled) {
+            setMissingFields(prev => prev.filter(f => f !== name));
         } else {
-            setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+            setMissingFields(prev => prev.includes(name) ? prev : [...prev, name]);
         }
     };
 
@@ -174,6 +219,13 @@ const MemberVerification = () => {
             city: ''
         }));
 
+        setMissingFields(prev => {
+            let next = prev.filter(f => f !== 'countryOfResidence');
+            if (!next.includes('stateProvince')) next.push('stateProvince');
+            if (!next.includes('city')) next.push('city');
+            return next;
+        });
+
         if (country) {
             setSelectedCountryCode(country.isoCode);
             setResidenceStates(State.getStatesOfCountry(country.isoCode));
@@ -195,6 +247,12 @@ const MemberVerification = () => {
             city: ''
         }));
 
+        setMissingFields(prev => {
+            let next = prev.filter(f => f !== 'stateProvince');
+            if (!next.includes('city')) next.push('city');
+            return next;
+        });
+
         if (state) {
             setResidenceCities(City.getCitiesOfState(selectedCountryCode, state.isoCode));
         } else {
@@ -204,21 +262,17 @@ const MemberVerification = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (myVerification?.data?.status === 'Pending') return;
 
         if (formData.departmentsOfInterest.length === 0) {
             return setSubmitError("Please select at least one primary department of interest.");
         }
-
         if (!idFile && !existingIdUrl) {
             return setSubmitError("Please upload your government-issued ID document.");
         }
 
         try {
             const data = new FormData();
-
-            // Append all form fields
             Object.keys(formData).forEach(key => {
                 if (key === 'departmentsOfInterest') {
                     data.append(key, JSON.stringify(formData[key]));
@@ -226,10 +280,7 @@ const MemberVerification = () => {
                     data.append(key, formData[key]);
                 }
             });
-
-            // Append the file
-            data.append('idDocument', idFile);
-
+            if (idFile) data.append('idDocument', idFile);
             await submitVerification(data).unwrap();
             localStorage.removeItem(DRAFT_KEY);
             setIsSubmitted(true);
@@ -248,7 +299,23 @@ const MemberVerification = () => {
     }
 
     if (isSubmitted) {
-        // ... same lines 128-135
+        return (
+            <div className="py-20 mx-auto max-w-2xl text-center space-y-6">
+                <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle size={40} />
+                </div>
+                <h1 className="text-3xl font-black text-slate-800">Application Submitted!</h1>
+                <p className="text-slate-600 text-lg leading-relaxed">
+                    Your verification request has been received. Our team will review your documents and notify you of the status via email and in your dashboard.
+                </p>
+                <button
+                    onClick={() => navigate('/dashboard')}
+                    className="px-8 py-3 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 transition-all transform hover:-translate-y-1 active:translate-y-0"
+                >
+                    Back to Dashboard
+                </button>
+            </div>
+        );
     }
 
     const verificationStatus = myVerification?.data?.status;
@@ -265,7 +332,6 @@ const MemberVerification = () => {
         "Emergency Response Team", "Energy"
     ];
 
-    // If approved, show an exclusive verified view and do not render the form.
     if (isApproved) {
         return (
             <div className="py-12 mx-auto max-w-3xl animate-in fade-in duration-500">
@@ -292,15 +358,39 @@ const MemberVerification = () => {
         );
     }
 
+    const isMissing = (fieldKey) => missingFields.includes(fieldKey);
+
+    const inputClass = (fieldKey) =>
+        `w-full px-4 py-3.5 rounded-xl border outline-none transition-all font-medium text-slate-800 ${isMissing(fieldKey)
+            ? 'border-red-400 ring-2 ring-red-100 bg-red-50/30'
+            : 'bg-slate-50/30 border-gray-100 focus:bg-white focus:ring-2 focus:ring-red-500 focus:border-transparent'
+        }`;
+
+    const labelClass = (fieldKey) =>
+        `text-xs font-bold uppercase tracking-wider flex justify-between ${isMissing(fieldKey) ? 'text-red-500' : 'text-slate-700'}`;
+
     return (
         <form onSubmit={handleSubmit} className="py-4 md:py-8 mx-auto space-y-8 animate-in fade-in duration-500 pb-20">
+            {missingFields.length > 0 && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-center gap-3 animate-in slide-in-from-top duration-500">
+                    <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M12 3a9 9 0 110 18 9 9 0 010-18z" />
+                        </svg>
+                    </div>
+                    <p className="text-red-700 text-sm font-medium">
+                        <span className="font-bold">{missingFields.length} field{missingFields.length > 1 ? 's' : ''}</span> still need{missingFields.length === 1 ? 's' : ''} your attention. Fields marked in <span className="text-red-500 font-bold">red</span> are required.
+                    </p>
+                </div>
+            )}
+
             <div className="flex flex-col gap-2">
                 <h1 className="text-3xl font-bold text-slate-800">Membership Verification</h1>
                 <p className="text-slate-500">Please provide accurate information for your membership verification process.</p>
             </div>
 
             {isPending && (
-                <div className="p-4 bg-yellow-50 border border-yellow-100 rounded-3xl flex items-center gap-4 animate-in slide-in-from-top duration-500">
+                <div className="p-4 bg-yellow-50 border border-yellow-100 rounded-3xl flex items-center gap-4">
                     <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-yellow-500 border border-yellow-50 shrink-0">
                         <Info size={24} />
                     </div>
@@ -312,27 +402,22 @@ const MemberVerification = () => {
             )}
 
             {isRejected && (
-                <div className="p-6 bg-red-50 border-2 border-red-200/60 flex flex-col md:flex-row items-start gap-6 animate-in slide-in-from-top duration-500 relative overflow-hidden">
+                <div className="p-6 bg-red-50 border-2 border-red-200/60 flex flex-col md:flex-row items-start gap-6 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-red-100 rounded-bl-full -mr-16 -mt-16 opacity-50 pointer-events-none" />
-
                     <div className="w-16 h-16 rounded-full bg-white flex flex-shrink-0 items-center justify-center text-red-500 border border-red-100 relative z-10">
                         <AlertCircle size={32} strokeWidth={2.5} />
                     </div>
-
                     <div className="flex-1 relative z-10">
                         <h4 className="font-black text-red-950 text-xl tracking-tight mb-2">Verification Application Rejected</h4>
                         <p className="text-red-800/90 text-sm md:text-base leading-relaxed max-w-2xl font-medium">
-                            We carefully reviewed your application, but unfortunately, we could not approve it based on the information provided. Please review our feedback below, adjust your details in the pre-filled form, and submit your application again.
+                            We carefully reviewed your application, but unfortunately, we could not approve it. Please review our feedback, adjust your details, and submit again.
                         </p>
-
                         {adminFeedback && (
                             <div className="mt-5 p-5 bg-white/70 backdrop-blur-sm border border-red-100">
                                 <p className="text-xs font-black text-red-900/60 uppercase tracking-widest mb-2 flex items-center gap-2">
                                     <Shield size={14} /> Administrator Feedback
                                 </p>
-                                <p className="text-red-950 font-medium leading-relaxed">
-                                    "{adminFeedback}"
-                                </p>
+                                <p className="text-red-950 font-medium whitespace-pre-wrap">"{adminFeedback}"</p>
                             </div>
                         )}
                     </div>
@@ -342,87 +427,114 @@ const MemberVerification = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Left Column */}
                 <div className="space-y-8 bg-white py-6 lg:py-8">
-                    {/* Membership Type */}
-                    <Section title="Membership Type (Select One)">
+                    <Section title="Membership Type (General Member for is Individuals | Institutional Member for is Organizations & Companies etc)" isMissing={isMissing('membershipType')}>
                         <div className="space-y-3">
                             {["General Member", "Institutional Member"].map(type => (
                                 <RadioField
+                                    ref={(el) => registerRef('membershipType', el)}
                                     key={type}
                                     label={type}
                                     name="membershipType"
                                     value={type}
                                     checked={formData.membershipType === type}
                                     onChange={handleChange}
-                                    required
                                 />
                             ))}
                         </div>
                     </Section>
 
-                    {/* Personal Info */}
                     <Section title="Personal Information">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            <InputField label="Full Legal Name" name="fullLegalAge" value={formData.fullLegalAge} onChange={handleChange} placeholder="John..." required />
-                            <InputField label="Date of Birth" name="dateOfBirth" type="date" value={formData.dateOfBirth} onChange={handleChange} required />
+                            <div className="space-y-2">
+                                <label className={labelClass('fullLegalAge')}>
+                                    Full Legal Name {isMissing('fullLegalAge') && <span className="ml-1 text-red-400">• Required</span>}
+                                </label>
+                                <input
+                                    ref={(el) => registerRef('fullLegalAge', el)}
+                                    name="fullLegalAge"
+                                    value={formData.fullLegalAge}
+                                    onChange={handleChange}
+                                    placeholder="John Doe"
+                                    className={inputClass('fullLegalAge')}
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className={labelClass('dateOfBirth')}>
+                                    Date of Birth {isMissing('dateOfBirth') && <span className="ml-1 text-red-400">• Required</span>}
+                                </label>
+                                <input
+                                    ref={(el) => registerRef('dateOfBirth', el)}
+                                    type="date"
+                                    name="dateOfBirth"
+                                    value={formData.dateOfBirth}
+                                    onChange={handleChange}
+                                    className={inputClass('dateOfBirth')}
+                                />
+                            </div>
                         </div>
-                        <div className="mt-6 flex flex-col gap-3">
-                            <label className="text-sm font-bold text-slate-700">Gender</label>
+                        <div className="mt-6 space-y-3">
+                            <label className={labelClass('gender')}>
+                                Gender {isMissing('gender') && <span className="ml-1 text-red-400">• Required</span>}
+                            </label>
                             <div className="flex gap-8">
                                 {["Male", "Female"].map(g => (
                                     <RadioField
+                                        ref={(el) => registerRef('gender', el)}
                                         key={g}
                                         label={g}
                                         name="gender"
                                         value={g}
                                         checked={formData.gender === g}
                                         onChange={handleChange}
-                                        required
                                     />
                                 ))}
                             </div>
                         </div>
                     </Section>
 
-                    {/* Origin Info */}
                     <Section title="Origins">
                         <div className="space-y-5">
                             <SelectField
+                                ref={(el) => registerRef('nationality', el)}
                                 label="Nationality"
                                 name="nationality"
                                 value={formData.nationality}
                                 onChange={handleChange}
                                 options={countries.map(c => ({ label: c.name, value: c.name }))}
-                                required
+                                isMissing={isMissing('nationality')}
                             />
                         </div>
                         <div className="grid grid-cols-2 gap-5 mt-5">
                             <SelectField
+                                ref={(el) => registerRef('countryOfResidence', el)}
                                 label="Country of Residence"
                                 name="countryOfResidence"
                                 value={formData.countryOfResidence}
                                 onChange={handleResidenceCountryChange}
                                 options={countries.map(c => ({ label: c.name, value: c.name }))}
-                                required
+                                isMissing={isMissing('countryOfResidence')}
                             />
                             <SelectField
+                                ref={(el) => registerRef('stateProvince', el)}
                                 label="State / Province"
                                 name="stateProvince"
                                 value={formData.stateProvince}
                                 onChange={handleResidenceStateChange}
                                 disabled={!formData.countryOfResidence}
                                 options={residenceStates.map(s => ({ label: s.name, value: s.name }))}
-                                required
+                                isMissing={isMissing('stateProvince')}
                             />
                         </div>
                         <div className="mt-5">
                             <SelectField
+                                ref={(el) => registerRef('city', el)}
                                 label="City"
                                 name="city"
                                 value={formData.city}
                                 onChange={handleChange}
                                 disabled={!formData.stateProvince}
                                 options={residenceCities.map(c => ({ label: c.name, value: c.name }))}
-                                required
+                                isMissing={isMissing('city')}
                             />
                         </div>
                     </Section>
@@ -430,83 +542,118 @@ const MemberVerification = () => {
 
                 {/* Right Column */}
                 <div className="space-y-8 bg-white py-6 lg:py-8">
-                    {/* Tier Classification */}
-                    <Section title="Tier Classification">
+                    <Section title="Tier Classification" isMissing={isMissing('tierClassification')}>
                         <div className="space-y-3">
                             {[{ value: 1, label: 'Tier A - Diaspora' }, { value: 2, label: 'Tier B - Africa & Caribbean' }].map(tier => (
                                 <RadioField
+                                    ref={(el) => registerRef('tierClassification', el)}
                                     key={tier.value}
                                     label={tier.label}
                                     name="tierClassification"
                                     value={tier.value}
                                     checked={formData.tierClassification === tier.value}
                                     onChange={handleChange}
-                                    required
                                 />
                             ))}
                         </div>
                     </Section>
 
-                    {/* Contact Info */}
                     <Section title="Contact Information">
                         <div className="space-y-5">
-                            <InputField label="Phone number (WhatsApp Preferred)" name="phone" value={formData.phone} onChange={handleChange} placeholder="+234 800 000 0000" required />
-                            <InputField label="Email Address" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="john@example.com" required />
+                            <div className="space-y-2">
+                                <label className={labelClass('phone')}>
+                                    Phone Number {isMissing('phone') && <span className="ml-1 text-red-400">• Required</span>}
+                                </label>
+                                <input
+                                    ref={(el) => registerRef('phone', el)}
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    placeholder="+234..."
+                                    className={inputClass('phone')}
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className={labelClass('email')}>
+                                    Email Address {isMissing('email') && <span className="ml-1 text-red-400">• Required</span>}
+                                </label>
+                                <input
+                                    ref={(el) => registerRef('email', el)}
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    placeholder="email@example.com"
+                                    className={inputClass('email')}
+                                />
+                            </div>
                         </div>
                     </Section>
 
-                    {/* Identity Verification */}
                     <Section title="Identity Verification">
                         <div className="space-y-5">
-                            <label className="text-sm font-bold text-slate-700">Government Issued ID Provided</label>
+                            <label className={labelClass('governmentIdType')}>
+                                Government Issued ID Type {isMissing('governmentIdType') && <span className="ml-1 text-red-400">• Required</span>}
+                            </label>
                             <div className="flex gap-8">
                                 {["National ID", "Passport"].map(id => (
                                     <RadioField
+                                        ref={(el) => registerRef('governmentIdType', el)}
                                         key={id}
                                         label={id}
                                         name="governmentIdType"
                                         value={id}
                                         checked={formData.governmentIdType === id}
                                         onChange={handleChange}
-                                        required
                                     />
                                 ))}
                             </div>
 
                             <div
                                 onClick={() => document.getElementById('id-upload').click()}
-                                className={`border-2 border-dashed p-8 flex flex-col items-center justify-center gap-4 transition-all cursor-pointer group ${idFile ? 'border-green-200 bg-green-50/30' : 'border-gray-200 bg-slate-50/50 hover:bg-slate-50'}`}
+                                className={`border-2 border-dashed p-8 flex flex-col items-center justify-center gap-4 transition-all cursor-pointer group ${idFile ? 'border-green-200 bg-green-50/30' : isMissing('idDocument') ? 'border-red-400 bg-red-50/20' : 'border-gray-200 bg-slate-50/50 hover:bg-slate-50'}`}
                             >
                                 <input
+                                    ref={(el) => registerRef('idDocument', el)}
                                     id="id-upload"
                                     type="file"
                                     className="hidden"
                                     onChange={handleChange}
                                     accept=".pdf,.jpg,.jpeg,.png"
-                                    required={!existingIdUrl}
                                 />
-                                <div className={`w-12 h-12 rounded-full bg-white flex items-center justify-center border border-gray-100 transition-transform group-hover:-translate-y-1 ${idFile ? 'text-green-500' : 'text-slate-400'}`}>
+                                <div className={`w-12 h-12 rounded-full bg-white flex items-center justify-center border transition-transform group-hover:-translate-y-1 ${idFile ? 'text-green-500 border-green-100' : isMissing('idDocument') ? 'text-red-500 border-red-100' : 'text-slate-400 border-gray-100'}`}>
                                     {idFile ? <CheckCircle2 size={24} /> : <Upload size={24} />}
                                 </div>
                                 <div className="text-center">
-                                    <p className="font-bold text-slate-800">
-                                        {idFile ? idFile.name : "Upload document"}
+                                    <p className={`font-bold ${isMissing('idDocument') ? 'text-red-700' : 'text-slate-800'}`}>
+                                        {idFile ? idFile.name : isMissing('idDocument') ? "Upload ID Document • Required" : "Upload document"}
                                     </p>
-                                    <button type="button" className="mt-2 px-6 py-2 bg-white border border-gray-200 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 transition-colors">
+                                    <button type="button" className={`mt-2 px-6 py-2 bg-white border rounded-xl text-sm font-bold transition-colors ${isMissing('idDocument') ? 'border-red-200 text-red-600 hover:bg-red-50' : 'border-gray-200 text-slate-600 hover:bg-slate-50'}`}>
                                         {idFile ? "Change File" : "Choose Files"}
                                     </button>
                                 </div>
                             </div>
 
-                            <InputField label="ID Number" name="idNumber" value={formData.idNumber} onChange={handleChange} placeholder="Enter your ID number" required />
+                            <div className="space-y-2">
+                                <label className={labelClass('idNumber')}>
+                                    ID Number {isMissing('idNumber') && <span className="ml-1 text-red-400">• Required</span>}
+                                </label>
+                                <input
+                                    ref={(el) => registerRef('idNumber', el)}
+                                    name="idNumber"
+                                    value={formData.idNumber}
+                                    onChange={handleChange}
+                                    placeholder="Enter ID number"
+                                    className={inputClass('idNumber')}
+                                />
+                            </div>
                         </div>
                     </Section>
                 </div>
             </div>
 
-            {/* Departments of Interest */}
-            <Section className="py-6" title="Primary Department of Interest (Select One)">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-8">
+            <Section className="py-6" title="Primary Department of Interest" isMissing={isMissing('departmentsOfInterest')}>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-8" ref={(el) => registerRef('departmentsOfInterest', el)}>
                     {departments.map(dept => (
                         <CheckboxField
                             key={dept}
@@ -520,23 +667,22 @@ const MemberVerification = () => {
                 </div>
             </Section>
 
-            {/* Agreements */}
             <Section className="py-6" title="Agreements & Acknowledgements">
                 <div className="space-y-8">
-                    <div className="p-6 bg-slate-50/50 border border-slate-100 flex gap-4">
+                    <div className={`p-6 border flex gap-4 transition-colors ${isMissing('serviceHoursAgreed') ? 'bg-red-50/30 border-red-200' : 'bg-slate-50/50 border-slate-100'}`}>
                         <CheckboxField
+                            ref={(el) => registerRef('serviceHoursAgreed', el)}
                             name="serviceHoursAgreed"
                             checked={formData.serviceHoursAgreed}
                             onChange={handleChange}
-                            required
                         />
-                        <p className="text-sm text-slate-600 leading-relaxed font-medium">
+                        <p className={`text-sm leading-relaxed font-medium ${isMissing('serviceHoursAgreed') ? 'text-red-700' : 'text-slate-600'}`}>
                             I agree to complete a minimum of 12 service hours per month (or 36 per quarter) and log activities in the Digital Activity Register.
                         </p>
                     </div>
 
-                    <div className="space-y-4">
-                        <h4 className="font-bold text-slate-800">Membership Benefit Acknowledgement</h4>
+                    <div className={`p-6 border space-y-4 transition-colors ${isMissing('benefitsAcknowledged') ? 'bg-red-50/30 border-red-200' : 'bg-white'}`}>
+                        <h4 className={`font-bold ${isMissing('benefitsAcknowledged') ? 'text-red-900' : 'text-slate-800'}`}>Membership Benefit Acknowledgement</h4>
                         <p className="text-sm text-slate-500">By joining UPAM, I understand that eligible benefits may include:</p>
                         <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 pl-2">
                             {["Education scholarships and grants", "Business and entrepreneurship support", "Life-Care and Wellness programs", "Pension and financial security programs", "Professional networking and global opportunities"].map(b => (
@@ -547,25 +693,24 @@ const MemberVerification = () => {
                         </ul>
                         <div className="flex gap-4 pt-2">
                             <CheckboxField
+                                ref={(el) => registerRef('benefitsAcknowledged', el)}
                                 name="benefitsAcknowledged"
                                 checked={formData.benefitsAcknowledged}
                                 onChange={handleChange}
-                                required
                             />
-                            <p className="text-sm text-slate-600 font-medium">
+                            <p className={`text-sm font-medium ${isMissing('benefitsAcknowledged') ? 'text-red-700' : 'text-slate-600'}`}>
                                 I acknowledge that all benefits are subject to program-specific terms, conditions, and eligibility requirements.
                             </p>
                         </div>
                     </div>
 
-                    <div className="space-y-4 border-t border-slate-100 pt-8">
-                        <h4 className="font-bold text-slate-800">Code of Conduct and Policy Agreement</h4>
-                        <p className="text-sm text-slate-500 italic">I, the undersigned, affirm that:</p>
+                    <div className={`p-6 border space-y-4 transition-colors ${isMissing('termsAgreed') ? 'bg-red-50/30 border-red-200' : 'bg-white'}`}>
+                        <h4 className={`font-bold ${isMissing('termsAgreed') ? 'text-red-900' : 'text-slate-800'}`}>Code of Conduct and Policy Agreement</h4>
                         <ul className="space-y-3 pl-2">
                             {[
                                 "I support the vision and mission of the United Pan-Africanist Movement (UPAM)",
-                                "I agree to abide by the UPAM Constitution, Membership Policy, Code of Conduct, NDA, and all related governing documents",
-                                "I understand that failure to comply may result in remediation, suspension, or termination of membership"
+                                "I agree to abide by the UPAM Constitution and Code of Conduct",
+                                "I understand that failure to comply may result in termination of membership"
                             ].map(p => (
                                 <li key={p} className="flex items-start gap-3 text-sm text-slate-600 font-medium leading-relaxed">
                                     <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5" /> {p}
@@ -574,13 +719,13 @@ const MemberVerification = () => {
                         </ul>
                         <div className="flex gap-4 pt-4">
                             <CheckboxField
+                                ref={(el) => registerRef('termsAgreed', el)}
                                 name="termsAgreed"
                                 checked={formData.termsAgreed}
                                 onChange={handleChange}
-                                required
                             />
-                            <p className="text-sm text-blue-600 font-semibold">
-                                I agree to all the terms and condition and to abide by all the rules and regulations
+                            <p className={`text-sm font-semibold ${isMissing('termsAgreed') ? 'text-red-700' : 'text-blue-600'}`}>
+                                I agree to all the terms and conditions and to abide by all the rules and regulations.
                             </p>
                         </div>
                     </div>
@@ -596,8 +741,8 @@ const MemberVerification = () => {
 
             <button
                 type="submit"
-                disabled={isSubmitting || !formData.termsAgreed || !formData.serviceHoursAgreed || !formData.benefitsAcknowledged || isPending}
-                className="w-full py-5 bg-red-600 hover:bg-red-700 text-white font-bold shadow-xs shadow-red-100 transition-all transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                disabled={isSubmitting || isPending}
+                className="w-full py-5 bg-red-600 hover:bg-red-700 text-white font-bold shadow-xs transition-all transform hover:-translate-y-0.5 disabled:opacity-50 flex items-center justify-center gap-3"
             >
                 {isSubmitting && <Loader2 className="animate-spin" size={24} />}
                 {isSubmitting ? 'Submitting Application...' : isPending ? 'Application Pending Review' : 'Submit for Verification'}
@@ -606,53 +751,47 @@ const MemberVerification = () => {
     );
 };
 
-// Sub-components for cleaner code
-const Section = ({ title, children, className }) => (
-    <div className={`bg-white px-6 md:px-8 ${className}`}>
-        <h3 className="text-lg font-bold text-slate-800 border-b border-slate-50 pb-4">{title}</h3>
+const Section = ({ title, children, className, isMissing }) => (
+    <div className={`bg-white px-6 md:px-8 py-4 border-l-4 transition-colors ${isMissing ? 'border-red-400 bg-red-50/10' : 'border-transparent'} ${className}`}>
+        <h3 className={`text-lg font-bold border-b border-slate-50 pb-4 mb-5 ${isMissing ? 'text-red-900' : 'text-slate-800'}`}>
+            {title} {isMissing && <span className="text-xs font-black uppercase text-red-500 float-right mt-1.5 tracking-widest">• Action Needed</span>}
+        </h3>
         {children}
     </div>
 );
 
-const InputField = ({ label, ...props }) => (
-    <div className="space-y-2">
-        <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">{label}</label>
-        <input
-            {...props}
-            className="w-full px-4 py-3.5 rounded-xl bg-slate-50/30 border border-gray-100 focus:bg-white focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800"
-        />
-    </div>
-);
-
-const RadioField = ({ label, ...props }) => (
+const RadioField = React.forwardRef(({ label, ...props }, ref) => (
     <label className="flex items-center gap-3 cursor-pointer group">
         <div className="relative flex items-center justify-center">
-            <input type="radio" className="peer sr-only" {...props} />
+            <input ref={ref} type="radio" className="peer sr-only" {...props} />
             <div className="w-5 h-5 rounded-full border-2 border-slate-200 peer-checked:border-red-500 transition-colors" />
             <div className="absolute w-2.5 h-2.5 rounded-full bg-red-500 scale-0 peer-checked:scale-100 transition-transform" />
         </div>
         <span className="text-sm font-medium text-slate-600 group-hover:text-slate-800 transition-colors">{label}</span>
     </label>
-);
+));
 
-const CheckboxField = ({ label, ...props }) => (
+const CheckboxField = React.forwardRef(({ label, ...props }, ref) => (
     <label className="flex items-center gap-3 cursor-pointer group">
         <div className="relative flex items-center justify-center">
-            <input type="checkbox" className="peer sr-only" {...props} />
+            <input ref={ref} type="checkbox" className="peer sr-only" {...props} />
             <div className="w-5 h-5 rounded-md border-2 border-slate-200 peer-checked:bg-red-500 peer-checked:border-red-500 transition-all" />
             <CheckCircle2 className="absolute text-white scale-0 peer-checked:scale-100 transition-transform" size={14} />
         </div>
         {label && <span className="text-sm font-medium text-slate-600 group-hover:text-slate-800 transition-colors">{label}</span>}
     </label>
-);
+));
 
-const SelectField = ({ label, options, ...props }) => (
+const SelectField = React.forwardRef(({ label, options, isMissing, ...props }, ref) => (
     <div className="space-y-2">
-        <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">{label}</label>
+        <label className={`text-xs font-bold uppercase tracking-wider flex justify-between ${isMissing ? 'text-red-500' : 'text-slate-700'}`}>
+            {label} {isMissing && <span className="text-red-400">• Required</span>}
+        </label>
         <div className="relative">
             <select
+                ref={ref}
                 {...props}
-                className="w-full px-4 py-3.5 rounded-xl bg-slate-50/30 border border-gray-100 focus:bg-white focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 appearance-none disabled:opacity-50"
+                className={`w-full px-4 py-3.5 rounded-xl border outline-none transition-all font-medium text-slate-800 appearance-none disabled:opacity-50 ${isMissing ? 'border-red-400 ring-2 ring-red-100 bg-red-50/30' : 'bg-slate-50/30 border-gray-100 focus:bg-white focus:ring-2 focus:ring-red-500'}`}
             >
                 <option value="">Select {label}</option>
                 {options.map((opt, i) => (
@@ -664,6 +803,6 @@ const SelectField = ({ label, options, ...props }) => (
             </div>
         </div>
     </div>
-);
+));
 
 export default MemberVerification;

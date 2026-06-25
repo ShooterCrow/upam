@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
     Upload,
     Eye,
@@ -73,8 +73,16 @@ const MyProfile = () => {
         confirmPassword: ''
     });
 
+    const [missingFields, setMissingFields] = useState([]);
+    const fieldRefs = useRef({});
+    const hasScrolled = useRef(false);
+
+    const registerRef = useCallback((fieldKey, el) => {
+        if (el) fieldRefs.current[fieldKey] = el;
+    }, []);
+
     // Populate form data when profile data is loaded
-    React.useEffect(() => {
+    useEffect(() => {
         if (profileData?.data) {
             const user = profileData.data;
             setFormData({
@@ -89,8 +97,27 @@ const MyProfile = () => {
                 confirmPassword: ''
             });
             setPhoneVerified(user.phoneVerified || false);
+
+            if (profileData.missingFields) {
+                setMissingFields(profileData.missingFields);
+            }
         }
     }, [profileData]);
+
+    // Auto-scroll to first missing field
+    useEffect(() => {
+        if (missingFields.length > 0 && !hasScrolled.current) {
+            const firstMissing = missingFields[0];
+            const el = fieldRefs.current[firstMissing];
+            if (el) {
+                hasScrolled.current = true;
+                setTimeout(() => {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    el.focus();
+                }, 300);
+            }
+        }
+    }, [missingFields]);
 
     const isVerified = profileData?.data?.isVerifiedMember;
     const user = profileData?.data;
@@ -108,9 +135,18 @@ const MyProfile = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+
+        if (value.trim()) {
+            setMissingFields(prev => prev.filter(f => f !== name));
+        } else {
+            setMissingFields(prev => {
+                if (!prev.includes(name)) return [...prev, name];
+                return prev;
+            });
+        }
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (completeness?.step1?.complete && !completeness.isAllComplete && location.pathname === completeness.step1.path) {
             const timer = setTimeout(() => {
                 navigate(completeness.step2.path);
@@ -211,8 +247,34 @@ const MyProfile = () => {
         }
     };
 
+    const isMissing = (fieldKey) => missingFields.includes(fieldKey);
+
+    const inputClass = (fieldKey) =>
+        `w-full px-4 py-3 border outline-none transition-all font-medium text-slate-800 ${isFieldLocked(fieldKey)
+            ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75 border-gray-200'
+            : isMissing(fieldKey)
+                ? 'border-red-400 ring-2 ring-red-100 bg-red-50/30'
+                : 'bg-white border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent'
+        }`;
+
+    const labelClass = (fieldKey) =>
+        `flex justify-between w-full text-xs font-bold uppercase tracking-wider ${isMissing(fieldKey) ? 'text-red-500' : 'text-slate-700'}`;
+
     return (
         <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
+            {missingFields.length > 0 && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-center gap-3 animate-in slide-in-from-top duration-500">
+                    <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M12 3a9 9 0 110 18 9 9 0 010-18z" />
+                        </svg>
+                    </div>
+                    <p className="text-red-700 text-sm font-medium">
+                        <span className="font-bold">{missingFields.length} field{missingFields.length > 1 ? 's' : ''}</span> still need{missingFields.length === 1 ? 's' : ''} your attention. Fields marked in <span className="text-red-500 font-bold">red</span> are required.
+                    </p>
+                </div>
+            )}
+
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <h1 className="text-2xl font-bold text-slate-800">Account Settings</h1>
                 {isVerified && (
@@ -280,55 +342,72 @@ const MyProfile = () => {
                         <h3 className="text-xl font-bold text-slate-800">Personal Information</h3>
                         <div className="grid grid-cols-1 gap-5">
                             <div className="space-y-2">
-                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">First Name</label>
+                                <label className={labelClass('firstName')}>
+                                    <span>First Name</span>
+                                    {isMissing('firstName') && <span className="text-[10px] text-red-500 font-bold uppercase tracking-wider">• Required</span>}
+                                </label>
                                 <input
+                                    ref={(el) => registerRef('firstName', el)}
                                     type="text"
                                     name="firstName"
                                     value={formData.firstName}
                                     onChange={handleChange}
                                     disabled={isFieldLocked('firstName')}
-                                    className={`w-full px-4 py-3  bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('firstName') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
+                                    className={inputClass('firstName')}
                                 />
                                 {isFieldLocked('firstName') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
                             <div className="space-y-2">
-                                <label className="flex justify-between w-full text-xs font-bold text-slate-700 uppercase tracking-wider"><span>Last Name</span> {!formData.lastName && <span className="text-[10px] text-red-600 font-black uppercase tracking-widest flex items-center gap-1"><Shield size={10} /> Lastname Required</span>} </label>
+                                <label className={labelClass('lastName')}>
+                                    <span>Last Name</span>
+                                    {isMissing('lastName') && <span className="text-[10px] text-red-500 font-bold uppercase tracking-wider">• Required</span>}
+                                </label>
                                 <input
+                                    ref={(el) => registerRef('lastName', el)}
                                     type="text"
                                     name="lastName"
                                     value={formData.lastName}
                                     onChange={handleChange}
                                     disabled={isFieldLocked('lastName')}
-                                    className={`w-full px-4 py-3  bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('lastName') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
+                                    className={inputClass('lastName')}
                                 />
                                 {isFieldLocked('lastName') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Email Address</label>
+                                <label className={labelClass('email')}>
+                                    <span>Email Address</span>
+                                    {isMissing('email') && <span className="text-[10px] text-red-500 font-bold uppercase tracking-wider">• Required</span>}
+                                </label>
                                 <input
+                                    ref={(el) => registerRef('email', el)}
                                     type="email"
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
                                     disabled={isFieldLocked('email')}
-                                    className={`w-full px-4 py-3  bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('email') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
+                                    className={inputClass('email')}
                                 />
                                 {isFieldLocked('email') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center justify-between">
-                                    <span>Phone No</span> {!formData.phone ? <span className="text-[10px] text-red-600 font-black uppercase tracking-widest flex items-center gap-1"><Shield size={10} /> Phone Number Required</span> : (requirePhoneVerification && !phoneVerified) && <span className="text-[10px] text-red-600 font-black uppercase tracking-widest flex items-center gap-1"><Shield size={10} /> Unverified Number</span>}
-                                    {phoneVerified && <span className="text-[10px] text-emerald-600 font-black uppercase tracking-widest flex items-center gap-1"><CheckCircle2 size={12} /> Verified</span>}
+                                <label className={labelClass('phone')}>
+                                    <span>Phone No</span>
+                                    <div className="flex gap-2 items-center">
+                                        {isMissing('phone') && <span className="text-[10px] text-red-500 font-bold uppercase tracking-wider">• Required</span>}
+                                        {(requirePhoneVerification && !phoneVerified && !isMissing('phone')) && <span className="text-[10px] text-red-600 font-black uppercase tracking-widest flex items-center gap-1"><Shield size={10} /> Unverified</span>}
+                                        {phoneVerified && <span className="text-[10px] text-emerald-600 font-black uppercase tracking-widest flex items-center gap-1"><CheckCircle2 size={12} /> Verified</span>}
+                                    </div>
                                 </label>
                                 <div className="relative">
                                     <input
-                                        type="text"
+                                        ref={(el) => registerRef('phone', el)}
+                                        type="tel"
                                         name="phone"
                                         placeholder="+234"
                                         value={formData.phone}
                                         onChange={handleChange}
                                         disabled={isFieldLocked('phone') || isOtpSent}
-                                        className={`w-full px-4 py-3  bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('phone') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
+                                        className={inputClass('phone')}
                                     />
                                     {phoneVerified && <CheckCircle2 className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500" size={18} />}
                                 </div>
@@ -398,37 +477,49 @@ const MyProfile = () => {
                                 {phoneError && <p className="text-[10px] text-red-600 font-bold uppercase tracking-wider mt-2">{phoneError}</p>}
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Date of Birth</label>
+                                <label className={labelClass('dob')}>
+                                    <span>Date of Birth</span>
+                                    {isMissing('dob') && <span className="text-[10px] text-red-500 font-bold uppercase tracking-wider">• Required</span>}
+                                </label>
                                 <input
+                                    ref={(el) => registerRef('dob', el)}
                                     type="date"
                                     name="dob"
                                     value={formData.dob}
                                     onChange={handleChange}
                                     disabled={isFieldLocked('dob')}
-                                    className={`w-full px-4 py-3  bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('dob') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
+                                    className={inputClass('dob')}
                                 />
                                 {isFieldLocked('dob') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Country</label>
+                                <label className={labelClass('country')}>
+                                    <span>Country</span>
+                                    {isMissing('country') && <span className="text-[10px] text-red-500 font-bold uppercase tracking-wider">• Required</span>}
+                                </label>
                                 <input
+                                    ref={(el) => registerRef('country', el)}
                                     type="text"
                                     name="country"
                                     value={formData.country}
                                     onChange={handleChange}
                                     disabled={isFieldLocked('country')}
-                                    className={`w-full px-4 py-3  bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 ${isFieldLocked('country') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
+                                    className={inputClass('country')}
                                 />
                                 {isFieldLocked('country') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Chapter</label>
+                                <label className={labelClass('chapter')}>
+                                    <span>Chapter</span>
+                                    {isMissing('chapter') && <span className="text-[10px] text-red-500 font-bold uppercase tracking-wider">• Required</span>}
+                                </label>
                                 <select
+                                    ref={(el) => registerRef('chapter', el)}
                                     name="chapter"
                                     value={formData.chapter}
                                     onChange={handleChange}
                                     disabled={isFieldLocked('chapter')}
-                                    className={`w-full px-4 py-3  bg-white border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all font-medium text-slate-800 appearance-none ${isFieldLocked('chapter') ? 'bg-slate-50 text-slate-500 cursor-not-allowed opacity-75' : ''}`}
+                                    className={`${inputClass('chapter')} appearance-none`}
                                 >
                                     <option value="">Select a Chapter</option>
                                     {profileData?.chapters?.map((ch) => (
