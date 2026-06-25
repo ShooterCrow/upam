@@ -27,7 +27,6 @@ import LoadingState from '../../ui/LoadingState';
 
 const UserSidebar = () => {
     const { user } = useAuth()
-    console.log(user)
     const completeness = useSelector(selectCompleteness);
     const location = useLocation();
     const navigate = useNavigate();

@@ -9,7 +9,7 @@ const EmergencyContact = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const completeness = useSelector(selectCompleteness);
-    const { data: contactData, isLoading, isError } = useGetMyEmergencyContactQuery();
+    const { data: contactData, isLoading, isFetching, isError } = useGetMyEmergencyContactQuery();
     const [updateEmergencyContact, { isLoading: isUpdating }] = useUpdateMyEmergencyContactMutation();
 
     const initialContactState = {
@@ -100,10 +100,17 @@ const EmergencyContact = () => {
         if (completeness?.step3?.complete && !completeness.isAllComplete && location.pathname === completeness.step3.path) {
             const timer = setTimeout(() => {
                 navigate('/dashboard');
-            }, 1000);
+            }, 1500);
             return () => clearTimeout(timer);
         }
     }, [completeness?.step3?.complete, completeness?.isAllComplete, navigate, location.pathname, completeness?.step3?.path]);
+
+    const getLoadingMessage = () => {
+        if (isUpdating) return "Saving Changes...";
+        if (isFetching) return "Confirming Completion...";
+        if (completeness?.step3?.complete) return "Redirecting...";
+        return "Saving Changes...";
+    };
 
     const handleSaveChanges = async (e) => {
         e.preventDefault();
@@ -221,10 +228,11 @@ const EmergencyContact = () => {
                 <div className="w-full flex justify-center mt-12 pb-16">
                     <button
                         type="submit"
-                        disabled={isUpdating}
-                        className={`w-full max-w-md py-4 text-white font-bold rounded-lg shadow-lg transition-all transform active:scale-95 ${isUpdating ? 'bg-red-400 cursor-not-allowed' : 'bg-[#E50914] hover:bg-red-700 hover:shadow-red-900/30'}`}
+                        disabled={isUpdating || isFetching || completeness?.step3?.complete}
+                        className={`w-full max-w-md py-4 text-white font-bold rounded-lg shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2 ${isUpdating || isFetching || completeness?.step3?.complete ? 'bg-red-400 cursor-not-allowed' : 'bg-[#E50914] hover:bg-red-700 hover:shadow-red-900/30'}`}
                     >
-                        {isUpdating ? 'Saving...' : 'Save Changes'}
+                        {(isUpdating || isFetching || completeness?.step3?.complete) && <Loader2 className="animate-spin" size={20} />}
+                        {isUpdating || isFetching || completeness?.step3?.complete ? getLoadingMessage() : 'Save Changes'}
                     </button>
                 </div>
             </form>

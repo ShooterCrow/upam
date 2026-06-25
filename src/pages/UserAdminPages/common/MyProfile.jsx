@@ -36,9 +36,8 @@ const MyProfile = () => {
     const location = useLocation();
     const completeness = useSelector(selectCompleteness);
     const { user: authUser } = useAuth();
-    const { data: profileData, isLoading: isProfileLoading, isError: isProfileError, error: profileFetchError, refetch } = useGetMeQuery();
+    const { data: profileData, isLoading: isProfileLoading, isError: isProfileError, error: profileFetchError, isFetching, refetch } = useGetMeQuery();
     const [updateMe, { isLoading: isUpdating }] = useUpdateMeMutation();
-    console.log(profileData)
 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -150,10 +149,18 @@ const MyProfile = () => {
         if (completeness?.step1?.complete && !completeness.isAllComplete && location.pathname === completeness.step1.path) {
             const timer = setTimeout(() => {
                 navigate(completeness.step2.path);
-            }, 1000);
+            }, 1500);
             return () => clearTimeout(timer);
         }
     }, [completeness?.step1?.complete, completeness?.step2?.path, completeness?.isAllComplete, navigate, location.pathname, completeness?.step1?.path]);
+
+    const getLoadingMessage = () => {
+        if (isUpdating) return "Saving Changes...";
+        if (isFetching) return "Confirming Completion...";
+        if (completeness?.step1?.complete) return "Redirecting...";
+        return "Saving Changes...";
+    };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -632,11 +639,11 @@ const MyProfile = () => {
 
                         <button
                             type="submit"
-                            disabled={isUpdating}
+                            disabled={isUpdating || isFetching || completeness?.step1?.complete}
                             className="w-full py-4 bg-red-600 hover:bg-red-700 text-white  font-bold shadow-lg shadow-red-100 transition-all transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                         >
-                            {isUpdating && <Loader2 className="animate-spin" size={20} />}
-                            {isUpdating ? 'Saving Changes...' : 'Save Changes'}
+                            {(isUpdating || isFetching || completeness?.step1?.complete) && <Loader2 className="animate-spin" size={20} />}
+                            {(isUpdating || isFetching || completeness?.step1?.complete) ? getLoadingMessage() : 'Save Changes'}
                         </button>
                     </div>
                 </div>
