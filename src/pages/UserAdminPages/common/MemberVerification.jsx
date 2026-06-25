@@ -202,10 +202,17 @@ const MemberVerification = () => {
         if (completeness?.step2?.complete && !completeness.isAllComplete && location.pathname === completeness.step2.path) {
             const timer = setTimeout(() => {
                 navigate(completeness.step3.path);
-            }, 1000);
+            }, 1500);
             return () => clearTimeout(timer);
         }
     }, [completeness?.step2?.complete, completeness?.step3?.path, completeness?.isAllComplete, navigate, location.pathname, completeness?.step2?.path]);
+
+    const getLoadingMessage = () => {
+        if (isSubmitting) return "Saving Changes...";
+        if (isFetching) return "Confirming Completion...";
+        if (completeness?.step2?.complete) return "Redirecting...";
+        return "Saving Changes...";
+    };
 
     const handleResidenceCountryChange = (e) => {
         if (myVerification?.data?.status === 'Pending') return;
@@ -741,11 +748,15 @@ const MemberVerification = () => {
 
             <button
                 type="submit"
-                disabled={isSubmitting || isPending}
+                disabled={isSubmitting || isPending || isFetching || completeness?.step2?.complete}
                 className="w-full py-5 bg-red-600 hover:bg-red-700 text-white font-bold shadow-xs transition-all transform hover:-translate-y-0.5 disabled:opacity-50 flex items-center justify-center gap-3"
             >
-                {isSubmitting && <Loader2 className="animate-spin" size={24} />}
-                {isSubmitting ? 'Submitting Application...' : isPending ? 'Application Pending Review' : 'Submit for Verification'}
+                {(isSubmitting || isFetching || (completeness?.step2?.complete && !isPending)) && <Loader2 className="animate-spin" size={24} />}
+                {isSubmitting || isFetching || (completeness?.step2?.complete && !isPending)
+                    ? getLoadingMessage()
+                    : isPending
+                        ? 'Application Pending Review'
+                        : 'Submit for Verification'}
             </button>
         </form>
     );
