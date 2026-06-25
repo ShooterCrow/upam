@@ -4,6 +4,7 @@ import LoadingState from '../../../component/ui/LoadingState';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCompleteness } from '../../authenticationPages/authSlice';
+import { Loader2 } from 'lucide-react';
 
 const EmergencyContact = () => {
     const navigate = useNavigate();
