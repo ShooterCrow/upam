@@ -151,8 +151,14 @@ const MyProfile = () => {
                 navigate(completeness.step2.path);
             }, 1500);
             return () => clearTimeout(timer);
+        } else if (completeness?.isAllComplete && location.pathname === completeness.step1.path) {
+            const rolePath = authUser?.roles?.[0] === 'Admin' ? '/admin' : '/user';
+            const timer = setTimeout(() => {
+                navigate(rolePath);
+            }, 1500);
+            return () => clearTimeout(timer);
         }
-    }, [completeness?.step1?.complete, completeness?.step2?.path, completeness?.isAllComplete, navigate, location.pathname, completeness?.step1?.path]);
+    }, [completeness?.step1?.complete, completeness?.step2?.path, completeness?.isAllComplete, navigate, location.pathname, completeness?.step1?.path, authUser?.roles]);
 
     const getLoadingMessage = () => {
         if (isUpdating) return "Saving Changes...";

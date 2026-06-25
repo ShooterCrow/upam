@@ -15,7 +15,6 @@ const MemberVerification = () => {
     const completeness = useSelector(selectCompleteness);
     const { data: myVerification, isLoading: isFetching } = useGetMyVerificationQuery();
     const [submitVerification, { isLoading: isSubmitting }] = useSubmitVerificationMutation();
-    const [isSubmitted, setIsSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState(null);
     const { user } = useAuth();
     const fullName = user?.firstName + ' ' + user?.lastName;
@@ -231,8 +230,14 @@ const MemberVerification = () => {
                 navigate(completeness.step3.path);
             }, 1500);
             return () => clearTimeout(timer);
+        } else if (completeness?.isAllComplete && location.pathname === completeness.step2.path) {
+            const rolePath = user?.roles?.[0] === 'Admin' ? '/admin' : '/user';
+            const timer = setTimeout(() => {
+                navigate(rolePath);
+            }, 1500);
+            return () => clearTimeout(timer);
         }
-    }, [completeness?.step2?.complete, completeness?.step3?.path, completeness?.isAllComplete, navigate, location.pathname, completeness?.step2?.path]);
+    }, [completeness?.step2?.complete, completeness?.step3?.path, completeness?.isAllComplete, navigate, location.pathname, completeness?.step2?.path, user?.roles]);
 
     const getLoadingMessage = () => {
         if (isSubmitting) return "Saving Changes...";
@@ -304,7 +309,6 @@ const MemberVerification = () => {
             if (idFile) data.append('idDocument', idFile);
             await submitVerification(data).unwrap();
             localStorage.removeItem(DRAFT_KEY);
-            setIsSubmitted(true);
         } catch (err) {
             setSubmitError(err?.data?.message || "Failed to submit verification application");
         }
@@ -315,26 +319,6 @@ const MemberVerification = () => {
             <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
                 <Loader2 className="animate-spin text-red-600" size={40} />
                 <p className="text-slate-500 font-medium">Loading application status...</p>
-            </div>
-        );
-    }
-
-    if (isSubmitted) {
-        return (
-            <div className="py-20 mx-auto max-w-2xl text-center space-y-6">
-                <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle size={40} />
-                </div>
-                <h1 className="text-3xl font-black text-slate-800">Application Submitted!</h1>
-                <p className="text-slate-600 text-lg leading-relaxed">
-                    Your verification request has been received. Our team will review your documents and notify you of the status via email and in your dashboard.
-                </p>
-                <button
-                    onClick={() => navigate('/dashboard')}
-                    className="px-8 py-3 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 transition-all transform hover:-translate-y-1 active:translate-y-0"
-                >
-                    Back to Dashboard
-                </button>
             </div>
         );
     }

@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCompleteness } from '../../authenticationPages/authSlice';
 import { Loader2 } from 'lucide-react';
+import useAuth from '../../../hooks/useAuth';
 
 const EmergencyContact = () => {
     const navigate = useNavigate();
@@ -12,6 +13,8 @@ const EmergencyContact = () => {
     const completeness = useSelector(selectCompleteness);
     const { data: contactData, isLoading, isFetching, isError } = useGetMyEmergencyContactQuery();
     const [updateEmergencyContact, { isLoading: isUpdating }] = useUpdateMyEmergencyContactMutation();
+    const { user } = useAuth();
+    console.log(user)
 
     const initialContactState = {
         firstName: '',
@@ -100,11 +103,17 @@ const EmergencyContact = () => {
     useEffect(() => {
         if (completeness?.step3?.complete && !completeness.isAllComplete && location.pathname === completeness.step3.path) {
             const timer = setTimeout(() => {
-                navigate('/dashboard');
+                navigate('/dashboard'); // Keep /dashboard as fallback or next step if generic
+            }, 1500);
+            return () => clearTimeout(timer);
+        } else if (completeness?.isAllComplete && location.pathname === completeness.step3.path) {
+            const rolePath = user?.roles?.[0] === 'Admin' ? '/admin' : '/user';
+            const timer = setTimeout(() => {
+                navigate(rolePath);
             }, 1500);
             return () => clearTimeout(timer);
         }
-    }, [completeness?.step3?.complete, completeness?.isAllComplete, navigate, location.pathname, completeness?.step3?.path]);
+    }, [completeness?.step3?.complete, completeness?.isAllComplete, navigate, location.pathname, completeness?.step3?.path, user?.roles]);
 
     const getLoadingMessage = () => {
         if (isUpdating) return "Saving Changes...";
