@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+/* Google Fonts (Lato) is loaded non-blocking via index.html — do NOT add @import here */
+
 @import "tailwindcss";
 
 body,
