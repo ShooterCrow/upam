@@ -386,7 +386,7 @@ const MemberVerification = () => {
     return (
         <div className="relative">
             {/* Redirection / Confirming Overlay */}
-            {(isFetching || (isRedirecting && !isSubmitting)) && (
+            {((isFetching && wasSaving) || (isRedirecting && wasSaving && !isSubmitting)) && (
                 <div className="fixed inset-0 z-[9999] bg-white/90 backdrop-blur-sm flex flex-col items-center justify-center animate-in fade-in duration-300">
                     <div className="flex flex-col items-center gap-6">
                         <div className="relative">
