@@ -15,7 +15,6 @@ const EmergencyContact = () => {
     const [updateEmergencyContact, { isLoading: isUpdating }] = useUpdateMyEmergencyContactMutation();
     const [wasSaving, setWasSaving] = useState(false);
     const { user } = useAuth();
-    console.log(user)
 
     const initialContactState = {
         firstName: '',

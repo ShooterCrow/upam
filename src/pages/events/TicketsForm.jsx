@@ -42,7 +42,6 @@ const TicketsForm = () => {
   };
 
   const handleConfirmSubmit = () => {
-    console.log('Ticket request submitted:', formData);
     setShowModal(false);
     setFormData({
       fullName: '',
