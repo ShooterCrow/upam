@@ -69,6 +69,8 @@ const MyProfile = () => {
         country: '',
         chapter: '',
         dob: '',
+        gender: '',
+        address: '',
         password: '',
         confirmPassword: ''
     });
@@ -93,6 +95,8 @@ const MyProfile = () => {
                 country: user.country || '',
                 chapter: user.chapter?._id || user.chapter || '',
                 dob: user.dob ? user.dob.split('T')[0] : '',
+                gender: user.gender || '',
+                address: user.address || '',
                 password: '',
                 confirmPassword: ''
             });
@@ -114,7 +118,7 @@ const MyProfile = () => {
                 setTimeout(() => {
                     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     el.focus();
-                }, 300);
+                }, 800);
             }
         }
     }, [missingFields]);
@@ -195,6 +199,8 @@ const MyProfile = () => {
             if (formData.country) formDataToSend.append('country', formData.country);
             if (formData.chapter) formDataToSend.append('chapter', formData.chapter);
             if (formData.dob) formDataToSend.append('dob', formData.dob);
+            if (formData.gender) formDataToSend.append('gender', formData.gender);
+            if (formData.address) formDataToSend.append('address', formData.address);
             if (formData.password) formDataToSend.append('password', formData.password);
             if (imageFile) formDataToSend.append('profileImage', imageFile);
 
@@ -271,6 +277,7 @@ const MyProfile = () => {
     };
 
     const isMissing = (fieldKey) => missingFields.includes(fieldKey);
+    console.log(missingFields)
 
     const inputClass = (fieldKey) =>
         `w-full px-4 py-3 border outline-none transition-all font-medium text-slate-800 ${isFieldLocked(fieldKey)
@@ -412,6 +419,47 @@ const MyProfile = () => {
                                 />
                                 {isFieldLocked('email') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
                             </div>
+
+                            {/* Gender & Address */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div className="space-y-2">
+                                    <label className={labelClass('gender')}>
+                                        <span>Gender</span>
+                                        {isMissing('gender') && <span className="text-[10px] text-red-500 font-bold uppercase tracking-wider">• Required</span>}
+                                    </label>
+                                    <select
+                                        ref={(el) => registerRef('gender', el)}
+                                        name="gender"
+                                        value={formData.gender}
+                                        onChange={handleChange}
+                                        disabled={isFieldLocked('gender')}
+                                        className={inputClass('gender')}
+                                    >
+                                        <option value="">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                    {isFieldLocked('gender') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
+                                </div>
+                                <div className="space-y-2">
+                                    <label className={labelClass('address')}>
+                                        <span>Home Address</span>
+                                        {isMissing('address') && <span className="text-[10px] text-red-500 font-bold uppercase tracking-wider">• Required</span>}
+                                    </label>
+                                    <input
+                                        ref={(el) => registerRef('address', el)}
+                                        type="text"
+                                        name="address"
+                                        placeholder="123 Street Name, City, Country"
+                                        value={formData.address}
+                                        onChange={handleChange}
+                                        disabled={isFieldLocked('address')}
+                                        className={inputClass('address')}
+                                    />
+                                    {isFieldLocked('address') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
+                                </div>
+                            </div>
+
                             <div className="space-y-2">
                                 <label className={labelClass('phone')}>
                                     <span>Phone No</span>

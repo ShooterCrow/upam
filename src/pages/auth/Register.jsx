@@ -39,6 +39,8 @@ const Register = () => {
     dob: "",
     country: "",
     phone: "",
+    gender: "",
+    address: "",
     otpCode: "",
   });
 
@@ -94,7 +96,7 @@ const Register = () => {
     e.preventDefault();
     setErrMsg("");
 
-    if (!formData.firstName || !formData.email || !formData.password || !formData.dob || !formData.country || (requirePhoneVerification && !formData.phone)) {
+    if (!formData.firstName || !formData.email || !formData.password || !formData.dob || !formData.country || !formData.gender || !formData.address || (requirePhoneVerification && !formData.phone)) {
       setErrMsg("Please fill in all required fields");
       return;
     }
@@ -208,6 +210,40 @@ const Register = () => {
                       </option>
                     ))}
                   </select>
+                </div>
+              </div>
+
+              {/* Gender & Address */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="block text-xs font-black text-slate-900 tracking-widest uppercase">
+                    Gender
+                  </label>
+                  <select
+                    name="gender"
+                    className={inputBase}
+                    value={formData.gender}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-xs font-black text-slate-900 tracking-widest uppercase">
+                    Full Home Address
+                  </label>
+                  <input
+                    type="text"
+                    name="address"
+                    placeholder="123 Street Name, City, Country"
+                    className={inputBase}
+                    value={formData.address}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
               </div>
 
