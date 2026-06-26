@@ -13,7 +13,7 @@ import { useEffect, useRef } from 'react';
  * Set to false to disable specific reload/refresh criteria.
  */
 const ENABLE_IDLE_RELOAD = false; // Reload when tab is inactive for more than 1 minute
-const ENABLE_ONLINE_RELOAD = false; // Reload when internet connection is restored
+const ENABLE_ONLINE_RELOAD = true; // Reload when internet connection is restored
 
 const EXCLUDED_ROUTES = ["/register", "/admin/settings"];
 
