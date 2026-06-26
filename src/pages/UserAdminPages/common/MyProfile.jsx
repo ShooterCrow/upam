@@ -52,6 +52,7 @@ const MyProfile = () => {
     const [verifyPhone, { isLoading: isVerifyingOTP }] = useVerifyPhoneMutation();
     const { data: settingsResponse } = useGetSettingsQuery();
     const [otpId, setOtpId] = useState("");
+    const [wasSaving, setWasSaving] = useState(false);
     const [isOtpSent, setIsOtpSent] = useState(false);
     const [otpCode, setOtpCode] = useState("");
     const [otpMethod, setOtpMethod] = useState("whatsapp");
@@ -146,19 +147,27 @@ const MyProfile = () => {
     };
 
     useEffect(() => {
-        if (completeness?.step1?.complete && !completeness.isAllComplete && location.pathname === completeness.step1.path) {
-            const timer = setTimeout(() => {
-                navigate(completeness.step2.path);
-            }, 1500);
-            return () => clearTimeout(timer);
-        } else if (completeness?.isAllComplete && location.pathname === completeness.step1.path) {
-            const rolePath = authUser?.roles?.[0] === 'Admin' ? '/admin' : '/user';
-            const timer = setTimeout(() => {
-                navigate(rolePath);
-            }, 1500);
-            return () => clearTimeout(timer);
+        // Redirection only triggers if we explicitly just saved (wasSaving)
+        // OR if the user is in the middle of onboarding (not complete)
+        const isOnboarding = !completeness?.isAllComplete;
+
+        if (wasSaving || isOnboarding) {
+            if (completeness?.step1?.complete && !completeness.isAllComplete && location.pathname === completeness.step1.path) {
+                const timer = setTimeout(() => {
+                    navigate(completeness.step2.path);
+                    setWasSaving(false);
+                }, 1500);
+                return () => clearTimeout(timer);
+            } else if (completeness?.isAllComplete && location.pathname === completeness.step1.path && wasSaving) {
+                const rolePath = authUser?.roles?.[0] === 'Admin' ? '/admin' : '/user';
+                const timer = setTimeout(() => {
+                    navigate(rolePath);
+                    setWasSaving(false);
+                }, 1500);
+                return () => clearTimeout(timer);
+            }
         }
-    }, [completeness?.step1?.complete, completeness?.step2?.path, completeness?.isAllComplete, navigate, location.pathname, completeness?.step1?.path, authUser?.roles]);
+    }, [completeness?.step1?.complete, completeness?.step2?.path, completeness?.isAllComplete, navigate, location.pathname, completeness?.step1?.path, authUser?.roles, wasSaving]);
 
     const getLoadingMessage = () => {
         if (isUpdating) return "Saving Changes...";
@@ -191,6 +200,7 @@ const MyProfile = () => {
 
             await updateMe(formDataToSend).unwrap();
             refetch();
+            setWasSaving(true);
         } catch (err) {
             setUpdateStatus({
                 type: 'error',

@@ -13,6 +13,7 @@ const EmergencyContact = () => {
     const completeness = useSelector(selectCompleteness);
     const { data: contactData, isLoading, isFetching, isError } = useGetMyEmergencyContactQuery();
     const [updateEmergencyContact, { isLoading: isUpdating }] = useUpdateMyEmergencyContactMutation();
+    const [wasSaving, setWasSaving] = useState(false);
     const { user } = useAuth();
     console.log(user)
 
@@ -101,19 +102,25 @@ const EmergencyContact = () => {
     };
 
     useEffect(() => {
-        if (completeness?.step3?.complete && !completeness.isAllComplete && location.pathname === completeness.step3.path) {
-            const timer = setTimeout(() => {
-                navigate('/dashboard'); // Keep /dashboard as fallback or next step if generic
-            }, 1500);
-            return () => clearTimeout(timer);
-        } else if (completeness?.isAllComplete && location.pathname === completeness.step3.path) {
-            const rolePath = user?.roles?.[0] === 'Admin' ? '/admin' : '/user';
-            const timer = setTimeout(() => {
-                navigate(rolePath);
-            }, 1500);
-            return () => clearTimeout(timer);
+        const isOnboarding = !completeness?.isAllComplete;
+
+        if (wasSaving || isOnboarding) {
+            if (completeness?.step3?.complete && !completeness.isAllComplete && location.pathname === completeness.step3.path) {
+                const timer = setTimeout(() => {
+                    navigate('/dashboard');
+                    setWasSaving(false);
+                }, 1500);
+                return () => clearTimeout(timer);
+            } else if (completeness?.isAllComplete && location.pathname === completeness.step3.path && wasSaving) {
+                const rolePath = user?.roles?.[0] === 'Admin' ? '/admin' : '/user';
+                const timer = setTimeout(() => {
+                    navigate(rolePath);
+                    setWasSaving(false);
+                }, 1500);
+                return () => clearTimeout(timer);
+            }
         }
-    }, [completeness?.step3?.complete, completeness?.isAllComplete, navigate, location.pathname, completeness?.step3?.path, user?.roles]);
+    }, [completeness?.step3?.complete, completeness?.isAllComplete, navigate, location.pathname, completeness?.step3?.path, user?.roles, wasSaving]);
 
     const getLoadingMessage = () => {
         if (isUpdating) return "Saving Changes...";
@@ -126,6 +133,7 @@ const EmergencyContact = () => {
         e.preventDefault();
         try {
             await updateEmergencyContact(formState).unwrap();
+            setWasSaving(true);
             alert("Emergency contact information saved successfully!");
         } catch (error) {
             console.error("Failed to update emergency contact details", error);
