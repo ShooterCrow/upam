@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
     User,
     Mail,
@@ -76,7 +76,7 @@ const MemberProfile = () => {
                 <div className="flex gap-2">
                     <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider border ${fullMember.isVerifiedMember ? 'bg-green-50 text-green-600 border-green-100' : 'bg-orange-50 text-orange-600 border-orange-100'
                         }`}>
-                        {fullMember.isVerifiedMember ? 'Verified Member' : 'Unverified'}
+                        {fullMember.isVerifiedMember ? 'Verified Member' : 'Unverified'} - <Link to={`/admin/members-application/${fullMember._id}`} className="text-blue-600 hover:underline">View Application</Link>
                     </span>
                 </div>
             </div>
