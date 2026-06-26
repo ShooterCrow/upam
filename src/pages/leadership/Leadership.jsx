@@ -40,7 +40,7 @@ function ProfileCard({ profile }) {
                     <h3 className="text-[#555555] font-bold text-sm sm:text-base leading-snug group-hover:text-[#EB010C] transition-colors duration-200" translate="no">
                         {profile.name}
                     </h3>
-                    <p className="text-[#555555] text-xs sm:text-sm font-medium leading-snug mt-0.5">
+                    <p className="text-[#555555] text-xs sm:text-sm font-medium leading-snug mt-0.5 ">
                         {profile.title}
                     </p>
                 </div>

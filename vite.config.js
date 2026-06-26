@@ -29,10 +29,12 @@ export default defineConfig({
           }
 
           // platform - isolate heavy UI/utility libraries
+          // NOTE: lucide-react is intentionally NOT chunked here.
+          // Placing it in a manual chunk prevents tree-shaking, bundling ALL
+          // ~1500 icons instead of only the ones actually imported by the app.
           if (
             id.includes("node_modules/@reduxjs") ||
-            id.includes("node_modules/country-state-city") ||
-            id.includes("node_modules/lucide-react")
+            id.includes("node_modules/country-state-city")
           ) {
             return "vendor-platform";
           }
