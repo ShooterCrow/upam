@@ -209,7 +209,7 @@ const Index = () => {
     const locations = []; // Markers are hardcoded in WorldMapWithMarkers
     const images = [
         "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779449532/ae109f1f9e9b12a967427c8a6e5f7c76190fb577_ncxlu7.jpg",
-        "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
+        "https://res.cloudinary.com/dyy6gisnk/image/upload/v1782491358/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh_hbw7fd.jpg",
         "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
         "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288535/c5dbbb8bc42b46092812e5f987dc66eaf6cb2b68_urieei.jpg",
         "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
@@ -478,7 +478,7 @@ const Index = () => {
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
-                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/v1782491358/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh_hbw7fd.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288535/c5dbbb8bc42b46092812e5f987dc66eaf6cb2b68_urieei.jpg"
                             ]}
                             row2={[

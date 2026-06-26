@@ -351,13 +351,13 @@ const About = () => {
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
-                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/v1782491358/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh_hbw7fd.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443390/4295b57ab6d99005f92560cffef9c5e1d2acc0f4_unr3mf.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443386/9ab71b884c373f83d32fabdda6f6590c98490278_jprsen.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
-                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/v1782491358/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh_hbw7fd.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443390/4295b57ab6d99005f92560cffef9c5e1d2acc0f4_unr3mf.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443386/9ab71b884c373f83d32fabdda6f6590c98490278_jprsen.jpg",
                             ].map((src, idx) => (
@@ -379,13 +379,13 @@ const About = () => {
                         <div className="absolute hidden lg:block right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
                         <div className="flex animate-scroll-slow-reverse">
                             {[
-                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/v1782491358/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh_hbw7fd.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443386/9ab71b884c373f83d32fabdda6f6590c98490278_jprsen.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443390/4295b57ab6d99005f92560cffef9c5e1d2acc0f4_unr3mf.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779214104/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288418/384bf4174dffb9995e47ecfadad2844a1c7d067a_brppyj.jpg",
-                                "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288775/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh.jpg",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/v1782491358/bd04a7a4ac0a5ecdb4216d379daccc9797a90c12_ztqcqh_hbw7fd.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443386/9ab71b884c373f83d32fabdda6f6590c98490278_jprsen.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779443390/4295b57ab6d99005f92560cffef9c5e1d2acc0f4_unr3mf.jpg",
