@@ -16,6 +16,7 @@ const MemberVerification = () => {
     const { data: myVerification, isLoading: isFetching } = useGetMyVerificationQuery();
     const [submitVerification, { isLoading: isSubmitting }] = useSubmitVerificationMutation();
     const [submitError, setSubmitError] = useState(null);
+    const [wasSaving, setWasSaving] = useState(false);
     const { user } = useAuth();
     const fullName = user?.firstName + ' ' + user?.lastName;
     const DRAFT_KEY = React.useMemo(() => `urbanice_member_verification_draft_${user?.id}`, [user?.id]);
@@ -225,19 +226,25 @@ const MemberVerification = () => {
     };
 
     useEffect(() => {
-        if (completeness?.step2?.complete && !completeness.isAllComplete && location.pathname === completeness.step2.path) {
-            const timer = setTimeout(() => {
-                navigate(completeness.step3.path);
-            }, 1500);
-            return () => clearTimeout(timer);
-        } else if (completeness?.isAllComplete && location.pathname === completeness.step2.path) {
-            const rolePath = user?.roles?.[0] === 'Admin' ? '/admin' : '/user';
-            const timer = setTimeout(() => {
-                navigate(rolePath);
-            }, 1500);
-            return () => clearTimeout(timer);
+        const isOnboarding = !completeness?.isAllComplete;
+
+        if (wasSaving || isOnboarding) {
+            if (completeness?.step2?.complete && !completeness.isAllComplete && location.pathname === completeness.step2.path) {
+                const timer = setTimeout(() => {
+                    navigate(completeness.step3.path);
+                    setWasSaving(false);
+                }, 1500);
+                return () => clearTimeout(timer);
+            } else if (completeness?.isAllComplete && location.pathname === completeness.step2.path && wasSaving) {
+                const rolePath = user?.roles?.[0] === 'Admin' ? '/admin' : '/user';
+                const timer = setTimeout(() => {
+                    navigate(rolePath);
+                    setWasSaving(false);
+                }, 1500);
+                return () => clearTimeout(timer);
+            }
         }
-    }, [completeness?.step2?.complete, completeness?.step3?.path, completeness?.isAllComplete, navigate, location.pathname, completeness?.step2?.path, user?.roles]);
+    }, [completeness?.step2?.complete, completeness?.step3?.path, completeness?.isAllComplete, navigate, location.pathname, completeness?.step2?.path, user?.roles, wasSaving]);
 
     const isRedirecting = completeness?.step2?.complete || completeness?.isAllComplete;
 
@@ -308,9 +315,9 @@ const MemberVerification = () => {
                     data.append(key, formData[key]);
                 }
             });
-            if (idFile) data.append('idDocument', idFile);
             await submitVerification(data).unwrap();
             localStorage.removeItem(DRAFT_KEY);
+            setWasSaving(true);
         } catch (err) {
             setSubmitError(err?.data?.message || "Failed to submit verification application");
         }
