@@ -82,7 +82,7 @@ const Chapters = () => {
                     <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-slate-50/50">
-                                <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Chapter ID</th>
+                                {/* <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Chapter ID</th> */}
                                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Name</th>
                                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">URL Slug</th>
                                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider text-center">Flag</th>
@@ -97,9 +97,9 @@ const Chapters = () => {
                                     className="group hover:bg-slate-50 transition-colors cursor-pointer"
                                     onClick={() => navigate(`/admin/chapters/${chapter._id}`)}
                                 >
-                                    <td className="px-6 py-5 text-sm font-bold text-slate-700">
+                                    {/* <td className="px-6 py-5 text-sm font-bold text-slate-700">
                                         {chapter.chapter_id}
-                                    </td>
+                                    </td> */}
                                     <td className="px-6 py-5">
                                         <div className="flex flex-col">
                                             <span className="text-sm font-bold text-blue-600">{chapter.chapter_name}</span>
