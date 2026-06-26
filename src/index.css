@@ -5,7 +5,8 @@
 body,
 * {
   font-family: "Lato";
-  font-display: optional;
+  /* font-display is a @font-face descriptor, not valid here.
+     It is set via display=swap in the Google Fonts URL in index.html */
 }
 
 h1,

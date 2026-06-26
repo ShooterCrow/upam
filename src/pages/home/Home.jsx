@@ -134,11 +134,11 @@ const UnitedAfricaHero = () => {
             {/* Background decorative elements */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(235,1,12,0.02),transparent_50%)] pointer-events-none" />
             <div className="absolute top-0 left-0 w-full lg:w-64 h-full opacity-10 pointer-events-none">
-                <img alt="Countries" src="/world_map.png" className="w-full h-full object-contain" />
+                <img alt="Countries" src="/world_map.png" className="w-full h-full object-contain" fetchpriority="high" />
             </div>
 
             <div className="absolute top-0 right-0 w-64 h-full opacity-10 hidden lg:block pointer-events-none">
-                <img alt="Countries" src="/world_map.png" className="w-full h-full object-contain" />
+                <img alt="Countries" src="/world_map.png" className="w-full h-full object-contain" fetchpriority="low" aria-hidden="true" />
             </div>
 
             {/* Main content */}
