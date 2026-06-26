@@ -165,14 +165,14 @@ const MemberProfile = () => {
                                     <Shield size={16} className={fullMember.emailVerified ? 'text-green-500' : 'text-slate-300'} />
                                     <span className="text-xs font-bold text-slate-600">Email Status: {fullMember.emailVerified ? 'Verified' : 'Pending'}</span>
                                 </div>
-                                <button
+                                {/* <button
                                     disabled={isUpdating}
                                     onClick={handleToggleEmailVerification}
                                     className="text-[10px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-800 flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-lg transition-colors border border-blue-100"
                                 >
                                     {isUpdating && <Loader2 size={12} className="animate-spin" />}
                                     {fullMember.emailVerified ? 'Revoke Verification' : 'Verify Email Now'}
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                     </div>
