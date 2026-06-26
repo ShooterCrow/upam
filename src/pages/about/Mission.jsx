@@ -30,7 +30,7 @@ const Mission = () => {
                     {/* Right: Video Player */}
                     <div className="relative w-full max-w-[655px] h-[280px] lg:h-[367px] bg-gray-900 rounded-lg overflow-hidden">
                         <img
-                            src="https://api.builder.io/api/v1/image/assets/TEMP/b3564abd0e1fb1dfb19649f1092e28adc8a02548?width=1310"
+                            src="https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg"
                             alt="Video thumbnail"
                             className="w-full h-full object-cover"
                         />

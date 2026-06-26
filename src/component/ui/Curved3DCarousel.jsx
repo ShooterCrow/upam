@@ -18,15 +18,15 @@ const Curved3DCarousel = () => {
         // Set up each image in the ring
         // First, define your image array
         const myImages = [
-            'https://api.builder.io/api/v1/image/assets/TEMP/65edfbd6618650ee6c39d6d3e581e169f2567595?width=700',
-            'https://api.builder.io/api/v1/image/assets/TEMP/0939de8e4e557c4e75f688148d4757b3f0e275bb?width=700',
-            'https://api.builder.io/api/v1/image/assets/TEMP/b3564abd0e1fb1dfb19649f1092e28adc8a02548?width=700',
-            'https://api.builder.io/api/v1/image/assets/TEMP/7fe6a4a6f31d3a5de91463aff776e511431d8ec3?width=700',
+            'https://res.cloudinary.com/dyy6gisnk/image/upload/v1782489323/65edfbd6618650ee6c39d6d3e581e169f2567595_se0ysj.png',
+            'https://res.cloudinary.com/dyy6gisnk/image/upload/v1782489400/0939de8e4e557c4e75f688148d4757b3f0e275bb_lennhe.png',
+            'https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg',
+            'https://res.cloudinary.com/dyy6gisnk/image/upload/v1779289158/86de539d2a97e136c3c2d19e422562df9c06e468_n8r0xw.jpg',
             '/constructionworker.png',
-            'https://api.builder.io/api/v1/image/assets/TEMP/65edfbd6618650ee6c39d6d3e581e169f2567595?width=700',
-            'https://api.builder.io/api/v1/image/assets/TEMP/0939de8e4e557c4e75f688148d4757b3f0e275bb?width=700',
-            'https://api.builder.io/api/v1/image/assets/TEMP/b3564abd0e1fb1dfb19649f1092e28adc8a02548?width=700',
-            'https://api.builder.io/api/v1/image/assets/TEMP/7fe6a4a6f31d3a5de91463aff776e511431d8ec3?width=700',
+            'https://res.cloudinary.com/dyy6gisnk/image/upload/v1782489323/65edfbd6618650ee6c39d6d3e581e169f2567595_se0ysj.png',
+            'https://res.cloudinary.com/dyy6gisnk/image/upload/v1782489400/0939de8e4e557c4e75f688148d4757b3f0e275bb_lennhe.png',
+            'https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288157/dbccf0c78cdb3ba4ed57fe9088f1f7582b761665_sucuow.jpg',
+            'https://res.cloudinary.com/dyy6gisnk/image/upload/v1779289158/86de539d2a97e136c3c2d19e422562df9c06e468_n8r0xw.jpg',
             '/constructionworker.png',
             // ... add more images as needed
         ];

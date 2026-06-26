@@ -333,7 +333,7 @@ const Index = () => {
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
                                 <div className="relative group overflow-hidden">
                                     <img
-                                        src="https://api.builder.io/api/v1/image/assets/TEMP/45370172fe42ffd55b6009588f5603c9aeb8c1b3?width=1086"
+                                        src="https://res.cloudinary.com/dyy6gisnk/image/upload/v1782490118/45370172fe42ffd55b6009588f5603c9aeb8c1b3_uaxrxq.png"
                                         alt="UPAM Community"
                                         className="w-full aspect-[16/10] object-cover transition-transform duration-1000 group-hover:scale-105"
                                     />
@@ -482,9 +482,9 @@ const Index = () => {
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288535/c5dbbb8bc42b46092812e5f987dc66eaf6cb2b68_urieei.jpg"
                             ]}
                             row2={[
-                                "https://api.builder.io/api/v1/image/assets/TEMP/e30f23ba83e18af62762d04d97d7fb23736884ea?width=400",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/v1779443386/9ab71b884c373f83d32fabdda6f6590c98490278_jprsen.jpg",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779288902/c78f0671096d20f62827357b9a362ac828bdbbf9_kzt0tj.jpg",
-                                "https://api.builder.io/api/v1/image/assets/TEMP/b25f74c0c208851c995df3fe41a15ea551fbb960?width=400",
+                                "https://res.cloudinary.com/dyy6gisnk/image/upload/v1782490285/b25f74c0c208851c995df3fe41a15ea551fbb960_zrt8wz.png",
                                 "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/39167ef588ea05d0dbf7a9b1527a68952ea3b2cf_ksjhwg.png"
                             ]}
                         />
@@ -561,7 +561,7 @@ const Index = () => {
                     <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-0">
                         <div className="relative group overflow-hidden h-[400px] lg:h-auto">
                             <img
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/743da7307db5c6f3802fcc3250631182d6dcce9b?width=1422"
+                                src="https://res.cloudinary.com/dyy6gisnk/image/upload/v1782489849/743da7307db5c6f3802fcc3250631182d6dcce9b_feic4z.png"
                                 alt="Join Movement"
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                             />

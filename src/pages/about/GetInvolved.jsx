@@ -34,7 +34,7 @@ const GetInvolved = () => {
                 {/* Right: Image with overlays */}
                 <div className="relative w-full lg:w-[711px] h-[280px] lg:h-[350px] overflow-hidden order-1 lg:order-2">
                     <img
-                        src="https://api.builder.io/api/v1/image/assets/TEMP/743da7307db5c6f3802fcc3250631182d6dcce9b?width=1422"
+                        src="https://res.cloudinary.com/dyy6gisnk/image/upload/v1782489849/743da7307db5c6f3802fcc3250631182d6dcce9b_feic4z.png"
                         alt="Community gathering"
                         className="w-full h-full object-cover"
                     />

@@ -5,7 +5,7 @@ const Objectives = () => {
                 {/* Left: Image */}
                 <div className="w-full lg:w-auto">
                     <img
-                        src="https://api.builder.io/api/v1/image/assets/TEMP/494bd64452c17d8f73dc5f162ce9131d86969c3b?width=970"
+                        src="https://res.cloudinary.com/dyy6gisnk/image/upload/v1779444587/b39e14ad312073a43c669522ff40f459de6562d7_kj94sw.jpg"
                         alt="UPAM team in action"
                         className="w-full lg:w-[485px] h-auto lg:h-[302px] object-cover"
                     />

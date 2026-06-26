@@ -6,7 +6,7 @@ export function Hero() {
                 <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 lg:gap-12 w-full">
                     <div className="flex flex-col gap-2 flex-1 max-w-[573px]">
                         <p className="text-base text-foreground tracking-wide">About Us</p>
-                        <h1 className="text-[28px] lg:text-[32px] font-semibold leading-[1.39] tracking-wide text-foreground">
+                        <h1 className="text- lg:text-[32px] font-semibold leading-[1.39] tracking-wide text-foreground">
                             Uniting Africa. Empowering People.
                         </h1>
                         <p className="text-sm text-neutral leading-[1.56] tracking-wide">
@@ -27,7 +27,7 @@ export function Hero() {
                     {/* Left Group */}
                     <div className="flex flex-col sm:flex-row items-center gap-4 lg:gap-0">
                         <img
-                            src="https://api.builder.io/api/v1/image/assets/TEMP/7fe6a4a6f31d3a5de91463aff776e511431d8ec3?width=520"
+                            src="https://res.cloudinary.com/dyy6gisnk/image/upload/v1782489956/7fe6a4a6f31d3a5de91463aff776e511431d8ec3_qr3m0f.png"
                             alt="UPAM team meeting"
                             className="w-full sm:w-[200px] lg:w-[260px] h-auto lg:h-[340px] object-cover"
                         />
@@ -41,12 +41,12 @@ export function Hero() {
                     {/* Right Group */}
                     <div className="flex flex-col sm:flex-row items-center gap-4 lg:gap-0">
                         <img
-                            src="https://api.builder.io/api/v1/image/assets/TEMP/0939de8e4e557c4e75f688148d4757b3f0e275bb?width=520"
+                            src="https://res.cloudinary.com/dyy6gisnk/image/upload/v1779288902/c78f0671096d20f62827357b9a362ac828bdbbf9_kzt0tj.jpg"
                             alt="Community members"
                             className="w-full sm:w-[200px] lg:w-[260px] h-auto lg:h-[340px] object-cover"
                         />
                         <img
-                            src="https://api.builder.io/api/v1/image/assets/TEMP/65edfbd6618650ee6c39d6d3e581e169f2567595?width=714"
+                            src="https://res.cloudinary.com/dyy6gisnk/image/upload/v1782489323/65edfbd6618650ee6c39d6d3e581e169f2567595_se0ysj.png"
                             alt="Cultural celebration"
                             className="w-full sm:w-[280px] lg:w-[357px] h-auto lg:h-[422px] object-cover"
                         />
