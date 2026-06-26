@@ -46,8 +46,9 @@ const Login = () => {
     e.preventDefault();
     try {
       const userData = await login({ identifier, password }).unwrap();
-      setNavTo(userData.data.user.roles[0] === "admin" ? "/admin" : "/user");
-      // dispatch(setCredentials({ ...userData }));
+      const role = userData?.data?.user?.roles?.[0] || userData?.user?.roles?.[0];
+      setNavTo(role === "admin" ? "/admin" : "/user");
+      dispatch(setCredentials({ ...userData }));
     } catch (err) {
       if (err?.data?.message) {
         setErrMsg(err?.data.message);

@@ -52,7 +52,7 @@ const Notification = () => {
     }
 
     if (isError) {
-        return <div className="p-6 text-red-500">Failed to load notifications. Please try again.</div>;
+        return <div className="p-6 text-red-500">Failed to load notifications. Please refresh the page.</div>;
     }
 
     return (

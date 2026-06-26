@@ -78,7 +78,7 @@ const Chapters = () => {
                         <h3 className="text-lg font-black text-slate-800 mb-2">Could not load chapters</h3>
                         <p className="text-sm text-slate-400 mb-6">There was an error fetching the chapter data.</p>
                         <button
-                            onClick={refetch}
+                            onClick={(() => window.location.reload())}
                             className="px-6 py-2 bg-[#EB010C] text-white text-xs font-black uppercase tracking-widest hover:bg-[#c9000a] transition-colors"
                         >
                             Try Again

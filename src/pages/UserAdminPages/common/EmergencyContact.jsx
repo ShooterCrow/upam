@@ -138,7 +138,7 @@ const EmergencyContact = () => {
     }
 
     if (isError) {
-        return <div className="text-red-500 p-4">Error loading data. Please try again.</div>;
+        return <div className="text-red-500 p-4">Error loading data. Please refresh the page.</div>;
     }
 
     // Helper: check if a field is missing

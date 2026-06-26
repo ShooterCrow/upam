@@ -244,7 +244,7 @@ const AdminSupportInbox = () => {
                             <div className="text-center p-8">
                                 <p className="text-red-500">Failed to load messages</p>
                                 <button
-                                    onClick={refetch}
+                                    onClick={(() => window.location.reload())}
                                     className="mt-2 text-red-600 hover:text-red-700 font-medium"
                                 >
                                     Try again

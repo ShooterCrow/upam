@@ -35,9 +35,9 @@ const CompletionBanner = ({ completeness }) => {
                         <h4 className="text-white font-black text-sm uppercase tracking-widest flex items-center gap-2">
                             Restricted Access <span className="text-red-200 text-[10px] bg-red-800 px-2 py-0.5 rounded-full border border-red-700/50">{info.title}</span>
                         </h4>
-                        <p className="text-red-50 text-xs font-medium max-w-7xl mt-0.5 opacity-90">
+                        {/* <p className="text-red-50 text-xs font-medium max-w-7xl mt-0.5 opacity-90">
                             To protect our community, please complete your profile. {info.desc}
-                        </p>
+                        </p> */}
                     </div>
                 </div>
 
