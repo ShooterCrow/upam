@@ -447,7 +447,7 @@ const Index = () => {
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                                         <div className="absolute bottom-0 left-0 p-8">
-                                            <h3 className="text-2xl font-black text-white uppercase tracking-tighter">
+                                            <h3 className="headerWhite text-2xl font-black text-white uppercase tracking-tighter">
                                                 {area.title}
                                             </h3>
                                         </div>

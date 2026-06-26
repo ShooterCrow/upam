@@ -26,6 +26,7 @@ const MemberProfile = () => {
 
     const { data: response, isLoading, isError, error, refetch } = useGetUserFullProfileQuery(id);
     const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
+    console.log(response)
 
     if (isLoading) return <LoadingState message="Loading member profile..." />;
     if (isError) return <ErrorState message={error?.data?.message || "Error loading profile"} onRetry={refetch} />;
