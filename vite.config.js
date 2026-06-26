@@ -28,15 +28,21 @@ export default defineConfig({
             return "vendor-visuals";
           }
 
-          // platform - isolate heavy UI/utility libraries
-          // NOTE: lucide-react is intentionally NOT chunked here.
-          // Placing it in a manual chunk prevents tree-shaking, bundling ALL
-          // ~1500 icons instead of only the ones actually imported by the app.
+          // redux - RTK + its bundled deps (redux, immer, reselect)
+          // NOTE: lucide-react is intentionally NOT chunked here — putting it
+          // in a manualChunk bundles ALL ~1500 icons and defeats tree-shaking.
           if (
             id.includes("node_modules/@reduxjs") ||
-            id.includes("node_modules/country-state-city")
+            id.includes("node_modules/redux") ||
+            id.includes("node_modules/immer") ||
+            id.includes("node_modules/reselect")
           ) {
-            return "vendor-platform";
+            return "vendor-redux";
+          }
+
+          // data - large geographic datasets
+          if (id.includes("node_modules/country-state-city")) {
+            return "vendor-data";
           }
         },
       },
