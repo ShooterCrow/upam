@@ -385,7 +385,7 @@ const MyProfile = () => {
                                     disabled={isFieldLocked('firstName')}
                                     className={inputClass('firstName')}
                                 />
-                                {isFieldLocked('firstName') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
+                                {/* {isFieldLocked('firstName') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>} */}
                             </div>
                             <div className="space-y-2">
                                 <label className={labelClass('lastName')}>
@@ -401,7 +401,7 @@ const MyProfile = () => {
                                     disabled={isFieldLocked('lastName')}
                                     className={inputClass('lastName')}
                                 />
-                                {isFieldLocked('lastName') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
+                                {/* {isFieldLocked('lastName') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>} */}
                             </div>
                             <div className="space-y-2">
                                 <label className={labelClass('email')}>
@@ -417,7 +417,7 @@ const MyProfile = () => {
                                     disabled={isFieldLocked('email')}
                                     className={inputClass('email')}
                                 />
-                                {isFieldLocked('email') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
+                                {/* {isFieldLocked('email') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>} */}
                             </div>
 
                             {/* Gender & Address */}
@@ -439,7 +439,7 @@ const MyProfile = () => {
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                     </select>
-                                    {isFieldLocked('gender') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
+                                    {/* {isFieldLocked('gender') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>} */}
                                 </div>
                                 <div className="space-y-2">
                                     <label className={labelClass('address')}>
@@ -456,7 +456,7 @@ const MyProfile = () => {
                                         disabled={isFieldLocked('address')}
                                         className={inputClass('address')}
                                     />
-                                    {isFieldLocked('address') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
+                                    {/* {isFieldLocked('address') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>} */}
                                 </div>
                             </div>
 
@@ -482,7 +482,7 @@ const MyProfile = () => {
                                     />
                                     {phoneVerified && <CheckCircle2 className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500" size={18} />}
                                 </div>
-                                {isFieldLocked('phone') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
+                                {/* {isFieldLocked('phone') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>} */}
 
                                 {/* Phone Verification Logic */}
                                 {requirePhoneVerification && !phoneVerified && formData.phone && !isOtpSent && (
@@ -561,7 +561,7 @@ const MyProfile = () => {
                                     disabled={isFieldLocked('dob')}
                                     className={inputClass('dob')}
                                 />
-                                {isFieldLocked('dob') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
+                                {/* {isFieldLocked('dob') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>} */}
                             </div>
                             <div className="space-y-2">
                                 <label className={labelClass('country')}>
@@ -577,7 +577,7 @@ const MyProfile = () => {
                                     disabled={isFieldLocked('country')}
                                     className={inputClass('country')}
                                 />
-                                {isFieldLocked('country') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
+                                {/* {isFieldLocked('country') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>} */}
                             </div>
                             <div className="space-y-2">
                                 <label className={labelClass('chapter')}>
@@ -599,7 +599,7 @@ const MyProfile = () => {
                                         </option>
                                     ))}
                                 </select>
-                                {isFieldLocked('chapter') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>}
+                                {/* {isFieldLocked('chapter') && <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mt-1 flex items-center gap-1"><Shield size={10} /> Permanently Locked</p>} */}
                             </div>
                         </div>
                     </div>
