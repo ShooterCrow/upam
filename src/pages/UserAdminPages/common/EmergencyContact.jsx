@@ -245,11 +245,11 @@ const EmergencyContact = () => {
                 <div className="w-full flex justify-center mt-12 pb-16">
                     <button
                         type="submit"
-                        disabled={isUpdating || isFetching || completeness?.step3?.complete}
-                        className={`w-full max-w-md py-4 text-white font-bold rounded-lg shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2 ${isUpdating || isFetching || completeness?.step3?.complete ? 'bg-red-400 cursor-not-allowed' : 'bg-[#E50914] hover:bg-red-700 hover:shadow-red-900/30'}`}
+                        disabled={isUpdating || isFetching || (completeness?.step3?.complete && wasSaving)}
+                        className={`w-full max-w-md py-4 text-white font-bold rounded-lg shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2 ${isUpdating || isFetching || (completeness?.step3?.complete && wasSaving) ? 'bg-red-400 cursor-not-allowed' : 'bg-[#E50914] hover:bg-red-700 hover:shadow-red-900/30'}`}
                     >
-                        {(isUpdating || isFetching || completeness?.step3?.complete) && <Loader2 className="animate-spin" size={20} />}
-                        {isUpdating || isFetching || completeness?.step3?.complete ? getLoadingMessage() : 'Save Changes'}
+                        {(isUpdating || isFetching || (completeness?.step3?.complete && wasSaving)) && <Loader2 className="animate-spin" size={20} />}
+                        {isUpdating || isFetching || (completeness?.step3?.complete && wasSaving) ? getLoadingMessage() : 'Save Changes'}
                     </button>
                 </div>
             </form>

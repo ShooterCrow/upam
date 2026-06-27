@@ -776,11 +776,11 @@ const MemberVerification = () => {
 
                 <button
                     type="submit"
-                    disabled={isSubmitting || isPending || isFetching || completeness?.step2?.complete}
+                    disabled={isSubmitting || isPending || isFetching || (completeness?.step2?.complete && wasSaving)}
                     className="w-full py-5 bg-red-600 hover:bg-red-700 text-white font-bold shadow-xs transition-all transform hover:-translate-y-0.5 disabled:opacity-50 flex items-center justify-center gap-3"
                 >
-                    {(isSubmitting || isFetching || (completeness?.step2?.complete && !isPending)) && <Loader2 className="animate-spin" size={24} />}
-                    {isSubmitting || isFetching || (completeness?.step2?.complete && !isPending)
+                    {(isSubmitting || isFetching || (completeness?.step2?.complete && wasSaving && !isPending)) && <Loader2 className="animate-spin" size={24} />}
+                    {isSubmitting || isFetching || (completeness?.step2?.complete && wasSaving && !isPending)
                         ? getLoadingMessage()
                         : isPending
                             ? 'Application Pending Review'
