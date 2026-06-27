@@ -255,7 +255,7 @@ const Header = () => {
                     <div className="px-4 py-6">
                         {/* User Profile Section - Only show if logged in */}
                         {isLoggedIn && (
-                            <div className="mb-6 pb-6 border-b">
+                            <Link to={`/${roles[0]}`} className="mb-6 pb-6 border-b">
                                 <div className="flex items-center gap-3 mb-2">
                                     <div className="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center">
 
@@ -267,7 +267,7 @@ const Header = () => {
                                         <div className="text-sm text-[#555555]">Email: {user.email}</div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         )}
 
                         {/* Navigation Links */}
