@@ -153,7 +153,7 @@ const EmergencyContact = () => {
 
     // Dynamic input class
     const inputClass = (fieldKey) =>
-        `w-full border rounded p-2.5 outline-none text-gray-700 bg-white transition-colors duration-200 ${isMissing(fieldKey)
+        `w-full border p-2.5 outline-none text-gray-700 bg-white transition-colors duration-200 ${isMissing(fieldKey)
             ? 'border-red-400 ring-2 ring-red-100 bg-red-50/30'
             : 'border-gray-200 focus:border-red-400'
         }`;
@@ -223,7 +223,7 @@ const EmergencyContact = () => {
                     {/* Emergency Contact Column */}
                     <div className="flex-1">
                         <h2 className="text-2xl font-semibold text-gray-800 mb-6">Emergency Contact</h2>
-                        <div className="bg-white p-8 rounded-md shadow-sm border border-gray-100 space-y-5">
+                        <div className="bg-white p-8 border border-gray-100 space-y-5">
                             {ecFields.map(([name, label, type]) =>
                                 renderField('emergencyContact', name, label, type || 'text', handleEmergencyContactChange)
                             )}
@@ -233,7 +233,7 @@ const EmergencyContact = () => {
                     {/* Next of Kin Column */}
                     <div className="flex-1 mt-8 lg:mt-0">
                         <h2 className="text-2xl font-semibold text-gray-800 mb-6">Next of Kin</h2>
-                        <div className="bg-white p-8 rounded-md shadow-sm border border-gray-100 space-y-5">
+                        <div className="bg-white p-8 border border-gray-100 space-y-5">
                             {nokFields.map(([name, label, type]) =>
                                 renderField('nextOfKin', name, label, type || 'text', handleNextOfKinChange)
                             )}
@@ -246,7 +246,7 @@ const EmergencyContact = () => {
                     <button
                         type="submit"
                         disabled={isUpdating || isFetching || (completeness?.step3?.complete && wasSaving)}
-                        className={`w-full max-w-md py-4 text-white font-bold rounded-lg shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2 ${isUpdating || isFetching || (completeness?.step3?.complete && wasSaving) ? 'bg-red-400 cursor-not-allowed' : 'bg-[#E50914] hover:bg-red-700 hover:shadow-red-900/30'}`}
+                        className={`w-full max-w-md py-4 text-white font-bold transition-all transform active:scale-95 flex items-center justify-center gap-2 ${isUpdating || isFetching || (completeness?.step3?.complete && wasSaving) ? 'bg-red-400 cursor-not-allowed' : 'bg-[#E50914] hover:bg-red-700 hover:shadow-red-900/30'}`}
                     >
                         {(isUpdating || isFetching || (completeness?.step3?.complete && wasSaving)) && <Loader2 className="animate-spin" size={20} />}
                         {isUpdating || isFetching || (completeness?.step3?.complete && wasSaving) ? getLoadingMessage() : 'Save Changes'}
