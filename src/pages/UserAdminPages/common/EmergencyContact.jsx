@@ -204,7 +204,7 @@ const EmergencyContact = () => {
     ];
 
     return (
-        <div className="bg-gray-50 min-h-screen p-6 font-sans">
+        <div className="bg-gray-50 min-h-screen lg:p-6 font-sans">
             {missingFields.length > 0 && (
                 <div className="max-w-7xl mx-auto mb-6 bg-red-50 border border-red-200 rounded-lg p-4 flex items-center gap-3 animate-in slide-in-from-top duration-500">
                     <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 shrink-0">
