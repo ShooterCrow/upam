@@ -315,7 +315,7 @@ const MyProfile = () => {
                 )}
             </div>
 
-            {isVerified && (
+            {/* {isVerified && (
                 <div className="p-4 bg-blue-50 border border-blue-100 flex items-start gap-4">
                     <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-500 border border-blue-50 shrink-0">
                         <Lock size={20} />
@@ -327,7 +327,7 @@ const MyProfile = () => {
                         </p>
                     </div>
                 </div>
-            )}
+            )} */}
 
             <form id="profile-form" onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                 {/* Left Column */}
