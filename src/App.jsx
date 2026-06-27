@@ -81,7 +81,7 @@ const RouteLoader = () => (
       <div className="absolute inset-0 blur-xl bg-[#EB010C]/20 rounded-full animate-pulse" />
     </div>
     <p className="text-[10px] font-black text-slate-900 uppercase tracking-[0.3em] animate-pulse">
-      Initalizing Flow...
+      Initializing...
     </p>
   </div>
 );
