@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { X, Save, Loader2, Info } from 'lucide-react';
 import { useAddNewChapterMutation, useUpdateChapterMutation } from './chaptersApiSlice';
+import { useGetUsersQuery } from '../../../platform/usersApiSlice';
+import SearchableUserSelect from '../../../../component/ui/SearchableUserSelect';
 import { toast } from 'react-toastify';
 
 const ChapterForm = ({ isOpen, onClose, chapter }) => {
     const [formData, setFormData] = useState({
         chapter_name: '',
         chapter_note: '',
-        chapter_flag: ''
+        chapter_flag: '',
+        representative: ''
     });
+
+    const { data: usersData, isLoading: isUsersLoading } = useGetUsersQuery({ limit: 1000 });
 
     const [addNewChapter, { isLoading: isAdding }] = useAddNewChapterMutation();
     const [updateChapter, { isLoading: isUpdating }] = useUpdateChapterMutation();
@@ -18,13 +23,15 @@ const ChapterForm = ({ isOpen, onClose, chapter }) => {
             setFormData({
                 chapter_name: chapter.chapter_name || '',
                 chapter_note: chapter.chapter_note || '',
-                chapter_flag: chapter.chapter_flag || ''
+                chapter_flag: chapter.chapter_flag || '',
+                representative: chapter.representative?._id || chapter.representative || ''
             });
         } else {
             setFormData({
                 chapter_name: '',
                 chapter_note: '',
-                chapter_flag: ''
+                chapter_flag: '',
+                representative: ''
             });
         }
     }, [chapter, isOpen]);
@@ -57,7 +64,7 @@ const ChapterForm = ({ isOpen, onClose, chapter }) => {
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-300">
-            <div className="bg-white w-full max-w-xl rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 border border-slate-100">
+            <div className="bg-white w-full max-w-xl shadow-sm overflow-hidden animate-in zoom-in-95 duration-300 border border-slate-100">
                 {/* Header */}
                 <div className="px-8 py-6 border-b border-slate-50 flex justify-between items-center bg-slate-50/30">
                     <div>
@@ -89,7 +96,7 @@ const ChapterForm = ({ isOpen, onClose, chapter }) => {
                                 onChange={handleChange}
                                 required
                                 placeholder="e.g. United Arab Emirates"
-                                className="w-full px-4 py-3.5 rounded-2xl bg-slate-50 border-transparent focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50 transition-all text-sm font-semibold text-slate-700 outline-none"
+                                className="w-full px-4 py-3.5 bg-slate-50 border-transparent focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50 transition-all text-sm font-semibold text-slate-700 outline-none"
                             />
                         </div>
 
@@ -102,7 +109,17 @@ const ChapterForm = ({ isOpen, onClose, chapter }) => {
                                 value={formData.chapter_flag}
                                 onChange={handleChange}
                                 placeholder="https://i.imgur.com/HGFd10W.jpg"
-                                className="w-full px-4 py-3.5 rounded-2xl bg-slate-50 border-transparent focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50 transition-all text-sm font-semibold text-slate-700 outline-none"
+                                className="w-full px-4 py-3.5 bg-slate-50 border-transparent focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50 transition-all text-sm font-semibold text-slate-700 outline-none"
+                            />
+                        </div>
+
+                        {/* National Representative */}
+                        <div className="space-y-2">
+                            <label className="text-xs font-black text-slate-500 uppercase tracking-wider ml-1">National Representative</label>
+                            <SearchableUserSelect
+                                value={formData.representative}
+                                onChange={(val) => setFormData(prev => ({ ...prev, representative: val }))}
+                                disabled={isUsersLoading}
                             />
                         </div>
 
@@ -115,7 +132,7 @@ const ChapterForm = ({ isOpen, onClose, chapter }) => {
                                 onChange={handleChange}
                                 rows="3"
                                 placeholder="Additional notes about this chapter..."
-                                className="w-full px-4 py-3.5 rounded-2xl bg-slate-50 border-transparent focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50 transition-all text-sm font-semibold text-slate-700 outline-none resize-none"
+                                className="w-full px-4 py-3.5 bg-slate-50 border-transparent focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50 transition-all text-sm font-semibold text-slate-700 outline-none resize-none"
                             ></textarea>
                         </div>
                     </div>
@@ -124,14 +141,14 @@ const ChapterForm = ({ isOpen, onClose, chapter }) => {
                         <button
                             type="button"
                             onClick={onClose}
-                            className="flex-1 px-6 py-4 rounded-2xl border border-slate-200 text-sm font-bold text-slate-600 hover:bg-slate-50 transition-all active:scale-95"
+                            className="flex-1 px-6 py-4 border border-slate-200 text-sm font-bold text-slate-600 hover:bg-slate-50 transition-all active:scale-95"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="flex-[2] px-6 py-4 rounded-2xl bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 flex items-center justify-center gap-2"
+                            className="flex-[2] px-6 py-4 bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 shadow-sm shadow-blue-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 flex items-center justify-center gap-2"
                         >
                             {isLoading ? (
                                 <Loader2 size={18} className="animate-spin" />

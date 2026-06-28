@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useGetChaptersQuery, useDeleteChapterMutation } from './chaptersApiSlice';
-import { MoreVertical, Plus, Edit2, Trash2, Globe, FileText, Image as ImageIcon } from 'lucide-react';
+import { MoreVertical, Plus, Edit2, Trash2, Globe, FileText, Image as ImageIcon, Eye } from 'lucide-react';
 import LoadingState from '../../../../component/ui/LoadingState';
 import ErrorState from '../../../../component/ui/ErrorState';
 import ChapterForm from './ChapterForm';
@@ -69,7 +69,7 @@ const Chapters = () => {
 
                 <button
                     onClick={handleAddNew}
-                    className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-all shadow-md active:scale-95"
+                    className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 text-sm font-bold hover:bg-blue-700 transition-all shadow-md active:scale-95"
                 >
                     <Plus size={18} />
                     Add New Chapter
@@ -77,7 +77,7 @@ const Chapters = () => {
             </div>
 
             {/* Table */}
-            <div className="mt-6 bg-white border border-gray-100 overflow-hidden rounded-2xl shadow-sm">
+            <div className="mt-6 bg-white border border-gray-100 overflow-hidden shadow-sm">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                         <thead>
@@ -141,7 +141,7 @@ const Chapters = () => {
                                         </button>
 
                                         {showActionMenu === chapter._id && (
-                                            <div className="absolute right-6 top-12 w-36 bg-white rounded-xl border border-gray-100 z-10 py-1 shadow-xl animate-in fade-in zoom-in-95">
+                                            <div className="absolute right-6 top-12 w-36 bg-white border border-gray-100 z-10 py-1 shadow-xl animate-in fade-in zoom-in-95">
                                                 <button
                                                     onClick={() => navigate(`/admin/chapters/${chapter._id}`)}
                                                     className="w-full text-left px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 flex items-center gap-2"

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useGetChapterByIdQuery } from '../chapters/chaptersApiSlice';
-import { Globe, Users, User, ArrowLeft, Search, Mail, Phone, MapPin, Calendar, ExternalLink } from 'lucide-react';
+import { Globe, Users, User, ArrowLeft, Search, Mail, Phone, MapPin, Calendar, ExternalLink, Plus } from 'lucide-react';
 import LoadingState from '../../../../component/ui/LoadingState';
 import ErrorState from '../../../../component/ui/ErrorState';
+import { useUpdateChapterMutation } from '../chapters/chaptersApiSlice';
+import SearchableUserSelect from '../../../../component/ui/SearchableUserSelect';
+import { toast } from 'react-toastify';
 
 const ChapterDetail = () => {
     const { id } = useParams();
@@ -11,6 +14,18 @@ const ChapterDetail = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const { data: chapterData, isLoading, isError, error, refetch } = useGetChapterByIdQuery(id);
+    const [updateChapter] = useUpdateChapterMutation();
+
+    const handleAssignRep = async (userId) => {
+        if (!userId) return;
+        try {
+            await updateChapter({ id, representative: userId }).unwrap();
+            toast.success('Representative assigned successfully');
+            refetch();
+        } catch (err) {
+            toast.error(err?.data?.message || 'Error assigning representative');
+        }
+    };
 
     if (isLoading) return <LoadingState message="Loading chapter details..." />;
     if (isError) return <ErrorState message={error?.data?.message || "Error loading chapter"} onRetry={refetch} />;
@@ -18,6 +33,8 @@ const ChapterDetail = () => {
     const chapter = chapterData;
     const representative = chapterData.representative;
     const members = chapterData.members || [];
+
+    console.log(chapterData)
 
     const filteredMembers = members.filter(m =>
         `${m.firstName} ${m.lastName}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -175,7 +192,13 @@ const ChapterDetail = () => {
                                 <div className="w-16 h-16 rounded-full bg-slate-50 flex items-center justify-center mx-auto mb-4 text-slate-200">
                                     <User size={30} />
                                 </div>
-                                <p className="text-sm text-slate-400">No National Representative assigned to this chapter yet.</p>
+                                <p className="text-sm text-slate-400 mb-4">No National Representative assigned to this chapter yet. <br /> <span className="flex justify-center items-center my-2 gap-2 font-bold">Set One Below <Plus color='gray' size={16} /></span></p>
+                                <div className="max-w-full mx-auto text-left">
+                                    <SearchableUserSelect
+                                        value=""
+                                        onChange={handleAssignRep}
+                                    />
+                                </div>
                             </div>
                         )}
                     </div>
