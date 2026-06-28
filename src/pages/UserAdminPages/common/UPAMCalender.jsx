@@ -30,7 +30,27 @@ const UPAMCalender = () => {
     const { roles } = useAuth();
     const isAdmin = roles?.includes('admin') || roles?.includes('manager');
 
-    const events = eventsData?.data || [];
+    const allEvents = eventsData?.data || [];
+    const events = isAdmin ? allEvents : allEvents.filter(e => e.category === 'Event');
+
+    const [sortBy, setSortBy] = useState('newest');
+
+    const sortedEvents = React.useMemo(() => {
+        if (isAdmin) return events; // Admin calendar grid handles its own rendering
+        return [...events].sort((a, b) => {
+            if (sortBy === 'a-z') {
+                return (a.title || '').localeCompare(b.title || '');
+            }
+            if (sortBy === 'z-a') {
+                return (b.title || '').localeCompare(a.title || '');
+            }
+            if (sortBy === 'oldest') {
+                return new Date(a.date) - new Date(b.date);
+            }
+            // 'newest' (latest event to oldest event)
+            return new Date(b.date) - new Date(a.date);
+        });
+    }, [events, sortBy, isAdmin]);
 
     // Unified Form State as per mockup
     const [formData, setFormData] = useState({
@@ -185,31 +205,53 @@ const UPAMCalender = () => {
 
     return (
         <div>
-            <div className="mb-3">
-                <h1 className="text-2xl md:text-3xl font-semibold text-gray-900 tracking-tight">UPAM Calendar</h1>
-                <p className="text-slate-500 font-medium">
-                    Events of the year
-                </p>
+            <div className="mb-3 lg:mb-6 flex justify-between items-center">
+                <div>
+                    <h1 className="text-2xl md:text-3xl font-semibold text-gray-900 tracking-tight">UPAM Calendar</h1>
+                    <p className="text-slate-500 font-medium">
+                        Events of the year
+                    </p>
+                </div>
+                {(!isAdmin && viewMode !== "details") &&
+                    <div className="w-[40%] flex justify-between items-center bg-white p-4 border border-gray-100">
+                        <span className="text-sm font-bold text-slate-800">
+                            Showing {sortedEvents.length} Event{sortedEvents.length !== 1 ? 's' : ''}
+                        </span>
+                        <div className="flex items-center gap-2">
+                            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Sort:</span>
+                            <select
+                                value={sortBy}
+                                onChange={(e) => setSortBy(e.target.value)}
+                                className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-sm text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer transition-all"
+                            >
+                                <option value="newest">Newest to Oldest</option>
+                                <option value="oldest">Oldest to Newest</option>
+                                <option value="a-z">A-Z</option>
+                                <option value="z-a">Z-A</option>
+                            </select>
+                        </div>
+                    </div>
+                }
             </div>
-            <div className="flex flex-col lg:flex-row gap-8 h-full animate-in fade-in duration-500">
+            <div className={`flex flex-col ${isAdmin ? 'lg:flex-row' : ''} gap-8 h-full animate-in fade-in duration-500`}>
 
                 {/* Sidebar - Left Column */}
-                <aside className="lg:w-80 flex flex-col gap-6">
-                    {/* Mini Calendar Card */}
-                    <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
-                        <CommunityCalendar
-                            selectedDate={selectedDate}
-                            onDateChange={(date) => {
-                                setSelectedDate(date);
-                                setViewMode('calendar');
-                            }}
-                            events={events}
-                        />
-                    </div>
+                {isAdmin && (
+                    <aside className="lg:w-80 flex flex-col gap-6">
+                        {/* Mini Calendar Card */}
+                        <div className="bg-white p-6  border border-gray-100 shadow-sm">
+                            <CommunityCalendar
+                                selectedDate={selectedDate}
+                                onDateChange={(date) => {
+                                    setSelectedDate(date);
+                                    setViewMode('calendar');
+                                }}
+                                events={events}
+                            />
+                        </div>
 
-                    {/* Add Event Button & List */}
-                    <div className="flex flex-col gap-4">
-                        {isAdmin && (
+                        {/* Add Event Button & List */}
+                        <div className="flex flex-col gap-4">
                             <div className="flex flex-col gap-2">
                                 <button
                                     onClick={() => handleAddClick('Event')}
@@ -226,126 +268,219 @@ const UPAMCalender = () => {
                                     Add Announcement
                                 </button>
                             </div>
-                        )}
 
-                        <div className="relative group">
-                            <button className="w-full py-3 bg-white border border-gray-100 text-slate-600 rounded-xl font-medium flex items-center justify-center gap-2 hover:bg-slate-50 transition-all cursor-default">
-                                Events <ChevronDown size={16} />
-                            </button>
-                        </div>
+                            <div className="relative group">
+                                <button className="w-full py-3 bg-white border border-gray-100 text-slate-600 rounded-xl font-medium flex items-center justify-center gap-2 hover:bg-slate-50 transition-all cursor-default">
+                                    Events <ChevronDown size={16} />
+                                </button>
+                            </div>
 
-                        <div className="space-y-3 mt-2">
-                            {isLoading ? (
-                                <div className="flex justify-center p-4"><div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div></div>
-                            ) : events.length === 0 ? (
-                                <div className="text-center py-10 px-4 bg-slate-50/50 rounded-2xl border border-dashed border-slate-200">
-                                    <CalendarIcon className="mx-auto text-slate-300 mb-2" size={32} />
-                                    <p className="text-sm font-medium text-slate-500">No Events Created yet</p>
-                                </div>
-                            ) : (
-                                events.slice().reverse().map((event) => (
-                                    <button
-                                        key={event._id}
-                                        onClick={() => handleEventClick(event)}
-                                        className={`w-full p-4 rounded-2xl flex items-center gap-4 text-left transition-all group relative ${selectedEvent?._id === event._id ? 'bg-blue-50 border-blue-100' : 'bg-white border border-gray-50 hover:border-blue-200'}`}
-                                    >
-                                        <div className={`p-2 rounded-lg transition-colors ${event.category === 'Announcement' ? 'bg-red-50 text-red-500' : 'bg-blue-50 text-blue-500'}`}>
-                                            {event.category === 'Announcement' ? <MessageSquare size={18} /> : <CalendarIcon size={18} />}
-                                        </div>
-                                        <div className="flex-1 min-w-0">
-                                            <div className="flex justify-between items-start">
-                                                <h4 className="text-sm font-bold text-slate-800 truncate">{event.title}</h4>
-                                                <span className={`text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase ${event.category === 'Announcement' ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>
-                                                    {event.category}
-                                                </span>
+                            <div className="space-y-3 mt-2">
+                                {isLoading ? (
+                                    <div className="flex justify-center p-4"><div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div></div>
+                                ) : events.length === 0 ? (
+                                    <div className="text-center py-10 px-4 bg-slate-50/50 rounded-2xl border border-dashed border-slate-200">
+                                        <CalendarIcon className="mx-auto text-slate-300 mb-2" size={32} />
+                                        <p className="text-sm font-medium text-slate-500">No Events Created yet</p>
+                                    </div>
+                                ) : (
+                                    events.slice().reverse().map((event) => (
+                                        <button
+                                            key={event._id}
+                                            onClick={() => handleEventClick(event)}
+                                            className={`w-full p-4 rounded-2xl flex items-center gap-4 text-left transition-all group relative ${selectedEvent?._id === event._id ? 'bg-blue-50 border-blue-100' : 'bg-white border border-gray-50 hover:border-blue-200'}`}
+                                        >
+                                            <div className={`p-2 rounded-lg transition-colors ${event.category === 'Announcement' ? 'bg-red-50 text-red-500' : 'bg-blue-50 text-blue-500'}`}>
+                                                {event.category === 'Announcement' ? <MessageSquare size={18} /> : <CalendarIcon size={18} />}
                                             </div>
-                                            <p className="text-[10px] text-slate-500">{new Date(event.date).toLocaleDateString()}</p>
-                                        </div>
-                                    </button>
-                                ))
-                            )}
+                                            <div className="flex-1 min-w-0">
+                                                <div className="flex justify-between items-start">
+                                                    <h4 className="text-sm font-bold text-slate-800 truncate">{event.title}</h4>
+                                                    <span className={`text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase ${event.category === 'Announcement' ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>
+                                                        {event.category}
+                                                    </span>
+                                                </div>
+                                                <p className="text-[10px] text-slate-500">{new Date(event.date).toLocaleDateString()}</p>
+                                            </div>
+                                        </button>
+                                    ))
+                                )}
+                            </div>
                         </div>
-                    </div>
-                </aside>
+                    </aside>
+                )}
 
                 {/* Main View Panel - Right Column */}
                 <main className="flex-1 min-h-[600px] overflow-y-auto custom-scrollbar">
                     <AnimatePresence mode="wait">
                         {viewMode === 'calendar' && (
-                            <motion.div
-                                key="calendar-view"
-                                initial={{ opacity: 0, scale: 0.98 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.98 }}
-                                className="bg-white rounded-3xl border border-gray-100 shadow-sm h-full flex flex-col min-h-[700px]"
-                            >
-                                {/* Calendar Header */}
-                                <div className="p-6 border-b border-gray-50 flex flex-wrap items-center justify-between gap-4">
-                                    <div className="flex items-center gap-4">
-                                        <div className="flex bg-slate-50 p-1 rounded-xl">
-                                            <button
-                                                onClick={() => setSelectedDate(new Date())}
-                                                className="px-4 py-2 bg-white rounded-lg shadow-sm text-sm font-bold text-slate-700"
-                                            >
-                                                Today
-                                            </button>
-                                            <button className="p-2 text-slate-400 hover:text-slate-600 px-3"><ChevronLeft size={18} /></button>
-                                            <button className="p-2 text-slate-400 hover:text-slate-600 px-3"><ChevronRight size={18} /></button>
-                                        </div>
-                                        <h3 className="text-xl font-bold text-slate-800">
-                                            {selectedDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
-                                        </h3>
-                                    </div>
-                                </div>
-
-                                {/* Full Month Calendar Grid */}
-                                <div className="flex-1 p-4">
-                                    <div className="grid grid-cols-7 h-full">
-                                        {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map(day => (
-                                            <div key={day} className="p-3 text-center text-xs font-bold text-slate-400 border-b border-gray-50">
-                                                {day}
-                                            </div>
-                                        ))}
-                                        {/* Simplified Calendar Gen for Display */}
-                                        {Array.from({ length: 35 }).map((_, i) => {
-                                            const displayDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
-                                            const startDay = displayDate.getDay();
-                                            const dayNum = i - startDay + 1;
-                                            const cellDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), dayNum);
-                                            const isCurrentMonth = cellDate.getMonth() === selectedDate.getMonth();
-                                            const cellEvents = getEventsForDate(cellDate);
-                                            const isToday = cellDate.toDateString() === new Date().toDateString();
-                                            const isSelected = cellDate.toDateString() === selectedDate.toDateString();
-
-                                            return (
-                                                <div
-                                                    key={i}
-                                                    onClick={() => setSelectedDate(cellDate)}
-                                                    className={`min-h-[120px] p-2 border-b border-r border-gray-50 cursor-pointer transition-colors group relative ${!isCurrentMonth ? 'bg-slate-50/20' : 'hover:bg-slate-50/50'} ${isSelected ? 'bg-blue-50/30' : ''}`}
+                            isAdmin ? (
+                                <motion.div
+                                    key="calendar-view"
+                                    initial={{ opacity: 0, scale: 0.98 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.98 }}
+                                    className="bg-white  border border-gray-100 shadow-sm h-full flex flex-col min-h-[700px]"
+                                >
+                                    {/* Calendar Header */}
+                                    <div className="p-6 border-b border-gray-50 flex flex-wrap items-center justify-between gap-4">
+                                        <div className="flex items-center gap-4">
+                                            <div className="flex bg-slate-50 p-1 rounded-xl">
+                                                <button
+                                                    onClick={() => setSelectedDate(new Date())}
+                                                    className="px-4 py-2 bg-white rounded-lg shadow-sm text-sm font-bold text-slate-700"
                                                 >
-                                                    <div className="flex flex-col items-center">
-                                                        <span className={`text-xs font-bold w-7 h-7 flex items-center justify-center rounded-full transition-colors ${isToday ? 'bg-blue-600 text-white shadow-md shadow-blue-100' : isCurrentMonth ? 'text-slate-600' : 'text-slate-300'} ${isSelected && !isToday ? 'border-2 border-blue-600' : ''}`}>
-                                                            {cellDate.getDate()}
-                                                        </span>
+                                                    Today
+                                                </button>
+                                                <button className="p-2 text-slate-400 hover:text-slate-600 px-3"><ChevronLeft size={18} /></button>
+                                                <button className="p-2 text-slate-400 hover:text-slate-600 px-3"><ChevronRight size={18} /></button>
+                                            </div>
+                                            <h3 className="text-xl font-bold text-slate-800">
+                                                {selectedDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
+                                            </h3>
+                                        </div>
+                                    </div>
 
-                                                        <div className="mt-2 w-full space-y-1">
-                                                            {cellEvents.map(ev => (
-                                                                <div
-                                                                    key={ev._id}
-                                                                    className={`px-1.5 py-0.5 rounded text-[9px] font-bold truncate flex items-center gap-1 ${ev.category === 'Announcement' ? 'bg-red-50 text-red-600' : 'bg-blue-50 text-blue-600'}`}
-                                                                >
-                                                                    <div className={`w-1 h-1 rounded-full ${ev.category === 'Announcement' ? 'bg-red-500' : 'bg-blue-500'}`} />
-                                                                    {ev.title}
-                                                                </div>
-                                                            ))}
+                                    {/* Full Month Calendar Grid */}
+                                    <div className="flex-1 p-4">
+                                        <div className="grid grid-cols-7 h-full">
+                                            {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map(day => (
+                                                <div key={day} className="p-3 text-center text-xs font-bold text-slate-400 border-b border-gray-50">
+                                                    {day}
+                                                </div>
+                                            ))}
+                                            {/* Simplified Calendar Gen for Display */}
+                                            {Array.from({ length: 35 }).map((_, i) => {
+                                                const displayDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+                                                const startDay = displayDate.getDay();
+                                                const dayNum = i - startDay + 1;
+                                                const cellDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), dayNum);
+                                                const isCurrentMonth = cellDate.getMonth() === selectedDate.getMonth();
+                                                const cellEvents = getEventsForDate(cellDate);
+                                                const isToday = cellDate.toDateString() === new Date().toDateString();
+                                                const isSelected = cellDate.toDateString() === selectedDate.toDateString();
+
+                                                return (
+                                                    <div
+                                                        key={i}
+                                                        onClick={() => setSelectedDate(cellDate)}
+                                                        className={`min-h-[120px] p-2 border-b border-r border-gray-50 cursor-pointer transition-colors group relative ${!isCurrentMonth ? 'bg-slate-50/20' : 'hover:bg-slate-50/50'} ${isSelected ? 'bg-blue-50/30' : ''}`}
+                                                    >
+                                                        <div className="flex flex-col items-center">
+                                                            <span className={`text-xs font-bold w-7 h-7 flex items-center justify-center rounded-full transition-colors ${isToday ? 'bg-blue-600 text-white shadow-md shadow-blue-100' : isCurrentMonth ? 'text-slate-600' : 'text-slate-300'} ${isSelected && !isToday ? 'border-2 border-blue-600' : ''}`}>
+                                                                {cellDate.getDate()}
+                                                            </span>
+
+                                                            <div className="mt-2 w-full space-y-1">
+                                                                {cellEvents.map(ev => (
+                                                                    <div
+                                                                        key={ev._id}
+                                                                        className={`px-1.5 py-0.5 rounded text-[9px] font-bold truncate flex items-center gap-1 ${ev.category === 'Announcement' ? 'bg-red-50 text-red-600' : 'bg-blue-50 text-blue-600'}`}
+                                                                    >
+                                                                        <div className={`w-1 h-1 rounded-full ${ev.category === 'Announcement' ? 'bg-red-500' : 'bg-blue-500'}`} />
+                                                                        {ev.title}
+                                                                    </div>
+                                                                ))}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            );
-                                        })}
+                                                );
+                                            })}
+                                        </div>
                                     </div>
-                                </div>
-                            </motion.div>
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    key="events-list-view"
+                                    initial={{ opacity: 0, y: 15 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -15 }}
+                                    className="space-y-6"
+                                >
+                                    {isLoading ? (
+                                        <div className="flex flex-col items-center justify-center min-h-[400px] gap-3">
+                                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                                            <p className="text-slate-500 font-medium">Fetching events...</p>
+                                        </div>
+                                    ) : events.length === 0 ? (
+                                        <div className="text-center py-20 px-4 bg-white  border border-gray-100 shadow-sm flex flex-col items-center justify-center">
+                                            <div className="w-16 h-16 rounded-full bg-slate-50 flex items-center justify-center text-slate-300 mb-4">
+                                                <CalendarIcon size={32} />
+                                            </div>
+                                            <p className="text-lg font-bold text-slate-800">No Events Scheduled</p>
+                                            <p className="text-sm text-slate-400 mt-1">There are no upcoming events listed at this time.</p>
+                                        </div>
+                                    ) : (
+                                        <div className="space-y-6">
+
+                                            {/* Event Cards Grid */}
+                                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                                {sortedEvents.map((event) => {
+                                                    const today = new Date();
+                                                    today.setHours(0, 0, 0, 0);
+                                                    const eventDate = new Date(event.date);
+                                                    eventDate.setHours(0, 0, 0, 0);
+                                                    const isPast = eventDate <= today;
+
+                                                    return (
+                                                        <div
+                                                            key={event._id}
+                                                            className="bg-white border border-gray-100 shadow-sm overflow-hidden flex flex-col hover:shadow-md transition-all duration-300 group cursor-pointer hover:-translate-y-1 "
+                                                            onClick={() => handleEventClick(event)}
+                                                        >
+                                                            <div className="aspect-video bg-slate-100 relative overflow-hidden shrink-0">
+                                                                {event.image ? (
+                                                                    <img
+                                                                        src={event.image}
+                                                                        alt={event.title}
+                                                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                                    />
+                                                                ) : (
+                                                                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-r from-blue-500/10 to-indigo-500/10 text-blue-600">
+                                                                        <CalendarIcon size={36} className="opacity-40" />
+                                                                    </div>
+                                                                )}
+                                                                <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+                                                                    <span className="bg-blue-600 text-white text-[9px] font-black tracking-widest uppercase px-3 py-1 rounded-full shadow-sm">
+                                                                        {event.category || 'Event'}
+                                                                    </span>
+                                                                    {isPast && (
+                                                                        <span className="bg-amber-500 text-white text-[9px] font-black tracking-widest uppercase px-3 py-1 rounded-full shadow-sm">
+                                                                            Past Event
+                                                                        </span>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                            <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                                                                <div className="space-y-2">
+                                                                    <div className="flex items-center gap-2 text-slate-400 font-bold text-[10px] uppercase tracking-wider">
+                                                                        <Clock size={12} />
+                                                                        {new Date(event.date).toLocaleDateString(undefined, {
+                                                                            year: 'numeric', month: 'short', day: 'numeric'
+                                                                        })}
+                                                                    </div>
+                                                                    <h3 className="font-bold text-slate-800 text-lg group-hover:text-blue-600 transition-colors leading-snug line-clamp-1">
+                                                                        {event.title}
+                                                                    </h3>
+                                                                    <p className="text-slate-500 text-sm leading-relaxed line-clamp-2">
+                                                                        {event.description ? event.description.replace(/<[^>]*>/g, '') : ''}
+                                                                    </p>
+                                                                </div>
+                                                                <div className="pt-2 flex items-center justify-between border-t border-slate-50">
+                                                                    <span className="text-xs font-bold text-blue-600 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                                                        View details
+                                                                        <ArrowRight size={14} />
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    )}
+                                </motion.div>
+                            )
                         )}
 
                         {viewMode === 'details' && selectedEvent && (
@@ -354,7 +489,7 @@ const UPAMCalender = () => {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -20 }}
-                                className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden flex flex-col lg:flex-row h-full min-h-[600px]"
+                                className="bg-white  border border-gray-100 shadow-sm overflow-hidden flex flex-col lg:flex-row h-full min-h-[600px]"
                             >
                                 <div className="flex-1 p-10 space-y-8 flex flex-col">
                                     <div className="flex items-center justify-between">
@@ -430,7 +565,7 @@ const UPAMCalender = () => {
                                         <img src={selectedEvent.image} alt={selectedEvent.title} className="w-full h-full object-cover" />
                                     ) : (
                                         <div className="w-full h-full flex flex-col items-center justify-center text-slate-200 gap-4 p-12 text-center">
-                                            <div className="w-24 h-24 rounded-3xl bg-white flex items-center justify-center shadow-sm">
+                                            <div className="w-24 h-24  bg-white flex items-center justify-center shadow-sm">
                                                 <ImageIcon size={40} />
                                             </div>
                                             <div>
@@ -450,7 +585,7 @@ const UPAMCalender = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 className="space-y-6"
                             >
-                                <div className="flex items-center justify-between bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+                                <div className="flex items-center justify-between bg-white p-6  border border-gray-100 shadow-sm">
                                     <div>
                                         <h2 className="text-2xl font-bold text-slate-800">{selectedEvent ? 'Edit' : 'Add'} {formData.category}</h2>
                                         <p className="text-sm text-slate-500">Create or update entries for the African community calendar</p>
@@ -464,7 +599,7 @@ const UPAMCalender = () => {
                                 </div>
 
                                 <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                                    <div className="space-y-6 bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+                                    <div className="space-y-6 bg-white p-8  border border-gray-100 shadow-sm">
                                         <div className="space-y-2">
                                             <label className="text-sm font-bold text-slate-700">{formData.category} Title</label>
                                             <input
@@ -633,7 +768,7 @@ const UPAMCalender = () => {
                                     </div>
 
                                     <div className="space-y-6">
-                                        <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm space-y-6">
+                                        <div className="bg-white p-8  border border-gray-100 shadow-sm space-y-6">
                                             <h4 className="text-sm font-bold text-slate-700">Upload Image</h4>
                                             <input
                                                 type="file"
@@ -644,7 +779,7 @@ const UPAMCalender = () => {
                                             />
                                             <label
                                                 htmlFor="eventImage"
-                                                className="w-full aspect-video border-2 border-dashed border-slate-200 rounded-3xl flex flex-col items-center justify-center p-8 text-center group hover:border-blue-500 transition-all cursor-pointer relative overflow-hidden bg-slate-50"
+                                                className="w-full aspect-video border-2 border-dashed border-slate-200  flex flex-col items-center justify-center p-8 text-center group hover:border-blue-500 transition-all cursor-pointer relative overflow-hidden bg-slate-50"
                                             >
                                                 {formData.imagePreview ? (
                                                     <img src={formData.imagePreview} className="absolute inset-0 w-full h-full object-cover" alt="Preview" />
@@ -663,7 +798,7 @@ const UPAMCalender = () => {
                                         </div>
 
                                         {/* Announcement Preview Logic */}
-                                        <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+                                        <div className="bg-white p-8  border border-gray-100 shadow-sm">
                                             <h4 className="text-sm font-bold text-slate-700 mb-4">Preview</h4>
                                             <div className={`p-6 rounded-2xl border ${formData.category === 'Announcement' ? 'bg-red-50/50 border-red-100' : 'bg-blue-50/50 border-blue-100'}`}>
                                                 <div className="flex items-center gap-2 mb-2">
