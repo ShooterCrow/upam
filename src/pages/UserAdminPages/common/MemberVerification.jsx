@@ -315,6 +315,9 @@ const MemberVerification = () => {
                     data.append(key, formData[key]);
                 }
             });
+            if (idFile) {
+                data.append('idDocument', idFile);
+            }
             await submitVerification(data).unwrap();
             localStorage.removeItem(DRAFT_KEY);
             setWasSaving(true);
