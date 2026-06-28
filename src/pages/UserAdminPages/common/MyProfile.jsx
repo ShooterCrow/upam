@@ -60,6 +60,7 @@ const MyProfile = () => {
     const [phoneError, setPhoneError] = useState("");
 
     const requirePhoneVerification = settingsResponse?.data?.hotelInfo?.requirePhoneVerification ?? false;
+    const allowVerifiedEdit = settingsResponse?.data?.hotelInfo?.allowVerifiedEdit ?? false;
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -128,6 +129,7 @@ const MyProfile = () => {
 
     const isFieldLocked = (fieldName) => {
         if (!isVerified) return false;
+        if (allowVerifiedEdit) return false;
         const val = user?.[fieldName];
         // For chapter, check if it exists as an object or id
         if (fieldName === 'chapter') {

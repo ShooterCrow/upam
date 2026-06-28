@@ -7,6 +7,7 @@ const Settings = () => {
     const [updateSettings, { isLoading: isUpdating }] = useUpdateSettingsMutation();
     const [requireEmailVerification, setRequireEmailVerification] = useState(false);
     const [requirePhoneVerification, setRequirePhoneVerification] = useState(false);
+    const [allowVerifiedEdit, setAllowVerifiedEdit] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     //ewwewe
@@ -15,6 +16,7 @@ const Settings = () => {
         if (response?.data?.hotelInfo) {
             setRequireEmailVerification(response.data.hotelInfo.requireEmailVerification ?? false);
             setRequirePhoneVerification(response.data.hotelInfo.requirePhoneVerification ?? false);
+            setAllowVerifiedEdit(response.data.hotelInfo.allowVerifiedEdit ?? false);
         }
     }, [response]);
 
@@ -33,7 +35,8 @@ const Settings = () => {
             const updatedHotelInfo = {
                 ...hotelInfo,
                 requireEmailVerification,
-                requirePhoneVerification
+                requirePhoneVerification,
+                allowVerifiedEdit
             };
 
             formData.append('hotelInfo', JSON.stringify(updatedHotelInfo));
@@ -108,6 +111,24 @@ const Settings = () => {
                                 className="sr-only peer"
                                 checked={requirePhoneVerification}
                                 onChange={(e) => setRequirePhoneVerification(e.target.checked)}
+                            />
+                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+                        </label>
+                    </div>
+
+                    <div className="flex items-center justify-between py-4 border-t border-gray-100">
+                        <div>
+                            <h3 className="font-medium text-gray-900">Allow Verified Members Profile Editing</h3>
+                            <p className="text-sm text-gray-500 mt-1 max-w-xl">
+                                When enabled, verified members can edit their personal profile information (such as name, phone, dob, country, chapter) at any time. When disabled, profile fields are locked once they are filled.
+                            </p>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                            <input
+                                type="checkbox"
+                                className="sr-only peer"
+                                checked={allowVerifiedEdit}
+                                onChange={(e) => setAllowVerifiedEdit(e.target.checked)}
                             />
                             <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
                         </label>
