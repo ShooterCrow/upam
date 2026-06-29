@@ -25,7 +25,7 @@ import { useGetEventsQuery } from '../../pages/UserAdminPages/admin/calendarApiS
 const Donation = () => {
     const formRef = useRef(null);
     const [donationType, setDonationType] = useState('one-time'); // 'one-time', 'monthly'
-    const [selectedAmount, setSelectedAmount] = useState('25');
+    const [selectedAmount, setSelectedAmount] = useState('5');
     const [customAmount, setCustomAmount] = useState('');
     const [preferredArea, setPreferredArea] = useState('general');
     const [anonymous, setAnonymous] = useState(false);
@@ -44,7 +44,7 @@ const Donation = () => {
     const events = eventsData?.data || [];
     const featuredEvent = events.find(e => e.isFeatured) || events[0];
 
-    const presetAmounts = ['10', '25', '50', '100'];
+    const presetAmounts = ['1', '2', '5', '10'];
 
     const getImpactText = (amount) => {
         const amt = parseFloat(amount);
@@ -190,7 +190,7 @@ const Donation = () => {
                                     onClick={() => setDonationType('monthly')}
                                     className={`py-2 text-xs font-bold transition-all ${donationType === 'monthly' ? 'bg-white text-slate-900' : 'text-slate-500 hover:text-slate-700'}`}
                                 >
-                                    💝 Monthly Support
+                                    Monthly Support
                                 </button>
                             </div>
 
@@ -203,7 +203,7 @@ const Donation = () => {
                                             key={amount}
                                             type="button"
                                             onClick={() => { setSelectedAmount(amount); setCustomAmount(''); }}
-                                            className={`py-3.5 text-sm font-extrabold rounded-xl border transition-all ${selectedAmount === amount ? 'bg-[#EB010C] text-white border-[#EB010C] scale-105' : 'bg-white text-slate-700 border-slate-200 hover:border-[#EB010C]'}`}
+                                            className={`py-3 text-sm font-extrabold border transition-all ${selectedAmount === amount ? 'bg-[#EB010C] text-white border-[#EB010C] scale-105' : 'bg-white text-slate-700 border-slate-200 hover:border-[#EB010C]'}`}
                                         >
                                             ${amount}
                                         </button>
@@ -214,7 +214,7 @@ const Donation = () => {
                                     <button
                                         type="button"
                                         onClick={() => setSelectedAmount('custom')}
-                                        className={`w-full py-2.5 text-xs font-bold rounded-xl border text-center transition-all ${selectedAmount === 'custom' ? 'bg-[#EB010C] text-white border-[#EB010C]' : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'}`}
+                                        className={`w-full py-2.5 text-xs font-bold border text-center transition-all ${selectedAmount === 'custom' ? 'bg-[#EB010C] text-white border-[#EB010C]' : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'}`}
                                     >
                                         Custom Amount
                                     </button>
@@ -227,7 +227,7 @@ const Donation = () => {
                                                 value={customAmount}
                                                 onChange={(e) => setCustomAmount(e.target.value)}
                                                 placeholder="Enter customized amount"
-                                                className="w-full bg-slate-50 border border-slate-200 py-3.5 pl-8 pr-4 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EB010C] focus:border-[#EB010C] font-bold transition-all"
+                                                className="w-full bg-slate-50 border border-slate-200 py-3.5 pl-8 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#EB010C] focus:border-[#EB010C] font-bold transition-all"
                                                 autoFocus
                                             />
                                         </div>
@@ -250,7 +250,7 @@ const Donation = () => {
                                 <select
                                     value={preferredArea}
                                     onChange={(e) => setPreferredArea(e.target.value)}
-                                    className="w-full bg-slate-50 border border-slate-200 py-3 px-4 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EB010C] focus:border-[#EB010C] font-bold transition-all appearance-none"
+                                    className="w-full bg-slate-50 border border-slate-200 py-3 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#EB010C] focus:border-[#EB010C] font-bold transition-all appearance-none"
                                 >
                                     <option value="general">General Support (Allocated where needed)</option>
                                     <option value="education">UPAM Academy & Scholarships</option>
@@ -263,7 +263,7 @@ const Donation = () => {
                             <div className="space-y-3 pt-4 border-t border-slate-100">
                                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Your Information</label>
 
-                                <div className="flex items-center gap-2 mb-4 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <div className="flex items-center gap-2 mb-4 bg-slate-50 p-3 border border-slate-100">
                                     <input
                                         type="checkbox"
                                         id="anonymous-check"
@@ -285,7 +285,7 @@ const Donation = () => {
                                     value={formData.fullName}
                                     onChange={handleFormChange}
                                     placeholder="Full Name"
-                                    className={`w-full bg-slate-50 border border-slate-200 py-3 px-4 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EB010C] focus:border-[#EB010C] transition-all font-medium ${anonymous ? 'opacity-40 cursor-not-allowed bg-slate-100 pointer-events-none' : ''}`}
+                                    className={`w-full bg-slate-50 border border-slate-200 py-3 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#EB010C] focus:border-[#EB010C] transition-all font-medium ${anonymous ? 'opacity-40 cursor-not-allowed bg-slate-100 pointer-events-none' : ''}`}
                                     required={!anonymous}
                                     disabled={anonymous}
                                 />
@@ -295,7 +295,7 @@ const Donation = () => {
                                     value={formData.email}
                                     onChange={handleFormChange}
                                     placeholder="Email Address"
-                                    className={`w-full bg-slate-50 border border-slate-200 py-3 px-4 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EB010C] focus:border-[#EB010C] transition-all font-medium ${anonymous ? 'opacity-40 cursor-not-allowed bg-slate-100 pointer-events-none' : ''}`}
+                                    className={`w-full bg-slate-50 border border-slate-200 py-3 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#EB010C] focus:border-[#EB010C] transition-all font-medium ${anonymous ? 'opacity-40 cursor-not-allowed bg-slate-100 pointer-events-none' : ''}`}
                                     required={!anonymous}
                                     disabled={anonymous}
                                 />
@@ -352,7 +352,7 @@ const Donation = () => {
                         <div className="mt-6 pt-4">
                             <button
                                 onClick={() => handleQuickSponsor('education', '50')}
-                                className="w-full py-2.5 bg-white hover:bg-slate-900 border border-slate-200 text-slate-800 hover:text-white rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1 group-hover:bg-[#EB010C] group-hover:text-white group-hover:border-[#EB010C]"
+                                className="w-full py-2.5 bg-white hover:bg-slate-900 border border-slate-200 text-slate-800 hover:text-white text-xs font-black transition-all flex items-center justify-center gap-1 group-hover:bg-[#EB010C] group-hover:text-white group-hover:border-[#EB010C]"
                             >
                                 Support Academy
                                 <ArrowRight size={14} />
@@ -387,7 +387,7 @@ const Donation = () => {
                         <div className="mt-6 pt-4">
                             <button
                                 onClick={() => handleQuickSponsor('digital', '25')}
-                                className="w-full py-2.5 bg-white hover:bg-slate-900 border border-slate-200 text-slate-800 hover:text-white rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1 group-hover:bg-[#EB010C] group-hover:text-white group-hover:border-[#EB010C]"
+                                className="w-full py-2.5 bg-white hover:bg-slate-900 border border-slate-200 text-slate-800 hover:text-white text-xs font-black transition-all flex items-center justify-center gap-1 group-hover:bg-[#EB010C] group-hover:text-white group-hover:border-[#EB010C]"
                             >
                                 Support Jumuiya
                                 <ArrowRight size={14} />
@@ -422,7 +422,7 @@ const Donation = () => {
                         <div className="mt-6 pt-4">
                             <button
                                 onClick={() => handleQuickSponsor('youth', '100')}
-                                className="w-full py-2.5 bg-white hover:bg-slate-900 border border-slate-200 text-slate-800 hover:text-white rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1 group-hover:bg-[#EB010C] group-hover:text-white group-hover:border-[#EB010C]"
+                                className="w-full py-2.5 bg-white hover:bg-slate-900 border border-slate-200 text-slate-800 hover:text-white text-xs font-black transition-all flex items-center justify-center gap-1 group-hover:bg-[#EB010C] group-hover:text-white group-hover:border-[#EB010C]"
                             >
                                 Support WNN Africa
                                 <ArrowRight size={14} />
