@@ -71,7 +71,7 @@ const UserSupportExperience = () => {
                             }}
                         />
                     ) : (
-                        <div className="bg-white rounded-3xl p-8 border border-slate-100">
+                        <div className="bg-white p-8 border border-slate-100">
                             <h2 className="text-2xl font-bold text-slate-800 mb-6">Send us a message</h2>
 
                             {isError && (
@@ -87,7 +87,7 @@ const UserSupportExperience = () => {
                                         type="text"
                                         name="name"
                                         required
-                                        className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-red-500 transition-all disabled:opacity-50"
+                                        className="w-full px-4 py-3 bg-slate-50 border-none focus:ring-2 focus:ring-red-500 transition-all disabled:opacity-50"
                                         placeholder="Enter your name"
                                         value={formData.name}
                                         onChange={handleChange}
@@ -100,7 +100,7 @@ const UserSupportExperience = () => {
                                         type="email"
                                         name="email"
                                         required
-                                        className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-red-500 transition-all disabled:opacity-50"
+                                        className="w-full px-4 py-3 bg-slate-50 border-none focus:ring-2 focus:ring-red-500 transition-all disabled:opacity-50"
                                         placeholder="your@email.com"
                                         value={formData.email}
                                         onChange={handleChange}
@@ -113,7 +113,7 @@ const UserSupportExperience = () => {
                                         <label className="text-sm font-semibold text-slate-700">Category</label>
                                         <select
                                             name="category"
-                                            className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-red-500 transition-all"
+                                            className="w-full px-4 py-3 bg-slate-50 border-none focus:ring-2 focus:ring-red-500 transition-all"
                                             value={formData.category}
                                             onChange={handleChange}
                                         >
@@ -128,7 +128,7 @@ const UserSupportExperience = () => {
                                         <input
                                             type="tel"
                                             name="phone"
-                                            className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-red-500 transition-all disabled:opacity-50"
+                                            className="w-full px-4 py-3 bg-slate-50 border-none focus:ring-2 focus:ring-red-500 transition-all disabled:opacity-50"
                                             placeholder="+234"
                                             value={formData.phone}
                                             onChange={handleChange}
@@ -143,7 +143,7 @@ const UserSupportExperience = () => {
                                         name="message"
                                         required
                                         rows="4"
-                                        className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none focus:ring-2 focus:ring-red-500 transition-all resize-none disabled:opacity-50"
+                                        className="w-full px-4 py-3 bg-slate-50 border-none focus:ring-2 focus:ring-red-500 transition-all resize-none disabled:opacity-50"
                                         placeholder="Tell us what's on your mind..."
                                         value={formData.message}
                                         onChange={handleChange}
@@ -154,7 +154,7 @@ const UserSupportExperience = () => {
                                 <button
                                     type="submit"
                                     disabled={isLoading}
-                                    className="w-full py-4 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                                    className="w-full py-4 bg-red-600 hover:bg-red-700 text-white font-bold flex items-center justify-center gap-2 transition-all disabled:opacity-50"
                                 >
                                     {isLoading ? 'Sending...' : 'Send Message'}
                                     <Send size={18} />
@@ -166,7 +166,7 @@ const UserSupportExperience = () => {
 
                 {/* History Section - Right */}
                 <div className="lg:col-span-12 xl:col-span-7">
-                    <div className="bg-white rounded-3xl p-8 border border-slate-100 min-h-[600px] flex flex-col">
+                    <div className="bg-white p-8 border border-slate-100 min-h-[600px] flex flex-col">
                         <div className="flex items-center justify-between mb-8">
                             <div>
                                 <h2 className="text-2xl font-bold text-slate-900">Support History</h2>
@@ -215,7 +215,7 @@ const UserSupportExperience = () => {
                                             </div>
 
                                             <div className="space-y-4">
-                                                <div className="bg-white p-4 rounded-xl border border-slate-100">
+                                                <div className="bg-white p-4 border border-slate-100">
                                                     <p className="text-sm text-slate-700 leading-relaxed">{msg.message}</p>
                                                 </div>
 
@@ -225,7 +225,7 @@ const UserSupportExperience = () => {
                                                             <Reply size={12} className="rotate-180" />
                                                             <span className="text-[10px] font-bold uppercase tracking-widest">Response</span>
                                                         </div>
-                                                        <div className="bg-red-50/50 p-4 rounded-xl border border-red-50/50">
+                                                        <div className="bg-red-50/50 p-4 border border-red-50/50">
                                                             <p className="text-sm text-slate-700 italic">"{msg.response}"</p>
                                                         </div>
                                                     </div>
@@ -287,7 +287,7 @@ const AdminSupportInbox = () => {
             {/* Messages List - Left Column */}
             <div className="lg:col-span-5 flex flex-col gap-6">
                 {/* Header with Search */}
-                <div className="bg-white p-6 rounded-3xl border border-gray-50">
+                <div className="bg-white p-6 border border-gray-50">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <h2 className="text-md lg:text-lg font-bold text-slate-800">
                             Messages ({contacts?.data?.length || 0})
@@ -298,13 +298,13 @@ const AdminSupportInbox = () => {
                                 <input
                                     type="text"
                                     placeholder="Search messages..."
-                                    className="pl-10 pr-4 py-2.5 bg-slate-50 rounded-xl border-none focus:ring-2 focus:ring-red-500 w-full"
+                                    className="pl-10 pr-4 py-2.5 bg-slate-50 border-none focus:ring-2 focus:ring-red-500 w-full"
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                 />
                             </div>
                             {/* <button
-                                className="p-3 bg-slate-50 hover:bg-slate-100 rounded-xl transition-colors"
+                                className="p-3 bg-slate-50 hover:bg-slate-100 transition-colors"
                                 onClick={refetch}
                                 disabled={isLoading}
                             >
@@ -315,7 +315,7 @@ const AdminSupportInbox = () => {
                 </div>
 
                 {/* Messages Container */}
-                <div className="flex-1 bg-white rounded-3xl border border-gray-50 overflow-hidden">
+                <div className="flex-1 bg-white border border-gray-50 overflow-hidden">
                     <div className="p-2 overflow-y-auto h-[calc(100vh-350px)] custom-scrollbar">
                         {isLoading ? (
                             <div className="flex items-center justify-center h-32">
@@ -396,13 +396,13 @@ const AdminSupportInbox = () => {
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -20 }}
-                            className="bg-white h-full rounded-3xl border border-gray-50 flex flex-col overflow-hidden"
+                            className="bg-white h-full border border-gray-50 flex flex-col overflow-hidden"
                         >
                             {/* Message Header */}
                             <div className="p-8 border-b border-gray-100">
                                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                                     <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center text-red-600 font-bold text-xl">
+                                        <div className="w-12 h-12 bg-red-100 flex items-center justify-center text-red-600 font-bold text-xl">
                                             {selectedMsg.name[0]}
                                         </div>
                                         <div>
@@ -470,7 +470,7 @@ const AdminSupportInbox = () => {
                                         <button
                                             onClick={handleReply}
                                             disabled={isReplying || !replyText.trim()}
-                                            className="w-full py-4 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-lg shadow-red-200 hover:shadow-red-300"
+                                            className="w-full py-4 bg-red-600 hover:bg-red-700 text-white font-bold flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-lg shadow-red-200 hover:shadow-red-300"
                                         >
                                             {isReplying ? 'Sending...' : 'Send Response'}
                                             <Send size={20} />
@@ -483,7 +483,7 @@ const AdminSupportInbox = () => {
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className="bg-white h-full rounded-3xl border border-dashed border-gray-200 flex flex-col items-center justify-center p-12 text-center"
+                            className="bg-white h-full border border-dashed border-gray-200 flex flex-col items-center justify-center p-12 text-center"
                         >
                             <div className="w-20 h-20 rounded-full bg-slate-50 flex items-center justify-center mb-6">
                                 <MessageSquare size={40} className="text-slate-300" />
