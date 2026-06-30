@@ -39,6 +39,10 @@ const Placeholder = ({ className = '', tone = 'light' }) => {
 /* -------------------------------------------------------------------------- */
 /*  Content data                                                              */
 /* -------------------------------------------------------------------------- */
+/* Build a Cloudinary delivery URL from a public ID (cloud: ddjxdvgd5). */
+const cld = (id) =>
+  `https://res.cloudinary.com/ddjxdvgd5/image/upload/f_auto,q_auto/${id}`;
+
 const objectives = [
   'To mobilize global African collaboration for sustainable development',
   'To attract global investment to Malawi and to the African continent',
@@ -60,51 +64,111 @@ const agendaDays = [
   {
     label: 'Day 1',
     title: 'Arrival & Accreditation',
+    img: cld('perbzj260oes8glkkhan'),
     text: 'This day marks the official arrival of delegates and the beginning of the conference experience. Participants will be received, registered, and fully accredited while settling into their accommodations in preparation for the days ahead.',
   },
   {
     label: 'Day 2',
     title: 'Visitation',
+    img: cld('bpzciauyqcnl71kprp6l'),
     text: 'Day two focuses on strategic visits and engagements with selected delegates, traditional leaders, and key officials, fostering relationships and strengthening collaboration at high levels.',
   },
   {
     label: 'Day 3',
     title: 'Collaboration',
+    img: cld('gfxoenwjcyaoobcdmoz6'),
     text: 'This day is dedicated to partnership and shared growth, featuring interactive workshops with partners aimed at exchanging ideas, building capacity, and aligning on impactful initiatives.',
   },
   {
     label: 'Day 4',
     title: 'Conference Day',
+    img: cld('mg20lnj8x30vhy1iif7j'),
     text: "The core of the event, this day brings together thought leaders, innovators, and stakeholders for a comprehensive conference experience filled with keynote sessions, panel discussions, workshops, exhibitions, and forward-looking dialogues shaping Africa's future.",
   },
   {
     label: 'Day 5',
     title: 'Gala Night / Cocktail Program',
+    img: cld('wtuo6hq4zeqmn8f7dzdc'),
     text: "An evening of elegance and celebration, the gala night provides a relaxed atmosphere for networking, entertainment, recognition, and reflection on the conference's impact and achievements.",
   },
   {
     label: 'Day 6',
     title: 'Departure',
+    img: cld('ddclv1n5gzuzahlq9fqj'),
     text: 'The final day offers an opportunity for brief evaluation and reflection before delegates depart, marking the close of a successful and impactful conference.',
   },
 ];
 
+/* Section imagery (Cloudinary public IDs). */
+const heroImages = [
+  'egvxmufrtvywslbuier9',
+  'ihkyepd0jqij8r6osizq',
+  'g67flavc51tedionxxd8',
+  'rpg1c82f6k6yuugfh2bh',
+  'pjn1qyabr6e3zpfq9z7z',
+  'o0g15wvygpqyrjcc3bdy',
+  'vfmd7lw9bsygluyzjfxy',
+].map(cld);
+
+const aboutImages = [
+  'gu7ajh63clcc7x40yt5o',
+  'ibmsj0ys1idcaliud63w',
+  'n0rpwatohyflph8e5dg7',
+].map(cld);
+
+const objectivesImage = cld('d4iwt0tc5hmngy1raa88');
+
+const eventDetailImages = ['qjtbvflnyqjqnum6qlir', 'r0s1q4vu8var2ydbw0yd'].map(cld);
+
+const travelImage = cld('tvfyhp6jsekwqbbuhfap');
+
+const outcomesImage = cld('ejstnnytik61fd0hnrdc');
+const networkingImage = cld('aifwikozbc5yts0thqln');
+
+const mediaBannerImage = cld('gnfdqi7liygptmxnbkij');
+const mediaSlideImage = cld('sbwbxa5ksanvqp14uoid');
+
+const agendaIntroImage = cld('moumsjzgxnrdbbftqsox');
+
+const volunteerImages = ['mg20lnj8x30vhy1iif7j', 'd4iwt0tc5hmngy1raa88'].map(cld);
+
 const guests = [
-  { name: 'H.E Enock Chihana', role: 'Vice President' },
-  { name: 'Dr. Michael Usi', role: 'Former Vice President' },
-  { name: 'Hon. Vera Kamtukule', role: 'Minister of Tourism' },
-  { name: 'Hon. Victoria Kingstone', role: 'PM at the Pan African Parliament' },
-  { name: 'Dr. Napoleon Dzombe', role: 'Businessman' },
-  { name: 'Prophet Shephard Bushiri', role: 'Founder of Jesus Nation Church' },
-  { name: 'Mr. Bone Kalindo', role: 'Human Rights Activist' },
-  { name: 'Mr. Robert Mwaalalambo', role: 'Human Rights Activist' },
+  { name: 'H.E Enock Chihana', role: 'Vice President', img: cld('lzzco9z9tz8at6tqujpp') },
+  { name: 'Dr. Michael Usi', role: 'Former Vice President', img: cld('yibtkkrmt73g7usbnqfb') },
+  { name: 'Hon. Vera Kamtukule', role: 'Minister of Tourism', img: cld('adomwwqvqbhyphzboccw') },
+  {
+    name: 'Hon. Victoria Kingstone',
+    role: 'PM at the Pan African Parliament',
+    img: cld('qskl0mubsp52on69k4gi'),
+  },
+  { name: 'Dr. Napoleon Dzombe', role: 'Businessman', img: cld('dqqo4ccliso5lsgtgnse') },
+  {
+    name: 'Prophet Shephard Bushiri',
+    role: 'Founder of Jesus Nation Church',
+    img: cld('dwb8xqhz166qbt1ivicf'),
+  },
+  { name: 'Mr. Bone Kalindo', role: 'Human Rights Activist', img: cld('joqfhirztc0adpjfthao') },
+  {
+    name: 'Mr. Robert Mwaalalambo',
+    role: 'Human Rights Activist',
+    img: cld('orbwcgw5txmbxpffhvna'),
+  },
   {
     name: 'Ms. Debora Matope',
     role: 'Program Manager of Guidance Counseling and Youth Development for Africans',
+    img: cld('zdwtcqpixnhpmxs4qzt7'),
   },
-  { name: 'Mr. Kelvin Kamchacha', role: 'Businessman' },
-  { name: 'Miti Chikakula', role: 'COMESA Federation of Women in Business' },
-  { name: 'Mary Banda', role: 'COMESA Federation of Women in Business' },
+  { name: 'Mr. Kelvin Kamchacha', role: 'Businessman', img: cld('hj0anq4airctqrkwb755') },
+  {
+    name: 'Miti Chikakula',
+    role: 'COMESA Federation of Women in Business',
+    img: cld('v35uwlcd2uxa7dio7ae5'),
+  },
+  {
+    name: 'Mary Banda',
+    role: 'COMESA Federation of Women in Business',
+    img: cld('wwofysm0y5ovrdecfj2q'),
+  },
 ];
 
 const travelItems = [
@@ -251,11 +315,13 @@ const MalawiSummit = () => {
           {/* Thumbnail strip — seamless infinite marquee (set duplicated for the loop) */}
           <div className="relative left-1/2 -ml-[50vw] w-screen overflow-hidden mt-12">
             <div className="flex animate-scroll-slow">
-              {Array.from({ length: 20 }).map((_, i) => (
-                <Placeholder
+              {[...heroImages, ...heroImages, ...heroImages].map((src, i) => (
+                <img
                   key={i}
-                  tone="light"
-                  className="flex-shrink-0 w-40 sm:w-48 lg:w-56 aspect-[3/4] mx-2"
+                  src={src}
+                  alt=""
+                  loading="lazy"
+                  className="flex-shrink-0 w-40 sm:w-48 lg:w-56 aspect-[3/4] mx-2 object-cover"
                 />
               ))}
             </div>
@@ -284,8 +350,14 @@ const MalawiSummit = () => {
 
           <ScrollReveal direction="up" delay={0.1}>
             <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-0">
-              {Array.from({ length: 3 }).map((_, i) => (
-                <Placeholder key={i} tone="dark" className="aspect-[4/3]" />
+              {aboutImages.map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt=""
+                  loading="lazy"
+                  className="w-full aspect-[4/3] object-cover"
+                />
               ))}
             </div>
           </ScrollReveal>
@@ -307,7 +379,12 @@ const MalawiSummit = () => {
               </ul>
             </ScrollReveal>
             <ScrollReveal direction="left" delay={0.1}>
-              <Placeholder tone="light" className="w-full aspect-[4/3]" />
+              <img
+                src={objectivesImage}
+                alt="Conference objectives"
+                loading="lazy"
+                className="w-full aspect-[4/3] object-cover rounded"
+              />
             </ScrollReveal>
           </div>
         </div>
@@ -338,8 +415,18 @@ const MalawiSummit = () => {
           {/* Right — two-image frame, full-bleed to the right edge */}
           <div className="relative min-h-[320px] lg:min-h-[480px]">
             <div className="absolute inset-0 grid grid-cols-2 gap-3 p-3 lg:p-4">
-              <Placeholder tone="dark" className="w-full h-1/2 self-end" />
-              <Placeholder tone="dark" className="w-full h-full" />
+              <img
+                src={eventDetailImages[0]}
+                alt=""
+                loading="lazy"
+                className="w-full h-1/2 self-end object-cover"
+              />
+              <img
+                src={eventDetailImages[1]}
+                alt=""
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
@@ -361,7 +448,12 @@ const MalawiSummit = () => {
                 experiences designed to foster learning, collaboration, networking, and impactful
                 dialogue throughout the event.
               </p>
-              <Placeholder tone="dark" className="w-full aspect-[16/10]" />
+              <img
+                src={agendaIntroImage}
+                alt="Programs and agenda"
+                loading="lazy"
+                className="w-full aspect-[16/10] object-cover rounded"
+              />
             </div>
 
             {/* Right: day tabs + content */}
@@ -396,7 +488,12 @@ const MalawiSummit = () => {
               <ScrollReveal key={activeDay} direction="up" duration={0.5}>
                 <h3 className="text-xl font-semibold mb-3 text-white">{day.title}</h3>
                 <p className="text-sm text-white/60 leading-relaxed mb-6 max-w-lg">{day.text}</p>
-                <Placeholder tone="dark" className="w-full aspect-[16/9]" />
+                <img
+                  src={day.img}
+                  alt={day.title}
+                  loading="lazy"
+                  className="w-full aspect-[16/9] object-cover"
+                />
               </ScrollReveal>
 
               <div className="flex justify-end mt-6">
@@ -421,7 +518,16 @@ const MalawiSummit = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-5 gap-y-8">
             {guests.map((g, i) => (
               <ScrollReveal key={`${g.name}-${i}`} direction="up" delay={(i % 6) * 0.05}>
-                <Placeholder tone="light" className="w-full aspect-square mb-3" />
+                {g.img ? (
+                  <img
+                    src={g.img}
+                    alt={`${g.name} — ${g.role}`}
+                    loading="lazy"
+                    className="w-full aspect-square mb-3 object-cover rounded"
+                  />
+                ) : (
+                  <Placeholder tone="light" className="w-full aspect-square mb-3" />
+                )}
                 <p className="text-sm font-semibold text-gray-900 leading-snug">{g.name}</p>
                 <p className="text-xs text-gray-500 mt-1 leading-snug">{g.role}</p>
               </ScrollReveal>
@@ -542,7 +648,12 @@ const MalawiSummit = () => {
             <ScrollReveal key={activeTravel} direction="up" duration={0.5}>
               <h3 className="text-xl font-semibold mb-3 text-white">{travel.heading}</h3>
               <p className="text-sm text-white/85 leading-relaxed mb-6 max-w-md">{travel.text}</p>
-              <Placeholder tone="light" className="w-full aspect-[16/10]" />
+              <img
+                src={travelImage}
+                alt={travel.heading}
+                loading="lazy"
+                className="w-full aspect-[16/10] object-cover rounded"
+              />
             </ScrollReveal>
           </div>
         </div>
@@ -565,7 +676,12 @@ const MalawiSummit = () => {
               </ul>
             </ScrollReveal>
             <ScrollReveal direction="left" delay={0.1}>
-              <Placeholder tone="light" className="w-full aspect-[4/3]" />
+              <img
+                src={outcomesImage}
+                alt="Expected outcomes"
+                loading="lazy"
+                className="w-full aspect-[4/3] object-cover rounded"
+              />
             </ScrollReveal>
           </div>
 
@@ -576,6 +692,12 @@ const MalawiSummit = () => {
                 Networking Opportunities
               </h2>
               <p className="text-sm text-gray-500 mb-8">Connect, Collaborate and Grow</p>
+              <img
+                src={networkingImage}
+                alt="Networking opportunities"
+                loading="lazy"
+                className="w-full aspect-[4/3] object-cover rounded"
+              />
             </ScrollReveal>
             <ScrollReveal direction="left" delay={0.1}>
               <ul className="space-y-4">
@@ -591,7 +713,12 @@ const MalawiSummit = () => {
       {/* ================= FRAME 11 — MEDIA & COVERAGE (carousel) ========== */}
       <section className="bg-black text-white">
         {/* Full-bleed top image — spans the entire screen width */}
-        <Placeholder tone="dark" className="w-full aspect-[21/9]" />
+        <img
+          src={mediaBannerImage}
+          alt=""
+          loading="lazy"
+          className="w-full aspect-[21/9] object-cover"
+        />
 
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <div className="text-center mb-10">
@@ -606,7 +733,12 @@ const MalawiSummit = () => {
           {/* Carousel slide */}
           <ScrollReveal key={mediaIndex} direction="scale" duration={0.5}>
             <div className="relative max-w-5xl mx-auto">
-              <Placeholder tone="dark" className="w-full aspect-video" />
+              <img
+                src={mediaSlideImage}
+                alt=""
+                loading="lazy"
+                className="w-full aspect-video object-cover"
+              />
               <button
                 aria-label="Play video"
                 className="absolute inset-0 flex items-center justify-center group"
@@ -674,8 +806,15 @@ const MalawiSummit = () => {
 
             <ScrollReveal direction="left" delay={0.1}>
               <div className="grid grid-cols-1 gap-5">
-                <Placeholder tone="light" className="w-full aspect-[16/9]" />
-                <Placeholder tone="light" className="w-full aspect-[16/9]" />
+                {volunteerImages.map((src, i) => (
+                  <img
+                    key={i}
+                    src={src}
+                    alt=""
+                    loading="lazy"
+                    className="w-full aspect-[16/9] object-cover rounded"
+                  />
+                ))}
               </div>
             </ScrollReveal>
           </div>
