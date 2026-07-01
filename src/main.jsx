@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { disableReactDevTools } from '@fvilers/disable-react-devtools'
 import { Provider } from 'react-redux'
 import { store } from './app/store.js'
+import { GlobalErrorBoundary } from './component/common/GlobalErrorBoundary.jsx'
 
 // Only disable devtools in production
 if (process.env.NODE_ENV === 'production') disableReactDevTools()
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
   {
     path: '/*',
     element: <App />,
+    errorElement: <GlobalErrorBoundary />,
   }
 ])
 
