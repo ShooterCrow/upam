@@ -225,9 +225,8 @@ const CheckItem = ({ children, dark = false }) => (
 /* Circular arrow button used as a decorative accent in several frames */
 const CircleArrow = ({ className = '', dark = false }) => (
   <span
-    className={`inline-flex items-center justify-center w-12 h-12 rounded-full border ${
-      dark ? 'border-white/40 text-white' : 'border-gray-300 text-gray-700'
-    } ${className}`}
+    className={`inline-flex items-center justify-center w-12 h-12 rounded-full border ${dark ? 'border-white/40 text-white' : 'border-gray-300 text-gray-700'
+      } ${className}`}
   >
     <ArrowUpRight className="w-5 h-5" />
   </span>
@@ -287,8 +286,8 @@ const MalawiSummit = () => {
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
             <ScrollReveal direction="up" className="max-w-3xl">
               <h1
-                className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-white"
-               
+                className="headerWhite text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-white"
+
               >
                 Global African Renaissance Summit 2026 (Malawi)
               </h1>
@@ -345,7 +344,7 @@ const MalawiSummit = () => {
                 Pan-African leadership and economic collaboration.
               </p>
             </ScrollReveal>
-            
+
           </div>
 
           <ScrollReveal direction="up" delay={0.1}>
@@ -471,9 +470,8 @@ const MalawiSummit = () => {
                       role="tab"
                       aria-selected={active}
                       onClick={() => setActiveDay(i)}
-                      className={`relative text-sm font-medium pb-2 transition-colors ${
-                        active ? 'text-white' : 'text-white/40 hover:text-white/70'
-                      }`}
+                      className={`relative text-sm font-medium pb-2 transition-colors ${active ? 'text-white' : 'text-white/40 hover:text-white/70'
+                        }`}
                     >
                       {d.label}
                       {active && (
@@ -631,9 +629,8 @@ const MalawiSummit = () => {
                       <button
                         onClick={() => setActiveTravel(i)}
                         aria-pressed={active}
-                        className={`w-full flex items-center gap-8 text-left py-7 px-4 border-b border-white/25 transition-colors ${
-                          active ? 'bg-white/10' : 'hover:bg-white/5'
-                        }`}
+                        className={`w-full flex items-center gap-8 text-left py-7 px-4 border-b border-white/25 transition-colors ${active ? 'bg-white/10' : 'hover:bg-white/5'
+                          }`}
                       >
                         <span className="text-base font-semibold w-8 shrink-0">{t.num}</span>
                         <span className="text-base font-medium">{t.title}</span>
