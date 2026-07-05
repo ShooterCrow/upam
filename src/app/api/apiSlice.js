@@ -71,6 +71,19 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
   // Handle network errors or timeouts explicitly
   if (result?.error) {
+    if (result.error.status === 429) {
+      window.dispatchEvent(
+        new CustomEvent("api-rate-limit-exceeded", {
+          detail: {
+            message:
+              result.error.data?.message ||
+              result.error.data?.error ||
+              "429 too many requests",
+          },
+        }),
+      );
+    }
+
     if (result.error.status === "FETCH_ERROR") {
       console.error("Network error or timeout occurred:", result.error.error);
     }

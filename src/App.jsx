@@ -13,6 +13,7 @@ import RequireAuth from './pages/authenticationPages/RequireAuth';
 import ProfileCompletionGuard from './pages/authenticationPages/ProfileCompletionGuard';
 import RoleRedirectGuard from './pages/authenticationPages/RoleRedirectGuard';
 import AutoRecovery from './component/common/AutoRecovery';
+import RateLimitBlocker from './component/common/RateLimitBlocker';
 
 // Lazy Loaded Page Components
 const Home = lazy(() => import('./pages/home/Home'));
@@ -90,6 +91,7 @@ const App = () => {
   return (
     <div>
       <AutoRecovery />
+      <RateLimitBlocker />
       <Suspense fallback={<RouteLoader />}>
         <Routes>
           <Route element={<PersistLogin />}>
