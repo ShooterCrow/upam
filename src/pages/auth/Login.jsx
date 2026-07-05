@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "../../pages/authenticationPages/authSlice";
 import ScrollReveal from "../../components/ScrollReveal";
 import { ArrowRight } from "lucide-react";
+import useAuth from "../../hooks/useAuth";
 
 /** Google "G" logo for Sign in with Google */
 const GoogleIcon = () => (
@@ -37,9 +38,18 @@ const Login = () => {
   const [login, { isLoading, isSuccess }] = useLoginMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { roles, isLoggedIn } = useAuth();
+
+  // If already logged in, redirect immediately
+  useEffect(() => {
+    if (isLoggedIn) {
+      const isAdmin = roles?.includes('admin') || roles?.includes('manager');
+      navigate(isAdmin ? "/admin" : "/user", { replace: true });
+    }
+  }, [isLoggedIn, roles, navigate]);
 
   useEffect(() => {
-    if (isSuccess) navigate(navTo);
+    if (isSuccess && navTo) navigate(navTo);
   }, [isSuccess, navigate, navTo]);
 
   const handleSubmit = async (e) => {

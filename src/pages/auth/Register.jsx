@@ -7,6 +7,7 @@ import ScrollReveal from "../../components/ScrollReveal";
 import { ArrowRight, CheckCircle2, Loader2, Phone, MessageSquare, ShieldCheck, Globe, Calendar } from "lucide-react";
 import { Country } from "country-state-city";
 import { useGetSettingsQuery } from "../platform/settingsApiSlice";
+import useAuth from "../../hooks/useAuth";
 
 /** Google "G" logo for Sign up with Google */
 const GoogleIcon = () => (
@@ -54,6 +55,14 @@ const Register = () => {
   const { data: settingsResponse } = useGetSettingsQuery();
   const navigate = useNavigate();
   const [errMsg, setErrMsg] = useState("");
+  const { roles, isLoggedIn } = useAuth();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      const isAdmin = roles?.includes('admin') || roles?.includes('manager');
+      navigate(isAdmin ? "/admin" : "/user", { replace: true });
+    }
+  }, [isLoggedIn, roles, navigate]);
 
   const requirePhoneVerification = settingsResponse?.data?.hotelInfo?.requirePhoneVerification ?? false;
 
