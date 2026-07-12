@@ -731,7 +731,7 @@ const Index = () => {
                                         {/* Featured Event - Left Column (Full height) */}
                                         <div className="lg:col-span-2">
                                             {events[0] && (
-                                                <Link to={`/events/${events[0]._id}`} className="relative h-[530px] border border-slate-100 overflow-hidden group cursor-pointer block bg-black">
+                                                <Link to={events[0].title == "GLOBAL AFRICAN RENAISSANCE SUMMIT 2026 (MALAWI)" ? "https://www.unitedpam.org/events/global-african-renaissance-summit-2026" : `/events/${events[0]._id}`} className="relative h-[530px] border border-slate-100 overflow-hidden group cursor-pointer block bg-black">
                                                     <img
                                                         src={events[0].image ? (events[0].image.startsWith('http') ? events[0].image : `http://localhost:5000/${events[0].image}`) : "/academy_logo.png"}
                                                         alt={events[0].title}
