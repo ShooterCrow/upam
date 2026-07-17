@@ -180,7 +180,7 @@ const ChapterDetail = () => {
                                 </div>
 
                                 <button
-                                    onClick={() => navigate(`/admin/all-members/${representative._id}`)}
+                                    onClick={() => navigate(`/dashboard/all-members/${representative._id}`)}
                                     className="w-full py-2 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:bg-black transition-colors flex items-center justify-center gap-2"
                                 >
                                     <ExternalLink size={12} />
@@ -235,7 +235,7 @@ const ChapterDetail = () => {
                                 </thead>
                                 <tbody className="divide-y divide-slate-50">
                                     {filteredMembers.map((m) => (
-                                        <tr onClick={() => navigate(`/admin/all-members/${m._id}`)} key={m._id} className="group cursor-pointer hover:bg-slate-50 transition-colors">
+                                        <tr onClick={() => navigate(`/dashboard/all-members/${m._id}`)} key={m._id} className="group cursor-pointer hover:bg-slate-50 transition-colors">
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center gap-3">
                                                     <div className="w-10 h-10 rounded-full overflow-hidden bg-slate-100 flex-shrink-0 border border-slate-200">
@@ -259,7 +259,7 @@ const ChapterDetail = () => {
                                             </td>
                                             {/* <td className="px-6 py-4 text-right">
                                                 <button
-                                                    onClick={() => navigate(`/admin/all-members/${m._id}`)}
+                                                    onClick={() => navigate(`/dashboard/all-members/${m._id}`)}
                                                     className="text-xs font-bold text-blue-600 hover:underline"
                                                 >
                                                     Detail

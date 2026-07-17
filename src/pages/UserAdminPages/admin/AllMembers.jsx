@@ -1,31 +1,65 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 import { useGetUsersQuery, useUpdateUserMutation } from '../../platform/usersApiSlice';
-import { MoreVertical, Filter, ChevronLeft, ChevronRight, SlidersHorizontal, Search, ShieldCheck, User as UserIcon, Loader2 } from 'lucide-react';
+import {
+    MoreVertical, SlidersHorizontal, Search, ShieldCheck, User as UserIcon, Loader2,
+    ArrowUpAZ, ArrowDownAZ, ArrowUpDown, ArrowUp01, ArrowDown01,
+    ArrowUpNarrowWide, ArrowDownNarrowWide
+} from 'lucide-react';
 import LoadingState from '../../../component/ui/LoadingState';
 import ErrorState from '../../../component/ui/ErrorState';
 import Pagination from '../../../component/ui/Pagination';
+import { fireSortToast } from '../../../component/common/ToastNotification';
+
+// Sort state cycles: null → 'asc' → 'desc' → 'reset' → null
+const ROLE_ORDER = { admin: 0, manager: 1, representative: 2, user: 3 };
+
+const SORT_CYCLE = [null, 'asc', 'desc', 'reset'];
+
+const nextSortState = (current) => {
+    const idx = SORT_CYCLE.indexOf(current);
+    return SORT_CYCLE[(idx + 1) % SORT_CYCLE.length];
+};
+
+const SortIcon = ({ col, sortConfig }) => {
+    if (sortConfig.col !== col) return <ArrowUpDown size={13} className="text-slate-300 inline ml-1" />;
+    if (sortConfig.dir === 'asc') {
+        if (col === 'name' || col === 'email' || col === 'country') return <ArrowUpAZ size={13} className="text-blue-500 inline ml-1" />;
+        if (col === 'role') return <ArrowUpNarrowWide size={13} className="text-blue-500 inline ml-1" />;
+        return <ArrowUp01 size={13} className="text-blue-500 inline ml-1" />;
+    }
+    if (sortConfig.dir === 'desc') {
+        if (col === 'name' || col === 'email' || col === 'country') return <ArrowDownAZ size={13} className="text-orange-500 inline ml-1" />;
+        if (col === 'role') return <ArrowDownNarrowWide size={13} className="text-orange-500 inline ml-1" />;
+        return <ArrowDown01 size={13} className="text-orange-500 inline ml-1" />;
+    }
+    return <ArrowUpDown size={13} className="text-slate-400 inline ml-1" />;
+};
 
 const AllMembers = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const { isAdmin } = useAuth();
     const [page, setPage] = useState(1);
     const [limit] = useState(10);
     const [searchTerm, setSearchTerm] = useState('');
     const [debouncedSearch, setDebouncedSearch] = useState('');
-    const [verifiedFilter, setVerifiedFilter] = useState('all'); // 'all', 'true', 'false'
+    const [verifiedFilter, setVerifiedFilter] = useState('all');
     const [showFilterMenu, setShowFilterMenu] = useState(false);
     const [updatingRoleId, setUpdatingRoleId] = useState(null);
+    const [sortConfig, setSortConfig] = useState({ col: null, dir: null });
 
-    // Mutations
+    const isChapterMembers = location.pathname.includes('/chapter-members');
+    const pageTitle = isChapterMembers ? 'Chapter Members' : 'All Members';
+
     const [updateUser] = useUpdateUserMutation();
 
-    // Debounce search term
     useEffect(() => {
         const timer = setTimeout(() => {
             setDebouncedSearch(searchTerm);
-            setPage(1); // Reset to first page on search
+            setPage(1);
         }, 500);
-
         return () => clearTimeout(timer);
     }, [searchTerm]);
 
@@ -33,12 +67,76 @@ const AllMembers = () => {
         page,
         limit,
         search: debouncedSearch || undefined,
-        verified: verifiedFilter === 'all' ? undefined : verifiedFilter
+        verified: verifiedFilter === 'all' ? undefined : verifiedFilter,
     });
 
-    const users = response?.data || [];
+    const rawUsers = response?.data || [];
     const totalPages = response?.totalPages || 1;
     const numberOfUsers = response?.totalUsersInDB || 0;
+
+    const users = useMemo(() => {
+        if (!sortConfig.col || sortConfig.dir === 'reset') return rawUsers;
+        const sorted = [...rawUsers].sort((a, b) => {
+            let aVal, bVal;
+            switch (sortConfig.col) {
+                case 'name':
+                    aVal = `${a.firstName} ${a.lastName}`.toLowerCase();
+                    bVal = `${b.firstName} ${b.lastName}`.toLowerCase();
+                    break;
+                case 'email':
+                    aVal = (a.email || '').toLowerCase();
+                    bVal = (b.email || '').toLowerCase();
+                    break;
+                case 'country':
+                    aVal = (a.country || '').toLowerCase();
+                    bVal = (b.country || '').toLowerCase();
+                    break;
+                case 'role':
+                    aVal = ROLE_ORDER[a.roles[0]] ?? 99;
+                    bVal = ROLE_ORDER[b.roles[0]] ?? 99;
+                    break;
+                case 'status':
+                    aVal = a.isVerifiedMember ? 0 : 1;
+                    bVal = b.isVerifiedMember ? 0 : 1;
+                    break;
+                case 'emailVerified':
+                    aVal = a.emailVerified ? 0 : 1;
+                    bVal = b.emailVerified ? 0 : 1;
+                    break;
+                default:
+                    return 0;
+            }
+            if (aVal < bVal) return sortConfig.dir === 'asc' ? -1 : 1;
+            if (aVal > bVal) return sortConfig.dir === 'asc' ? 1 : -1;
+            return 0;
+        });
+        return sorted;
+    }, [rawUsers, sortConfig]);
+
+    const handleSort = (col, label) => {
+        setSortConfig(prev => {
+            const sameCol = prev.col === col;
+            const curDir = sameCol ? prev.dir : null;
+            const nextDir = nextSortState(curDir);
+
+            if (nextDir === null || nextDir === 'reset') {
+                fireSortToast(`${label} — Default order`, 'sort-reset');
+                return { col: null, dir: null };
+            }
+
+            const isTextCol = ['name', 'email', 'country'].includes(col);
+            const toastType = nextDir === 'asc'
+                ? (isTextCol ? 'sort-asc' : 'sort-num-asc')
+                : (isTextCol ? 'sort-desc' : 'sort-num-desc');
+
+            const suffix = nextDir === 'asc'
+                ? (isTextCol ? 'A → Z' : 'Priority ↑')
+                : (isTextCol ? 'Z → A' : 'Priority ↓');
+
+            fireSortToast(`${label} — ${suffix}`, toastType);
+            return { col, dir: nextDir };
+        });
+    };
 
     const handleFilterChange = (status) => {
         setVerifiedFilter(status);
@@ -48,22 +146,21 @@ const AllMembers = () => {
 
     const handleRoleChange = async (member, newRole) => {
         if (!window.confirm(`Are you sure you want to change ${member.firstName}'s role to ${newRole}?`)) return;
-
         setUpdatingRoleId(member._id);
         try {
-            await updateUser({
-                id: member._id,
-                roles: [newRole.toLowerCase()]
-            }).unwrap();
-            // Success! The table will auto-update because of tag invalidation
+            await updateUser({ id: member._id, roles: [newRole.toLowerCase()] }).unwrap();
         } catch (err) {
-            alert(err?.data?.message || "Failed to update role. Please check the safety net.");
+            alert(err?.data?.message || 'Failed to update role. Please check the safety net.');
         } finally {
             setUpdatingRoleId(null);
         }
     };
 
-    if (isLoading && !users.length) {
+    const thClass = (col) =>
+        `px-6 py-5 text-sm font-semibold tracking-wider cursor-pointer select-none transition-colors whitespace-nowrap
+        ${sortConfig.col === col ? 'text-slate-700' : 'text-slate-500 hover:text-slate-700'}`;
+
+    if (isLoading && !rawUsers.length) {
         return (
             <div className="h-[70vh] flex items-center justify-center">
                 <LoadingState message="Fetching members..." />
@@ -74,24 +171,23 @@ const AllMembers = () => {
     if (isError) {
         return (
             <div className="h-[70vh] flex items-center justify-center">
-                <ErrorState
-                    message={error?.data?.message || "Could not load members"}
-                    onRetry={refetch}
-                />
+                <ErrorState message={error?.data?.message || 'Could not load members'} onRetry={refetch} />
             </div>
         );
     }
 
     return (
         <div className="animate-in fade-in duration-500 pb-10">
-            {/* Header & Search/Filter */}
-            <div className="bg-white px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
-                <h2 className="text-lg font-bold text-slate-800 w-full md:w-auto">All Members ({numberOfUsers})</h2>
-
-                <div className="flex items-center gap-3 w-full md:w-auto">
-                    {/* Search Input */}
-                    <div className="relative flex-1 md:w-72">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+            {/* Header */}
+            <div className="bg-white px-6 py-3 border border-gray-100 flex justify-between items-center">
+                <div>
+                    <h2 className="text-lg font-bold text-slate-800">{pageTitle}</h2>
+                    <p className="text-xs text-slate-400">{numberOfUsers.toLocaleString()} total members</p>
+                </div>
+                <div className="flex items-center gap-3">
+                    {/* Search */}
+                    <div className="relative">
+                        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                         <input
                             type="text"
                             placeholder="Search members..."
@@ -101,7 +197,7 @@ const AllMembers = () => {
                         />
                     </div>
 
-                    {/* Filter Menu */}
+                    {/* Filter */}
                     <div className="relative">
                         <button
                             onClick={() => setShowFilterMenu(!showFilterMenu)}
@@ -113,26 +209,15 @@ const AllMembers = () => {
 
                         {showFilterMenu && (
                             <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 py-2 animate-in fade-in slide-in-from-top-2">
-                                <button
-                                    onClick={() => handleFilterChange('all')}
-                                    className={`w-full text-left px-4 py-3 text-sm hover:bg-slate-50 transition-colors ${verifiedFilter === 'all' ? 'font-bold text-blue-600' : 'text-slate-600'}`}
-                                >
-                                    All Members
-                                </button>
-                                <div className="h-px bg-slate-50 mx-2"></div>
-                                <button
-                                    onClick={() => handleFilterChange('true')}
-                                    className={`w-full text-left px-4 py-3 text-sm hover:bg-slate-50 transition-colors ${verifiedFilter === 'true' ? 'font-bold text-blue-600' : 'text-slate-600'}`}
-                                >
-                                    Verified Members
-                                </button>
-                                <div className="h-px bg-slate-50 mx-2"></div>
-                                <button
-                                    onClick={() => handleFilterChange('false')}
-                                    className={`w-full text-left px-4 py-3 text-sm hover:bg-slate-50 transition-colors ${verifiedFilter === 'false' ? 'font-bold text-blue-600' : 'text-slate-600'}`}
-                                >
-                                    Unverified Members
-                                </button>
+                                {['all', 'true', 'false'].map((f) => (
+                                    <button
+                                        key={f}
+                                        onClick={() => handleFilterChange(f)}
+                                        className={`w-full text-left px-4 py-3 text-sm hover:bg-slate-50 transition-colors ${verifiedFilter === f ? 'font-bold text-blue-600' : 'text-slate-600'}`}
+                                    >
+                                        {f === 'all' ? 'All Members' : f === 'true' ? 'Verified Members' : 'Unverified Members'}
+                                    </button>
+                                ))}
                             </div>
                         )}
                     </div>
@@ -141,24 +226,34 @@ const AllMembers = () => {
 
             {/* Table */}
             <div className="bg-white border border-gray-100 overflow-hidden relative min-h-[400px]">
-                {/* Inline Loading Overlay */}
-                {isFetching && users.length > 0 && (
-                    <div className="absolute inset-0 z-20 flex items-center justify-center bg-white/40 backdrop-blur-[1px] transition-all">
-                        <LoadingState message="Wait a moment..." />
+                {isFetching && rawUsers.length > 0 && (
+                    <div className="absolute inset-0 bg-white/60 flex items-center justify-center z-10">
+                        <Loader2 size={28} className="animate-spin text-blue-500" />
                     </div>
                 )}
-
                 <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                         <thead>
-                            <tr className="bg-slate-50/50">
+                            <tr className="bg-slate-50/50 border-b border-slate-100">
                                 <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">S/N</th>
-                                <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Name</th>
-                                <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Email</th>
-                                <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider text-center">Email Verified</th>
-                                <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Country</th>
-                                <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Role</th>
-                                <th className="px-6 py-5 text-sm font-semibold text-slate-500 tracking-wider">Status</th>
+                                <th className={thClass('name')} onClick={() => handleSort('name', 'Name')}>
+                                    Name <SortIcon col="name" sortConfig={sortConfig} />
+                                </th>
+                                <th className={thClass('email')} onClick={() => handleSort('email', 'Email')}>
+                                    Email <SortIcon col="email" sortConfig={sortConfig} />
+                                </th>
+                                <th className={`${thClass('emailVerified')} text-center`} onClick={() => handleSort('emailVerified', 'Email Verified')}>
+                                    Email Verified <SortIcon col="emailVerified" sortConfig={sortConfig} />
+                                </th>
+                                <th className={thClass('country')} onClick={() => handleSort('country', 'Country')}>
+                                    Country <SortIcon col="country" sortConfig={sortConfig} />
+                                </th>
+                                <th className={thClass('role')} onClick={() => handleSort('role', 'Role')}>
+                                    Role <SortIcon col="role" sortConfig={sortConfig} />
+                                </th>
+                                <th className={thClass('status')} onClick={() => handleSort('status', 'Status')}>
+                                    Status <SortIcon col="status" sortConfig={sortConfig} />
+                                </th>
                                 <th className="px-6 py-5 text-sm font-semibold text-slate-500"></th>
                             </tr>
                         </thead>
@@ -167,7 +262,10 @@ const AllMembers = () => {
                                 <tr
                                     key={member._id}
                                     className={`group hover:bg-slate-50 transition-colors cursor-pointer ${isFetching ? 'opacity-40 pointer-events-none' : ''}`}
-                                    onClick={() => navigate(`/admin/all-members/${member._id}`)}
+                                    onClick={() => {
+                                        const basePath = isChapterMembers ? 'chapter-members' : 'all-members';
+                                        navigate(`/dashboard/${basePath}/${member._id}`);
+                                    }}
                                 >
                                     <td className="px-6 py-5 text-sm text-slate-400">
                                         {String((page - 1) * limit + idx + 1).padStart(2, '0')}
@@ -189,30 +287,50 @@ const AllMembers = () => {
                                     </td>
                                     <td className="px-6 py-5 text-sm text-slate-500">{member.country || '---'}</td>
                                     <td className="px-6 py-5 text-sm" onClick={(e) => e.stopPropagation()}>
-                                        <div className="relative group/role">
-                                            <select
-                                                disabled={updatingRoleId === member._id}
-                                                value={member.roles[0]}
-                                                onChange={(e) => handleRoleChange(member, e.target.value)}
-                                                className={`pl-8 pr-4 py-1.5 rounded-lg text-xs font-bold border transition-all appearance-none cursor-pointer outline-none
-                                                    ${member.roles.includes('admin')
-                                                        ? 'bg-red-50 text-red-600 border-red-100 hover:bg-red-100'
-                                                        : 'bg-slate-50 text-slate-600 border-slate-100 hover:bg-slate-100'
-                                                    } ${updatingRoleId === member._id ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                            >
-                                                <option value="user">USER</option>
-                                                <option value="admin">ADMIN</option>
-                                            </select>
-                                            <div className="absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
-                                                {updatingRoleId === member._id ? (
-                                                    <Loader2 size={14} className="animate-spin text-slate-400" />
-                                                ) : member.roles.includes('admin') ? (
+                                        {isAdmin ? (
+                                            <div className="relative group/role">
+                                                <select
+                                                    disabled={updatingRoleId === member._id}
+                                                    value={member.roles[0]}
+                                                    onChange={(e) => handleRoleChange(member, e.target.value)}
+                                                    className={`pl-8 pr-4 py-1.5 rounded-lg text-xs font-bold border transition-all appearance-none cursor-pointer outline-none
+                                                        ${member.roles.includes('admin')
+                                                            ? 'bg-red-50 text-red-600 border-red-100 hover:bg-red-100'
+                                                            : 'bg-slate-50 text-slate-600 border-slate-100 hover:bg-slate-100'
+                                                        } ${updatingRoleId === member._id ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                                >
+                                                    <option value="user">USER</option>
+                                                    <option value="manager">MANAGER</option>
+                                                    <option value="representative">REPRESENTATIVE</option>
+                                                    <option value="admin">ADMIN</option>
+                                                </select>
+                                                <div className="absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
+                                                    {updatingRoleId === member._id ? (
+                                                        <Loader2 size={14} className="animate-spin text-slate-400" />
+                                                    ) : member.roles.includes('admin') ? (
+                                                        <ShieldCheck size={14} className="text-red-600" />
+                                                    ) : (
+                                                        <UserIcon size={14} className="text-slate-500" />
+                                                    )}
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <span className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold uppercase border ${member.roles.includes('admin')
+                                                    ? 'bg-red-50 text-red-600 border-red-100'
+                                                    : member.roles.includes('representative')
+                                                        ? 'bg-indigo-50 text-indigo-600 border-indigo-100'
+                                                        : member.roles.includes('manager')
+                                                            ? 'bg-blue-50 text-blue-600 border-blue-100'
+                                                            : 'bg-slate-50 text-slate-600 border-slate-100'
+                                                }`}>
+                                                {member.roles.includes('admin') ? (
                                                     <ShieldCheck size={14} className="text-red-600" />
                                                 ) : (
                                                     <UserIcon size={14} className="text-slate-500" />
                                                 )}
-                                            </div>
-                                        </div>
+                                                {member.roles[0]}
+                                            </span>
+                                        )}
                                     </td>
                                     <td className="px-6 py-5 text-sm">
                                         {member.isVerifiedMember ? (
@@ -240,7 +358,6 @@ const AllMembers = () => {
                 </div>
             </div>
 
-            {/* Pagination */}
             <Pagination
                 currentPage={page}
                 totalPages={totalPages}

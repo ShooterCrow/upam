@@ -3,25 +3,15 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from '../../../pages/authenticationPages/authApiSlice';
 import LoadingState from '../../ui/LoadingState';
 import {
-    LayoutDashboard,
-    Users,
-    Settings,
     MoreHorizontal,
-    FileText,
-    BarChart,
     Shield,
-    Bell,
     LogOut,
     User,
-    CheckCircle,
-    CreditCard,
-    AlertCircle,
-    Headphones
 } from 'lucide-react';
 import { ADMIN_LINKS } from '../../../constants/navigation';
-
 import { selectCompleteness } from '../../../pages/authenticationPages/authSlice';
 import { useSelector } from 'react-redux';
+import useAuth from '../../../hooks/useAuth';
 
 const AdminBottomBar = () => {
     const completeness = useSelector(selectCompleteness);
@@ -29,6 +19,7 @@ const AdminBottomBar = () => {
     const navigate = useNavigate();
     const [logout, { isLoading: isLoggingOut }] = useLogoutMutation();
     const [showMore, setShowMore] = useState(false);
+    const { roles } = useAuth();
 
     const handleLogout = async () => {
         try {
@@ -39,12 +30,11 @@ const AdminBottomBar = () => {
         }
     };
 
-
     const isComplete = completeness?.isAllComplete ?? true;
     const allowedPaths = [
-        '/admin/my-profile',
-        '/admin/member-verification',
-        '/admin/emergency-contact',
+        '/dashboard/my-profile',
+        '/dashboard/member-verification',
+        '/dashboard/emergency-contact',
         '/logout'
     ];
 
@@ -54,9 +44,11 @@ const AdminBottomBar = () => {
                 completeness.step3.path
     ) : null;
 
-    const mainLinks = ADMIN_LINKS.slice(0, 3);
-    const moreLinks = ADMIN_LINKS.slice(3).concat([
-        { name: 'Account', path: '/admin/my-profile', icon: User },
+    // Filter links by current user's roles
+    const visibleLinks = ADMIN_LINKS.filter(link => !link.roles || link.roles.some(r => roles.includes(r)));
+    const mainLinks = visibleLinks.slice(0, 3);
+    const moreLinks = visibleLinks.slice(3).concat([
+        { name: 'Account', path: '/dashboard/my-profile', icon: User },
         { name: 'Log out', path: '/logout', icon: LogOut, isDanger: true },
     ]);
 
@@ -121,7 +113,7 @@ const AdminBottomBar = () => {
             {/* Bottom Bar */}
             <div className="fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-gray-100 lg:hidden z-50 flex items-center justify-around px-2 pb-safe">
                 {mainLinks.map((link) => {
-                    const isActive = location.pathname === link.path || (link.path !== '/admin' && location.pathname.startsWith(link.path));
+                    const isActive = location.pathname === link.path || (link.path !== '/dashboard' && location.pathname.startsWith(link.path));
                     const Icon = link.icon;
                     const isRestricted = !isComplete && !allowedPaths.includes(link.path);
 

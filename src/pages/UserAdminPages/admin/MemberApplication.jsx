@@ -1,45 +1,120 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    FileText,
-    Clock,
-    CheckCircle2,
-    XCircle,
-    ChevronRight,
-    Search,
-    Filter,
-    Loader2,
-    Calendar,
-    User,
-    SlidersHorizontal,
-    MoreVertical
+    FileText, Clock, CheckCircle2, XCircle, Search, Filter,
+    Loader2, Calendar, User, SlidersHorizontal, MoreVertical,
+    ArrowUpAZ, ArrowDownAZ, ArrowUpDown, ArrowUp01, ArrowDown01,
+    ArrowUpNarrowWide, ArrowDownNarrowWide
 } from 'lucide-react';
 import { useGetVerificationsQuery } from '../../platform/verificationApiSlice';
 import LoadingState from '../../../component/ui/LoadingState';
 import ErrorState from '../../../component/ui/ErrorState';
+import { fireSortToast } from '../../../component/common/ToastNotification';
+
+const SORT_CYCLE = [null, 'asc', 'desc', 'reset'];
+const STATUS_ORDER = { Pending: 0, Approved: 1, Rejected: 2 };
+
+const nextSortState = (current) => {
+    const idx = SORT_CYCLE.indexOf(current);
+    return SORT_CYCLE[(idx + 1) % SORT_CYCLE.length];
+};
+
+const SortIcon = ({ col, sortConfig }) => {
+    if (sortConfig.col !== col) return <ArrowUpDown size={13} className="text-slate-300 inline ml-1" />;
+    if (sortConfig.dir === 'asc') {
+        if (col === 'applicant' || col === 'type') return <ArrowUpAZ size={13} className="text-blue-500 inline ml-1" />;
+        if (col === 'status') return <ArrowUpNarrowWide size={13} className="text-blue-500 inline ml-1" />;
+        return <ArrowUp01 size={13} className="text-blue-500 inline ml-1" />;
+    }
+    if (sortConfig.dir === 'desc') {
+        if (col === 'applicant' || col === 'type') return <ArrowDownAZ size={13} className="text-orange-500 inline ml-1" />;
+        if (col === 'status') return <ArrowDownNarrowWide size={13} className="text-orange-500 inline ml-1" />;
+        return <ArrowDown01 size={13} className="text-orange-500 inline ml-1" />;
+    }
+    return <ArrowUpDown size={13} className="text-slate-400 inline ml-1" />;
+};
 
 const MemberApplication = () => {
     const navigate = useNavigate();
     const [showFilterMenu, setShowFilterMenu] = useState(false);
     const [statusFilter, setStatusFilter] = useState('all');
+    const [sortConfig, setSortConfig] = useState({ col: null, dir: null });
 
     const { data: response, isLoading, isError, error, refetch } = useGetVerificationsQuery();
-
     const applications = response?.data || [];
 
-    const filteredApplications = statusFilter === 'all'
-        ? applications
-        : applications.filter(app => app.status === statusFilter);
+    const filteredApplications = useMemo(() => {
+        let items = statusFilter === 'all'
+            ? applications
+            : applications.filter(app => app.status === statusFilter);
+
+        if (!sortConfig.col || sortConfig.dir === 'reset') return items;
+
+        return [...items].sort((a, b) => {
+            let aVal, bVal;
+            switch (sortConfig.col) {
+                case 'applicant':
+                    aVal = `${a.user?.firstName} ${a.user?.lastName}`.toLowerCase();
+                    bVal = `${b.user?.firstName} ${b.user?.lastName}`.toLowerCase();
+                    break;
+                case 'type':
+                    aVal = (a.membershipType || '').toLowerCase();
+                    bVal = (b.membershipType || '').toLowerCase();
+                    break;
+                case 'status':
+                    aVal = STATUS_ORDER[a.status] ?? 99;
+                    bVal = STATUS_ORDER[b.status] ?? 99;
+                    break;
+                case 'date':
+                    aVal = new Date(a.createdAt).getTime();
+                    bVal = new Date(b.createdAt).getTime();
+                    break;
+                default:
+                    return 0;
+            }
+            if (aVal < bVal) return sortConfig.dir === 'asc' ? -1 : 1;
+            if (aVal > bVal) return sortConfig.dir === 'asc' ? 1 : -1;
+            return 0;
+        });
+    }, [applications, statusFilter, sortConfig]);
+
+    const handleSort = (col, label) => {
+        setSortConfig(prev => {
+            const sameCol = prev.col === col;
+            const curDir = sameCol ? prev.dir : null;
+            const nextDir = nextSortState(curDir);
+
+            if (nextDir === null || nextDir === 'reset') {
+                fireSortToast(`${label} — Default order`, 'sort-reset');
+                return { col: null, dir: null };
+            }
+
+            const isTextCol = ['applicant', 'type'].includes(col);
+            const toastType = nextDir === 'asc'
+                ? (isTextCol ? 'sort-asc' : 'sort-num-asc')
+                : (isTextCol ? 'sort-desc' : 'sort-num-desc');
+
+            const suffix = nextDir === 'asc'
+                ? (isTextCol ? 'A → Z' : 'Earliest first')
+                : (isTextCol ? 'Z → A' : 'Latest first');
+
+            fireSortToast(`${label} — ${suffix}`, toastType);
+            return { col, dir: nextDir };
+        });
+    };
+
+    const thClass = (col) =>
+        `px-6 py-5 text-xs font-semibold tracking-wider cursor-pointer select-none transition-colors whitespace-nowrap
+        ${sortConfig.col === col ? 'text-slate-700' : 'text-slate-500 hover:text-slate-700'}`;
 
     const StatusBadge = ({ status }) => {
         const configs = {
             Pending: { icon: Clock, color: 'text-yellow-600', bg: 'bg-yellow-50', label: 'Under Review' },
             Approved: { icon: CheckCircle2, color: 'text-green-600', bg: 'bg-green-50', label: 'Verified' },
-            Rejected: { icon: XCircle, color: 'text-red-600', bg: 'bg-red-50', label: 'Rejected' }
+            Rejected: { icon: XCircle, color: 'text-red-600', bg: 'bg-red-50', label: 'Rejected' },
         };
         const config = configs[status] || configs.Pending;
         const Icon = config.icon;
-
         return (
             <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full ${config.bg} ${config.color} font-bold text-xs`}>
                 <Icon size={14} />
@@ -48,24 +123,17 @@ const MemberApplication = () => {
         );
     };
 
-    if (isLoading) {
-        return (
-            <div className="h-[70vh] flex items-center justify-center">
-                <LoadingState message="Fetching applications..." />
-            </div>
-        );
-    }
+    if (isLoading) return (
+        <div className="h-[70vh] flex items-center justify-center">
+            <LoadingState message="Fetching applications..." />
+        </div>
+    );
 
-    if (isError) {
-        return (
-            <div className="h-[70vh] flex items-center justify-center">
-                <ErrorState
-                    message={error?.data?.message || "Could not load applications"}
-                    onRetry={refetch}
-                />
-            </div>
-        );
-    }
+    if (isError) return (
+        <div className="h-[70vh] flex items-center justify-center">
+            <ErrorState message={error?.data?.message || 'Could not load applications'} onRetry={refetch} />
+        </div>
+    );
 
     return (
         <div className="animate-in fade-in duration-500 pb-10">
@@ -84,49 +152,39 @@ const MemberApplication = () => {
 
                     {showFilterMenu && (
                         <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl border border-gray-100 z-20 py-2 animate-in fade-in slide-in-from-top-2 shadow-xl shadow-slate-200/20">
-                            <button
-                                onClick={() => { setStatusFilter('all'); setShowFilterMenu(false); }}
-                                className={`w-full text-left px-4 py-3 text-sm hover:bg-slate-50 transition-colors ${statusFilter === 'all' ? 'font-bold text-blue-600' : 'text-slate-600'}`}
-                            >
-                                All Applications
-                            </button>
-                            <div className="h-px bg-slate-50 mx-2"></div>
-                            <button
-                                onClick={() => { setStatusFilter('Pending'); setShowFilterMenu(false); }}
-                                className={`w-full text-left px-4 py-3 text-sm hover:bg-slate-50 transition-colors ${statusFilter === 'Pending' ? 'font-bold text-blue-600' : 'text-slate-600'}`}
-                            >
-                                Pending
-                            </button>
-                            <div className="h-px bg-slate-50 mx-2"></div>
-                            <button
-                                onClick={() => { setStatusFilter('Approved'); setShowFilterMenu(false); }}
-                                className={`w-full text-left px-4 py-3 text-sm hover:bg-slate-50 transition-colors ${statusFilter === 'Approved' ? 'font-bold text-blue-600' : 'text-slate-600'}`}
-                            >
-                                Approved
-                            </button>
-                            <div className="h-px bg-slate-50 mx-2"></div>
-                            <button
-                                onClick={() => { setStatusFilter('Rejected'); setShowFilterMenu(false); }}
-                                className={`w-full text-left px-4 py-3 text-sm hover:bg-slate-50 transition-colors ${statusFilter === 'Rejected' ? 'font-bold text-blue-600' : 'text-slate-600'}`}
-                            >
-                                Rejected
-                            </button>
+                            {['all', 'Pending', 'Approved', 'Rejected'].map((f) => (
+                                <button
+                                    key={f}
+                                    onClick={() => { setStatusFilter(f); setShowFilterMenu(false); }}
+                                    className={`w-full text-left px-4 py-3 text-sm hover:bg-slate-50 transition-colors ${statusFilter === f ? 'font-bold text-blue-600' : 'text-slate-600'}`}
+                                >
+                                    {f === 'all' ? 'All Applications' : f}
+                                </button>
+                            ))}
                         </div>
                     )}
                 </div>
             </div>
 
-            {/* Table Area */}
+            {/* Table */}
             <div className="bg-white border border-gray-100 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                         <thead>
-                            <tr className="bg-slate-50/50">
+                            <tr className="bg-slate-50/50 border-b border-slate-100">
                                 <th className="px-6 py-5 text-xs font-semibold text-slate-500 tracking-wider">S/N</th>
-                                <th className="px-6 py-5 text-xs font-semibold text-slate-500 tracking-wider">APPLICANT</th>
-                                <th className="px-6 py-5 text-xs font-semibold text-slate-500 tracking-wider">TYPE</th>
-                                <th className="px-6 py-5 text-xs font-semibold text-slate-500 tracking-wider">STATUS</th>
-                                <th className="px-6 py-5 text-xs font-semibold text-slate-500 tracking-wider">SUBMISSION DATE</th>
+                                <th className={thClass('applicant')} onClick={() => handleSort('applicant', 'Applicant')}>
+                                    APPLICANT <SortIcon col="applicant" sortConfig={sortConfig} />
+                                </th>
+                                <th className={thClass('type')} onClick={() => handleSort('type', 'Type')}>
+                                    TYPE <SortIcon col="type" sortConfig={sortConfig} />
+                                </th>
+                                <th className={thClass('status')} onClick={() => handleSort('status', 'Status')}>
+                                    STATUS <SortIcon col="status" sortConfig={sortConfig} />
+                                </th>
+                                <th className={thClass('date')} onClick={() => handleSort('date', 'Date')}>
+                                    SUBMISSION DATE <SortIcon col="date" sortConfig={sortConfig} />
+                                </th>
                                 <th className="px-6 py-5 text-xs font-semibold text-slate-500 tracking-wider"></th>
                             </tr>
                         </thead>
@@ -135,7 +193,7 @@ const MemberApplication = () => {
                                 <tr
                                     key={app._id}
                                     className="group hover:bg-slate-50 transition-colors cursor-pointer"
-                                    onClick={() => navigate(`/admin/members-application/${app._id}`)}
+                                    onClick={() => navigate(`/dashboard/members-application/${app._id}`)}
                                 >
                                     <td className="px-6 py-5 text-sm text-slate-400">
                                         {String(idx + 1).padStart(2, '0')}

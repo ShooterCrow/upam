@@ -59,8 +59,8 @@ const Register = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      const isAdmin = roles?.includes('admin') || roles?.includes('manager');
-      navigate(isAdmin ? "/admin" : "/user", { replace: true });
+      const isPrivileged = roles?.some(r => ['admin', 'manager', 'representative'].includes(r));
+      navigate(isPrivileged ? "/dashboard" : "/user", { replace: true });
     }
   }, [isLoggedIn, roles, navigate]);
 

@@ -511,6 +511,8 @@ const AdminSupportInbox = () => {
 const Support = () => {
     const { roles } = useAuth();
     const isAdmin = roles.includes('admin');
+    const isManager = roles.includes('manager');
+    const canManageSupport = isAdmin || isManager;
 
     return (
         <div className="space-y-8 animate-in fade-in duration-500">
@@ -519,7 +521,7 @@ const Support = () => {
                 <div className="space-y-1">
                     <h1 className="text-2xl md:text-3xl font-semibold text-gray-900 tracking-tight">Support & Help</h1>
                     <p className="text-slate-500 font-medium">
-                        {isAdmin
+                        {canManageSupport
                             ? 'Manage user inquiries and provide assistance.'
                             : 'How can we help you today?'
                         }
@@ -529,7 +531,7 @@ const Support = () => {
             </div>
 
             {/* Main Content */}
-            {isAdmin ? <AdminSupportInbox /> : <UserSupportExperience />}
+            {canManageSupport ? <AdminSupportInbox /> : <UserSupportExperience />}
         </div>
     );
 };

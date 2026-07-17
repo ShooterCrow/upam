@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import useAuth from '../../../../hooks/useAuth';
 import {
     User,
     Mail,
@@ -23,10 +24,10 @@ import ErrorState from '../../../../component/ui/ErrorState';
 const MemberProfile = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { isAdmin, isManager } = useAuth();
 
     const { data: response, isLoading, isError, error, refetch } = useGetUserFullProfileQuery(id);
     const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
-    console.log(response)
 
     if (isLoading) return <LoadingState message="Loading member profile..." />;
     if (isError) return <ErrorState message={error?.data?.message || "Error loading profile"} onRetry={refetch} />;
@@ -77,7 +78,10 @@ const MemberProfile = () => {
                 <div className="flex gap-2">
                     <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider border ${fullMember.isVerifiedMember ? 'bg-green-50 text-green-600 border-green-100' : 'bg-orange-50 text-orange-600 border-orange-100'
                         }`}>
-                        {fullMember.isVerifiedMember ? 'Verified Member' : 'Unverified'} - <Link to={`/admin/members-application/${fullMember._id}`} className="text-blue-600 hover:underline">View Application</Link>
+                        {fullMember.isVerifiedMember ? 'Verified Member' : 'Unverified'}
+                        {(isAdmin || isManager) && (
+                            <> - <Link to={`/dashboard/members-application/${fullMember._id}`} className="text-blue-600 hover:underline">View Application</Link></>
+                        )}
                     </span>
                 </div>
             </div>

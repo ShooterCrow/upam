@@ -7,19 +7,18 @@ const RoleRedirectGuard = () => {
 
     if (!isLoggedIn) return <Outlet />;
 
-    const isAdmin = roles.includes('admin') || roles.includes('manager');
-    const isUser = roles.includes('user');
+    const isPrivileged = roles.includes('admin') || roles.includes('manager') || roles.includes('representative');
+    const isPureUser = roles.includes('user') && !isPrivileged;
 
-    // If Admin is in /user space, bounce to /admin
-    if (isAdmin && location.pathname.startsWith('/user')) {
-        const targetPath = location.pathname.replace('/user', '/admin');
+    // If privileged user is in /user space, bounce to /dashboard
+    if (isPrivileged && location.pathname.startsWith('/user')) {
+        const targetPath = location.pathname.replace('/user', '/dashboard');
         return <Navigate to={targetPath} replace />;
     }
 
-    // If User (only) is in /admin space, bounce to /user
-    // Note: managers might have both, so we use strict user check
-    if (isUser && !isAdmin && location.pathname.startsWith('/admin')) {
-        const targetPath = location.pathname.replace('/admin', '/user');
+    // If pure user is in /dashboard space, bounce to /user
+    if (isPureUser && location.pathname.startsWith('/dashboard')) {
+        const targetPath = location.pathname.replace('/dashboard', '/user');
         return <Navigate to={targetPath} replace />;
     }
 

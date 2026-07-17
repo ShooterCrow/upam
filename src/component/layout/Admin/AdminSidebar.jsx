@@ -26,7 +26,7 @@ import { useLogoutMutation } from '../../../pages/authenticationPages/authApiSli
 import LoadingState from '../../ui/LoadingState';
 
 const AdminSidebar = () => {
-    const { user } = useAuth()
+    const { user, roles } = useAuth();
     const completeness = useSelector(selectCompleteness);
     const location = useLocation();
     const navigate = useNavigate();
@@ -35,9 +35,9 @@ const AdminSidebar = () => {
 
     const isComplete = completeness?.isAllComplete ?? true;
     const allowedPaths = [
-        '/admin/my-profile',
-        '/admin/member-verification',
-        '/admin/emergency-contact',
+        '/dashboard/my-profile',
+        '/dashboard/member-verification',
+        '/dashboard/emergency-contact',
         '/logout'
     ];
 
@@ -64,8 +64,8 @@ const AdminSidebar = () => {
         }
     };
 
-    // Admin specific links
-    const links = ADMIN_LINKS;
+    // Filter links to only those the current user's roles can see
+    const links = ADMIN_LINKS.filter(link => !link.roles || link.roles.some(r => roles.includes(r)));
     const bottomLinks = ADMIN_BOTTOM_LINKS;
 
     return (
@@ -105,7 +105,7 @@ const AdminSidebar = () => {
                 {/* Main Navigation */}
                 <nav className="flex-1 overflow-y-auto py-2 px-4 space-y-1">
                     {links.map((link) => {
-                        const isActive = location.pathname === link.path || (link.path !== '/admin' && location.pathname.startsWith(link.path));
+                        const isActive = location.pathname === link.path || (link.path !== '/dashboard' && location.pathname.startsWith(link.path));
                         const Icon = link.icon;
                         const isRestricted = !isComplete && !allowedPaths.includes(link.path);
 
@@ -137,10 +137,10 @@ const AdminSidebar = () => {
                 </nav>
 
                 {/* Bottom Navigation (Profile/Logout) */}
-                <div className="p-4 border-t border-gray-50 space-y-1">
+                <div className="p-4 border-t border-gray-300 space-y-1">
                     {bottomLinks.map((link) => {
                         const Icon = link.icon;
-                        const isActive = location.pathname === link.path || (link.path !== '/admin' && location.pathname.startsWith(link.path));
+                        const isActive = location.pathname === link.path || (link.path !== '/dashboard' && location.pathname.startsWith(link.path));
                         const isRestricted = !isComplete && !allowedPaths.includes(link.path);
 
                         return link.path === '/logout' ? (

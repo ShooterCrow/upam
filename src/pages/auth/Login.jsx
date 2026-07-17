@@ -43,8 +43,8 @@ const Login = () => {
   // If already logged in, redirect immediately
   useEffect(() => {
     if (isLoggedIn) {
-      const isAdmin = roles?.includes('admin') || roles?.includes('manager');
-      navigate(isAdmin ? "/admin" : "/user", { replace: true });
+      const isPrivileged = roles?.some(r => ['admin', 'manager', 'representative'].includes(r));
+      navigate(isPrivileged ? "/dashboard" : "/user", { replace: true });
     }
   }, [isLoggedIn, roles, navigate]);
 
@@ -56,8 +56,9 @@ const Login = () => {
     e.preventDefault();
     try {
       const userData = await login({ identifier, password }).unwrap();
-      const role = userData?.data?.user?.roles?.[0] || userData?.user?.roles?.[0];
-      setNavTo(role === "admin" ? "/admin" : "/user");
+      const userRoles = userData?.data?.user?.roles || userData?.user?.roles || [];
+      const isPrivileged = userRoles.some(r => ['admin', 'manager', 'representative'].includes(r));
+      setNavTo(isPrivileged ? "/dashboard" : "/user");
       dispatch(setCredentials({ ...userData }));
     } catch (err) {
       if (err?.data?.message) {

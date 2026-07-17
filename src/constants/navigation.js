@@ -24,53 +24,123 @@ import {
   Wallet,
   Settings,
   ClipboardList,
+  Shield,
 } from "lucide-react";
 
 export const ADMIN_LINKS = [
-  { name: "Dashboard", path: "/admin", icon: LayoutDashboard },
-  { name: "UPAM Calender", path: "/admin/calendar", icon: Calendar },
   {
-    name: "Member Verification",
-    path: "/admin/member-verification",
-    icon: CheckCircle,
+    name: "Dashboard",
+    path: "/dashboard",
+    icon: LayoutDashboard,
+    roles: ["admin", "manager", "representative"],
   },
   {
-    name: "Membership Payment",
-    path: "/admin/membership-payment",
-    icon: CreditCard,
+    name: "UPAM Calender",
+    path: "/dashboard/calendar",
+    icon: Calendar,
+    roles: ["admin", "manager", "representative"],
   },
   {
     name: "Emergency Contact",
-    path: "/admin/emergency-contact",
+    path: "/dashboard/emergency-contact",
     icon: AlertCircle,
+    roles: ["admin", "manager", "representative"],
   },
-  { name: "Notifications", path: "/admin/notification", icon: Bell },
-  { name: "Support & Help", path: "/admin/support", icon: Headphones },
   {
-    name: "All Transactions",
-    path: "/admin/all-transactions",
-    icon: List,
+    name: "Notifications",
+    path: "/dashboard/notification",
+    icon: Bell,
+    roles: ["admin", "manager", "representative"],
+  },
+  {
+    name: "Create User",
+    path: "/dashboard/create-user",
+    icon: UserPlus,
+    roles: ["admin", "representative"],
+  },
+  {
+    name: "Chapter Members",
+    path: "/dashboard/chapter-members",
+    icon: Users,
+    roles: ["representative"],
   },
   {
     name: "My Transactions",
-    path: "/admin/my-transactions",
+    path: "/dashboard/my-transactions",
     icon: Wallet,
+    roles: ["admin", "manager", "representative"],
   },
-  { name: "Dues", path: "/admin/dues", icon: ClipboardList },
-  { name: "My Dues", path: "/admin/my-dues", icon: ClipboardList },
-  { name: "All Members", path: "/admin/all-members", icon: Users },
+  {
+    name: "My Dues",
+    path: "/dashboard/my-dues",
+    icon: ClipboardList,
+    roles: ["admin", "manager", "representative"],
+  },
+  {
+    name: "Member Verification",
+    path: "/dashboard/member-verification",
+    icon: CheckCircle,
+    roles: ["admin", "manager", "representative"],
+  },
+  {
+    name: "Membership Payment",
+    path: "/dashboard/membership-payment",
+    icon: CreditCard,
+    roles: ["admin", "representative", "manager"],
+  },
+  {
+    name: "Support & Help",
+    path: "/dashboard/support",
+    icon: Headphones,
+    roles: ["admin", "manager", "representative"],
+  },
+  {
+    name: "All Transactions",
+    path: "/dashboard/all-transactions",
+    icon: List,
+    roles: ["admin", "manager"],
+  },
+  {
+    name: "Dues",
+    path: "/dashboard/dues",
+    icon: ClipboardList,
+    roles: ["admin", "manager"],
+  },
+  {
+    name: "All Members",
+    path: "/dashboard/all-members",
+    icon: Users,
+    roles: ["admin", "manager"],
+  },
+  {
+    name: "Role Management",
+    path: "/dashboard/role-management",
+    icon: Shield,
+    roles: ["admin"],
+  },
   {
     name: "Members Application",
-    path: "/admin/members-application",
+    path: "/dashboard/members-application",
     icon: FileText,
+    roles: ["admin", "manager"],
   },
-  { name: "Chapters", path: "/admin/chapters", icon: Globe },
-  { name: "Settings", path: "/admin/settings", icon: Settings },
+  {
+    name: "Chapters",
+    path: "/dashboard/chapters",
+    icon: Globe,
+    roles: ["admin", "manager"],
+  },
+  {
+    name: "Settings",
+    path: "/dashboard/settings",
+    icon: Settings,
+    roles: ["admin"],
+  },
 ];
 
 export const ADMIN_BOTTOM_LINKS = [
-  { name: "Account", path: "/admin/my-profile", icon: User },
-  { name: "Log out", path: "/logout", icon: LogOutIcon }, // Note: Handled specially in components
+  { name: "Account", path: "/dashboard/my-profile", icon: User },
+  { name: "Log out", path: "/logout", icon: LogOutIcon },
 ];
 
 export const USER_LINKS = [

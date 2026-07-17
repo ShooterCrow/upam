@@ -15,7 +15,7 @@ import { useEffect, useRef } from 'react';
 const ENABLE_IDLE_RELOAD = false; // Reload when tab is inactive for more than 1 minute
 const ENABLE_ONLINE_RELOAD = true; // Reload when internet connection is restored
 
-const EXCLUDED_ROUTES = ["/register", "/admin/settings"];
+const EXCLUDED_ROUTES = ["/register", "/dashboard/settings"];
 
 
 const AutoRecovery = () => {

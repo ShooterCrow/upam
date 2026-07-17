@@ -13,6 +13,7 @@ const useAuth = () => {
   let isActive = false;
   let isAdmin = false;
   let isManager = false;
+  let isRepresentative = false;
   let status = "User";
 
   if (token && user) {
@@ -22,9 +23,12 @@ const useAuth = () => {
     isActive = emailVerified;
     isAdmin = roles.includes("admin");
     isManager = roles.includes("manager");
+    isRepresentative =
+      roles.includes("representative") && !isAdmin && !isManager;
 
     if (isAdmin) status = "Admin";
     else if (isManager) status = "Manager";
+    else if (isRepresentative) status = "Representative";
 
     return {
       roles,
@@ -32,6 +36,7 @@ const useAuth = () => {
       isActive,
       isAdmin,
       isManager,
+      isRepresentative,
       status,
       user,
       importedMember_id,
@@ -46,6 +51,7 @@ const useAuth = () => {
     isActive: false,
     isAdmin: false,
     isManager: false,
+    isRepresentative: false,
     status: "Guest",
     user: null,
     isLoading: false,

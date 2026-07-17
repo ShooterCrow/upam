@@ -81,7 +81,7 @@ const MemberDetail = () => {
                     <p className="text-slate-500 mt-2 max-w-md">We couldn't find the verification application you're looking for. It may have been deleted or the ID is incorrect.</p>
                 </div>
                 <button
-                    onClick={() => navigate('/admin/members-application')}
+                    onClick={() => navigate('/dashboard/members-application')}
                     className="px-6 py-3 bg-slate-800 text-white rounded-xl font-bold hover:bg-slate-700 transition-all"
                 >
                     Back to Applications
@@ -117,7 +117,7 @@ const MemberDetail = () => {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 py-8 border-b border-slate-100 mb-8">
                 <div className="space-y-4">
                     <button
-                        onClick={() => navigate('/admin/members-application')}
+                        onClick={() => navigate('/dashboard/members-application')}
                         className="flex items-center gap-2 text-slate-400 hover:text-slate-800 transition-colors font-medium group"
                     >
                         <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
@@ -136,7 +136,7 @@ const MemberDetail = () => {
                     <div className="flex items-center gap-3">
                         <button
                             onClick={() => { setShowActionPanel(true); setFeedback(application.adminFeedback || ''); }}
-                            className="px-8 py-3.5 bg-slate-900 text-white rounded-2xl font-bold hover:shadow-lg hover:shadow-slate-200 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                            className="px-8 py-3.5 bg-slate-900 text-white font-bold hover:shadow-lg hover:shadow-slate-200 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
                         >
                             {application.status === 'Approved' ? 'Manage Verification' : 'Review Application'}
                         </button>
@@ -145,7 +145,7 @@ const MemberDetail = () => {
             </div>
 
             {successMessage && (
-                <div className="mb-8 p-4 bg-emerald-50 border border-emerald-100 rounded-2xl flex items-center gap-3 text-emerald-700 font-bold animate-in slide-in-from-top-4 duration-300">
+                <div className="mb-8 p-4 bg-emerald-50 border border-emerald-100 flex items-center gap-3 text-emerald-700 font-bold animate-in slide-in-from-top-4 duration-300">
                     <CheckCircle2 size={20} />
                     {successMessage}
                 </div>
@@ -318,7 +318,7 @@ const MemberDetail = () => {
             {/* Action Popup */}
             {showActionPanel && (
                 <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
-                    <div className="bg-white w-full max-w-lg rounded-[2.5rem] p-10 animate-in zoom-in-95 duration-300">
+                    <div className="bg-white w-full max-w-lg p-7 animate-in zoom-in-95 duration-300">
                         <div className="flex items-center justify-between mb-8">
                             <h2 className="text-2xl font-black text-slate-900 tracking-tight">
                                 {application.status === 'Approved' ? 'Manage Verification' : 'Review Application'}
@@ -332,7 +332,7 @@ const MemberDetail = () => {
                             <div className="space-y-2">
                                 <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Administrator Feedback (Optional)</label>
                                 <textarea
-                                    className="w-full h-32 px-5 py-4 rounded-[1.5rem] bg-slate-50 border border-slate-100 focus:bg-white focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all outline-none font-medium text-slate-800 placeholder:text-slate-400 text-sm"
+                                    className="w-full h-32 px-5 py-4 bg-slate-50 border border-slate-100 focus:bg-white focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all outline-none font-medium text-slate-800 placeholder:text-slate-400 text-sm"
                                     placeholder="Enter your comments for the applicant..."
                                     value={feedback}
                                     onChange={(e) => setFeedback(e.target.value)}
@@ -343,7 +343,7 @@ const MemberDetail = () => {
                                 <button
                                     disabled={isUpdating}
                                     onClick={() => handleStatusUpdate('Rejected')}
-                                    className="flex items-center justify-center gap-2 py-4.5 bg-white border-2 border-slate-100 text-slate-600 rounded-2xl font-bold hover:bg-red-50 hover:border-red-100 hover:text-red-600 transition-all disabled:opacity-50"
+                                    className="flex items-center justify-center gap-2 py-3 bg-white border-2 border-slate-100 text-slate-600 font-bold hover:bg-red-50 hover:border-red-100 hover:text-red-600 transition-all disabled:opacity-50"
                                 >
                                     {isUpdating ? <Loader2 className="animate-spin" size={18} /> : (application.status === 'Approved' ? <AlertCircle size={18} /> : <XCircle size={18} />)}
                                     {application.status === 'Approved' ? 'Cancel Verification' : 'Reject'}
@@ -352,7 +352,7 @@ const MemberDetail = () => {
                                     <button
                                         disabled={isUpdating}
                                         onClick={() => handleStatusUpdate('Approved')}
-                                        className="flex items-center justify-center gap-2 py-4.5 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition-all shadow-lg shadow-red-100/50 disabled:opacity-50"
+                                        className="flex items-center justify-center gap-2 py-3 bg-red-600 text-white font-bold hover:bg-red-700 transition-all shadow-lg shadow-red-100/50 disabled:opacity-50"
                                     >
                                         {isUpdating ? <Loader2 className="animate-spin" size={18} /> : <CheckCircle2 size={18} />}
                                         Approve

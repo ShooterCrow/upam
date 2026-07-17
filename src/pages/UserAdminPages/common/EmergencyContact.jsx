@@ -111,7 +111,10 @@ const EmergencyContact = () => {
                 }, 1500);
                 return () => clearTimeout(timer);
             } else if (completeness?.isAllComplete && location.pathname === completeness.step3.path && wasSaving) {
-                const rolePath = user?.roles?.[0] === 'Admin' ? '/admin' : '/user';
+                const privilegedRoles = ['Admin', 'Manager', 'Representative'];
+                const rolePath = privilegedRoles.includes(authUser?.roles?.[0])
+                    ? '/dashboard'
+                    : '/user';
                 const timer = setTimeout(() => {
                     navigate(rolePath);
                     setWasSaving(false);

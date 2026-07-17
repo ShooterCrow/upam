@@ -74,7 +74,7 @@ const Dashboard = () => {
                             <p className="text-slate-500 text-lg">
                                 Here's the Summary of your Activity History for the Week Here
                             </p>
-                            <Link to={isAdmin ? '/admin/calendar' : '/user/calendar'} className="flex items-center gap-2 text-blue-600 font-bold hover:gap-3 transition-all mt-4 group">
+                            <Link to={isAdmin ? '/dashboard/calendar' : '/user/calendar'} className="flex items-center gap-2 text-blue-600 font-bold hover:gap-3 transition-all mt-4 group">
                                 View Activities Here
                                 <ArrowRight size={20} />
                             </Link>
@@ -127,7 +127,7 @@ const Dashboard = () => {
                                     <h3 className="text-xl font-bold text-slate-800">
                                         {isAdmin ? 'Recently verified members' : 'Recent Notifications'}
                                     </h3>
-                                    <Link to={isAdmin ? '/admin/notification' : '/user/notification'} className="text-blue-500 text-sm font-bold hover:underline">View all</Link>
+                                    <Link to={isAdmin ? '/dashboard/notification' : '/user/notification'} className="text-blue-500 text-sm font-bold hover:underline">View all</Link>
                                 </div>
                                 <div className="overflow-x-auto">
                                     <table className="w-full text-left">

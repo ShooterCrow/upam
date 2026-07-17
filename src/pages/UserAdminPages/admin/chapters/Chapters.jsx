@@ -95,7 +95,7 @@ const Chapters = () => {
                                 <tr
                                     key={chapter._id}
                                     className="group hover:bg-slate-50 transition-colors cursor-pointer"
-                                    onClick={() => navigate(`/admin/chapters/${chapter._id}`)}
+                                    onClick={() => navigate(`/dashboard/chapters/${chapter._id}`)}
                                 >
                                     {/* <td className="px-6 py-5 text-sm font-bold text-slate-700">
                                         {chapter.chapter_id}
@@ -143,7 +143,7 @@ const Chapters = () => {
                                         {showActionMenu === chapter._id && (
                                             <div className="absolute right-6 top-12 w-36 bg-white border border-gray-100 z-10 py-1 shadow-xl animate-in fade-in zoom-in-95">
                                                 <button
-                                                    onClick={() => navigate(`/admin/chapters/${chapter._id}`)}
+                                                    onClick={() => navigate(`/dashboard/chapters/${chapter._id}`)}
                                                     className="w-full text-left px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 flex items-center gap-2"
                                                 >
                                                     <Eye size={14} />

@@ -61,6 +61,8 @@ const MemberDetail = lazy(() => import('./pages/UserAdminPages/admin/detailPages
 const MemberProfile = lazy(() => import('./pages/UserAdminPages/admin/detailPages/MemberProfile'));
 const Chapters = lazy(() => import('./pages/UserAdminPages/admin/chapters/Chapters'));
 const ChapterDetail = lazy(() => import('./pages/UserAdminPages/admin/detailPages/ChapterDetail'));
+const CreateUser = lazy(() => import('./pages/UserAdminPages/admin/CreateUser'));
+const RoleManagement = lazy(() => import('./pages/UserAdminPages/admin/RoleManagement'));
 const PublicChapters = lazy(() => import('./pages/chapters/Chapters'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const MembershipPayment = lazy(() => import('./pages/UserAdminPages/common/MembershipPayment'));
@@ -155,11 +157,11 @@ const App = () => {
 
             </Route>
 
-            {/* Admin Routes */}
-            <Route element={<RequireAuth allowedRoles={['admin', "manager"]} />}>
+            {/* Dashboard Routes (admin, manager, representative) */}
+            <Route element={<RequireAuth allowedRoles={['admin', "manager", "representative"]} />}>
               <Route element={<RoleRedirectGuard />}>
                 <Route element={<ProfileCompletionGuard />}>
-                  <Route path="/admin" element={<AdminLayoutContext />}>
+                  <Route path="/dashboard" element={<AdminLayoutContext />}>
                     <Route index element={<Dashboard />} />
                     <Route path='member-verification' element={<MemberVerification />} />
                     <Route path='membership-payment' element={<MembershipPayment />} />
@@ -167,6 +169,10 @@ const App = () => {
                     <Route path='notification' element={<Notification />} />
                     <Route path='support' element={<Support />} />
                     <Route path='all-members'>
+                      <Route index element={<AllMembers />} />
+                      <Route path=":id" element={<MemberProfile />} />
+                    </Route>
+                    <Route path='chapter-members'>
                       <Route index element={<AllMembers />} />
                       <Route path=":id" element={<MemberProfile />} />
                     </Route>
@@ -185,12 +191,14 @@ const App = () => {
                     <Route path='my-profile' element={<MyProfile />} />
                     <Route path='calendar' element={<UPAMCalender />} />
                     <Route path='settings' element={<Settings />} />
+                    <Route path='create-user' element={<CreateUser />} />
+                    <Route path='role-management' element={<RoleManagement />} />
                   </Route>
                 </Route>
               </Route>
             </Route>
 
-            {/* User Routes */}
+            {/* User Routes (pure user role only) */}
             <Route element={<RequireAuth allowedRoles={['user', "admin", "manager"]} />}>
               <Route element={<RoleRedirectGuard />}>
                 <Route element={<ProfileCompletionGuard />}>
@@ -211,6 +219,7 @@ const App = () => {
             </Route>
 
             {/* Catch-all route */}
+            <Route path="admin" element={<Navigate to="/dashboard" replace />} />
             <Route path="*" element={<NotFound />} />
 
           </Route>
