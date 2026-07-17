@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import ScrollReveal from '../../../components/ScrollReveal';
+import ScrollReveal from '../../../component/ScrollReveal';
 
 const PanAfricanUnity = () => {
     return (
@@ -34,7 +34,7 @@ const PanAfricanUnity = () => {
                                 Introduction: The Enduring Promise of Pan-Africanism
                             </h2>
                             <p className="text-base text-slate-600 leading-relaxed mb-4">
-                                Pan-Africanism emerged as both a response and a vision—a response to centuries of exploitation and fragmentation, and a vision of unity, dignity, and self-determination for African people worldwide. From early thinkers such as Henry Sylvester-Williams and W.E.B. Du Bois to continental leaders like Kwame Nkrumah, Julius Nyerere, and Patrice Lumumba, Pan-Africanism has consistently called for African unity as the foundation for freedom and progress.
+                                Pan-Africanism emerged as both a response and a visionâ€”a response to centuries of exploitation and fragmentation, and a vision of unity, dignity, and self-determination for African people worldwide. From early thinkers such as Henry Sylvester-Williams and W.E.B. Du Bois to continental leaders like Kwame Nkrumah, Julius Nyerere, and Patrice Lumumba, Pan-Africanism has consistently called for African unity as the foundation for freedom and progress.
                             </p>
                             <p className="text-base text-slate-600 leading-relaxed">
                                 Yet, more than half a century after the political independence of most African states, the continent remains divided economically, politically, and psychologically. Borders imposed by colonial powers persist, intra-African trade remains low, and African voices are often fragmented. This gap between ideology and practical unity raises a central question: How can Pan-Africanism be translated into concrete action in the 21st century?
@@ -56,7 +56,7 @@ const PanAfricanUnity = () => {
                         From Historical Ideology to Contemporary Context
                     </h2>
                     <p className="text-base text-slate-600 leading-relaxed mb-6">
-                        Historically, Pan-Africanism was shaped by the shared experience of oppression. Early congresses focused on racial justice and anti-colonial resistance. The transition from the OAU to the African Union (AU) in 2002 signaled a renewed commitment to integration. Today, Pan-Africanism operates within a complex global environment—deeply entangled in international trade, digital networks, and migration flows. This demands a more pragmatic, results-oriented Pan-Africanism that balances idealism with institutional effectiveness.
+                        Historically, Pan-Africanism was shaped by the shared experience of oppression. Early congresses focused on racial justice and anti-colonial resistance. The transition from the OAU to the African Union (AU) in 2002 signaled a renewed commitment to integration. Today, Pan-Africanism operates within a complex global environmentâ€”deeply entangled in international trade, digital networks, and migration flows. This demands a more pragmatic, results-oriented Pan-Africanism that balances idealism with institutional effectiveness.
                     </p>
                 </section>
 
@@ -123,10 +123,10 @@ const PanAfricanUnity = () => {
                     <h2 className="text-2xl lg:text-3xl font-black text-slate-900 mb-6 uppercase text-center">Reimagining Pan-African Unity</h2>
                     <div className="text-base lg:text-lg text-slate-600 leading-relaxed space-y-6">
                         <p>
-                            Pan-Africanism in the 21st century stands at a crossroads. Its future relevance depends on producing real outcomes—improving livelihoods, strengthening identity, and amplifying Africa's collective voice.
+                            Pan-Africanism in the 21st century stands at a crossroads. Its future relevance depends on producing real outcomesâ€”improving livelihoods, strengthening identity, and amplifying Africa's collective voice.
                         </p>
                         <p>
-                            By grounding the movement in action—political coordination, economic integration, cultural renewal, and youth leadership—Africa can transform this historic vision into a functional reality. The task before this generation is not merely to inherit Pan-Africanism but to build it.
+                            By grounding the movement in actionâ€”political coordination, economic integration, cultural renewal, and youth leadershipâ€”Africa can transform this historic vision into a functional reality. The task before this generation is not merely to inherit Pan-Africanism but to build it.
                         </p>
                         <div className="text-slate-900 font-black text-center pt-8 border-b-2 border-[#EB010C] w-fit mx-auto pb-2 uppercase text-xl">
                             BUILDING THE VISION. LIVING THE UNITY.

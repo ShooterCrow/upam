@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Send, ArrowRight } from 'lucide-react';
 import worldMap from '../../assets/world_map.png';
 import { useCreateContactMutation } from './contactsApiSlice';
-import ScrollReveal from '../../components/ScrollReveal';
+import ScrollReveal from '../../component/ScrollReveal';
 import FAQ from '../../component/ui/FAQ';
 
 const TikTokIcon = () => (
@@ -73,7 +73,7 @@ const ContactUs = () => {
                     <ScrollReveal direction="right">
                         <div className="p-8 md:p-12">
                             <h2 className="text-2xl font-black text-slate-900 tracking-tight mb-1">Send Us a Message</h2>
-                            <p className="text-xs text-slate-400 mb-8 font-medium">We typically reply within 24–48 hours.</p>
+                            <p className="text-xs text-slate-400 mb-8 font-medium">We typically reply within 24â€“48 hours.</p>
 
                             {isSuccess ? (
                                 <div className="py-12 text-center">

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import eventHero from '../../assets/event.jpg';
 import { Calendar, MapPin, ArrowRight, Play, ChevronDown, ChevronUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import ScrollReveal from '../../components/ScrollReveal';
+import ScrollReveal from '../../component/ScrollReveal';
 import {
   events,
   howItWorksSteps,
@@ -19,7 +19,7 @@ const eventFaqs = [
   },
   {
     q: 'Can anyone list an event?',
-    a: 'Yes — individuals, organizations, and communities can list events on the UPAM platform. All events are subject to a brief review to ensure they align with our community guidelines.',
+    a: 'Yes â€” individuals, organizations, and communities can list events on the UPAM platform. All events are subject to a brief review to ensure they align with our community guidelines.',
   },
   {
     q: 'Are virtual events supported?',
@@ -101,7 +101,7 @@ const Events = () => {
                 knowledge sharing, and cultural exchange. It allows individuals, organizations, and
                 communities to promote events, reach wider audiences, and sell tickets seamlessly.
                 Whether it's a leadership summit, cultural festival, training, concert, or virtual
-                event — UPAM provides the space to make it visible and accessible.
+                event â€” UPAM provides the space to make it visible and accessible.
               </p>
             </ScrollReveal>
             <ScrollReveal direction="right">

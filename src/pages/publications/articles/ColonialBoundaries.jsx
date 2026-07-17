@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import ScrollReveal from '../../../components/ScrollReveal';
+import ScrollReveal from '../../../component/ScrollReveal';
 
 const ColonialBoundaries = () => {
   return (
@@ -22,7 +22,7 @@ const ColonialBoundaries = () => {
             One People, Many Borders: How Colonial Boundaries Continue to Shape African Disunity
           </h1>
           <p className="text-base leading-[170%] text-slate-600">
-            Africa is home to immense cultural, linguistic, and historical interconnectedness, yet it remains one of the most politically fragmented regions in the world. The borders that divide the continent today were largely imposed during colonial rule, with little regard for existing African societies, identities, or systems of governance. This paper examines how colonial boundaries continue to shape African disunity in the 21st century—politically, economically, socially, and psychologically. It argues that these borders are not merely geographic lines but enduring structures of division that hinder Pan-African unity and development. By analyzing their historical origins, contemporary impacts, and possible pathways toward transcending them, the paper positions border re-imagining as a central task in the realization of Pan-Africanism as a lived reality.
+            Africa is home to immense cultural, linguistic, and historical interconnectedness, yet it remains one of the most politically fragmented regions in the world. The borders that divide the continent today were largely imposed during colonial rule, with little regard for existing African societies, identities, or systems of governance. This paper examines how colonial boundaries continue to shape African disunity in the 21st centuryâ€”politically, economically, socially, and psychologically. It argues that these borders are not merely geographic lines but enduring structures of division that hinder Pan-African unity and development. By analyzing their historical origins, contemporary impacts, and possible pathways toward transcending them, the paper positions border re-imagining as a central task in the realization of Pan-Africanism as a lived reality.
           </p>
         </header></ScrollReveal>
 
@@ -35,7 +35,7 @@ const ColonialBoundaries = () => {
               </h2>
               <div className="text-base text-slate-600 leading-relaxed space-y-4">
                 <p>
-                  Africa’s borders are among the most visible legacies of colonialism. Unlike many other regions of the world where borders evolved over long historical processes, African borders were largely drawn in a short period during the late 19th and early 20th centuries. These lines were imposed through negotiation among European powers, without consultation with African peoples.
+                  Africaâ€™s borders are among the most visible legacies of colonialism. Unlike many other regions of the world where borders evolved over long historical processes, African borders were largely drawn in a short period during the late 19th and early 20th centuries. These lines were imposed through negotiation among European powers, without consultation with African peoples.
                 </p>
                 <p>
                   Today, Africa has over 50 nation-states, each with its own political system, currency, immigration policies, and economic priorities. While political independence transferred governance to African leaders, the colonial borders remained intact. The result has been a continent that is politically sovereign but structurally fragmented. This paper argues that African disunity cannot be fully understood without confronting the enduring influence of colonial borders. It further contends that Pan-African unity requires not necessarily the erasure of borders, but a fundamental transformation of how they function and how Africans relate to one another across them.
@@ -58,7 +58,7 @@ const ColonialBoundaries = () => {
             The Colonial Construction of African Borders
           </h2>
           <p className="text-base text-slate-600 leading-relaxed">
-            The modern African border system emerged primarily from the Berlin Conference of 1884–1885 and subsequent colonial agreements. European powers partitioned the continent based on strategic interests, economic resources, and political convenience. Ethnic groups, kingdoms, and trade networks were split across artificial boundaries, while historically unrelated communities were forced into single political units. These borders served colonial objectives: control, extraction, and administration. They disrupted indigenous governance systems and reoriented African societies toward external centers of power. Colonial borders were not meant to foster unity or development; they were designed to facilitate domination. By the time African nations gained independence, these borders had hardened into internationally recognized boundaries, making their alteration politically risky and diplomatically complex.
+            The modern African border system emerged primarily from the Berlin Conference of 1884â€“1885 and subsequent colonial agreements. European powers partitioned the continent based on strategic interests, economic resources, and political convenience. Ethnic groups, kingdoms, and trade networks were split across artificial boundaries, while historically unrelated communities were forced into single political units. These borders served colonial objectives: control, extraction, and administration. They disrupted indigenous governance systems and reoriented African societies toward external centers of power. Colonial borders were not meant to foster unity or development; they were designed to facilitate domination. By the time African nations gained independence, these borders had hardened into internationally recognized boundaries, making their alteration politically risky and diplomatically complex.
           </p>
         </section>
 
@@ -69,7 +69,7 @@ const ColonialBoundaries = () => {
           </h2>
           <div className="text-base text-slate-600 leading-relaxed space-y-4">
             <p>
-              Colonial borders reshaped how Africans understood themselves and one another. Communities that had shared language, culture, and ancestry for centuries were suddenly defined as “foreigners” to one another. Over time, colonial administrations reinforced new identities tied to colonial territories rather than shared African heritage.
+              Colonial borders reshaped how Africans understood themselves and one another. Communities that had shared language, culture, and ancestry for centuries were suddenly defined as â€œforeignersâ€ to one another. Over time, colonial administrations reinforced new identities tied to colonial territories rather than shared African heritage.
             </p>
             <p>
               Post-independence education systems, national symbols, and political narratives often emphasized national identity over Pan-African consciousness. While national pride played an important role in state-building, it also contributed to a narrowing of identity that weakened continental solidarity. The psychological impact of borders is profound. Africans are often more familiar with European or American geography than with neighboring African countries. This mental fragmentation undermines the sense of shared destiny that Pan-Africanism seeks to cultivate.
@@ -82,7 +82,7 @@ const ColonialBoundaries = () => {
           <section>
             <h2 className="text-lg lg:text-xl font-black text-slate-900 mb-3 uppercase">Political Disunity</h2>
             <p className="text-base text-slate-600 leading-relaxed">
-              Colonial borders have also shaped Africa’s political landscape in ways that complicate governance. Many states encompass diverse ethnic groups, and arbitrary borders often make nation-building difficult. Competition over land and resources is exacerbated by borders that ignore historical realities, diverting resources from development and continental integration.
+              Colonial borders have also shaped Africaâ€™s political landscape in ways that complicate governance. Many states encompass diverse ethnic groups, and arbitrary borders often make nation-building difficult. Competition over land and resources is exacerbated by borders that ignore historical realities, diverting resources from development and continental integration.
             </p>
           </section>
           <section>
@@ -99,7 +99,7 @@ const ColonialBoundaries = () => {
             Borders, Mobility, and the African People
           </h2>
           <p className="text-base text-slate-600 leading-relaxed mb-6">
-            One of the most tangible ways colonial borders affect everyday life is through restrictions on mobility. Africans often face greater difficulty traveling within Africa than traveling outside the continent. Visa requirements and bureaucratic hurdles contradict the Pan-African ideal of shared belonging. Efforts like the AU’s Free Movement Protocol represent vital steps toward reimagining borders as points of connection.
+            One of the most tangible ways colonial borders affect everyday life is through restrictions on mobility. Africans often face greater difficulty traveling within Africa than traveling outside the continent. Visa requirements and bureaucratic hurdles contradict the Pan-African ideal of shared belonging. Efforts like the AUâ€™s Free Movement Protocol represent vital steps toward reimagining borders as points of connection.
           </p>
           <div className="bg-[#EB010C]/5 p-6 border border-red-100 italic">
             "Unity is not the absence of borders; it is the presence of a shared vision powerful enough to transcend them."

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Search, User, Calendar, IdCard, Users, ArrowRight, Shield, Globe, MapPin, Eye, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useSearchMembersQuery } from './searchApiSlice';
 import useAuth from '../../hooks/useAuth';
-import ScrollReveal from '../../components/ScrollReveal';
+import ScrollReveal from '../../component/ScrollReveal';
 
 const TABS = [
   { id: 'name', label: 'By Name', icon: User },

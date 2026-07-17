@@ -1,8 +1,8 @@
-import React from 'react';
+﻿import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { globalExecutive, nationalRepresentatives, directors, members } from '../../constants/leaders';
-import ScrollReveal from '../../components/ScrollReveal';
+import ScrollReveal from '../../component/ScrollReveal';
 import { Users, Globe, Building2, ArrowRight } from 'lucide-react';
 
 const imageRevealVariants = {

@@ -1,6 +1,6 @@
-import React from 'react';
+﻿import React from 'react';
 import { Cookie, Key, MousePointer2 } from 'lucide-react';
-import ScrollReveal from '../../components/ScrollReveal';
+import ScrollReveal from '../../component/ScrollReveal';
 
 const Cookies = () => {
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Users, Handshake, Heart, CheckCircle2, GraduationCap, Briefcase, Shield, Coins, Network } from 'lucide-react';
 import becomeMemberImg from '../../assets/become_member.png';
@@ -6,7 +6,7 @@ import volunteerImg from '../../assets/volunteer.png';
 import partnerImg from '../../assets/partner.png';
 import benefitsImg from '../../assets/benefits.png';
 import FAQ from '../../component/ui/FAQ';
-import ScrollReveal from '../../components/ScrollReveal';
+import ScrollReveal from '../../component/ScrollReveal';
 
 const benefits = [
   { icon: GraduationCap, label: "Education & Scholarships", desc: "Access to sponsored education tracks and UPAM Academy programs." },

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import ScrollReveal from '../../components/ScrollReveal';
+﻿import React, { useState } from 'react';
+import ScrollReveal from '../../component/ScrollReveal';
 import { X } from 'lucide-react';
 
 const galleryImages = [
@@ -76,10 +76,10 @@ const Gallery = () => {
         </ScrollReveal>
       </div>
 
-      {/* Row 1 — scrolls left */}
+      {/* Row 1 â€” scrolls left */}
       <GalleryRow images={row1} onSelect={setSelectedImage} />
 
-      {/* Row 2 — scrolls right */}
+      {/* Row 2 â€” scrolls right */}
       <div className="mt-3">
         <GalleryRow images={row2} reverse onSelect={setSelectedImage} />
       </div>

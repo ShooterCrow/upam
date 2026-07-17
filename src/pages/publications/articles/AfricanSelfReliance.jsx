@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import ScrollReveal from '../../../components/ScrollReveal';
+import ScrollReveal from '../../../component/ScrollReveal';
 
 const AfricanSelfReliance = () => {
   return (
@@ -22,7 +22,7 @@ const AfricanSelfReliance = () => {
             African Self-Reliance: Moving Beyond Aid to Sustainable Development
           </h1>
           <p className="text-base leading-[170%] text-slate-600">
-            For decades, Africa’s development trajectory has been shaped by foreign aid, loans, and external interventions. While aid has played a role in humanitarian relief and short-term stabilization, it has not delivered lasting economic independence or structural transformation. This paper argues that true African development must be rooted in self-reliance—defined as the capacity of African societies to determine their priorities, mobilize internal resources, and build sustainable systems that serve their people. By examining the limitations of aid-dependent development models, the paper explores alternative pathways centered on local production, institutional strengthening, knowledge sovereignty, and Pan-African cooperation. African self-reliance is presented not as isolationism, but as a foundation for dignity, resilience, and long-term prosperity.
+            For decades, Africaâ€™s development trajectory has been shaped by foreign aid, loans, and external interventions. While aid has played a role in humanitarian relief and short-term stabilization, it has not delivered lasting economic independence or structural transformation. This paper argues that true African development must be rooted in self-relianceâ€”defined as the capacity of African societies to determine their priorities, mobilize internal resources, and build sustainable systems that serve their people. By examining the limitations of aid-dependent development models, the paper explores alternative pathways centered on local production, institutional strengthening, knowledge sovereignty, and Pan-African cooperation. African self-reliance is presented not as isolationism, but as a foundation for dignity, resilience, and long-term prosperity.
           </p>
         </header></ScrollReveal>
 
@@ -38,7 +38,7 @@ const AfricanSelfReliance = () => {
                   Since independence, many African nations have pursued development strategies heavily influenced by external actors. International financial institutions, donor governments, and non-governmental organizations have shaped policies, priorities, and metrics of success. Despite decades of aid inflows, Africa continues to face persistent challenges such as poverty, unemployment, infrastructure deficits, and vulnerability to global economic shocks.
                 </p>
                 <p>
-                  This paradox—high aid dependency alongside limited development outcomes—has prompted renewed debate about the effectiveness of aid as a development strategy. Increasingly, African scholars, policymakers, and Pan-African movements argue that sustainable progress requires a shift from dependency to self-reliance. This paper explores what African self-reliance means in practice, why aid-centered models have fallen short, and how Africa can build development pathways grounded in its own resources, people, and collective strength.
+                  This paradoxâ€”high aid dependency alongside limited development outcomesâ€”has prompted renewed debate about the effectiveness of aid as a development strategy. Increasingly, African scholars, policymakers, and Pan-African movements argue that sustainable progress requires a shift from dependency to self-reliance. This paper explores what African self-reliance means in practice, why aid-centered models have fallen short, and how Africa can build development pathways grounded in its own resources, people, and collective strength.
                 </p>
               </div>
             </div>
@@ -77,7 +77,7 @@ const AfricanSelfReliance = () => {
               Beyond economics, aid dependency reinforces narratives of African incapacity, undermining confidence in local leadership. Societies may internalize the belief that solutions must come from outside.
             </p>
             <p>
-              Politically, reliance on aid erodes democratic ownership and limits experimentation with indigenous solutions. African self-reliance requires a shift in mindset—from seeing Africa as a recipient to recognizing it as a producer of ideas and systems.
+              Politically, reliance on aid erodes democratic ownership and limits experimentation with indigenous solutions. African self-reliance requires a shift in mindsetâ€”from seeing Africa as a recipient to recognizing it as a producer of ideas and systems.
             </p>
           </div>
         </section>
@@ -120,7 +120,7 @@ const AfricanSelfReliance = () => {
           <section>
             <h2 className="text-lg lg:text-xl font-black text-slate-900 mb-3 uppercase">Knowledge & Innovation</h2>
             <p className="text-base text-slate-600 leading-relaxed">
-              Education systems must generate solutions relevant to African realities. Self-reliance requires investing in African research and cultural production. Knowledge sovereignty—control over data and narratives—is a critical dimension of self-reliance.
+              Education systems must generate solutions relevant to African realities. Self-reliance requires investing in African research and cultural production. Knowledge sovereigntyâ€”control over data and narrativesâ€”is a critical dimension of self-reliance.
             </p>
           </section>
         </div>
@@ -174,7 +174,7 @@ const AfricanSelfReliance = () => {
               African self-reliance is not a rejection of cooperation but a reassertion of agency. Aid-dependent models address symptoms rather than structures. A self-reliant Africa builds on its resources, invests in its people, and collaborates internally.
             </p>
             <p>
-              Transitioning beyond aid is a necessary step toward shaping the continent's future. For Africa to prosper, development must be something Africans do for themselves—together.
+              Transitioning beyond aid is a necessary step toward shaping the continent's future. For Africa to prosper, development must be something Africans do for themselvesâ€”together.
             </p>
             <div className="text-slate-900 font-black text-center pt-8 border-b-2 border-[#EB010C] w-fit mx-auto pb-2">
               DIGNITY. RESILIENCE. PROSPERITY.

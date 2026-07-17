@@ -1,6 +1,6 @@
-import React from 'react';
+﻿import React from 'react';
 import { Shield, CheckCircle2, AlertCircle, FileText, UserPlus, Users, DollarSign, Clock, HelpCircle, ArrowRight, Gavel, FileCheck } from 'lucide-react';
-import ScrollReveal from '../../components/ScrollReveal';
+import ScrollReveal from '../../component/ScrollReveal';
 
 const SectionTitle = ({ number, title }) => (
   <div className="flex items-center gap-4 mb-8">
@@ -145,16 +145,16 @@ const MembershipPolicy = () => {
                     <ul className="space-y-2">
                       <li className="flex items-start gap-2">
                         <div className="w-1.5 h-1.5 bg-[#EB010C] mt-2 flex-shrink-0" />
-                        <p className="text-sm font-bold text-slate-900">Tier A — Defined Diaspora: Members residing outside Africa & the Caribbean</p>
+                        <p className="text-sm font-bold text-slate-900">Tier A â€” Defined Diaspora: Members residing outside Africa & the Caribbean</p>
                       </li>
                       <li className="flex items-start gap-2">
                         <div className="w-1.5 h-1.5 bg-[#EB010C] mt-2 flex-shrink-0" />
-                        <p className="text-sm font-bold text-slate-900">Tier B — Africa & Caribbean: Members residing permanently within Africa or the Caribbean</p>
+                        <p className="text-sm font-bold text-slate-900">Tier B â€” Africa & Caribbean: Members residing permanently within Africa or the Caribbean</p>
                       </li>
                     </ul>
                   </div>
                   <div className="mt-8">
-                    <h5 className="font-black text-slate-900 uppercase text-xs mb-2">Youth Eligibility (Ages 12–18):</h5>
+                    <h5 className="font-black text-slate-900 uppercase text-xs mb-2">Youth Eligibility (Ages 12â€“18):</h5>
                     <p className="text-sm font-medium">Youth may join with guardian consent through the Framework of Pan African Club.</p>
                   </div>
                 </SubSection>
@@ -179,7 +179,7 @@ const MembershipPolicy = () => {
                       </ul>
                     </div>
                     <div>
-                      <h5 className="font-black text-slate-900 uppercase text-xs mb-4">Youth Applicants (12–18)</h5>
+                      <h5 className="font-black text-slate-900 uppercase text-xs mb-4">Youth Applicants (12â€“18)</h5>
                       <ul className="space-y-3">
                         <li className="flex items-start gap-2">
                           <div className="w-1.5 h-1.5 bg-[#EB010C] mt-2 flex-shrink-0" />
@@ -198,7 +198,7 @@ const MembershipPolicy = () => {
                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {[
                       'General Member (Adult)',
-                      'Youth Member (12–18)',
+                      'Youth Member (12â€“18)',
                       'Executive Board Member (after 6 months + service hours)',
                       'Institution Membership'
                     ].map((c, i) => (
@@ -377,7 +377,7 @@ const MembershipPolicy = () => {
                       </ul>
                     </div>
                     <div>
-                      <h5 className="font-black text-slate-900 uppercase text-xs mb-2">Youth (12–18)</h5>
+                      <h5 className="font-black text-slate-900 uppercase text-xs mb-2">Youth (12â€“18)</h5>
                       <p className="text-sm font-medium">Through the Pan African Club programs</p>
                     </div>
                   </div>
@@ -390,7 +390,7 @@ const MembershipPolicy = () => {
                       <ol className="space-y-3 list-decimal ml-5">
                         <li className="text-sm font-medium">Through quarterly review</li>
                         <li className="text-sm font-medium">Making recording to performance Explanation Form</li>
-                        <li className="text-sm font-medium">Review the 60‑day Formal Performance Plan</li>
+                        <li className="text-sm font-medium">Review the 60â€‘day Formal Performance Plan</li>
                         <li className="text-sm font-medium">Suspension or termination</li>
                       </ol>
                     </div>
@@ -403,7 +403,7 @@ const MembershipPolicy = () => {
                         </li>
                         <li className="flex items-start gap-2">
                           <div className="w-1.5 h-1.5 bg-[#EB010C] mt-2 flex-shrink-0" />
-                          <p className="text-sm font-bold text-slate-900">Tier B: $1 per missed hour or Service‑for‑Dues (40 hours/month)</p>
+                          <p className="text-sm font-bold text-slate-900">Tier B: $1 per missed hour or Serviceâ€‘forâ€‘Dues (40 hours/month)</p>
                         </li>
                         <li className="flex items-start gap-2">
                           <div className="w-1.5 h-1.5 bg-[#EB010C] mt-2 flex-shrink-0" />

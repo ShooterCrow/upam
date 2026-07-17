@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import loginIllustration from "../../assets/Register.png";
 import { useLoginMutation } from "../../pages/authenticationPages/authApiSlice";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../pages/authenticationPages/authSlice";
-import ScrollReveal from "../../components/ScrollReveal";
+import ScrollReveal from "../../component/ScrollReveal";
 import { ArrowRight } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 
@@ -118,7 +118,7 @@ const Login = () => {
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
-                    placeholder="••••••••"
+                    placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
                     className={inputBase}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}

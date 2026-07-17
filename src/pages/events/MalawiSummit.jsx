@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowUpRight,
@@ -10,11 +10,11 @@ import {
   Image as ImageIcon,
   Play,
 } from 'lucide-react';
-import ScrollReveal from '../../components/ScrollReveal';
+import ScrollReveal from '../../component/ScrollReveal';
 
 /* -------------------------------------------------------------------------- */
 /*  Brand colours (applied via Tailwind arbitrary classes, matching the rest  */
-/*  of the codebase): Green bg-[#003115] · Black bg-black · Red bg-[#EB010C]   */
+/*  of the codebase): Green bg-[#003115] Â· Black bg-black Â· Red bg-[#EB010C]   */
 /* -------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------- */
@@ -182,13 +182,13 @@ const travelItems = [
     num: '02',
     title: 'Visa Information',
     heading: 'Visa Information',
-    text: 'Visa requirements and application guidance for international delegates will be published here soon. [Placeholder content — to be provided.]',
+    text: 'Visa requirements and application guidance for international delegates will be published here soon. [Placeholder content â€” to be provided.]',
   },
   {
     num: '03',
     title: 'Transport Guidance',
     heading: 'Transport Guidance',
-    text: 'Airport transfers, local transport options, and shuttle arrangements for delegates will be detailed here soon. [Placeholder content — to be provided.]',
+    text: 'Airport transfers, local transport options, and shuttle arrangements for delegates will be detailed here soon. [Placeholder content â€” to be provided.]',
   },
 ];
 
@@ -272,7 +272,7 @@ const MalawiSummit = () => {
 
   return (
     <div className="bg-white overflow-x-hidden">
-      {/* ================= FRAME 1 — HERO ================= */}
+      {/* ================= FRAME 1 â€” HERO ================= */}
       <section className="bg-[#003115] text-white">
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
           <Link
@@ -311,7 +311,7 @@ const MalawiSummit = () => {
             </ScrollReveal>
           </div>
 
-          {/* Thumbnail strip — seamless infinite marquee (set duplicated for the loop) */}
+          {/* Thumbnail strip â€” seamless infinite marquee (set duplicated for the loop) */}
           <div className="relative left-1/2 -ml-[50vw] w-screen overflow-hidden mt-12">
             <div className="flex animate-scroll-slow">
               {[...heroImages, ...heroImages, ...heroImages].map((src, i) => (
@@ -328,7 +328,7 @@ const MalawiSummit = () => {
         </div>
       </section>
 
-      {/* ================= FRAME 2 — ABOUT ================= */}
+      {/* ================= FRAME 2 â€” ABOUT ================= */}
       <section className="bg-black text-white">
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <div className="flex items-start justify-between gap-6">
@@ -363,7 +363,7 @@ const MalawiSummit = () => {
         </div>
       </section>
 
-      {/* ================= FRAME 3 — OBJECTIVES ================= */}
+      {/* ================= FRAME 3 â€” OBJECTIVES ================= */}
       <section className="bg-white">
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -389,12 +389,12 @@ const MalawiSummit = () => {
         </div>
       </section>
 
-      {/* ================= FRAME 4 — EVENT DETAILS ================= */}
+      {/* ================= FRAME 4 â€” EVENT DETAILS ================= */}
       {/* 50/50 split: left content aligns to the site gutter, right two-image
           frame is full-bleed to the right edge of the screen. */}
       <section className="bg-[#003115] text-white overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-stretch">
-          {/* Left — content */}
+          {/* Left â€” content */}
           <div className="flex items-center px-4 sm:px-6 lg:pl-[calc(max((100vw_-_1330px)/2,0px)_+_2rem)] lg:pr-12 py-14 lg:py-20">
             <ScrollReveal direction="right" className="w-full">
               <h2 className="text-2xl lg:text-3xl font-bold mb-8 text-white">
@@ -411,7 +411,7 @@ const MalawiSummit = () => {
             </ScrollReveal>
           </div>
 
-          {/* Right — two-image frame, full-bleed to the right edge */}
+          {/* Right â€” two-image frame, full-bleed to the right edge */}
           <div className="relative min-h-[320px] lg:min-h-[480px]">
             <div className="absolute inset-0 grid grid-cols-2 gap-3 p-3 lg:p-4">
               <img
@@ -431,7 +431,7 @@ const MalawiSummit = () => {
         </div>
       </section>
 
-      {/* ================= FRAME 5/6 — PROGRAMS & AGENDA (interactive) ====== */}
+      {/* ================= FRAME 5/6 â€” PROGRAMS & AGENDA (interactive) ====== */}
       <section className="bg-black text-white">
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
@@ -501,7 +501,7 @@ const MalawiSummit = () => {
         </div>
       </section>
 
-      {/* ================= FRAME 7 — SPECIAL GUESTS ================= */}
+      {/* ================= FRAME 7 â€” SPECIAL GUESTS ================= */}
       <section className="bg-white">
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <ScrollReveal direction="up">
@@ -519,7 +519,7 @@ const MalawiSummit = () => {
                 {g.img ? (
                   <img
                     src={g.img}
-                    alt={`${g.name} — ${g.role}`}
+                    alt={`${g.name} â€” ${g.role}`}
                     loading="lazy"
                     className="w-full aspect-square mb-3 object-cover rounded"
                   />
@@ -534,7 +534,7 @@ const MalawiSummit = () => {
         </div>
       </section>
 
-      {/* ================= FRAME 8 — EVENT REGISTRATION ================= */}
+      {/* ================= FRAME 8 â€” EVENT REGISTRATION ================= */}
       <section id="event-registration" className="bg-gray-100 scroll-mt-20">
         <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <h2 className="text-2xl lg:text-3xl font-bold text-center text-gray-900 mb-10">
@@ -612,7 +612,7 @@ const MalawiSummit = () => {
         </div>
       </section>
 
-      {/* ================= FRAME 9 — TRAVEL & ACCOMMODATION (interactive) === */}
+      {/* ================= FRAME 9 â€” TRAVEL & ACCOMMODATION (interactive) === */}
       <section className="bg-[#EB010C] text-white">
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
@@ -656,7 +656,7 @@ const MalawiSummit = () => {
         </div>
       </section>
 
-      {/* ================= FRAME 10 — OUTCOMES + NETWORKING ================= */}
+      {/* ================= FRAME 10 â€” OUTCOMES + NETWORKING ================= */}
       <section className="bg-white">
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           {/* Expected Outcomes */}
@@ -707,9 +707,9 @@ const MalawiSummit = () => {
         </div>
       </section>
 
-      {/* ================= FRAME 11 — MEDIA & COVERAGE (carousel) ========== */}
+      {/* ================= FRAME 11 â€” MEDIA & COVERAGE (carousel) ========== */}
       <section className="bg-black text-white">
-        {/* Full-bleed top image — spans the entire screen width */}
+        {/* Full-bleed top image â€” spans the entire screen width */}
         <img
           src={mediaBannerImage}
           alt=""
@@ -771,7 +771,7 @@ const MalawiSummit = () => {
         </div>
       </section>
 
-      {/* ================= FRAME 12 — VOLUNTEER ================= */}
+      {/* ================= FRAME 12 â€” VOLUNTEER ================= */}
       <section className="bg-white">
         <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">

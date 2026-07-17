@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import ScrollReveal from '../../../components/ScrollReveal';
+import ScrollReveal from '../../../component/ScrollReveal';
 
 const HealingHistoricalDivides = () => {
   return (
@@ -35,7 +35,7 @@ const HealingHistoricalDivides = () => {
               </h2>
               <div className="text-base text-slate-600 leading-relaxed space-y-4">
                 <p>
-                  Africa’s history is not only a story of resilience and civilization but also one of profound disruption. The transatlantic slave trade and European colonialism did not merely exploit African labor and resources; they fractured societies, displaced millions, and imposed systems designed to dehumanize and divide.
+                  Africaâ€™s history is not only a story of resilience and civilization but also one of profound disruption. The transatlantic slave trade and European colonialism did not merely exploit African labor and resources; they fractured societies, displaced millions, and imposed systems designed to dehumanize and divide.
                 </p>
                 <p>
                   Although formal slavery and colonial rule have ended, their legacies remain embedded in global power structures and in the internal dynamics of African societies. Political borders, economic dependency, identity fragmentation, and psychological trauma are all remnants of these historical processes. This paper contends that Pan-African unity cannot be fully realized without confronting and healing these historical divides.
@@ -109,7 +109,7 @@ const HealingHistoricalDivides = () => {
             The Role of Pan-African Movements
           </h2>
           <p className="text-base text-slate-600 leading-relaxed">
-            Organizations like UPAM play a vital role in bridging historical divides. By creating spaces for dialogue and collaboration, they translate historical awareness into collective action. Unity is not automatic—it must be built intentionally through advocacy, research, and community engagement.
+            Organizations like UPAM play a vital role in bridging historical divides. By creating spaces for dialogue and collaboration, they translate historical awareness into collective action. Unity is not automaticâ€”it must be built intentionally through advocacy, research, and community engagement.
           </p>
         </section>
 

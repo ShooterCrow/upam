@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import ScrollReveal from '../../../components/ScrollReveal';
+import ScrollReveal from '../../../component/ScrollReveal';
 
 const DigitalLiteracy = () => {
   return (
@@ -33,10 +33,10 @@ const DigitalLiteracy = () => {
               </h2>
               <div className="text-base text-slate-600 leading-relaxed space-y-4">
                 <p>
-                  Throughout history, technological control has been closely linked to power and self-determination. From the Industrial Revolution to the digital age, societies that mastered technology shaped global systems, while those excluded were marginalized. Africa’s experience reflects this pattern. Despite being rich in resources and human potential, the continent has often been positioned at the periphery of technological advancement.
+                  Throughout history, technological control has been closely linked to power and self-determination. From the Industrial Revolution to the digital age, societies that mastered technology shaped global systems, while those excluded were marginalized. Africaâ€™s experience reflects this pattern. Despite being rich in resources and human potential, the continent has often been positioned at the periphery of technological advancement.
                 </p>
                 <p>
-                  Today, digital technology influences nearly every aspect of life—commerce, governance, education, healthcare, and communication. For Africa, digital literacy and innovation are no longer optional; they are essential tools for survival, competitiveness, and independence. Without them, African societies risk deepening dependency on external systems that control data, platforms, and knowledge. This paper argues that digital literacy and innovation must be treated as strategic instruments of African self-sufficiency, not merely as development accessories or consumer conveniences.
+                  Today, digital technology influences nearly every aspect of lifeâ€”commerce, governance, education, healthcare, and communication. For Africa, digital literacy and innovation are no longer optional; they are essential tools for survival, competitiveness, and independence. Without them, African societies risk deepening dependency on external systems that control data, platforms, and knowledge. This paper argues that digital literacy and innovation must be treated as strategic instruments of African self-sufficiency, not merely as development accessories or consumer conveniences.
                 </p>
               </div>
             </div>
@@ -56,7 +56,7 @@ const DigitalLiteracy = () => {
             Historical Context: Africa and Technological Marginalization
           </h2>
           <p className="text-base text-slate-600 leading-relaxed">
-            Africa’s technological marginalization did not emerge in isolation. Colonial systems actively suppressed indigenous knowledge systems and limited technological development to serve extractive interests. Infrastructure such as railways and ports was designed primarily to transport resources outward, not to support internal industrialization or innovation. After independence, many African countries faced limited access to capital, education, and research institutions necessary for technological advancement. Global technological revolutions—computing, telecommunications, and later the internet—largely unfolded without African leadership or ownership. As a result, Africa became dependent on imported technologies, software, and expertise. This historical exclusion has shaped present realities, where many African economies rely heavily on foreign digital platforms and intellectual property, reinforcing economic and informational dependency.
+            Africaâ€™s technological marginalization did not emerge in isolation. Colonial systems actively suppressed indigenous knowledge systems and limited technological development to serve extractive interests. Infrastructure such as railways and ports was designed primarily to transport resources outward, not to support internal industrialization or innovation. After independence, many African countries faced limited access to capital, education, and research institutions necessary for technological advancement. Global technological revolutionsâ€”computing, telecommunications, and later the internetâ€”largely unfolded without African leadership or ownership. As a result, Africa became dependent on imported technologies, software, and expertise. This historical exclusion has shaped present realities, where many African economies rely heavily on foreign digital platforms and intellectual property, reinforcing economic and informational dependency.
           </p>
         </section>
 
@@ -96,7 +96,7 @@ const DigitalLiteracy = () => {
           </h2>
           <div className="text-base text-slate-600 leading-relaxed space-y-4">
             <p>
-              Innovation is not limited to high-tech laboratories or Silicon Valley-style startups. In the African context, innovation often emerges from necessity—solving local problems with limited resources. Mobile banking, agricultural technology, and health innovations demonstrate Africa’s capacity for creative problem-solving.
+              Innovation is not limited to high-tech laboratories or Silicon Valley-style startups. In the African context, innovation often emerges from necessityâ€”solving local problems with limited resources. Mobile banking, agricultural technology, and health innovations demonstrate Africaâ€™s capacity for creative problem-solving.
             </p>
             <p className="font-black text-slate-900 uppercase text-sm">However, innovation ecosystems remain uneven due to systemic challenges:</p>
             <div className="grid md:grid-cols-2 gap-4">
@@ -128,10 +128,10 @@ const DigitalLiteracy = () => {
               Education lies at the heart of digital self-sufficiency. Many African education systems still emphasize rote learning over critical thinking, creativity, and technical skills. Bridging the digital divide requires transforming curricula to include:
             </p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 font-bold text-slate-800">
-              <li>• Coding and computational thinking</li>
-              <li>• Digital entrepreneurship</li>
-              <li>• Media and information literacy</li>
-              <li>• African perspectives on technology and ethics</li>
+              <li>â€¢ Coding and computational thinking</li>
+              <li>â€¢ Digital entrepreneurship</li>
+              <li>â€¢ Media and information literacy</li>
+              <li>â€¢ African perspectives on technology and ethics</li>
             </ul>
             <p>
               Digital literacy programs must also extend beyond formal schooling to reach adults, rural communities, and marginalized groups. Inclusive digital education ensures that technological empowerment does not become another source of inequality.
@@ -148,7 +148,7 @@ const DigitalLiteracy = () => {
             Digital Economies and African Ownership
           </h2>
           <p className="text-base text-slate-600 leading-relaxed mb-6">
-            The digital economy offers new avenues for wealth creation, yet ownership remains a critical concern. Many digital platforms operating in Africa—social media, e-commerce, cloud services—are owned by foreign corporations. This raises questions about data sovereignty, profit extraction, and long-term dependency. African self-sufficiency requires building and supporting African-owned digital platforms, fintech systems, and data infrastructure. Ownership ensures that value generated within African digital spaces circulates locally, funding further innovation and development. Data, often described as the “new oil,” must be treated as a strategic resource. African control over data governance and digital infrastructure is essential for economic and political autonomy.
+            The digital economy offers new avenues for wealth creation, yet ownership remains a critical concern. Many digital platforms operating in Africaâ€”social media, e-commerce, cloud servicesâ€”are owned by foreign corporations. This raises questions about data sovereignty, profit extraction, and long-term dependency. African self-sufficiency requires building and supporting African-owned digital platforms, fintech systems, and data infrastructure. Ownership ensures that value generated within African digital spaces circulates locally, funding further innovation and development. Data, often described as the â€œnew oil,â€ must be treated as a strategic resource. African control over data governance and digital infrastructure is essential for economic and political autonomy.
           </p>
           <img
             src="https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779263497/1586336c8630d744a01c5e9365c019966728c838_tcmo19.png"
@@ -168,7 +168,7 @@ const DigitalLiteracy = () => {
           <section>
             <h2 className="text-lg lg:text-xl font-black text-slate-900 mb-3 uppercase">The Role of Youth & Diaspora</h2>
             <p className="text-base text-slate-600 leading-relaxed">
-              Africa’s youthful population represents one of its greatest assets in the digital age. Supporting youth-led digital initiatives can accelerate self-sufficiency while fostering a sense of ownership and purpose. The African diaspora also plays a critical role, bringing technical expertise and global networks. Structured engagement with the diaspora can facilitate knowledge transfer, mentorship, and collaborative innovation.
+              Africaâ€™s youthful population represents one of its greatest assets in the digital age. Supporting youth-led digital initiatives can accelerate self-sufficiency while fostering a sense of ownership and purpose. The African diaspora also plays a critical role, bringing technical expertise and global networks. Structured engagement with the diaspora can facilitate knowledge transfer, mentorship, and collaborative innovation.
             </p>
           </section>
         </div>
@@ -209,7 +209,7 @@ const DigitalLiteracy = () => {
           <h2 className="text-2xl lg:text-3xl font-black text-slate-900 mb-6 uppercase text-center">From Digital Access to Digital Power</h2>
           <div className="text-base lg:text-lg text-slate-600 leading-relaxed space-y-6">
             <p>
-              Digital access alone does not guarantee self-sufficiency. The goal must be digital power—the ability to design, control, and govern digital systems. This shift requires coordinated efforts across education, policy, investment, and cultural renewal.
+              Digital access alone does not guarantee self-sufficiency. The goal must be digital powerâ€”the ability to design, control, and govern digital systems. This shift requires coordinated efforts across education, policy, investment, and cultural renewal.
             </p>
             <p>
               Digital literacy and innovation are among the most powerful tools available to Africa in the pursuit of self-sufficiency. When Africans understand, create, and own digital systems, technology becomes a means of liberation rather than dependency. Achieving this vision demands intentional investment, inclusive education, ethical governance, and Pan-African solidarity.

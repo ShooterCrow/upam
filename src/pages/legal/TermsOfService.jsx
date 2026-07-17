@@ -1,6 +1,6 @@
-import React from 'react';
+﻿import React from 'react';
 import { Shield, FileText, Gavel, Scale } from 'lucide-react';
-import ScrollReveal from '../../components/ScrollReveal';
+import ScrollReveal from '../../component/ScrollReveal';
 
 const TermsOfService = () => {
   return (

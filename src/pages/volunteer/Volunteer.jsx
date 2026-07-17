@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-import ScrollReveal from '../../components/ScrollReveal';
+import ScrollReveal from '../../component/ScrollReveal';
 
 const Volunteer = () => {
   const [formData, setFormData] = useState({
@@ -33,7 +33,7 @@ const Volunteer = () => {
         <div className="bg-white py-12 mb-8">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-3xl md:text-3xl font-bold">
-              UPAM Volunteer Application – Required Information
+              UPAM Volunteer Application â€“ Required Information
             </h1>
           </div>
         </div>

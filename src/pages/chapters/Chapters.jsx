@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Globe, MapPin, ExternalLink, Users, Search } from 'lucide-react';
 import { useGetChaptersQuery } from '../UserAdminPages/admin/chapters/chaptersApiSlice';
-import ScrollReveal from '../../components/ScrollReveal';
+import ScrollReveal from '../../component/ScrollReveal';
 
 const Chapters = () => {
     const [searchQuery, setSearchQuery] = useState('');

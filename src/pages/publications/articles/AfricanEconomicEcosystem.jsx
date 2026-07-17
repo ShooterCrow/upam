@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import ScrollReveal from '../../../components/ScrollReveal';
+import ScrollReveal from '../../../component/ScrollReveal';
 
 const AfricanEconomicEcosystem = () => {
   return (
@@ -35,10 +35,10 @@ const AfricanEconomicEcosystem = () => {
               </h2>
               <div className="text-base text-slate-600 leading-relaxed space-y-4">
                 <p>
-                  Africa’s economic story has long been framed around growth statistics, foreign investment inflows, and development aid. While these metrics often suggest progress, they rarely address a more fundamental question: Who owns Africa’s economy? Ownership determines power. It shapes decision-making, value distribution, and long-term sustainability.
+                  Africaâ€™s economic story has long been framed around growth statistics, foreign investment inflows, and development aid. While these metrics often suggest progress, they rarely address a more fundamental question: Who owns Africaâ€™s economy? Ownership determines power. It shapes decision-making, value distribution, and long-term sustainability.
                 </p>
                 <p>
-                  Across much of the continent, key sectors—mining, oil, telecommunications, agriculture processing, banking, and even retail—are dominated or heavily influenced by foreign interests. As a result, wealth generated within Africa frequently flows outward, reinforcing dependency rather than building internal capacity. This paper contends that economic growth without ownership is insufficient. For Africa to achieve meaningful development and unity, it must build an economic ecosystem owned, governed, and driven by Africans themselves.
+                  Across much of the continent, key sectorsâ€”mining, oil, telecommunications, agriculture processing, banking, and even retailâ€”are dominated or heavily influenced by foreign interests. As a result, wealth generated within Africa frequently flows outward, reinforcing dependency rather than building internal capacity. This paper contends that economic growth without ownership is insufficient. For Africa to achieve meaningful development and unity, it must build an economic ecosystem owned, governed, and driven by Africans themselves.
                 </p>
               </div>
             </div>
@@ -59,10 +59,10 @@ const AfricanEconomicEcosystem = () => {
           </h2>
           <div className="text-base text-slate-600 leading-relaxed space-y-4">
             <p>
-              The roots of Africa’s economic dependency lie in the transatlantic slave trade and colonialism. These systems were not accidental; they were designed to extract labor, resources, and wealth for external benefit. Colonial economies were structured around exporting raw materials and importing finished goods, leaving little room for industrialization or local enterprise. At independence, many African states inherited economies shaped by these extractive models.
+              The roots of Africaâ€™s economic dependency lie in the transatlantic slave trade and colonialism. These systems were not accidental; they were designed to extract labor, resources, and wealth for external benefit. Colonial economies were structured around exporting raw materials and importing finished goods, leaving little room for industrialization or local enterprise. At independence, many African states inherited economies shaped by these extractive models.
             </p>
             <p>
-              While political control shifted, economic structures often remained unchanged. Multinational corporations replaced colonial administrators, and foreign aid replaced direct rule, but dependency persisted. Structural adjustment programs of the late 20th century further weakened African economic sovereignty by prioritizing privatization, deregulation, and reduced state involvement—often at the expense of local industries and social welfare. These historical forces continue to shape present realities, making the call for African-owned systems both urgent and complex.
+              While political control shifted, economic structures often remained unchanged. Multinational corporations replaced colonial administrators, and foreign aid replaced direct rule, but dependency persisted. Structural adjustment programs of the late 20th century further weakened African economic sovereignty by prioritizing privatization, deregulation, and reduced state involvementâ€”often at the expense of local industries and social welfare. These historical forces continue to shape present realities, making the call for African-owned systems both urgent and complex.
             </p>
           </div>
         </section>
@@ -132,13 +132,13 @@ const AfricanEconomicEcosystem = () => {
           </h2>
           <div className="text-base text-slate-600 leading-relaxed space-y-4">
             <p>
-              Africa’s trade patterns remain outward-oriented, with many countries exporting raw materials and importing finished products. This limits job creation and value retention. Intra-African trade, by contrast, remains relatively low compared to other regions. The African Continental Free Trade Area (AfCFTA) offers a framework for transforming these patterns. Africa must also invest in:
+              Africaâ€™s trade patterns remain outward-oriented, with many countries exporting raw materials and importing finished products. This limits job creation and value retention. Intra-African trade, by contrast, remains relatively low compared to other regions. The African Continental Free Trade Area (AfCFTA) offers a framework for transforming these patterns. Africa must also invest in:
             </p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 font-bold text-slate-800">
-              <li>• Local manufacturing</li>
-              <li>• Agro-processing</li>
-              <li>• Regional supply chains</li>
-              <li>• Logistics & Transport</li>
+              <li>â€¢ Local manufacturing</li>
+              <li>â€¢ Agro-processing</li>
+              <li>â€¢ Regional supply chains</li>
+              <li>â€¢ Logistics & Transport</li>
             </ul>
             <p>
               Value addition is essential. Processing African resources within Africa creates jobs, builds skills, and increases economic resilience. An African-owned ecosystem ensures that the benefits of value addition remain within the continent.
@@ -201,7 +201,7 @@ const AfricanEconomicEcosystem = () => {
               An African-owned economic ecosystem is not a rejection of global engagement but a rebalancing of power. Africa can engage globally on its own terms, as an equal partner rather than a dependent participant. This vision aligns with Pan-African principles of unity, self-determination, and collective progress.
             </p>
             <p>
-              Economic ownership lies at the heart of Africa’s struggle for true independence. Without control over production, finance, and trade, political sovereignty remains fragile. Building an African economic ecosystem owned by Africans is both a moral imperative and a practical necessity.
+              Economic ownership lies at the heart of Africaâ€™s struggle for true independence. Without control over production, finance, and trade, political sovereignty remains fragile. Building an African economic ecosystem owned by Africans is both a moral imperative and a practical necessity.
             </p>
             <p className="text-slate-900 font-black text-center pt-4">
               The future of Africa depends not only on growth but on ownership.

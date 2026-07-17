@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { motion } from 'framer-motion';
 import {
     Users,
@@ -13,7 +13,7 @@ import {
     Play,
     CheckCircle2
 } from 'lucide-react';
-import ScrollReveal from '../../components/ScrollReveal';
+import ScrollReveal from '../../component/ScrollReveal';
 import WorldMapWithMarkers from '../../component/ui/WorldMapWithMarkers';
 import { Link } from 'react-router-dom';
 
@@ -59,7 +59,7 @@ const About = () => {
         },
         {
             title: "Members",
-            description: "The heartbeat of UPAM — everyday Africans working together to build a stronger continent.",
+            description: "The heartbeat of UPAM â€” everyday Africans working together to build a stronger continent.",
             icon: <Users className="w-5 h-5" />
         }
     ];
@@ -342,7 +342,7 @@ const About = () => {
                 </ScrollReveal>
 
                 <div className="w-full -mx-4 md:-mx-8">
-                    {/* Row 1 — scrolls left */}
+                    {/* Row 1 â€” scrolls left */}
                     <div className="relative overflow-hidden py-1">
                         <div className="absolute hidden lg:block left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
                         <div className="absolute hidden lg:block right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
@@ -373,7 +373,7 @@ const About = () => {
                         </div>
                     </div>
 
-                    {/* Row 2 — scrolls right */}
+                    {/* Row 2 â€” scrolls right */}
                     <div className="relative overflow-hidden py-1 mt-3">
                         <div className="absolute hidden lg:block left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
                         <div className="absolute hidden lg:block right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
