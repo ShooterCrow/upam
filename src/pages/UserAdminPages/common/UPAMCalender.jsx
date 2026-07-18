@@ -556,6 +556,14 @@ const UPAMCalender = () => {
                                                     </span>
                                                 </div>
                                             )}
+                                            {isAdmin && selectedEvent.createdBy && (
+                                                <div>
+                                                    <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Posted By</h4>
+                                                    <div className="flex items-center gap-2 text-slate-700 font-bold px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100">
+                                                        {selectedEvent.createdBy.firstName} {selectedEvent.createdBy.lastName}
+                                                    </div>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

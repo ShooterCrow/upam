@@ -139,7 +139,7 @@ const UserSidebar = () => {
                 </nav>
 
                 {/* Bottom Navigation (Account/Logout) */}
-                <div className="p-4 border-t border-gray-50 space-y-1">
+                <div className="p-4 border-t border-gray-300 space-y-1">
                     {bottomLinks.map((link) => {
                         const Icon = link.icon;
                         const isActive = location.pathname === link.path || (link.path !== '/user' && location.pathname.startsWith(link.path));

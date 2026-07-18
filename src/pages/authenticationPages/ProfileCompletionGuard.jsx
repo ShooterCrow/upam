@@ -94,7 +94,7 @@ const ProfileCompletionGuard = () => {
 
     // Background fetch to keep completeness state in sync across redirects
     useGetCompletenessQuery(undefined, {
-        pollingInterval: 30000, // Optional: fallback polling
+        pollingInterval: 150000, // Optional: fallback polling
         refetchOnMountOrArgChange: true
     });
 
