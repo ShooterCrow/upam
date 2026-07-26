@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import {
     Users,
@@ -83,6 +84,12 @@ const About = () => {
 
     return (
         <div className="bg-[#FAFAFC] text-slate-900 font-['Inter',_sans-serif] overflow-x-hidden pt-[72px] lg:pt-[75px]">
+            <Helmet>
+                <title>About Us | UPAM - United Pan-Africanist Movement</title>
+                <meta name="description" content="Discover UPAM's history, mission, vision, organizational structure, and community development projects across Africa." />
+                <meta property="og:title" content="About Us | UPAM" />
+                <meta property="og:description" content="Discover UPAM's history, mission, vision, organizational structure, and community development projects across Africa." />
+            </Helmet>
             {/* Hero Section */}
             <div className="relative bg-gradient-to-br from-[#FAFAFC] to-[#F3F4F6] pt-24 pb-20 px-4 md:px-8 border-b border-gray-100 overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(235,1,12,0.03),transparent_50%)] pointer-events-none" />

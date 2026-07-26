@@ -1,4 +1,5 @@
 ﻿import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import ScrollReveal from '../../component/ScrollReveal';
 import { X } from 'lucide-react';
 
@@ -56,6 +57,12 @@ const Gallery = () => {
 
   return (
     <div className="bg-white min-h-screen pb-24 overflow-hidden selection:bg-[#EB010C] selection:text-white">
+      <Helmet>
+        <title>Gallery & Moments | UPAM - United Pan-Africanist Movement</title>
+        <meta name="description" content="View the Gallery showcasing moments of unity, culture, advocacy, and community impact captured across Africa and the diaspora." />
+        <meta property="og:title" content="Gallery & Moments | UPAM" />
+        <meta property="og:description" content="View the Gallery showcasing moments of unity, culture, advocacy, and community impact captured across Africa and the diaspora." />
+      </Helmet>
 
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,4 +1,5 @@
 ﻿import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Send, ArrowRight } from 'lucide-react';
 import worldMap from '../../assets/world_map.png';
 import { useCreateContactMutation } from './contactsApiSlice';
@@ -44,6 +45,12 @@ const ContactUs = () => {
 
     return (
         <div className="min-h-screen bg-[#FAFAFC] text-slate-900 overflow-x-hidden">
+            <Helmet>
+                <title>Contact Us | UPAM - United Pan-Africanist Movement</title>
+                <meta name="description" content="Get in touch with the United Pan-Africanist Movement (UPAM). Reach out to our USA and Namibia offices, email, phone, or message us." />
+                <meta property="og:title" content="Contact Us | UPAM" />
+                <meta property="og:description" content="Get in touch with the United Pan-Africanist Movement (UPAM). Reach out to our USA and Namibia offices, email, phone, or message us." />
+            </Helmet>
 
             {/* Hero */}
             <div className="relative pt-32 px-4 md:px-8 border-b border-gray-100 overflow-hidden">

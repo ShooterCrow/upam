@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import {
     Heart,
@@ -81,7 +82,13 @@ const Donation = () => {
     const activeImpactText = getImpactText(displayAmount);
 
     return (
-        <div className="min-h-screen bg-[#FAFAFC] text-slate-900 font-['Inter',_sans-serif] overflow-x-hidden">
+        <div className="min-h-screen bg-[#FAFAFC] text-[#555555] font-['Inter',_sans-serif] overflow-x-hidden">
+            <Helmet>
+                <title>Donate & Support | UPAM - United Pan-Africanist Movement</title>
+                <meta name="description" content="Support the Pan-African dream by contributing to UPAM. Your donations directly support educational scholarships, digital forums, clean energy, and WNN Africa." />
+                <meta property="og:title" content="Donate & Support | UPAM" />
+                <meta property="og:description" content="Support the Pan-African dream by contributing to UPAM. Your donations directly support educational scholarships, digital forums, clean energy, and WNN Africa." />
+            </Helmet>
             {/* Header Hero Area */}
             <div className="relative bg-gradient-to-br from-[#FAFAFC] to-[#F3F4F6] text-slate-900 pt-24 pb-20 px-4 md:px-8 border-b border-gray-100 overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(235,1,12,0.03),transparent_50%)] pointer-events-none" />

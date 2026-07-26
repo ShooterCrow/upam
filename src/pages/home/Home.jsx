@@ -1,4 +1,5 @@
 import React, { useMemo, useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -196,9 +197,9 @@ const UnitedAfricaHero = () => {
                         titleNumber === index
                           ? { y: 0, opacity: 1 }
                           : {
-                              y: titleNumber > index ? "-100%" : "100%",
-                              opacity: 0,
-                            }
+                            y: titleNumber > index ? "-100%" : "100%",
+                            opacity: 0,
+                          }
                       }
                       transition={{
                         type: "spring",
@@ -307,6 +308,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50/30 overflow-x-hidden">
+      <Helmet>
+        <title>United Pan-Africanist Movement | UPAM</title>
+        <meta name="description" content="UPAM - United Pan-Africanist Movement is an all-African organization seeking to enhance the unification of African nations and reclaim hope for the destined future." />
+        <meta property="og:title" content="United Pan-Africanist Movement | UPAM" />
+        <meta property="og:description" content="UPAM - United Pan-Africanist Movement is an all-African organization seeking to enhance the unification of African nations and reclaim hope for the destined future." />
+      </Helmet>
       {/* Main Content Container */}
       <div className="flex flex-col items-center gap-16 lg:gap-24 pb-12 lg:py-24 px-4 lg:px-8">
         <div className="w-full max-w-7xl">
@@ -506,11 +513,10 @@ const Index = () => {
                         <button
                           key={index}
                           onClick={() => setActiveFocus(index)}
-                          className={`group relative flex items-center justify-between p-5 transition-all duration-300 border ${
-                            activeFocus === index
+                          className={`group relative flex items-center justify-between p-5 transition-all duration-300 border ${activeFocus === index
                               ? "bg-[#003115] border-[#003115] text-white"
                               : "bg-white border-slate-100 text-[#555555] hover:border-[#EB010C]/30"
-                          }`}
+                            }`}
                         >
                           <span
                             className={`text-[10px] font-black uppercase tracking-widest ${activeFocus === index ? "text-[#EB010C]" : "text-[#555555]"}`}
@@ -536,11 +542,10 @@ const Index = () => {
                 {focusAreas.map((area, index) => (
                   <div
                     key={index}
-                    className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-                      activeFocus === index
+                    className={`absolute inset-0 transition-all duration-700 ease-in-out ${activeFocus === index
                         ? "opacity-100 scale-100"
                         : "opacity-0 scale-105 pointer-events-none"
-                    }`}
+                      }`}
                   >
                     <img
                       src={area.image}

@@ -1,4 +1,5 @@
 ﻿import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Globe, MapPin, ExternalLink, Users, Search } from 'lucide-react';
 import { useGetChaptersQuery } from '../UserAdminPages/admin/chapters/chaptersApiSlice';
@@ -15,6 +16,12 @@ const Chapters = () => {
 
     return (
         <div className="min-h-screen bg-[#FAFAFC] text-slate-900 overflow-x-hidden">
+            <Helmet>
+                <title>Our Chapters | UPAM - United Pan-Africanist Movement</title>
+                <meta name="description" content="Explore UPAM chapters worldwide. Find or start a chapter in your country or community to connect with other Pan-Africanists." />
+                <meta property="og:title" content="Our Chapters | UPAM" />
+                <meta property="og:description" content="Explore UPAM chapters worldwide. Find or start a chapter in your country or community to connect with other Pan-Africanists." />
+            </Helmet>
 
             {/* Hero */}
             <div className="relative bg-gradient-to-br from-[#FAFAFC] to-[#F3F4F6] pt-32 pb-20 px-4 md:px-8 border-b border-gray-100 overflow-hidden">

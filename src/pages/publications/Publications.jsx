@@ -1,4 +1,5 @@
 ﻿import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Download, ArrowRight, BookOpen, FileText, Share2, FileDown, BookMarked } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ScrollReveal from '../../component/ScrollReveal';
@@ -55,6 +56,12 @@ export default function Publications() {
 
     return (
         <div className="bg-white min-h-screen pb-24 overflow-hidden selection:bg-[#EB010C] selection:text-white">
+            <Helmet>
+                <title>Publications & Articles | UPAM - United Pan-Africanist Movement</title>
+                <meta name="description" content="Read UPAM articles, policy papers, and annual reports. Discover knowledge that strengthens African unity, informs policy, and drives sustainable development." />
+                <meta property="og:title" content="Publications & Articles | UPAM" />
+                <meta property="og:description" content="Read UPAM articles, policy papers, and annual reports. Discover knowledge that strengthens African unity, informs policy, and drives sustainable development." />
+            </Helmet>
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
                 {/* Hero Section */}

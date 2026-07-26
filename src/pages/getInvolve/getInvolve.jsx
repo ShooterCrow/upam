@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Users, Handshake, Heart, CheckCircle2, GraduationCap, Briefcase, Shield, Coins, Network } from 'lucide-react';
 import becomeMemberImg from '../../assets/become_member.png';
@@ -19,6 +20,12 @@ const benefits = [
 const GetInvolve = () => {
   return (
     <div className="min-h-screen bg-[#FAFAFC] text-slate-900 overflow-x-hidden">
+      <Helmet>
+        <title>Get Involved | UPAM - United Pan-Africanist Movement</title>
+        <meta name="description" content="Discover how to get involved, volunteer, partner, become a member or donate to support the United Pan-Africanist Movement." />
+        <meta property="og:title" content="Get Involved | UPAM" />
+        <meta property="og:description" content="Discover how to get involved, volunteer, partner, become a member or donate to support the United Pan-Africanist Movement." />
+      </Helmet>
 
       {/* Hero */}
       <div className="relative bg-gradient-to-br from-[#FAFAFC] to-[#F3F4F6] pt-32 pb-20 px-4 md:px-8 border-b border-gray-100 overflow-hidden">
