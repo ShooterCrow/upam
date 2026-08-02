@@ -4,7 +4,7 @@ import loginIllustration from "../../assets/Register.png";
 import { useLoginMutation } from "../../pages/authenticationPages/authApiSlice";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../pages/authenticationPages/authSlice";
-import ScrollReveal from "../../component/ScrollReveal";
+import ScrollReveal from "../../components/ScrollReveal";
 import { ArrowRight } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 

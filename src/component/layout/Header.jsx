@@ -20,7 +20,9 @@ const Header = () => {
     const navigate = useNavigate();
     const [logout] = useLogoutMutation();
     const { isLoggedIn, user, roles } = useAuth();
-    const isOnDashboard = location.pathname.startsWith('/user') || location.pathname.startsWith('/admin');
+    const isPrivilegedRole = (roles || []).some(role => ['admin', 'manager', 'representative'].includes(role));
+    const dashboardPath = isPrivilegedRole ? '/dashboard' : '/user';
+    const isOnDashboard = location.pathname.startsWith('/dashboard') || location.pathname.startsWith('/user');
     const isDesktop = useMediaQuery('(min-width: 1024px)');
     const { data: profileData, isLoading: isProfileLoading, isError: isProfileError, error: profileFetchError, refetch } = useGetMeQuery();
 
@@ -255,7 +257,7 @@ const Header = () => {
                     <div className="px-4 py-6">
                         {/* User Profile Section - Only show if logged in */}
                         {isLoggedIn && (
-                            <Link to={`/${roles[0]}`} className="mb-6 pb-6 border-b">
+                            <Link to={dashboardPath} className="mb-6 pb-6 border-b">
                                 <div className="flex items-center gap-3 mb-2">
                                     <div className="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center">
 
@@ -352,7 +354,7 @@ const Header = () => {
                                             </div>
                                         );
                                     })}
-                                    <Link to={`/${roles[0]}`} className="block text-center text-red-600 font-semibold mt-6" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <Link to={dashboardPath} className="block text-center text-red-600 font-semibold mt-6" onClick={() => setIsMobileMenuOpen(false)}>
                                         Go back to Dashboard
                                     </Link>
                                 </>

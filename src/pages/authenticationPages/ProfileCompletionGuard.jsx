@@ -90,11 +90,12 @@ const CompletionBanner = ({ completeness }) => {
 
 const ProfileCompletionGuard = () => {
     const completeness = useSelector(selectCompleteness);
+    console.log(completeness)
     const location = useLocation();
 
     // Background fetch to keep completeness state in sync across redirects
     useGetCompletenessQuery(undefined, {
-        pollingInterval: 150000, // Optional: fallback polling
+        // pollingInterval: 150000, // Optional: fallback polling
         refetchOnMountOrArgChange: true
     });
 
@@ -116,6 +117,7 @@ const ProfileCompletionGuard = () => {
             const firstIncompletePath = !completeness.step1.complete ? completeness.step1.path
                 : !completeness.step2.complete ? completeness.step2.path
                     : completeness.step3.path;
+                    alert(firstIncompletePath)
 
             return <Navigate to={firstIncompletePath} replace />;
         }

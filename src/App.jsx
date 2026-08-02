@@ -199,7 +199,7 @@ const App = () => {
             </Route>
 
             {/* User Routes (pure user role only) */}
-            <Route element={<RequireAuth allowedRoles={['user', "admin", "manager"]} />}>
+            <Route element={<RequireAuth allowedRoles={['user']} />}>
               <Route element={<RoleRedirectGuard />}>
                 <Route element={<ProfileCompletionGuard />}>
                   <Route path="/user" element={<UserLayoutContext />}>
@@ -219,7 +219,7 @@ const App = () => {
             </Route>
 
             {/* Catch-all route */}
-            <Route path="admin" element={<Navigate to="/dashboard" replace />} />
+            <Route path="admin/*" element={<Navigate to="/dashboard" replace />} />
             <Route path="*" element={<NotFound />} />
 
           </Route>
