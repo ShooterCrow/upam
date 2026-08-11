@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-import ScrollReveal from '../../component/ScrollReveal';
+import ScrollReveal from '../../components/ScrollReveal';
 
 const Partnership = () => {
     const [formData, setFormData] = useState({

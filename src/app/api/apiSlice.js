@@ -177,6 +177,10 @@ export const apiSlice = createApi({
     "MembershipPlan",
     "EmergencyContact",
     "Completeness",
+    "Dashboard",
+    "Due",
+    "Shares",
+    "LoginActivity",
   ],
   endpoints: (builder) => ({}),
 });

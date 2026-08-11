@@ -63,20 +63,18 @@ export const DashboardStats = ({ data, role, isLoading }) => {
             trend: 'up'
         },
         {
-            title: "Total Shares",
-            value: isLoading ? "..." : formatCurrency(data?.totalShares),
-            icon: ChartCandlestick,
-            iconBg: "bg-orange-50",
-            iconColor: "text-orange-500",
-            linkText: "Buy more shares",
-            trend: 'up'
-        },
-        {
             title: role === 'admin' ? "Total Members" : "Total Hours",
             value: isLoading ? "..." : role === 'admin' ? formatNumber(data?.totalMembers) : formatNumber(0),
             icon: role === 'admin' ? Users : Timer,
             iconBg: "bg-indigo-50",
             iconColor: "text-indigo-500"
+        },
+        {
+            title: "Total Shares",
+            value: isLoading ? "..." : formatNumber(data?.totalShares),
+            icon: ChartCandlestick,
+            iconBg: "bg-orange-50",
+            iconColor: "text-orange-500"
         }
     ];
 

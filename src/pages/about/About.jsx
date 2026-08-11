@@ -14,7 +14,7 @@ import {
     Play,
     CheckCircle2
 } from 'lucide-react';
-import ScrollReveal from '../../component/ScrollReveal';
+import ScrollReveal from '../../components/ScrollReveal';
 import WorldMapWithMarkers from '../../component/ui/WorldMapWithMarkers';
 import { Link } from 'react-router-dom';
 

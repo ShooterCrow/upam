@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import registerIllustration from "../../assets/Register.png";
 import { useSignupMutation, useSendOtpMutation } from "../../pages/authenticationPages/authApiSlice";
 import { useDispatch } from "react-redux";
-import ScrollReveal from "../../component/ScrollReveal";
+import ScrollReveal from "../../components/ScrollReveal";
 import { ArrowRight, CheckCircle2, Loader2, Phone, MessageSquare, ShieldCheck, Globe, Calendar } from "lucide-react";
 import { Country } from "country-state-city";
 import { useGetSettingsQuery } from "../platform/settingsApiSlice";

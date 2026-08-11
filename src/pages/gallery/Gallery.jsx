@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import ScrollReveal from '../../component/ScrollReveal';
+import ScrollReveal from '../../components/ScrollReveal';
 import { X } from 'lucide-react';
 
 const galleryImages = [

@@ -10,7 +10,7 @@ import {
   Image as ImageIcon,
   Play,
 } from 'lucide-react';
-import ScrollReveal from '../../component/ScrollReveal';
+import ScrollReveal from '../../components/ScrollReveal';
 
 /* -------------------------------------------------------------------------- */
 /*  Brand colours (applied via Tailwind arbitrary classes, matching the rest  */

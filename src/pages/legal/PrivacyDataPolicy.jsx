@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Eye, Lock, Database, UserCheck } from 'lucide-react';
-import ScrollReveal from '../../component/ScrollReveal';
+import ScrollReveal from '../../components/ScrollReveal';
 
 const PrivacyDataPolicy = () => {
   return (

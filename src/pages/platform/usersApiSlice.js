@@ -44,6 +44,13 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       query: (id) => `/users/${id}/full-profile`,
       providesTags: (result, error, id) => [{ type: "Users", id }],
     }),
+    getUserLoginActivity: builder.query({
+      query: ({ id, ...params }) => ({
+        url: `/users/${id}/login-activity`,
+        params,
+      }),
+      providesTags: (result, error, { id }) => [{ type: "LoginActivity", id }],
+    }),
     verifyPhone: builder.mutation({
       query: (data) => ({
         url: "/users/profile/verify-phone",
@@ -59,6 +66,7 @@ export const {
   useGetUsersQuery,
   useGetUserByIdQuery,
   useGetUserFullProfileQuery,
+  useGetUserLoginActivityQuery,
   useGetMeQuery,
   useUpdateUserMutation,
   useUpdateMeMutation,

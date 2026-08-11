@@ -2,7 +2,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Download, ArrowRight, BookOpen, FileText, Share2, FileDown, BookMarked } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import ScrollReveal from '../../component/ScrollReveal';
+import ScrollReveal from '../../components/ScrollReveal';
 
 export default function Publications() {
     const [activeTab, setActiveTab] = useState('articles');
