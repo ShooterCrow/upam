@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import useAuth from '../../../../hooks/useAuth';
 import {
@@ -15,16 +15,20 @@ import {
     Loader2,
     AlertCircle,
     TrendingUp,
-    ArrowLeft
+    ArrowLeft,
+    ChartCandlestick
 } from 'lucide-react';
 import { useGetUserFullProfileQuery, useUpdateUserMutation } from '../../../platform/usersApiSlice';
 import LoadingState from '../../../../component/ui/LoadingState';
 import ErrorState from '../../../../component/ui/ErrorState';
+import ShareManagementModal from './ShareManagementModal';
+import MemberLoginActivity from './MemberLoginActivity';
 
 const MemberProfile = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const { isAdmin, isManager } = useAuth();
+    const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
     const { data: response, isLoading, isError, error, refetch } = useGetUserFullProfileQuery(id);
     const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
@@ -126,12 +130,24 @@ const MemberProfile = () => {
 
                     {/* Financial Stats */}
                     <div className="lg:col-span-2 bg-white border border-gray-100 p-8 shadow-sm flex flex-col justify-center">
-                        <div className="flex items-center gap-3 mb-8">
-                            <TrendingUp className="text-blue-600" size={20} />
-                            <h3 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">Activity & Financials</h3>
+                        <div className="flex items-center justify-between gap-4 mb-8">
+                            <div className="flex items-center gap-3">
+                                <TrendingUp className="text-blue-600" size={20} />
+                                <h3 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">Activity & Financials</h3>
+                            </div>
+
+                            {isAdmin && (
+                                <button
+                                    onClick={() => setIsShareModalOpen(true)}
+                                    className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 text-xs font-bold hover:bg-blue-700 transition-all shadow-md active:scale-95 shrink-0"
+                                >
+                                    <ChartCandlestick size={16} />
+                                    Manage Shares
+                                </button>
+                            )}
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
                             <div className="bg-slate-50 p-6 border border-slate-100 space-y-2 group hover:bg-white hover:shadow-xl hover:shadow-slate-100/50 transition-all duration-300">
                                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">Total Spent</p>
                                 <p className="text-2xl font-black text-slate-800">$ {stats.totalSpent?.toLocaleString() || '0'}.00</p>
@@ -145,6 +161,10 @@ const MemberProfile = () => {
                             <div className="bg-slate-50 p-6 border border-slate-100 space-y-2 group hover:bg-white hover:shadow-xl hover:shadow-slate-100/50 transition-all duration-300">
                                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">Payments Count</p>
                                 <p className="text-2xl font-black text-slate-800">{stats.totalPaymentsCount || '0'}</p>
+                            </div>
+                            <div className="bg-slate-50 p-6 border border-slate-100 space-y-2 group hover:bg-white hover:shadow-xl hover:shadow-slate-100/50 transition-all duration-300">
+                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">Total Shares</p>
+                                <p className="text-2xl font-black text-slate-800">{Number(stats.totalShares || 0).toLocaleString()}</p>
                             </div>
                         </div>
                     </div>
@@ -230,7 +250,20 @@ const MemberProfile = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Login Activity — admins & managers only */}
+                {(isAdmin || isManager) && <MemberLoginActivity userId={fullMember._id} />}
             </div>
+
+            {/* Mounted only while open so the form resets on every launch */}
+            {isAdmin && isShareModalOpen && (
+                <ShareManagementModal
+                    isOpen={isShareModalOpen}
+                    onClose={() => setIsShareModalOpen(false)}
+                    member={fullMember}
+                    currentShares={stats.totalShares || 0}
+                />
+            )}
         </div>
     );
 };

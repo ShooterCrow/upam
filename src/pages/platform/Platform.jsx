@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { ArrowUpRight, ArrowRight, Grid, Layout, Orbit } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import ScrollReveal from '../../component/ScrollReveal';
+import ScrollReveal from '../../components/ScrollReveal';
 import jumuiyaLogo from '../../assets/jumuiya_logo.png';
 import upamEventsLogo from '../../assets/upam_events_logo.png';
 import academyLogo from '../../assets/academy_logo.png';

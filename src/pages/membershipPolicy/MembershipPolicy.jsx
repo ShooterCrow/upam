@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Shield, CheckCircle2, AlertCircle, FileText, UserPlus, Users, DollarSign, Clock, HelpCircle, ArrowRight, Gavel, FileCheck } from 'lucide-react';
-import ScrollReveal from '../../component/ScrollReveal';
+import ScrollReveal from '../../components/ScrollReveal';
 
 const SectionTitle = ({ number, title }) => (
   <div className="flex items-center gap-4 mb-8">

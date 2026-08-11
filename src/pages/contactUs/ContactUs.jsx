@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Send, ArrowRight } from 'lucide-react';
 import worldMap from '../../assets/world_map.png';
 import { useCreateContactMutation } from './contactsApiSlice';
-import ScrollReveal from '../../component/ScrollReveal';
+import ScrollReveal from '../../components/ScrollReveal';
 import FAQ from '../../component/ui/FAQ';
 
 const TikTokIcon = () => (

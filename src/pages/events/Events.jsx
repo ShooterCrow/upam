@@ -2,7 +2,7 @@
 import eventHero from '../../assets/event.jpg';
 import { Calendar, MapPin, ArrowRight, Play, ChevronDown, ChevronUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import ScrollReveal from '../../component/ScrollReveal';
+import ScrollReveal from '../../components/ScrollReveal';
 import {
   events,
   howItWorksSteps,

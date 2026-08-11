@@ -3,7 +3,7 @@ import { Search, User, Calendar, IdCard, Users, ArrowRight, Shield, Globe, MapPi
 import { Link } from 'react-router-dom';
 import { useSearchMembersQuery } from './searchApiSlice';
 import useAuth from '../../hooks/useAuth';
-import ScrollReveal from '../../component/ScrollReveal';
+import ScrollReveal from '../../components/ScrollReveal';
 
 const TABS = [
   { id: 'name', label: 'By Name', icon: User },

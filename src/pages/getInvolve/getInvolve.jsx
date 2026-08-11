@@ -7,7 +7,7 @@ import volunteerImg from '../../assets/volunteer.png';
 import partnerImg from '../../assets/partner.png';
 import benefitsImg from '../../assets/benefits.png';
 import FAQ from '../../component/ui/FAQ';
-import ScrollReveal from '../../component/ScrollReveal';
+import ScrollReveal from '../../components/ScrollReveal';
 
 const benefits = [
   { icon: GraduationCap, label: "Education & Scholarships", desc: "Access to sponsored education tracks and UPAM Academy programs." },
