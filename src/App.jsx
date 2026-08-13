@@ -63,6 +63,7 @@ const Chapters = lazy(() => import('./pages/UserAdminPages/admin/chapters/Chapte
 const ChapterDetail = lazy(() => import('./pages/UserAdminPages/admin/detailPages/ChapterDetail'));
 const CreateUser = lazy(() => import('./pages/UserAdminPages/admin/CreateUser'));
 const RoleManagement = lazy(() => import('./pages/UserAdminPages/admin/RoleManagement'));
+const Shares = lazy(() => import('./pages/UserAdminPages/admin/Shares'));
 const PublicChapters = lazy(() => import('./pages/chapters/Chapters'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const MembershipPayment = lazy(() => import('./pages/UserAdminPages/common/MembershipPayment'));
@@ -191,6 +192,7 @@ const App = () => {
                     <Route path='my-profile' element={<MyProfile />} />
                     <Route path='calendar' element={<UPAMCalender />} />
                     <Route path='settings' element={<Settings />} />
+                    <Route path='shares' element={<Shares />} />
                     <Route path='create-user' element={<CreateUser />} />
                     <Route path='role-management' element={<RoleManagement />} />
                   </Route>

@@ -25,6 +25,7 @@ import {
   Settings,
   ClipboardList,
   Shield,
+  ChartCandlestick,
 } from "lucide-react";
 
 export const ADMIN_LINKS = [
@@ -129,6 +130,12 @@ export const ADMIN_LINKS = [
     path: "/dashboard/chapters",
     icon: Globe,
     roles: ["admin", "manager"],
+  },
+  {
+    name: "Shares",
+    path: "/dashboard/shares",
+    icon: ChartCandlestick,
+    roles: ["admin"],
   },
   {
     name: "Settings",
