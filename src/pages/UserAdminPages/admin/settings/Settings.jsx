@@ -102,7 +102,7 @@ const Settings = () => {
                         <div>
                             <h3 className="font-medium text-gray-900">Require Phone Verification</h3>
                             <p className="text-sm text-gray-500 mt-1 max-w-xl">
-                                When enabled, new users must verify their phone number via WhatsApp or SMS (Bird.com) during registration.
+                                When enabled, new users must verify their phone number via WhatsApp or SMS during registration.
                             </p>
                         </div>
                         <label className="relative inline-flex items-center cursor-pointer">
