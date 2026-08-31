@@ -56,7 +56,7 @@ const Shares = () => {
         <p className="text-sm text-slate-500">Manage platform shares and member allocations.</p>
       </div>
 
-      <div className="p-6 space-y-6">
+      <div className="py-6 space-y-6">
         <DashboardStats data={stats} role={user?.roles?.[0]} isLoading={isDashboardLoading} />
 
         <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
