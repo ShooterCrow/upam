@@ -3,7 +3,15 @@ import { apiSlice } from "../../../../app/api/apiSlice";
 export const membershipPlansApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getMembershipPlans: builder.query({
-      query: () => "/membership-plans",
+      query: ({ membershipLevel, chapterId } = {}) => {
+        const params = new URLSearchParams();
+        if (membershipLevel) params.set("membershipLevel", membershipLevel);
+        if (chapterId) params.set("chapterId", chapterId);
+        const query = params.toString();
+        return query
+          ? `/membership-plans?${query}`
+          : "/membership-plans";
+      },
       providesTags: (result) =>
         result
           ? [
@@ -28,6 +36,7 @@ export const membershipPlansApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) => [
         { type: "MembershipPlan", id: arg.id },
+        { type: "MembershipPlan", id: "LIST" },
       ],
     }),
     deleteMembershipPlan: builder.mutation({
@@ -37,6 +46,7 @@ export const membershipPlansApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) => [
         { type: "MembershipPlan", id: arg.id },
+        { type: "MembershipPlan", id: "LIST" },
       ],
     }),
   }),

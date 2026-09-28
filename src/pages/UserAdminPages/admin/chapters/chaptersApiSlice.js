@@ -29,6 +29,17 @@ export const chaptersApiSlice = apiSlice.injectEndpoints({
         "Chapters",
       ],
     }),
+    updateChapterCurrency: builder.mutation({
+      query: ({ id, ...currencyData }) => ({
+        url: `/chapters/currency/${id}`,
+        method: "PUT",
+        body: currencyData,
+      }),
+      invalidatesTags: (result, error, { id }) => [
+        { type: "Chapters", id },
+        "Chapters",
+      ],
+    }),
     deleteChapter: builder.mutation({
       query: (id) => ({
         url: `/chapters/${id}`,
@@ -44,5 +55,6 @@ export const {
   useGetChapterByIdQuery,
   useAddNewChapterMutation,
   useUpdateChapterMutation,
+  useUpdateChapterCurrencyMutation,
   useDeleteChapterMutation,
 } = chaptersApiSlice;

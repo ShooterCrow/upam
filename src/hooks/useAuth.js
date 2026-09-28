@@ -16,6 +16,11 @@ const useAuth = () => {
   let isRepresentative = false;
   let status = "User";
 
+  const getReferenceId = (reference) =>
+    reference && typeof reference === "object"
+      ? reference._id || reference.id || null
+      : reference || null;
+
   if (token && user) {
     roles = user.roles || [];
     isLoggedIn = true;
@@ -25,6 +30,8 @@ const useAuth = () => {
     isManager = roles.includes("manager");
     isRepresentative =
       roles.includes("representative") && !isAdmin && !isManager;
+    const chapter = user.chapter || null;
+    const representedChapter = user.representedChapter || null;
 
     if (isAdmin) status = "Admin";
     else if (isManager) status = "Manager";
@@ -39,6 +46,16 @@ const useAuth = () => {
       isRepresentative,
       status,
       user,
+      chapter,
+      chapterId: getReferenceId(chapter),
+      chapterName:
+        typeof chapter === "object" ? chapter.chapter_name || null : null,
+      representedChapter,
+      representedChapterId: getReferenceId(representedChapter),
+      representedChapterName:
+        typeof representedChapter === "object"
+          ? representedChapter?.chapter_name || null
+          : null,
       importedMember_id,
       isLoading: false,
       isUninitialized: false,
@@ -54,6 +71,12 @@ const useAuth = () => {
     isRepresentative: false,
     status: "Guest",
     user: null,
+    chapter: null,
+    chapterId: null,
+    chapterName: null,
+    representedChapter: null,
+    representedChapterId: null,
+    representedChapterName: null,
     isLoading: false,
     isUninitialized: false,
   };

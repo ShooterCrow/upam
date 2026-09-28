@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { X, Save, Loader2, Info } from 'lucide-react';
-import { useAddNewChapterMutation, useUpdateChapterMutation } from './chaptersApiSlice';
+import { useAddNewChapterMutation, useUpdateChapterCurrencyMutation, useUpdateChapterMutation } from './chaptersApiSlice';
 import { useGetUsersQuery } from '../../../platform/usersApiSlice';
 import SearchableUserSelect from '../../../../component/ui/SearchableUserSelect';
+import SearchableCurrencySelect from '../../../../component/ui/SearchableCurrencySelect';
 import { toast } from 'react-toastify';
 
 const ChapterForm = ({ isOpen, onClose, chapter }) => {
     const [formData, setFormData] = useState({
         chapter_name: '',
+        currency: 'USD',
         chapter_note: '',
         chapter_flag: '',
         representative: ''
@@ -17,11 +19,13 @@ const ChapterForm = ({ isOpen, onClose, chapter }) => {
 
     const [addNewChapter, { isLoading: isAdding }] = useAddNewChapterMutation();
     const [updateChapter, { isLoading: isUpdating }] = useUpdateChapterMutation();
+    
 
     useEffect(() => {
         if (chapter) {
             setFormData({
                 chapter_name: chapter.chapter_name || '',
+                currency: chapter?.currency || '',
                 chapter_note: chapter.chapter_note || '',
                 chapter_flag: chapter.chapter_flag || '',
                 representative: chapter.representative?._id || chapter.representative || ''
@@ -29,6 +33,7 @@ const ChapterForm = ({ isOpen, onClose, chapter }) => {
         } else {
             setFormData({
                 chapter_name: '',
+                currency: '',
                 chapter_note: '',
                 chapter_flag: '',
                 representative: ''
@@ -43,6 +48,11 @@ const ChapterForm = ({ isOpen, onClose, chapter }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!/^[A-Z]{3}$/.test(formData.currency)) {
+            toast.error('Select a valid currency from the list.');
+            return;
+        }
 
         try {
             if (chapter) {
@@ -100,17 +110,28 @@ const ChapterForm = ({ isOpen, onClose, chapter }) => {
                             />
                         </div>
 
-                        {/* Chapter Flag */}
-                        <div className="space-y-2">
-                            <label className="text-xs font-black text-slate-500 uppercase tracking-wider ml-1">Flag Image URL</label>
-                            <input
-                                type="url"
-                                name="chapter_flag"
-                                value={formData.chapter_flag}
-                                onChange={handleChange}
-                                placeholder="https://i.imgur.com/HGFd10W.jpg"
-                                className="w-full px-4 py-3.5 bg-slate-50 border-transparent focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50 transition-all text-sm font-semibold text-slate-700 outline-none"
-                            />
+                        <div className="flex flex-col md:flex-row gap-6">
+                            {/* Chapter Currency */}
+                            <div className="space-y-2 flex-1 min-w-0">
+                                <label className="text-xs font-black text-slate-500 uppercase tracking-wider ml-1">Chapter Currency</label>
+                                <SearchableCurrencySelect
+                                    value={formData.currency}
+                                    onChange={(currency) => setFormData(prev => ({ ...prev, currency }))}
+                                />
+                            </div>
+
+                            {/* Chapter Flag */}
+                            <div className="space-y-2 flex-1 min-w-0">
+                                <label className="text-xs font-black text-slate-500 uppercase tracking-wider ml-1">Flag Image URL</label>
+                                <input
+                                    type="url"
+                                    name="chapter_flag"
+                                    value={formData.chapter_flag}
+                                    onChange={handleChange}
+                                    placeholder="https://i.imgur.com/HGFd10W.jpg"
+                                    className="w-full px-4 py-3.5 bg-slate-50 border-transparent focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50 transition-all text-sm font-semibold text-slate-700 outline-none"
+                                />
+                            </div>
                         </div>
 
                         {/* National Representative */}
