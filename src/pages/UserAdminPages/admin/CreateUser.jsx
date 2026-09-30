@@ -54,7 +54,7 @@ const CreateUser = () => {
         setFormData(prev => ({
             ...prev,
             chapter: selectedId,
-            country: selectedChapter ? selectedChapter.chapter_name : ''
+            country: selectedChapter ? selectedchapter?.chapter_name : ''
         }));
     };
 

@@ -14,7 +14,7 @@ const EmergencyContact = () => {
     const { data: contactData, isLoading, isFetching, isError } = useGetMyEmergencyContactQuery();
     const [updateEmergencyContact, { isLoading: isUpdating }] = useUpdateMyEmergencyContactMutation();
     const [wasSaving, setWasSaving] = useState(false);
-    const { user } = useAuth();
+    const { user, roles } = useAuth();
 
     const initialContactState = {
         firstName: '',
@@ -112,7 +112,7 @@ const EmergencyContact = () => {
                 return () => clearTimeout(timer);
             } else if (completeness?.isAllComplete && location.pathname === completeness.step3.path && wasSaving) {
                 const privilegedRoles = ['Admin', 'Manager', 'Representative'];
-                const rolePath = privilegedRoles.includes(authUser?.roles?.[0])
+                const rolePath = privilegedRoles.includes(roles?.[0])
                     ? '/dashboard'
                     : '/user';
                 const timer = setTimeout(() => {

@@ -126,7 +126,7 @@ const Chapters = () => {
                                                 {chapter.chapter_flag ? (
                                                     <img
                                                         src={chapter.chapter_flag}
-                                                        alt={`${chapter.chapter_name} flag`}
+                                                        alt={`${chapter?.chapter_name} flag`}
                                                         className="w-14 h-9 object-cover border border-slate-200 flex-shrink-0"
                                                         onError={(e) => { e.target.style.display = 'none'; }}
                                                     />
@@ -137,7 +137,7 @@ const Chapters = () => {
                                                 )}
                                                 <div>
                                                     <h3 className="text-sm font-black text-slate-900 leading-snug group-hover:text-[#EB010C] transition-colors">
-                                                        {chapter.chapter_name}
+                                                        {chapter?.chapter_name}
                                                     </h3>
                                                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
                                                         ID: {chapter.chapter_id}
@@ -148,7 +148,7 @@ const Chapters = () => {
                                             {/* Note */}
                                             {chapter.chapter_note && (
                                                 <p className="text-xs text-slate-500 leading-relaxed uppercase line-clamp-2">
-                                                    {chapter.chapter_note} {chapter.chapter_name}
+                                                    {chapter.chapter_note} {chapter?.chapter_name}
                                                 </p>
                                             )}
                                         </div>

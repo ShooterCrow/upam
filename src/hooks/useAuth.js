@@ -49,7 +49,7 @@ const useAuth = () => {
       chapter,
       chapterId: getReferenceId(chapter),
       chapterName:
-        typeof chapter === "object" ? chapter.chapter_name || null : null,
+        typeof chapter === "object" ? chapter?.chapter_name || null : null,
       representedChapter,
       representedChapterId: getReferenceId(representedChapter),
       representedChapterName:

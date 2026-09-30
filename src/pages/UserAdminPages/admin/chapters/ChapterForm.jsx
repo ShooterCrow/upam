@@ -24,7 +24,7 @@ const ChapterForm = ({ isOpen, onClose, chapter }) => {
     useEffect(() => {
         if (chapter) {
             setFormData({
-                chapter_name: chapter.chapter_name || '',
+                chapter_name: chapter?.chapter_name || '',
                 currency: chapter?.currency || '',
                 chapter_note: chapter.chapter_note || '',
                 chapter_flag: chapter.chapter_flag || '',

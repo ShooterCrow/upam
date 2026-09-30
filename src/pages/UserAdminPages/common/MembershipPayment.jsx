@@ -441,7 +441,7 @@ const MembershipPayment = () => {
                                 >
                                     <option value="">Select country / chapter</option>
                                     {chapters.map(chapter => (
-                                        <option key={chapter._id} value={chapter._id}>{chapter.chapter_name}</option>
+                                        <option key={chapter._id} value={chapter._id}>{chapter?.chapter_name}</option>
                                     ))}
                                 </select>
                             ) : ownMembershipChapterId ? (
@@ -553,7 +553,7 @@ const MembershipPayment = () => {
                                 <li key={plan._id} className="flex items-center justify-between p-4 border border-gray-100 rounded-xl bg-slate-50/50 hover:bg-slate-50 transition-colors">
                                     <div>
                                         <p className="font-bold text-slate-800">{plan.name}</p>
-                                        {plan.chapter?.chapter_name && <p className="text-xs text-slate-500">{plan.chapter.chapter_name}</p>}
+                                        {plan.chapter?.chapter_name && <p className="text-xs text-slate-500">{plan.chapter?.chapter_name}</p>}
                                         <p className="text-sm text-slate-500 font-medium">{formatAmount(plan.price, plan.chapter?.currency || plan.currency || 'USD')}</p>
                                     </div>
                                     {canManagePlans && (

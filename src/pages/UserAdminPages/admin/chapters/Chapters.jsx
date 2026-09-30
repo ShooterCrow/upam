@@ -102,7 +102,7 @@ const Chapters = () => {
                                     </td> */}
                                     <td className="px-6 py-5">
                                         <div className="flex flex-col">
-                                            <span className="text-sm font-bold text-blue-600">{chapter.chapter_name}</span>
+                                            <span className="text-sm font-bold text-blue-600">{chapter?.chapter_name}</span>
                                         </div>
                                     </td>
                                     <td className="px-6 py-5">
@@ -116,7 +116,7 @@ const Chapters = () => {
                                             <div className="flex justify-center">
                                                 <img
                                                     src={chapter.chapter_flag}
-                                                    alt={chapter.chapter_name}
+                                                    alt={chapter?.chapter_name}
                                                     className="w-10 h-6 object-cover rounded shadow-sm border border-slate-200"
                                                     onError={(e) => {
                                                         e.target.src = 'https://via.placeholder.com/40x24?text=Flag';

@@ -63,7 +63,7 @@ const ChapterDetail = () => {
                         <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     </button>
                     <div>
-                        <h2 className="text-xl font-bold text-slate-800">{chapter.chapter_name}</h2>
+                        <h2 className="text-xl font-bold text-slate-800">{chapter?.chapter_name}</h2>
                         <p className="text-xs text-slate-500">Chapter Detail & Analytics</p>
                     </div>
                 </div>
@@ -88,7 +88,7 @@ const ChapterDetail = () => {
                                 {chapter.chapter_flag ? (
                                     <img
                                         src={chapter.chapter_flag}
-                                        alt={chapter.chapter_name}
+                                        alt={chapter?.chapter_name}
                                         className="w-16 h-10 object-cover rounded shadow-md border-2 border-white"
                                     />
                                 ) : (
@@ -97,7 +97,7 @@ const ChapterDetail = () => {
                                     </div>
                                 )}
                                 <div>
-                                    <h3 className="font-bold text-slate-800">{chapter.chapter_name}</h3>
+                                    <h3 className="font-bold text-slate-800">{chapter?.chapter_name}</h3>
                                     <p className="text-xs text-slate-400 font-mono">ID: {chapter.chapter_id}</p>
                                 </div>
                             </div>
