@@ -34,7 +34,7 @@ export const globalExecutive = [
       id: 6,
       name: "Traimo Lazaro Gavu",
       title: "Global Executive of Enterprises",
-      image: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793093663/Traimo_Lazaro_Gavu_asicoq.png"
+      image: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793095782/Traimo_Lazaro_Gavu1_kgwfud.jpg"
   },
   {
     id: 7,
