@@ -179,7 +179,7 @@ export const directors = [
   {
     id: 26,
     name: "Jamillah Kachingwe",
-    title: "Operational Manager - UPAM Microfinance Malawi",
+    title: "Operational Manager - UPAM Microfinance",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793102715/Jamillah_Kachingwe_hlpysn.png",
   },
