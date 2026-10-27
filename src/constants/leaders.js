@@ -178,7 +178,7 @@ export const directors = [
   },
   {
     id: 26,
-    name: "Victor Onyekwere",
+    name: "Jamillah Kachingwe",
     title: "Operational Manager - UPAM Microfinance Malawi",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793102715/Jamillah_Kachingwe_hlpysn.png",
