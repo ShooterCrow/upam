@@ -108,12 +108,12 @@ export const nationalRepresentatives = [
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1780001980/WhatsApp_Image_2026-05-27_at_04.11.51-removebg-preview_2_gmemka.png",
   },
-  // {
-  //     id: 17,
-  //     name: "Kettie Mchekeni",
-  //     title: "National Representative Malawi",
-  //     image: "/images/leadership/kettie-mchekeni.jpg"
-  // },
+  {
+      id: 17,
+      name: "Kettie Mchekeni",
+      title: "National Representative Malawi",
+      image: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793095046/Kettie_mkxfz5.png"
+  },
   //   {
   //     id: 18,
   //     name: "Frank Minga",
