@@ -108,12 +108,6 @@ export const nationalRepresentatives = [
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1780001980/WhatsApp_Image_2026-05-27_at_04.11.51-removebg-preview_2_gmemka.png",
   },
-  {
-      id: 17,
-      name: "Kettie Mchekeni",
-      title: "National Representative Malawi",
-      image: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793095046/Kettie_mkxfz5.png"
-  },
   //   {
   //     id: 18,
   //     name: "Frank Minga",
@@ -167,6 +161,13 @@ export const directors = [
     title: "Director of internal communications",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779380144/WhatsApp_Image_2026-05-21_at_16.58.27_yb5mhj.jpg",
+  },
+  
+  {
+      id: 17,
+      name: "Kettie Mchekeni",
+      title: "Operational and Finance Assistant Manager",
+      image: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793095046/Kettie_mkxfz5.png"
   },
   {
     id: 25,
