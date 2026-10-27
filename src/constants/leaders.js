@@ -176,6 +176,13 @@ export const directors = [
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779376626/d9331509-c158-479b-8428-b6a3d0c1163e_wj9hqv.png",
   },
+  {
+    id: 26,
+    name: "Victor Onyekwere",
+    title: "Operational Manager - UPAM Microfinance Malawi",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793102715/Jamillah_Kachingwe_hlpysn.png",
+  },
 ];
 
 export const members = [
