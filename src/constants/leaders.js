@@ -167,7 +167,7 @@ export const directors = [
       id: 17,
       name: "Kettie Mchekeni",
       title: "Operational and Finance Assistant Manager",
-      image: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793095046/Kettie_mkxfz5.png"
+      image: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793095370/Kettie_djfawa.png"
   },
   {
     id: 25,
