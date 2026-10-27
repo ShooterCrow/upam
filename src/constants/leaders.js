@@ -30,12 +30,12 @@ export const globalExecutive = [
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779380142/WhatsApp_Image_2026-05-21_at_16.55.29_e0ushp.jpg",
   },
-  // {
-  //     id: 6,
-  //     name: "Prof. Njoroge Gitomeh",
-  //     title: "Global Secretary of Finance",
-  //     image: "/pics/prof-njoroge.jpeg"
-  // },
+  {
+      id: 6,
+      name: "Traimo Lazaro Gavu",
+      title: "Global Executive of Enterprises",
+      image: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793093663/Traimo_Lazaro_Gavu_asicoq.png"
+  },
   {
     id: 7,
     name: "Dr Venetta Mwengella",
