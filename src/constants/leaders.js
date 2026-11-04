@@ -197,7 +197,7 @@ export const members = [
     name: "Faith Augustine",
     title: "Reporter",
     image:
-      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779380144/1779157735407_2_aslqrt.jpg",
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793834682/IMG_1075.JPG_jdwv4m.png",
   },
   {
     id: 26,
