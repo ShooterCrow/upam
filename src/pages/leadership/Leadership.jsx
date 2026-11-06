@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { globalExecutive, nationalRepresentatives, directors, members } from '../../constants/leaders';
+import { globalExecutive, nationalRepresentatives, directors, Admins } from '../../constants/leaders';
 import ScrollReveal from '../../components/ScrollReveal';
 import { Users, Globe, Building2, ArrowRight } from 'lucide-react';
 
@@ -141,13 +141,13 @@ const Leadership = () => {
                     description="Oversight and financial governance to ensure long-term stability and impact."
                 />
 
-                {/* Members Section */}
+                {/* Admins Section */}
                 <Section
-                    title="Members"
+                    title="Admins"
                     subtitle="Dedicated Contributors"
                     icon={Users}
-                    profiles={members}
-                    description="Members dedicated to ensure the continuous progress and growth of the movement."
+                    profiles={Admins}
+                    description="Admins dedicated to ensure the continuous progress and growth of the movement."
                 />
             </div>
         </div>
