@@ -143,8 +143,8 @@ const Leadership = () => {
 
                 {/* Admins Section */}
                 <Section
-                    title="Admins"
-                    subtitle="Dedicated Contributors"
+                    title="Administrators"
+                    subtitle="Dedicated Admins"
                     icon={Users}
                     profiles={Admins}
                     description="Admins dedicated to ensure the continuous progress and growth of the movement."
