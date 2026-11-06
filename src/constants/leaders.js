@@ -206,7 +206,7 @@ export const directors = [
   },
 ];
 
-export const members = [
+export const Admins = [
   {
     id: 17,
     name: "Standa Sani",
