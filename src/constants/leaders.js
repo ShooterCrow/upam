@@ -74,12 +74,12 @@ export const globalExecutive = [
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779381405/pius-removebg-preview_1_zigjla.png",
   },
-  // {
-  //     id: 13,
-  //     name: "Abdulhamid Idris Yusuf",
-  //     title: "Global Secretary of ICT",
-  //     image: "/images/leadership/abdulhamid-yusuf.jpg"
-  // },
+  {
+      id: 13,
+      name: "Abdulhamid Idris Yusuf",
+      title: "Global Secretary of ICT",
+      image: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793963662/hamid_g50myr.png"
+  },
   // {
   //     id: 14,
   //     name: "Prisca Iweobi",
@@ -177,11 +177,32 @@ export const directors = [
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779376626/d9331509-c158-479b-8428-b6a3d0c1163e_wj9hqv.png",
   },
   {
+    id: 25,
+    name: "Alade Jamiu",
+    title: "Project Manager",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793963664/alade_eldzcf.png",
+  },
+  {
     id: 26,
     name: "Jamillah Kachingwe",
     title: "Operational Manager - UPAM Microfinance",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793102715/Jamillah_Kachingwe_hlpysn.png",
+  },
+  {
+    id: 27,
+    name: "Williams John Ominyi",
+    title: "Secretary General - Nigeria Chapter",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793963661/williams_ci3zr9.png",
+  },
+  {
+    id: 27,
+    name: "Ally Watson Mwasungile",
+    title: "Secretary General - Tanzania Chapter",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793963661/tanzania_tv7pud.png",
   },
 ];
 
