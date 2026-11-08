@@ -76,6 +76,7 @@ const MyTransactions = lazy(() => import('./pages/UserAdminPages/common/MyTransa
 const Settings = lazy(() => import('./pages/UserAdminPages/admin/settings/Settings'));
 const Dues = lazy(() => import('./pages/UserAdminPages/admin/Dues'));
 const MyDues = lazy(() => import('./pages/UserAdminPages/common/MyDues'));
+const Assignments = lazy(() => import('./pages/assignments/Assignments'));
 
 // Loading Fallback Component
 const RouteLoader = () => (
@@ -157,6 +158,8 @@ const App = () => {
               <Route element={<RequireAuth />} />
 
             </Route>
+
+            <Route path="/assignments" element={<Assignments />} />
 
             {/* Dashboard Routes (admin, manager, representative) */}
             <Route element={<RequireAuth allowedRoles={['admin', "manager", "representative"]} />}>

@@ -27,6 +27,7 @@ const PersistLogin = () => {
         '/partnership',
         '/volunteer',
         '/leadership',
+        '/assignments',
         '/platforms',
         '/forgot-password'
     ];
