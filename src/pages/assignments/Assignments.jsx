@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-    CalendarDays,
     ChevronLeft,
     ChevronRight,
     FileText,
@@ -16,7 +15,7 @@ const initialAssignments = [
         course: 'UI/UX Design',
         module: 'Module 2: User Research',
         description: 'Create low-fidelity wireframes for the mobile banking app screens discussed in class.',
-        dueDate: '2026-11-11',
+        dueDate: '2025-05-28',
         status: 'Pending',
         files: ['Brief.pdf', 'Reference.png'],
     },
@@ -26,7 +25,7 @@ const initialAssignments = [
         course: 'UI/UX Design',
         module: 'Module 2: User Research',
         description: 'Develop two user personas based on the research data provided.',
-        dueDate: '2026-11-14',
+        dueDate: '2025-05-31',
         status: 'In Progress',
         files: ['Persona_Template.docx'],
     },
@@ -36,9 +35,9 @@ const initialAssignments = [
         course: 'UI/UX Design',
         module: 'Module 3: Information Architecture',
         description: 'Create a sitemap and user flow for the e-commerce website.',
-        dueDate: '2026-11-18',
+        dueDate: '2025-05-22',
         status: 'Submitted',
-        submittedDate: '2026-11-07',
+        submittedDate: '2025-05-22',
         files: ['Sitemap_Guide.pdf', 'User_Flow_Example.png'],
     },
     {
@@ -47,9 +46,9 @@ const initialAssignments = [
         course: 'UI/UX Design',
         module: 'Module 3: Information Architecture',
         description: 'Analyze 3 competitor products and present your insights.',
-        dueDate: '2026-11-20',
+        dueDate: '2025-05-20',
         status: 'Graded',
-        submittedDate: '2026-11-04',
+        submittedDate: '2025-05-20',
         grade: '85%',
         files: ['Analysis_Template.xlsx'],
     },
@@ -59,7 +58,7 @@ const initialAssignments = [
         course: 'UI/UX Design',
         module: 'Module 4: UI Design',
         description: 'Conduct an accessibility audit on the provided website and document issues.',
-        dueDate: '2026-11-25',
+        dueDate: '2025-06-05',
         status: 'Not Started',
         files: ['Audit_Checklist.pdf'],
     },
@@ -89,6 +88,13 @@ const dateKey = (date) => {
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
+};
+
+const formatDeadlineCountdown = (dateString) => {
+    const daysLeft = Math.ceil(
+        (new Date(`${dateString}T12:00:00`) - new Date('2025-05-27T12:00:00')) / 86400000,
+    );
+    return `${daysLeft} ${daysLeft === 1 ? 'day' : 'days'} left`;
 };
 
 function AssignmentModal({ assignment, onClose, onSubmit }) {
@@ -202,56 +208,52 @@ function AssignmentCard({ assignment, onOpen }) {
     const buttonLabel = assignment.status === 'In Progress' ? 'Continue' : 'View Assignment';
 
     return (
-        <article className="grid gap-4 rounded-2xl bg-white p-4 shadow-[0_1px_3px_rgba(15,23,42,0.04)] sm:grid-cols-[30px_minmax(0,1fr)_112px] sm:gap-3 sm:p-5">
-            <div className={`flex h-[30px] w-[30px] items-center justify-center rounded-lg ${statusIconStyles[assignment.status]}`}>
-                <FileText size={16} strokeWidth={1.8} />
+        <article className="grid min-h-[106px] grid-cols-[30px_minmax(0,1fr)] gap-x-3 gap-y-2 rounded-xl bg-white px-3 py-3 sm:grid-cols-[30px_minmax(0,1fr)_82px] sm:gap-x-3 sm:gap-y-0">
+            <div className={`flex h-[30px] w-[30px] items-center justify-center rounded-[9px] ${statusIconStyles[assignment.status]}`}>
+                <FileText size={15} strokeWidth={1.8} />
             </div>
             <div className="min-w-0">
-                <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                    <h2 className="text-sm font-bold text-slate-900">{assignment.title}</h2>
-                    <span className={`rounded px-2 py-0.5 text-[10px] font-semibold ${statusStyles[assignment.status]}`}>
-                        {assignment.status}
-                    </span>
-                </div>
-                <p className="mt-0.5 text-xs text-slate-500">
+                <h2 className="truncate text-[10px] font-bold leading-[13px] text-slate-900">{assignment.title}</h2>
+                <p className="mt-px truncate text-[8px] leading-[11px] text-slate-500">
                     {assignment.course} · {assignment.module}
                 </p>
-                <p className="mt-2 text-xs leading-5 text-slate-500">{assignment.description}</p>
-                <div className="mt-2 flex flex-wrap gap-1.5">
+                <p className="mt-2 line-clamp-2 text-[9px] leading-[13px] text-slate-500">{assignment.description}</p>
+                <div className="mt-2 flex flex-wrap gap-1">
                     {assignment.files.slice(0, 2).map((name) => (
-                        <span key={name} className="rounded bg-slate-100 px-2 py-1 text-[10px] text-slate-500">
+                        <span key={name} className="max-w-full truncate rounded bg-slate-100 px-1.5 py-0.5 text-[7px] leading-[10px] text-slate-500">
                             {name}
                         </span>
                     ))}
                     {assignment.files.length > 2 && (
-                        <span className="px-1 py-1 text-[10px] text-slate-500">
+                        <span className="px-1 py-0.5 text-[7px] leading-[10px] text-slate-600">
                             +{assignment.files.length - 2} more
                         </span>
                     )}
                 </div>
             </div>
-            <div className="flex items-center justify-between gap-3 sm:flex-col sm:items-end sm:justify-between">
-                <div className="text-left sm:text-right">
+            <div className="col-start-2 row-start-2 flex flex-row items-center justify-between gap-3 sm:col-start-3 sm:row-start-1 sm:flex-col sm:items-end sm:justify-between">
+                <span className={`rounded px-1.5 py-0.5 text-[8px] font-semibold leading-[11px] ${statusStyles[assignment.status]}`}>
+                    {assignment.status}
+                </span>
+                <div className="w-full text-right">
                     {assignment.grade && (
-                        <p className="text-[11px] font-bold text-emerald-600">Score: {assignment.grade}</p>
+                        <p className="text-[8px] font-bold leading-[11px] text-emerald-600">Score: {assignment.grade}</p>
                     )}
-                    <p className="text-[11px] font-semibold text-slate-800">
+                    <p className="text-[8px] font-semibold leading-[11px] text-slate-800">
                         {assignment.status === 'Submitted'
-                            ? `Submitted: ${formatDate(assignment.submittedDate)}`
+                            ? `Submitted: ${formatDate(assignment.submittedDate, { month: 'short', day: 'numeric', year: 'numeric' })}`
                             : assignment.status === 'Graded'
-                                ? `Reviewed: ${formatDate(assignment.submittedDate)}`
-                                : `Due: ${formatDate(assignment.dueDate)}`}
+                                ? `Reviewed: ${formatDate(assignment.submittedDate, { month: 'short', day: 'numeric', year: 'numeric' })}`
+                                : `Due: ${formatDate(assignment.dueDate, { month: 'short', day: 'numeric', year: 'numeric' })}`}
                     </p>
-                    <p className="text-[10px] text-slate-400">
-                        {assignment.status === 'Submitted' || assignment.status === 'Graded'
-                            ? `Due: ${formatDate(assignment.dueDate, { month: 'short', day: 'numeric' })}`
-                            : '11:59 PM'}
+                    <p className="text-[7px] leading-[9px] text-slate-400">
+                        {assignment.status === 'Submitted' ? '11:59 PM' : assignment.status === 'Graded' ? '11:59 PM' : '11:59 PM'}
                     </p>
                 </div>
                 <button
                     type="button"
                     onClick={() => onOpen(assignment)}
-                    className="rounded-md border border-slate-300 px-3 py-1.5 text-[11px] font-medium text-slate-700 hover:border-slate-500 hover:bg-slate-50"
+                    className="whitespace-nowrap rounded-[5px] border border-slate-400 px-2 py-1 text-[7px] font-medium leading-[9px] text-slate-800 hover:border-slate-600 hover:bg-slate-50"
                 >
                     {assignment.status === 'Submitted' || assignment.status === 'Graded' ? 'View Feedback' : buttonLabel}
                 </button>
@@ -261,7 +263,7 @@ function AssignmentCard({ assignment, onOpen }) {
 }
 
 function CalendarPanel({ assignments, month, setMonth }) {
-    const [selectedDate, setSelectedDate] = useState(dateKey(new Date()));
+    const [selectedDate, setSelectedDate] = useState('2025-05-27');
     const firstDay = new Date(month.getFullYear(), month.getMonth(), 1);
     const daysInMonth = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate();
     const leadingDays = firstDay.getDay();
@@ -282,42 +284,42 @@ function CalendarPanel({ assignments, month, setMonth }) {
     };
 
     return (
-        <section className="rounded-2xl bg-rose-50/80 p-5">
-            <h2 className="text-sm font-bold text-slate-900">Calendar</h2>
-            <div className="mt-3 flex items-center justify-between">
+        <section className="rounded-xl bg-[#fff0f1] px-3 py-3">
+            <h2 className="text-[10px] font-bold leading-4 text-slate-900">Calendar</h2>
+            <div className="mt-1 flex items-center justify-between">
                 <button
                     type="button"
                     onClick={() => moveMonth(-1)}
                     aria-label="Previous month"
-                    className="rounded-md p-1 text-slate-500 hover:bg-white"
+                    className="rounded p-0.5 text-slate-500 hover:bg-white"
                 >
-                    <ChevronLeft size={16} />
+                    <ChevronLeft size={13} />
                 </button>
-                <p className="text-xs font-bold text-slate-800">
+                <p className="text-[9px] font-bold text-slate-800">
                     {month.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                 </p>
                 <button
                     type="button"
                     onClick={() => moveMonth(1)}
                     aria-label="Next month"
-                    className="rounded-md p-1 text-slate-500 hover:bg-white"
+                    className="rounded p-0.5 text-slate-500 hover:bg-white"
                 >
-                    <ChevronRight size={16} />
+                    <ChevronRight size={13} />
                 </button>
             </div>
-            <div className="mt-3 grid grid-cols-7 gap-y-1 text-center">
+            <div className="mt-2 grid grid-cols-7 gap-y-0.5 text-center">
                 {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((day) => (
-                    <span key={day} className="py-1 text-[9px] font-semibold text-slate-500">{day}</span>
+                    <span key={day} className="py-1 text-[7px] font-semibold text-slate-500">{day}</span>
                 ))}
                 {days.map(({ key, day, dateKey: calendarDate }) => (
-                    <span key={key} className="flex h-7 items-center justify-center">
+                    <span key={key} className="flex h-[21px] items-center justify-center">
                         {day && (
                             <button
                                 type="button"
                                 onClick={() => setSelectedDate(calendarDate)}
                                 aria-label={`${month.toLocaleDateString('en-US', { month: 'long' })} ${day}${deadlines.has(calendarDate) ? ', assignment due' : ''}`}
                                 aria-pressed={selectedDate === calendarDate}
-                                className={`relative flex h-6 w-6 items-center justify-center rounded-full text-[10px] ${
+                                className={`relative flex h-[18px] w-[18px] items-center justify-center rounded-full text-[7px] ${
                                     selectedDate === calendarDate
                                         ? 'bg-slate-900 font-bold text-white'
                                         : 'text-slate-700 hover:bg-white'
@@ -343,10 +345,7 @@ export default function Assignments() {
     const [course, setCourse] = useState('All Courses');
     const [module, setModule] = useState('All Modules');
     const [sortBy, setSortBy] = useState('dueDate');
-    const [month, setMonth] = useState(() => {
-        const today = new Date();
-        return new Date(today.getFullYear(), today.getMonth(), 1);
-    });
+    const [month, setMonth] = useState(() => new Date(2025, 4, 1));
     const [selectedAssignment, setSelectedAssignment] = useState(null);
 
     const courses = useMemo(() => [...new Set(assignments.map((item) => item.course))], [assignments]);
@@ -412,15 +411,15 @@ export default function Assignments() {
     ];
 
     return (
-        <main className="min-h-screen bg-[#f7f7f8] px-4 py-6 text-slate-800 sm:px-6 lg:px-7">
-            <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-start gap-6 sm:grid-cols-[minmax(0,1fr)_190px] xl:grid-cols-[minmax(0,1fr)_280px]">
-                <section className="min-w-0">
-                    <header className="mb-4">
-                        <h1 className="text-2xl font-bold tracking-tight text-slate-900">Assignments</h1>
-                        <p className="mt-1 text-xs text-slate-500">View, submit and track all your course assignments.</p>
+        <main className="min-h-screen bg-[#f9f9f9] text-slate-800">
+            <div className="grid min-h-screen grid-cols-1 items-start sm:grid-cols-[minmax(0,7fr)_minmax(190px,3fr)]">
+                <section className="min-w-0 px-[14px] pb-6 pt-[14px]">
+                    <header className="mb-[14px]">
+                        <h1 className="text-[18px] font-bold leading-[22px] tracking-tight text-slate-900">Assignments</h1>
+                        <p className="mt-1 text-[9px] leading-3 text-slate-500">View, submit and track all your course assignments.</p>
                     </header>
 
-                    <div className="mb-4 flex gap-5 overflow-x-auto border-b border-slate-200" role="tablist" aria-label="Assignment status">
+                    <div className="mb-[17px] flex gap-[14px] overflow-x-auto" role="tablist" aria-label="Assignment status">
                         {tabs.map(({ label, count }) => (
                             <button
                                 key={label}
@@ -428,30 +427,30 @@ export default function Assignments() {
                                 role="tab"
                                 aria-selected={activeTab === label}
                                 onClick={() => setActiveTab(label)}
-                                className={`flex shrink-0 items-center gap-1.5 border-b-2 px-0 pb-2.5 text-xs transition-colors ${
+                                className={`flex shrink-0 items-center gap-1 border-b pb-[5px] text-[9px] leading-[13px] transition-colors ${
                                     activeTab === label
-                                        ? 'border-orange-500 font-semibold text-orange-600'
+                                        ? 'border-[#ff6b22] font-semibold text-[#f05a18]'
                                         : 'border-transparent text-slate-500 hover:text-slate-800'
                                 }`}
                             >
                                 {label}
                                 {count !== undefined && (
-                                    <span className={label === 'Pending' ? 'text-rose-500' : 'text-slate-400'}>{count}</span>
+                                    <span className={label === 'Pending' ? 'text-rose-500' : 'text-slate-500'}>{count}</span>
                                 )}
                             </button>
                         ))}
                     </div>
 
-                    <div className="mb-4 grid grid-cols-1 gap-2 sm:grid-cols-[minmax(100px,1.35fr)_repeat(3,minmax(80px,1fr))]">
-                        <label className="flex h-10 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3">
-                            <Search size={15} className="shrink-0 text-slate-400" />
+                    <div className="mb-[15px] grid grid-cols-1 gap-2 sm:grid-cols-[minmax(0,1.35fr)_repeat(3,minmax(0,1fr))] sm:gap-2">
+                        <label className="flex h-[21px] min-w-0 items-center gap-1.5 rounded-[6px] border border-slate-200 bg-white px-1.5">
+                            <Search size={11} className="shrink-0 text-slate-400" />
                             <input
                                 type="search"
                                 value={search}
                                 onChange={(event) => setSearch(event.target.value)}
                                 placeholder="Search assignments..."
                                 aria-label="Search assignments"
-                                className="min-w-0 flex-1 bg-transparent text-xs outline-none placeholder:text-slate-400"
+                                className="min-w-0 flex-1 bg-transparent text-[8px] outline-none placeholder:text-slate-400"
                             />
                         </label>
                         <select
@@ -461,7 +460,7 @@ export default function Assignments() {
                                 setModule('All Modules');
                             }}
                             aria-label="Filter by course"
-                            className="h-10 rounded-lg border border-slate-200 bg-white px-3 text-xs text-slate-600 outline-none"
+                            className="h-[21px] min-w-0 rounded-[6px] border border-slate-200 bg-white px-1.5 text-[8px] text-slate-600 outline-none"
                         >
                             <option>All Courses</option>
                             {courses.map((item) => <option key={item}>{item}</option>)}
@@ -470,7 +469,7 @@ export default function Assignments() {
                             value={module}
                             onChange={(event) => setModule(event.target.value)}
                             aria-label="Filter by module"
-                            className="h-10 rounded-lg border border-slate-200 bg-white px-3 text-xs text-slate-600 outline-none"
+                            className="h-[21px] min-w-0 rounded-[6px] border border-slate-200 bg-white px-1.5 text-[8px] text-slate-600 outline-none"
                         >
                             <option>All Modules</option>
                             {modules.map((item) => <option key={item}>{item}</option>)}
@@ -479,7 +478,7 @@ export default function Assignments() {
                             value={sortBy}
                             onChange={(event) => setSortBy(event.target.value)}
                             aria-label="Sort assignments"
-                            className="h-10 rounded-lg border border-slate-200 bg-white px-3 text-xs text-slate-600 outline-none"
+                            className="h-[21px] min-w-0 rounded-[6px] border border-slate-200 bg-white px-1.5 text-[8px] text-slate-600 outline-none"
                         >
                             <option value="dueDate">Sort by: Due Date</option>
                             <option value="title">Sort by: Title</option>
@@ -504,11 +503,11 @@ export default function Assignments() {
                     </div>
                 </section>
 
-                <aside className="space-y-4 sm:sticky sm:top-6">
-                    <section className="rounded-2xl bg-white p-5 shadow-[0_1px_3px_rgba(15,23,42,0.04)]">
-                        <h2 className="text-sm font-bold text-slate-900">Assignment Overview</h2>
-                        <div className="mt-4 space-y-3">
-                            <div className="flex justify-between text-[11px]">
+                <aside className="space-y-[14px] bg-white px-[10px] pb-6 pt-[10px]">
+                    <section className="rounded-xl bg-[#f7f7f7] px-3 py-3">
+                        <h2 className="text-[10px] font-bold leading-4 text-slate-900">Assignment Overview</h2>
+                        <div className="mt-2 space-y-[9px]">
+                            <div className="flex justify-between text-[8px]">
                                 <span className="text-slate-500">Total Assignments</span>
                                 <strong>{assignments.length}</strong>
                             </div>
@@ -519,9 +518,9 @@ export default function Assignments() {
                                 { label: 'Graded', count: counts.Graded, color: 'bg-indigo-500' },
                                 { label: 'Not Started', count: counts['Not Started'], color: 'bg-slate-400' },
                             ].map(({ label, count, color }) => (
-                                <div key={label} className="grid grid-cols-[78px_1fr_16px] items-center gap-3 text-[11px]">
+                                <div key={label} className="grid grid-cols-[84px_1fr_12px] items-center gap-1.5 text-[8px]">
                                     <span className="text-slate-500">{label}</span>
-                                    <span className="h-1 overflow-hidden rounded-full bg-slate-100">
+                                    <span className="h-[3px] overflow-hidden rounded-full bg-slate-100">
                                         <span
                                             className={`block h-full rounded-full ${color}`}
                                             style={{ width: `${assignments.length ? (count / assignments.length) * 100 : 0}%` }}
@@ -535,36 +534,32 @@ export default function Assignments() {
 
                     <CalendarPanel assignments={assignments} month={month} setMonth={setMonth} />
 
-                    <section className="rounded-2xl bg-white p-5 shadow-[0_1px_3px_rgba(15,23,42,0.04)]">
-                        <h2 className="text-sm font-bold text-slate-900">Upcoming Deadlines</h2>
-                        <div className="mt-3 space-y-2">
+                    <section className="rounded-xl bg-[#f7f7f7] px-3 py-3">
+                        <h2 className="text-[10px] font-bold leading-4 text-slate-900">Upcoming Deadlines</h2>
+                        <div className="mt-2 space-y-2">
                             {upcomingAssignments.length ? upcomingAssignments.map((assignment) => (
                                 <button
                                     key={assignment.id}
                                     type="button"
                                     onClick={() => setSelectedAssignment(assignment)}
-                                    className="flex w-full items-center gap-2 rounded-xl bg-slate-50 p-2 text-left hover:bg-slate-100"
+                                    className="flex w-full items-center gap-2 rounded-lg bg-white p-2 text-left hover:bg-slate-100"
                                 >
-                                    <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${statusIconStyles[assignment.status]}`}>
-                                        <FileText size={15} />
+                                    <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${statusIconStyles[assignment.status]}`}>
+                                        <FileText size={13} />
                                     </span>
                                     <span className="min-w-0 flex-1">
-                                        <span className="block truncate text-[11px] font-semibold text-slate-800">{assignment.title}</span>
-                                        <span className="block truncate text-[9px] text-slate-500">
+                                        <span className="block truncate text-[8px] font-semibold leading-[10px] text-slate-800">{assignment.title}</span>
+                                        <span className="block truncate text-[7px] leading-[9px] text-slate-500">
                                             {assignment.course} · {formatDate(assignment.dueDate, { month: 'short', day: 'numeric' })}
                                         </span>
                                     </span>
-                                    <span className="shrink-0 text-[9px] font-medium text-rose-500">
-                                        {formatDate(assignment.dueDate, { month: 'short', day: 'numeric' })}
+                                    <span className="shrink-0 text-[7px] font-medium text-rose-500">
+                                        {formatDeadlineCountdown(assignment.dueDate)}
                                     </span>
                                 </button>
                             )) : (
                                 <p className="rounded-xl bg-slate-50 p-3 text-xs text-slate-500">No upcoming deadlines.</p>
                             )}
-                        </div>
-                        <div className="mt-3 flex items-center gap-1 text-[10px] text-slate-400">
-                            <CalendarDays size={12} />
-                            Dates shown in your local time
                         </div>
                     </section>
                 </aside>
