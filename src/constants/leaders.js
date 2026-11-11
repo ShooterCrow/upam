@@ -219,13 +219,6 @@ export const directors = [
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793963664/alade_eldzcf.png",
   },
   {
-    id: 26,
-    name: "Jamillah Kachingwe",
-    title: "Operational Manager - UPAM Microfinance",
-    image:
-      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793102715/Jamillah_Kachingwe_hlpysn.png",
-  },
-  {
     id: 27,
     name: "Williams John Ominyi",
     title: "Secretary General - Nigeria Chapter",
@@ -284,7 +277,14 @@ export const Admins = [
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779380143/WhatsApp_Image_2026-05-21_at_16.55.02_nof2vg.jpg",
   },
   {
-    id: 26,
+    id: 27,
+    name: "Jamillah Kachingwe",
+    title: "Operational Manager - UPAM Microfinance",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793102715/Jamillah_Kachingwe_hlpysn.png",
+  },
+  {
+    id: 28,
     name: "Niyokwizera Joyce",
     title: "Treasurer - Burundi Chapter",
     image:
