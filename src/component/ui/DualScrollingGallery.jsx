@@ -1,10 +1,14 @@
 import React from "react";
+import useMarqueeScroll from "../../hooks/useMarqueeScroll";
 
-const GalleryRow = ({ images, reverse = false, grayscale = false }) => (
+const GalleryRow = ({ images, reverse = false, grayscale = false }) => {
+    const scrollRef = useMarqueeScroll({ duration: 40, reverse });
+
+    return (
     <div className="w-full relative py-2">
-        <div className="relative overflow-hidden">
-            {/* Scrolling container */}
-            <div className={`flex ${reverse ? 'animate-scroll-slow-reverse' : 'animate-scroll-slow'} hover:pause-animation`}>
+        <div ref={scrollRef} className="relative overflow-x-auto no-scrollbar cursor-grab select-none">
+            {/* Scrolling container (auto-scrolls; mouse wheel / drag to scroll) */}
+            <div className="flex w-max">
                 {[...images, ...images].map((src, index) => (
                     <div key={index} className="flex-shrink-0 w-60 md:w-72 lg:w-80 mx-2 group">
                         <div className="relative overflow-hidden bg-slate-900 shadow-md transition-all duration-500 rounded-sm">
@@ -14,6 +18,7 @@ const GalleryRow = ({ images, reverse = false, grayscale = false }) => (
                                     alt={`Gallery Image ${index + 1}`}
                                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                                     loading="lazy"
+                                    draggable={false}
                                 />
                             </div>
                             <div className="absolute inset-x-0 bottom-0 h-1 bg-[#EB010C] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
@@ -23,7 +28,8 @@ const GalleryRow = ({ images, reverse = false, grayscale = false }) => (
             </div>
         </div>
     </div>
-);
+    );
+};
 
 const DualScrollingGallery = ({ row1, row2, grayscale = false }) => {
     return (
