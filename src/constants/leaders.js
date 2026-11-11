@@ -256,7 +256,7 @@ export const directors = [
   {
     id: 30,
     name: "Niyomwungere Elvis",
-    title: "National Secretary - Burundi Chapter",
+    title: "Secretary General - Burundi Chapter",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395881/download_ly2ok0.jpg",
   },
