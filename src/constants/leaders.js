@@ -28,7 +28,7 @@ export const globalExecutive = [
     name: "Augustine Nyakatoma",
     title: "Speaker of National Representative",
     image:
-      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779380142/WhatsApp_Image_2026-05-21_at_16.55.29_e0ushp.jpg",
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395744/download_mpifa3.jpg",
   },
   {
       id: 6,
@@ -121,6 +121,41 @@ export const nationalRepresentatives = [
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779469978/baaa595454893fe572eb9897f235aaf4aeaf854c_yjdaoa.jpg",
   },
+  {
+    id: 20,
+    name: "Sarah Mcipo",
+    title: "National Representative Mozambique",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395545/download_mnpqfx.jpg",
+  },
+  {
+    id: 21,
+    name: "Luumuno Mukoka",
+    title: "National Representative Zambia",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395797/download_tucbyi.jpg",
+  },
+  {
+    id: 22,
+    name: "Mohammed Barkissou",
+    title: "National Representative Benin",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395820/download_aop4l2.jpg",
+  },
+  {
+    id: 23,
+    name: "Niyubahwe Josue",
+    title: "National Representative Burundi",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395856/download_vpgzh3.jpg",
+  },
+  {
+    id: 24,
+    name: "Cherif Nkeshimana",
+    title: "Vice National Representative Burundi",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395940/download_q6x0vm.jpg",
+  },
 ];
 
 export const directors = [
@@ -204,6 +239,27 @@ export const directors = [
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793963661/tanzania_tv7pud.png",
   },
+  {
+    id: 28,
+    name: "Celso Patricio Fulaitone Dimba",
+    title: "Secretary General - Mozambique Chapter",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395589/download_rtk7gc.jpg",
+  },
+  {
+    id: 29,
+    name: "Christine Mulochwa",
+    title: "Secretary General - Zambia Chapter",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395759/download_vc9seg.jpg",
+  },
+  {
+    id: 30,
+    name: "Niyomwungere Elvis",
+    title: "National Secretary - Burundi Chapter",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395881/download_ly2ok0.jpg",
+  },
 ];
 
 export const Admins = [
@@ -226,5 +282,12 @@ export const Admins = [
     title: "Membership Admin",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779380143/WhatsApp_Image_2026-05-21_at_16.55.02_nof2vg.jpg",
+  },
+  {
+    id: 26,
+    name: "Niyokwizera Joyce",
+    title: "Treasurer - Burundi Chapter",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395979/download_hjfe2m.jpg",
   },
 ];
