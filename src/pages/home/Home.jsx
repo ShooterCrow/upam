@@ -11,7 +11,24 @@ import WorldMapWithMarkers from '../../component/ui/WorldMapWithMarkers';
 import { globalExecutive } from '../../constants/leaders';
 import ScrollReveal from '../../components/ScrollReveal';
 import { useGetEventsQuery } from '../UserAdminPages/admin/calendarApiSlice';
+import { events as staticEvents } from '../events/eventsData';
+
+// Backend events have no slug, but event pages are routed by slug (/events/:slug).
+// Resolve a backend event to its page by matching its title against the static event data.
+const slugify = (str = '') => str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+const getEventLink = (event) => {
+    if (event?.slug) return `/events/${event.slug}`;
+    const titleSlug = slugify(event?.title);
+    if (!titleSlug) return '/events';
+    const match = staticEvents.find(
+        (e) => e.slug === titleSlug || titleSlug.startsWith(e.slug) || e.slug.startsWith(titleSlug) || slugify(e.title) === titleSlug
+    );
+    if (match) return `/events/${match.slug}`;
+    if (titleSlug.includes('renaissance')) return '/events/global-african-renaissance-summit-2026';
+    return '/events';
+};
 import DualScrollingGallery from '../../component/ui/DualScrollingGallery';
+import useMarqueeScroll from '../../hooks/useMarqueeScroll';
 import SingleSlider from '../../components/SingleSlider';
 
 
@@ -206,6 +223,7 @@ const Index = () => {
     const events = eventsData?.data || [];
     const [openFaq, setOpenFaq] = useState(0);
     const [activeFocus, setActiveFocus] = useState(0);
+    const leadersScrollRef = useMarqueeScroll({ duration: 22 }); // SPEED CONTROL: seconds per full loop (lower = faster)
     const locations = []; // Markers are hardcoded in WorldMapWithMarkers
     const images = [
         "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779449532/ae109f1f9e9b12a967427c8a6e5f7c76190fb577_ncxlu7.jpg",
@@ -511,38 +529,51 @@ const Index = () => {
                                         title: "Clean Energy",
                                         desc: "Powering a brighter future for Sudan with the Sudan National Energy Research Center.",
                                         icon: <Zap className="w-6 h-6" />,
+                                        image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80",
                                         delay: 0.1
                                     },
                                     {
                                         title: "Financial Support",
                                         desc: "Financial inclusion initiatives and economic empowerment for vulnerable communities.",
                                         icon: <Wallet className="w-6 h-6" />,
+                                        image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80",
                                         delay: 0.2
                                     },
                                     {
                                         title: "Health Program",
                                         desc: "Rolling out health programs across Africa, building stronger and healthier communities.",
                                         icon: <HeartPulse className="w-6 h-6" />,
+                                        image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80",
                                         delay: 0.3
                                     },
                                     {
                                         title: "UPAM Schools",
                                         desc: "Equipping the next-gen workforce with in-demand skills to thrive in the global market.",
                                         icon: <GraduationCap className="w-6 h-6" />,
+                                        image: "/education_leadership.png",
                                         delay: 0.4
                                     }
                                 ].map((item, index) => (
                                     <ScrollReveal key={index} direction="up" delay={item.delay}>
-                                        <div className="group bg-white p-8 border border-slate-100 shadow-sm transition-all duration-500 hover:shadow-2xl hover:border-[#EB010C]/30 flex flex-col gap-8 h-full border-b-4 border-b-slate-200 hover:border-b-[#EB010C] relative overflow-hidden">
-                                            <div className="absolute top-0 right-0 w-24 h-24 bg-slate-50 translate-x-12 -translate-y-12 rotate-45 group-hover:bg-[#EB010C]/5 transition-colors" />
-                                            <div className="w-16 h-16 bg-[#003115] text-white flex items-center justify-center group-hover:bg-[#EB010C] transition-colors duration-500">
+                                        <div className="group bg-slate-900 p-8 border border-slate-100 shadow-sm transition-all duration-500 hover:shadow-2xl hover:border-[#EB010C]/30 flex flex-col gap-8 h-full min-h-[340px] border-b-4 border-b-slate-200 hover:border-b-[#EB010C] relative overflow-hidden">
+                                            {/* Background image + dark overlay */}
+                                            <img
+                                                src={item.image}
+                                                alt=""
+                                                aria-hidden="true"
+                                                loading="lazy"
+                                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-black/50" />
+                                            <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 translate-x-12 -translate-y-12 rotate-45 group-hover:bg-[#EB010C]/30 transition-colors" />
+                                            <div className="relative w-16 h-16 bg-[#003115] text-white flex items-center justify-center group-hover:bg-[#EB010C] transition-colors duration-500">
                                                 {item.icon}
                                             </div>
-                                            <div className="space-y-4">
-                                                <h3 className="text-xl font-black text-[#555555] uppercase tracking-tight group-hover:text-[#EB010C] transition-colors">
+                                            <div className="relative space-y-4 mt-auto">
+                                                <h3 className="headerWhite text-xl font-black text-white uppercase tracking-tight transition-colors">
                                                     {item.title}
                                                 </h3>
-                                                <p className="text-sm text-[#555555] leading-relaxed font-medium">
+                                                <p className="text-sm text-white/85 leading-relaxed font-medium">
                                                     {item.desc}
                                                 </p>
                                             </div>
@@ -586,7 +617,7 @@ const Index = () => {
                                 <div className="pt-8 relative z-10">
                                     <Link to="/get-involved">
                                         <button className="px-10 py-5 bg-[#EB010C] text-white font-black text-xs uppercase tracking-widest hover:bg-white hover:text-[#555555] transition-all duration-300 flex items-center gap-4">
-                                            Join Now
+                                            Get Involved
                                             <ArrowRight size={16} />
                                         </button>
                                     </Link>
@@ -624,12 +655,9 @@ const Index = () => {
                                 <div className="absolute hidden lg:block left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
                                 <div className="absolute hidden lg:block right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
 
-                                <div className="relative overflow-hidden py-4 w-full">
-                                    {/* Scrolling track (flex animate-scroll-slow hover:pause-animation) */}
-                                    <div
-                                        className="flex animate-scroll-slow hover:pause-animation"
-                                        style={{ animationDuration: '22s' }} /* 🚀 SPEED CONTROL: Change '22s' to make it faster (e.g. '15s') or slower (e.g. '40s') */
-                                    >
+                                <div ref={leadersScrollRef} className="relative overflow-x-auto no-scrollbar cursor-grab select-none py-4 w-full">
+                                    {/* Scrolling track — auto-scrolls; mouse wheel / drag to scroll */}
+                                    <div className="flex w-max">
                                         {/* First full set of leaders */}
                                         {globalExecutive.map((leader, index) => (
                                             <div
@@ -640,6 +668,7 @@ const Index = () => {
                                                     <img
                                                         src={leader.image}
                                                         alt={leader.name}
+                                                        draggable={false}
                                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                                         onError={(e) => {
                                                             e.target.onerror = null;
@@ -669,6 +698,7 @@ const Index = () => {
                                                     <img
                                                         src={leader.image}
                                                         alt={leader.name}
+                                                        draggable={false}
                                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                                         onError={(e) => {
                                                             e.target.onerror = null;
@@ -731,7 +761,7 @@ const Index = () => {
                                         {/* Featured Event - Left Column (Full height) */}
                                         <div className="lg:col-span-2">
                                             {events[0] && (
-                                                <Link to={`/events/${events[0]._id}`} className="relative h-[530px] border border-slate-100 overflow-hidden group cursor-pointer block bg-black">
+                                                <Link to={getEventLink(events[0])} className="relative h-[530px] border border-slate-100 overflow-hidden group cursor-pointer block bg-black">
                                                     <img
                                                         src={events[0].image ? (events[0].image.startsWith('http') ? events[0].image : `http://localhost:5000/${events[0].image}`) : "/academy_logo.png"}
                                                         alt={events[0].title}
@@ -772,7 +802,7 @@ const Index = () => {
                                         {/* Other Events - Right Column (Stacked cards) */}
                                         <div className="flex flex-col gap-6">
                                             {events.slice(1, 3).map((event) => (
-                                                <Link key={event._id} to={`/events/}`} className="flex-1 border-none flex flex-col group transition-all duration-500">
+                                                <Link key={event._id} to={getEventLink(event)} className="flex-1 border-none flex flex-col group transition-all duration-500">
                                                     <div className="relative aspect-video overflow-hidden bg-slate-100">
                                                         <img
                                                             src={event.image ? (event.image.startsWith('http') ? event.image : `http://localhost:5000/${event.image}`) : "/academy_logo.png"}
