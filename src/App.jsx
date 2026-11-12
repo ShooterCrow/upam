@@ -54,6 +54,7 @@ const EmergencyContact = lazy(() => import('./pages/UserAdminPages/common/Emerge
 const Notification = lazy(() => import('./pages/UserAdminPages/common/Notification'));
 const Support = lazy(() => import('./pages/UserAdminPages/common/Support'));
 const MemberApplication = lazy(() => import('./pages/UserAdminPages/admin/MemberApplication'));
+const PartnershipApplications = lazy(() => import('./pages/UserAdminPages/admin/PartnershipApplications'));
 const MyProfile = lazy(() => import('./pages/UserAdminPages/common/MyProfile'));
 const UPAMCalender = lazy(() => import('./pages/UserAdminPages/common/UPAMCalender'));
 const AllMembers = lazy(() => import('./pages/UserAdminPages/admin/AllMembers'));
@@ -183,6 +184,9 @@ const App = () => {
                     <Route path='members-application'>
                       <Route index element={<MemberApplication />} />
                       <Route path=":id" element={<MemberDetail />} />
+                    </Route>
+                    <Route element={<RequireAuth allowedRoles={['admin', 'manager']} />}>
+                      <Route path='partnership-applications' element={<PartnershipApplications />} />
                     </Route>
                     <Route path='chapters'>
                       <Route index element={<Chapters />} />

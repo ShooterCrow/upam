@@ -23,6 +23,7 @@ const PersistLogin = () => {
         '/publications',
         '/membership-policy',
         '/membership-agreement',
+        '/chapters',
         '/contact-us',
         '/partnership',
         '/volunteer',
@@ -50,7 +51,7 @@ const PersistLogin = () => {
         };
 
         // Only attempt to refresh if we don't have a token and persistence is enabled
-        if (!token && persist) {
+        if (!token && persist && !isPublicRoute) {
             verifyRefreshToken();
         } else {
             setIsLoading(false);
@@ -59,7 +60,7 @@ const PersistLogin = () => {
         return () => {
             isMounted = false;
         };
-    }, [token, persist, refresh]); // Added missing dependencies
+    }, [token, persist, refresh, isPublicRoute]);
 
     // If persistence is disabled, render content immediately
     if (!persist || isPublicRoute) {

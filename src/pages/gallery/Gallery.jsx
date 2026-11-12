@@ -15,40 +15,31 @@ const galleryImages = [
   { id: 9, src: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1779289158/86de539d2a97e136c3c2d19e422562df9c06e468_n8r0xw.jpg", alt: "UPAM Community Development" },
 ];
 
-const row1 = galleryImages.slice(0, 5);
-const row2 = galleryImages.slice(4);
-
-const GalleryRow = ({ images, reverse = false, onSelect }) => (
-  <div className="relative overflow-hidden py-1">
-    <div className="absolute hidden lg:block left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-    <div className="absolute hidden lg:block right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-
-    <div className={`flex ${reverse ? 'animate-scroll-slow-reverse' : 'animate-scroll-slow'}`}>
-      {[...images, ...images].map((img, idx) => (
-        <div
-          key={idx}
-          className="flex-shrink-0 w-64 md:w-80 lg:w-96 mx-2 group cursor-pointer"
+const GalleryGrid = ({ images, onSelect }) => (
+  <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+    {images.map((img) => (
+      <div key={img.id} className="mb-4 break-inside-avoid">
+        <button
+          type="button"
+          className="group relative block w-full cursor-pointer overflow-hidden bg-black text-left shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#EB010C]"
           onClick={() => onSelect(img)}
+          aria-label={`Expand image: ${img.alt}`}
         >
-          <div className="relative overflow-hidden bg-black shadow-md aspect-[4/3]">
-            <img
-              src={img.src}
-              alt={img.alt}
-              loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-            <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all duration-700">
-              <div className="translate-y-6 group-hover:translate-y-0 transition-transform duration-700">
-                <div className="w-8 h-[2px] bg-[#EB010C] mb-3" />
-                <p className="text-white text-sm font-black uppercase tracking-tight leading-tight">{img.alt}</p>
-              </div>
-            </div>
-            <div className="absolute inset-x-0 bottom-0 h-1 bg-[#EB010C] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+          <img
+            src={img.src}
+            alt={img.alt}
+            loading="lazy"
+            className="block h-auto w-full transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100" />
+          <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+            <div className="w-8 h-[2px] bg-[#EB010C] mb-3" />
+            <p className="text-white text-sm font-black uppercase tracking-tight leading-tight">{img.alt}</p>
           </div>
-        </div>
-      ))}
-    </div>
+          <div className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-[#EB010C] transition-transform duration-500 group-hover:scale-x-100 group-focus-visible:scale-x-100" />
+        </button>
+      </div>
+    ))}
   </div>
 );
 
@@ -73,7 +64,7 @@ const Gallery = () => {
                 Moments That Inspire
               </div>
             </div>
-            <h1 className="text-3xl lg:text-4xl font-black text-[#555555] uppercase mb-6">
+            <h1 className="text-3xl lg:text-4xl font-black text-white uppercase mb-6">
               Welcome to our <span className="text-[#EB010C]">Gallery</span> curated with images and video coverage of moments that inspire change
             </h1>
             <p className="text-base lg:text-lg text-[#555555] leading-relaxed font-medium max-w-3xl mx-auto">
@@ -83,12 +74,8 @@ const Gallery = () => {
         </ScrollReveal>
       </div>
 
-      {/* Row 1 â€” scrolls left */}
-      <GalleryRow images={row1} onSelect={setSelectedImage} />
-
-      {/* Row 2 â€” scrolls right */}
-      <div className="mt-3">
-        <GalleryRow images={row2} reverse onSelect={setSelectedImage} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <GalleryGrid images={galleryImages} onSelect={setSelectedImage} />
       </div>
 
       {/* Lightbox Modal */}

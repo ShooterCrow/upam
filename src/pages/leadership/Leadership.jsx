@@ -1,6 +1,6 @@
-﻿import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { globalExecutive, nationalRepresentatives, directors, Admins } from '../../constants/leaders';
 import ScrollReveal from '../../components/ScrollReveal';
 import { Users, Globe, Building2, ArrowRight } from 'lucide-react';
@@ -49,11 +49,11 @@ function ProfileCard({ profile }) {
     );
 }
 
-function Section({ title, subtitle, profiles, description, icon: Icon }) {
+function Section({ id, title, subtitle, profiles, description, icon: Icon }) {
     return (
         <>
             {profiles.length > 0 && (
-                <section className="mb-24 md:mb-32">
+                <section id={id} className="mb-24 md:mb-32 scroll-mt-28">
                     <ScrollReveal direction="left">
                         <div className="mb-12 md:mb-16 max-w-3xl">
                             <div className="flex items-center gap-3 mb-4">
@@ -84,6 +84,21 @@ function Section({ title, subtitle, profiles, description, icon: Icon }) {
 }
 
 const Leadership = () => {
+    const { hash } = useLocation();
+
+    useEffect(() => {
+        if (!hash) return undefined;
+
+        const frame = requestAnimationFrame(() => {
+            document.getElementById(hash.slice(1))?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+        return () => cancelAnimationFrame(frame);
+    }, [hash]);
+
     // Get a subset of images for the hero grid
     const heroImages = [...globalExecutive].slice(0, 4).map(p => p.image);
 
@@ -116,6 +131,7 @@ const Leadership = () => {
             <div className="max-w-7xl mx-auto py-12 px-6">
                 {/* Global Executive Section */}
                 <Section
+                    id="global-executives"
                     title="Global Executives"
                     subtitle="Visionary Board"
                     icon={Globe}
@@ -125,6 +141,7 @@ const Leadership = () => {
 
                 {/* National Representatives Section */}
                 <Section
+                    id="national-representatives"
                     title="National Representatives"
                     subtitle="Regional Impact"
                     icon={Users}
@@ -134,6 +151,7 @@ const Leadership = () => {
 
                 {/* Directors Section */}
                 <Section
+                    id="directors"
                     title="Directors"
                     subtitle="Strategic Oversight"
                     icon={Building2}
@@ -143,6 +161,7 @@ const Leadership = () => {
 
                 {/* Admins Section */}
                 <Section
+                    id="administrators"
                     title="Administrators"
                     subtitle="Dedicated Admins"
                     icon={Users}

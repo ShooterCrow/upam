@@ -1,25 +1,31 @@
 ﻿import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import ScrollReveal from '../../components/ScrollReveal';
+import { useCreatePartnerMutation } from './partnersApiSlice';
+
+const initialFormData = {
+    orgName: '',
+    orgType: '',
+    yearEstablished: '',
+    countryRegistration: '',
+    countryOperation: '',
+    website: '',
+    officialEmail: '',
+    officialPhone: '',
+    partnershipType: '',
+    areasOfInterest: [],
+    collaborationDescription: '',
+    resourcesContribute: [],
+    commitmentLevel: '',
+    legalStatus: '',
+    conflictOfInterest: ''
+};
 
 const Partnership = () => {
-    const [formData, setFormData] = useState({
-        orgName: '',
-        orgType: '',
-        yearEstablished: '',
-        countryRegistration: '',
-        countryOperation: '',
-        website: '',
-        officialEmail: '',
-        officialPhone: '',
-        partnershipType: '',
-        areasOfInterest: [],
-        collaborationDescription: '',
-        resourcesContribute: [],
-        commitmentLevel: '',
-        legalStatus: '',
-        conflictOfInterest: ''
-    });
+    const [formData, setFormData] = useState(initialFormData);
+    const [submitMessage, setSubmitMessage] = useState('');
+    const [submitError, setSubmitError] = useState('');
+    const [createPartner, { isLoading }] = useCreatePartnerMutation();
 
     const interestAreas = [
         "Pan-African Advocacy",
@@ -54,9 +60,27 @@ const Partnership = () => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Corrected Partnership Application Submitted:', formData);
+        setSubmitMessage('');
+        setSubmitError('');
+
+        try {
+            const result = await createPartner({
+                ...formData,
+                yearEstablished: formData.yearEstablished ? Number(formData.yearEstablished) : undefined,
+                website: formData.website.trim() || undefined
+            }).unwrap();
+
+            setFormData(initialFormData);
+            setSubmitMessage(
+                result.emailNotificationSent
+                    ? 'Your partnership application was submitted successfully. Our team has been notified.'
+                    : 'Your partnership application was received, but the admin email notification could not be sent. The team can still review it in the dashboard.'
+            );
+        } catch (error) {
+            setSubmitError(error?.data?.message || 'We could not submit your application. Please try again.');
+        }
     };
 
     return (
@@ -76,6 +100,16 @@ const Partnership = () => {
             <div className="container mx-auto px-4 max-w-4xl">
                 <ScrollReveal direction="up" delay={0.1}>
                 <form onSubmit={handleSubmit} className="space-y-12">
+                    {submitMessage && (
+                        <div role="status" className="rounded border border-green-200 bg-green-50 p-4 text-sm font-medium text-green-800">
+                            {submitMessage}
+                        </div>
+                    )}
+                    {submitError && (
+                        <div role="alert" className="rounded border border-red-200 bg-red-50 p-4 text-sm font-medium text-red-800">
+                            {submitError}
+                        </div>
+                    )}
                     {/* Organization Details */}
                     <div className="space-y-6">
                         <div className="grid md:grid-cols-2 gap-6">
@@ -179,9 +213,10 @@ const Partnership = () => {
 
                     <button
                         type="submit"
-                        className="w-full bg-[#EB010C] text-white py-4 font-bold uppercase tracking-widest hover:bg-red-700 transition-colors rounded shadow-md mt-8"
+                        disabled={isLoading}
+                        className="w-full bg-[#EB010C] text-white py-4 font-bold uppercase tracking-widest hover:bg-red-700 transition-colors rounded shadow-md mt-8 disabled:cursor-not-allowed disabled:opacity-60"
                     >
-                        Submit Information
+                        {isLoading ? 'Submitting...' : 'Submit Information'}
                     </button>
                 </form>
                 </ScrollReveal>

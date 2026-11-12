@@ -1,17 +1,53 @@
 ﻿import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Download, ArrowRight, BookOpen, FileText, Share2, FileDown, BookMarked } from 'lucide-react';
+import { Download, ArrowRight, FileDown, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ScrollReveal from '../../components/ScrollReveal';
 
 export default function Publications() {
     const [activeTab, setActiveTab] = useState('articles');
+    const [selectedDocument, setSelectedDocument] = useState(null);
 
-    const reports = [
+    const documents = [
         {
-            id: 1,
-            title: "UPAM Annual Report 2025",
-            description: "An overview of UPAM's youth engagement programs, leadership training outcomes, and community impact across Africa and the diaspora."
+            title: "Networking",
+            url: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1794469184/Networking_k6mjsy.pdf"
+        },
+        {
+            title: "Pension & Retirement",
+            url: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1794469185/Pension_Retirement_emoyoo.pdf"
+        },
+        {
+            title: "Travel Conference Discount",
+            url: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1794469185/Travel_Conference_Discount_wtbg2f.pdf"
+        },
+        {
+            title: "School Network Discount",
+            url: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1794469186/School_Network_Discount_r5fru1.pdf"
+        },
+        {
+            title: "Business Startup Financing",
+            url: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1794469185/Business_Startup_Financing_lfcob4.pdf"
+        },
+        {
+            title: "Digital Empowerment",
+            url: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1794469184/Digital_Empowerment_cyupr4.pdf"
+        },
+        {
+            title: "Education Scholarship",
+            url: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1794469184/Education_Scholarship_efl9mb.pdf"
+        },
+        {
+            title: "Business Advertising & Promotion",
+            url: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1794469184/Business_Advertising_Promotion_jvu36o.pdf"
+        },
+        {
+            title: "Business Consulting",
+            url: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1794469184/Business_Consulting_ewsbbx.pdf"
+        },
+        {
+            title: "Legal Policy Support",
+            url: "https://res.cloudinary.com/dyy6gisnk/image/upload/v1794469184/Legal_Policy_Support_u7tbgo.pdf"
         }
     ];
 
@@ -156,74 +192,44 @@ export default function Publications() {
                             ))}
                         </div>
                     ) : (
-                        <div className="space-y-32">
-                            {/* Evaluation Reports */}
+                        <div>
                             <div>
                                 <ScrollReveal direction="left">
                                     <div className="flex items-center gap-4 mb-16 px-2">
-                                        <h2 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em]">Evaluation Reports</h2>
+                                        <h2 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em]">Reports & Policy Documents</h2>
                                         <div className="h-[1px] flex-1 bg-slate-100" />
                                     </div>
                                 </ScrollReveal>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-slate-100">
-                                    {reports.map((report, index) => (
-                                        <ScrollReveal key={index} direction="up" delay={index * 0.1}>
-                                            <div className="group relative p-12 min-h-[400px] bg-white border-r border-b border-slate-100 flex flex-col justify-between transition-all duration-700 hover:bg-slate-50">
+                                    {documents.map((document, index) => (
+                                        <ScrollReveal key={document.url} direction="up" delay={index * 0.1}>
+                                            <div className="group relative p-8 md:p-10 min-h-[320px] bg-white border-r border-b border-slate-100 flex flex-col justify-between transition-all duration-700 hover:bg-slate-50">
                                                 <div>
                                                     <div className="mb-8">
                                                         <FileDown className="w-8 h-8 text-slate-200 group-hover:text-[#EB010C] transition-colors duration-500" />
                                                     </div>
                                                     <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tighter leading-tight mb-6 transition-colors duration-300 group-hover:text-[#EB010C]">
-                                                        {report.title}
+                                                        {document.title}
                                                     </h3>
-                                                    <p className="text-sm text-slate-500 leading-relaxed font-medium">
-                                                        {report.description}
-                                                    </p>
                                                 </div>
 
-                                                <div className="pt-10">
-                                                    <button className="inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-[#EB010C] transition-all duration-300 hover:gap-6">
-                                                        Download PDF
-                                                        <Download size={14} />
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </ScrollReveal>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Policy Papers */}
-                            <div>
-                                <ScrollReveal direction="right">
-                                    <div className="flex items-center gap-4 mb-16 px-2">
-                                        <h2 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Policy Papers</h2>
-                                        <div className="h-[1px] flex-1 bg-slate-100" />
-                                    </div>
-                                </ScrollReveal>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-slate-100">
-                                    {reports.map((report, index) => (
-                                        <ScrollReveal key={index} direction="up" delay={index * 0.1 + 0.2}>
-                                            <div className="group relative p-12 min-h-[400px] bg-white border-r border-b border-slate-100 flex flex-col justify-between transition-all duration-700 hover:bg-slate-50">
-                                                <div>
-                                                    <div className="mb-8">
-                                                        <BookMarked className="w-8 h-8 text-slate-200 group-hover:text-[#EB010C] transition-colors duration-500" />
-                                                    </div>
-                                                    <h3 className="text-2xl font-black text-slate-300 uppercase tracking-tighter leading-tight mb-6 transition-colors duration-300 group-hover:text-[#EB010C]">
-                                                        {report.title}
-                                                    </h3>
-                                                    <p className="text-sm text-slate-400 leading-relaxed font-medium italic">
-                                                        {report.description}
-                                                    </p>
-                                                </div>
-
-                                                <div className="pt-10">
-                                                    <button className="inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 transition-all duration-300 hover:text-[#EB010C] hover:gap-6">
-                                                        Access Document
+                                                <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-8">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setSelectedDocument(document)}
+                                                        className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-700 transition-colors hover:text-[#EB010C]"
+                                                    >
+                                                        View PDF
                                                         <ArrowRight size={14} />
                                                     </button>
+                                                    <a
+                                                        href={document.url.replace('/upload/', '/upload/fl_attachment/')}
+                                                        className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-[#EB010C] transition-colors hover:text-[#c9000a]"
+                                                    >
+                                                        Download PDF
+                                                        <Download size={14} />
+                                                    </a>
                                                 </div>
                                             </div>
                                         </ScrollReveal>
@@ -235,6 +241,49 @@ export default function Publications() {
                 </div>
 
             </div>
+
+            {selectedDocument && (
+                <div
+                    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-3 sm:p-6"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="pdf-viewer-title"
+                    onClick={() => setSelectedDocument(null)}
+                >
+                    <div
+                        className="flex h-[90vh] w-full max-w-6xl flex-col overflow-hidden bg-white shadow-2xl"
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <div className="flex items-center justify-between gap-4 border-b border-slate-200 px-4 py-3">
+                            <h2 id="pdf-viewer-title" className="truncate text-sm font-bold text-slate-800">
+                                {selectedDocument.title}
+                            </h2>
+                            <div className="flex shrink-0 items-center gap-4">
+                                <a
+                                    href={selectedDocument.url.replace('/upload/', '/upload/fl_attachment/')}
+                                    className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#EB010C] hover:text-[#c9000a]"
+                                >
+                                    Download
+                                    <Download size={14} />
+                                </a>
+                                <button
+                                    type="button"
+                                    onClick={() => setSelectedDocument(null)}
+                                    aria-label="Close PDF viewer"
+                                    className="p-1 text-slate-500 transition-colors hover:text-slate-900"
+                                >
+                                    <X size={22} />
+                                </button>
+                            </div>
+                        </div>
+                        <iframe
+                            src={selectedDocument.url}
+                            title={selectedDocument.title}
+                            className="min-h-0 flex-1"
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

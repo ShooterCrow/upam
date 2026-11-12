@@ -126,6 +126,12 @@ export const ADMIN_LINKS = [
     roles: ["admin", "manager"],
   },
   {
+    name: "Partnership Applications",
+    path: "/dashboard/partnership-applications",
+    icon: FileText,
+    roles: ["admin", "manager"],
+  },
+  {
     name: "Chapters",
     path: "/dashboard/chapters",
     icon: Globe,

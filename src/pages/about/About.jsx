@@ -44,22 +44,26 @@ const About = () => {
 
     const structureLevels = [
         {
-            title: "Board of trustees",
-            description: "Provides strategic direction and oversees UPAM's global mission.",
-            icon: <Shield className="w-5 h-5" />
-        },
-        {
             title: "Global Executives",
+            sectionId: "global-executives",
             description: "Focused on education, community outreach, innovation, partnerships, and media.",
             icon: <Globe className="w-5 h-5" />
         },
         {
-            title: "National Executives",
+            title: "National Representatives",
+            sectionId: "national-representatives",
             description: "Active teams across African countries driving local programs and initiatives.",
             icon: <Activity className="w-5 h-5" />
         },
         {
-            title: "Members",
+            title: "Directors",
+            sectionId: "directors",
+            description: "Provides strategic direction and oversees UPAM's global mission.",
+            icon: <Shield className="w-5 h-5" />
+        },
+        {
+            title: "Administrators",
+            sectionId: "administrators",
             description: "The heartbeat of UPAM â€” everyday Africans working together to build a stronger continent.",
             icon: <Users className="w-5 h-5" />
         }
@@ -443,8 +447,12 @@ const About = () => {
                     </ScrollReveal>
 
                     <ScrollReveal direction="right" className="space-y-4">
-                        {structureLevels.map((level, idx) => (
-                            <div key={idx} className="group p-6 bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 border-l-4 hover:border-l-[#EB010C] border-l-transparent">
+                        {structureLevels.map((level) => (
+                            <Link
+                                key={level.sectionId}
+                                to={`/leadership#${level.sectionId}`}
+                                className="group block p-6 bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 border-l-4 hover:border-l-[#EB010C] border-l-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                            >
                                 <div className="flex gap-5 items-center">
                                     <div className="shrink-0 p-3 bg-white/10 text-[#EB010C]">
                                         {level.icon}
@@ -455,7 +463,7 @@ const About = () => {
                                     </div>
                                     <ChevronRight className="ml-auto text-slate-600 group-hover:text-white transition-colors" size={20} />
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </ScrollReveal>
                 </div>

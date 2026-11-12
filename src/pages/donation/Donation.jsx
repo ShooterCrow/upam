@@ -500,13 +500,13 @@ const Donation = () => {
                             "Receiving the UPAM Academy scholarship completely reshaped my future. I received training in cloud databases, and now I manage servers for African business start-ups. I'm active in coordinating local youth assemblies."
                         </p>
                         <div className="flex gap-4 items-center">
-                            <div className="w-12 h-12 rounded-full overflow-hidden border border-[#EB010C]">
+                            {/* <div className="w-12 h-12 rounded-full overflow-hidden border border-[#EB010C]">
                                 <img
                                     src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100&h=100&fit=crop&crop=face"
                                     alt="Amina"
                                     className="w-full h-full object-cover"
                                 />
-                            </div>
+                            </div> */}
                             <div>
                                 <h4 className="font-bold text-sm text-slate-900">Amina K.</h4>
                                 <p className="text-[10px] text-[#EB010C] font-bold uppercase tracking-wider">Scholarship Beneficiary, Nigeria Chapter</p>
@@ -519,13 +519,13 @@ const Donation = () => {
                             "Strategic workshops run by local UPAM infrastructure helped our small agricultural cooperative sync with modern supply routes. Pan-African unity isn't just an abstract theory, it has very real practical utility here."
                         </p>
                         <div className="flex gap-4 items-center">
-                            <div className="w-12 h-12 rounded-full overflow-hidden border border-[#EB010C]">
+                            {/* <div className="w-12 h-12 rounded-full overflow-hidden border border-[#EB010C]">
                                 <img
                                     src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face"
                                     alt="Kofi"
                                     className="w-full h-full object-cover"
                                 />
-                            </div>
+                            </div> */}
                             <div>
                                 <h4 className="font-bold text-sm text-slate-900">Kofi B.</h4>
                                 <p className="text-[10px] text-[#EB010C] font-bold uppercase tracking-wider">Chapter Leader, Ghana</p>
