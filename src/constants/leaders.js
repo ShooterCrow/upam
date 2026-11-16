@@ -42,12 +42,12 @@ export const globalExecutive = [
     title: "Global Secretary of Health",
     image: "/pics/venetta.png",
   },
-  // {
-  //     id: 8,
-  //     name: "Hon. Lorraine Malekanya",
-  //     title: "Global Secretary of Legal Affairs",
-  //     image: "/pics/lorraine.png"
-  // },
+  {
+      id: 8,
+      name: "Hon. Lorraine Malekanya",
+      title: "Global Secretary of Legal Affairs",
+      image: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794809846/download_hvzeix.jpg"
+  },
   {
     id: 9,
     name: "Mrs. Muthoni Mwangi",
@@ -289,5 +289,12 @@ export const Admins = [
     title: "Treasurer - Burundi Chapter",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395979/download_hjfe2m.jpg",
+  },
+  {
+    id: 29,
+    name: "Samuel Isiah",
+    title: "Graphic Designer",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794809619/download_avosvp.jpg",
   },
 ];
