@@ -19,9 +19,9 @@ export const globalExecutive = [
   },
   {
     id: 4,
-    name: "Akpor Emmanuel Terfa",
-    title: "Global Secretary General",
-    image: "/pics/terfa.png",
+    name: "Nariti Luboza",
+    title: "Acting Global Secretary General",
+    image: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1795351744/image_f977f69f_jfx528.jpg",
   },
   {
     id: 5,
@@ -156,6 +156,13 @@ export const nationalRepresentatives = [
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395940/download_q6x0vm.jpg",
   },
+  {
+    id: 25,
+    name: "Felistas Tendayi Chikaura",
+    title: "National Representative Zimbabwe",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1795351744/image_f5b42884_xwy3gq.jpg",
+  },
 ];
 
 export const directors = [
@@ -252,6 +259,20 @@ export const directors = [
     title: "Secretary General - Burundi Chapter",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395881/download_ly2ok0.jpg",
+  },
+  // {
+  //   id: 31,
+  //   name: "__ __",
+  //   title: "Secretary General of Legal Affairs - Malawi Chapter",
+  //   image:
+  //     "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1795351743/image_c36d7a9c_pal4vt.jpg",
+  // },
+  {
+    id: 32,
+    name: "Elizabeth Samakande",
+    title: "Secretary General  - Zimbabwe Chapter",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1795351744/image_830430d7_ku8pjy.jpg",
   },
 ];
 

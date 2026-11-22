@@ -1,6 +1,23 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy as reactLazy } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
+
+const lazy = (importer) => {
+  let preloadPromise;
+  const preload = () => {
+    if (!preloadPromise) {
+      preloadPromise = importer().catch((error) => {
+        preloadPromise = undefined;
+        throw error;
+      });
+    }
+    return preloadPromise;
+  };
+
+  const Page = reactLazy(preload);
+  Page.preload = preload;
+  return Page;
+};
 
 // Layouts (Keep eager for immediate shell rendering)
 import Layout from './component/layout/Layout';
@@ -78,6 +95,111 @@ const Settings = lazy(() => import('./pages/UserAdminPages/admin/settings/Settin
 const Dues = lazy(() => import('./pages/UserAdminPages/admin/Dues'));
 const MyDues = lazy(() => import('./pages/UserAdminPages/common/MyDues'));
 
+const staticRoutePages = new Map([
+  ['/', Home],
+  ['/gallery', Gallery],
+  ['/about', About],
+  ['/get-involved', GetInvolve],
+  ['/membership-policy', MembershipPolicy],
+  ['/membership-agreement', MembershipAgreement],
+  ['/contact-us', ContactUs],
+  ['/partnership', Partnership],
+  ['/volunteer', Volunteer],
+  ['/donation', Donation],
+  ['/donation/funds', Donation],
+  ['/leadership', Leadership],
+  ['/events', Events],
+  ['/events/create', CreateEvent],
+  ['/events/help', EventsHelpSupport],
+  ['/events/tickets', EventsTickets],
+  ['/events/tickets/form', TicketsForm],
+  ['/events/global-african-renaissance-summit-2026', MalawiSummit],
+  ['/publications', Publications],
+  ['/publications/panafrican-unity', PanAfricanUnity],
+  ['/publications/digital-literacy', DigitalLiteracy],
+  ['/publications/african-economic-ecosystem', AfricanEconomicEcosystem],
+  ['/publications/colonial-boundaries', ColonialBoundaries],
+  ['/publications/african-self-reliance', AfricanSelfReliance],
+  ['/publications/healing-historical-divides', HealingHistoricalDivides],
+  ['/register', Register],
+  ['/login', Login],
+  ['/forgot-password', ForgottenPassword],
+  ['/verify-email', VerifyEmail],
+  ['/reset-password', ResetPassword],
+  ['/platforms', Platform],
+  ['/chapters', PublicChapters],
+  ['/resources', Publications],
+  ['/membership', MembershipPolicy],
+  ['/terms', TermsOfService],
+  ['/privacy', PrivacyDataPolicy],
+  ['/cookies', Cookies],
+  ['/search', SearchMembers],
+]);
+
+const dashboardRoutePages = {
+  '': Dashboard,
+  'member-verification': MemberVerification,
+  'membership-payment': MembershipPayment,
+  'emergency-contact': EmergencyContact,
+  notification: Notification,
+  support: Support,
+  'all-members': AllMembers,
+  'chapter-members': AllMembers,
+  'all-transactions': AllTransactionsTable,
+  'my-transactions': MyTransactions,
+  'my-dues': MyDues,
+  'members-application': MemberApplication,
+  'partnership-applications': PartnershipApplications,
+  chapters: Chapters,
+  dues: Dues,
+  'my-profile': MyProfile,
+  calendar: UPAMCalender,
+  settings: Settings,
+  shares: Shares,
+  'create-user': CreateUser,
+  'role-management': RoleManagement,
+};
+
+const getPageForPath = (path) => {
+  const staticPage = staticRoutePages.get(path);
+  if (staticPage) return staticPage;
+
+  if (/^\/events\/[^/]+$/.test(path)) return EventDetail;
+
+  const dashboardMatch = path.match(/^\/(dashboard|user)(?:\/(.*))?$/);
+  if (dashboardMatch) {
+    const [, section, route = ''] = dashboardMatch;
+    const page = dashboardRoutePages[route];
+    if (route === 'all-members' || route === 'chapter-members') {
+      return path.split('/').length > 3 ? MemberProfile : AllMembers;
+    }
+    if (route === 'members-application' || route === 'chapters') {
+      return path.split('/').length > 3
+        ? route === 'members-application' ? MemberDetail : ChapterDetail
+        : page;
+    }
+    if (section === 'user' && !['', 'member-verification', 'calendar', 'membership-payment', 'emergency-contact', 'notification', 'support', 'my-transactions', 'my-dues', 'my-profile'].includes(route)) {
+      return NotFound;
+    }
+    return page || NotFound;
+  }
+
+  return NotFound;
+};
+
+const prefetchLinkTarget = (event) => {
+  const anchor = event.target.closest?.('a[href]');
+  if (!anchor || (event.relatedTarget && anchor.contains(event.relatedTarget))) return;
+
+  const url = new URL(anchor.href, window.location.href);
+  if (url.origin !== window.location.origin) return;
+
+  const page = getPageForPath(url.pathname.replace(/\/$/, '') || '/');
+  page.preload().catch((error) => {
+    console.error(`Failed to prefetch route "${url.pathname}":`, error);
+  });
+};
+
 // Loading Fallback Component
 const RouteLoader = () => (
   <div className="fixed inset-0 bg-white/80 backdrop-blur-sm z-[9999] flex items-center justify-center flex-col gap-4">
@@ -93,7 +215,11 @@ const RouteLoader = () => (
 
 const App = () => {
   return (
-    <div>
+    <div
+      onPointerOverCapture={prefetchLinkTarget}
+      onPointerDownCapture={prefetchLinkTarget}
+      onFocusCapture={prefetchLinkTarget}
+    >
       <AutoRecovery />
       <RateLimitBlocker />
       <Suspense fallback={<RouteLoader />}>
