@@ -228,49 +228,49 @@ export const directors = [
   {
     id: 27,
     name: "Williams John Ominyi",
-    title: "Secretary General - Nigeria Chapter",
+    title: "Secretary General - Nigeria",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793963661/williams_ci3zr9.png",
   },
   {
     id: 27,
     name: "Ally Watson Mwasungile",
-    title: "Secretary General - Tanzania Chapter",
+    title: "Secretary General - Tanzania",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1793963661/tanzania_tv7pud.png",
   },
   {
     id: 28,
     name: "Celso Patricio Fulaitone Dimba",
-    title: "Secretary General - Mozambique Chapter",
+    title: "Secretary General - Mozambique",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395589/download_rtk7gc.jpg",
   },
   {
     id: 29,
     name: "Christine Mulochwa",
-    title: "Secretary General - Zambia Chapter",
+    title: "Secretary General - Zambia",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395759/download_vc9seg.jpg",
   },
   {
     id: 30,
     name: "Niyomwungere Elvis",
-    title: "Secretary General - Burundi Chapter",
+    title: "Secretary General - Burundi",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395881/download_ly2ok0.jpg",
   },
   // {
   //   id: 31,
   //   name: "__ __",
-  //   title: "Secretary General of Legal Affairs - Malawi Chapter",
+  //   title: "Secretary General of Legal Affairs - Malawi",
   //   image:
   //     "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1795351743/image_c36d7a9c_pal4vt.jpg",
   // },
   {
     id: 32,
     name: "Elizabeth Samakande",
-    title: "Secretary General  - Zimbabwe Chapter",
+    title: "Secretary General  - Zimbabwe",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1795351744/image_830430d7_ku8pjy.jpg",
   },
@@ -307,7 +307,7 @@ export const Admins = [
   {
     id: 28,
     name: "Niyokwizera Joyce",
-    title: "Treasurer - Burundi Chapter",
+    title: "Treasurer - Burundi",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1794395979/download_hjfe2m.jpg",
   },
