@@ -11,6 +11,7 @@ import {
   Play,
 } from 'lucide-react';
 import ScrollReveal from '../../components/ScrollReveal';
+import EventContactAdmin from './EventContactAdmin';
 
 /* -------------------------------------------------------------------------- */
 /*  Brand colours (applied via Tailwind arbitrary classes, matching the rest  */
@@ -817,6 +818,9 @@ const MalawiSummit = () => {
           </div>
         </div>
       </section>
+      <div className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 pb-14 lg:pb-20">
+        <EventContactAdmin />
+      </div>
     </div>
   );
 };

@@ -101,6 +101,7 @@ export const events = [
     dateShort: "Nov 28th 2026",
     location: "TBD",
     purpose: "Celebration of Unity, Impact and sustainability",
+    featured: true,
     image:
       "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80",
     fullDescription:

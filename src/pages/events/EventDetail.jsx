@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Calendar, MapPin, ArrowLeft, CheckCircle } from 'lucide-react';
 import { events } from './eventsData';
+import EventContactAdmin from './EventContactAdmin';
 
 const EventDetail = () => {
   const { slug } = useParams();
@@ -174,6 +175,7 @@ const EventDetail = () => {
             </Link>
           </div>
         </section>
+        <EventContactAdmin />
       </article>
     </div>
   );

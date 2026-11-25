@@ -1,19 +1,17 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
-import EventsNavbar from './EventsNavbar'
 import useScrollRestoration from '../../hooks/useScrollRestoration'
 
 const Layout = () => {
     const { pathname } = useLocation()
     useScrollRestoration()
     const noPaddingComponents = ["/register", "/login", "/verify-email", "/reset-password", "/donation", "/about", "/leadership", "/chapters", "/get-involved", "/contact-us", "/search", "/membership-policy", "/terms", "/privacy", "/cookies"]
-    const isEventsPage = pathname.startsWith('/events')
 
     return (
         <>
-            {isEventsPage ? <EventsNavbar /> : <Header />}
-            <main className={`${noPaddingComponents.includes(pathname) ? '' : isEventsPage ? 'pt-[72px] lg:pt-[80px]' : 'pt-[100px] lg:pt-[120px]'}`}>
+            <Header />
+            <main className={`${noPaddingComponents.includes(pathname) ? '' : 'pt-[100px] lg:pt-[120px]'}`}>
                 <Outlet />
             </main>
             <Footer />
