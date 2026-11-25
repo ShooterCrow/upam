@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ChevronDown } from 'lucide-react';
-import { events } from './eventsData';
+import { useGetEventsQuery } from '../UserAdminPages/admin/calendarApiSlice';
 
 const MEMBERSHIP_OPTIONS = [
   'UPAM Members',
@@ -16,6 +16,11 @@ const ORGANIZATION_TYPES = ['Profits', 'Non - Profit', 'Government'];
 const TICKET_TYPES = ['General', 'VIP'];
 
 const TicketsForm = () => {
+  const [searchParams] = useSearchParams();
+  const selectedEventId = searchParams.get('event') || '';
+  const { data: eventsResponse, isLoading: eventsLoading, isError: eventsError, error } =
+    useGetEventsQuery({ category: 'Event' });
+  const events = eventsResponse?.data || [];
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
@@ -23,7 +28,7 @@ const TicketsForm = () => {
     phone: '',
     membership: '',
     country: 'Africa',
-    event: '',
+    event: selectedEventId,
     ticketType: '',
     numberOfTickets: '',
     organizationName: '',
@@ -49,7 +54,7 @@ const TicketsForm = () => {
       phone: '',
       membership: '',
       country: 'Africa',
-      event: '',
+      event: selectedEventId,
       ticketType: '',
       numberOfTickets: '',
       organizationName: '',
@@ -192,14 +197,20 @@ const TicketsForm = () => {
                   required
                 >
                   <option value="">Select event</option>
+                  {eventsLoading && <option disabled>Loading events...</option>}
                   {events.map((ev) => (
-                    <option key={ev.id} value={ev.slug}>
+                    <option key={ev._id} value={ev._id}>
                       {ev.title}
                     </option>
                   ))}
                 </select>
                 <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none w-5 h-5" />
               </div>
+              {eventsError && (
+                <p role="alert" className="mt-2 text-sm text-red-600">
+                  {error?.data?.message || error?.error || 'Could not load events.'}
+                </p>
+              )}
             </div>
 
             <div>

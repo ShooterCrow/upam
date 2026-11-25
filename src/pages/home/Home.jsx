@@ -11,22 +11,7 @@ import WorldMapWithMarkers from '../../component/ui/WorldMapWithMarkers';
 import { globalExecutive } from '../../constants/leaders';
 import ScrollReveal from '../../components/ScrollReveal';
 import { useGetEventsQuery } from '../UserAdminPages/admin/calendarApiSlice';
-import { events as staticEvents } from '../events/eventsData';
-
-// Backend events have no slug, but event pages are routed by slug (/events/:slug).
-// Resolve a backend event to its page by matching its title against the static event data.
-const slugify = (str = '') => str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-const getEventLink = (event) => {
-    if (event?.slug) return `/events/${event.slug}`;
-    const titleSlug = slugify(event?.title);
-    if (!titleSlug) return '/events';
-    const match = staticEvents.find(
-        (e) => e.slug === titleSlug || titleSlug.startsWith(e.slug) || e.slug.startsWith(titleSlug) || slugify(e.title) === titleSlug
-    );
-    if (match) return `/events/${match.slug}`;
-    if (titleSlug.includes('renaissance')) return '/events/global-african-renaissance-summit-2026';
-    return '/events';
-};
+import { getEventImage, getEventPath } from '../events/eventUtils';
 import DualScrollingGallery from '../../component/ui/DualScrollingGallery';
 import useMarqueeScroll from '../../hooks/useMarqueeScroll';
 import SingleSlider from '../../components/SingleSlider';
@@ -219,7 +204,13 @@ const UnitedAfricaHero = () => {
 
 
 const Index = () => {
-    const { data: eventsData, isLoading: eventsLoading } = useGetEventsQuery({ limit: 3, category: 'Event' });
+    const {
+        data: eventsData,
+        isLoading: eventsLoading,
+        isError: eventsError,
+        error: eventsErrorDetails,
+        refetch: refetchEvents,
+    } = useGetEventsQuery({ limit: 3, category: 'Event' });
     const events = eventsData?.data || [];
     const [openFaq, setOpenFaq] = useState(0);
     const [activeFocus, setActiveFocus] = useState(0);
@@ -752,6 +743,19 @@ const Index = () => {
                                     <div className="lg:col-span-3 flex items-center justify-center py-20">
                                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-upam-red"></div>
                                     </div>
+                                ) : eventsError ? (
+                                    <div className="lg:col-span-3 flex flex-col items-center justify-center py-20 text-center">
+                                        <p className="text-[#555555] font-medium">
+                                            {eventsErrorDetails?.data?.message || eventsErrorDetails?.error || 'Could not load events.'}
+                                        </p>
+                                        <button
+                                            type="button"
+                                            onClick={refetchEvents}
+                                            className="mt-4 font-bold text-[#EB010C] hover:underline"
+                                        >
+                                            Try again
+                                        </button>
+                                    </div>
                                 ) : events.length === 0 ? (
                                     <div className="lg:col-span-3 text-center py-20 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
                                         <p className="text-[#555555] font-medium">No recent activities or events found.</p>
@@ -761,9 +765,9 @@ const Index = () => {
                                         {/* Featured Event - Left Column (Full height) */}
                                         <div className="lg:col-span-2">
                                             {events[0] && (
-                                                <Link to={getEventLink(events[0])} className="relative h-[530px] border border-slate-100 overflow-hidden group cursor-pointer block bg-black">
+                                                <Link to={getEventPath(events[0])} className="relative h-[530px] border border-slate-100 overflow-hidden group cursor-pointer block bg-black">
                                                     <img
-                                                        src={events[0].image ? (events[0].image.startsWith('http') ? events[0].image : `http://localhost:5000/${events[0].image}`) : "/academy_logo.png"}
+                                                        src={getEventImage(events[0].image)}
                                                         alt={events[0].title}
                                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-60 grayscale-20 group-hover:grayscale-0"
                                                     />
@@ -802,10 +806,10 @@ const Index = () => {
                                         {/* Other Events - Right Column (Stacked cards) */}
                                         <div className="flex flex-col gap-6">
                                             {events.slice(1, 3).map((event) => (
-                                                <Link key={event._id} to={getEventLink(event)} className="flex-1 border-none flex flex-col group transition-all duration-500">
+                                                <Link key={event._id} to={getEventPath(event)} className="flex-1 border-none flex flex-col group transition-all duration-500">
                                                     <div className="relative aspect-video overflow-hidden bg-slate-100">
                                                         <img
-                                                            src={event.image ? (event.image.startsWith('http') ? event.image : `http://localhost:5000/${event.image}`) : "/academy_logo.png"}
+                                                            src={getEventImage(event.image)}
                                                             alt={event.title}
                                                             className="w-full h-full object-cover grayscale-10 group-hover:grayscale-0 transition-all duration-700"
                                                         />

@@ -1,24 +1,67 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { Calendar, MapPin, ArrowLeft, CheckCircle } from 'lucide-react';
-import { events } from './eventsData';
+import { Link, useParams } from 'react-router-dom';
+import { ArrowLeft, Calendar, Clock3, UserRound } from 'lucide-react';
+import { useGetEventsQuery } from '../UserAdminPages/admin/calendarApiSlice';
+import LoadingState from '../../component/ui/LoadingState';
 import EventContactAdmin from './EventContactAdmin';
+import {
+  formatEventDate,
+  getEventImage,
+  isPastEvent,
+} from './eventUtils';
+
+const slugify = (value = '') =>
+  value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
 const EventDetail = () => {
   const { slug } = useParams();
-  const event = events.find((e) => e.slug === slug);
+  const {
+    data: eventsResponse,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useGetEventsQuery({ category: 'Event' });
+  const events = eventsResponse?.data || [];
+  const event = events.find(
+    (item) => item._id === slug || slugify(item.title) === slug,
+  );
+
+  if (isLoading) {
+    return <LoadingState message="Loading event details..." />;
+  }
+
+  if (isError) {
+    return (
+      <div className="mx-auto max-w-3xl px-4 py-16 text-center">
+        <h1 className="text-2xl font-bold text-slate-900">Unable to load event</h1>
+        <p className="mt-3 text-slate-600">
+          {error?.data?.message || error?.error || 'Please try again.'}
+        </p>
+        <button
+          type="button"
+          onClick={refetch}
+          className="mt-5 font-semibold text-[#EB010C] hover:underline"
+        >
+          Try again
+        </button>
+      </div>
+    );
+  }
 
   if (!event) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center max-w-md px-4">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Event not found</h1>
-          <p className="text-[#666666] mb-6">The event you are looking for does not exist or has been removed.</p>
+      <div className="flex min-h-[50vh] items-center justify-center bg-white">
+        <div className="max-w-md px-4 text-center">
+          <h1 className="mb-2 text-2xl font-bold text-gray-900">Event not found</h1>
+          <p className="mb-6 text-[#666666]">
+            The event you are looking for does not exist or has been removed.
+          </p>
           <Link
             to="/events"
-            className="inline-flex items-center gap-2 text-upam-red font-medium hover:text-upam-red/80"
+            className="inline-flex items-center gap-2 font-medium text-upam-red hover:text-upam-red/80"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="h-4 w-4" />
             Back to events
           </Link>
         </div>
@@ -26,154 +69,88 @@ const EventDetail = () => {
     );
   }
 
+  const isPast = isPastEvent(event);
+
   return (
     <div className="min-h-screen bg-white">
-      <article className="max-w-[1330px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
-        {/* Back link */}
+      <article className="mx-auto max-w-[1330px] px-4 py-8 sm:px-6 lg:px-8 lg:py-16">
         <Link
           to="/events"
-          className="inline-flex items-center gap-2 text-sm font-medium text-upam-red hover:text-upam-red/80 mb-8"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-upam-red hover:text-upam-red/80"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="h-4 w-4" />
           Back to events
         </Link>
 
-        {/* Hero image */}
-        <div className="relative w-full h-64 sm:h-80 lg:h-[480px] rounded-xl overflow-hidden mb-8 lg:mb-12">
+        <div className="relative mb-8 h-64 w-full overflow-hidden rounded-xl sm:h-80 lg:mb-12 lg:h-[480px]">
           <img
-            src={event.image}
+            src={getEventImage(event.image)}
             alt={event.title}
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-          {/* Title overlay on hero */}
           <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-10">
-            <div className="flex flex-wrap items-center gap-3 text-sm text-white/80 mb-3">
-              {event.date && (
+            <div className="mb-3 flex flex-wrap items-center gap-3 text-sm text-white">
+              <span className="flex items-center gap-2">
+                <Calendar className="h-4 w-4 text-[#EB010C]" />
+                {formatEventDate(event.date)}
+              </span>
+              {event.time && (
                 <span className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-[#EB010C]" />
-                  {event.date}
+                  <Clock3 className="h-4 w-4 text-[#EB010C]" />
+                  {event.time}
                 </span>
               )}
-              {event.location && (
-                <span className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-[#EB010C]" />
-                  {event.location}
-                </span>
-              )}
-              <span className={`px-3 py-1 rounded-full text-xs font-semibold ${event.status === 'completed' ? 'bg-gray-500/80' : 'bg-[#EB010C]/80'} text-white`}>
-                {event.status === 'completed' ? 'Completed' : 'Upcoming'}
+              <span
+                className={`rounded-full px-3 py-1 text-xs font-semibold text-white ${
+                  isPast ? 'bg-gray-500/80' : 'bg-[#EB010C]/80'
+                }`}
+              >
+                {isPast ? 'Completed' : 'Upcoming'}
               </span>
             </div>
-            <h1
-              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight max-w-4xl"
-              style={{ fontFamily: 'Lato' }}
-            >
+            <h1 className="max-w-4xl text-2xl font-bold leading-tight text-white sm:text-3xl lg:text-4xl">
               {event.title}
             </h1>
           </div>
         </div>
 
-        {/* Overview */}
         <section className="mb-10 lg:mb-14">
-          <p className="text-base lg:text-lg font-normal leading-[170%] text-[#444444] max-w-4xl">
-            {event.overview || event.fullDescription}
+          <p className="max-w-4xl text-base leading-[170%] text-[#444444] lg:text-lg">
+            {event.description}
           </p>
+          {(event.category || event.organizer) && (
+            <div className="mt-6 flex flex-wrap gap-3">
+              {event.category && (
+                <span className="border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700">
+                  {event.category}
+                </span>
+              )}
+              {event.organizer && (
+                <span className="inline-flex items-center gap-2 border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700">
+                  <UserRound className="h-4 w-4 text-[#EB010C]" />
+                  {event.organizer}
+                </span>
+              )}
+            </div>
+          )}
         </section>
 
-        {/* Theme / Purpose / Subtheme badges */}
-        {(event.theme || event.purpose || event.subtheme) && (
-          <section className="mb-10 lg:mb-14 flex flex-wrap gap-4">
-            {event.purpose && (
-              <div className="bg-[#FFF5F5] border border-[#EB010C]/20 rounded-lg px-5 py-3">
-                <p className="text-xs font-semibold text-[#EB010C] uppercase tracking-wider mb-1">Purpose</p>
-                <p className="text-sm text-gray-800 font-medium">{event.purpose}</p>
-              </div>
-            )}
-            {event.theme && (
-              <div className="bg-gray-50 border border-gray-200 rounded-lg px-5 py-3">
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Theme</p>
-                <p className="text-sm text-gray-800 font-medium">{event.theme}</p>
-              </div>
-            )}
-            {event.subtheme && (
-              <div className="bg-gray-50 border border-gray-200 rounded-lg px-5 py-3">
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Sub-theme</p>
-                <p className="text-sm text-gray-800 font-medium">{event.subtheme}</p>
-              </div>
-            )}
-          </section>
-        )}
-
-        {/* Programme Highlights */}
-        {event.highlights && event.highlights.length > 0 && (
-          <section className="mb-10 lg:mb-14">
-            <h2 className="text-xl lg:text-2xl font-bold text-gray-900 mb-6 pb-3 border-b border-gray-200">
-              Programme Highlights
-            </h2>
-            <div className="flex flex-col gap-6">
-              {event.highlights.map((item, idx) => (
-                <div key={idx} className="bg-gray-50 rounded-xl p-6 border border-gray-100">
-                  <h3 className="text-base lg:text-lg font-semibold text-gray-900 mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm lg:text-base text-[#666666] leading-relaxed">{item.body}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Objectives */}
-        {event.objectives && event.objectives.length > 0 && (
-          <section className="mb-10 lg:mb-14">
-            <h2 className="text-xl lg:text-2xl font-bold text-gray-900 mb-6 pb-3 border-b border-gray-200">
-              Programme Objectives
-            </h2>
-            <ul className="flex flex-col gap-3">
-              {event.objectives.map((obj, idx) => (
-                <li key={idx} className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#EB010C] shrink-0 mt-0.5" />
-                  <span className="text-sm lg:text-base text-[#444444] leading-relaxed">{obj}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {/* Full description fallback (for events without extra fields) */}
-        {!event.overview && !event.highlights && (
-          <section className="mb-10 lg:mb-14">
-            <p className="text-sm sm:text-base lg:text-[16px] font-normal leading-[170%] tracking-[0.02em] text-[#666666] max-w-3xl">
-              {event.fullDescription}
-            </p>
-          </section>
-        )}
-
-        {/* CTA */}
-        <section className="pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <section className="flex flex-col items-start gap-4 border-t border-gray-200 pt-8 sm:flex-row sm:items-center">
           <div>
-            <p className="text-[#666666] text-sm mb-1">
-              Interested in this event?
-            </p>
-            <p className="text-[#444444] text-sm font-medium">
-              Register or get in touch with us for more details and updates.
+            <p className="mb-1 text-sm text-[#666666]">Interested in this event?</p>
+            <p className="text-sm font-medium text-[#444444]">
+              Contact the event team for registration and attendance information.
             </p>
           </div>
-          <div className="flex gap-3 shrink-0">
+          {!isPast && (
             <Link
-              to="/events/tickets"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#EB010C] text-white font-medium rounded hover:bg-[#EB010C]/90 transition-colors"
+              to={`/events/tickets/form?event=${event._id}`}
+              className="inline-flex shrink-0 items-center gap-2 rounded bg-[#EB010C] px-6 py-3 font-medium text-white transition-colors hover:bg-[#EB010C]/90"
             >
               Get Tickets
             </Link>
-            <Link
-              to="/contact-us"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-800 font-medium border border-gray-300 rounded hover:bg-gray-50 transition-colors"
-            >
-              Contact Us
-            </Link>
-          </div>
+          )}
         </section>
         <EventContactAdmin />
       </article>
