@@ -42,7 +42,7 @@ const Events = () => {
   return (
     <div className="min-h-screen bg-[#FAFAFC] text-slate-900">
       <Helmet>
-        <title>Events &amp; Conferences | UPAM</title>
+        <title className='text-white'>Events &amp; Conferences | UPAM</title>
         <meta
           name="description"
           content="Discover upcoming and past UPAM events, conferences, and community programmes."
