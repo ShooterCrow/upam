@@ -5,12 +5,12 @@ export const globalExecutive = [
     title: "Global President (UPAM)",
     image: "/pics/Frame 37613.png",
   },
-  // {
-  //     id: 2,
-  //     name: "Priscilla Tsongavain",
-  //     title: "Vice President (UPAM)",
-  //     image: "/pics/priscilla.jpg"
-  // },
+  {
+      id: 2,
+      name: "Priscilla Tsongavain",
+      title: "Vice President",
+      image: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1795622231/download_c25tep.jpg"
+  },
   {
     id: 3,
     name: "Petrina Nghipondilo Shilindi",
@@ -108,12 +108,12 @@ export const nationalRepresentatives = [
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1780001980/WhatsApp_Image_2026-05-27_at_04.11.51-removebg-preview_2_gmemka.png",
   },
-  //   {
-  //     id: 18,
-  //     name: "Frank Minga",
-  //     title: "National Representative Tanzania",
-  //     image: "/pics/minga.png",
-  //   },
+    {
+      id: 18,
+      name: "Frank Minga",
+      title: "National Representative Tanzania",
+      image: "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1795622643/image_5a73514f_zmp2wb.jpg",
+    },
   {
     id: 19,
     name: "Clement McDonald",
@@ -162,6 +162,13 @@ export const nationalRepresentatives = [
     title: "National Representative Zimbabwe",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1795351744/image_f5b42884_xwy3gq.jpg",
+  },
+  {
+    id: 26,
+    name: "Blessings Nanguwo",
+    title: "National Representative Malawi",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1795622643/image_cce33581_ktoals.jpg",
   },
 ];
 
@@ -273,6 +280,13 @@ export const directors = [
     title: "Secretary General  - Zimbabwe",
     image:
       "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1795351744/image_830430d7_ku8pjy.jpg",
+  },
+  {
+    id: 32,
+    name: "Idris Yusuf Abduljaleel",
+    title: "Assistant Secretary General - Nigeria",
+    image:
+      "https://res.cloudinary.com/dyy6gisnk/image/upload/f_auto,q_auto/v1795622643/image_35e69a18_h6ta1f.jpg",
   },
 ];
 
